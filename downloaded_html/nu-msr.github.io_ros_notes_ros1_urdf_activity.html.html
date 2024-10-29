@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-10-29 Tue 11:30 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>URDF Activity</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">URDF Activity</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgc937aca">Activity</a></li>
+<li><a href="#org8ebcf42">Today's Example</a></li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-orgc937aca" class="outline-2">
+<h2 id="orgc937aca">Activity</h2>
+<div class="outline-text-2" id="text-orgc937aca">
+<ul class="org-ul">
+<li>Clone <code>https://github.com/m-elwin/me495_urdf.git</code></li>
+<li>See how the robot moves in rviz.</li>
+<li>Change the launchfile so it no longer loads the <code>rviz</code> configuration.
+<ul class="org-ul">
+<li>Then, when rviz loads, set it up to see the robot.</li>
+</ul></li>
+<li>Using the information in the <a href="https://wiki.ros.org/urdf/Tutorials/Using%20Xacro%20to%20Clean%20Up%20a%20URDF%20File">URDF tutorial</a>
+<ul class="org-ul">
+<li><b>NOTE</b> Omit the <code>--inorder</code> argument when invoking xacro, the wiki has outdated information.</li>
+</ul></li>
+<li>Rename <code>slidebot.urdf</code> to <code>slidebot.urdf.xacro</code> (<code>mv slidebot.urdf slidebot.urdf.xacro</code>)</li>
+<li>Modify it so that it is a valid xacro file (adding <code>xmlns:xacro="http://wiki.ros.org/wiki/xacro"</code> to the robot tag)
+and modify the launchfile to load the xacro file.</li>
+<li>Create a parameter called <code>base_radius</code> and use it as the radius of the <code>base</code> sphere
+<ul class="org-ul">
+<li>Declare this directly as a <code>xacro:property</code></li>
+</ul></li>
+<li>Make the length of the arm 10 times the radius of the <code>base</code> sphere</li>
+<li>Using the information here <a href="http://wiki.ros.org/xacro#YAML_support">xacro YAML</a> 
+load the <code>base_radius</code> from a <code>yaml</code> file instead of declaring it directly in the <code>xacro</code> file.</li>
+<li>Use a <code>xacro:macro</code> to add a link to the arm that is the same as the
+current <code>arm</code> link but on the opposite side of the body</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org8ebcf42" class="outline-2">
+<h2 id="org8ebcf42">Today's Example</h2>
+<div class="outline-text-2" id="text-org8ebcf42">
+<p>
+Here is what I did for today's example.
+</p>
+<pre class="example">
+mkdir -p ws/src
+cd ws/src
+git clone https://github.com/jackal/jackal.git
+cd ws
+catkin_make
+xacro src/jackal/jackal_description/urdf/jackal.urdf.xacro &gt; jackal.urdf
+roslaunch urdf_tutorial display.launch model:=jackal.urdf
+</pre>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

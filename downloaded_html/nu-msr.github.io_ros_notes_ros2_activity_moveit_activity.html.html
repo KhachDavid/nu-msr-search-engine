@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-10-29 Tue 11:30 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MoveWhat? Activity</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">MoveWhat? Activity</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org5fe08cd">Introduction</a></li>
+<li><a href="#org914e9eb">Preliminaries</a></li>
+<li><a href="#org1e02346">First Steps</a>
+<ul>
+<li><a href="#org4e24ea9">Rviz2</a></li>
+<li><a href="#orgddb8dc2">Motion Plan</a>
+<ul>
+<li><a href="#org88233cf">Joints</a></li>
+</ul>
+</li>
+<li><a href="#orgacfa5bb">Planning Scene</a></li>
+</ul>
+</li>
+<li><a href="#org078af8e">How It Works</a>
+<ul>
+<li><a href="#org59ef7de">The Plan</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-org5fe08cd" class="outline-2">
+<h2 id="org5fe08cd">Introduction</h2>
+<div class="outline-text-2" id="text-org5fe08cd">
+<ol class="org-ol">
+<li>MoveIt 2 is a massive package, with many features, but it is still under heavy development</li>
+<li>To make our robot move, without using C++, we will need to do some detective work</li>
+<li>This guide is designed as a tutorial to introduce you to MoveIt and prepare your group for Homework 3</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org914e9eb" class="outline-2">
+<h2 id="org914e9eb">Preliminaries</h2>
+<div class="outline-text-2" id="text-org914e9eb">
+<ol class="org-ol">
+<li>You should install the <code>nupanda</code> workspace and the <code>interbotix</code> workspace
+<ul class="org-ul">
+<li>Each of these workspaces provides a different robot that you will be working with</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org1e02346" class="outline-2">
+<h2 id="org1e02346">First Steps</h2>
+<div class="outline-text-2" id="text-org1e02346">
+<ol class="org-ol">
+<li>You can use either the <code>franka</code> or the <code>px100</code> in this example
+<ul class="org-ul">
+<li>Using both will provide some extra comparisons when something inevitably goes wrong, helping you to narrow down whether the problem is robot-specific or more broadly related to moveit</li>
+</ul></li>
+<li>To start the franka robot <code>ros2 launch franka_moveit_config moveit.launch.py robot_ip:=dont-care use_fake_hardware:=true</code>
+<ul class="org-ul">
+<li>This will start a franka MoveIt setup, with the MoveIt GUI in rviz</li>
+<li>Rather than connecting to the actual robot or a simulation, a <i>mock</i> controller is used that takes
+joint positions as inputs and returns fake joint states as sensor data</li>
+<li>The <i>mock</i> controller provided by Franka <a href="https://github.com/frankaemika/franka_ros2/issues/36">does not work</a>, which is part of why you are using a fork created by me.</li>
+</ul></li>
+<li>To start the px100 robot use <code>ros2 launch interbotix_xsarm_moveit xsarm_moveit.launch.py robot_model:=px100 hardware_type:=fake</code>
+<ul class="org-ul">
+<li>If you installed the <code>interbotix</code> workspace at the beginning of the quarter you will need to update the <code>interbotix_ros_manipulators</code> repository and rebuild</li>
+</ul></li>
+</ol>
+</div>
+<div id="outline-container-org4e24ea9" class="outline-3">
+<h3 id="org4e24ea9">Rviz2</h3>
+<div class="outline-text-3" id="text-org4e24ea9">
+<ol class="org-ol">
+<li>There are two new Rviz widgets (which show up in the left-pane) that have been added by the setup when you run these launch files
+<ul class="org-ul">
+<li>PlanningScene, which keeps track of obstacles in the environment</li>
+<li>MotionPlanning, which is a gui interface to move the robot 
+<ul class="org-ul">
+<li>This is initally unchecked, check it to enable it. This provides a graphical interface for moving the robot</li>
+</ul></li>
+</ul></li>
+<li>In ROS 2 Humble, there will be an interactive marker displayed near the robot's end-effector that you can drag to set the target location for the motion plan
+<ul class="org-ul">
+<li>In ROS 2 Iron, both for the franka and the px100 this marker does not appear</li>
+<li>I have yet tracked down the cause of this bug</li>
+<li>You can still move to pre-selected positions or use the <code>Joint</code> panel to directly manipulate the joints</li>
+<li>We will not be using the graphical planning features much, once we can control everything programmatically</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgddb8dc2" class="outline-3">
+<h3 id="orgddb8dc2">Motion Plan</h3>
+<div class="outline-text-3" id="text-orgddb8dc2">
+<ol class="org-ol">
+<li>When you enable the MotionPlanning Widget you should see
+<ol class="org-ol">
+<li>An orange overlay on the robot. This represents the <i>planning group</i>, the collection of joints (and there associated links) that are currently being controlled
+<ul class="org-ul">
+<li>In the MotionPlanning GUI, under the Planning Tab, you can change the planning group to, for example, control the gripper instead of the arm</li>
+<li>While you can plan a path for the gripper, you cannot execute it successfully without the robot, as there is currently no fake gripper state
+<ul class="org-ul">
+<li>There are multiple control modes for the gripper, all through the gripper action server, some of which are not position control (and hence are not part of moveit)</li>
+</ul></li>
+</ul></li>
+<li>An interactive marker, which can be dragged to move the arm to various positions
+<ul class="org-ul">
+<li>This marker controls the goal state, which is the target location of the robot's end-effector</li>
+<li>As you drag the robot around, some of the links may turn red, which indicates a (possibly self) collision or otherwise invalid state</li>
+<li>Try it! [Or Not since it does not work in ROS 2 Iron].</li>
+</ul></li>
+<li>There are also pre-set positions that can be moved to
+<ul class="org-ul">
+<li>It is also possible to plan from a goal state that is not the current location of the robot by setting the Start State</li>
+</ul></li>
+<li>In the Planning Tab, press plan to generate a motion plan
+<ul class="org-ul">
+<li>You should see an animation of the arm moving from start to goal</li>
+<li>Press Execute to run the plan, and watch the arm move (Try It!)</li>
+<li>If you press Plan &amp; Execute you will se the robot start to move, with the plan happening slightly ahead of robot motion (Try It!)</li>
+<li>You can change the speed of the motion by selecting Velocity Scaling and Accel Scaling
+<ul class="org-ul">
+<li>On the real robot be very careful with these, the robot can move fast!</li>
+</ul></li>
+<li>There are also many options that are available for motion planning that are accessible via the gui</li>
+</ul></li>
+</ol></li>
+</ol>
+</div>
+<div id="outline-container-org88233cf" class="outline-4">
+<h4 id="org88233cf">Joints</h4>
+<div class="outline-text-4" id="text-org88233cf">
+<ol class="org-ol">
+<li>The Joints tab allows you to plan to a specific joint configuration rather than an end-effector configuration</li>
+<li>Notice that if you move the marker at the end-effector, the joint states move as well indicating that inverse kinematics is happening here!
+<ul class="org-ul">
+<li>In other words, planning to an end-effector position means computing inverse kinematics to find the corresponding joint positions</li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-orgacfa5bb" class="outline-3">
+<h3 id="orgacfa5bb">Planning Scene</h3>
+<div class="outline-text-3" id="text-orgacfa5bb">
+<ol class="org-ol">
+<li>Under the Scene Objects tab, you can manipulate obstacles in the environment
+<ol class="org-ol">
+<li>Click the plus sign next to the word box to add a box into the scene
+<ul class="org-ul">
+<li>Move it to somewhere where the robot can potentially hit it</li>
+</ul></li>
+<li>Click "publish" to set the box as part of the planning scene</li>
+<li>It is also possible to attach objects to the end-effector (e.g., so that collision detection accounts for a grabbed object)</li>
+</ol></li>
+<li>With the scene set, drag the end-effector into the box
+<ul class="org-ul">
+<li>What happens? (The links that collide should turn red)</li>
+<li>What happens if you click plan? (The plan will fail)</li>
+<li>Check "collision-aware IK" and move the end-effector into the box and hold it
+<ul class="org-ul">
+<li>You should see the IK solver try to keep moving the joints to avoid the collision 
+<ul class="org-ul">
+<li>If the end-effector is colliding with the box, no IK solution can succeed at avoiding it</li>
+<li>But it is possible if another link is hitting the box (maybe another arm orienation does not have that same collision)</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org078af8e" class="outline-2">
+<h2 id="org078af8e">How It Works</h2>
+<div class="outline-text-2" id="text-org078af8e">
+<ol class="org-ol">
+<li>The <a href="https://moveit.picknik.ai/main/index.html">Moveit Documentation</a> provides an overview, particularly the <a href="https://moveit.picknik.ai/main/doc/concepts/move_group.html">Move Group</a> diagram.</li>
+<li>Comments in the <a href="https://github.com/ros-planning/moveit_msgs/tree/ros2">moveit_msgs</a> packages explain how to use the ROS API for the <code>/move_group</code> node.</li>
+<li>Take a look at the <code>rqt_graph</code> (be sure to refresh)
+<ul class="org-ul">
+<li>The key node for planning is the <code>/move_group</code> node</li>
+</ul></li>
+<li>Run <code>ros2 node info /move_group</code> to see it's ROS API
+<ul class="org-ul">
+<li>You can of course get info on these interface with the <code>ros2</code> command line
+<code>ros2 service/action/topic</code> and <code>ros2 interface</code></li>
+<li>The key actions here, however, are
+<ul class="org-ul">
+<li><code>/move_action</code>, which is used to plan the path</li>
+<li><code>/execute_trajectory</code>, which does exactly what it sounds like</li>
+</ul></li>
+<li>The key service is <code>/compute_ik</code> which computes the inverse kinematics</li>
+</ul></li>
+<li>If you use <code>ros2 interface</code> on the types (which you should do) you can learn how these actions work a bit more
+<ul class="org-ul">
+<li>For more information on actions see <a href="../basics.html#actions">the notes on actions</a></li>
+</ul></li>
+</ol>
+</div>
+<div id="outline-container-org59ef7de" class="outline-3">
+<h3 id="org59ef7de">The Plan</h3>
+<div class="outline-text-3" id="text-org59ef7de">
+<ol class="org-ol">
+<li>Let's use our working interface to the move-group node (that is, Rviz) to help us better understand how the ROS API for the <code>/move_group</code> node works
+<ul class="org-ul">
+<li>Make sure the <code>MotionPlanning</code> panel in Rviz is selected and activated</li>
+</ul></li>
+<li>To be as thorough as possible we would want to capture all the data that <code>rviz</code> sends to the <code>move_group</code> node
+<ul class="org-ul">
+<li>That is, all <code>move_group</code> service servers, action servers, and subscriptions that <code>rviz2</code> connects to</li>
+<li>We can find these by comparing <code>ros2 node info /move_group</code> to <code>ros2 node info /rviz2</code></li>
+</ul></li>
+<li>Capturing actions and services is not as straightforward as subscribing
+<ul class="org-ul">
+<li>We can use a hack where, prior to launching any <code>moveit</code> nodes we run our own node that provides the same <code>service</code> or <code>action</code>
+<ul class="org-ul">
+<li>The exact behavior of having duplicate services and a</li>
+<li>This node will now receive the requests, even after we run the moveit node</li>
+<li>The downside of this approach is that the <code>/move_group</code> node (as the second node started) will not receive the requests</li>
+<li>We could always use remapping to insert a shim node where the server just forwards the request to <code>the move_group</code></li>
+</ul></li>
+</ul></li>
+<li>While the above is the most thorough, we already know that most of the "action" is in the <code>/move_action</code> action
+<ul class="org-ul">
+<li>So the plan will be:
+<ul class="org-ul">
+<li>Write a node that creates an action server on the <code>/move_action</code></li>
+<li>Run that node</li>
+<li>Run the moveit code</li>
+<li>Perform actions in <code>rviz</code></li>
+<li>Print out the action request</li>
+<li>Your library can then use this information as a model</li>
+</ul></li>
+</ul></li>
+<li>Create a new workspace, and a new package (called <code>intercept</code>), and a new node called <code>move_what</code>.
+<ul class="org-ul">
+<li>Run <code>move_what</code>, then launch the <code>franka</code> moveit code.</li>
+<li>Use <code>move_what</code> to intercept services and and actions you think are relevant for planning, and print out the data
+<ul class="org-ul">
+<li>Some actions to try are:
+<ul class="org-ul">
+<li><code>/move_action</code></li>
+<li><code>/execute_trajectory</code></li>
+</ul></li>
+<li>Some services to try are:
+<ul class="org-ul">
+<li><code>/compute_ik</code></li>
+</ul></li>
+</ul></li>
+<li>The <code>/planning_scene</code> topic is what gets published to when something is added to the planning scene</li>
+</ul></li>
+<li>By doing this you will learn how the <code>move_it</code> rviz plugin uses the <code>move_group</code>
+<ul class="org-ul">
+<li>Try to discover what sequence of events happens to plan a motion and then execute it</li>
+<li>Try to discover the difference between Plan, Execute, and Plan &amp; Execute</li>
+<li>Try to discover what features of the planning message are used and which are not</li>
+</ul></li>
+<li>The goal of this exploration is to be able to call an action manually that causes a path to be planned and executed</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

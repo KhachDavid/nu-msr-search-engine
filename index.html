@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MSR Search Engine</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .filter {
+            margin: 10px 0;
+        }
+        .result {
+            margin-top: 15px;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .result a {
+            text-decoration: none;
+            color: blue;
+        }
+        .excerpt {
+            margin-top: 5px;
+            color: gray;
+        }
+        .highlight {
+            background-color: yellow;  /* Highlight color */
+            font-weight: bold;          /* Bold text */
+        }
+
+    </style>
+</head>
+<body>
+    <h1>MSR Search Engine</h1>
+    <input 
+        type="text" 
+        id="searchInput" 
+        placeholder="Enter keyword..." 
+        onkeypress="handleKeyPress(event)" 
+        autofocus
+    />
+    <button onclick="searchFiles()">Search</button>
+    
+    <div class="filter">
+        <label>
+            <input type="checkbox" id="ros1Filter" checked />
+            Exclude ROS1 Results
+        </label>
+    </div>
+    
+    <div id="results"></div>
+
+    <script>
+        let htmlFiles = [];
+        let urlMapping = {};
+
+        async function fetchHtmlFiles() {
+            const response = await fetch('/files');
+            if (response.ok) {
+                htmlFiles = await response.json();
+            } else {
+                console.error('Failed to fetch HTML files');
+            }
+        }
+
+        async function fetchUrlMapping() {
+            const response = await fetch('downloaded_html/url_mapping.json');
+            if (response.ok) {
+                urlMapping = await response.json();
+            } else {
+                console.error('Failed to fetch URL mapping');
+            }
+        }
+
+        async function searchFiles() {
+            const query = document.getElementById('searchInput').value.trim().toLowerCase();
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '';  // Clear previous results
+                
+            if (query.length < 2) return;  // Avoid short searches, modify to allow two-character queries
+                
+            const excludeRos1 = document.getElementById('ros1Filter').checked;  // Check if the filter is enabled
+                
+            // Loop through files and search for the query
+            for (const file of htmlFiles) {
+                const res = await fetch(`downloaded_html/${file}`);
+                const htmlContent = await res.text();
+            
+                // Check if the content should be excluded
+                if (excludeRos1 && file.includes('ros_notes_ros1')) {
+                    continue;  // Skip this file
+                }
+            
+                // Use a case-insensitive regex to search for the query
+                const regex = new RegExp(query, 'gi');  // Create a case-insensitive regex
+                const index = htmlContent.toLowerCase().search(regex);
+                
+                if (index !== -1) {
+                    const excerpt = getExcerpt(htmlContent, index, query.length);
+                    const vanillaExcerpt = getExcerpt(htmlContent, index, query.length, true);
+                    addResult(file, excerpt, vanillaExcerpt);
+                }
+            }
+        }
+
+
+        function getExcerpt(content, index, queryLength, vanilla=false) {
+            const start = Math.max(0, index - 300);  // Show 300 characters before the match
+            const end = Math.min(content.length, index + queryLength + 300);  // And 300 after
+            const excerptHtml = content.slice(start, end);
+                
+            // Create a temporary element to parse the HTML and extract text
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = excerptHtml;
+                
+            // Get the text content only
+            const textContent = tempDiv.textContent || tempDiv.innerText || "";
+            // Highlight the search term in the text content
+            const searchTerm = document.getElementById('searchInput').value.trim();
+
+            if (vanilla) {
+                const encodedSearchTerm = encodeURIComponent(searchTerm);
+                return encodedSearchTerm
+            }
+
+            const regex = new RegExp(`(${searchTerm})`, 'gi'); // Create a case-insensitive regex
+            const highlightedExcerpt = textContent.replace(regex, '<span class="highlight">$1</span>');
+                
+            return `...${highlightedExcerpt}...`; // Return the cleaned and highlighted excerpt
+        }
+
+
+        function addResult(file, excerpt, vanillaExcerpt) {
+            const resultsDiv = document.getElementById('results');
+        
+            const resultDiv = document.createElement('div');
+            resultDiv.className = 'result';
+        
+            // Link to the original URL with text highlighting
+            const link = document.createElement('a');
+            const searchTerm = encodeURIComponent(document.getElementById('searchInput').value.trim());
+
+            const excerptDiv = document.createElement('div');
+            excerptDiv.className = 'excerpt';
+            excerptDiv.innerHTML = excerpt;  // Use innerHTML to render HTML properly
+        
+            link.href = `${urlMapping[file]}#:~:text=${vanillaExcerpt}`;  // Append the text fragment for highlighting
+            link.target = '_blank';  // Open in a new tab
+            link.textContent = urlMapping[file];
+
+            resultDiv.appendChild(link);
+            resultDiv.appendChild(excerptDiv);
+            resultsDiv.appendChild(resultDiv);
+        }
+
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                searchFiles();  // Trigger search on Enter key press
+            }
+        }
+
+        function getSearchTerm() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('search');
+        }
+
+        // Highlight the search term in the document body
+        function highlightSearchTermInDocument() {
+            const searchTerm = getSearchTerm();
+            if (searchTerm) {
+                const regex = new RegExp(`(${searchTerm})`, 'gi'); // Create a case-insensitive regex
+                document.body.innerHTML = document.body.innerHTML.replace(regex, '<span class="highlight">$1</span>');
+            }
+        }
+
+        window.onload = async () => {
+            await fetchUrlMapping();  // Fetch URL mapping on page load
+            await fetchHtmlFiles();  // Fetch files when the page loads
+            highlightSearchTermInDocument()
+        };
+    </script>
+</body>
+</html>

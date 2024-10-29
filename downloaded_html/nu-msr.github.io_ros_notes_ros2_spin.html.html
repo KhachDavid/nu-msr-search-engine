@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-10-29 Tue 11:30 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Threads, Spinning, and Async in ROS 2</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">Threads, Spinning, and Async in ROS 2</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org344a40c">Overview</a></li>
+<li><a href="#service_client">Service Clients</a>
+<ul>
+<li><a href="#orgaee1b7f">Steps to Call a Service</a></li>
+</ul>
+</li>
+<li><a href="#orgb098918">Events</a></li>
+<li><a href="#org1c09f23">Callbacks</a></li>
+<li><a href="#org7a0eb92">Callback Groups</a>
+<ul>
+<li><a href="#orgbe9f79a">MutuallyExclusiveCallbackGroup</a></li>
+<li><a href="#org82c425c">ReentrantCallbackGroup</a></li>
+</ul>
+</li>
+<li><a href="#orge6eeb03">ROS and Python Async I/O</a>
+<ul>
+<li>
+<ul>
+<li><a href="#org3b17a38">Python</a></li>
+<li><a href="#orgf23b10d">ROS 2</a></li>
+<li><a href="#org82a5851">ROS 2 vs Python</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org9b428dc">Deadlocks</a></li>
+<li><a href="#patterns">Patterns</a>
+<ul>
+<li><a href="#orgcfec863">Basic ROS 2 Node</a></li>
+<li><a href="#org8807191">Service Clients</a>
+<ul>
+<li><a href="#blocking_calls">Blocking Calls</a></li>
+<li><a href="#orgd6c2c79">Non-blocking</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#walkthrough">Walkthrough</a>
+<ul>
+<li><a href="#orgdc3405c">Deadlock</a></li>
+<li><a href="#orgf39feb7">Await</a></li>
+</ul>
+</li>
+<li><a href="#org5f3b0fe">Concurrency</a>
+<ul>
+<li><a href="#org9dd5a63">Execution Models</a></li>
+<li><a href="#org703ed2d">Process</a></li>
+<li><a href="#orgcc0c9f9">Thread</a></li>
+<li><a href="#org2f32a99">Threads in Python</a>
+<ul>
+<li><a href="#org5996ab6">Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org6889301">Resources</a></li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-org344a40c" class="outline-2">
+<h2 id="org344a40c">Overview</h2>
+<div class="outline-text-2" id="text-org344a40c">
+<ul class="org-ul">
+<li>Python ROS 2 nodes (unlike their counterparts in ROS 1) are single-threaded and sequential by default.</li>
+<li>Lack of threads makes reasoning about ROS 2 python nodes easier, makes them more similar to C++ nodes (which were single-threaded in ROS 1) and also provides more control over execution</li>
+<li>ROS 2 python, however, supports highly configurable modes of execution, which require knowledge of both the python concurrency model and how ROS 2 fits in with it.</li>
+<li>In most cases, the single-threaded sequential of ROS 2 makes coding much easier and eliminates whole classes of possible bugs</li>
+<li>This default model, however, is sometimes overly restrictive and reduces potential performance</li>
+<li>There is also one common case where sticking with the default model makes coding much more difficult: using service clients.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-service_client" class="outline-2">
+<h2 id="service_client">Service Clients</h2>
+<div class="outline-text-2" id="text-service_client">
+<ul class="org-ul">
+<li>When a service is called using <code>service.async_call</code>, the following happens:
+<ul class="org-ul">
+<li>The request is sent to the server</li>
+<li>The server processes the request and computes the response</li>
+<li>The response is sent back to the client</li>
+<li>The client receives the response</li>
+</ul></li>
+<li>The full sequence of events in a service call take an unspecified amount of time during which the client does not have a response.
+What should the client do while waiting for the response?
+<ol class="org-ol">
+<li>Wait until the response is received before doing anything. In this case the request is <i>synchronous</i> and the client <i>blocks</i> until it receives the result</li>
+<li>Perform other useful work while waiting for the result to be received. In this case the request is <i>asynchronous</i> and does not block (i.e., it is <i>non-blocking</i>).
+If the node cares about the response, it needs some way to process the response when it is received.</li>
+</ol></li>
+</ul>
+</div>
+
+<div id="outline-container-orgaee1b7f" class="outline-3">
+<h3 id="orgaee1b7f">Steps to Call a Service</h3>
+<div class="outline-text-3" id="text-orgaee1b7f">
+<ol class="org-ol">
+<li>Create a service client (call it <code>client</code>) using <code>Node.create_client</code></li>
+<li>Wait for the service to become available using <code>client.wait_for_service(timeout_sec</code>&#x2026;)=</li>
+<li>Issue a request with <code>client.call_async</code>
+<ul class="org-ul">
+<li>Synchronous calls are generally not well supported in ROS 2, although there is a synchronous calling method in <code>rclpy</code></li>
+</ul></li>
+<li>If you don't want to block
+<ul class="org-ul">
+<li>Do a little bit of work</li>
+<li>Check for a result</li>
+<li>Repeat until a result is ready</li>
+</ul></li>
+<li>If you do want to block, wait for the result until it is ready
+<ul class="org-ul">
+<li>The <a href="https://docs.ros.org/en/iron/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Service-And-Client.html#write-the-client-node">Service Tutorial</a> uses <code>rclpy.spin_until_future_complete</code> to accomplish this task</li>
+<li>But the code in the tutorial <b>WILL NOT WORK</b> if used from within another callback function!</li>
+<li>What is a future anyway? And why is it spinning?</li>
+</ul></li>
+</ol>
+
+<p>
+The rest of these notes address how to easily wait for a service call to complete in ROS 2, while also explaining in some detail the concepts and machinery
+required to make it happen. For quick instruction see <a href="#patterns">Patterns.</a>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb098918" class="outline-2">
+<h2 id="orgb098918">Events</h2>
+<div class="outline-text-2" id="text-orgb098918">
+<ul class="org-ul">
+<li>External events in ROS include
+<ul class="org-ul">
+<li>Receiving a message on a topic (subscriber callback)</li>
+<li>A timer triggering (timer callback: the ROS time is external to the node)</li>
+<li>Receiving a response to a service request (future object)</li>
+<li>A parameter changing (the parameter callback)</li>
+</ul></li>
+<li>As external events occur, they must be explicitly processed by the node</li>
+<li>Each ROS node must explicitly process events by "spinning"
+<ul class="org-ul">
+<li><code>rclpy.spin_once</code> causes the node to check for and process the next pending event (e.g., by calling a subscriber callback for a received message)</li>
+<li><code>rclpy.spin</code> creates an event loop, which repeatedly checks for events and handles them
+<ul class="org-ul">
+<li>It is essentially an infinite loop that repeatedly calls <code>spin_once()</code></li>
+</ul></li>
+<li>There is also <code>rclpy.spin_until_future_complete</code> which will call <code>spin_once()</code> repeatedly until a specified event occurs.</li>
+</ul></li>
+<li>As a general rule (there are exceptions) your node should be organized around a single call to <code>rclpy.spin()</code> with periodic tasks being handled with a timer
+<ul class="org-ul">
+<li>Keeping all of the spinning in one place significantly simplifies the architecture of your node and helps you avoid common pitfalls.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org1c09f23" class="outline-2">
+<h2 id="org1c09f23">Callbacks</h2>
+<div class="outline-text-2" id="text-org1c09f23">
+<ul class="org-ul">
+<li>A callback is a function (or callable object) that is provided to an object to be called at a later time.</li>
+<li>In ROS 2, callbacks are explicitly registered when (for example)
+<ul class="org-ul">
+<li>Creating a subscriber (the callback is called whenever a message is received)</li>
+<li>A timer is created (the callback is called whenever the timer is triggered)</li>
+<li>A service server is created (the callback is called whenever somebody calls the server)</li>
+</ul></li>
+<li>Callbacks are also implicitly used when a service client calls a service
+<ul class="org-ul">
+<li>The callback is what receives the response from the service server</li>
+</ul></li>
+<li>Callbacks are only called whenever <code>rcply.spin_once</code> is called (which can be and usually is from within <code>rclpy.spin</code>).</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org7a0eb92" class="outline-2">
+<h2 id="org7a0eb92">Callback Groups</h2>
+<div class="outline-text-2" id="text-org7a0eb92">
+<ul class="org-ul">
+<li>By default, ROS 2 only allows only one callback function to be pending on the callstack.
+<ul class="org-ul">
+<li>This behavior means that spinning from within a callback will not allow other callback functions to be called (via <code>rclpy.spin_once</code>).</li>
+<li>In other words, the callbacks cannot be nested by default.</li>
+</ul></li>
+<li>The behavior of what callbacks can be called by <code>rclpy.spin_once</code> is controlled using <a href="https://docs.ros.org/en/iron/How-To-Guides/Using-callback-groups.html">Callback Groups</a></li>
+<li>There are two primary callback groups types: <code>MutuallyExclusiveCallbackGroup</code> and <code>ReentrantCallbackGroup</code>.</li>
+</ul>
+</div>
+
+<div id="outline-container-orgbe9f79a" class="outline-3">
+<h3 id="orgbe9f79a">MutuallyExclusiveCallbackGroup</h3>
+<div class="outline-text-3" id="text-orgbe9f79a">
+<ul class="org-ul">
+<li>No more than one callback in the same <code>MutuallyExclusiveCallbackGroup</code> can ever be running concurrently.</li>
+<li>By default, all callbacks are placed in the same <code>MutuallyExclusiveCallbackGroup</code>.</li>
+<li>The mutually exclusive property makes it easy to reason about callbacks that may touch the same variables (e.g., global variables or member variables) because
+callbacks must always run to completion before another one can be called.
+<ul class="org-ul">
+<li>For example, when a <code>timer</code> is part of a <code>MutuallyExclusiveCallbackGroup</code> you know that the timer callback will always run to completion before it is called again,
+even if the timer expires sooner or if multiple threads are used</li>
+</ul></li>
+<li>If you explicitly <code>spin_once</code> in a callback within a <code>MutuallyExclusiveCallbackGroup</code> none of the callbacks in that group will be called, even if there is a pending event.
+<ul class="org-ul">
+<li>Callbacks in other callback groups can, however, be called</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org82c425c" class="outline-3">
+<h3 id="org82c425c">ReentrantCallbackGroup</h3>
+<div class="outline-text-3" id="text-org82c425c">
+<ul class="org-ul">
+<li>All callbacks in a <code>ReentrantCallbackGroup</code> can run concurrently, this means that it is possible for a callback to be only partially complete before it is called again</li>
+<li>If you explicitly <code>spin_once</code> from within a callback that is part of a <code>ReentrantCallbackGroup</code> then any callback in that same group can be called</li>
+<li>For example, if a timer is in a <code>ReentrantCallbackGroup</code>, and you <code>spin_once</code> from the timer callback after the timer has expired (e.g., your callback took longer than
+the timer's period), the <code>timer</code> callback will be called again.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orge6eeb03" class="outline-2">
+<h2 id="orge6eeb03">ROS and Python Async I/O</h2>
+<div class="outline-text-2" id="text-orge6eeb03">
+</div>
+<div id="outline-container-org3b17a38" class="outline-4">
+<h4 id="org3b17a38">Python</h4>
+<div class="outline-text-4" id="text-org3b17a38">
+<ul class="org-ul">
+<li>The python <a href="https://docs.python.org/3/library/asyncio.html">asyncio</a> library, along with the <code>async</code> and <code>await</code> keywords, enables single-threaded cooperative concurrency in python.</li>
+<li>The heart of any asynchronous (async) program is an <i>event loop</i>. In ROS, the event loop is provided by <code>rclpy.spin</code>.</li>
+<li>The event loop is responsible for scheduling the execution of <i>Tasks</i>.</li>
+<li>Tasks are able to run <i>coroutines</i> which are functions that can suspend themselves mid-execution and then resume</li>
+<li>When a coroutine suspends itself mid-execution the <i>event loop</i> can schedule another Task</li>
+<li>A coroutine is created by declaring a function with the <code>async</code> keyword: <code>async def my_coroutine():</code></li>
+<li>A coroutine can suspend itself using the <code>await</code> keyword: this allows it to either
+<ol class="org-ol">
+<li>Call another coroutine and wait for it to finish (e.g., <code>await my_couroutine1()</code>)</li>
+<li>Wait for the result of a <i>Future</i> object to become available.</li>
+</ol></li>
+</ul>
+
+<p>
+A function that may take a long time to compute a result (call it <code>long_function</code>) can instead
+</p>
+<ol class="org-ol">
+<li>Create a <code>Future()</code> object (call it <code>future</code>)</li>
+<li>Use a task to schedule a co-routine (call it <code>data_provider</code>) that has access to <code>future</code> and can provide it with the data, when that data is available</li>
+<li>Return <code>future</code> to the caller</li>
+<li>When the co-routine that calls <code>long_function</code> (call it <code>callback</code>) first gets <code>future</code>, <code>future.done()</code> is <code>False</code>, meaning that data is not available</li>
+<li><code>callback</code> needs to somehow wait for <code>future.done()</code> to become <code>True</code> and it can then find the data in <code>future.result()</code></li>
+<li>One way of waiting for <code>future.done()</code> to become true is to <code>await</code> the <code>future</code></li>
+<li>When the co-routine calls <code>await</code> on <code>future</code> it suspends its execution, allowing other co-routines to run, including <code>data_provider</code></li>
+<li>When <code>data_provider</code> gets the data, it provides that data to <code>future</code>
+<ul class="org-ul">
+<li>Now <code>future.done()</code> will be True and <code>future.result()</code> will contain the data</li>
+<li>The next time <code>callback</code> is scheduled, it will resume from where it suspended execution via <code>await</code>, and the <code>future</code> will now have data.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgf23b10d" class="outline-4">
+<h4 id="orgf23b10d">ROS 2</h4>
+<div class="outline-text-4" id="text-orgf23b10d">
+<ul class="org-ul">
+<li>In ROS 2, the <i>event loop</i> is provided by <code>rclpy.spin</code>, and callbacks are scheduled by this <i>event loop</i></li>
+<li>Callbacks in ROS 2 can be functions or co-routines.</li>
+<li>If a callback is a co-routine, it can <code>await</code> on a future</li>
+<li>For a ROS 2 service client, <code>client.call_async()</code> returns a future</li>
+
+<li>So, if a callback is <code>async</code> it can <code>await</code> the result of <code>client.call_async()</code>.
+<ul class="org-ul">
+<li>It will suspend its operation and return control to the event loop (<code>rclpy.spin</code>)</li>
+<li>If the callback groups are set up correctly, <code>rclpy.spin()</code> will be able to call the server client callback when the response arrives</li>
+<li>The future will then be done, and the callback that issued the service request will have the result and be able to continue</li>
+<li>To get the response from the service use: <code>response = await client.call_async()</code></li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org82a5851" class="outline-4">
+<h4 id="org82a5851">ROS 2 vs Python</h4>
+<div class="outline-text-4" id="text-org82a5851">
+<ul class="org-ul">
+<li>In <code>python asyncio</code> the event loop is created by calling <code>asyncio.run</code>. In ROS 2, an event loop iteration us implemented using an <code>rclpy.executor</code></li>
+<li>In <code>python asyncio</code> a task is created with <code>asyncio.create_task</code>. In ROS 2, a task is created with <code>rclpy.executor.create_task</code> and is associated
+with a given executor.</li>
+<li>In python <code>asyncio.Future</code> futures are used. In ROS 2 the futures are <code>rclpy.task.Future</code> objects and are associated with an executors event loop.</li>
+<li>Overall, the ROS 2 task objects behave in the same way as the corresponding <code>python asyncio</code> counterparts. However, ROS 2 facilitates the creation
+of different types of event loops, and these objects are associated with these loops.
+<ul class="org-ul">
+<li>For example, in ROS 2 there is a <code>MultiThreadedExecutor</code> that uses multiple threads to process events.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org9b428dc" class="outline-2">
+<h2 id="org9b428dc">Deadlocks</h2>
+<div class="outline-text-2" id="text-org9b428dc">
+<ul class="org-ul">
+<li>A deadlock occurs when code cannot make progress</li>
+<li>It is easy to accidentally cause a deadlock (where your program can make no further progress).
+<ul class="org-ul">
+<li>You get no warning or error or any other indication that your program is in a deadlock. The program just stops but stays in memory and does not exit.</li>
+</ul></li>
+<li>When using multi-threading, deadlocks can happen in several different ways (e.g., by acquiring and releasing locks out of order)</li>
+<li>Deadlocks are, unfortunately possible even with single-threaded concurrency like <code>asyncio</code></li>
+<li>In general, with ROS 2, a deadlock will occur if any part of your code depends on a <code>callback</code> running but either
+<ol class="org-ol">
+<li>The code is not able to <code>spin</code></li>
+<li>Callback's <code>A</code> and <code>B</code> are in the same <code>MutuallyExclusiveCallbackGroup</code> and callback <code>A</code> requires callback <code>B</code> to run to make progress</li>
+</ol></li>
+<li>The most common source of <code>deadlocks</code> occurs when waiting for a response from a service <code>client</code>  (which implicitly has a hidden callback that must happen to receive the response data).</li>
+<li>By sticking with certain patterns, deadlocks can be avoided.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-patterns" class="outline-2">
+<h2 id="patterns">Patterns</h2>
+<div class="outline-text-2" id="text-patterns">
+<ul class="org-ul">
+<li>The ROS 2 architecture provides a lot of control over concurrency, and generally helps avoid data races (when two different pieces of code try to write to the same memory)</li>
+<li>While there are many ways of handling the issues of deadlocks (such as spinning in the right places and making sure callback groups are setup properly) some patterns
+can help reduce the decisions that the programmer needs to make while also simplifying the reasoning about code</li>
+<li>Here are some general guidelines that generally work well and cover probably 80% of cases</li>
+</ul>
+</div>
+
+<div id="outline-container-orgcfec863" class="outline-3">
+<h3 id="orgcfec863">Basic ROS 2 Node</h3>
+<div class="outline-text-3" id="text-orgcfec863">
+<ol class="org-ol">
+<li>Use <code>rclpy.spin</code> in only one place in  your program (likely the main entry point)
+<ul class="org-ul">
+<li>Now you know exactly where the spinning occurs</li>
+<li>By following the other guidelines you will never need to spin again</li>
+<li>An exception to this rule is if you need to do some one-time setup when your node starts
+<ul class="org-ul">
+<li>Then you may want to call services and spin until they are complete</li>
+<li>Most setup, however, is not one-time. You may want the ability to, for example, reset and re-run the setup.</li>
+</ul></li>
+</ul></li>
+<li>Structure the main execution of your code around a timer callback
+<ul class="org-ul">
+<li>Usually you want to be issuing commands at a single fixed frequency</li>
+<li>The timer should advance the progress of your algorithm by one time-step</li>
+<li>Subscribers do very little work and instead store data that is then used by the timer</li>
+<li>This setup allows you to easily keep track of the node's state in a single location and allows.
+some calculations or decisions to take place over multiple timer ticks without needing to pause.</li>
+<li>If you have a timer running at <code>X hz</code>, it's easy to subdivide that into <code>X/N hz</code>. Multiple timers could also be used,
+but doing a subdivision can be a good choice because it gives more deterministic performance and control in terms of when the various tasks occur relative to each other.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org8807191" class="outline-3">
+<h3 id="org8807191">Service Clients</h3>
+<div class="outline-text-3" id="text-org8807191">
+<p>
+Here is information on two types of service calls: blocking/synchronous and non-blocking/asynchronous.
+Examples can be found at <a href="https://github.com/m-elwin/async_experiments">https://github.com/m-elwin/async_experiments</a> and a walkthrough of the code is provided at <a href="#walkthrough">here</a>
+</p>
+</div>
+<div id="outline-container-blocking_calls" class="outline-4">
+<h4 id="blocking_calls">Blocking Calls</h4>
+<div class="outline-text-4" id="text-blocking_calls">
+<ol class="org-ol">
+<li>Blocking calls are the easiest to handle and are preferred unless performance requirements dictate otherwise</li>
+<li>Assume that you want to call the service from <code>callback</code></li>
+<li>Make <code>callback</code> an <code>async</code> function.</li>
+<li>Create a new <code>MutuallyExclusiveCallbackGroup</code> and assign every <code>service client</code> to that callback group.</li>
+<li>All other callback functions remain in the default <code>MutuallyExclusiveCallbackGroup</code>.</li>
+<li>From within <code>callback</code> you can now <code>await</code> the result of the <code>call_async</code> on the service client:
+<ul class="org-ul">
+<li>This <code>await</code> will send the service request, suspend <code>callback</code>, and return control to the event loop</li>
+<li>When the event loop receives the response, <code>callback</code> will be resumed where it had been suspended and you will have access to the response.</li>
+</ul></li>
+<li>See the AwaitClient example in <a href="https://github.com/m-elwin/async_experiments">https://github.com/m-elwin/async_experiments</a>.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgd6c2c79" class="outline-4">
+<h4 id="orgd6c2c79">Non-blocking</h4>
+<div class="outline-text-4" id="text-orgd6c2c79">
+<ol class="org-ol">
+<li>For non-blocking service calls you need to implement logic that periodically checks the result of the future returned by <code>service_client.call_async</code></li>
+<li>The logic that checks the result should be in a timer that checks the <code>.done()</code> status of the future.
+<ul class="org-ul">
+<li>The <code>future</code> status can only be changed when the callback finishes (so other callbacks or called) or if it calls <code>await</code> (so other callbacks can execute)</li>
+<li>Therefore, it does not make sense to loop and check the <code>..done()</code> status, instead check it once and if not, defer to the next time the callback is called.</li>
+</ul></li>
+<li>In this pattern, the work is being divided up (by you) into short spurts that can be executed within a timer period, often in conjunction with a state machine</li>
+<li>See the FutureClient example in <a href="https://github.com/m-elwin/async_experiments">https://github.com/m-elwin/async_experiments</a>.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-walkthrough" class="outline-2">
+<h2 id="walkthrough">Walkthrough</h2>
+<div class="outline-text-2" id="text-walkthrough">
+<p>
+These walkthroughs take you through the code in  <a href="https://github.com/m-elwin/async_experiments">https://github.com/m-elwin/async_experiments</a> in the order in which it is executed and provide a conceptual guide to what is happening.
+</p>
+</div>
+<div id="outline-container-orgdc3405c" class="outline-3">
+<h3 id="orgdc3405c">Deadlock</h3>
+<div class="outline-text-3" id="text-orgdc3405c">
+<ol class="org-ol">
+<li><code>ros2 launch async_experiments experiment.launch.xml experiment:=deadlock</code></li>
+<li>The deadlock node starts in the <code>async_client.py:deadlock_entry</code> function.</li>
+<li>The <code>DeadlockClient</code> constructor (<code>__init__</code>) is called:
+<ul class="org-ul">
+<li>It creates a service client</li>
+<li>It creates a timer</li>
+</ul></li>
+<li><p>
+<code>rclpy.spin</code> is called, which implements an event loop as follows in pseudocode:
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">while</span> Node_Has_Not_Exited:
+   Check <span class="org-keyword">for</span> an event
+   If an event has occured, call the appropriate callback
+</pre>
+</div></li>
+<li>After some time a timer event occurs and the timer callback (<code>DeadlockClient.timer_callback</code>) is called from the event loop.</li>
+<li>The timer callback calls the "delay" service using <code>call_async</code> and retrieves a <code>Future</code> object called <code>future</code>
+<ul class="org-ul">
+<li>This call sends a request to the node running the "delay" service, so that it may generate a response</li>
+<li>The future keeps track of the status of the response</li>
+<li>Initially, the response has not been received, so <code>future.done()</code> returns False</li>
+</ul></li>
+<li>The timer enters a loop that waits for <code>future.done()</code> to return true</li>
+<li>Meanwhile, the node implementing the "delay" service does some processing, and sends a response</li>
+<li>The <code>DeadlockClient</code> node is still looping, waiting for <code>future.done()</code> to be true
+<ul class="org-ul">
+<li>It will loop forever, because this loop does not call anything that checks for responses that can change the status of the <code>Future()</code> object so <code>future.done()</code> will always be <code>False</code>.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgf39feb7" class="outline-3">
+<h3 id="orgf39feb7">Await</h3>
+<div class="outline-text-3" id="text-orgf39feb7">
+<ol class="org-ol">
+<li><code>ros2 launch async_experiments experiment.launch.xml experiment:=await</code></li>
+<li>The <code>await</code> node starts in the <code>async_client.py:await_entry</code> function.</li>
+<li>The <code>AwaitClient</code> constructor (<code>__init__</code>) is called:
+<ul class="org-ul">
+<li>A callback group called <code>cbgroup</code> is created</li>
+<li>A service client called <code>_client</code> is created and assigned to <code>cbgroup</code></li>
+<li>A timer is created, it's callback group is the default <code>MutuallyExclusiveCallbackGroup</code>, which is different than <code>cbgroup</code>.</li>
+<li>Based on this setup, the <code>_client</code> callback can run when the <code>timer_callback</code> has called <code>await</code> and not complted.</li>
+</ul></li>
+<li><p>
+<code>rclpy.spin</code> is called, which implements an event loop as follows in pseudocode:
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">while</span> Node_Has_Not_Exited:
+   Check <span class="org-keyword">for</span> an event
+   If an event has occured, call the appropriate callback
+</pre>
+</div></li>
+<li>After some time a timer event occurs and the timer callback (<code>AwaitClient.timer_callback</code>) is called from the event loop.</li>
+<li>The <code>timer_callback</code> calls the "delay" service (running on the <code>delay_server</code> node) using <code>call_async</code> and retrieves a <code>Future</code> object
+<ul class="org-ul">
+<li>We refer to this object <code>future</code> in these notes. In the code we don't name this object because we directly await on the return value</li>
+<li><code>_client</code> also has a reference to <code>future</code> (since it created <code>future</code> it maintains its own reference to it)</li>
+<li>The <code>call_async</code> sends a request to the <code>delay_server</code> node so that the "delay" service may generate a response</li>
+<li>The future keeps track of the status of the response</li>
+<li>The <code>timer_callback</code> calls <code>await</code> on the future object</li>
+<li>Initially, the response has not been received, so <code>future.done()</code> returns False, thus the <code>timer_callback</code> function suspends itself,
+allowing the <code>rclpy.spin</code> event loop to continue processing events.</li>
+</ul></li>
+<li>Meanwhile, after receiving the request, the <code>delay_server</code> node begins creating the request</li>
+<li><p>
+Control of the <code>await</code> node is in <code>rclpy.spin</code>:
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">while</span> Node_Has_Not_Exited:
+   Check <span class="org-keyword">for</span> an event
+   If an event has occured, call the appropriate callback
+</pre>
+</div></li>
+<li>Meanwhile, <code>delay_server</code> node finishes its computation and sends it's response back to the <code>_client</code>
+<ul class="org-ul">
+<li>The <code>await</code> node event loop receives this event and calls the default callback associated with <code>_client</code></li>
+</ul></li>
+<li>The <code>_client.callback</code> does the following:
+<ul class="org-ul">
+<li>Store the response in the <code>future</code></li>
+<li>Signal that <code>future</code> is done</li>
+</ul></li>
+<li>After the service client callback completes the event loop is re-entered.
+<ul class="org-ul">
+<li>Python detects that <code>future.done()</code> is true and resumes executing the co-routine where <code>future</code> was <code>awaited</code> (the <code>timer_callback</code>)</li>
+</ul></li>
+<li>The <code>timer_callback</code> resumes execution from after the <code>await</code> statement
+<ul class="org-ul">
+<li>Because the <code>future</code> is <code>done()</code> it knows the service call has completed</li>
+<li>It finishes and the event loop <code>rclpy.spin()</code> is re-entered</li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-org5f3b0fe" class="outline-2">
+<h2 id="org5f3b0fe">Concurrency</h2>
+<div class="outline-text-2" id="text-org5f3b0fe">
+</div>
+<div id="outline-container-org9dd5a63" class="outline-3">
+<h3 id="org9dd5a63">Execution Models</h3>
+<div class="outline-text-3" id="text-org9dd5a63">
+<ul class="org-ul">
+<li>In sequential computing, only one computation happens at a given time. The computations happen in sequence.
+<ul class="org-ul">
+<li>When using a sequential model, callback groups don't matter (unless you explicitly <code>spin_once</code> from within a callback).
+<ul class="org-ul">
+<li>Unless <code>spin_once</code> is called, nothing attempts to call the callbacks</li>
+<li>Each callback will run until completion.</li>
+</ul></li>
+</ul></li>
+<li>In parallel computing, multiple computations can happen simultaneously.
+<ul class="org-ul">
+<li>Callback groups matter, and there are other synchronization issues related to multi-threading</li>
+</ul></li>
+<li>In concurrent computing, multiple computations can be pending at the same time, but are not executing sequentially.</li>
+<li>For example, consider the following chess-playing scenarios
+<ul class="org-ul">
+<li>A person playing one chess game, followed by another chess game: this is like sequential computation.</li>
+<li>Two pairs of people playing two chess games simultaneously: this is like parallel computation.</li>
+<li>One person playing two chess games against two opponents. First the person makes a move in game 1, then makes a move in game 2. Both games are in progress at the same time,
+but the person is not making a move in each game simultaneously.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org703ed2d" class="outline-3">
+<h3 id="org703ed2d">Process</h3>
+<div class="outline-text-3" id="text-org703ed2d">
+<ol class="org-ol">
+<li>A <a href="https://www.tldp.org/LDP/tlk/kernel/processes.html">process</a> is an abstraction used by the Linux Kernel (and other operating systems) to segregate memory address space.
+<ul class="org-ul">
+<li>Code running in each process thinks it has access to the full memory-address space: in reality the kernel maps a processes memory into the physical ram</li>
+<li>Code running in each process cannot access memory used by other processes without operating-system intervention, increasing stability and security.</li>
+<li>Programmers do not need to worry about the intricacies of physical memory: to them memory is just a flat contiguous address space</li>
+</ul></li>
+<li>Every process has a "main" thread, which executes the machine code within the context of the process's memory address space</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgcc0c9f9" class="outline-3">
+<h3 id="orgcc0c9f9">Thread</h3>
+<div class="outline-text-3" id="text-orgcc0c9f9">
+<ol class="org-ol">
+<li>A <a href="https://www.tldp.org/FAQ/Threads-FAQ/Types.html">thread</a> is subordinate unit of execution within a process, and it is what actually executes the machine code</li>
+<li>By default each process has a single "main" thread. But it can also create additional threads to run code simultaneously.
+<ul class="org-ul">
+<li>All threads within a process share the same memory address space</li>
+<li>Each thread has its own stack (for calling functions and storing local variables)</li>
+<li>The heap and global variables are shared by threads</li>
+<li>Unlike processes, threads can directly read and write the memory used by another thread</li>
+</ul></li>
+<li>Each thread is scheduled for execution by the kernel
+<ul class="org-ul">
+<li>If the machine has multiple CPUs then threads can be executed in parallel</li>
+<li>If there are more threads than CPUs (as is usually the case), the kernel rapidly switches between threads, executing little bits of code each time
+<ul class="org-ul">
+<li>In this case the code is running concurrently, but it is fast enough to simulate simultaneity</li>
+</ul></li>
+</ul></li>
+<li>If two threads access the same memory and are not coordinated properly, a bug called a <i>race condition</i> can occur.
+<ul class="org-ul">
+<li>A race condition can result in data corruption</li>
+<li>It can also result in a deadlock, where no thread can continue executing</li>
+</ul></li>
+<li>The exact interleaving of the instructions across multiple threads is non-deterministic because it depends on how the kernel
+schedules execution, which in turn depends on what else is happening on the computer
+<ul class="org-ul">
+<li>Non-deterministic bugs in multi-threaded code may be from a race condition</li>
+<li>Be cautious and have a plan before introducing extra threads into your program</li>
+</ul></li>
+<li>- As the operating system switches between threads, it is possible for instructions to be interrupted before completing:
+<ul class="org-ul">
+<li>Generally, a single python statement maps to multiple machine instructions and thus a statement can be interrupted in the middle of executing</li>
+<li>Consider <code>i = i + 1</code>.  The thread can be interrupted in the middle of reading the value of <code>i</code>, adding <code>1</code> to it, or storing the result in <code>i</code></li>
+<li>In the meantime, another thread can modify <code>i</code>, leading to incorrect results.</li>
+</ul></li>
+<li><i>Atomic operations</i> finish executing without interruption. Atomic operations guarantee that a complete result will be computed and seen by all threads.</li>
+<li>Synchronization primitives such as a mutex or a semaphore can be used to coordinate execution between threads</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org2f32a99" class="outline-3">
+<h3 id="org2f32a99">Threads in Python</h3>
+<div class="outline-text-3" id="text-org2f32a99">
+<ol class="org-ol">
+<li>The most common python interpreter, CPython, implements a <a href="http://wiki.python.org/moin/GlobalInterpreterLock">Global Interpreter Lock (GIL)</a>
+<ul class="org-ul">
+<li>The GIL simplifies the creation of the interpreter while preserving good single-threaded performance</li>
+<li>It also severely limits multi-threaded performance in python.</li>
+</ul></li>
+<li>The GIL prevents multiple python instructions from executing simultaneously on a multi-core system.
+<ul class="org-ul">
+<li>Thus, multi-threading with CPython is like multi-threading on a single-core CPU: the python code is not executed simultaneously</li>
+<li>Operations on each thread are interleaved (that is, the python interpreter executes some commands on one thread, then switches to another).</li>
+<li>The order of this interleaving is generally non-deterministic</li>
+</ul></li>
+<li>The GIL does not prevent all race-conditions
+<ul class="org-ul">
+<li>You still need to synchronize threads that read/write to the same shared variables.</li>
+<li>Bugs that occur due to specific orderings of operations on multiple threads can still occur</li>
+<li>Non-atomic python statements can be interrupted before completion</li>
+</ul></li>
+<li>The GIL only applies to python bytecode instructions
+<ul class="org-ul">
+<li>Python code can call C code, and that C code can bypass the GIL</li>
+<li>Python waits for a system function (e.g., to reading from a file), it is not executing bytecode.  Thus,
+another thread can run while the other thread waits for the system.</li>
+<li>Thus, multiple-threads in python can improve performance of input/output (I/O) bound (but not CPU bound) python programs but not
+<ul class="org-ul">
+<li>CPU bound means performance is limited by the available CPU resources</li>
+<li>I/O bound means performance is limited by input/output operations (such as reading a file)</li>
+</ul></li>
+</ul></li>
+
+<li>Atomic Operations: The following operations in python are guaranteed to complete once started, prior to another thread being run
+<ul class="org-ul">
+<li>Reading or writing a single variable of a basic type (int, float, string, etc)</li>
+<li>Assigning an object to a variable (e.g., x = y)</li>
+<li>Reading an item from a list</li>
+<li>Modifying an item in a list</li>
+<li>Getting an item from a dictionary</li>
+<li><a href="https://docs.python.org/3/faq/library.html#what-kinds-of-global-value-mutation-are-thread-safe">A complete list of python atomic operations</a></li>
+</ul></li>
+</ol>
+</div>
+<div id="outline-container-org5996ab6" class="outline-4">
+<h4 id="org5996ab6">Example</h4>
+<div class="outline-text-4" id="text-org5996ab6">
+<p>
+If you perform a non-atomic operation, the thread you are running on can be interrupted in the middle.
+Assume we have two threads, both performing  <code>i = i + 1</code>, a non-atomic operation.  Thus what is actually executed gets broken into several interruptable steps
+</p>
+<pre class="example">
+i = 0
+# Two threads are started
+Thread 1            |        Thread 2
+i = i + 1        |           i = i + 1
+</pre>
+
+<p>
+Operations can happen in multiple ways leading to different results: for example
+</p>
+<pre class="example">
+Thread 1, reads i, it is 0
+Thread 2, reads i, it is 0
+Thread 1 adds 1 to what it read, yielding 1
+Thread 1 stores 1 in i
+Thread 1 reads i it is 1
+Thread 1 adds 1 to what it read, yielding 2
+Thread 2 adds 1 to what it read, yielding 1
+Thread 1 stores 2 in i
+Thread 2 stores 1 in i
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+<div id="outline-container-org6889301" class="outline-2">
+<h2 id="org6889301">Resources</h2>
+<div class="outline-text-2" id="text-org6889301">
+<ul class="org-ul">
+<li><a href="https://docs.ros.org/en/iron/How-To-Guides/Sync-Vs-Async.html">Async vs Synchronous Service Clients</a></li>
+<li><a href="https://docs.ros.org/en/iron/How-To-Guides/Using-callback-groups.html">Callback Groups</a></li>
+<li><a href="https://docs.ros2.org/foxy/api/rclpy/api/init_shutdown.html">Spinning</a></li>
+<li><a href="https://docs.ros.org/en/iron/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Service-And-Client.html">Writing A Service</a></li>
+<li><a href="https://github.com/m-elwin/async_experiments">Examples</a></li>
+<li><a href="https://github.com/ros2/examples/tree/rolling/rclpy/services/minimal_client">rclpy Service client Examples</a></li>
+<li><a href="https://docs.python.org/3/library/asyncio.html">Python Async IO</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

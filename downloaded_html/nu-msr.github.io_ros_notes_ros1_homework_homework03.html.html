@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-10-29 Tue 11:30 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Homework 3</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">Homework 3</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org24d7592">Logistics</a>
+<ul>
+<li><a href="#org52bfc33">Robots</a></li>
+</ul>
+</li>
+<li><a href="#orgc8905ec">Part I: Gazebo Differential Drive Challenge</a>
+<ul>
+<li><a href="#orga571457">Creating the World</a></li>
+<li><a href="#orgc3d730c">The Xacro URDF</a>
+<ul>
+<li><a href="#org04bff68">Robot Description</a></li>
+<li><a href="#org55bd899">Gazebo Extensions</a></li>
+<li><a href="#org112b306">Control</a></li>
+</ul>
+</li>
+<li><a href="#orgfe69877">Hints</a></li>
+</ul>
+</li>
+<li><a href="#org75c97f1">Part II: Motion Planning</a>
+<ul>
+<li><a href="#org9614af2">Hints</a></li>
+<li><a href="#orga457be5">Resources</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-org24d7592" class="outline-2">
+<h2 id="org24d7592">Logistics</h2>
+<div class="outline-text-2" id="text-org24d7592">
+<ol class="org-ol">
+<li>Create a git repository using the link provided in Canvas.</li>
+<li>Your homework will be submitted via this git repository.</li>
+<li>I will grade whatever is on the <code>main</code> branch when I clone the repository.</li>
+<li><a href="./guidelines.html">Guidelines</a> provides important information about what
+you should turn-in, including information about your <code>README.md</code> file.</li>
+<li><p>
+You will create two separate ROS packages for this assignment but store them in the same git repository. T
+</p>
+<pre class="example">
+my_git_repository/diff_drive/{package.xml, CMakeLists.txt, README.md, etc}
+my_git_repository/arm_move/{package.xml, CMakeLists.txt, README.md, etc}
+</pre>
+<ul class="org-ul">
+<li>Each package should have it's own <code>README.md</code>.</li>
+</ul></li>
+</ol>
+</div>
+
+<div id="outline-container-org52bfc33" class="outline-3">
+<h3 id="org52bfc33">Robots</h3>
+<div class="outline-text-3" id="text-org52bfc33">
+<ol class="org-ol">
+<li>This assignment will use the <code>pincherX 100</code> robot.</li>
+<li>If you are not an MSR student, follow the setup guide: <a href="../pincherX100.html">PincherX 100</a></li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc8905ec" class="outline-2">
+<h2 id="orgc8905ec">Part I: Gazebo Differential Drive Challenge</h2>
+<div class="outline-text-2" id="text-orgc8905ec">
+<p>
+The challenge is to create a differential-drive robot that can be simulated in Gazebo and controlled by ROS.
+</p>
+<ul class="org-ul">
+<li>The robot will be able to flip over and continue driving</li>
+<li>The robot will move through a world filled with Jersey Barriers and trash.</li>
+</ul>
+
+<p>
+Your submission should be a subdirectory with
+</p>
+<ul class="org-ul">
+<li><code>package.xml</code></li>
+<li><code>CMakeLists.txt</code></li>
+<li><code>/config</code> (<code>.yaml</code> files)</li>
+<li><code>/urdf</code> (<code>.xacro</code> and <code>.gazebo</code> files)</li>
+<li><code>/launch</code> (<code>.launch</code> files)</li>
+<li><code>/worlds</code> (<code>.world</code> files)</li>
+<li><code>/nodes</code> (Your ROS nodes.)</li>
+</ul>
+
+<p>
+There is a hints section at the bottom of each section.
+</p>
+</div>
+
+<div id="outline-container-orga571457" class="outline-3">
+<h3 id="orga571457">Creating the World</h3>
+<div class="outline-text-3" id="text-orga571457">
+<ol class="org-ol">
+<li>Use the Gazebo GUI to create your world.  Place an asphalt plane over the ground plane.
+Then add some Jersey Barriers (at least 2), A few cardboard boxes (at least 3) and something
+else you find interesting. Save your world as <code>ddrive.world</code> in the <code>world/</code> directory of your project</li>
+
+<li>Write a launchfile called <code>ddrive.launch</code>.  For now,
+it should launch gazebo and load the world you just created.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgc3d730c" class="outline-3">
+<h3 id="orgc3d730c">The Xacro URDF</h3>
+<div class="outline-text-3" id="text-orgc3d730c">
+</div>
+<div id="outline-container-org04bff68" class="outline-4">
+<h4 id="org04bff68">Robot Description</h4>
+<div class="outline-text-4" id="text-org04bff68">
+<ol class="org-ol">
+<li>The robot has a body consisting of a rectangular prism.  It has two cylindrical wheels on the front and a caster at the rear.
+<ul class="org-ul">
+<li>There should be a caster on the top and bottom of the robot so that it is symmetrical about its horizontal plane</li>
+<li>Each caster link should be modified to have no friction in gazebo so that it can slide freely.</li>
+<li>Feel free to set the masses and dimensions of the robot to suit your needs.</li>
+</ul></li>
+<li>Create a <code>ddrive.urdf.xacro</code> file to describe the differential-drive robot.
+<ul class="org-ul">
+<li>The dimensional parameters of the robot should be stored in a <code>.yaml</code> file and referenced in the <code>xacro file</code></li>
+<li>Each link you add must have the proper collision bounding box and inertia.</li>
+<li>Place <code>gazebo</code> specific tags in a separate <code>ddrive.gazebo</code> file that is included in your main <code>urdf</code> <code>xacro</code>.</li>
+</ul></li>
+<li>Create a launchfile called <code>ddrive_rviz.launch</code> that launches the <code>urdf</code> in RViz, along with a <code>robot_state_publisher</code>
+and optionally a <code>joint_state_publisher_gui</code>.  This launchfile will be useful for debugging.</li>
+<li>Modify <code>ddrive.launch</code> so that it spawns your URDF model in the gazebo world.
+<ul class="org-ul">
+<li>Use a launchfile argument to start gazebo with the simulation paused. You will need to remember to unpause when you
+actually want the simulation to run.</li>
+</ul></li>
+<li>Modify <code>ddrive.launch</code> so that it loads the urdf into the <code>/robot_description</code> parameter.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org55bd899" class="outline-4">
+<h4 id="org55bd899">Gazebo Extensions</h4>
+<div class="outline-text-4" id="text-org55bd899">
+<ol class="org-ol">
+<li>Add gazebo materials to each of your links so they appear as an appropriate color.</li>
+<li><p>
+Add the "Differential Drive" plugin to your robot.
+</p>
+<ul class="org-ul">
+<li><p>
+You may adapt the following code (which I adapted from the <a href="http://gazebosim.org/tutorials?tut=ros_gzplugins">Gazebo Plugins in Ros Tutorial</a>
+</p>
+<pre class="example">
+&lt;gazebo&gt;
+&lt;plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so"&gt;
+&lt;rosDebugLevel&gt;na&lt;/rosDebugLevel&gt;
+&lt;alwaysOn&gt;true&lt;/alwaysOn&gt;
+&lt;updateRate&gt;100&lt;/updateRate&gt;
+&lt;leftJoint&gt;left_wheel&lt;/leftJoint&gt;
+&lt;rightJoint&gt;right_wheel&lt;/rightJoint&gt;
+&lt;wheelSeparation&gt;${body_width+wheel_width}&lt;/wheelSeparation&gt;
+&lt;wheelDiameter&gt;${wheel_radius}&lt;/wheelDiameter&gt;
+&lt;wheelTorque&gt;20&lt;/wheelTorque&gt;
+&lt;commandTopic&gt;diff/cmd_vel&lt;/commandTopic&gt;
+&lt;odometryTopic&gt;diff/odom&lt;/odometryTopic&gt;
+&lt;odometryFrame&gt;odom&lt;/odometryFrame&gt;
+&lt;robotBaseFrame&gt;base_link&lt;/robotBaseFrame&gt;
+&lt;publishWheelTF&gt;false&lt;/publishWheelTF&gt;
+&lt;publishOdomTF&gt;true&lt;/publishOdomTF&gt;
+&lt;publishWheelJointState&gt;true&lt;/publishWheelJointState&gt;
+&lt;wheelAcceleration&gt;false&lt;/wheelAcceleration&gt;
+&lt;odometrySource&gt;world&lt;/odometrySource&gt;
+&lt;publishTf&gt;1&lt;/publishTf&gt;
+&lt;/plugin&gt;
+&lt;/gazebo&gt;
+</pre></li>
+</ul>
+<ul class="org-ul">
+<li>The above code assumes your wheel joints are called <code>left_wheel</code> and <code>right_wheel</code> and also refers to some <code>xacro</code> parameters I defined for the dimensions
+of the robot. You may need to modify it to match your <code>urdf.xacro</code> file.</li>
+<li>Create a new <code>rviz</code> configuration using the <code>odom</code> frame as the fixed frame.  The <code>odom</code> frame is published
+by the differential drive gazebo plugin</li>
+<li>Launch rviz with this configuration so that you can visualize where the robot thinks it is, according to it's wheel odometry.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org112b306" class="outline-4">
+<h4 id="org112b306">Control</h4>
+<div class="outline-text-4" id="text-org112b306">
+<ol class="org-ol">
+<li>Write a node called <code>flip</code> that makes the robot move back and forth along a line by flipping over itself rather than turning.
+(i.e., both wheels should move with the same velocity at all times). You will need to use the dynamics of the robot to accomplish this task.
+You may find that the <code>teleop_twist_keyboard</code> package is useful for letting you get a feel for the dynamics.
+<ul class="org-ul">
+<li>Precise control is great but not necessary, just have fun doing some flips.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfe69877" class="outline-3">
+<h3 id="orgfe69877">Hints</h3>
+<div class="outline-text-3" id="text-orgfe69877">
+<ol class="org-ol">
+<li>If your model is loaded into the <code>/robot_description parameter</code>, and gazebo is running: 
+use <code>rosrun gazebo_ros spawn_model -urdf -param robot_description -model ddrive -b</code>
+<ul class="org-ul">
+<li>The <code>-b</code> will cause gazebo to delete the model when you kill the node</li>
+<li>The <code>-param</code> loads the urdf from the parameter server.  You can use <code>-file</code> to load from a urdf file (converted using <code>xacro</code> manually)</li>
+<li>Links will not be exported to the <code>sdf</code> unless they have visual and inertial elements.</li>
+<li>I suggest pausing the simulation when you spawn the robot.
+<ul class="org-ul">
+<li>If you are not careful about where you spawn the robot or having a collision element (so it doesn't fall through the ground), it can fly off into space.</li>
+</ul></li>
+<li>You can run the spawn_model node from a launchfile for easier use</li>
+</ul></li>
+
+<li>For this exercise, you may wish to use <code>xacro</code> macros to create the visual, collision, and inertial elements from a single set of
+parameters specifying the geometry and orientation of the link.
+<ul class="org-ul">
+<li>For example, in this case the visual and collision elements can be identical</li>
+<li>Macros can be nested.  So build them up slowly and view the results incrementally by
+outputting the urdf file from the xacro file.</li>
+</ul></li>
+
+<li>For your links to show up with the proper colors in gazebo, you need to assign them a gazebo material, as per the Using URDF in Gazebo tutorial.
+<ul class="org-ul">
+<li>The URDF material tag does not get translated so your links will just show up as gray if you don't include this separately.</li>
+</ul></li>
+
+<li>The view menu in gazebo can let you visualize the inertial properties
+See in the "Checking in Gazebo section" of <a href="http://gazebosim.org/tutorials?tut=inertia&amp;cat=build_robot">http://gazebosim.org/tutorials?tut=inertia&amp;cat=build_robot</a></li>
+
+<li>If gazebo is having trouble opening, it may not have exited cleanly:
+<ul class="org-ul">
+<li><code>ps aux | grep gazebo</code> will show gazebo processes to kill</li>
+<li><code>rosnode kill</code> will show ros nodes to kill</li>
+<li><code>ps aux | grep ros</code> will show ros processes to kill</li>
+<li>You can try <code>killall gzserver</code> to kill the gazebo server</li>
+<li>You can try <code>killall gzclient</code> to kill the gazebo client</li>
+</ul></li>
+
+<li>It is helpful to not need to restart gazebo every time you want to test your robot.
+<ul class="org-ul">
+<li>Feel free to arrange your launchfiles such that starting gazebo is optional and in a way that makes it easy
+to spawn/remove your model</li>
+<li>You can also call gazebo services from the command-line or use rosrun to help during debugging</li>
+</ul></li>
+
+<li>The simulation can be rather finicky when it comes to ground contact and friction with the wheels.
+If you are having trouble with the robot sliding oddly or not moving when you spin the wheels:
+<ol class="org-ol">
+<li>Make sure that the bottom of the caster and the bottom of the wheels are at the exact same height</li>
+<li>Make sure that the dimensions and mass of the vehicle are reasonable in relation to each other</li>
+<li>Make sure the wheels have high friction coefficients (.e.g, <code>&lt;mu1&gt;999&lt;/mu1&gt;</code> and <code>&lt;mu2&gt;999&lt;/mu2&gt;</code> i</li>
+<li><p>
+You can adjust some collision properties in the <code>gazebo</code> part of the <code>urdf</code>, which may help:   
+</p>
+<div class="org-src-container">
+<pre class="src src-xml"><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">gazebo</span> <span class="org-nxml-attribute-local-name">reference</span>=<span class="org-string">"wheel_name_here"</span><span class="org-nxml-tag-delimiter">&gt;</span>
+<span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">mu1</span><span class="org-nxml-tag-delimiter">&gt;</span><span class="org-nxml-text">1</span><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-element-local-name">mu1</span><span class="org-nxml-tag-delimiter">&gt;</span>
+<span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">mu2</span><span class="org-nxml-tag-delimiter">&gt;</span><span class="org-nxml-text">1</span><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-element-local-name">mu2</span><span class="org-nxml-tag-delimiter">&gt;</span>
+<span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">kp</span><span class="org-nxml-tag-delimiter">&gt;</span><span class="org-nxml-text">500000.0</span><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-element-local-name">kp</span><span class="org-nxml-tag-delimiter">&gt;</span>
+<span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">kd</span><span class="org-nxml-tag-delimiter">&gt;</span><span class="org-nxml-text">10.0</span><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-element-local-name">kd</span><span class="org-nxml-tag-delimiter">&gt;</span>
+<span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">minDepth</span><span class="org-nxml-tag-delimiter">&gt;</span><span class="org-nxml-text">0.001</span><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-element-local-name">minDepth</span><span class="org-nxml-tag-delimiter">&gt;</span>
+<span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">maxVel</span><span class="org-nxml-tag-delimiter">&gt;</span><span class="org-nxml-text">0.1</span><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-element-local-name">maxVel</span><span class="org-nxml-tag-delimiter">&gt;</span>
+<span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">fdir1</span><span class="org-nxml-tag-delimiter">&gt;</span><span class="org-nxml-text">1 0 0</span><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-element-local-name">fdir1</span><span class="org-nxml-tag-delimiter">&gt;</span>
+<span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-element-local-name">gazebo</span><span class="org-nxml-tag-delimiter">&gt;</span>
+</pre>
+</div>
+<ul class="org-ul">
+<li>Depending on your vehicle inertias, you may need to adjust these parameters</li>
+<li>Read more about the parameters here: <a href="http://gazebosim.org/tutorials/?tut=ros_urdf#%3Cgazebo%3EElementsForLinks">Gazebo Elements For Links</a></li>
+</ul></li>
+</ol></li>
+<li>If your robot is drifting a little when not commanded with a velocity that is okay.  You can usually correct
+for this by always explicitly sending a <code>/cmd_vel</code> command of 0.</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-org75c97f1" class="outline-2">
+<h2 id="org75c97f1">Part II: Motion Planning</h2>
+<div class="outline-text-2" id="text-org75c97f1">
+<ol class="org-ol">
+<li>You will do this final task on the real robot and in gazebo.</li>
+<li>The overall goal is to train a robot to follow a series of waypoints to grab an object</li>
+<li>Copy the launchfile used by the px100 gazebo program to <code>arm_box.launch</code> and modify it so that it loads a custom world containing
+a RealSense Box.  The box is 14cm x 9cm x 5cm and weights 100g</li>
+<li>In this project you will use the MoveIt Python API to create a planning scene and perform some path planning tasks
+<ul class="org-ul">
+<li>The robot arm sits on top of a table. The RealSense Box also sits on top of the table and is an obstacle</li>
+</ul></li>
+<li>Create a node called <code>mover</code> that implements the following:
+<ol class="org-ol">
+<li>Upon startup, adds a collision object representing the table to the planning scene.</li>
+<li>The node loads a list of waypoints from the parameter server
+<ul class="org-ul">
+<li>If waypoints do not yet exist, the list is empty</li>
+</ul></li>
+<li>A <code>reset</code> service that 
+<ul class="org-ul">
+<li>Takes a position and orientation of the realsense box and creates/moves the Realsense Box to the appropriate location</li>
+<li>Moves the robot to its pre-defined <code>'Home'</code> position without hitting the box (<code>'Home'</code> is pre-defined by the SDK)</li>
+<li>Reset takes a parameter that determines if the waypoints are cleared or not.</li>
+</ul></li>
+<li>A <code>step</code> service that moves the robot to a user-specified position and also a gripper state (open or closed)
+<ul class="org-ul">
+<li><code>step</code> returns the <a href="http://docs.ros.org/en/melodic/api/moveit_msgs/html/msg/MoveItErrorCodes.html">MoveItErrorCode</a> to indicate success or failure of the plan</li>
+<li>If the motion plan succeeds, <code>step</code> adds the position to the list of waypoints, storing it in the parameter server, and executes the plan</li>
+<li>If the motion plan fails, it is okay, use the MoveItErrorCode to interpret why</li>
+</ul></li>
+<li>A <code>follow</code> service that has the robot move to each waypoint, in sequence
+<ul class="org-ul">
+<li>Follow should contain an option that determines if the cycle should be repeated or run just once.</li>
+</ul></li>
+</ol></li>
+<li>Add another small light object to the (real/simulated) world.  Use the <code>step</code> and <code>follow</code> services to generate
+a sequence of waypoints that allows the robot to pick up the object from a fixed location and drop it off elsewhere.
+<ul class="org-ul">
+<li>When you get a working sequence, save the corresponding ROS parameters to a yaml file and include it in your repository</li>
+<li>Your launchfile should load the waypoints from the yaml file</li>
+</ul></li>
+<li>Write a launchfile called <code>arm.launch</code> 
+<ul class="org-ul">
+<li>The launchfile should setup the robot or simulation (depending on the value of an argument called <code>use_sim</code>) to be controlled from the <code>mover</code> node</li>
+<li>Include an option to run the MoveIt <code>fake_node</code> instead of gazebo, when <code>use_sim</code> is true.</li>
+<li>The <code>mover</code> node should start and be loaded with an initial waypoint sequence</li>
+<li>RViz should be loaded.  <code>Rviz</code> should show the robot and the planning scene</li>
+</ul></li>
+<li>Write a launchfile called <code>arm.test</code> for your integration tests
+<ul class="org-ul">
+<li>This should use fake moveit and also start your <code>mover</code> node.</li>
+<li>It should call <code>reset</code> service</li>
+<li>It should then call the <code>step</code> service in such a way that the robot will crash into the floor
+<ul class="org-ul">
+<li>Verify that the <code>step</code> service returns an error code</li>
+</ul></li>
+<li>It should also call the <code>step</code> service in such a way that it succeeds.
+<ul class="org-ul">
+<li>Verify the success</li>
+</ul></li>
+<li>This test launchfile should be added to <code>catkin</code> so that it runs with <code>catkin_make</code> run tests</li>
+</ul></li>
+<li>Include a link to a video in your README.md of the robot in gazebo and in the real world accomplishing its task</li>
+</ol>
+</div>
+<div id="outline-container-org9614af2" class="outline-3">
+<h3 id="org9614af2">Hints</h3>
+<div class="outline-text-3" id="text-org9614af2">
+<ol class="org-ol">
+<li>It is often easier to launch gazebo and keep it running.  Then just kill and manually restart your node</li>
+<li>You may wish to do the bulk of your testing with the <code>fake</code> MoveIt node prior to involving the simulation or the real robot.
+<ul class="org-ul">
+<li>With the interactive <code>moveit</code> view you can interactively determine lots of information about the robot such as
+<ul class="org-ul">
+<li>It's planning groups,</li>
+<li>It's built-in positions</li>
+</ul></li>
+</ul></li>
+<li>You may wish to run through some tutorials prior to attempting the assignment:
+<ul class="org-ul">
+<li><a href="https://ros-planning.github.io/moveit_tutorials/doc/move_group_python_interface/move_group_python_interface_tutorial.html">MoveGroup Python Tutorial</a></li>
+<li><a href="https://github.com/Interbotix/interbotix_ros_manipulators/tree/main/interbotix_ros_xsarms/interbotix_xsarm_moveit">Interbotix MoveIt Tutorial</a></li>
+</ul></li>
+<li>Remember, this robot has fewer than 6-dof, so many 6-DOF poses of the end effector are invalid.</li>
+<li>You can <code>set_position_target</code> to set position without respect to pose and <code>set_orientation_target</code> or 
+<code>set_rpy_target</code> to set one without regard for the other. You can also plan to joint positions.</li>
+<li><code>get_current_pose()</code> is also helpful for debugging to see the exact current location of the end effector</li>
+<li>You can try out most things in the RViz GUI prior to coding them</li>
+<li>There are two tricky parts to PlanningSceneInterface that you must work around
+<ol class="org-ol">
+<li>After creating the PlanningSceneInterface, it's publishers may not have necessarily finished connecting to their respective topics
+<ul class="org-ul">
+<li>This means that you can potentially add an object prior to the PlanningSceneInterface being ready, in which case the object will not get added</li>
+</ul></li>
+<li>Your node could exit after modifying the planning scene but before the message is published.</li>
+<li>To solve these issues, you should, after every action on a planning scene, wait (with a timeout) to see if your changes actually took effect
+<ul class="org-ul">
+<li>Sample code for doing this is provided in the tutorial</li>
+<li>Depending on the context, the action you take after a timeout failure is different</li>
+<li>For example, if you just started the planning scene, you may wish to retry the addition a few times upon timing out</li>
+</ul></li>
+</ol></li>
+<li>All parameters/names used by the interbotix arm are stored under the <code>/px100</code> namespace. This means that you will need to specify/remap
+names throughout this assignment so that they use the appropriate values in the /px100 namespace
+<ul class="org-ul">
+<li>In particular, when launching the <code>mover</code> node you should
+<ol class="org-ol">
+<li>remap <code>/attached_collision_object</code> to <code>/px100/attached_collision_object</code></li>
+<li>remap <code>/collision_object</code> to <code>/px100/collision_object</code></li>
+<li>Launch your node in the <code>px100</code> namespace</li>
+</ol></li>
+</ul></li>
+<li>It is up to you what rotational representation (e.g., quaternions or euler angles) to use for your services</li>
+<li>If the gazebo simulation drops the object, you may wish to edit <code>custom_ws/interbotix_ros_manipulators/interbotix_xsarm_gazebo/config/interbotix_texture.gazebo</code> to
+increase the coefficient of friction on the grippers.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orga457be5" class="outline-3">
+<h3 id="orga457be5">Resources</h3>
+<div class="outline-text-3" id="text-orga457be5">
+<ol class="org-ol">
+<li>The <a href="./lecture18_moveit.html">MoveIt Notes</a></li>
+<li>The <a href="./lecture09_gazebo.html">Gazebo notes</a></li>
+<li>See <a href="./design_doc_test.html">Test A ROS Node</a></li>
+</ol>
+<p>
+1 The moveit tutorials <a href="https://ros-planning.github.io/moveit_tutorials/">https://ros-planning.github.io/moveit_tutorials/</a>
+</p>
+<ul class="org-ul">
+<li>It may help to go through some tutorials prior to starting</li>
+<li>MoveitQuickstart in Rviz, Move Group Python Interface are the two most important</li>
+</ul>
+<ol class="org-ol">
+<li><a href="http://docs.ros.org/noetic/api/moveit_commander/html/namespacemoveit__commander.html">Full Python API documentation</a></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

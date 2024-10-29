@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-10-29 Tue 11:30 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Robot Modeling</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">Robot Modeling</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgd8ee66a">Unified Robot Description Format</a>
+<ul>
+<li><a href="#org061223f">URDF XML</a></li>
+<li><a href="#org1d2efbf">Related Formats</a></li>
+</ul>
+</li>
+<li><a href="#orgd77b685">robot_state_publisher</a></li>
+<li><a href="#orga5c9c23">joint_state_publisher</a></li>
+<li><a href="#orgc4fa906">Debugging URDF hints</a>
+<ul>
+<li><a href="#rviz_xacro_launch">Python Launchfile</a></li>
+<li><a href="#org2b19c9d">XML Launchfile</a></li>
+<li><a href="#orgab82834">Example</a></li>
+</ul>
+</li>
+<li><a href="#xacro">xacro</a>
+<ul>
+<li><a href="#org395a476">Xacro Robot</a></li>
+<li><a href="#org5e38c6a">Xacro Properties</a></li>
+<li><a href="#orgcc7abfd">Xacro Macros</a></li>
+<li><a href="#orgf7fdf28">Xacro Include</a></li>
+<li><a href="#org7efffcd">Xacro If</a></li>
+<li><a href="#orgf493222">Xacro Arguments</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-orgd8ee66a" class="outline-2">
+<h2 id="orgd8ee66a">Unified Robot Description Format</h2>
+<div class="outline-text-2" id="text-orgd8ee66a">
+<ul class="org-ul">
+<li><code>urdf</code> is the main description format for robots in ROS</li>
+<li>It is an XML format with special tags for defining a robot</li>
+<li>The <a href="https://wiki.ros.org/urdf">urdf</a> ROS package that enables the file to be parsed from C++</li>
+<li>The <a href="https://docs.ros.org/en/jazzy/Tutorials/Intermediate/URDF/URDF-Main.html">URDF Tutorials</a> introduce this file format interactively.</li>
+</ul>
+</div>
+
+<div id="outline-container-org061223f" class="outline-3">
+<h3 id="org061223f">URDF XML</h3>
+<div class="outline-text-3" id="text-org061223f">
+<p>
+The <a href="https://wiki.ros.org/urdf/XML">urdf XML specification</a> contains nine sub-specifications.
+Many of the specifications are not used or only used with specific packages.
+The important specifications are described below.
+</p>
+<ul class="org-ul">
+<li><a href="https://wiki.ros.org/urdf/XML/model">model</a> - This specification provides a general guide to the <code>.urdf</code> format.</li>
+<li><a href="https://wiki.ros.org/urdf/XML/robot">robot</a> - The <code>&lt;robot&gt;</code> element is the top-level element in all urdf files. It contains links and joints.</li>
+<li><a href="https://wiki.ros.org/urdf/XML/link">link</a> - Describes properties of a rigid-body in your robot
+<ul class="org-ul">
+<li>Has a <code>name</code> attribute to name the link.</li>
+<li><code>&lt;inertial&gt;</code> Optionally specify mass and rotational inertia properties of the link.</li>
+<li><code>&lt;visual&gt;</code> Optionally describes how to draw the link.  There are basic primitives or you can use a 3D model from CAD.
+<ul class="org-ul">
+<li><code>&lt;geometry&gt;</code> specifies the shape of the object. Can be <code>&lt;box&gt;</code>, <code>&lt;cylinder&gt;</code>, <code>&lt;sphere&gt;</code> or <code>&lt;mesh&gt;</code>.</li>
+<li><code>&lt;material&gt;</code> specifies the color of the object</li>
+</ul></li>
+<li><code>&lt;collision&gt;</code> Optionally describe geometry used for collision detection.  Used by motion planning and simulation tools.</li>
+</ul></li>
+<li><a href="https://wiki.ros.org/urdf/XML/joint">joint</a> - Connects links together with various types of joint freedoms.
+<ul class="org-ul">
+<li>Has a <code>name</code> attribute to name the joint.</li>
+<li>Has a <code>type</code> attribute which determines what freedoms and constraints are imposed on the joint.
+<ul class="org-ul">
+<li><code>revolute</code>: a 1-degree of freedom (DOF) rotational joint with upper and lower joint limits (specified by a <code>&lt;limit&gt;</code> element)</li>
+<li><code>continuous</code>: a 1-DOF rotational joint without limits</li>
+<li><code>prismatic</code>: a 1-DOF translational joint with limits (specified by a <code>&lt;limit&gt;</code> element)</li>
+<li><code>fixed</code>: A transformation that does not change between two links</li>
+<li><code>floating</code>: A joint where all 6 DOF can move</li>
+<li><code>planar</code>: A 2-DOF joint allowing translation in the plane</li>
+</ul></li>
+<li>Joints have a <code>&lt;parent&gt;</code> link and a <code>&lt;child&gt;</code> link and determine where the <code>&lt;child&gt;</code> link is relative to the parent.</li>
+<li><code>&lt;origin&gt;</code> specifies the location of the child in the parent link frame
+<ul class="org-ul">
+<li>The child frame is translated by <code>xyz</code></li>
+<li>The child frame is rotated by <code>rpy</code>, roll ,pitch, yaw (which are rotations about the fixed <code>x</code>, <code>y</code>, and <code>z</code> axes).</li>
+</ul></li>
+<li>Other joints can be created by locating multiple joints at the same location.  For example: a universal joint is two co-located <code>continuous</code> joints.
+Creating such joints may require using "dummy" links that lack inertial, visualization, or collision properties.</li>
+<li>There are many optional tags.  The <code>&lt;safety_controller&gt;</code> tag is only used by the <code>pr2_controller_manager</code> and the <code>ros_control</code> packages.</li>
+</ul></li>
+<li><a href="http://wiki.ros.org/urdf/XML/Gazebo">gazebo</a> Gazebo extensions to URDF files, which it uses when converting to its <code>SDF</code> file format.
+For more information see <a href="http://gazebosim.org/tutorials?tut=ros_urdf&amp;cat=connect_ros">Gazebo Tutorial for Using URDF</a>.</li>
+<li>Go through the <a href="http://wiki.ros.org/urdf/Tutorials">ROS URDF Tutorials</a> to learn more.</li>
+<li>Even though the documentations linked here are for ROS 1, the specification is the same for ROS 2</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org1d2efbf" class="outline-3">
+<h3 id="org1d2efbf">Related Formats</h3>
+<div class="outline-text-3" id="text-org1d2efbf">
+<p>
+There are other formats used in robotics (not just ROS) that relate to URDF files.
+</p>
+<ul class="org-ul">
+<li><a href="https://wiki.ros.org/orocos_kdl">Kinematics and Dynamics Library (KDL)</a>
+<ul class="org-ul">
+<li>The <a href="https://index.ros.org/p/kdl_parser/github-ros-kdl_parser/#jazzy">kdl_parser</a> converts <code>urdf</code> to a format used by KDL</li>
+</ul></li>
+<li>Gazebo (the primary ROS simulation tool) uses <code>SDF</code> files, but can convert <code>URDF</code> files to <code>SDF</code> automatically
+<ul class="org-ul">
+<li>Many tags in a URDF file are mainly used when Gazebo converts to <code>SDF</code>.</li>
+</ul></li>
+<li><a href="https://www.krhonos.org/collada">Collada</a> is a generic 3D file format.</li>
+<li><a href="https://www.solidworks.com">SolidWorks</a> is a 3D computer aided design (CAD) program.
+<ul class="org-ul">
+<li>If using solidworks (or other CAD program) it often makes sense to export models as <code>.vrml</code> files, edit them in <a href="https://www.blender.org/">Blender</a> to reduce the polygon count for visualization purposes</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd77b685" class="outline-2">
+<h2 id="orgd77b685">robot_state_publisher</h2>
+<div class="outline-text-2" id="text-orgd77b685">
+<p>
+The <a href="https://index.ros.org/p/robot_state_publisher/github-ros-robot_state_publisher/#jazzy">robot_state_publisher</a> is used to publish the transforms that compose your <code>urdf</code> file on <code>/tf</code> and
+integrate it with the transform tree.
+</p>
+<ul class="org-ul">
+<li>The <code>robot_state_publisher</code> performs forward kinematics in ROS
+<ul class="org-ul">
+<li>It reads <code>urdf</code> data (as specified by the <code>robot_description</code> parameter to get the robot's kinematics and geometry)
+<ul class="org-ul">
+<li>Changes to the <code>robot_description</code> parameter will be published on the <code>robot_description</code> topic</li>
+</ul></li>
+<li>It listens on the <code>joint_states</code> topic to get (<a href="https://github.com/ros2/common_interfaces/blob/jazzy/sensor_msgs/msg/JointState.msg">sensor_msgs/msg/JointState) </a>
+<ul class="org-ul">
+<li>Each message describes the position, velocity and <i>effort</i> (torque/force) of the joints</li>
+<li>See documentation about the <a href="https://index.ros.org/p/sensor_msgs/github-ros2-common_interfaces/#jazzy">sensor_msgs</a> packages</li>
+</ul></li>
+<li>It uses the <code>sensor_msgs/JointState</code> data to publish transforms on <code>/tf</code> that describe the positions of the robot's links.</li>
+<li>It publishes the <code>urdf</code> to the <code>/robot_description</code> topic</li>
+<li>Frequency at which tfs are published are controlled by a parameter to the node</li>
+<li>Almost all robots in ROS run a <code>robot_state_publisher</code></li>
+</ul></li>
+<li>The <code>joint_state</code> messages typically come from sensors (such as encoders) on the robot, but can also be generated by other nodes,
+which is useful for testing the robot model without needing the physical robot.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga5c9c23" class="outline-2">
+<h2 id="orga5c9c23">joint_state_publisher</h2>
+<div class="outline-text-2" id="text-orga5c9c23">
+<p>
+The <a href="https://index.ros.org/p/joint_state_publisher/github-ros-joint_state_publisher/#jazzy">joint_state_publisher</a> publishes <code>sensor_msgs/JointState</code> messages on the <code>joint_states</code> topic.
+</p>
+
+<p>
+It operates in a few different modes:
+</p>
+<ol class="org-ol">
+<li>Reads <code>sensor_msgs/JointState</code> messages from topics specified by <code>source_list</code> and publishes the combined information on a single topic
+<ul class="org-ul">
+<li>Useful if various sensor nodes are providing readings and you want to use <code>robot_state_publisher</code> to show transforms for the whole system</li>
+</ul></li>
+<li>Default value: publishes a fixed default value for the joint.
+<ul class="org-ul">
+<li>Useful for keeping the <code>/tf</code> tree in a valid state when other parts of your system are not running.</li>
+<li>Used as a stand-in for the actual robot during visualization tasks</li>
+</ul></li>
+<li>Mimic mode: publishes some joint states that follow the motion of other joints.</li>
+<li>The joint state publisher reads the <code>robot_description</code> topic so it knows the names of the joints to publish</li>
+<li>The <code>joint_state_publisher_gui</code> node creates a user interface that allows a user to manipulate the joint states that are published
+<ul class="org-ul">
+<li>This gui does not actually control a robot, rather it is a way of simulating fake encoder data in an interactive manner</li>
+</ul></li>
+<li>In typical operation, nodes connected to hardware publish joint states. However, <code>joint_state_publisher</code> is useful for
+combining different sources of joint state information.</li>
+<li>The <code>/joint_states</code> topic and <code>sensor_msgs/JointState</code> messages are for sensor data (that is measurements of the joint states). They
+are not typically used to <i>control</i> the joint states.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgc4fa906" class="outline-2">
+<h2 id="orgc4fa906">Debugging URDF hints</h2>
+<div class="outline-text-2" id="text-orgc4fa906">
+<ol class="org-ol">
+<li>Build up the URDF slowly. Test each time you add a new link or joint.</li>
+<li>Create a Launchfile to help with testing. This launchfile will likely evolve or parts of it will be used in your actual application
+<ol class="org-ol">
+<li>It should run the <code>robot_state_publisher</code> to read your <code>urdf</code> file.</li>
+<li>It should run the <code>joint_state_publihser_gui</code> by default, to allow you to manipulate the joints</li>
+<li>It should launch <code>rviz</code> (and optionally) load an appropriate <code>.rviz</code> configuration file.</li>
+<li><code>rviz</code> needs to be configured to
+<ul class="org-ul">
+<li>Have the proper fixed_frame.</li>
+<li>Add the "RobotModel" view to see the links of your robot</li>
+<li>Add the "tf" view to your rviz configuration.</li>
+</ul></li>
+</ol></li>
+<li>This setup allows you to run the launchfile and visualize the robot.  You can also change the joint angles easily to see how it moves.</li>
+<li>If you name the first link of your robot "base_link" you can <code>ros2 launch urdf_tutorial display.launch model:=&lt;path/to/urdf&gt;</code> to view your urdf.
+<ul class="org-ul">
+<li>The <code>&lt;path/to/urdf&gt;</code> is relative to the <code>urdf_tutorials</code> installation directory. Use an absolute path for your urdf file.</li>
+<li>If the first link is not called "base_link" you will need to change the fixed frame in rviz manually</li>
+</ul></li>
+</ol>
+</div>
+
+<div id="outline-container-rviz_xacro_launch" class="outline-3">
+<h3 id="rviz_xacro_launch">Python Launchfile</h3>
+<div class="outline-text-3" id="text-rviz_xacro_launch">
+<ol class="org-ol">
+<li>Remember to install the <code>urdf</code> file in <code>setup.py</code></li>
+<li>Use a <code>Node</code> Action, along with the <code>Command</code>, <code>PathJointSubsitution</code>, <code>ExecutableInPackage</code>, and <code>FindPackageShare</code> substitutions</li>
+</ol>
+
+<div class="org-src-container">
+<pre class="src src-python">Node(
+    package<span class="org-operator">=</span><span class="org-string">"robot_state_publisher"</span>,
+    executable<span class="org-operator">=</span><span class="org-string">"robot_state_publisher"</span>,
+    parameters<span class="org-operator">=</span>[
+        {<span class="org-string">"robot_description"</span> :
+        Command([ExecutableInPackage(<span class="org-string">"xacro"</span>, <span class="org-string">"xacro"</span>), <span class="org-string">" "</span>,
+                 PathJoinSubstitution(
+                [FindPackageShare(<span class="org-string">"mypackage"</span>), <span class="org-string">"my.urdf.xacro"</span>])])}
+            ]
+            ),
+</pre>
+</div>
+<ul class="org-ul">
+<li><p>
+This Action
+</p>
+<ol class="org-ol">
+<li>Starts a node using the <code>robot_state_publisher</code> executable in the <code>robot_state_publisher</code> package</li>
+<li>Loads the <code>robot_state_publisher</code> <code>robot_description</code> parameter with the contents of the <code>urdf</code> created
+by running <code>xacro</code> on <code>my.urdf.xacro</code></li>
+<li>The <code>Command</code> substitution executes whatever string is created from concatenating
+elements in its list argument and substitutes it with the output of the command.
+<ul class="org-ul">
+<li>So we are essentially building a command to run whose output will be filling the <code>robot_description</code></li>
+<li><code>ExecutableInPackage()</code> finds the <code>xacro</code> executable (2nd argument) within the <code>xacro</code> package (1st argument)</li>
+<li>We add a space (<code>" "</code>) to separate the xacro command from its arguments</li>
+<li><code>FindPackageShare()</code> finds the share directory of <code>mypackage</code></li>
+<li><code>PathJoinSubstitution()</code> concatenates the <code>mypackage</code> share directory with the location of the xacro file</li>
+</ul></li>
+</ol>
+<ol class="org-ol">
+<li>See <a href="./launch.html#substitutions">Launch Substitutions</a> for details.</li>
+</ol></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org2b19c9d" class="outline-3">
+<h3 id="org2b19c9d">XML Launchfile</h3>
+<div class="outline-text-3" id="text-org2b19c9d">
+<div class="org-src-container">
+<pre class="src src-xml"><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">node</span> <span class="org-nxml-attribute-local-name">pkg</span>=<span class="org-string">"robot_state_publisher"</span> <span class="org-nxml-attribute-local-name">exec</span>=<span class="org-string">"robot_state_publisher"</span><span class="org-nxml-tag-delimiter">&gt;</span>
+   <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">param</span> <span class="org-nxml-attribute-local-name">name</span>=<span class="org-string">"robot_description"</span> <span class="org-nxml-attribute-local-name">value</span>=<span class="org-string">"$(command '$(exec-in-pkg xacro xacro) $(find-pkg-share pkg)/my.urdf.xacro')"</span> <span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+<span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-element-local-name">node</span><span class="org-nxml-tag-delimiter">&gt;</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgab82834" class="outline-3">
+<h3 id="orgab82834">Example</h3>
+<div class="outline-text-3" id="text-orgab82834">
+<p>
+An example package that creates a URDF file and launches rviz to display it can be found at <a href="https://github.com/m-elwin/me495_urdf">https://github.com/m-elwin/me495_urdf</a>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-xacro" class="outline-2">
+<h2 id="xacro">xacro</h2>
+<div class="outline-text-2" id="text-xacro">
+<ul class="org-ul">
+<li><a href="https://github.com/ros/xacro/wiki">xacro</a> is a macro language for XML, designed to make creating URDF files easier.</li>
+<li><a href="https://docs.ros.org/en/jazzy/Tutorials/Intermediate/URDF/Using-Xacro-to-Clean-Up-a-URDF-File.html">Xacro Tutorial</a></li>
+
+<li>Variables can store values and basic math can be performed</li>
+<li>Blocks of <code>xml</code> code can be given names and used multiple times</li>
+<li><code>xacro</code> files can include other <code>xacro</code> files.</li>
+</ul>
+
+<p>
+For example, the Baxter robot has two identical arms.  With URDF you would
+need to define each of those arms separately, even though they have the same structure.
+Using <code>xacro</code> you could create a macro for a Baxter arm and then use that
+macro to create two instances of the arm.
+</p>
+
+<ul class="org-ul">
+<li>Most robots use <code>xacro</code> files instead of urdf files.</li>
+<li>The <code>xacro</code> package contains a <code>xacro</code> executable that parses <code>xacro</code> files and produces <code>urdf</code> files.
+<ul class="org-ul">
+<li>All <code>urdf</code> files are valid <code>xacro</code> files. <code>xacro</code> can then be used as an add-on to the <code>urdf</code></li>
+</ul></li>
+<li><code>xacro</code> files can also be converted into <code>urdf</code> files at compile time via <code>CMakeLists.txt</code>.
+<ul class="org-ul">
+<li>First, <code>find_package(xacro REQUIRED)</code></li>
+<li>Then, <code>xacro_add_files(myxacrofiles TARGET xacro_files)</code></li>
+<li>To see updates to the <code>urdf</code> file you need to run <code>catkin_make</code></li>
+</ul></li>
+
+<li>Using <code>xacro</code> effectively makes your robot description much more robust and easy to change because
+it cuts down on repetition and makes your file more modular.</li>
+</ul>
+</div>
+
+<div id="outline-container-org395a476" class="outline-3">
+<h3 id="org395a476">Xacro Robot</h3>
+<div class="outline-text-3" id="text-org395a476">
+<ul class="org-ul">
+<li>The top-level tag in <code>urdf</code> files is the <code>&lt;robot&gt;</code> tag.</li>
+<li>To indicate that you want to use <code>xacro</code> add the <code>xmlns:xacro attribute</code> to <code>&lt;robot&gt;</code> (e.g., <code>&lt;robot xmlns:xacro="http://www.ros.org/wiki/xacro"&gt;</code>)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org5e38c6a" class="outline-3">
+<h3 id="org5e38c6a">Xacro Properties</h3>
+<div class="outline-text-3" id="text-org5e38c6a">
+<ul class="org-ul">
+<li>Use the <code>&lt;xacro:property name="name" value="value"&gt;</code> to define a constant in <code>xacro</code>
+<ul class="org-ul">
+<li>Basic constants (like <code>pi</code>) are already defined.</li>
+<li>You can use any python expression anywhere using the <code>${}</code> syntax</li>
+<li><p>
+It often makes sense to load non-changeable robot parameters directly from a yaml file
+</p>
+<div class="org-src-container">
+<pre class="src src-xml"><span class="org-comment-delimiter">&lt;!-- </span><span class="org-comment">Get the path to the yaml file relative to the package</span><span class="org-comment-delimiter"> --&gt;</span>
+<span class="org-comment-delimiter">&lt;!-- </span><span class="org-comment">config.yaml should have been installed in setup.py</span><span class="org-comment-delimiter"> --&gt;</span>
+<span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-prefix">xacro</span><span class="org-nxml-element-colon">:</span><span class="org-nxml-element-local-name">property</span> <span class="org-nxml-attribute-local-name">name</span>=<span class="org-string">"yaml_file"</span> <span class="org-nxml-attribute-local-name">value</span>=<span class="org-string">"$(find package)/config.yaml"</span> <span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+<span class="org-comment-delimiter">&lt;!-- </span><span class="org-comment">load values from yaml file which are stored in a dictionary called props</span><span class="org-comment-delimiter">--&gt;</span>
+<span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-prefix">xacro</span><span class="org-nxml-element-colon">:</span><span class="org-nxml-element-local-name">property</span> <span class="org-nxml-attribute-local-name">name</span>=<span class="org-string">"props"</span> <span class="org-nxml-attribute-local-name">value</span>=<span class="org-string">"${xacro.load_yaml(yaml_file)}"</span> <span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+<span class="org-comment-delimiter">&lt;!-- </span><span class="org-comment">access an individual variable</span><span class="org-comment-delimiter"> --&gt;</span>
+<span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-prefix">xacro</span><span class="org-nxml-element-colon">:</span><span class="org-nxml-element-local-name">property</span> <span class="org-nxml-attribute-local-name">name</span>=<span class="org-string">"myprop"</span>  <span class="org-nxml-attribute-local-name">value</span>=<span class="org-string">"${props['myprop']}"</span> <span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+</pre>
+</div></li>
+</ul></li>
+<li><p>
+In ROS2, <code>yaml</code> files often start with the node name (or a pattern) and the <code>ros__parameters</code> keyword, as these parameters are associated with individual nodes
+</p>
+<div class="org-src-container">
+<pre class="src src-yaml">node_name_or_wildcards:
+   ros__parameters:
+</pre>
+</div>
+<ul class="org-ul">
+<li>When loading the yaml file from a <code>xacro</code> file, you can access the elements by indexing: for example:
+<code>&lt;xacro:property name="props" value="${xacro.load_yaml(yaml_file)['/**']['ros__parameters']}" /&gt;</code>
+will retrieve a dictionary of the parameters that you actually wish to use.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgcc7abfd" class="outline-3">
+<h3 id="orgcc7abfd">Xacro Macros</h3>
+<div class="outline-text-3" id="text-orgcc7abfd">
+<ul class="org-ul">
+<li>Macro's are the most useful tools when creating <code>urdf</code> files for eventual use with gazebo</li>
+<li><p>
+A common case: you want the visual, inertial, and collision elements of a link to correspond
+to each other:
+</p>
+<div class="org-src-container">
+<pre class="src src-xml"> <span class="org-comment-delimiter">&lt;!-- </span><span class="org-comment">Create a link with</span>
+<span class="org-comment">      visual, inertial, and collision for a z-axis aligned cylinder.</span>
+<span class="org-comment">      Also enables specifying a material block.</span>
+<span class="org-comment">      Assumes the default cylinder orientation</span>
+<span class="org-comment-delimiter"> --&gt;</span>
+<span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-prefix">xacro</span><span class="org-nxml-element-colon">:</span><span class="org-nxml-element-local-name">macro</span> <span class="org-nxml-attribute-local-name">name</span>=<span class="org-string">"cylinder_link"</span> <span class="org-nxml-attribute-local-name">params</span>=<span class="org-string">"name length radius mass *material"</span><span class="org-nxml-tag-delimiter">&gt;</span>
+  <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">link</span> <span class="org-nxml-attribute-local-name">name</span>=<span class="org-string">"${name}"</span><span class="org-nxml-tag-delimiter">&gt;</span>
+    <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">visual</span><span class="org-nxml-tag-delimiter">&gt;</span>
+      <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">geometry</span><span class="org-nxml-tag-delimiter">&gt;</span>
+        <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">cylinder</span> <span class="org-nxml-attribute-local-name">length</span>=<span class="org-string">"${length}"</span> <span class="org-nxml-attribute-local-name">radius</span>=<span class="org-string">"${radius}"</span> <span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+      <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-element-local-name">geometry</span><span class="org-nxml-tag-delimiter">&gt;</span>
+      <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-prefix">xacro</span><span class="org-nxml-element-colon">:</span><span class="org-nxml-element-local-name">insert_block</span> <span class="org-nxml-attribute-local-name">name</span>=<span class="org-string">"material"</span> <span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+    <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-element-local-name">visual</span><span class="org-nxml-tag-delimiter">&gt;</span>
+    <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">collision</span><span class="org-nxml-tag-delimiter">&gt;</span>
+      <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">geometry</span><span class="org-nxml-tag-delimiter">&gt;</span>
+        <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">cylinder</span> <span class="org-nxml-attribute-local-name">length</span>=<span class="org-string">"${length}"</span> <span class="org-nxml-attribute-local-name">radius</span>=<span class="org-string">"${radius}"</span> <span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+      <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-element-local-name">geometry</span><span class="org-nxml-tag-delimiter">&gt;</span>
+    <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-element-local-name">collision</span><span class="org-nxml-tag-delimiter">&gt;</span>
+    <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">inertial</span><span class="org-nxml-tag-delimiter">&gt;</span>
+      <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">mass</span> <span class="org-nxml-attribute-local-name">value</span>=<span class="org-string">"${mass}"</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+      <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">inertia</span> <span class="org-nxml-attribute-local-name">ixx</span>=<span class="org-string">"${(1.0/12.0)*mass*(3*radius**2 + length**2)}"</span>
+               <span class="org-nxml-attribute-local-name">ixy</span>=<span class="org-string">"0"</span>
+               <span class="org-nxml-attribute-local-name">ixz</span>=<span class="org-string">"0"</span>
+               <span class="org-nxml-attribute-local-name">iyy</span>=<span class="org-string">"${(1.0/12.0)*mass*(3*radius**2 + length**2)}"</span>
+               <span class="org-nxml-attribute-local-name">iyz</span>=<span class="org-string">"0"</span>
+               <span class="org-nxml-attribute-local-name">izz</span>=<span class="org-string">"${0.5*mass*radius**2}"</span> <span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+    <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-element-local-name">inertial</span><span class="org-nxml-tag-delimiter">&gt;</span>
+  <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-element-local-name">link</span><span class="org-nxml-tag-delimiter">&gt;</span>
+<span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-element-prefix">xacro</span><span class="org-nxml-element-colon">:</span><span class="org-nxml-element-local-name">macro</span><span class="org-nxml-tag-delimiter">&gt;</span>
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgf7fdf28" class="outline-3">
+<h3 id="orgf7fdf28">Xacro Include</h3>
+<div class="outline-text-3" id="text-orgf7fdf28">
+<ul class="org-ul">
+<li>You can include <code>xacro</code> files in other <code>xacro</code> files using 
+<code>&lt;xacro:include filename = "$(find package)/urdf/myfile.xacro"&gt;</code></li>
+<li>Build your own library of useful <code>xacro</code> macros.</li>
+<li>Keep the <code>gazebo</code> tags for your <code>urdf</code> in a separate file and include it. 
+Thus you can maintain a clean separation between the <code>gazebo</code>
+and non-gazebo parts of your file.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org7efffcd" class="outline-3">
+<h3 id="org7efffcd">Xacro If</h3>
+<div class="outline-text-3" id="text-org7efffcd">
+<ul class="org-ul">
+<li>Conditionally include a block using <code>&lt;xacro:if value = "expression"&gt;</code></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf493222" class="outline-3">
+<h3 id="orgf493222">Xacro Arguments</h3>
+<div class="outline-text-3" id="text-orgf493222">
+<ul class="org-ul">
+<li>Pass arguments to <code>xacro</code> using <code>xacro model variable:=value</code> syntax..</li>
+<li>Access arguments within <code>xacro</code> using <code>$(arg name)</code></li>
+<li>Declare that an argument is expected and provide a default value with 
+<code>&lt;xacro:arg name="argname" default="default"/&gt;</code></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

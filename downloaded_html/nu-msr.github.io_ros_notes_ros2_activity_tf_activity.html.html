@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-10-29 Tue 11:30 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ROS Tf Activity</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">ROS Tf Activity</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#demo">Demonstration</a></li>
+<li><a href="#orgc622f86">Exercises</a></li>
+<li><a href="#org32ec918">Resources</a></li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-demo" class="outline-2">
+<h2 id="demo">Demonstration</h2>
+<div class="outline-text-2" id="text-demo">
+<div class="org-src-container">
+<pre class="src src-bash"><span class="org-comment-delimiter"># </span><span class="org-comment">create the workspace and clone the repository and get set up</span>
+mkdir -p ws/src
+<span class="org-builtin">cd</span> ws/src
+git clone https://github.com/m-elwin/me495_tf.git -b ros2
+<span class="org-builtin">cd</span> ..
+colcon build --symlink-install
+<span class="org-builtin">source</span> install/setup.bash
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">run the broadcaster</span>
+ros2 run me495_tf in_out &amp;
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">list the topics, notice the /tf and /tf_static</span>
+ros2 topic list
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">use rqt_tf_tree to see the tf_tree</span>
+ros2 run tf2_tools view_frames
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Also can use rqt_tf_tree. Need to install the rqt_tf_tree package</span>
+ros2 run rqt_tf_tree rqt_tf_tree
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">use tf_echo to see translation between frames. C-c to quit</span>
+ros2 run tf2_ros tf2_echo right left
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">run in rviz, set everything up correctly</span>
+rviz2
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">run in rviz, using my rviz config</span>
+rviz2 -d src/me495_tf/config/view.rviz
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">run the tracker node</span>
+ros2 run me495_tf tracker
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc622f86" class="outline-2">
+<h2 id="orgc622f86">Exercises</h2>
+<div class="outline-text-2" id="text-orgc622f86">
+<ol class="org-ol">
+<li>Walk through the demonstration above, manually setting up rviz to display the transformations</li>
+<li>Modify <code>in_out</code> so that the base frame is dynamic, that is, it is broadcast from the regular broadcaster and
+not the static broadcaster.</li>
+<li>Make the base frame rotate about it's own z axis at a fixed rate, and visualize in rviz</li>
+<li>Add another frame called <code>up</code> that is a child of base.  Have this frame move in sync with left and right but perpendicular to them</li>
+<li>Modify tracker so that when the distance between <code>up</code> and <code>left</code> is above a threshold, it prints a message</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org32ec918" class="outline-2">
+<h2 id="org32ec918">Resources</h2>
+<div class="outline-text-2" id="text-org32ec918">
+<p>
+<a href="../tf.html">TF Notes</a>
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

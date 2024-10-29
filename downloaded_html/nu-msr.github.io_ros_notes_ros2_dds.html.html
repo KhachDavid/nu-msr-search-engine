@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-10-29 Tue 11:30 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Data Distribution Service (DDS)</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">Data Distribution Service (DDS)</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org4c716d3">Data Distribution Service</a>
+<ul>
+<li><a href="#org898814d">Quality of Service (QoS)</a></li>
+</ul>
+</li>
+<li><a href="#org2768744">Real-Time Publish Subscribe</a></li>
+<li><a href="#org7931deb">DDS And ROS</a>
+<ul>
+<li><a href="#org61b704a">Quality of Service</a></li>
+<li><a href="#org3a13cad">Profiles</a></li>
+<li><a href="#org6fcff4d">Compatibility</a></li>
+<li><a href="#org2e727e3">Events</a></li>
+<li><a href="#org8ba8fdd">Changing the DDS Provider</a></li>
+</ul>
+</li>
+<li><a href="#org1ca92be">OMG!</a></li>
+<li><a href="#org88a8f0e">Resources</a></li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-org4c716d3" class="outline-2">
+<h2 id="org4c716d3">Data Distribution Service</h2>
+<div class="outline-text-2" id="text-org4c716d3">
+<ul class="org-ul">
+<li>Communication protocol describing how <i>data providers</i> and <i>data consumers</i> interact</li>
+<li>Publisher: An entity that manages <i>DataWriters</i>, which are responsible for sending data over the system</li>
+<li>Subscriber: An entity that manages <i>DataReaders</i>, which are responsible for consuming data sent over the system</li>
+<li>Topic: DataWriters publish to a topic and DataReaders subscribe to a topic</li>
+<li>Domain: An entity that isolates groups of publishers and subscribers from each other. Only publishers and subscribers
+in the same domain can communicate</li>
+<li>The standard describes the behavior of a system consisting of these entities
+<ul class="org-ul">
+<li>Data-Centric-Publish-Subscribe (DCPS)</li>
+</ul></li>
+</ul>
+</div>
+
+<div id="outline-container-org898814d" class="outline-3">
+<h3 id="org898814d">Quality of Service (QoS)</h3>
+<div class="outline-text-3" id="text-org898814d">
+<ul class="org-ul">
+<li>Describes the behavior of communication in a DDS system</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org2768744" class="outline-2">
+<h2 id="org2768744">Real-Time Publish Subscribe</h2>
+<div class="outline-text-2" id="text-org2768744">
+<ul class="org-ul">
+<li>RTPS is a protocol that can be (and often is) used by DDS when the DDS entities need to communicate over a network</li>
+<li>RTPS can be thought of as the "nuts and bolts" that are used to actually implement a DDS system</li>
+<li>Typically implemented over UDP, TCP, or shared memory</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org7931deb" class="outline-2">
+<h2 id="org7931deb">DDS And ROS</h2>
+<div class="outline-text-2" id="text-org7931deb">
+<ol class="org-ol">
+<li>DDS is a complicated industrial standard maintained by <a href="https://www.omg.org">Object Management Group</a></li>
+<li>Many companies and other entities have implemented this standard and provide code (either free or proprietary)</li>
+<li>ROS aims to work with any of these DDS providers</li>
+<li>ROS abstracts the DDS provider by providing ROS Middleware Libraries (rmw).  These provide a standard ROS API
+that can then be used to implement ROS Publishers, Subscribers, Services, etc</li>
+</ol>
+</div>
+
+<div id="outline-container-org61b704a" class="outline-3">
+<h3 id="org61b704a">Quality of Service</h3>
+<div class="outline-text-3" id="text-org61b704a">
+<ul class="org-ul">
+<li>How does data get delivered and what happens when it can't be delivered?</li>
+<li>Similar to being able to choose between:
+<ul class="org-ul">
+<li>TCP (which has features to ensure all packets are delivered on time)</li>
+<li>UDP (where packets can be transmitted quickly but there are no guarantees)</li>
+<li>This is just an analogy, DDS (and RTPS) can be implemented on top of TCP, UDP or something else)</li>
+</ul></li>
+<li>Also, what happens if a publisher is publishing faster than a subscriber can read the data?</li>
+<li>See <a href="https://docs.ros.org/en/iron/Concepts/About-Quality-of-Service-Settings.html">Quality of Service</a> for details about what options are available</li>
+<li>ROS has some standard Profiles that are generally useful combinations of DDS settings used in robotics</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3a13cad" class="outline-3">
+<h3 id="org3a13cad">Profiles</h3>
+<div class="outline-text-3" id="text-org3a13cad">
+<ul class="org-ul">
+<li>By default it is "keep last" with a queue size of 10, "reliable" and "volatile"</li>
+<li>Services are reliable and volatile</li>
+<li>The sensor data profile drops the "reliable", under the theory that it is more important to receive timely data than complete data</li>
+<li>Many of the settings use "System Default" which means that, depending on the DDS vendor, there may be different behavior</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org6fcff4d" class="outline-3">
+<h3 id="org6fcff4d">Compatibility</h3>
+<div class="outline-text-3" id="text-org6fcff4d">
+<p>
+If both ends of the communication channel (e.g. publisher/subscriber) don't have the same QoS settings, they may be unable to communicate.
+</p>
+<ul class="org-ul">
+<li>There is a <a href="https://docs.ros.org/en/iron/Concepts/Intermediate/About-Quality-of-Service-Settings.html#qos-compatibilities">table of compatible QoS services</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org2e727e3" class="outline-3">
+<h3 id="org2e727e3">Events</h3>
+<div class="outline-text-3" id="text-org2e727e3">
+<ul class="org-ul">
+<li>User-code can subscribe to various events that occur in the QoS system</li>
+<li>This includes detecting if publishing deadlines  are missed or if there are problems matching publishers and subscribers</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org8ba8fdd" class="outline-3">
+<h3 id="org8ba8fdd">Changing the DDS Provider</h3>
+<div class="outline-text-3" id="text-org8ba8fdd">
+<ul class="org-ul">
+<li>The <code>RMW_IMPLEMENTATION</code> allows you to change the DDS provider if desired</li>
+<li>Different DDS providers have different capabilities and are not completely compatible</li>
+<li>The current DDS provider is <code>eProsima FAST DDS</code>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org1ca92be" class="outline-2">
+<h2 id="org1ca92be">OMG!</h2>
+<div class="outline-text-2" id="text-org1ca92be">
+<p>
+Object Management Group. An Software Industry Standards group that developed DDS
+</p>
+<ul class="org-ul">
+<li>Also developed UML</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org88a8f0e" class="outline-2">
+<h2 id="org88a8f0e">Resources</h2>
+<div class="outline-text-2" id="text-org88a8f0e">
+<ul class="org-ul">
+<li><a href="https://fast-dds.docs.eprosima.com/en/latest/fastdds/getting_started/definitions.html">Eprosima Fast DDS</a></li>
+<li><a href="https://docs.ros.org/en/iron/Concepts/About-Different-Middleware-Vendors.html">ROS 2 DDS Vendors</a></li>
+<li><a href="https://design.ros2.org/articles/ros_on_dds.html">Why DDS?</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

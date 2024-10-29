@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-10-29 Tue 11:30 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Emika Franka Panda Robot</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">Emika Franka Panda Robot</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org18fbf0f">Introduction</a></li>
+<li><a href="#org04d7b3a">Layers of Control</a></li>
+<li><a href="#org0594661">Software Setup</a>
+<ul>
+<li><a href="#org2f64518">Time Synchronization</a></li>
+</ul>
+</li>
+<li><a href="#org7b4fd0b">Getting Started</a>
+<ul>
+<li><a href="#org7e152e4">Rules</a></li>
+<li><a href="#orge091f3a">Power On</a></li>
+<li><a href="#orgd3b42fb">The Web Interface</a></li>
+<li><a href="#org702733f">Enabling ROS</a></li>
+<li><a href="#org602198e">Using ROS</a></li>
+<li><a href="#org9fa14fa">Enabling Device</a></li>
+<li><a href="#orgc0e3240">Finished With Robot</a></li>
+<li><a href="#org10fd86c">Power Off</a></li>
+</ul>
+</li>
+<li><a href="#org3d5f24c">Robot Status Lights</a>
+<ul>
+<li><a href="#org83e9c2f">Red Light Troubleshooting</a></li>
+</ul>
+</li>
+<li><a href="#orgc9f7be8">Mechanical</a></li>
+<li><a href="#orgb739b5d">Resources</a></li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-org18fbf0f" class="outline-2">
+<h2 id="org18fbf0f">Introduction</h2>
+<div class="outline-text-2" id="text-org18fbf0f">
+<p>
+The Emika Franka Panda robot is a 7-DOF robot arm with a 3kg max payload
+and full torque sensing at each joint.
+</p>
+
+<p>
+The robot is connected to a workstation computer running the 
+<a href="https://wiki.linuxfoundation.org/realtime/start">Realtime Linux Kernel.</a>  Your laptop connects to the workstation computer.
+</p>
+
+<p>
+In general, write software on your laptop and control the robot over the network;
+however, in more advanced configurations it is possible to run your code directly on the workstation computers.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org04d7b3a" class="outline-2">
+<h2 id="org04d7b3a">Layers of Control</h2>
+<div class="outline-text-2" id="text-org04d7b3a">
+<ol class="org-ol">
+<li>MoveIt: At the highest layer, the robot can be controlled
+through MoveIt and ROS.
+<ul class="org-ul">
+<li>Currently this is provided by <a href="https://github.com/m-elwin/franka_ros2/tree/humble">my fork</a> of <a href="https://github.com/frankaemika/franka_ros2">https://github.com/frankaemika/franka_ros2</a>, a package that is already in the <code>nuws</code></li>
+</ul></li>
+
+<li>ros_control: There are several ROS controllers that can be used,
+written with the <a href="https://control.ros.org">ros2_control</a> package. It is also possible to write your
+own controllers in C++.</li>
+
+<li><a href="https://github.com/frankaemika/libfranka">libfranka</a> this is a C++ library provided by Franka. ROS uses this library
+to communicate with and control the robot, and you can use it also.</li>
+</ol>
+
+
+<ol class="org-ol">
+<li>Web interface: a web interface is available that runs on the robot.
+<ul class="org-ul">
+<li>Graphical programming of pre-determined tasks is possible, as is
+interactively placing the robot and storing its position.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org0594661" class="outline-2">
+<h2 id="org0594661">Software Setup</h2>
+<div class="outline-text-2" id="text-org0594661">
+<ol class="org-ol">
+<li><p>
+Create a new ROS 2 workspace:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">mkdir -p ws/franka/src
+<span class="org-builtin">cd</span> ws/franka
+vcs import --input https://nu-msr.github.io/images/franka.repos src
+rosdep install --from-paths src -y --ignore-src -r
+colcon build --merge-install --cmake-args -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF
+</pre>
+</div></li>
+<li>To use the Franka you will need to have the <code>franka</code> workspace sourced.</li>
+</ol>
+</div>
+
+<div id="outline-container-org2f64518" class="outline-3">
+<h3 id="org2f64518">Time Synchronization</h3>
+<div class="outline-text-3" id="text-org2f64518">
+<ol class="org-ol">
+<li>The Franka workstations are not connected to the internet, therefore their clocks can drift relative to your computer</li>
+<li>It is advantageous that all nodes running on a local network have synchronized clocks</li>
+<li>To synchronize directly between your laptop and the robot we will set up an NTP server and using <a href="https://chrony-project.org/">chrony</a>
+<ul class="org-ul">
+<li>chrony provides an advanced NTP client and server</li>
+</ul></li>
+<li>Install chrony with <code>sudo apt install chrony</code></li>
+<li>Set up the server:
+<ul class="org-ul">
+<li>Edit the configuration file <code>sudoedit /etc/chrony/chrony.conf</code></li>
+<li><p>
+Add the following lines
+</p>
+<pre class="example">
+allow 192.168.18/24
+local stratum 10
+</pre></li>
+<li>Restart chrony: <code>sudo systemctl restart chrony</code></li>
+</ul></li>
+<li>After this one-time install, you can resync the workstation time with your computer by running the following command on the <code>station</code>:
+<ul class="org-ul">
+<li><code>sudo -E timesync.bash</code></li>
+<li>The above command should be run whenever you switch laptops in order to have the station synchronize with the newly connected laptop</li>
+</ul></li>
+<li>When on the <code>station</code> you can view time synchronization status with <code>chronyc tracking</code>
+<ul class="org-ul">
+<li>You can also view the state of the sources with <code>chronyc sources</code></li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-org7b4fd0b" class="outline-2">
+<h2 id="org7b4fd0b">Getting Started</h2>
+<div class="outline-text-2" id="text-org7b4fd0b">
+</div>
+<div id="outline-container-org7e152e4" class="outline-3">
+<h3 id="org7e152e4">Rules</h3>
+<div class="outline-text-3" id="text-org7e152e4">
+<ol class="org-ol">
+<li>Make sure the workspace is clear of people objects whenever the robot's lights are blue or green.</li>
+<li>Never force the robot to move physically. Always use the guided movement mode (pressing buttons on arm, lights are white).</li>
+<li>Be gentle in the guided movement mode and don't try to force the robot. 
+<ul class="org-ul">
+<li>In guided mode the robot should be easy to move. If it is resisting stop and investigate.</li>
+</ul></li>
+<li>Test actions in MoveIt with the fake hardware before deploying on the robot:
+<ul class="org-ul">
+<li>Make sure that the robot moves as you expect</li>
+</ul></li>
+<li>Always have somebody ready to press the enabling device to stop the robot.
+<ul class="org-ul">
+<li>Some projects will require the three-state switch rather than the enabling device (I will let you know).</li>
+<li>Press the device whenever the robot deviates from how you expect it to behave or if it looks like it might crash.</li>
+</ul></li>
+<li>Follow all power on and power off procedures in this manual.</li>
+<li>If you ever see Red lights, power off the robot and turn it on.
+<ul class="org-ul">
+<li>If they remain red after one complete power cycle, stop working and contact me.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orge091f3a" class="outline-3">
+<h3 id="orge091f3a">Power On</h3>
+<div class="outline-text-3" id="text-orge091f3a">
+<p>
+If the robot is off, you will need to turn it on (obviously!).
+</p>
+
+<ol class="org-ol">
+<li>Make sure the e-stop is not pressed (pull up on the red button).</li>
+<li>Turn the power-strip on.
+<ul class="org-ul">
+<li>The workstation PC and Franka Controller should power on automatically</li>
+<li>The Panda lights should flash yellow  for a time</li>
+</ul></li>
+<li>Wait for the yellow lights to stop flashing.</li>
+<li>Yellow lights indicate the robot is locked and cannot move.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgd3b42fb" class="outline-3">
+<h3 id="orgd3b42fb">The Web Interface</h3>
+<div class="outline-text-3" id="text-orgd3b42fb">
+<ol class="org-ol">
+<li>Plug the ethernet cord from the robot into your computer.
+<ul class="org-ul">
+<li>Your computer should obtain an ip address automatically, but it may take a little while.</li>
+</ul></li>
+<li>Make sure the enabling device is within reach and pressed down (robot is disabled).</li>
+<li>Navigate in your web browser to <code>https://panda0.robot</code>
+<ul class="org-ul">
+<li>This is the graphical, non-programmer interface to the robot</li>
+<li>You will get an SSL warning. It is okay to accept the risk and continue (you are not on the internet here this is just the robot and I can't change its SSL certificate).</li>
+<li>Login with the information I have provided</li>
+</ul></li>
+<li>If somebody has already been using the robot, you will be prompted to request control
+<ul class="org-ul">
+<li>Press request control</li>
+<li>Click enforce</li>
+<li>Click the button labeled with a circle on the top of the robot</li>
+<li>The web interface should now be enabled</li>
+</ul></li>
+<li>Make sure nobody is in the robot's workspace.</li>
+<li>Unlock the robot by clicking the unlock button. The robot's lights should turn white.</li>
+<li>You can now manually move the robot by pressing the two buttons on the end of the arm
+<ul class="org-ul">
+<li>The web-interface has some options about how this movement works, and you can toggle between them on the robot arm itself by pressing it's buttons</li>
+<li>Two buttons on the top of the head open and close the grippers</li>
+<li>Do not force the robot, it should move freely when pressing the buttons properly</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org702733f" class="outline-3">
+<h3 id="org702733f">Enabling ROS</h3>
+<div class="outline-text-3" id="text-org702733f">
+<ol class="org-ol">
+<li>In the hamburger menu in the upper-right corner, select Activate Franka Control Interface (FCI)</li>
+<li>The web interface no longer has control, and you can now use ROS</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org602198e" class="outline-3">
+<h3 id="org602198e">Using ROS</h3>
+<div class="outline-text-3" id="text-org602198e">
+<ol class="org-ol">
+<li>ssh into <code>station</code>, using the credentials that I provide.
+<ul class="org-ul">
+<li>You can also use <code>ssh-copy-id</code> to install your <code>ssh</code> certificate and avoid entering the password each time.</li>
+</ul></li>
+<li>Release the enabling device, so that the robot lights are blue</li>
+<li>On <code>station</code> run <code>ros2 launch franka_fer_moveit_config moveit.launch.py use_rviz:=false robot_ip:=panda0.robot</code> to start the controllers and moveit</li>
+<li>On laptop run <code>ros2 launch franka_fer_moveit_config rviz.launch.py robot_ip:=panda0.robot</code> to launch <code>rviz</code>
+<ul class="org-ul">
+<li>You can also specify the <code>rviz_config</code> parameter to load an alternative <code>rviz</code> file, if you want to customize the visualization</li>
+</ul></li>
+<li>The <code>move_group</code> node is running on <code>station</code>, but you can communicate with it via its <code>actions</code>, <code>services</code>, and <code>topics</code> without worrying about that</li>
+<li>Pressing the <code>enabling</code> device will stop the robot and cause some nodes to crash</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org9fa14fa" class="outline-3">
+<h3 id="org9fa14fa">Enabling Device</h3>
+<div class="outline-text-3" id="text-org9fa14fa">
+<ol class="org-ol">
+<li>Feel free to press the enabling device at any time to stop the robot</li>
+<li>After pressing, you will need to
+<ul class="org-ul">
+<li>Make sure to terminate the <code>moveit.launch.py</code> launchfile</li>
+<li>Release the enabling device (possibly after manually guiding the robot to a new position)</li>
+<li>Re-run the <code>moveit.launch.py</code> launchfile</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgc0e3240" class="outline-3">
+<h3 id="orgc0e3240">Finished With Robot</h3>
+<div class="outline-text-3" id="text-orgc0e3240">
+<p>
+Before you step away from the robot:
+</p>
+<ol class="org-ol">
+<li>Move the robot to a reasonable ready position (either using MoveIt, or by manually moving it)</li>
+<li>Make sure the robot is disabled (press the enabling device so the lights turn white).</li>
+<li>Kill the any launchfiles or nodes that you started on <code>station</code></li>
+<li>In the web interface, disable the FCI.</li>
+<li>Lock the robot.</li>
+<li>It is okay to step away from the robot when it is locked.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org10fd86c" class="outline-3">
+<h3 id="org10fd86c">Power Off</h3>
+<div class="outline-text-3" id="text-org10fd86c">
+<ol class="org-ol">
+<li>In the web interface, select shutdown.</li>
+<li>Wait for the robot's lights to turn off and the fans in the control box to stop spinning</li>
+<li>Power off the power strip</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3d5f24c" class="outline-2">
+<h2 id="org3d5f24c">Robot Status Lights</h2>
+<div class="outline-text-2" id="text-org3d5f24c">
+<ol class="org-ol">
+<li>Yellow: Robot is Locked. Do not attempt to move the arm, you can damage it.
+<ul class="org-ul">
+<li>If you leave the robot unattended, put it lock mode.</li>
+</ul></li>
+<li>White: Robot is disabled.  You can physically move the arm by pressing the move buttons near the end-effector
+<ul class="org-ul">
+<li>Do not attempt to force the arm to move in this mode</li>
+<li>The arm cannot undergo a motion initiated from the computer in this mode</li>
+<li>This mode is entered by pressing the enabling device</li>
+</ul></li>
+<li>Blue: Robot is enabled. It can move due to computer commands. 
+<ul class="org-ul">
+<li>No person (including you) should not be in the robot workspace when the robot is blue.</li>
+<li>You must pay attention and be ready to press the enabling device (to disable the robot) if an unexpected movement occurs</li>
+<li>Enter this mode by twisting the enabling device so that the button pops up</li>
+</ul></li>
+<li>Green:
+<ul class="org-ul">
+<li>This mode is entered when the robot is executing a command from the web interface</li>
+<li>We won't often see this mode</li>
+</ul></li>
+<li>Red: Error
+<ul class="org-ul">
+<li>You can enter this mode in a number of ways, but one way is if you try to force any of the arm joints to move too much</li>
+<li>You will need to power cycle the robot to remove the error</li>
+<li>If power-cycling does not clear the red lights, contact me and stop using the robot</li>
+</ul></li>
+</ol>
+</div>
+<div id="outline-container-org83e9c2f" class="outline-3">
+<h3 id="org83e9c2f">Red Light Troubleshooting</h3>
+<div class="outline-text-3" id="text-org83e9c2f">
+<ul class="org-ul">
+<li>If the red lights turn on but then clear after resetting the robot you are likely near a joint limit</li>
+<li>To see if this is the issue, unlock the robot and enable it (Blue Lights)
+<ul class="org-ul">
+<li>In the web interface, under "Robot Status" the robot picture will be blue but there will be a message saying "joint limit exceeded"</li>
+</ul></li>
+<li>To clear the joint limit exceeded message you need to carefully manipulate each joint (under white lights) so that they are not near the joint limits.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgc9f7be8" class="outline-2">
+<h2 id="orgc9f7be8">Mechanical</h2>
+<div class="outline-text-2" id="text-orgc9f7be8">
+<ol class="org-ol">
+<li>Franka World provides a full SolidWorks Model of the robot and also CAD for mounting cameras to the arm</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgb739b5d" class="outline-2">
+<h2 id="orgb739b5d">Resources</h2>
+<div class="outline-text-2" id="text-orgb739b5d">
+<ol class="org-ol">
+<li><a href="https://support.franka.de/docs/franka_ros2.html">Software Documentation</a>
+<ul class="org-ul">
+<li>Particular attention to franka_ros</li>
+</ul></li>
+<li><a href="https://franka.world">Franka World</a> (Free signup required): provides access to the manual, and some useful SolidWorks models
+(for example to attach a realsense to the robot).</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

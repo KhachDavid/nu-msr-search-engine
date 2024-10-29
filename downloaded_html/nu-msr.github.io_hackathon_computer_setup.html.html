@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-10-04 Fri 17:27 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Computer Setup</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">Computer Setup</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org8e22c39">Hardware Overview</a>
+<ul>
+<li><a href="#org01893f6">Why Linux?</a></li>
+</ul>
+</li>
+<li><a href="#orgfeedff5">Caution</a></li>
+<li><a href="#org394300d">Installing Linux</a>
+<ul>
+<li><a href="#org676d430">Booting</a></li>
+<li><a href="#orgec61c02">Installation</a></li>
+</ul>
+</li>
+<li><a href="#org404e838">First Boot</a>
+<ul>
+<li><a href="#orgcec4db6">Login</a></li>
+<li><a href="#org2eea256">Terminal</a></li>
+<li><a href="#orgf325a81">Internet</a></li>
+<li><a href="#org3d270b1">System76 Setup</a></li>
+<li><a href="#orgac81d56">Web Browser</a></li>
+<li><a href="#org51d53cc">Turn Off The Beep</a></li>
+</ul>
+</li>
+<li><a href="#orgea84b8c">Development Environment</a>
+<ul>
+<li><a href="#TextEditor">Text Editors</a></li>
+<li><a href="#org4ae7405">Version Control (git)</a></li>
+<li><a href="#org26ecdb3">Python</a></li>
+<li><a href="#org2f44b29">Robot Operating System (ROS 2)</a></li>
+<li><a href="#org20c2832">Realsense</a></li>
+<li><a href="#interbotix_setup">Interbotix Arms</a></li>
+</ul>
+</li>
+<li><a href="#org4e2233e">Backups</a>
+<ul>
+<li><a href="#orgb3da556">First Line of Defense</a></li>
+<li><a href="#orgf25bbca">Additional Options</a></li>
+</ul>
+</li>
+<li><a href="#org494c567">Additional Customization</a>
+<ul>
+<li><a href="#org24b12f1">The Dock</a></li>
+<li><a href="#org4bf44e7">Terminal Settings</a></li>
+<li><a href="#orgdf27de4">System Settings</a></li>
+<li><a href="#orgc769bf7">Keyboard shortcuts</a></li>
+<li><a href="#orgc96ef6b">Disable Graphical Boot</a></li>
+</ul>
+</li>
+<li><a href="#orgb07050f">Ooops!</a></li>
+<li><a href="#org889459c">Northwestern IT</a>
+<ul>
+<li><a href="#org650b5fb">Northwestern VPN</a></li>
+<li><a href="#org8cc9ecc">Printer</a></li>
+</ul>
+</li>
+<li><a href="#org78ca607">Non-Free Applications</a>
+<ul>
+<li><a href="#orga7045c3">Zoom</a></li>
+<li><a href="#org2274a37">Slack</a></li>
+<li><a href="#orga511bb4">Discord</a></li>
+</ul>
+</li>
+<li><a href="#org9040011">Software Management</a>
+<ul>
+<li><a href="#orgccd26fa">Apt</a></li>
+<li><a href="#org9f642dd">Sandboxed Applications</a></li>
+<li><a href="#orgd3ca6f2">Language-specific Package Managers</a></li>
+<li><a href="#org8fbf6f5">Build From Source</a></li>
+</ul>
+</li>
+<li><a href="#org3dcc914">Ubuntu Cleanup</a></li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-org8e22c39" class="outline-2">
+<h2 id="org8e22c39">Hardware Overview</h2>
+<div class="outline-text-2" id="text-org8e22c39">
+<ol class="org-ol">
+<li>MSR provides new Linux laptops for you to use while in the program.</li>
+<li>To build your Linux skills, use these laptops for everything!</li>
+<li>Most robots are computers, so the ability to maintain Linux systems is crucial.</li>
+</ol>
+</div>
+
+<div id="outline-container-orge158d55" class="outline-4">
+<h4 id="orge158d55">Laptop Specifications</h4>
+<div class="outline-text-4" id="text-orge158d55">
+<ul class="org-ul">
+<li>System76 Adder 4 Workstation (addws4)</li>
+<li>Intel Core i9-14900HX (5.8 GHz, 36 MB Cache, 8 P-Cores 16 E-Cores)</li>
+<li>8GB NVIDIA GeForce RTX 4060 with 3072 CUDA Cores</li>
+<li>64 GB RAM (DDR4 5200 MHz)</li>
+<li>1 TB PCIe4 Hard Drive</li>
+<li>15.6"  1920x1080@144Hz LCD</li>
+<li><a href="https://tech-docs.system76.com/models/addw4/README.html">Full Technical Documentation</a></li>
+
+<li>This laptop is big, heavy, and powerful. Think of it more like a portable desktop than a laptop.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org01893f6" class="outline-3">
+<h3 id="org01893f6">Why Linux?</h3>
+<div class="outline-text-3" id="text-org01893f6">
+<p>
+Being able to use Linux is an important skill for robotics engineers, but it a skill that is not usually taught explicitly.
+By using Linux every day as your main computing platform and providing your own technical support you will
+become a knowledgeable Linux user.  You can always ask for help, but maintaining a do-it-yourself mentality
+is crucial to advance your learning. Spending a little extra time to make your computer fit you
+and fix the problems you encounter (or create) is a great way to become proficient.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfeedff5" class="outline-2">
+<h2 id="orgfeedff5">Caution</h2>
+<div class="outline-text-2" id="text-orgfeedff5">
+<ol class="org-ol">
+<li>Read this document carefully.</li>
+<li>Backup your work regularly.</li>
+<li>Don't spill a drink on your laptop.</li>
+<li>Don't leave your laptop behind during a night out.</li>
+<li>Don't close your laptop screen on a foreign object.</li>
+<li>Do not drop your laptop or drop something on your laptop.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org394300d" class="outline-2">
+<h2 id="org394300d">Installing Linux</h2>
+<div class="outline-text-2" id="text-org394300d">
+<p>
+The laptops come with Ubuntu 22.04 LTS, but we will be using Ubuntu 24.04 LTS.
+</p>
+
+<p>
+I have distributed USB drives with the installer ready to go.
+</p>
+
+<p>
+This will install a slightly-customized version of Ubuntu Linux 24.04 Noble Numbat.
+For more details see <a href="./ubuntu_minimal.html">Ubuntu Minimal.</a>
+</p>
+</div>
+
+<div id="outline-container-org676d430" class="outline-3">
+<h3 id="org676d430">Booting</h3>
+<div class="outline-text-3" id="text-org676d430">
+<ol class="org-ol">
+<li>Ensure that there is no ethernet cable plugged in.</li>
+<li>Ensure that the power cable is connected.</li>
+<li>Plug the USB drive into a USB port.</li>
+<li>Turn the computer on (hold the power button for about 1 second release, and wait 1 second for it light up).</li>
+<li>When the System76 Screen appears, with text on the bottom, press ESC to enter the UEFI setup.</li>
+<li>Select <i>One Time Boot</i>.</li>
+<li>Select the Third Option (Samsung PSSD T7)</li>
+<li>When the Grub menu appears select "Try or Install Ubuntu" (Press Enter)</li>
+<li>Wait for the Ubuntu Installer to open</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgec61c02" class="outline-3">
+<h3 id="orgec61c02">Installation</h3>
+<div class="outline-text-3" id="text-orgec61c02">
+<p>
+The installation will bring you through a series of screens.
+</p>
+<ul class="org-ul">
+<li>After making the proper selections (as per this guide), click <code>Next</code>.</li>
+<li>It is crucial that you pay attention and enter the proper settings.</li>
+<li>Each screen below is presented in-order and identified by the value of the installation window titlebar.</li>
+</ul>
+</div>
+
+<div id="outline-container-orgb503757" class="outline-4">
+<h4 id="orgb503757">The Installation Screens</h4>
+<div class="outline-text-4" id="text-orgb503757">
+<dl class="org-dl">
+<dt>Welcome To Ubuntu</dt><dd>Keep the default (<i>English</i>).
+<ul class="org-ul">
+<li>You can setup other languages later, but use the default settings for the installation.</li>
+</ul></dd>
+<dt>Accessibility</dt><dd>Keep the defaults.
+<ul class="org-ul">
+<li>If you need some accessibility features to get through the installation select them but let me know.</li>
+</ul></dd>
+<dt>Keyboard Layout</dt><dd>Keep the default (<i>English US</i>).</dd>
+<dt>Internet Connection</dt><dd>Keep the default (<i>Do not connect to the internet</i>). Do not, under any circumstances, connect to the internet.</dd>
+<dt>Try or Install Ubuntu</dt><dd>Keep the default (<i>Install Ubuntu</i>).</dd>
+<dt>Type of Installation</dt><dd>Keep the default (<i>Interactive Installation</i>).</dd>
+<dt>Applications</dt><dd>Keep the default (<i>Extended Installation</i>)</dd>
+<dt>Optimize your Computer</dt><dd>Keep the default: (<i>Unchecked Install third-party</i> and <i>Unchecked Download and install</i>)</dd>
+<dt>Disk Setup</dt><dd>Select <i>Erase disk and Install Ubuntu</i>. Do not choose any advanced features.</dd>
+<dt>Create Your Account</dt><dd>Do not accept the defaults here.
+<ul class="org-ul">
+<li>Enter your fullname for <i>Your Name</i>. This will auto-populate the other fields. <b>DO NOT ACCEPT THE AUTO-FILLED VALUES</b></li>
+<li>Your computer's name: choose a name that is between 4-15 characters, all lowercase letters and numbers, starting with a letter.</li>
+<li>Your username: choose a username between 2 and 12 characters, all lowercase letters and numbers, starting with a letter.</li>
+<li>Choose a <i>Strong</i> password that you will remember</li>
+<li>The restrictions on computer name and username here are more restrictive than necessary but they make life easier in the future.</li>
+</ul></dd>
+<dt>Select your timezone</dt><dd>Choose Chicago
+<ul class="org-ul">
+<li>See if you can click on the map at the location of Chicago! (Or you can type it)</li>
+<li>Before proceeding, <code>Location</code> should say <i>Chicago</i> and <code>Timezone</code> should say <i>America/Chicago</i></li>
+</ul></dd>
+<dt>Ready to install</dt><dd>Click <code>Install</code></dd>
+<dt>(no term)</dt><dd>When the installation is complete restart the computer</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org404e838" class="outline-2">
+<h2 id="org404e838">First Boot</h2>
+<div class="outline-text-2" id="text-org404e838">
+</div>
+<div id="outline-container-orgcec4db6" class="outline-3">
+<h3 id="orgcec4db6">Login</h3>
+<div class="outline-text-3" id="text-orgcec4db6">
+<ul class="org-ul">
+<li>Click your username and enter your password to login.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org2eea256" class="outline-3">
+<h3 id="org2eea256">Terminal</h3>
+<div class="outline-text-3" id="text-org2eea256">
+<ol class="org-ol">
+<li>Type <code>Ctrl-Alt-T</code> to open a terminal window.
+<ul class="org-ul">
+<li>All commands will be entered from the terminal.</li>
+<li>To paste to the terminal use <code>Ctrl-Shift v</code>.</li>
+<li>To copy from the terminal use <code>Ctrl-Shift c</code>.</li>
+<li>After typing a command press <code>Enter</code> to execute it.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgf325a81" class="outline-3">
+<h3 id="orgf325a81">Internet</h3>
+<div class="outline-text-3" id="text-orgf325a81">
+<ul class="org-ul">
+<li>List wireless connections with <code>nmcli dev wifi list</code>.</li>
+<li>For on-campus WiFi connect to <code>eduroam</code> network (be sure to substitute <code>&lt;netid&gt;</code> with your netid):
+<ul class="org-ul">
+<li>I have provided an eduroam profile for you that just must be modified with your <code>netid</code></li>
+<li>Run <code>nmcli --ask con mod eduroam autoconnect yes 802-1x.identity &lt;netid&gt;@northwestern.edu</code> to setup your username
+<ul class="org-ul">
+<li>The <code>&lt;netid&gt;</code> (including the <code>&lt;&gt;</code>) should be replaced with your netID (same ID used to log on to Canvas).</li>
+</ul></li>
+<li>Run <code>nmcli con up eduroam</code> to activate wireless
+<ul class="org-ul">
+<li>Enter your netID password when prompted (the one used to log into canvas)</li>
+</ul></li>
+</ul></li>
+<li>Connect to most WiFi Networks with <code>nmcli --ask dev wifi connect &lt;ssid&gt;</code>.
+<ul class="org-ul">
+<li>Replace <code>&lt;ssid&gt;</code> (including the <code>&lt;&gt;</code>) with the name of the network.</li>
+<li>You will be prompted for a password if the network is encrypted.</li>
+</ul></li>
+
+<li>Wired connections automatically work when plugged into an active ethernet port.</li>
+</ul>
+</div>
+<details id="org3429cdf"><summary class="header-4">Eduroam Details</summary>
+<div class="outline-text-4" id="text-org3429cdf">
+<p>
+The custom installation comes with a pre-filled in connection profile for eduroam, so you only need to change the username and password.
+Here are details on how to setup an eduroam connection from scratch.
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">nmcli con add type wifi <span class="org-sh-escaped-newline">\</span>
+          con-name eduroam <span class="org-sh-escaped-newline">\</span>
+          ssid eduroam <span class="org-sh-escaped-newline">\</span>
+          802-1x.eap peap <span class="org-sh-escaped-newline">\</span>
+          802-1x.identity &lt;netid&gt;@northwestern.edu <span class="org-sh-escaped-newline">\</span>
+          802-1x.phase2-autheap mschapv2 <span class="org-sh-escaped-newline">\</span>
+          wifi-sec.auth-alg open <span class="org-sh-escaped-newline">\</span>
+          wifi-sec.key-mgmt wpa-eap
+</pre>
+</div>
+</div>
+</details>
+</div>
+
+<div id="outline-container-org3d270b1" class="outline-3">
+<h3 id="org3d270b1">System76 Setup</h3>
+<div class="outline-text-3" id="text-org3d270b1">
+<p>
+System76 provides drivers for their laptops
+</p>
+<ul class="org-ul">
+<li>The driver enables you to switch graphics modes and change other settings</li>
+<li>These instructions are adapted from <a href="https://support.system76.com/articles/install-ubuntu/">System76 Ubuntu Installation</a></li>
+</ul>
+</div>
+<div id="outline-container-org7aa4edb" class="outline-4">
+<h4 id="org7aa4edb">System76 Driver</h4>
+<div class="outline-text-4" id="text-org7aa4edb">
+<p>
+Install the System76 Driver and <code>nvidia</code> drivers. All commands are entered in the Terminal:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">sudo add-apt-repository -y ppa:system76-dev/stable
+sudo apt install --no-install-recommends system76-driver
+sudo apt install system76-driver-nvidia
+sudo apt upgrade
+reboot <span class="org-comment-delimiter"># </span><span class="org-comment">will reboot your computer</span>
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>The <code>sudo apt upgrade</code> command above may actually <i>downgrade</i> some packages. We are now getting some hardware-specific packages from System76 rather
+than Ubuntu so the versions do not match. Precisely what benefits the System76 versions of the packages provide is a bit of an open question but
+System76 makes its own Linux Distribution and makes (or at least specs-out) the hardware so presumably their versions work better with our hardware
+(and at least we can complain to them when they don't).</li>
+</ul>
+</div>
+</div>
+
+<details id="org1f3b728"><summary class="header-4">Graphics Modes</summary>
+<div class="outline-text-4" id="text-org1f3b728">
+<ol class="org-ol">
+<li>These computers have two graphics cards: the NVIDIA and the integrated Intel, and several modes:
+<ul class="org-ul">
+<li><code>nvidia</code> - exclusively use the NVIDIA graphics card. Most power usage, most performance, medium stability (nvidia drivers right now have some quirks)</li>
+<li><code>integrated</code> - intel only: least power usage, least performance, most stability (Intel's drivers are open-source and integrated with the Linux Kernel)
+<ul class="org-ul">
+<li>nvidia card is not visible to the operating system, the HDMI port will not work (external monitor via USB-C only)</li>
+</ul></li>
+<li><code>hybrid</code> - uses both, graphics are routed through the NVIDIA card but most rendering done on intel: medium power usage, tunable performace, worst stability (this is complicated)</li>
+<li><code>compute</code> - uses the intel card for graphics but the nvidia is available for compute tasks
+<ul class="org-ul">
+<li>HDMI port will not work (external monitor via USB-C only)</li>
+<li>Maximizes compute on the GPU while still enabling a GUI (the desktop uses GPU resources, but its running on the intel GPU).</li>
+</ul></li>
+<li>Change the setting by running <code>sudo system76-power graphics &lt;mode&gt;</code> and rebooting. By default you will be using hybrid</li>
+</ul></li>
+
+<li>Display Server:
+<ul class="org-ul">
+<li>X11 - Legacy display server. Still used because it has features not fully realized in its replacement. Highest-level of compatibility but worse performance</li>
+<li>Wayland - Newest display server, some programs or features of programs not compatible. Best performance, worse compatibility (particularly with NVIDIA cards)</li>
+<li>Change between X11 and Wayland by clicking the gear icon in the lower-left corner when logging in.</li>
+</ul></li>
+<li>As you can see, there are many combinations of  Graphics Mode and Display Server.
+<ul class="org-ul">
+<li>Depending on what you are doing it may be advantageous to switch.</li>
+<li>It is certainly easier to stick to one and stay with it.</li>
+<li>The ideal in my view is <code>hybrid</code> and <code>wayland</code> but this tends to be the least-stable combination.</li>
+<li>Use <code>echo $XDG_SESSION_TYPE</code> to determine if you are using X11 or Wayland</li>
+</ul></li>
+</ol>
+</div>
+</details>
+</div>
+<div id="outline-container-orgac81d56" class="outline-3">
+<h3 id="orgac81d56">Web Browser</h3>
+<div class="outline-text-3" id="text-orgac81d56">
+</div>
+<div id="outline-container-org4739703" class="outline-4">
+<h4 id="org4739703">Firefox</h4>
+<div class="outline-text-4" id="text-org4739703">
+<p>
+Firefox is already installed.
+It comes from a <a href="https://support.mozilla.org/en-US/kb/install-firefox-linux#w_install-firefox-deb-package-for-debian-based-distributions">package repository</a> provided by Mozilla.
+</p>
+
+<ul class="org-ul">
+<li>I <b>highly</b> recommend that you install the <code>UBlock Origin</code> extension to block ads.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org30c655c" class="outline-4">
+<h4 id="org30c655c">Google Chrome</h4>
+<div class="outline-text-4" id="text-org30c655c">
+<ul class="org-ul">
+<li>Google Chrome is not part of Ubuntu so it must be downloaded directly from Google.</li>
+<li>It is also available as a snap, but these instructions assume we are avoiding snaps</li>
+<li><p>
+Download and install the <code>google chrome</code> package:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">wget -O /tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo apt install /tmp/chrome.deb
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org51d53cc" class="outline-3">
+<h3 id="org51d53cc">Turn Off The Beep</h3>
+<div class="outline-text-3" id="text-org51d53cc">
+<ul class="org-ul">
+<li>You may have already heard some annoying sound effects and beeping. (Try it by pressing <code>Backspace</code> several times on an empty terminal line).</li>
+<li>To mute these sounds run <code>gsettings set org.gnome.desktop.sound event-sounds false</code>.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgea84b8c" class="outline-2">
+<h2 id="orgea84b8c">Development Environment</h2>
+<div class="outline-text-2" id="text-orgea84b8c">
+</div>
+<div id="outline-container-TextEditor" class="outline-3">
+<h3 id="TextEditor">Text Editors</h3>
+<div class="outline-text-3" id="text-TextEditor">
+<p>
+As computer programmers, you will be spending a lot of your time writing code in a text editor.
+Fortunately there are many choices available.  Some suggestions are below: feel free to cycle through and choose one that you like.
+</p>
+</div>
+
+<div id="outline-container-org3ca50b9" class="outline-4">
+<h4 id="org3ca50b9"><a href="https://code.visualstudio.com">Visual Studio Code</a></h4>
+<div class="outline-text-4" id="text-org3ca50b9">
+<ol class="org-ol">
+<li>The most popular choice for recent MSR students.
+<ul class="org-ul">
+<li>Widely used.</li>
+<li>Relatively easy to setup.</li>
+<li>Supported (or controlled by) Microsoft, some plugins are not open source.</li>
+</ul></li>
+<li><p>
+From the terminal:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">wget -O /tmp/code.deb <span class="org-string">"https://code.visualstudio.com/sha/download?build=stable&amp;os=linux-deb-x64"</span>
+sudo apt install /tmp/code.deb
+</pre>
+</div></li>
+<li>Launch VSCode using <code>code</code>.
+<ul class="org-ul">
+<li>I opt-out of the telemetry collection (lower right) when first starting <code>code</code>.</li>
+</ul></li>
+<li><a href="https://code.visualstudio.com/docs/setup/linux">More details on VSCode</a></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgf3982a1" class="outline-4">
+<h4 id="orgf3982a1"><a href="https://vim.org">vim</a></h4>
+<div class="outline-text-4" id="text-orgf3982a1">
+<p>
+If you like simplicity and modal text editing.  
+</p>
+<ul class="org-ul">
+<li>Install with <code>apt install vim</code> (terminal-only) or <code>apt install vim-gtk3</code> (with gui).</li>
+<li>There is also <code>neovim</code>, a popular fork of <code>vim</code>.</li>
+<li>There is a steep learning curve for <code>vim</code>.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org8f1e956" class="outline-4">
+<h4 id="org8f1e956"><a href="https://emacs.org">emacs</a></h4>
+<div class="outline-text-4" id="text-org8f1e956">
+<p>
+Eight Megabytes and Constantly Swapping (this is a dated joke).
+</p>
+<ul class="org-ul">
+<li>My editor of choice: I use <code>emacs</code> with <code>evil</code> mode because &#x2026;(insert hour-long discussion here)&#x2026;</li>
+<li><code>spacemacs</code> and <code>doomemacs</code> are popular pre-configured versions of <code>emacs</code>.</li>
+<li><code>sudo apt install emacs</code></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org0b110ce" class="outline-4">
+<h4 id="org0b110ce">Other</h4>
+<div class="outline-text-4" id="text-org0b110ce">
+<p>
+So <a href="https://wiki.archlinux.org/index.php/List_of_applications/Documents#Text_editors">many others</a> to choose from.
+</p>
+
+
+<figure id="org7ee7223">
+<img src="https://imgs.xkcd.com/comics/real_programmers.png" alt="real_programmers.png">
+
+<figcaption><span class="figure-number">Figure 1: </span><a href="https://xkcd.com/378/">https://xkcd.com/378/</a>.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org4ae7405" class="outline-3">
+<h3 id="org4ae7405">Version Control (git)</h3>
+<div class="outline-text-3" id="text-org4ae7405">
+<ol class="org-ol">
+<li>Install <code>git</code> from apt (<code>sudo apt install git gitk</code>)
+<ul class="org-ul">
+<li><code>gitk</code> allows you to visualize the <code>git</code> repository</li>
+<li>For more information see <a href="./git_intro.html">Git Introduction.</a></li>
+<li><code>sudo</code> lets you run commands as the superuser. Enter your own password when prompted</li>
+</ul></li>
+<li><p>
+Setup your identity and the default branch name:
+</p>
+<ul class="org-ul">
+<li>Remember, when replacing <code>&lt;Your Name&gt;</code> with your name, don't include the <code>&lt;&gt;</code>.</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-bash">git config --global user.name <span class="org-string">"&lt;Your Name&gt;"</span>
+git config --global user.email <span class="org-string">"&lt;Your email&gt;"</span>
+git config --global init.defaultBranch main
+</pre>
+</div></li>
+<li>Setup the program that you will use to edit git commit messages
+<code>git config --global core.editor &lt;editor&gt;</code>
+<ul class="org-ul">
+<li>If you are using <code>code</code>, add the <code>--wait</code> flag: (<code>git config --global core.editor 'code --wait'</code>)</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org26ecdb3" class="outline-3">
+<h3 id="org26ecdb3">Python</h3>
+<div class="outline-text-3" id="text-org26ecdb3">
+<p>
+Install <a href="https://pypi.org/project/pip/">pip</a>, a package manager for python, <a href="https://ipython.org/">ipython</a>, an interactive python read-eval-print-loop (REPL),
+and support for virtual environments:
+</p>
+<ul class="org-ul">
+<li><code>sudo apt install python3-pip ipython3 python3.12-venv</code>.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org2f44b29" class="outline-3">
+<h3 id="org2f44b29">Robot Operating System (ROS 2)</h3>
+<div class="outline-text-3" id="text-org2f44b29">
+<p>
+Here are some abbreviated instructions for installing ROS 2 on an x86 PC, Many steps are skipped, assuming you have completed the prior steps in this guide.
+</p>
+<ul class="org-ul">
+<li>We'll learn more about ROS 2 later, these instructions are focused on getting it installed quickly.</li>
+<li><p>
+The instructions below are summarized from <a href="http://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debians.html">Official ROS 2 Jazzy Install Instructions</a>
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span class="org-comment-delimiter"># </span><span class="org-comment">Download ROS encryption keys</span>
+sudo wget -O /usr/share/keyrings/ros-archive-keyring.gpg <span class="org-sh-escaped-newline">\</span>
+     https://raw.githubusercontent.com/ros/rosdistro/master/ros.key
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Add the Repository by creating /etc/apt/sources.list.d</span>
+<span class="org-builtin">echo</span> <span class="org-string">"deb [arch=amd64 signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] \</span>
+<span class="org-string">      http://packages.ros.org/ros2/ubuntu noble main"</span> <span class="org-sh-escaped-newline">\</span>
+      | sudo tee /etc/apt/sources.list.d/ros2.list
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Update the package list</span>
+sudo apt update
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Install the development tools</span>
+sudo apt install ros-dev-tools
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Install ros2 iron</span>
+sudo apt install ros-jazzy-desktop
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Initialize rosdep (makes it easy to install ros dependencies)</span>
+sudo rosdep init
+rosdep update
+</pre>
+</div>
+<ul class="org-ul">
+<li>Add the line <code>source /opt/ros/jazzy/setup.bash</code> to the end of  <code>~/.bashrc</code> file. 
+<ul class="org-ul">
+<li>The <code>~</code> expands to <code>/home/&lt;user&gt;</code> where <code>&lt;user&gt;</code> is your username, so the file's path is <code>/home/&lt;user&gt;/.bashrc</code>.</li>
+<li>Edit the file using the <a href="#TextEditor">Text Editor</a> of your choice, for example <code>code ~/.bashrc</code>.</li>
+<li>This file is executed whenever you start <code>bash</code> and automatically configures the ROS environment.</li>
+</ul></li>
+<li>Restart the terminal and <code>echo $ROS_DISTRO</code>. It should display <code>jazzy</code>.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org20c2832" class="outline-3">
+<h3 id="org20c2832">Realsense</h3>
+<div class="outline-text-3" id="text-org20c2832">
+<ol class="org-ol">
+<li>Use <code>sudo apt install ros-jazzy-realsense2-camera ros-jazzy-realsense2-description</code> to install the  realsense SDK and ROS packages.
+<ul class="org-ul">
+<li><code>ros-jazzy-realsense2-camera</code> brings in <code>ros-jazzy-librealsense2</code>, the <a href="https://github.com/IntelRealSense/librealsense">realsense library</a></li>
+<li>You will be receiving a version of <code>ros-jazzy-librealsense2</code> modified from the standard ROS 2 version, from the <a href="https://launchpad.net/~numsr/+archive/ubuntu/robotics">NUMSR PPA</a></li>
+<li>The modified version of the library enables support for python, cuda, and <a href="https://github.com/IntelRealSense/realsense-ros/issues/1426">installs the udev rules</a> automatically</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-interbotix_setup" class="outline-3">
+<h3 id="interbotix_setup">Interbotix Arms</h3>
+<div class="outline-text-3" id="text-interbotix_setup">
+<p>
+One robot we will use is the <a href="https://www.trossenrobotics.com/pincherx-100-robot-arm.aspx">PincherX 100</a> robot arm.
+</p>
+<ul class="org-ul">
+<li>The software is not released as a binary package for ROS 2 so you will need to compile it yourself.</li>
+<li>I have created a <code>.repos</code> file which lists all the git repositories needed to compile the packages required for the Interbotix arms.
+<ul class="org-ul">
+<li>You can use this file to automatically download all the code that is needed, even though it is spread out across multiple git repositories.</li>
+</ul></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-bash"><span class="org-comment-delimiter"># </span><span class="org-comment">Create the workspace</span>
+mkdir -p ~/ws/interbotix/src
+<span class="org-builtin">cd</span> ws/interbotix
+vcs import --input https://nu-msr.github.io/hackathon/images/interbotix.repos src
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Install dependencies</span>
+sudo apt install python3-transforms3d
+rosdep install --from-paths src --ignore-src -r -y
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Build the workspace</span>
+colcon build --merge-install --cmake-args -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Setup udev rules</span>
+sudo cp src/interbotix_ros_core/interbotix_ros_xseries/<span class="org-sh-escaped-newline">\</span>
+     interbotix_xs_sdk/99-interbotix-udev.rules /etc/udev/rules.d
+sudo udevadm control --reload
+sudo udevadm trigger
+</pre>
+</div>
+
+<p>
+To use this new workspace, <code>source ~/ws/interbotix/install/setup.bash</code>.
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org4e2233e" class="outline-2">
+<h2 id="org4e2233e">Backups</h2>
+<div class="outline-text-2" id="text-org4e2233e">
+<p>
+You should frequently backup your work (e.g., the data in your home directory).
+Aside from hardware failures, as you experiment with the command-line it is easy to make a mistake.
+</p>
+</div>
+
+<div id="outline-container-orgb3da556" class="outline-3">
+<h3 id="orgb3da556">First Line of Defense</h3>
+<div class="outline-text-3" id="text-orgb3da556">
+<ol class="org-ol">
+<li>We have provided you with an external SSD. You can backup regularly.</li>
+<li>You can reformat the whole drive or you can keep it and use the 3rd partition for backups:
+<ul class="org-ul">
+<li>The advantage of using the third partition for backups is that you can boot the live Ubuntu environment anywhere and see your backup files</li>
+<li>The MSR version of the Ubuntu Live CD also has <a href="https://clonezilla.org/">Clonezilla</a> installed (run it with <code>clonezilla</code> at the command prompt after booting to the live CD), which
+enables you to make snapshots of the full drive.</li>
+<li>In general you only need to backup your data, but you could, after getting a good setup for your computer, create a Clonezilla image to be able
+to "factory reset" your computer to a basic installation with the other components you wanted installed.</li>
+</ul></li>
+<li>I use <code>rdiff-backup</code> (a backup program).</li>
+<li>Plug in the external drive to a USB 3 or USB c port</li>
+<li>Run <code>rdiff-backup /home/&lt;username&gt; /media/&lt;username&gt;/&lt;hdname&gt;</code></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgf25bbca" class="outline-3">
+<h3 id="orgf25bbca">Additional Options</h3>
+<div class="outline-text-3" id="text-orgf25bbca">
+<ol class="org-ol">
+<li><a href="https://restic.net/">Restic</a> does encrypted incremental backups to local devices or cloud services.</li>
+<li>The Cloud:
+<ul class="org-ul">
+<li><a href="https://dropbox.com">Dropbox</a>: Has a good <a href="https://www.dropbox.com/install-linux">Linux client</a> but costs money.</li>
+<li><a href="https://drive.google.com">Google Drive</a>: Your @u.northwestern account has unlimited storage, no official Linux support, web interface works.</li>
+<li><a href="https://rclone.org">rclone</a> - can be used as unofficial client for Box, Google Drive, and many other systems.</li>
+</ul></li>
+<li>External Hard-drive
+<ul class="org-ul">
+<li><a href="https://www.nongnu.org/rdiff-backup/">rdiff-backup</a> - Stores incremental backups so you can go back in time without using much space.</li>
+<li><a href="https://backintime.readthedocs.io/en/latest/">Back In Time</a> GUI backup program.</li>
+</ul></li>
+<li>A long list of <a href="https://wiki.archlinux.org/title/Synchronization_and_backup_programs">backup programs</a>.</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-org494c567" class="outline-2">
+<h2 id="org494c567">Additional Customization</h2>
+<div class="outline-text-2" id="text-org494c567">
+<ul class="org-ul">
+<li>Here are some suggestions and ideas for customizing your computer further.</li>
+<li>Almost nothing is required in Linux and everything is possible (with enough time).</li>
+<li>With a little effort you can make your environment behave like either Windows or macOS, for example.</li>
+</ul>
+</div>
+
+<div id="outline-container-org24b12f1" class="outline-3">
+<h3 id="org24b12f1">The Dock</h3>
+<div class="outline-text-3" id="text-org24b12f1">
+<ul class="org-ul">
+<li>The icons on the left of your screen allow you to switch between windows, and
+to open commonly-used applications.</li>
+<li>The first few icons are always pinned to this bar, and the bar is called the <code>Dock</code>.</li>
+<li>You can control which icons are pinned by right-clicking on any icon and then choosing either <code>Add to Favorites</code> or <code>Remove from Favorites</code>.</li>
+<li>You can also re-arrange icons by left-clicking and dragging the icons.</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org4bf44e7" class="outline-3">
+<h3 id="org4bf44e7">Terminal Settings</h3>
+<div class="outline-text-3" id="text-org4bf44e7">
+<ul class="org-ul">
+<li>You can add transparency and change terminal colors in the preferences.</li>
+<li>A common choice is to have the terminal transparent enough to read text behind it but opaque enough to easily see text in it.</li>
+<li>As with everything on <i>Linux</i> you have a choice. The default <code>gnome-terminal</code> is just one of many terminal emulators you can use.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgdf27de4" class="outline-3">
+<h3 id="orgdf27de4">System Settings</h3>
+<div class="outline-text-3" id="text-orgdf27de4">
+</div>
+<div id="outline-container-orge98f41c" class="outline-4">
+<h4 id="orge98f41c">GUI</h4>
+<div class="outline-text-4" id="text-orge98f41c">
+<ol class="org-ol">
+<li>Many settings are contained in the Settings menu.  I encourage you to explore them.</li>
+<li>You can also install some additional tools. None are necessary (you can always edit configuration files)
+<dl class="org-dl">
+<dt>gnome-tweak-tool</dt><dd>A GUI that provides several extra configuration options.</dd>
+<dt>gnome-extensions</dt><dd>This package bundles several useful gnome extensions.  Find out more at <a href="https://extensions.gnome.org/">easily-developed extensions</a>.</dd>
+<dt>dconf-editor</dt><dd>Enables advanced editing of many settings.</dd>
+</dl></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgc70dd90" class="outline-4">
+<h4 id="orgc70dd90">Terminal</h4>
+<div class="outline-text-4" id="text-orgc70dd90">
+<ul class="org-ul">
+<li>The <code>gsettings</code> command provides access to all settings via the command line.</li>
+<li>Settings are grouped into <code>schemas</code>, and individual options are stored as keys under a schema</li>
+<li>Use <code>gsettings list-recursively</code> to see all schemas and keys. The key is separated from the schema name by a space character
+<ul class="org-ul">
+<li>Use <code>gsettings list-recursively | grep &lt;something&gt;</code> to search for <code>&lt;something&gt;</code></li>
+</ul></li>
+<li>You can get the value of a key with <code>gsettings get &lt;schema&gt; &lt;key&gt;</code></li>
+<li>You can set the value of a key with <code>gsettings set &lt;schema&gt; &lt;key&gt; &lt;value&gt;</code></li>
+<li>For example, to undo "natural scrolling" on the touchpad use <code>gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll false</code></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc769bf7" class="outline-3">
+<h3 id="orgc769bf7">Keyboard shortcuts</h3>
+<div class="outline-text-3" id="text-orgc769bf7">
+<ul class="org-ul">
+<li>GNOME (the default desktop environment) has several keyboard shortcuts.</li>
+<li>See them and change them in the <code>Devices-&gt;Keyboard</code> under <code>System Settings</code></li>
+<li>Learning these shortcuts can save you time in the long run.</li>
+<li>There are also other desktop environments available. With some work, the look and feel of the desktop can be made to mimic Windows, MacOS, or be completely custom.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgc96ef6b" class="outline-3">
+<h3 id="orgc96ef6b">Disable Graphical Boot</h3>
+<div class="outline-text-3" id="text-orgc96ef6b">
+<p>
+Why would you want to disable the graphical boot?
+</p>
+<ul class="org-ul">
+<li>It can be a good debugging tool if there is something going wrong with your graphics/logging in.</li>
+<li>Simplifies what is running on your system.</li>
+<li>But, it doesn't look as good and requires some setup to get right.</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span class="org-comment-delimiter"># </span><span class="org-comment">Disable Graphical login by default</span>
+sudo systemctl set-default multi-user
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Make it as if you booted into graphical mode</span>
+sudo systemctl isolate graphical
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Enable Graphical login by default</span>
+sudo systemctl set-default graphical
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Switch to a mode as if you booted without graphics</span>
+sudo systemctl isolate multi-user
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb07050f" class="outline-2">
+<h2 id="orgb07050f">Ooops!</h2>
+<div class="outline-text-2" id="text-orgb07050f">
+<p>
+If something really bad happens to your computer, fear not!
+</p>
+<ol class="org-ol">
+<li>You've been backing up your data (right? right!)</li>
+<li>You can restore system by re-installing Ubuntu and going through this computer setup process again.
+<ul class="org-ul">
+<li>Then restore your files from backup.</li>
+</ul></li>
+<li>I also have a <a href="https://clonezilla.org">Clonezilla</a> disk image with a copy of the disk as the computer was shipped and can restore it to the factory state.</li>
+<li>After restoring the system, restore your data from the backup.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org889459c" class="outline-2">
+<h2 id="org889459c">Northwestern IT</h2>
+<div class="outline-text-2" id="text-org889459c">
+<p>
+This section provides Linux-specific information for systems maintained by the IT department.
+</p>
+</div>
+<div id="outline-container-org650b5fb" class="outline-3">
+<h3 id="org650b5fb">Northwestern VPN</h3>
+<div class="outline-text-3" id="text-org650b5fb">
+<ul class="org-ul">
+<li>The main reason for using the VPN is to access papers from sources such as IEEE and our internal servers while away from campus.</li>
+</ul>
+</div>
+<div id="outline-container-org56e0ffd" class="outline-4">
+<h4 id="org56e0ffd">gp-saml-gui</h4>
+<div class="outline-text-4" id="text-org56e0ffd">
+<ul class="org-ul">
+<li>This method has the easiest installation because it is distributed by Ubuntu.</li>
+<li>It is also potentially less reliable because I do not know if the setup I describe will always work or if it
+is time or netID dependent (since it involves directly connecting to a server that was not mentioned by NUIT).</li>
+
+<li>Install the vpn client <code>sudo apt install gp-saml-gui</code></li>
+<li>Connect to the vpn <code>gp-saml-gui -vg -S vpn-connect2.northwestern.edu</code>.</li>
+<li>If the above does not work, try to find the server using <code>gp-saml-gui -v -S vpn-connect.northwestern.edu</code>
+<ul class="org-ul">
+<li><code>vpn-connect.northwestern.edu</code> is the official connection point provided by NUIT.</li>
+<li>When your login it told me to connect to the gateway at <code>vpn-connect2.northwestern.edu</code>, it might tell you something different.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org59e7d50" class="outline-4">
+<h4 id="org59e7d50">GlobalProtect-openconnect</h4>
+<div class="outline-text-4" id="text-org59e7d50">
+<ul class="org-ul">
+<li>This client works, but is currently a pain to install due to dependency issues, so I am not currently recommending it.</li>
+<li>To connect to Northwestern's VPN we use the free but unofficial program <a href="https://github.com/yuezk/GlobalProtect-openconnect">GlobalProtect-openconnect</a>.</li>
+<li><p>
+Here are the installation instructions:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">sudo add-apt-repository ppa:yuezk/globalprotect-openconnect
+sudo apt install globalprotect-openconnect
+</pre>
+</div></li>
+<li>Run <code>gpclient</code> then use <code>vpn-connect.northwestern.edu</code> as the address.</li>
+<li>Enter your netId and password in the window that pops up.</li>
+<li>You will need Duo Authentication.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org43c89d4" class="outline-4">
+<h4 id="org43c89d4">Official Instructions</h4>
+<div class="outline-text-4" id="text-org43c89d4">
+<p>
+If you want to try your luck with the official proprietary client see these <a href="https://www.it.northwestern.edu/oncampus/vpn/">instructions</a>.
+</p>
+<ul class="org-ul">
+<li>I have gotten the client to connect to VPN successfully; however, it is buggy.  I have not successfully
+disconnected without manually killing the processes involved. By default, it also tries to connect to VPN every-time you login.</li>
+<li>It supports only older versions of Ubuntu.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8cc9ecc" class="outline-3">
+<h3 id="org8cc9ecc">Printer</h3>
+<div class="outline-text-3" id="text-org8cc9ecc">
+</div>
+<div id="outline-container-org265b0af" class="outline-4">
+<h4 id="org265b0af">ME Office Printer</h4>
+<div class="outline-text-4" id="text-org265b0af">
+<p>
+These are instructions for using the printer in the Mechanical Engineering office and only work while on campus.
+You will need a printer code (referred to as <code>&lt;USERCODE&gt;</code>).
+</p>
+<ul class="org-ul">
+<li>Information on obtaining a printer code is available on canvas under "Resources/Printers".</li>
+
+<li><p>
+Disable printer discovery to avoid seeing extraneous printers
+</p>
+<pre class="example">
+sudo systemctl disable --now cups-browsed
+</pre></li>
+
+<li><p>
+Setup the printer to use your <code>&lt;USERCODE&gt;</code>
+</p>
+<pre class="example">
+sudo lpadmin -p ME_Office -v "ipp://129.105.102.18/ipp" -m \
+"openprinting-ppds:0/ppd/openprinting/Ricoh/PDF/Ricoh-MP_C6004ex_PDF.ppd" \
+-o UserCode=Custom.&lt;USERCODE&gt;
+</pre>
+<p>
+Replace <code>&lt;USERCODE&gt;</code> with your user code. (i.e., if your code is 1234, use Custom.1234)
+</p></li>
+<li><p>
+Enable the printer
+</p>
+<pre class="example">
+sudo cupsenable ME_Office
+sudo cupsaccept ME_Office
+</pre></li>
+<li>The printer to print to is called <code>ME_Office</code>.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org90e812f" class="outline-4">
+<h4 id="org90e812f">CRB Printer</h4>
+<div class="outline-text-4" id="text-org90e812f">
+<ol class="org-ol">
+<li><p>
+Setup the printer:
+</p>
+<pre class="example">
+sudo lpadmin -p CRB_Lab -v "hp:/net/HP_LaserJet_P4015?ip=129.105.69.122" -m \
+"hplip:0/ppd/hplip/HP/hp-laserjet_p4015x.ppd"
+</pre></li>
+<li><p>
+Enable the printer
+</p>
+<pre class="example">
+sudo cupsenable CRB_Lab
+sudo cupsaccept CRB_Lab
+</pre></li>
+<li>The printer to print to is called <code>CRB_Lab</code>.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org78ca607" class="outline-2">
+<h2 id="org78ca607">Non-Free Applications</h2>
+<div class="outline-text-2" id="text-org78ca607">
+<p>
+Free software tends to work much better on Linux than proprietary software (and when something goes wrong you can fix it!)
+However there are some applications that, (partially due to network effects), it is desirable or necessary to use.
+There are free alternatives to all of these but I have not tried any.
+</p>
+</div>
+
+<div id="outline-container-orga7045c3" class="outline-3">
+<h3 id="orga7045c3">Zoom</h3>
+<div class="outline-text-3" id="text-orga7045c3">
+<ol class="org-ol">
+<li>Zoom can be used from a web-browser.
+<ul class="org-ul">
+<li>Go to any zoom linke</li>
+<li>When Zoom doesn't launch there is a tiny link below to join via  a web browser.</li>
+</ul></li>
+<li>Zoom does make a Desktop client that can be installed on Ubuntu.</li>
+<li><code>wget -O /tmp/zoom.deb "https://zoom.us/client/latest/zoom_amd64.deb"</code></li>
+<li><code>sudo apt install /tmp/zoom.deb</code></li>
+<li>When you run zoom for the first time, sign in with SSO, using <code>northwestern</code> as the
+domain.</li>
+<li>You should then be prompted to enter your netId and password</li>
+<li>I recommend installing Zoom on your phone as a backup</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org2274a37" class="outline-3">
+<h3 id="org2274a37">Slack</h3>
+<div class="outline-text-3" id="text-org2274a37">
+<ol class="org-ol">
+<li>Slack has a web interface</li>
+<li>The Slack download page promotes the snap but there is also a package and installed:</li>
+<li><code>wget -0 /tmp/slack.deb https://downloads.slack-edge.com/desktop-releases/linux/x64/4.39.88/slack-desktop-4.39.88-amd64.deb</code></li>
+<li><code>sudo apt install /tmp/slack.deb</code></li>
+<li>For proprietary software there is an advantage to Snaps over <code>.deb</code> files: the program is more isolated from the rest of the computer.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orga511bb4" class="outline-3">
+<h3 id="orga511bb4">Discord</h3>
+<div class="outline-text-3" id="text-orga511bb4">
+<ol class="org-ol">
+<li>Discord has a web interface, but it can also be downloaded as a package and installed:</li>
+<li><code>wget -o /tmp/discord.deb https://dl.discordapp.net/apps/linux/0.0.60/discord-0.0.60.deb</code></li>
+<li><code>sudo apt install /tmp/discord.deb</code></li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org9040011" class="outline-2">
+<h2 id="org9040011">Software Management</h2>
+<div class="outline-text-2" id="text-org9040011">
+<p>
+As you dive into robotics research and development, you will find yourself needing to install software, which is distributed in different ways (some better than others).
+This situation can get complicated, especially as you venture into lesser used scientific code (e.g., released by researchers as part of a publication).
+Here I outline methods of handling this complexity while maintaining your system in a functional state.
+</p>
+</div>
+
+
+<div id="outline-container-orgccd26fa" class="outline-3">
+<h3 id="orgccd26fa">Apt</h3>
+<div class="outline-text-3" id="text-orgccd26fa">
+<p>
+Ubuntu Linux comes with a strongly preferred method of managing packages: <code>apt</code>.<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>
+</p>
+</div>
+
+<div id="outline-container-org2c15b5a" class="outline-4">
+<h4 id="org2c15b5a">Why Apt?</h4>
+<div class="outline-text-4" id="text-org2c15b5a">
+<p>
+Most computer applications that you use are built using libraries: collections of code that is generally useful across applications.  Rather
+than duplicating this code every time it is needing (wasting both hard drive space and RAM), Ubuntu distributes one copy of each library which any
+application (or even another) library can use.
+</p>
+
+<p>
+These dependencies create a problem: if a program (e.g., Inkscape) depends on library (e.g., libcairo) and these are made by completely different organizations,
+then a user who wants to use the program would have to install both the program and the library separately (e.g., go to the Inkscape website, download and install,
+read that it requires libcairo, then go download and install libcairo). It is not unusual for large programs to have hundreds of dependencies, so this process would
+become tiresome quickly. Then factor program and library versions and the situation becomes even more untenable.
+</p>
+
+<p>
+Apt solves this dependency problem in two ways:
+</p>
+<ol class="org-ol">
+<li>Providing a central repository of software (and it is quite extensive, search it at <a href="https://packages.ubuntu.com">https://packages.ubuntu.com</a>).
+<ul class="org-ul">
+<li>The versions of the software in the repository are designed to work together.</li>
+</ul></li>
+<li>Tracking dependencies between programs and libraries.
+<ul class="org-ul">
+<li>For example, when installing a <code>inkscape</code> its dependencies will automatically be installed if not already present.</li>
+<li>If you then try to uninstall a dependency of <code>inkscape</code> you will be unable to unless you also agree to uninstall <code>inkscape</code> and any other dependent programs.</li>
+</ul></li>
+</ol>
+
+<p>
+By staying within the <code>apt</code> ecosystem using only official Ubuntu repositories you get well-tested software that is easy to install, update, and uninstall.
+How I wish I could end the story there!
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga95ec6a" class="outline-4">
+<h4 id="orga95ec6a">Why not Apt?</h4>
+<div class="outline-text-4" id="text-orga95ec6a">
+<p>
+Unfortunately, people (especially in robotics) often need packages that are not distributed by Ubuntu, for a few reasons:
+</p>
+
+<ol class="org-ol">
+<li>Not everybody who creates software decides to put in the effort to create an Ubuntu package for it.
+<ul class="org-ul">
+<li>For key software Ubuntu may maintain its own packages but for others they won't.</li>
+</ul></li>
+<li>A project you are trying to compile might need a different version of a library than is offered by Ubuntu.
+<ul class="org-ul">
+<li>Ubuntu introduces new software versions on a <a href="https://ubuntu.com/about/release-cycle">fixed release schedule</a> (typically every 6 months).</li>
+<li>Every two years Ubuntu issues an LTS version, which are the only version ROS officially supports.</li>
+<li>Thus, at the end of the release cycle, software in Ubuntu LTS is almost two years old!</li>
+</ul></li>
+<li>The software is proprietary and only packaged by the vendor.
+<ul class="org-ul">
+<li>We try to avoid this software but sometimes the sacrifice required too great.</li>
+</ul></li>
+</ol>
+
+<p>
+In these cases alternative installation methods are required.
+One of your main goals when obtaining this software should be to minimize the effect such software has on the apt-managed part of the system.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org410f855" class="outline-4">
+<h4 id="org410f855">Alternative Repositories</h4>
+<div class="outline-text-4" id="text-org410f855">
+<p>
+Ubuntu enables <code>apt</code> to download packages from servers other than the officially provide ones, enabling third parties to distribute software through apt.
+Ubuntu also has it's own service, called Personal Package Archives (PPAs), which hosts custom third-party packages for downloading by apt.
+You have already used some non-Ubuntu repositories: for example ROS provides its own repositories.
+</p>
+
+<p>
+If available, using an alternative <code>apt</code> repository enables you to maintain many of the advantages of <code>apt</code>, such as tracking dependencies and an easy uninstall method,
+while expanding the packages that are available. The disadvantage is that the packages in these repositories are not tested by the Ubuntu team, which can
+cause some installed programs to break. If the alternative repository, rather than just providing additional packages, provides
+an alternative version of a standard Ubuntu package the consequences can be widespread. 
+</p>
+
+<p>
+Fortunately, the goal of people who maintain alternative Ubuntu repositories is for their software
+to work on Ubuntu, so usually these alternative repositories do not cause issues. However, prior to adding such a repository you
+should
+</p>
+<ol class="org-ol">
+<li>Trust the authors (by installing their package you are essentially allowing them to run code as <code>root</code> on your computer).</li>
+<li>Ensure that you understand what is being installed and potential sources of conflict.</li>
+<li>Through <a href="https://help.ubuntu.com/community/PinningHowto">Pinning</a>, you can control the repositories that get priority for each package.</li>
+</ol>
+</div>
+
+<ul class="org-ul">
+<li><a id="org72ac05d"></a>Example Alternative Repositories<br>
+<div class="outline-text-5" id="text-org72ac05d">
+<ol class="org-ol">
+<li>The ROS repository.</li>
+<li>The <a href="https://launchpad.net/~numsr">Northwestern MSR repository</a></li>
+<li>The System76 PPA.</li>
+<li>The Intel librealsense repository.</li>
+<li>The VSCode repository (if using VSCode).</li>
+<li>The mozillateam repository (for firefox).</li>
+<li>The NVIDIA repository (if CUDA access outside of pytorch is needed).</li>
+<li>The Lambda Labs repository (on our GPU servers, not our laptops).</li>
+<li>The <a href="https://launchpad.net/~ubuntu-toolchain-r/+archive/ubuntu/test">toolchain</a> repository (to get latest compiler versions, if needed).</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+
+<div id="outline-container-org6ee3401" class="outline-4">
+<h4 id="org6ee3401">Standalone packages</h4>
+<div class="outline-text-4" id="text-org6ee3401">
+<p>
+Packages can also be distributed as standalone <code>.deb</code> packages and installed with <code>apt</code>.
+These packages can not generally be updated automatically via <code>apt upgrade</code>.
+However, some standalone <code>.deb</code> packages (such as the one for VSCode) actually function by adding an alternative repository to your system, which enables future updates.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org9f642dd" class="outline-3">
+<h3 id="org9f642dd">Sandboxed Applications</h3>
+<div class="outline-text-3" id="text-org9f642dd">
+<p>
+Flatpack, AppImage, and snap are three competing standards for "sandboxed applications".  These systems essentially include the program and all of its
+dependencies in a single directory and isolate themselves from the rest of the system. These systems enable the original application creator to
+have more control over the full software environment that a program runs in.
+</p>
+
+<ol class="org-ol">
+<li>These technologies allow a developer to package their program once for all Linux distributions, as opposed to making different packages for different distributions.</li>
+<li>Shipping all the dependencies ultimately uses more RAM, more disk space, and arguably makes security more difficult:
+<ul class="org-ul">
+<li>For example, if <code>openssl</code> has a vulnerability and Ubuntu fixes it is fixed for all applications that use <code>openssl</code>.</li>
+<li>On the other hand, because each Flatpack ships its own dependencies, each vendor needs to update it separately.</li>
+</ul></li>
+</ol>
+
+<p>
+A few alternatives are <a href="https://appimage.github.io/AppImage">AppImage</a>,  <a href="https://flatpak.org/">Flatpak</a>, and <a href="https://ubuntu.com/core/services/guide/snaps-intro">Snaps</a>.
+</p>
+<ul class="org-ul">
+<li>The Ubuntu Linux we installed was modified from the original version to remove Snaps.</li>
+</ul>
+</div>
+<div id="outline-container-orged37ebb" class="outline-4">
+<h4 id="orged37ebb">Docker</h4>
+<div class="outline-text-4" id="text-orged37ebb">
+<p>
+Docker is containerization software that enables deploying a full Linux environment that is separate from the main system.
+For example, it can enable you to run Ubuntu 18.04 applications within Ubuntu 22.04. Discussing docker in detail is out-of-scope here,
+but from our perspective it provides a method for trying out a project while keeping it entirely separate from your system.
+</p>
+
+<p>
+Overall, docker is less ergonomic for programs that you use every day on your system than some of these other methods, but it is a useful tool
+for deploying software to servers (or robots) and maintaining completely separate computing environments.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd3ca6f2" class="outline-3">
+<h3 id="orgd3ca6f2">Language-specific Package Managers</h3>
+<div class="outline-text-3" id="text-orgd3ca6f2">
+<p>
+Many programming languages have their own package managers (e.g., <code>pip</code>, <code>cargo</code>) designed for distributing software and libraries written in that language.
+These package managers often offer the same software that is available via <code>apt</code> but typically in a newer version.
+</p>
+</div>
+
+<div id="outline-container-org7fc1501" class="outline-4">
+<h4 id="org7fc1501">Python</h4>
+<div class="outline-text-4" id="text-org7fc1501">
+<p>
+Python package management will come up a lot in this course. Furthermore doing things like trying to uninstall python
+or install another python version can cause great damage to the your system.
+</p>
+
+<ol class="org-ol">
+<li>Prefer python packages installed via <code>apt</code> over all other python packages.
+<ul class="org-ul">
+<li>ROS is designed to work with the versions of the python packages in <code>apt</code>.</li>
+</ul></li>
+<li>If what you are doing is unrelated to ROS, use a virtual environment.</li>
+<li>If you want your packages easily available in ROS use <code>pip3</code>.
+<ul class="org-ul">
+<li>Cross your fingers that a dependency does not override a system dependency with a version that is incompatible.</li>
+<li>With some work it is possible to use a <code>venv</code> with ROS.</li>
+</ul></li>
+<li>NEVER install packages via <code>anaconda</code> or <code>miniconda</code>, no matter what you hear, read, or see from another source. DO NOT DO IT!</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8fbf6f5" class="outline-3">
+<h3 id="org8fbf6f5">Build From Source</h3>
+<div class="outline-text-3" id="text-org8fbf6f5">
+<p>
+Most programs and libraries that we use are open source. This means we can modify and build them to suit our needs.
+</p>
+<ul class="org-ul">
+<li>It is possible, for example, to compile an old version of OpenCV and use it with a specific package that requires an older version</li>
+</ul>
+</div>
+
+<div id="outline-container-org747021e" class="outline-4">
+<h4 id="org747021e">Colcon Workspace</h4>
+<div class="outline-text-4" id="text-org747021e">
+<ul class="org-ul">
+<li>Colcon is the build tool for ROS 2, but it can compile a variety of ROS and non-ROS packages.</li>
+<li>Many ROS packages are written in C++ which has no official package manager. There are some attempts (like vcpkg or conan) but they are far from standard or ubiquitous.</li>
+<li>Sometimes a ROS 2 package will only be released for an older ROS 2 version. Often it is possible to compile the package for a later version with minimal modification.</li>
+<li>For most packages, you can clone the package into a <code>src</code> directory and run <code>colcon build</code>. When you source that workspace everything you built in it will be available.</li>
+<li>You will need to retrieve dependencies with <code>rosdep</code>, manually install them via <code>apt</code>, or clone them into <code>src/</code></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org9a7eec9" class="outline-4">
+<h4 id="org9a7eec9">Compile By Hand</h4>
+<div class="outline-text-4" id="text-org9a7eec9">
+<p>
+Compiling "by hand" means following the instructions provided in the source code for compiling that particular project (or figuring out what to do from reading if there
+are no instructions). The main difficulty is obtaining all the dependencies.  Once the dependencies are installed the main program can be installed.
+</p>
+
+<p>
+If you install as <code>root</code> the files will be installed under the <code>/usr/local</code> prefix (usually). While this arrangement keeps the files separate from files managed by apt,
+it may be difficult to uninstall because the files are not usually tracked.
+</p>
+
+<p>
+An alternative pattern is to do the following
+</p>
+<ol class="org-ol">
+<li>Create a <code>prefix</code> directory. This directory mimics the structure under <code>/usr</code> but is typically placed in a user-accessible directory (e.g., <code>/home/&lt;user&gt;/prefix</code>).</li>
+<li>Compile each depency while specifying <code>/home/&lt;user&gt;/prefix</code> as the install prefix and the place where the program should be installed
+<ul class="org-ul">
+<li>How to change the install prefix depends on build system and how that was implemented</li>
+<li>For cmake, specify <code>-DCMAKE_INSTALL_PREFIX=/home/user/prefix</code>  and <code>-DCMAKE_PREFIX_PATH=/home/user/prefix</code> when generating the build system.</li>
+</ul></li>
+<li>Afterwards you can find the execuatables in <code>/home/&lt;user&gt;/prefix/bin</code> (and add them to your path if you would like).</li>
+<li>The advantage of this method is you can install without <code>root</code> and can delete the whole <code>prefix</code> directory to uninstall.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org9b747ef" class="outline-4">
+<h4 id="org9b747ef">Modifying Source Code</h4>
+<div class="outline-text-4" id="text-org9b747ef">
+<p>
+If you need to modify source code, for the long run here is the procedure (assuming the project uses git):
+</p>
+<ol class="org-ol">
+<li>Clone the repository</li>
+<li>Create your own branch</li>
+<li>Make your modifications</li>
+<li>Push to  a repository under your control (e.g., on <code>github</code> this will be a fork).</li>
+<li>You may want to contribute your changes to the project.</li>
+<li>You can now depend on your fork of the project and use whatever changes you made.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org9a9787b" class="outline-4">
+<h4 id="org9a9787b">Building Custom Packages</h4>
+<div class="outline-text-4" id="text-org9a9787b">
+<p>
+If you can compile the code you can also package it as a Debian package and install it, enabling it to be managed by <code>apt</code>.
+</p>
+<ul class="org-ul">
+<li>The ROS packaging tool <a href="https://bloom.readthedocs.io/en/0.5.10/">bloom</a> can be used (<code>bloom generate rosdebian</code>).</li>
+<li>The <a href="https://wiki.debian.org/Packaging">Debian packaging guide</a> provides information on how to create Debian packages.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3dcc914" class="outline-2">
+<h2 id="org3dcc914">Ubuntu Cleanup</h2>
+<div class="outline-text-2" id="text-org3dcc914">
+<p>
+After a regular Ubuntu 24.04 LTS install there would be some steps remaining to undo some annoying choices that Canonical has made for Ubuntu.
+However, the <a href="./ubuntu_minimal.html">customized install</a> that we used already cleared these items out of the base Ubuntu system.
+I outline the post-install cleanup steps here, although  they are no longer needed, if the customized install was used.
+</p>
+
+<ol class="org-ol">
+<li>Preventing automatic updates: they pop-up frequently and we need full control of when we update the computer:
+<ul class="org-ul">
+<li>In our case, the risk of a "security breach" is much lower in our case then the risk of breaking our projects</li>
+<li>I have also disabled phased updates, ensuring we all get the same updates after they have been tested.</li>
+</ul></li>
+
+<li>Removing snaps, a controversial feature of Ubuntu.
+<ul class="org-ul">
+<li>Removing them results in better performance and more control (since they update automatically).</li>
+<li>Other Linux distributions do not use snaps, so learning them is Ubuntu-specific.</li>
+<li>With each update to Ubuntu snaps become more integrated and harder to remove.</li>
+</ul></li>
+
+<li>Installing a Web-browser: Ubuntu no longer packages a mainstream webbrowser, unless you use snaps.
+<ul class="org-ul">
+<li>This installation has a snap-free firefox installed.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">Canonical is currently advocating for snaps but most software is still apt.</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

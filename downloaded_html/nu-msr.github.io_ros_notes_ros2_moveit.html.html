@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-10-29 Tue 11:30 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MoveIt 2 Introduction</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">MoveIt 2 Introduction</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org000a2d1">Overview</a></li>
+<li><a href="#org94c87e3">Getting Started</a></li>
+<li><a href="#org3ffc872">Main Components</a></li>
+<li><a href="#org5b07c6a">Configuration</a>
+<ul>
+<li><a href="#org0368679">Semantic Robot Description Format</a></li>
+</ul>
+</li>
+<li><a href="#org886d4d2">Interfacing with the Robot</a></li>
+<li><a href="#orge7b18e1">Kinematics</a>
+<ul>
+<li><a href="#org72af962">Kinematics and Dynamics Library</a></li>
+<li><a href="#orgdf5a0c3">IKFast</a></li>
+<li><a href="#orgf0f3725">Trac_IK</a></li>
+<li><a href="#orgc88b5fb">Custom</a></li>
+</ul>
+</li>
+<li><a href="#orgfd1a555">Motion Planning</a>
+<ul>
+<li><a href="#org8bfb7e5">Plan Requests and Results</a></li>
+<li><a href="#orgab8906b">Pre and Post Processing</a>
+<ul>
+<li><a href="#org35d1d71">ROS 2</a></li>
+<li><a href="#org88ed79c">ROS 1</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org5a2b545">Collision Detection</a></li>
+<li><a href="#org22607e5">Key Configuration Files</a>
+<ul>
+<li><a href="#org4b54f47">Location</a></li>
+<li><a href="#org32fd54a">Files</a></li>
+</ul>
+</li>
+<li><a href="#org7c8cd93">Learning MoveIt</a></li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-org000a2d1" class="outline-2">
+<h2 id="org000a2d1">Overview</h2>
+<div class="outline-text-2" id="text-org000a2d1">
+<p>
+<a href="https://moveit.picknik.ai/">MoveIt 2</a> is ROS's motion planning and manipulation library.
+It integrates state-of-the-art inverse kinematics solvers, path planning algorithms, and collision detection
+into a single, unified ROS interface.
+</p>
+
+<p>
+This document provides a general overview and a practical guide, specifically targeted toward
+the projects done in the Embedded Systems in Robotics course at Northwestern University.
+</p>
+
+<p>
+MoveIt is a large package and there are several methods of interacting with it. We will primarily use the python MoveIt API,
+but it is also accessible from C++ and via ROS 2.
+</p>
+</div>
+</div>
+<div id="outline-container-org94c87e3" class="outline-2">
+<h2 id="org94c87e3">Getting Started</h2>
+<div class="outline-text-2" id="text-org94c87e3">
+<p>
+Install moveit: <code>sudo apt install ros-iron-moveit</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3ffc872" class="outline-2">
+<h2 id="org3ffc872">Main Components</h2>
+<div class="outline-text-2" id="text-org3ffc872">
+<ul class="org-ul">
+<li><code>move_group</code> node.
+<ul class="org-ul">
+<li>The main node used by MoveIt</li>
+<li>Reads all of the configuration files</li>
+<li>Coordinates all the pieces of the motion-planning pipeline</li>
+<li>You can control moveit using this node's ROS API</li>
+<li><a href="https://moveit.picknik.ai/main/doc/concepts/move_group.html">Documentation for move_group Node</a></li>
+</ul></li>
+<li><a href="https://moveit.picknik.ai/main/api/html/classmoveit_1_1planning__interface_1_1MoveGroupInterface.html">move_group_interface</a> is a C++ library that makes interacting with the move_group node easier.
+<ul class="org-ul">
+<li>It is analogous to how Broadcasters and Listeners make interfacing with the <code>/tf</code> topic easier even though you could publish/subscribe directly.</li>
+<li>In ROS 1 there were python bindings to this library but they do not yet exist in ROS 2</li>
+</ul></li>
+
+<li><a href="https://moveit.picknik.ai/main/doc/examples/examples.html#using-moveit-directly-through-the-c-api">MoveItCpp</a> is C++ API for MoveIt. Rather than communicating with a separate <code>move_group</code> node, it essentially makes the node you are using
+into the <code>move_group</code> node.
+<ul class="org-ul">
+<li>One advantage is that there can be less overhead related to sending messages back and forth between your node and the move_group node.</li>
+<li>One disadvantage is that it is more complicated and requires configuring the node properly with the numerous MoveIt options</li>
+</ul></li>
+<li><a href="https://moveit.picknik.ai/main/doc/examples/examples.html#using-moveit-directly-through-the-python-api">moveit_py</a> Python Library: A python library (wrapping the MoveItCpp library) is officially released as a part of <code>moveit</code>
+<ul class="org-ul">
+<li>It does not currently have all the functionality we require</li>
+<li>We are using the moveit fork where this is being developed (in the <code>nuws</code>. It might be ready by the end of October</li>
+</ul></li>
+<li><code>rviz plugin</code> MoveIt has special plugins for <code>rviz</code> to interactively perform motion planning.
+<ul class="org-ul">
+<li>Mostly useful for debugging as in your programs you will likely be initiating motion planning from code.</li>
+<li>When you install moveit,  there will be special MoveIt display types that you can add to <code>rviz</code></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5b07c6a" class="outline-2">
+<h2 id="org5b07c6a">Configuration</h2>
+<div class="outline-text-2" id="text-org5b07c6a">
+<ul class="org-ul">
+<li>While the specifics may differ, the concepts between MoveIt and MoveIt 2 are similar so there is still useful information to be gleaned from the MoveIt! documentation</li>
+</ul>
+</div>
+<div id="outline-container-org0368679" class="outline-3">
+<h3 id="org0368679">Semantic Robot Description Format</h3>
+<div class="outline-text-3" id="text-org0368679">
+<ul class="org-ul">
+<li>An <a href="https://wiki.ros.org/srdf">srdf</a> describes information about your robot to help with motion planning</li>
+<li>Accompanies the <code>urdf</code> and describes additional information about the joints and links</li>
+<li>For example, can tell MoveIt which joints to move as a single group,
+where the end-effector is, which joints can ignore collision detection</li>
+<li>The <code>move_group</code> node needs both a <code>urdf</code> and an <code>srdf</code> to work
+<ul class="org-ul">
+<li>the <code>urdf</code> is in the <code>robot_description</code> parameter</li>
+<li>the <code>srdf</code> is in the <code>robot_description_semantic</code> parameter</li>
+</ul></li>
+<li>Both <code>urdf</code> and <code>srdf</code> files are usually written with <code>xacro</code></li>
+<li>The <a href="https://ros-planning.github.io/moveit_tutorials/doc/setup_assistant/setup_assistant_tutorial.html">MoveIt Setup Assistant</a>
+can be used to create an SRDF</li>
+<li>The Baxter and Sawyer and Interbotix moveit packages already come with <code>srdf</code> files
+<ul class="org-ul">
+<li>You may need to pass the proper parameters or even edit these files for your project</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org886d4d2" class="outline-2">
+<h2 id="org886d4d2">Interfacing with the Robot</h2>
+<div class="outline-text-2" id="text-org886d4d2">
+<ul class="org-ul">
+<li>Joint states should be published on the <code>/joint_states</code> topic</li>
+<li>A <code>robot_state_publisher</code> should be publishing transforms for the robot.</li>
+<li>The <code>/execute_trajectory</code> action (of type <code>moveit_msgs/action/ExecuteTrajectory</code>)
+tells moveit to execute the trajectory</li>
+<li>MoveIt executes a trajectory by interacting with low-level controllers (typically provided via the <a href="https://control.ros.org/master/index.html">ros2_control</a> package).
+<ul class="org-ul">
+<li>A <a href="http://docs.ros.org/api/control_msgs/html/action/FollowJointTrajectory.html">control_msgs/FollowJointTrajectory</a> <a href="http://wiki.ros.org/actionlib">action server</a> is used to enable the robot to follow the trajectory</li>
+<li>Low-level controllers are used to turn the trajectory into actual movements</li>
+<li>Most robots that support moveit provide the low-level controllers and the action server for you.</li>
+<li>Depending on the requirements, integrating an existing controller into the robot requires C++.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge7b18e1" class="outline-2">
+<h2 id="orge7b18e1">Kinematics</h2>
+<div class="outline-text-2" id="text-orge7b18e1">
+<ul class="org-ul">
+<li>MoveIt can perform forward and inverse kinematics, as well as computing Jacobians</li>
+<li>It actually relies on external libraries and plugins to perform these calculations,
+hence it is highly flexible</li>
+<li>The <code>move_group</code> node provides the <code>/compute_ik</code> and the <code>compute_fk</code> services
+<ul class="org-ul">
+<li>Note that the current state of the robot is always known via the <code>/joint_states</code> topic
+and the <code>tf</code> location of the end-effector</li>
+</ul></li>
+</ul>
+</div>
+<div id="outline-container-org72af962" class="outline-3">
+<h3 id="org72af962">Kinematics and Dynamics Library</h3>
+<div class="outline-text-3" id="text-org72af962">
+<ul class="org-ul">
+<li><a href="http://www.orocos.org/kdl">The Kinematics and Dynamics Library</a> (KDL) from the Orocos project
+<ul class="org-ul">
+<li><a href="http://wiki.ros.org/kdl_parser">kdl_parser</a> converts <code>urdf</code> into KDL "chains" which
+are used by KDL to perform kinematics calculations</li>
+<li>KDL is the default kinematics solver in MoveIT</li>
+<li>KDL is relatively easy to configure and widely applicable</li>
+<li>KDL solves inverse kinematics numerically, which is often not the best way
+<ul class="org-ul">
+<li>Slow</li>
+<li>Numerical issues</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgdf5a0c3" class="outline-3">
+<h3 id="orgdf5a0c3">IKFast</h3>
+<div class="outline-text-3" id="text-orgdf5a0c3">
+<p>
+<a href="http://www.orocos.org/kdl">IKFast</a> (part of OpenRAVE) creates <code>C++</code> header files that contain functions
+ for solving the inverse kinematics analytically.
+</p>
+<ul class="org-ul">
+<li>MoveIT can wrap these generated header files and use them to solve IK.</li>
+<li><a href="https://ros-planning.github.io/moveit_tutorials/doc/ikfast/ikfast_tutorial.html">MoveIT tutorial for IKFast</a></li>
+<li>Produces good solutions quickly</li>
+<li>Difficult to setup, not applicable to all robots</li>
+<li><a href="http://www.programmingvision.com/rosen_diankov_thesis.pdf">The Theory behind IKFast</a></li>
+<li>Baxter and Sawyer have IKFast plugins. Not the easiest to setup but they do produce better results in many cases</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgf0f3725" class="outline-3">
+<h3 id="orgf0f3725">Trac_IK</h3>
+<div class="outline-text-3" id="text-orgf0f3725">
+<ul class="org-ul">
+<li><a href="http://wiki.ros.org/trac_ik">trac_ik</a> is a relatively new inverse kinematics solver
+<ul class="org-ul">
+<li><a href="http://docs.ros.org/melodic/api/moveit_tutorials/html/doc/trac_ik/trac_ik_tutorial.html?highlight=trac_ik">MoveIt documentation for trac_ik</a></li>
+<li>developed for DARPA Robotics Challenge</li>
+<li>Better performance than KDL and more reliable</li>
+<li>Designed as a drop-in replacement for KDL</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgc88b5fb" class="outline-3">
+<h3 id="orgc88b5fb">Custom</h3>
+<div class="outline-text-3" id="text-orgc88b5fb">
+<ul class="org-ul">
+<li>It is also possible to implement your own custom kinematics code</li>
+<li>Usually this code is from analytical derivations, often taking advantage of
+the specific geometry of your robot.</li>
+<li>Two examples are <a href="https://github.com/pr2/pr2_kinematics">pr2_kinematics</a> and <a href="https://github.com/svenschneider/youbot-manipulation/tree/hydro/youbot_arm_kinematics_moveit">kuka_youbot</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfd1a555" class="outline-2">
+<h2 id="orgfd1a555">Motion Planning</h2>
+<div class="outline-text-2" id="text-orgfd1a555">
+<p>
+<a href="http://ompl.kavrakilab.org/">The Open Motion Planning Library (OMPL)</a> implements many different
+motion planning algorithms.  The <code>move_group</code> node can use many of these motion planners by loading
+OMPL plugins, as specified by configuration files.
+</p>
+</div>
+
+<div id="outline-container-org8bfb7e5" class="outline-3">
+<h3 id="org8bfb7e5">Plan Requests and Results</h3>
+<div class="outline-text-3" id="text-org8bfb7e5">
+<p>
+To plan a motion, send a "plan request" to the <code>move_group</code> node.
+</p>
+<ul class="org-ul">
+<li>The service (<code>/plan_kinematic_path</code>) plans a general path and returns it as the response</li>
+<li>More commonly the action interface is used (<code>/move_action</code>)
+<ul class="org-ul">
+<li>The <code>move_action</code> allows specifying:
+<ol class="org-ol">
+<li>The start location (of a link, the joints, or the end-effector)</li>
+<li>The End Location (of a link, the joints, or end-effector)</li>
+<li>Kinematic constraints</li>
+</ol></li>
+</ul></li>
+<li>The results can be returned as a path or executed immediately</li>
+<li>Because this is an action, the planning/motion can be interrupted and paused</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgab8906b" class="outline-3">
+<h3 id="orgab8906b">Pre and Post Processing</h3>
+<div class="outline-text-3" id="text-orgab8906b">
+</div>
+<div id="outline-container-org35d1d71" class="outline-4">
+<h4 id="org35d1d71">ROS 2</h4>
+<div class="outline-text-4" id="text-org35d1d71">
+<ol class="org-ol">
+<li><a href="https://moveit.picknik.ai/main/doc/concepts/trajectory_processing.html">Post-processing</a> enables you to adjust the timing to the path, according to jint_lmits.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org88ed79c" class="outline-4">
+<h4 id="org88ed79c">ROS 1</h4>
+<div class="outline-text-4" id="text-org88ed79c">
+<ul class="org-ul">
+<li>Adapters are used to pre- and post-process the motion plans</li>
+<li>Adapters are implemented as plugins and there are many possibilities</li>
+<li>Pre-processor example:
+<ul class="org-ul">
+<li>If a joint is up against a limit (perhaps to zero it), it starts in a collision state</li>
+<li>The motion planners won't form a plan through a collision</li>
+<li><code>FixStartStateCollision</code> is a pre-processor that randomly moves your initial condition
+so you start at a nearby collision-free state</li>
+</ul></li>
+<li>Post Processor example:
+<ul class="org-ul">
+<li>Motion plans typically just provide joint angle sequences without timing information</li>
+<li><code>AddTimeParemeteriazation</code> will set the time to reach each joint waypoint, respecting
+velocity and acceleration constraints</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5a2b545" class="outline-2">
+<h2 id="org5a2b545">Collision Detection</h2>
+<div class="outline-text-2" id="text-org5a2b545">
+<ul class="org-ul">
+<li>In MoveIt, the workspace and any objects that are grasped are represented in a "Planning Scene"</li>
+<li>The <code>planning_scene_monitor</code> in the <code>move_group</code> node determines the ultimate state of the world</li>
+<li><code>/joint_states</code>, the collision elements of the <code>urdf</code> and the descriptions of self collisions in
+the <code>srdf</code> are used to avoid self collisions</li>
+<li>Users can manually add obstacles by publishing to <code>/planning_scene</code> or writing appropriate configuration files</li>
+<li>RGB-D cameras can be used with the "World Geometry Monitor" to dynamically add obstacles to the scene using octomaps</li>
+<li>Collision detection requires a lot of computation
+<ul class="org-ul">
+<li>Keep collision geometries simple</li>
+<li>Eliminate unnecessary collision checks in the SRDF</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org22607e5" class="outline-2">
+<h2 id="org22607e5">Key Configuration Files</h2>
+<div class="outline-text-2" id="text-org22607e5">
+</div>
+<div id="outline-container-org4b54f47" class="outline-3">
+<h3 id="org4b54f47">Location</h3>
+<div class="outline-text-3" id="text-org4b54f47">
+<ul class="org-ul">
+<li>Most projects have similar configuration files that are loaded, but the exact structure is project-dependent.</li>
+<li>Configuration comes with the robot, however, sometimes it makes sense to modify the default configuration to better meet your needs.</li>
+<li>Most configuration is done through ROS parameters associated with the node implementing the <code>move_group</code>.</li>
+<li>To change parameters there are a few options:
+<ol class="org-ol">
+<li>Forking the package and modifying the parameters (it is unfortunate that we need to resort to this but often it is the easiest and most reliable way)</li>
+<li></li>
+</ol></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org32fd54a" class="outline-3">
+<h3 id="org32fd54a">Files</h3>
+<div class="outline-text-3" id="text-org32fd54a">
+<ul class="org-ul">
+<li><code>robot_name.srdf.xacro</code> This is the <code>srdf</code> for the robot. Groups joints together,
+turns off collision detection, etc</li>
+<li><code>kinematics.yaml</code> determines which kinematics plugins to use and their settings</li>
+<li><code>ompl_planning.yaml</code> Settings for OMPL. Often you have to search through
+the source code to determine what a parameter does.
+<ul class="org-ul">
+<li>Looking at the code for the MoveIt Setup Assistant helps: <a href="https://github.com/ros-planning/moveit/blob/master/moveit_setup_assistant/src/tools/moveit_config_data.cpp">moveit_config_data.cpp</a></li>
+</ul></li>
+<li><code>joint_limits.yaml</code> Joint velocity and acceleration limits
+<ul class="org-ul">
+<li>The easiest (albeit hacky) way to slow your robot down is to temporarily edit this file</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7c8cd93" class="outline-2">
+<h2 id="org7c8cd93">Learning MoveIt</h2>
+<div class="outline-text-2" id="text-org7c8cd93">
+<ul class="org-ul">
+<li><a href="https://moveit.picknik.ai/main/doc/concepts/concepts.html">MoveIt Concepts</a> documentation explains various aspects of how MoveIt works</li>
+<li>The primary <a href="https://moveit.picknik.ai/main/index.html">MoveIt 2 documentation</a> has a few tutorials, but let's just say that they are currently quite immature.</li>
+<li>Along with the documentation, the <a href="./activity/moveit_activity.html">MoveIt Activity</a> is designed to get you up to speed with how <code>MoveIt</code> works</li>
+<li>The documentation for MoveIt is still evolving rapidly, therefore experimentation is necessary</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

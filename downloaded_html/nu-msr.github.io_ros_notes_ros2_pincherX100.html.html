@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-10-29 Tue 11:30 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PincherX 100</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">PincherX 100</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org592c9b1">Overview</a></li>
+<li><a href="#org6bd2ab2">Installation</a></li>
+<li><a href="#orgc181394">Quick Start</a></li>
+<li><a href="#orgccbd799">Documentation</a></li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-org592c9b1" class="outline-2">
+<h2 id="org592c9b1">Overview</h2>
+<div class="outline-text-2" id="text-org592c9b1">
+<p>
+The <a href="https://www.trossenrobotics.com/pincherx-100-robot-arm.aspx">PincherX 100</a> is a small 4-DOF robot arm.
+The arm can be controlled through ROS or directly through its python API.
+</p>
+
+<ul class="org-ul">
+<li>The arms are located in the back of the lab, in the cabinet labeled <code>PincherX100</code></li>
+<li>The software for the arm was installed with the <code>nuws</code></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org6bd2ab2" class="outline-2">
+<h2 id="org6bd2ab2">Installation</h2>
+<div class="outline-text-2" id="text-org6bd2ab2">
+<p>
+See <a href="../hackathon/computer_setup.org:interbotix_setup">../hackathon/computer_setup.org:interbotix_setup</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc181394" class="outline-2">
+<h2 id="orgc181394">Quick Start</h2>
+<div class="outline-text-2" id="text-orgc181394">
+<ul class="org-ul">
+<li>Although there are many ways of controlling this arm, we will focus on using moveit</li>
+<li>To run moveit's kinematic simulation use
+<ul class="org-ul">
+<li><code>ros2 launch interbotix_xsarm_moveit xsarm_moveit.launch.py robot_model:=px100 hardware_type:=fake</code></li>
+<li>This launchfile can also be used with the real hardware. Read the launchfile and documentation to learn more</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgccbd799" class="outline-2">
+<h2 id="orgccbd799">Documentation</h2>
+<div class="outline-text-2" id="text-orgccbd799">
+<ol class="org-ol">
+<li><a href="https://www.trossenrobotics.com/docs/interbotix_xsarms/index.html">Documentation</a></li>
+<li><a href="https://github.com/Interbotix/interbotix_ros_manipulators/tree/humble/interbotix_ros_xsarms">Source code</a></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

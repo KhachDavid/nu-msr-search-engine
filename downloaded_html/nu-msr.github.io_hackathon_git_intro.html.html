@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-10-04 Fri 17:27 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Introduction to git</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">Introduction to git</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org2903a98">What is Version Control</a>
+<ul>
+<li><a href="#orgb99e596">Why Version Control?</a></li>
+<li><a href="#orga066d7a">Non-git version control</a></li>
+</ul>
+</li>
+<li><a href="#org6ae2b56">What is git?</a>
+<ul>
+<li><a href="#org8f2f9c5">Why git?</a></li>
+<li><a href="#orgf6f0d03">Jupyter Notebooks</a></li>
+</ul>
+</li>
+<li><a href="#org8a8ddcd">Git Help</a></li>
+<li><a href="#org3040790">The Three Areas of Git</a></li>
+<li><a href="#org6d95407">Basic git usage</a></li>
+<li><a href="#org45e2738">Git Tips</a></li>
+<li><a href="#simple-git-workflow">Simple Git Workflow</a>
+<ul>
+<li><a href="#org738c310">Setup</a></li>
+<li><a href="#org0e9a2a9">Process</a></li>
+<li><a href="#org6459e1c">Extensions</a></li>
+<li><a href="#org86b9dc2">Recovery</a></li>
+<li><a href="#org9042a04">Discussion</a></li>
+</ul>
+</li>
+<li><a href="#orgf5ba5eb">Git hosting services</a></li>
+<li><a href="#org12adf30">How to learn</a></li>
+<li><a href="#orgf59ca61">Git Prompt</a></li>
+<li><a href="#orgb7e40b3">Demonstration</a>
+<ul>
+<li><a href="#org82bbbc2">Basic Branching</a></li>
+<li><a href="#orgf6d32ce">Conflicts!</a></li>
+<li><a href="#orgd2643e5">Clone Me</a></li>
+<li><a href="#orgc6e5515">Meanwhile bash</a></li>
+<li><a href="#org068bb61">Ready to commit</a></li>
+</ul>
+</li>
+<li><a href="#org84c85c3">Exercises</a>
+<ul>
+<li><a href="#org13942f2">Basic Operations</a></li>
+<li><a href="#org8afdb0c">Remotes</a></li>
+<li><a href="#orgda4fccf">Collaboration</a></li>
+<li><a href="#org8e726e6">Simultaneous editing</a></li>
+</ul>
+</li>
+<li><a href="#orge768d22">Resources</a></li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-org2903a98" class="outline-2">
+<h2 id="org2903a98">What is Version Control</h2>
+<div class="outline-text-2" id="text-org2903a98">
+<p>
+A tool for tracking changes to files and synchronizing updates between multiple developers.
+</p>
+</div>
+
+<div id="outline-container-orgb99e596" class="outline-3">
+<h3 id="orgb99e596">Why Version Control?</h3>
+<div class="outline-text-3" id="text-orgb99e596">
+<ul class="org-ul">
+<li>Go back to previous versions</li>
+<li>No saving of <code>final_final_really_final_version.doc</code></li>
+<li>Easily merge changes from multiple people</li>
+<li>Keep a record of why you made changes along with those changes</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga066d7a" class="outline-3">
+<h3 id="orga066d7a">Non-git version control</h3>
+<div class="outline-text-3" id="text-orga066d7a">
+<ul class="org-ul">
+<li>Concurrent Versions System (cvs)</li>
+<li>Subversion (svn)</li>
+<li>Mercurial</li>
+<li>Perforce</li>
+<li>Bitkeeper<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6ae2b56" class="outline-2">
+<h2 id="org6ae2b56">What is git?</h2>
+<div class="outline-text-2" id="text-org6ae2b56">
+<ol class="org-ol">
+<li>Git is a version control system originally developed by Linus Torvalds for use with the Linux kernel.</li>
+<li>Git is used by Google, Facebook, Microsoft, Netflix, Boston Dynamics, and the Linux Kernel (and almost everyone else too!).</li>
+<li>The source code for most programs on your machine is maintained in <code>git</code></li>
+</ol>
+</div>
+
+<div id="outline-container-org8f2f9c5" class="outline-3">
+<h3 id="org8f2f9c5">Why git?</h3>
+<div class="outline-text-3" id="text-org8f2f9c5">
+<p>
+Git enables you to easily keep a history of the changes, the reasons behind them, and combine your work with others.
+It is ubiquitous, distributed, fast, and flexible. Used properly, it frees you to experiment with your code, without
+worrying about whether you will irrevocably loose something important.
+</p>
+
+<p>
+It is also a <b>job requirement</b> for nearly any robotics job involving software (which is to say almost every robotics job).
+</p>
+
+<ol class="org-ol">
+<li>Strive to be the person that everyone on the team comes to with <code>git</code> questions.</li>
+<li>Avoid being the person who messes up the repository for the team.
+<ul class="org-ul">
+<li>Almost every error in git is recoverable with some effort</li>
+<li>Each of you will likely make some or even many <code>git</code> mistakes along the way.  It is through fixing these
+mistakes that you may gain mastery of <code>git</code>.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgf6f0d03" class="outline-3">
+<h3 id="orgf6f0d03">Jupyter Notebooks</h3>
+<div class="outline-text-3" id="text-orgf6f0d03">
+<ol class="org-ol">
+<li>While git works with any type of file, it works best with text files designed to be edited by humans.</li>
+<li>One type of file you may encounter that does not quite fit this model is a Jupyter notebook
+<ul class="org-ul">
+<li>A Jupyter notebook combines source code (often python) and its output, in an interactive format</li>
+</ul></li>
+<li>If coding Jupyter notebook, I recommend that you look into using <code>git</code> along with <a href="https://github.com/mwouts/jupytext">jupytext</a>.</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org8a8ddcd" class="outline-2">
+<h2 id="org8a8ddcd">Git Help</h2>
+<div class="outline-text-2" id="text-org8a8ddcd">
+<ol class="org-ol">
+<li>Often, when you do something slightly wrong in <code>git</code>, <code>git</code> will suggest the appropriate action.</li>
+<li>Getting help: <code>git help &lt;verb&gt;</code></li>
+<li><code>git &lt;verb&gt; --help</code></li>
+<li><code>man git-&lt;verb&gt;</code></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org3040790" class="outline-2">
+<h2 id="org3040790">The Three Areas of Git</h2>
+<div class="outline-text-2" id="text-org3040790">
+<ol class="org-ol">
+<li>Working directory - The contents of your files on disk, as they appear with <code>ls</code> etc.
+<ul class="org-ul">
+<li>You edit files in your working directory as usual</li>
+</ul></li>
+<li>Commit History- The repository contains the full project history, consisting of all of the data that you have committed
+from the staging area.</li>
+<li>Staging Index -  The holding area for the changes you make to your working directory.  
+<ul class="org-ul">
+<li>After you change files, you explicitly add the changed files to the staging area, in preparation for saving to the repository (committing).</li>
+<li>Often shortened to just <i>Index</i></li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org6d95407" class="outline-2">
+<h2 id="org6d95407">Basic git usage</h2>
+<div class="outline-text-2" id="text-org6d95407">
+<ol class="org-ol">
+<li>A git repository is a directed acyclic garph (DAC) of objects, called commits. 
+<ul class="org-ul">
+<li><code>git commit</code> creates a commit, a snapshot of the files you are tracking in your working directory.</li>
+<li>To track a file, add it to your staging area using <code>git add</code></li>
+<li>You can remove a tracked file using <code>git rm</code>.  If you had previously commited it it will
+still be recoverable from the repository.</li>
+<li>You should write a message to accompany the commit.  The message explains what the commit does.</li>
+<li>Automatically commit all tracked changes using <code>git commit -a</code></li>
+<li>Each commit is identified by a hash, a number calculated from the state of the changes.</li>
+<li>The HEAD is a pointer to a commit corresponding to the current state of your repository.</li>
+</ul></li>
+<li>Use <code>git status</code> to see current information about the state of your repository.
+<ul class="org-ul">
+<li>You can run this frequently and there are <code>bash</code> scripts to add various levels of the information it provides to your prompt</li>
+</ul></li>
+<li>You can <code>checkout</code> a commit to make your working directory match its state at a given commit
+<ul class="org-ul">
+<li>A checkout moves your HEAD to a different commit and sets your working directory to correspond to that commit.</li>
+</ul></li>
+<li>You can <code>branch</code> to create a name for a commit (rather than its hash).  
+<ul class="org-ul">
+<li>Every git starts with a default branch, usually called either <code>master</code> or <code>main</code> (but it can be named anything).</li>
+<li>You can create other branches.  When you commit, you move the branch to the latest stage.</li>
+<li>By maintaining multiple branches you create a DAC of commits.  This enables you to experiment easily</li>
+</ul></li>
+<li>Use <code>git switch</code> to switch branches<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></li>
+<li>Use <code>git restore</code> to retrieve a file from a different commit<sup><a id="fnr.2.100" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></li>
+<li>Use <code>git log</code> to display information about the commits made on a branch and the associated meta-information</li>
+<li>Join changes from two branches together using <code>git merge</code>.  
+<ul class="org-ul">
+<li>If on each of the two branches you have not edited files in the same place, a fast-forward merge occurs,
+which simply adds the commits from the branch you are merging on top of the current branch</li>
+<li>Other merge strategies also exist.  If a file has been modified in incompatible ways, you get a merge conflict
+that must be resolved manually</li>
+<li>Git provides tools for managing conflicting edits, but it is best to coordinate with your team to avoid the situation.</li>
+</ul></li>
+<li>When you add a file in the directory, git lists all other files that it does not know about as "untracked".
+<ul class="org-ul">
+<li>You can prevent a file showing up as untracked by listing it in a <code>.gitignore</code> file</li>
+<li><code>.gitignore</code> also accepts globbing patterns (e.g., <code>*.o</code> will ignore all files ending in <code>.o</code>).</li>
+<li><code>.gitignore</code> is useful for keeping the repository clean and preventing user-generated files that should not be shared from cluttering git</li>
+<li>Examples of files that should be in <code>.gitignore</code>
+<ul class="org-ul">
+<li>Results of compilation (e.g., anything generated from the source code)</li>
+<li>Personal preferences that apply only on your machine</li>
+</ul></li>
+</ul></li>
+<li>Remotes connect different repositories and are created with <code>git remote add</code>.
+<ul class="org-ul">
+<li>The repositories can be in different directories or different computers.</li>
+<li>Remotes contain branches that you can merge with the base repository.</li>
+<li>A remote is usually a copy of your repository, but it need not be.</li>
+<li>Git is <i>distributed</i> so there need not be a central repository. However most projects have a central repository in practice and
+host it on a website like <a href="https://gitlab.com">GitLab</a>, <a href="https://github.com">GitHub</a>, <a href="https://bitbucket.com">BitBucket</a>, or <a href="https://sourcehut.org">sourcehut.org</a></li>
+<li>Git provides commands for keeping remote repositories in sync.</li>
+<li><code>git fetch</code> retrieves commits from a remote repository. The branches become available on your local repository for merging.</li>
+<li><code>git pull</code> is the same as <code>git fetch</code> and <code>git merge</code>.  It is safer to separate these commands.</li>
+<li><code>git push</code> updates a remote branch with the commits on your branch.</li>
+</ul></li>
+<li>Cloning: <code>git clone</code> creates a copy of a repository from another location</li>
+<li>Tagging: <code>git tag</code> can be used to label a commit. Like a branch, but usually you keep a tag in the same place.
+<ul class="org-ul">
+<li>Projects often provide tags for each release of their software</li>
+</ul></li>
+<li>Stash: <code>git stash</code> saves what you've been working on and restores your working directory to the last commit.  You can then restore your
+changes from the stash.  Useful if you need to quickly revisit your last commit without losing what you are currently working on.</li>
+<li>Rebase: <code>git rebase</code>. A tool for re-writing git history.  Very powerful, used in some git workflows to keep history clean.  
+If used in conjunction with a git workflow with strict rules can be quite useful.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org45e2738" class="outline-2">
+<h2 id="org45e2738">Git Tips</h2>
+<div class="outline-text-2" id="text-org45e2738">
+<ol class="org-ol">
+<li>When in doubt, copy your repository, and try out commands. Repeat until you get the desired result
+<ul class="org-ul">
+<li>It is very hard to actually lose data in git</li>
+<li>That does not mean the commands to recover are always straightforward</li>
+<li>If you just copy your repo, you can experiment without worry.</li>
+</ul></li>
+<li>Commit often!  You should try to be coding incrementally. Set many small goals, when you accomplish each goal commit.
+<ul class="org-ul">
+<li>Commits create milestones that you can explore and restore your code from at any time</li>
+<li>I can predict how well a project works based on the number of commits</li>
+</ul></li>
+<li>Don't add generated content, such as compiled files to your code.  Put these files in your <code>.gitignore</code></li>
+<li>Avoid adding large binary data files such as databases or large datasets
+<ul class="org-ul">
+<li>These take up a lot of storage when they change, since git needs to store a whole new copy</li>
+<li>There are tools for handling large binary files like git annex or git-lfs</li>
+</ul></li>
+<li>Keep small formatting changes in separate commits from substantive changes.  Try to lump small formatting changes together
+<ul class="org-ul">
+<li>Makes the history clear. Try to follow a style guide when coding.</li>
+</ul></li>
+<li>Write good commit messages that clearly explain what your commit did.
+<ul class="org-ul">
+<li>The first line is a summary. Then there is a blank line, followed by more details. Don't forget the more details part!</li>
+<li>Many projects limit line widths to 80 characters for easy display on a narrow part of the screen</li>
+</ul></li>
+<li>Employ a git <a href="https://www.atlassian.com/git/tutorials/comparing-workflows">workflow</a> for your team.
+<ul class="org-ul">
+<li>A company will likely have some practices already in place.</li>
+<li>I provide a workflow below</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-simple-git-workflow" class="outline-2">
+<h2 id="simple-git-workflow">Simple Git Workflow</h2>
+<div class="outline-text-2" id="text-simple-git-workflow">
+<p>
+Here is a workflow that I have found is useful for small student groups.
+The main benefits of this workflow are
+</p>
+<ol class="org-ol">
+<li>The <code>main</code> branch always has working code.</li>
+<li><code>git</code> will force you to incorporate your teammates' changes prior to changing <code>main</code></li>
+</ol>
+</div>
+
+<div id="outline-container-org738c310" class="outline-3">
+<h3 id="org738c310">Setup</h3>
+<div class="outline-text-3" id="text-org738c310">
+<ol class="org-ol">
+<li>There is a central repository called <code>origin</code>. Everybody clones <code>origin</code></li>
+<li>The <code>main</code> branch on the central repository must always contain the latest working code.
+<ul class="org-ul">
+<li>Your local <code>main</code> branch simply tracks <code>origin/main</code>. You never edit code on <code>main</code> directly=</li>
+</ul></li>
+<li>Everybody works in branches of the form <code>name/feature</code>.
+<ul class="org-ul">
+<li>For smaller projects it is okay if each person has just one feature, but you can have as many branches as you want</li>
+<li>Do not ever create a branch called just <code>name</code> since it prevents you from making <code>name/feature</code> later due to a quirk in git.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org0e9a2a9" class="outline-3">
+<h3 id="org0e9a2a9">Process</h3>
+<div class="outline-text-3" id="text-org0e9a2a9">
+<ol class="org-ol">
+<li>Get the latest code from your team. You always track this progress on your local <code>main</code> branch:
+<ol class="org-ol">
+<li><code>git switch main</code> to be sure you are on your <code>main</code> branch</li>
+<li><code>git fetch</code> from  <code>origin</code> to retrieve the latest updates</li>
+<li><p>
+<code>git merge --ff-only</code> the changes onto your local <code>main</code> branch.
+</p>
+<details class="folded"><summary>Details</summary>
+<ul class="org-ul">
+<li>If this merge fails, it means you edited code on <code>main</code> directly (which is not permitted in this workflow).</li>
+<li>To recover depends on what happened, but here is one way to hopefully (get you back on the workflow path):
+<ol class="org-ol">
+<li>Commit your current work.</li>
+<li>Create a feature branch at the current location: <code>git branch name/feature</code></li>
+<li>Reset the <code>main</code> branch to the <code>origin</code> location: <code>git reset origin/main</code></li>
+<li>The <code>git merge --ff-only</code> should succeed and you can now continue with the regular workflow.</li>
+</ol></li>
+</ul>
+</details></li>
+<li><code>main</code> is now up to date with <code>origin/main</code>.</li>
+<li>In the normal workflow, this step is the only time you ever modify anything on <code>main</code></li>
+</ol></li>
+<li>Incorporate the code from the team into your branch
+<ol class="org-ol">
+<li>If starting a new branch:
+<ul class="org-ul">
+<li><code>git switch -c name/feature</code> to create it and switch to it.</li>
+<li>You can now begin coding</li>
+</ul></li>
+<li>If working on an existing branch:
+<ul class="org-ul">
+<li><code>git switch name/feature</code> to switch to the branch</li>
+<li><p>
+<code>git rebase main</code> to incorporate the upstream changes.
+</p>
+<details class="folded"><summary>Details</summary>
+<p>
+This command will
+</p>
+<ul class="org-ul">
+<li>Temporarily remove all the commits you have worked on since you last diverged from <code>main</code></li>
+<li>Insert the commits from <code>main</code> that you had not yet incorporated into your branch</li>
+<li>Replay your commits on to of the last commit in main. (So it will be as if you made your changes against the latest <code>main</code> branch).</li>
+<li>If there are conflicts, prompt you to fix and commit them.</li>
+</ul>
+<p>
+-You can always abort the rebase with <code>git rebase --abort</code> and communicate with your team if you are unsure about the nature of the conflicts.
+</p>
+</details></li>
+</ul></li>
+<li>Test your code and make sure it works before proceeding.</li>
+</ol></li>
+<li>When ready to merge your feature branch to the remote main 
+<ul class="org-ul">
+<li><code>git push origin name/feature:main</code></li>
+<li>If nobody has pushed to <code>main</code> since your last fetch, this will go smoothly.  Coordinate with your team prior to pushing to main!</li>
+<li>If somebody has pushed to <code>main</code>, your push will be rejected and you must incorporate their work before pushing. Go to step 1.</li>
+</ul></li>
+<li>If you want to share code with some group members but are not ready to commit to <code>main</code>, you may establish other shared branches
+called <code>share/feature</code>.  They behave like the <code>main</code> branch except the bar for committing/pushing to them can be set to an 
+arbitrarily low level (i.e., you may even agree to commit broken code that does not compile to it).</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org6459e1c" class="outline-3">
+<h3 id="org6459e1c">Extensions</h3>
+<div class="outline-text-3" id="text-org6459e1c">
+<p>
+One shortcoming of this workflow is that your <code>name/feature</code> branch only exists on your local computer.
+If you are properly backing up your system, this should not be a problem; however it is probably a good idea
+to always push feature branches to a remote repository just in case.
+</p>
+
+<ol class="org-ol">
+<li>One option is to make secondary copy of your repository and branches at a different remote (called, for example, <code>myorigin</code>).
+<ul class="org-ul">
+<li>You can push your feature branches to this repository as a backup, without sharing them with your team</li>
+<li>This <code>fork</code> of your main repository can also be useful when showing off your GitHub: the project is now on your own account
+(just make sure to credit your teammates in the README).</li>
+</ul></li>
+<li>Another option is to push <code>name/feature</code> to <code>origin</code>. As long as everybody on the team agrees that you are the only person
+who can use that branch everything should work.
+<ul class="org-ul">
+<li>When you rebase <code>name/feature</code> you will need to force push (<code>git push -f</code>) to your own feature branch since you are changing the history of the branch.</li>
+<li>It is easiest to have your other teammates never checkout <code>name/feature</code></li>
+<li>If you violate the previous point, you will need to recover.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<details id="org86b9dc2"><summary class="header-3">Recovery</summary>
+<div class="outline-text-3" id="text-org86b9dc2">
+<p>
+This is an advanced topic and you want to follow the workflow above to avoid ending up here.  
+</p>
+<ol class="org-ol">
+<li>You and a partner are working on a common branch.</li>
+<li>The commits on <code>origin/common</code> look like O -&gt; A</li>
+<li>Partner has rebased and <code>partner/common</code> looks like  O -&gt; -&gt; B' -&gt; C' -&gt; A'.</li>
+<li>You have done some work and <code>mine/common</code> looks like O -&gt; A -&gt; D -&gt; E.</li>
+<li>Partner force pushes. <code>origin/common</code> now looks like O -&gt; B' -&gt; C' -&gt; A' (i.e., it exactly matches <code>partner/common</code>).</li>
+<li><code>mine/common</code> and <code>origin/common</code> have now diverged since the rebase replaced commits with copies.</li>
+<li>You cannot push (well, you can force push but it will overwrite your partner's work)</li>
+<li>You cannot pull, since you have O -&gt; A and <code>origin/common</code> has O -&gt; B'. Which history is correct? Git does not know.</li>
+<li>While on <code>mine/common</code></li>
+<li>Create a new branch off of <code>mine/common</code> called <code>mine/recover</code>.</li>
+<li>Commit any uncommitted changes</li>
+<li><code>git switch mine/common</code></li>
+<li><code>git reset origin/common</code> (you will loose uncommitted changes, which is why we created <code>mine/recover</code>)</li>
+<li>Now <code>mine/common</code> looks like O -&gt; B' -&gt; C' -&gt; A', and <code>mine/recover</code> looks like O -&gt; A -&gt; D -&gt; E</li>
+<li>You can continue to develop <code>mine/common</code> and you can access the work you had done on <code>mine/recover</code>
+<ul class="org-ul">
+<li>Getting your changes back onto <code>mine/common</code> will likely be a manual process involving <code>merge</code>, <code>rebase</code>, and possibly <code>cherry-pick</code></li>
+</ul></li>
+</ol>
+</div>
+</details>
+<details id="org9042a04"><summary class="header-3">Discussion</summary>
+<div class="outline-text-3" id="text-org9042a04">
+<p>
+This section is a more advanced discussion about two key design choices in the workflow.
+</p>
+<ol class="org-ol">
+<li>Why is it based on rebase and not merge?
+<ul class="org-ul">
+<li>Merging makes the most sense when each branch corresponds to a single feature and then that feature is merged into the <code>main</code> branch (which represents the latest working code).
+In this way the order in which features were developed is maintained and it is clear when (chronologically) each feature was implemented and added.</li>
+<li>In our development environment, each branch usually does not nicely correspond to a single discrete feature. Instead, the main code is always changing, and
+rebasing allows each developer to pretend that their branch started with the most up-to-date working version of the code.</li>
+<li>In this workflow we never <code>rebase</code> the main branch, so history in the <code>main</code> branch follows the history of each developer getting their code into <code>main</code> in a linear
+fashion.</li>
+</ul></li>
+<li>Why not just merge the feature branch into main and then push?
+<ul class="org-ul">
+<li>If somebody has made changes on <code>main</code> before you attempt to push you won't be able to push (which alerts you to this situation).
+However, you will have already merged all the commits you made into your local <code>main</code> branch, which means that you need to take
+some corrective action to make your <code>main</code> branch incorporate the changes (e.g., merging into main or rebasing main or even resetting (e.g. moving) a branch).
+These actions are doable and even the norm in many git workflows, but they amount to an extra maintenance step and require additional thought.</li>
+<li>By using the simple git workflow, git prevents you from pushing changes to the remote if you have not incorporated the latest changes from <code>main</code>.
+Because this step happens before you modify your local <code>main</code> branch, the possibilities of what operations you run on <code>main</code> are simplified: you are
+only ever do a fast-forward merge on <code>main</code>. Meanwhile, you can decide whether you want to incorporate the latest changes from <code>main</code> into your branch right away
+(usually but not always a good idea) or keep working on the branch as is.  Whichever you decide, you do not need to take any special actions (which is not true if
+you directly merged your code into the local main branch).</li>
+</ul></li>
+</ol>
+</div>
+</details>
+</div>
+
+<div id="outline-container-orgf5ba5eb" class="outline-2">
+<h2 id="orgf5ba5eb">Git hosting services</h2>
+<div class="outline-text-2" id="text-orgf5ba5eb">
+<ol class="org-ol">
+<li>Some popular git hosting services are:
+<ul class="org-ul">
+<li><a href="https://www.github.com">https://www.github.com</a></li>
+<li><a href="https://www.bitbucket.com">https://www.bitbucket.com</a></li>
+<li><a href="https://www.gitlab.com">https://www.gitlab.com</a></li>
+<li><a href="https://www.sourcehut.org">https://www.sourcehut.org</a></li>
+</ul></li>
+<li>These are convenient places to store your repositories and collaborate with others.</li>
+<li>Don't conflate <code>git</code> and <i>GitHub</i>.  Git is software tool distributed freely on the internet, whereas <i>GitHub</i> is one of several companies
+that provide services related to that tool.</li>
+<li>Many have items surrounding git that arguably enhance it (but also lock you into the particular provider) such as
+<dl class="org-dl">
+<dt>Issues</dt><dd>Enable users to file a bug report with your program</dd>
+<dt>Pull Requests</dt><dd>Enables another user to alert you that they have a contribution to your code ready to go</dd>
+<dt>Forking</dt><dd>Tracks that a repository is a clone of another repository</dd>
+<dt>Static Website Hosting</dt><dd>Host a static website for your project or portfolio</dd>
+<dt>Wiki</dt><dd>Like wikipedia, but for your project</dd>
+<dt>Gists</dt><dd>A quick way to host a single file</dd>
+<dt>Permissions</dt><dd>Prevent people from performing actions on the repository</dd>
+<dt>Organizations</dt><dd>Groups of repositories</dd>
+</dl></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org12adf30" class="outline-2">
+<h2 id="org12adf30">How to learn</h2>
+<div class="outline-text-2" id="text-org12adf30">
+<ol class="org-ol">
+<li>Use <code>git</code> often.  Use it for everything.</li>
+<li>Use the command line rather than GUI tools or GitHub to manipulate the repository.</li>
+<li>Use <code>gitk --all</code> to see what is happening in your repository.</li>
+<li>Do not just blindly run commands.  Especially when getting started, take the time to read about them, 
+experiment with them in a copy of your repository and understand what they are doing.</li>
+<li>Explore the <a href="#orge768d22">Resources</a> provided here</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgf59ca61" class="outline-2">
+<h2 id="orgf59ca61">Git Prompt</h2>
+<div class="outline-text-2" id="text-orgf59ca61">
+<ol class="org-ol">
+<li>It is extremely useful to setup your terminal to show information about git</li>
+<li>To add this to bash you must modify the <code>PS1</code> variable in your <code>~/.bashrc</code>
+<ul class="org-ul">
+<li>The <code>PS1</code> variable controls the look of your prompt</li>
+<li>Add <code>$(__git_ps1 "(%s)")</code> to where <code>PS1</code> is set in <code>~/.bashrc</code>, just before the <code>\$</code></li>
+</ul></li>
+<li>This is just the basic prompt showing you the branch. There are many other possibilities out there</li>
+</ol>
+</div>
+</div>
+
+<details id="orgb7e40b3"><summary class="header-2">Demonstration</summary>
+<div class="outline-text-2" id="text-orgb7e40b3">
+<p>
+Here is the code from the live demonstration
+</p>
+</div>
+<div id="outline-container-org82bbbc2" class="outline-3">
+<h3 id="org82bbbc2">Basic Branching</h3>
+<div class="outline-text-3" id="text-org82bbbc2">
+<div class="org-src-container">
+<pre class="src src-bash">git init --bare central <span class="org-comment-delimiter"># </span><span class="org-comment">Mimic a central repository (e.g., on GitHub)</span>
+git clone central repo1
+git status
+<span class="org-builtin">echo</span> <span class="org-string">"Good Code"</span> &gt; file1.txt
+git add file1.txt
+git commit  <span class="org-comment-delimiter"># </span><span class="org-comment">First commit</span>
+git status
+gitk --all &amp;
+<span class="org-builtin">echo</span> <span class="org-string">"More code"</span> &gt;&gt; file1.txt
+git commit -a <span class="org-comment-delimiter"># </span><span class="org-comment">Fixed a bug!</span>
+git branch br1
+git status
+git switch br1
+git status
+<span class="org-builtin">echo</span> <span class="org-string">"this is branch1"</span> &gt;&gt; file1.txt
+git commit -a <span class="org-comment-delimiter"># </span><span class="org-comment">Another bug is fixed!</span>
+less file1.txt
+git checkout main
+less file1.txt
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf6d32ce" class="outline-3">
+<h3 id="orgf6d32ce">Conflicts!</h3>
+<div class="outline-text-3" id="text-orgf6d32ce">
+<div class="org-src-container">
+<pre class="src src-bash"><span class="org-builtin">echo</span> <span class="org-string">"I have other ideas"</span> &gt;&gt; file1.txt
+git commit -a <span class="org-comment-delimiter"># </span><span class="org-comment">Conflict created!</span>
+git merge br1
+git status
+git merge --abort
+git merge br1
+cat file1.txt
+git checkout --ours file1.txt
+git checkout --theirs file1.txt
+git add file1.txt
+git status
+git commit <span class="org-comment-delimiter">#</span><span class="org-comment">fixed conflict</span>
+git push
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd2643e5" class="outline-3">
+<h3 id="orgd2643e5">Clone Me</h3>
+<div class="outline-text-3" id="text-orgd2643e5">
+<div class="org-src-container">
+<pre class="src src-bash"><span class="org-builtin">cd</span> ..
+git clone central repo2
+<span class="org-builtin">cd</span> repo2
+ls
+git remote -v
+git switch -c elwin/feature
+<span class="org-builtin">echo</span> <span class="org-string">"I Solved IT!"</span> &gt; file4.txt
+git add file4.txt
+git commit <span class="org-comment-delimiter"># </span><span class="org-comment">Got it</span>
+gitk --all &amp;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc6e5515" class="outline-3">
+<h3 id="orgc6e5515">Meanwhile bash</h3>
+<div class="outline-text-3" id="text-orgc6e5515">
+<div class="org-src-container">
+<pre class="src src-bash"><span class="org-builtin">cd</span> ../repo1
+<span class="org-builtin">echo</span> <span class="org-string">"important bug fix"</span> &gt;&gt; file2.txt
+git add file2.txt
+git commit <span class="org-comment-delimiter"># </span><span class="org-comment">That's it</span>
+git push
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org068bb61" class="outline-3">
+<h3 id="org068bb61">Ready to commit</h3>
+<div class="outline-text-3" id="text-org068bb61">
+<div class="org-src-container">
+<pre class="src src-bash"><span class="org-builtin">cd</span> ../repo2
+git push origin elwin/feature:main
+git fetch
+git checkout main
+git merge
+git switch elwin/feature
+git rebase main
+git push origin elwin/feature:main
+git checkout main
+git pull
+</pre>
+</div>
+</div>
+</div>
+</details>
+
+<div id="outline-container-org84c85c3" class="outline-2">
+<h2 id="org84c85c3">Exercises</h2>
+<div class="outline-text-2" id="text-org84c85c3">
+<p>
+Follow along with these Git exercises to practice your git usage.
+Along the way, if you don't understand something use the built-in git help 
+to read more about the command  <code>git help</code>.
+</p>
+
+<p>
+You should also follow along with <code>gitk</code>. Note: if you run <code>gitk</code>
+before making any commits, you will get an error message pop up. 
+Just click Ok.  After your first commit, refresh <code>gitk</code> (<code>Shift-F5</code>) and
+you should see your commits.
+</p>
+
+<p>
+After every action on the repository you must refresh <code>gitk</code> to see the changes reflected.
+</p>
+</div>
+
+<div id="outline-container-org13942f2" class="outline-3">
+<h3 id="org13942f2">Basic Operations</h3>
+<div class="outline-text-3" id="text-org13942f2">
+<ol class="org-ol">
+<li><p>
+First time git setup:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">git config --global user.name <span class="org-string">"Your Name"</span>
+git config --global user.email <span class="org-string">"Your email"</span>
+git config --global core.editor YourEditor
+git config --global init.defaultBranch main
+</pre>
+</div>
+<p>
+(for VScode use <code>'code --wait'</code> as the <code>YourEditor</code>)
+</p></li>
+
+<li>Create a new local repository:
+Create a directory using <code>mkdir</code>, <code>cd</code> into it, and use <code>git init</code></li>
+
+<li>Create files on your main branch. 
+<ol class="org-ol">
+<li>Create your first file, <code>quote.txt</code> and put some content in it (such as quote that you like).</li>
+<li>Run <code>git status</code> to see that there is now a file in your repository that is not tracked by git.</li>
+<li>Use <code>git add</code> to have git track the file it and place it in the staging area. Confirm with <code>git status</code></li>
+<li>Use <code>git commit</code> to commit the file to the repository. Write a commit message describing what you did.</li>
+</ol></li>
+
+<li>Launch <code>gitk</code>, and set it to view all branches:
+<ul class="org-ul">
+<li><code>gitk --all &amp;</code> (the <code>&amp;</code> runs it in the background so you can keep using the same terminal).</li>
+<li>After each git operation, use <code>Shift-F5</code> in the <code>gitk</code> window to update its view of the repository.</li>
+<li><p>
+Try to predict what you are going to see before refreshing the view
+</p>
+
+<figure id="org3e3e57b">
+<img src="./images/git1.png" alt="git1.png">
+
+</figure></li>
+</ul></li>
+
+<li>Create a second file called <code>robot.txt</code> and commit it to the repository.
+<ul class="org-ul">
+<li><p>
+This file should name your favorite robot and why you like it.
+</p>
+
+<figure id="org9ff80ad">
+<img src="./images/git2.png" alt="git2.png">
+
+</figure></li>
+</ul></li>
+
+<li>Add another quote to <code>quote.txt</code> and commit the changes.
+<ul class="org-ul">
+<li>Use <code>git add</code> to stage the file in the index.</li>
+<li>Use <code>git status</code> to see what <code>git add</code> did.
+<ul class="org-ul">
+<li>Notice you can unstage the file by using <code>git restore --staged quote.txt</code>.</li>
+</ul></li>
+<li>Use <code>git commit -a</code> to automatically stage all tracked files and create a commit.</li>
+<li><p>
+Write a good log message. Remember, the better your log messages are, the more useful git becomes
+</p>
+
+<figure id="orgd3c39a5">
+<img src="./images/git3.png" alt="git3.png">
+
+</figure></li>
+</ul></li>
+
+<li>Create a new branch called <code>test</code> in the repository and switch to it.
+<ul class="org-ul">
+<li>You can do this with a single command or with a sequence of different commands.</li>
+<li><p>
+Some commands that may be useful are <code>branch</code> and <code>switch</code>.
+</p>
+
+<figure id="org4f96d3b">
+<img src="./images/git4.png" alt="git4.png">
+
+</figure></li>
+</ul></li>
+
+<li><p>
+Append some more information about your favorite robot to <code>robot.txt</code> (on a new line), delete the <code>quote.txt</code> file, and commit the changes.
+</p>
+<ul class="org-ul">
+<li><code>git commit -a</code> will automatically stage the changes to these files (because you have previously added them to git)</li>
+<li>You can also stage them manually with <code>git add</code> and <code>git rm</code></li>
+</ul>
+
+<figure id="org705f693">
+<img src="./images/git4_1.png" alt="git4_1.png">
+
+</figure></li>
+<li><p>
+Switch to the <code>main</code> branch.
+</p>
+<ul class="org-ul">
+<li>What has happened to the changes you made on the other branch?</li>
+<li>What changed in <code>git status</code> and <code>gitk</code>?</li>
+</ul>
+
+<figure id="org7e59c7c">
+<img src="./images/git5.png" alt="git5.png">
+
+</figure></li>
+
+<li><p>
+Merge the changes from <code>test</code> into <code>main</code>  
+</p>
+<ul class="org-ul">
+<li>If you followed the instructions literally and <i>appended</i> data there should be no conflicts and the merge will go through as a fast-forward merge,
+essentially just taking the commit from <code>test</code> and adding it to your current <code>main</code> branch</li>
+<li>If you modified previously existing text in <code>robot.txt</code>, you may get merge conflicts
+<ul class="org-ul">
+<li>use <code>git status</code> to see what files are affected</li>
+<li>You can edit the affected files, add them, and commit the changes to complete the merge.</li>
+</ul></li>
+</ul>
+
+<figure id="org9c66bd0">
+<img src="./images/git6.png" alt="git6.png">
+
+</figure></li>
+
+<li>Create a file that should not be tracked: for example a zip file of the contents of your repository,
+using the <code>zip</code> command (<code>zip &lt;zipfile&gt; &lt;files_to_add&gt;</code>).</li>
+
+<li>Use <code>git status</code> to see that the file is not tracked.
+Create a <code>.gitignore</code> file to ignore the zip file and verify that the zip file does
+not show up in <code>git status</code>.  Commit <code>.gitignore</code> to the repository.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org8afdb0c" class="outline-3">
+<h3 id="org8afdb0c">Remotes</h3>
+<div class="outline-text-3" id="text-org8afdb0c">
+<ol class="org-ol">
+<li>Log in to your GitHub account
+<ul class="org-ul">
+<li>GitHub has many convenience functions that you can use to modify your repository directly from their website.</li>
+<li>Avoid these features: they create commits directly on your remote repository, which can lead to confusion.</li>
+</ul></li>
+<li>On GitHub, create a new private repository and don't create any files.</li>
+<li>Add your ssh key to your github account: <a href="https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account">https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account</a></li>
+<li>On your local repository, use <code>git remote -v</code> to see remote repositories.  You shouldn't see anything.
+<ul class="org-ul">
+<li>Technically a git remote can point to a git repository anywhere, including somewhere else on your harddrive</li>
+<li>You do not need a third-party service like github to make git remotes.</li>
+</ul></li>
+<li>The URL for your repository is <code>git@github.com:user-name/repository-name.git</code>
+<ul class="org-ul">
+<li>If you created the repository on github before doing anything on your system, you would <code>git clone</code> the repository
+<ul class="org-ul">
+<li>This will automatically add a <code>remote</code> called <code>origin</code></li>
+</ul></li>
+<li>In this case, we already have a repository so instead we just need to manually create the remote <code>origin</code>.</li>
+<li>There is also an <code>https</code> URL, which is useful for cloning public repositories, but you cannot use ssh keys with this method.
+<ul class="org-ul">
+<li>The <code>https</code> URL follows the pattern <code>https://github.com/user-name/repository-name.git</code></li>
+</ul></li>
+</ul></li>
+<li>Add your remote git repository as a remote called <code>origin</code>.
+<ul class="org-ul">
+<li><code>git remote add origin &lt;url_to_repository&gt;</code></li>
+</ul></li>
+<li>Push your main branch to <code>origin</code> and set it up such that your <code>main</code> branch to track <code>origin/main</code>:
+<ul class="org-ul">
+<li><code>git push -u origin main</code></li>
+<li>Now that your local branch is tracking a remote branch, <code>git push</code> will automatically push your <code>main</code> to <code>origin/main</code></li>
+<li>Be sure to look in <code>gitk</code> to see both your local and remote branches</li>
+<li>Look on GitHub and see that your changes were indeed pushed.</li>
+</ul></li>
+<li>Make sure your ssh keys are working: if they are working you need not enter a password when doing a <code>git push</code>
+<ul class="org-ul">
+<li>You may need to log out and log back in for a new key to be unlocked</li>
+<li>See <a href="./linux_interactive.html">Linux Notes</a> for how to generate an ssh key</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgda4fccf" class="outline-3">
+<h3 id="orgda4fccf">Collaboration</h3>
+<div class="outline-text-3" id="text-orgda4fccf">
+<p>
+You will now be divided into teams.
+</p>
+<ol class="org-ol">
+<li>Select 1 team member.  Everyone should clone that <code>partner</code> repository from GitHub. 
+<ul class="org-ul">
+<li>The creator of the <code>github</code> repository should add their partner as a collaborator so that both partners may push</li>
+</ul></li>
+<li>Create a new feature branch in <code>partner</code> named <code>yourname/aboutme</code>.</li>
+<li>Create a file called <code>yourname.txt</code>.  
+<ul class="org-ul">
+<li>In this file write something that you would like to share about yourself with others two true statements about yourself and one false statement.</li>
+<li>Place each statement on it's own line.</li>
+<li>This is the "feature" you are adding to the "program"</li>
+</ul></li>
+<li><code>commit</code> your changes to your local branch.</li>
+<li>One by one, each team member should merge their feature into <code>main</code>
+<ul class="org-ul">
+<li>Follow the <a href="#simple-git-workflow">Simple Git Workflow</a></li>
+<li>Features should be fully merged one at a time.</li>
+<li>Pushes and merges should go smoothly.
+<ul class="org-ul">
+<li>You have no conflicts because you edited different files</li>
+</ul></li>
+</ul></li>
+<li>At the end of this, everyone should update their local <code>main</code> branch to match <code>origin</code> and
+their feature branch should be <code>up-to-date</code> as well.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org8e726e6" class="outline-3">
+<h3 id="org8e726e6">Simultaneous editing</h3>
+<div class="outline-text-3" id="text-org8e726e6">
+<p>
+We will now engage in some mayhem.
+</p>
+<ol class="org-ol">
+<li>Everybody should edit every <code>yourname.txt</code> file (on their own branches feature branches)
+<ul class="org-ul">
+<li>Place $username.T next to each line that you think is true, and $username.F next to each line you think is false (substitute your username for <code>$username</code>)</li>
+</ul></li>
+<li>Each team member should simultaneously attempt to merge their feature into <code>main</code>
+<ul class="org-ul">
+<li>Follow the <a href="#simple-git-workflow">Simple Git Workflow</a>, as before</li>
+<li>People on your team will encounter conflicts.  Resolve them by combining the T/F ratings onto a single line and committing the files.</li>
+</ul></li>
+<li>When you are done, everyone's vote should be on every line.  How well did you do?</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge768d22" class="outline-2">
+<h2 id="orge768d22">Resources</h2>
+<div class="outline-text-2" id="text-orge768d22">
+<ol class="org-ol">
+<li><a href="https://git-scm.com/book/en/v2">Pro Book</a>: A definitive guide to git. Definitely recommend reading the first few chapters.</li>
+<li><a href="https://jwiegley.github.io/git-from-the-bottom-up/">Git from the Bottom up</a>. Learn git by understanding its internal data-structures.</li>
+<li><a href="https://learngitbranching.js.org/">Learning Git Interactive Tutorial</a>.</li>
+<li><a href="http://gitimmersion.com/">Git Imersion</a> step-by-step walkthrough</li>
+<li><a href="https://guides.github.com/">Github Guides</a> Guides for git by GitHub</li>
+<li>Learn more about git <a href="https://www.atlassian.com/git/tutorials/comparing-workflows">Workflows</a></li>
+</ol>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+Linus Torvalds wrote <code>git</code> so he could <a href="https://www.linuxjournal.com/content/git-origin-story">stop using Bitkeeper</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+The <code>git switch</code> and <code>git restore</code> commands are relatively recent additions.  Prior to their introduction, <code>git checkout</code> (somewhat confusingly) served both of these purposes
+and you will still encounter many references to <code>git checkout</code>. 
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

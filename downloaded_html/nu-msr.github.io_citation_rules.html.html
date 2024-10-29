@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-10-04 Fri 17:26 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Citation Rules</title>
+<meta name="author" content="Northwestern University MS in Robotics" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">Citation Rules</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#citations">Citations</a></li>
+<li><a href="#org1c44b17">Reports and Written Work (including Portfolios)</a>
+<ul>
+<li><a href="#org435ec4e">Citing Collaborators</a></li>
+</ul>
+</li>
+<li><a href="#org52d4606">Source Code</a>
+<ul>
+<li><a href="#orgdc2621c">Inline Code Citations</a></li>
+<li><a href="#orgc90f13d">Inline Comment Citations</a></li>
+</ul>
+</li>
+<li><a href="#org6753f4d">AI Tools</a>
+<ul>
+<li><a href="#orgb3c1c72">External AI Tool</a></li>
+<li><a href="#org9fb7ce8">Internal AI Tool</a></li>
+<li><a href="#orge8e10a3">Example</a></li>
+</ul>
+</li>
+<li><a href="#orgf6150cd">Group Projects</a></li>
+<li><a href="#orgf9daa16">References</a></li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-citations" class="outline-2">
+<h2 id="citations">Citations</h2>
+<div class="outline-text-2" id="text-citations">
+<p>
+This document describes the implementation details of citing resources for the Northwestern University MS in Robotics program.
+It does not discuss when to cite works or which works to cite, citation rules can be found in the <a href="./honor_code.html">The NUMSR Honor Code</a>.
+</p>
+
+<p>
+Citation style is divided into categories, based on the work that is being done.
+These rules form a baseline, but may be superseded by assignment-specific requirements.
+</p>
+
+<p>
+These rules must be followed strictly: even unintentional deviation from these rules may be viewed as evidence of academic integrity violations: it
+is your responsibility to seek clarification and understand and implement these rules.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1c44b17" class="outline-2">
+<h2 id="org1c44b17">Reports and Written Work (including Portfolios)</h2>
+<div class="outline-text-2" id="text-org1c44b17">
+<ol class="org-ol">
+<li>For reports and other formal written work, the format used should follow <a href="http://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf">The IEEE Reference Style Guide for Authors</a> [1],
+with some additions and modifications noted below.</li>
+<li>At the end of the document, create a section called "References" and provide a list of references.</li>
+<li>Each item in the list is numbered, with the number placed in square brackets (e.g., [1], [2], etc.)</li>
+<li>To cite a reference inline, place the corresponding number near the text where it is required.</li>
+<li>To cite pages, a figure, or a section etc. within a work, do so like [1, Fig. 4], [2, pp. 45-48].</li>
+<li>The ordering of the citations in the reference list is not important for the purposes of the honor code: however, it may be important as part of proper formatting and style.</li>
+<li>When citing online resources, you should always include the date you accessed the resource.</li>
+<li>All direct quotations should be surrounded by quotation marks (<code>"</code>") and cited inline.</li>
+<li>When citing a git repository or a file from a git repository, the citation should include the SHA1 hash of the commit that was used.
+<ul class="org-ul">
+<li>If the repository is hosted on <a href="https://github.com">Github</a> this requirement is satisfied by providing a link to the specific commit (which is obtainable by browsing the commit history on github).</li>
+<li>If hosted on <a href="https://github.com">Github</a>, there is an option to get a permanent link to a file when browsing it (pressing <code>C-S-,</code>).</li>
+<li>Other code hosting websites have similar features.</li>
+</ul></li>
+</ol>
+</div>
+
+<div id="outline-container-org435ec4e" class="outline-3">
+<h3 id="org435ec4e">Citing Collaborators</h3>
+<div class="outline-text-3" id="text-org435ec4e">
+<ol class="org-ol">
+<li>To cite fellow students with whom you have worked, and whose contributions do not require a inline citation, use the following format:
+<ul class="org-ul">
+<li>[1] Worked With: Name 1, Name 2, etc.</li>
+<li>This line should be the first line in your references list, and you can add names to it as needed.</li>
+<li>It is sufficient to have a single line listing your general collaborators, even if you worked on different problems with different groups.</li>
+</ul></li>
+<li>If a project is specifically structured as a group project, then members of the group do not need to be cited: they shall be considered authors
+and acknowledged where authorship is acknowledged.</li>
+<li>The absence of a first reference stating who you worked with is a declaration that you did not work with anybody on the assignment.</li>
+<li>If a student or group of students makes a contribution that requires an inline citation, those students should be listed on a separate line,
+using the format outlined in [1, Sec. Q], which looks like <code>Author1, Author2, private communication, Abbrev Month, year</code></li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org52d4606" class="outline-2">
+<h2 id="org52d4606">Source Code</h2>
+<div class="outline-text-2" id="text-org52d4606">
+<ol class="org-ol">
+<li>All source code that you write should be in a <code>git</code> repository, and these guidelines assume that.</li>
+<li>In the base directory of the git repository, create a file called <code>citations.txt</code></li>
+<li>The <code>citations.txt</code> contains your reference list.  The format of the reference list is the same as that for a written report, with the following modifications:
+<ul class="org-ul">
+<li>Words that should be italicized are set between forward-slash (<code>/</code>) characters: (e.g., <code>/Title/</code>)</li>
+</ul></li>
+<li>Each repository should contain a <code>README.md</code> file, that (minimally) lists the authors of the code.</li>
+</ol>
+</div>
+
+<div id="outline-container-orgdc2621c" class="outline-3">
+<h3 id="orgdc2621c">Inline Code Citations</h3>
+<div class="outline-text-3" id="text-orgdc2621c">
+<ol class="org-ol">
+<li>Inline citations for code have extra requirements to ensure that it is clear where your work begins and another ends.</li>
+<li><p>
+The following are the only acceptable formats for citing a portion of code inline.
+</p>
+<ul class="org-ul">
+<li>For <code>C++ or C</code>:</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-c++"><span class="org-comment-delimiter">// </span><span class="org-comment">############################ Begin_Citation [4, file.cpp:123-456] ############################</span>
+Code that was influenced by the citation here
+<span class="org-comment-delimiter">// </span><span class="org-comment">############################ End_Citation [4]  #############################</span>
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>For <code>Python</code> or other languages where <code>#</code> is a comment:</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-comment-delimiter">############################### </span><span class="org-comment">Begin_Citation [5] ############################</span>
+Code that was influenced by the citation here
+<span class="org-comment-delimiter">############################### </span><span class="org-comment">End_Citation [5]  #############################</span>
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>For <code>xml</code> and similar languages:</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-xml"><span class="org-comment-delimiter">&lt;!--</span><span class="org-comment">########################### Begin_Citation [6] #########################</span><span class="org-comment-delimiter">--&gt;</span>
+<span class="org-nxml-text">Code that was influenced by the citation here</span>
+<span class="org-comment-delimiter">&lt;!--</span><span class="org-comment">########################### End_Citation [6]  ##########################</span><span class="org-comment-delimiter">--&gt;</span>
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>Other languages, should use their comment character.</li>
+</ul></li>
+<li>The exact number of <code>#</code> characters is not important, but there should be at least 10 before and after the citation.</li>
+<li>The start of the citation must say <code>Begin_Citation</code> and is case-sensitive. It must be followed by a valid reference number in square brackets</li>
+<li>The end of the citation must say <code>Begin_Citation</code> and is case-sensitive. It must be followed by a valid reference number in square brackets</li>
+<li>When the inline citation references source code that is part of a bigger project, the inline citation must include the filename and line numbers (e.g., [4, file.cpp:123-126]).
+<ul class="org-ul">
+<li>The citation must indicate the file and lines that were used (e.g., [4, file.cpp:123-126]</li>
+<li>If the code was copied or adapted, the reader must be able to find the source of that code based solely on the information you provide.</li>
+</ul></li>
+<li>Failure to strictly follow these formatting requirements is an academic integrity violation, even if it appears as an attempt to provide a citation.</li>
+<li>If you look at a former solution (which is highly discouraged), it is the default assumption that there will be a direct link between what you looked at
+and what you are going to be coding, even if code is not copied directly.
+<ul class="org-ul">
+<li>The influence of that code (whether implicit or explicit) must be acknowledged with inline citations specifying specific files and line numbers.</li>
+<li>The absence of specific inline citations is an assertion that there is not literal,
+functional, or architectural (outside of the assignment specifications) influence of that solution on your code.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgc90f13d" class="outline-3">
+<h3 id="orgc90f13d">Inline Comment Citations</h3>
+<div class="outline-text-3" id="text-orgc90f13d">
+<ul class="org-ul">
+<li>Comments are treated like other written text for the purpose of inline citations.</li>
+<li>It can be very appropriate to provide inline citations in comments.
+<ul class="org-ul">
+<li>For example, if you read a blog post that said "Algorithm X is good at Y", it is appropriate to place a comment</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org6753f4d" class="outline-2">
+<h2 id="org6753f4d">AI Tools</h2>
+<div class="outline-text-2" id="text-org6753f4d">
+<p>
+There are additional rules for AI tools (such as ChatGPT):
+</p>
+</div>
+<div id="outline-container-orgb3c1c72" class="outline-3">
+<h3 id="orgb3c1c72">External AI Tool</h3>
+<div class="outline-text-3" id="text-orgb3c1c72">
+<ol class="org-ol">
+<li>If your use of the AI tool is external to your text editor (e.g., you use a website) you must provide a transcript of the conversation in your git repository
+and refer to it in the citation.</li>
+<li>There must be a persistent and publicly accessible URL for each transcript:
+<ul class="org-ul">
+<li>The URL may be hosted with the AI tool provider, so long as the URL is publicly accessible</li>
+<li>The transcript may be stored in a separate <code>git</code> repository with the purpose of hosting your cited AI chats</li>
+<li>Transcripts may also be hosted within the same git repository as your code under an <code>ai_citations</code> directory.</li>
+</ul></li>
+<li>The format for citing an AI assistant is:
+<code>Model Name, ver X. Company Name. Used On: Date. Transcript Available: url to transcript</code>
+<ul class="org-ul">
+<li>Company name may be "Self-Hosted" if you are self-hosting the assistant.</li>
+</ul></li>
+<li>For long transcripts, the inline citation should include line numbers or other indicators of which section of the cited transcript
+provided the answer.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org9fb7ce8" class="outline-3">
+<h3 id="org9fb7ce8">Internal AI Tool</h3>
+<div class="outline-text-3" id="text-org9fb7ce8">
+<ol class="org-ol">
+<li>If your AI tool is tied into your text editor,
+<ul class="org-ul">
+<li>Commit prior to using the tool.</li>
+<li>Use the tool and accept the results</li>
+<li>Commit after the results were accepted.</li>
+</ul></li>
+<li>The citation format is <code>Name of AI Tool. Comapny. Used on Date. Commit prior to use SHA1</code></li>
+<li>Basic code-completion tasks that do not introduce new logic into the system are exempt.
+<ul class="org-ul">
+<li>Judgment is required here, but to meet the requirement, the generated code must not:
+<ol class="org-ol">
+<li>Introduce any control-flow or branching statements.</li>
+<li>Implement any arithmetic or logical expressions.</li>
+<li>Call API functions that you have never heard of before.</li>
+</ol></li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-orge8e10a3" class="outline-3">
+<h3 id="orge8e10a3">Example</h3>
+<div class="outline-text-3" id="text-orge8e10a3">
+<p>
+Here is an example <code>citations.txt</code>:
+</p>
+<pre class="example">
+Worked With: [List every person you worked with generally here.]
+[1] Github Copilot. Microsoft. Used on 9/21/2023. Commit prior to use is 3fd56754423456434233242. Commit after use is 4543123423423a
+[2] ChatGpt. OpenAIUsed on 9/22/2023. Transcript is in ./chatgpt/transcript1.txt
+[3] https://stackoverflow.com/the/answer Accessed on 9/23/22
+[4] John Smith [if John Smith gave you a specific idea outside of generally working with you].
+</pre>
+
+<p>
+And here is an example of a C++ file that used a citation
+</p>
+<div class="org-src-container">
+<pre class="src src-C++"><span class="org-preprocessor">#include</span><span class="org-string">&lt;iostream&gt;</span>
+
+<span class="org-comment-delimiter">// </span><span class="org-comment">############################## Begin_Citation [2, transcript1.txt:450-500] ##############################</span>
+<span class="org-type">int</span> <span class="org-function-name">main</span>()
+{
+   <span class="org-constant">std</span>::cout &lt;&lt; <span class="org-string">"Hello ROS!"</span> &lt;&lt; <span class="org-constant">std</span>::endl;
+   <span class="org-keyword">return</span> 0;
+}
+<span class="org-comment-delimiter">// </span><span class="org-comment">############################## End_Citation [2]  ###############################</span>
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf6150cd" class="outline-2">
+<h2 id="orgf6150cd">Group Projects</h2>
+<div class="outline-text-2" id="text-orgf6150cd">
+<p>
+In group coding projects (and unless otherwise specified), each person should be assigned a letter (<code>a-z</code>) an maintain their own citation numbering:
+</p>
+<ol class="org-ol">
+<li>All citations are suffixed with the letter of the person who added the citation (e.g., <code>[1a]</code>).</li>
+<li>Citation lists can be maintained separately as <code>citations_a.txt</code> for each person to avoid git conflicts.</li>
+<li>The citation list should be combined into a single <code>citations.txt</code> at the end of the project.
+<ul class="org-ul">
+<li>The numbering does not need to be redone, letter suffixes can remain.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgf9daa16" class="outline-2">
+<h2 id="orgf9daa16">References</h2>
+<div class="outline-text-2" id="text-orgf9daa16">
+<p>
+[1] IEEE Publication Operations. <i>IEEE Reference Guide</i>, V11.29.2023. 2023. Accessed: 9/5/2024 [Online]. Available <a href="https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf">https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf</a>
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Northwestern University MS in Robotics.  Date: September 9, 2024.</p></p>
+</div>
+</body>
+</html>
