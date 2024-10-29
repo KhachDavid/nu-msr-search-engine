@@ -56,7 +56,7 @@ def main():
 
     # Download HTML for each URL found by Katana
     for url in urls:
-        if url.startswith("http") and url.endswith('.html'):  # Basic validation of URLs
+        if url.startswith("http") and url.endswith("html"):  # Basic validation of URLs
             filename = download_html(url)
             if filename:  # Check if the download was successful
                 url_mapping[filename] = url  # Map filename to original URL
