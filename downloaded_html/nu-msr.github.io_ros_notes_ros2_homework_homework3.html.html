@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-10-29 Tue 11:30 -->
+<!-- 2024-10-29 Tue 13:56 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Homework 3</title>
@@ -38,7 +38,12 @@
 </li>
 <li><a href="#orgf85b96e">Part II: Motion Planning Interface (Group)</a>
 <ul>
-<li><a href="#org985238d">Group Organization</a></li>
+<li><a href="#org985238d">Group Organization</a>
+<ul>
+<li><a href="#orgb52226f">Dividing the Work</a></li>
+<li><a href="#org7fea994">Work Flow</a></li>
+</ul>
+</li>
 <li><a href="#orgf80b86e">Motion Planning</a></li>
 <li><a href="#org5e8eb6e">Planning Scene</a></li>
 <li><a href="#orgb4adc9a">Robot State</a></li>
@@ -51,7 +56,7 @@
 <li><a href="#org125340a">The Videos</a></li>
 </ul>
 </li>
-<li><a href="#org3a75a79">Virtual Testing</a></li>
+<li><a href="#orga1e040b">Virtual Testing (2)</a></li>
 </ul>
 </li>
 </ul>
@@ -243,6 +248,42 @@ familiar with ROS 2).
 </ul></li>
 </ul>
 </div>
+<div id="outline-container-orgb52226f" class="outline-4">
+<h4 id="orgb52226f">Dividing the Work</h4>
+<div class="outline-text-4" id="text-orgb52226f">
+<ul class="org-ul">
+<li>I have divided the project into components that can be worked on mostly independently, once interfaces between them are designed.</li>
+<li>I have also rated the effort required for each task
+<ul class="org-ul">
+<li>Each person should take on approximately 4 units of effort as their primary responsibility, and should also try to work on at least two areas.</li>
+<li>Each person should be available to help on any of the sections.</li>
+</ul></li>
+<li><a href="#orgf80b86e">Motion Planning</a>: 8 units</li>
+<li><a href="#org5e8eb6e">Planning Scene</a>: 2 units</li>
+<li><a href="#orgb4adc9a">Robot State</a>: 2 units</li>
+<li><a href="#orgcfe7637">Integration</a>: 4 units</li>
+<li><a href="#org29bb2e9">Sample Task</a> 4 units</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org7fea994" class="outline-4">
+<h4 id="org7fea994">Work Flow</h4>
+<div class="outline-text-4" id="text-org7fea994">
+<ol class="org-ol">
+<li>It makes sense to setup the project so that different people are working in different files.</li>
+<li>If one module depends on another, define the module boundaries early and implement stubs. Then fill in the stubs later.</li>
+<li>In some cases, the best way to help is via pair programming: one student works at the keyboard while another looks on and helps.
+<ul class="org-ul">
+<li>If you do pair programming, it is important that you take turns so that each partner can have commits.</li>
+<li>Especially at the beginning, as you are trying to establish the structure of the project, everyone being together and working on the same project makes sense.</li>
+</ul></li>
+<li>It is crucial to follow the <a href="../../../hackathon/git_intro.html#simple-git-workflow">Simple Git Workflow</a> and integrate your code into the <code>main</code> branch frequently
+<ul class="org-ul">
+<li>The longer the team diverges, the harder it is to integrate the code later.</li>
+</ul></li>
+</ol>
+</div>
+</div>
 </div>
 
 <div id="outline-container-orgf80b86e" class="outline-3">
@@ -272,10 +313,10 @@ Write a class called <code>MotionPlanner</code> that enables a user to:
 <li>Be executed immediately after planning</li>
 <li>Be saved and inspected at a later time</li>
 </ol></li>
+<li>Estimated Work Effort: 8 Work Units</li>
 </ol>
 </div>
 </div>
-
 <div id="outline-container-org5e8eb6e" class="outline-3">
 <h3 id="org5e8eb6e">Planning Scene</h3>
 <div class="outline-text-3" id="text-org5e8eb6e">
@@ -286,6 +327,7 @@ Write a class called <code>PlanningScene</code> that enables a user to:
 <li>Add or remove boxes to the planning scene dynamically, at any location</li>
 <li>Attach and detach collision objects to the robot's end-effector.</li>
 <li>Load a planning scene from parameters that specify the locations and sizes of objects.</li>
+<li>Estimated Work Effort: 1 Work Unit</li>
 </ol>
 </div>
 </div>
@@ -306,6 +348,7 @@ Write a class called <code>RobotState</code> that enables a user to:
 <li>If no pose is specified, use the current location</li>
 </ul></li>
 <li>Retrieve the most up-to-date joint configuration or end-effector pose from the robot.</li>
+<li>Estimated Work Effort: 2 Work Units</li>
 </ol>
 </div>
 </div>
@@ -333,6 +376,7 @@ Here are some challenges:
 </ul></li>
 <li>Some of the above functionality takes a long time (such as planning and moving the arm) so <code>UserNode</code> needs to have the ability to either
 wait for the task to complete or initiate a task, work on something else, and check for the result later.</li>
+<li>Estimated Work Effort: 4 Work Units</li>
 </ol>
 </div>
 </div>
@@ -404,9 +448,10 @@ Write a launchfile called <code>pickplace.launch.{xml,py}</code> (your choice of
 </div>
 </div>
 
-<div id="outline-container-org3a75a79" class="outline-3">
-<h3 id="org3a75a79">Virtual Testing</h3>
-<div class="outline-text-3" id="text-org3a75a79">
+
+<div id="outline-container-orga1e040b" class="outline-3">
+<h3 id="orga1e040b">Virtual Testing (2)</h3>
+<div class="outline-text-3" id="text-orga1e040b">
 <ol class="org-ol">
 <li>Write an integration test that uses the kinematic Franka simulation to command the <code>Franka Panda</code> robot to move from one pose to another and verify that the pose is achieved.</li>
 <li>Write an integration test, using the <code>Franka Panda</code> Robot demonstration that creates a planning scene object and attempts to move the robot into that object and verify that planning fails.</li>

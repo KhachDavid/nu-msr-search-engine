@@ -37,8 +37,8 @@
             color: gray;
         }
         .highlight {
-            background-color: yellow;  /* Highlight color */
-            font-weight: bold;          /* Bold text */
+            background-color: yellow;
+            font-weight: bold;
         }
 
     </style>
@@ -67,6 +67,13 @@
         let htmlFiles = [];
         let urlMapping = {};
 
+        /**
+         * Fetches the list of available HTML files from the server.
+         * Populates the global `htmlFiles` array with the file names.
+         * Logs an error if the fetch operation fails.
+         * @async
+         * @returns {Promise<void>}
+         */
         async function fetchHtmlFiles() {
             const response = await fetch('/files');
             if (response.ok) {
@@ -76,6 +83,13 @@
             }
         }
 
+        /**
+         * Fetches the URL mapping from the server.
+         * Populates the global `urlMapping` object with file-to-URL mappings.
+         * Logs an error if the fetch operation fails.
+         * @async
+         * @returns {Promise<void>}
+         */
         async function fetchUrlMapping() {
             const response = await fetch('downloaded_html/url_mapping.json');
             if (response.ok) {
@@ -85,15 +99,22 @@
             }
         }
 
+        /**
+         * Searches through the HTML files for the user's query.
+         * Filters out specific files based on the 'Exclude ROS1 Results' checkbox.
+         * Highlights matching terms and displays search results with excerpts.
+         * @async
+         * @returns {Promise<void>}
+         */
         async function searchFiles() {
             const query = document.getElementById('searchInput').value.trim().toLowerCase();
             const resultsDiv = document.getElementById('results');
-            resultsDiv.innerHTML = '';  // Clear previous results
-                
-            if (query.length < 2) return;  // Avoid short searches, modify to allow two-character queries
-                
-            const excludeRos1 = document.getElementById('ros1Filter').checked;  // Check if the filter is enabled
-                
+            resultsDiv.innerHTML = '';
+
+            if (query.length < 2) return;
+
+            const excludeRos1 = document.getElementById('ros1Filter').checked;
+
             // Loop through files and search for the query
             for (const file of htmlFiles) {
                 const res = await fetch(`downloaded_html/${file}`);
@@ -101,13 +122,12 @@
             
                 // Check if the content should be excluded
                 if (excludeRos1 && file.includes('ros_notes_ros1')) {
-                    continue;  // Skip this file
+                    continue;
                 }
             
-                // Use a case-insensitive regex to search for the query
-                const regex = new RegExp(query, 'gi');  // Create a case-insensitive regex
+                const regex = new RegExp(query, 'gi');
                 const index = htmlContent.toLowerCase().search(regex);
-                
+
                 if (index !== -1) {
                     const excerpt = getExcerpt(htmlContent, index, query.length);
                     const vanillaExcerpt = getExcerpt(htmlContent, index, query.length, true);
@@ -116,7 +136,15 @@
             }
         }
 
-
+        /**
+         * Extracts a text excerpt surrounding the search query in the content.
+         * Optionally returns a vanilla (URL-encoded) version for link building.
+         * @param {string} content - The HTML content of the file.
+         * @param {number} index - The index where the search query is found.
+         * @param {number} queryLength - Length of the search query.
+         * @param {boolean} [vanilla=false] - If true, returns a URL-encoded excerpt.
+         * @returns {string} - Highlighted or URL-encoded excerpt.
+         */
         function getExcerpt(content, index, queryLength, vanilla=false) {
             const start = Math.max(0, index - 300);  // Show 300 characters before the match
             const end = Math.min(content.length, index + queryLength + 300);  // And 300 after
@@ -142,7 +170,13 @@
             return `...${highlightedExcerpt}...`; // Return the cleaned and highlighted excerpt
         }
 
-
+        /**
+         * Adds a search result entry to the results section.
+         * Includes a clickable link to the original file with text highlighting.
+         * @param {string} file - The name of the HTML file.
+         * @param {string} excerpt - Highlighted excerpt of matching content.
+         * @param {string} vanillaExcerpt - URL-encoded excerpt for fragment identifier.
+         */
         function addResult(file, excerpt, vanillaExcerpt) {
             const resultsDiv = document.getElementById('results');
         
@@ -155,9 +189,9 @@
 
             const excerptDiv = document.createElement('div');
             excerptDiv.className = 'excerpt';
-            excerptDiv.innerHTML = excerpt;  // Use innerHTML to render HTML properly
+            excerptDiv.innerHTML = excerpt;
         
-            link.href = `${urlMapping[file]}#:~:text=${vanillaExcerpt}`;  // Append the text fragment for highlighting
+            link.href = `${urlMapping[file]}#:~:text=${vanillaExcerpt}`;
             link.target = '_blank';  // Open in a new tab
             link.textContent = urlMapping[file];
 
@@ -169,7 +203,7 @@
 
         function handleKeyPress(event) {
             if (event.key === 'Enter') {
-                searchFiles();  // Trigger search on Enter key press
+                searchFiles();
             }
         }
 
@@ -178,11 +212,10 @@
             return params.get('search');
         }
 
-        // Highlight the search term in the document body
         function highlightSearchTermInDocument() {
             const searchTerm = getSearchTerm();
             if (searchTerm) {
-                const regex = new RegExp(`(${searchTerm})`, 'gi'); // Create a case-insensitive regex
+                const regex = new RegExp(`(${searchTerm})`, 'gi');
                 document.body.innerHTML = document.body.innerHTML.replace(regex, '<span class="highlight">$1</span>');
             }
         }
