@@ -1,5 +1,7 @@
 # NU MSR Website Search Engine
 
+Available: [khachdavid.github.io](https://khachdavid.github.io/nu-msr-search-engine/)
+
 This repository contains two main components:
 
 1. HTML Scraper: A program that scrapes all HTML files from [nu-msr.github.io](https://nu-msr.github.io/) and downloads them as lookup files for further use.
