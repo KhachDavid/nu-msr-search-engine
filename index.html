@@ -9,6 +9,22 @@
             font-family: Arial, sans-serif;
             padding: 20px;
         }
+        html, body {
+           margin:0;
+           padding:0;
+           height:100%;
+        }
+        #header {
+            padding:10px;
+        }
+        #container {    
+            min-height:100%;
+            position:relative;
+        }
+        #body {
+            padding:10px;
+            padding-bottom:60px;
+        }
         input[type="text"] {
             width: 80%;
             padding: 10px;
@@ -40,28 +56,59 @@
             background-color: yellow;
             font-weight: bold;
         }
-
+        #footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 30px;
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+        }
+        footer {
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+            position:absolute;
+            bottom:0;
+        }
+        footer a {
+            color: blue;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
-    <h1>MSR Search Engine</h1>
-    <input 
-        type="text" 
-        id="searchInput" 
-        placeholder="Enter keyword..." 
-        onkeypress="handleKeyPress(event)" 
-        autofocus
-    />
-    <button onclick="searchFiles()">Search</button>
+    <div id="container">
+        <div id="header">
+            <h1>MSR Search Engine</h1>
+        </div>
+
+        <div id="body">
+            <input 
+               type="text" 
+               id="searchInput" 
+               placeholder="Enter keyword..." 
+               onkeypress="handleKeyPress(event)" 
+               autofocus
+            >
+            <button onclick="searchFiles()">Search</button>
     
-    <div class="filter">
-        <label>
-            <input type="checkbox" id="ros1Filter" checked />
-            Exclude ROS1 Results
-        </label>
+            <div class="filter">
+                <label>
+                    <input type="checkbox" id="ros1Filter" checked />
+                    Exclude ROS1 Results
+                </label>
+            </div>
+    
+            <div id="results"></div>
+        </div>
+        <div id="footer">
+            <footer>
+                <p>View this project on <a href="https://github.com/KhachDavid/nu-msr-search-engine" target="_blank">GitHub</a></p>
+            </footer>
+        </div>
     </div>
-    
-    <div id="results"></div>
 
     <script>
         let htmlFiles = [];
