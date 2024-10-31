@@ -74,14 +74,14 @@
          * @async
          * @returns {Promise<void>}
          */
-        async function fetchHtmlFiles() {
-            const response = await fetch('/files');
-            if (response.ok) {
-                htmlFiles = await response.json();
-            } else {
-                console.error('Failed to fetch HTML files');
-            }
-        }
+        //async function fetchHtmlFiles() {
+        //    const response = await fetch('/files');
+        //    if (response.ok) {
+        //        htmlFiles = await response.json();
+        //    } else {
+        //        console.error('Failed to fetch HTML files');
+        //    }
+        //}
 
         /**
          * Fetches the URL mapping from the server.
@@ -94,6 +94,7 @@
             const response = await fetch('downloaded_html/url_mapping.json');
             if (response.ok) {
                 urlMapping = await response.json();
+                htmlFiles = Object.keys(`downloaded_html/${urlMapping}`);
             } else {
                 console.error('Failed to fetch URL mapping');
             }
