@@ -94,6 +94,13 @@
          * @returns {Promise<void>}
          */
         async function searchFiles() {
+            // if there are multiple keywords
+            // we handle in the following way
+            // get a list of files for each keyword
+            // where each element is a file containing the keyword
+            // take the intersection of all the sets
+            // return the intersection set
+            // filter ros1 as needed
             const query = document.getElementById('searchInput').value.trim().toLowerCase();
             const resultsDiv = document.getElementById('results');
             resultsDiv.innerHTML = '';
@@ -101,25 +108,49 @@
             if (query.length < 2) return;
 
             const excludeRos1 = document.getElementById('ros1Filter').checked;
+            const keywords = query.split(/\s+/);
+            const fileSets = [];
 
-            // Loop through files and search for the query
-            for (const file of htmlFiles) {
-                const res = await fetch(`downloaded_html/${file}`);
-                const htmlContent = await res.text();
-            
-                // Check if the content should be excluded
-                if (excludeRos1 && file.includes('ros_notes_ros1')) {
-                    continue;
+            for (const keyword of keywords) {
+                const matchingFiles = new Set();
+
+                for (const file of htmlFiles) {
+                    const res = await fetch(`downloaded_html/${file}`);
+                    const htmlContent = await res.text();
+
+                    // Check if the content should be excluded
+                    if (excludeRos1 && file.includes('ros_notes_ros1')) {
+                        continue;
+                    }
+
+                    const regex = new RegExp(keyword, 'gi');
+                    const index = htmlContent.toLowerCase().search(regex);
+
+                    if (index !== -1) {
+                        matchingFiles.add(file);
+                    }
                 }
-            
-                const regex = new RegExp(query, 'gi');
-                const index = htmlContent.toLowerCase().search(regex);
+        
+                fileSets.push(matchingFiles);
+            }
 
-                if (index !== -1) {
-                    const excerpt = getExcerpt(htmlContent, index, query.length);
-                    const vanillaExcerpt = getExcerpt(htmlContent, index, query.length, true);
+            const intersection = fileSets.reduce((acc, curr) => {
+                if (acc === null) return curr;
+                return new Set([...acc].filter(x => curr.has(x)));
+            }, null);
+
+            if (intersection && intersection.size > 0) {
+                for (const file of intersection) {
+                    const res = await fetch(`downloaded_html/${file}`);
+                    const htmlContent = await res.text();
+            
+                    const index = htmlContent.toLowerCase().search(new RegExp(keywords.join('|'), 'gi'));
+                    const excerpt = getExcerpt(htmlContent, index, keywords.join('|').length);
+                    const vanillaExcerpt = getExcerpt(htmlContent, index, keywords.join('|').length, true);
                     addResult(file, excerpt, vanillaExcerpt);
                 }
+            } else {
+                resultsDiv.innerHTML = '<p>No results found.</p>';
             }
         }
 
@@ -132,29 +163,31 @@
          * @param {boolean} [vanilla=false] - If true, returns a URL-encoded excerpt.
          * @returns {string} - Highlighted or URL-encoded excerpt.
          */
-        function getExcerpt(content, index, queryLength, vanilla=false) {
-            const start = Math.max(0, index - 300);  // Show 300 characters before the match
-            const end = Math.min(content.length, index + queryLength + 300);  // And 300 after
+         function getExcerpt(content, index, queryLength, vanilla = false) {
+            const start = Math.max(0, index - 300);
+            const end = Math.min(content.length, index + queryLength + 300);
             const excerptHtml = content.slice(start, end);
-                
-            // Create a temporary element to parse the HTML and extract text
+
             const tempDiv = document.createElement('div');
             tempDiv.innerHTML = excerptHtml;
-                
-            // Get the text content only
+
             const textContent = tempDiv.textContent || tempDiv.innerText || "";
-            // Highlight the search term in the text content
-            const searchTerm = document.getElementById('searchInput').value.trim();
+            const searchTerms = document.getElementById('searchInput').value.trim().toLowerCase().split(/\s+/);
 
             if (vanilla) {
-                const encodedSearchTerm = encodeURIComponent(searchTerm);
-                return encodedSearchTerm
+                return searchTerms.map(term => encodeURIComponent(term)).join(', ');
             }
+            let highlightedExcerpt = textContent;
+            searchTerms.forEach(term => {
+                if (term) {
+                    const regex = new RegExp(`(${term})`, 'i');
+                    highlightedExcerpt = highlightedExcerpt.replace(regex, (match) => {
+                        return `<span class="highlight">${match}</span>`;
+                    });
+                }
+            });
 
-            const regex = new RegExp(`(${searchTerm})`, 'gi'); // Create a case-insensitive regex
-            const highlightedExcerpt = textContent.replace(regex, '<span class="highlight">$1</span>');
-                
-            return `...${highlightedExcerpt}...`; // Return the cleaned and highlighted excerpt
+            return `...${highlightedExcerpt}...`;
         }
 
         /**
