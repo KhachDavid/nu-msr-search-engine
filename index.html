@@ -94,7 +94,9 @@
             const response = await fetch('downloaded_html/url_mapping.json');
             if (response.ok) {
                 urlMapping = await response.json();
-                htmlFiles = Object.keys(`downloaded_html/${urlMapping}`);
+                const keys = Object.keys(urlMapping)
+                
+                htmlFiles = keys.map(key => `downloaded_html/${key}`);
             } else {
                 console.error('Failed to fetch URL mapping');
             }
@@ -223,7 +225,7 @@
 
         window.onload = async () => {
             await fetchUrlMapping();  // Fetch URL mapping on page load
-            await fetchHtmlFiles();  // Fetch files when the page loads
+            //await fetchHtmlFiles();  // Fetch files when the page loads
             highlightSearchTermInDocument()
         };
     </script>
