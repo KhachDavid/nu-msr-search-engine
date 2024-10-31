@@ -68,22 +68,6 @@
         let urlMapping = {};
 
         /**
-         * Fetches the list of available HTML files from the server.
-         * Populates the global `htmlFiles` array with the file names.
-         * Logs an error if the fetch operation fails.
-         * @async
-         * @returns {Promise<void>}
-         */
-        //async function fetchHtmlFiles() {
-        //    const response = await fetch('/files');
-        //    if (response.ok) {
-        //        htmlFiles = await response.json();
-        //    } else {
-        //        console.error('Failed to fetch HTML files');
-        //    }
-        //}
-
-        /**
          * Fetches the URL mapping from the server.
          * Populates the global `urlMapping` object with file-to-URL mappings.
          * Logs an error if the fetch operation fails.
@@ -96,7 +80,7 @@
                 urlMapping = await response.json();
                 const keys = Object.keys(urlMapping)
                 
-                htmlFiles = keys.map(key => `downloaded_html/${key}`);
+                htmlFiles = keys.map(key => `${key}`);
             } else {
                 console.error('Failed to fetch URL mapping');
             }
@@ -225,7 +209,6 @@
 
         window.onload = async () => {
             await fetchUrlMapping();  // Fetch URL mapping on page load
-            //await fetchHtmlFiles();  // Fetch files when the page loads
             highlightSearchTermInDocument()
         };
     </script>
