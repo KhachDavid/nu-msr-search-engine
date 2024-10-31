@@ -24,7 +24,7 @@ class MyHandler(SimpleHTTPRequestHandler):
 
         If the requested path is `/files`, it lists all HTML files in the
         `downloaded_html` directory and sends them as a JSON response.
-        For other paths, it falls back to the default behavior of 
+        For other paths, it falls back to the default behavior of
         :class:`SimpleHTTPRequestHandler`.
         """
         if self.path == '/files':
