@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-10-29 Tue 13:56 -->
+<!-- 2024-11-04 Mon 10:57 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Homework 3</title>
@@ -56,7 +56,7 @@
 <li><a href="#org125340a">The Videos</a></li>
 </ul>
 </li>
-<li><a href="#orga1e040b">Virtual Testing (2)</a></li>
+<li><a href="#org0555217">Testing and Documentation</a></li>
 </ul>
 </li>
 </ul>
@@ -124,10 +124,13 @@ There is a hints section at the bottom of each section.
 <ul class="org-ul">
 <li>For now, it should launch gazebo and load the world you just created.</li>
 </ul></li>
+
+<li><b>IMPORTANT</b> Make sure that the world <code>sdf</code> file does not contain any absolute paths. It seems that the resource spawner will use <code>absolute</code> paths on
+your local machine. You will likely need to manually edit the <code>sdf</code> file and replace <code>file://</code> absolute paths with <code>model://</code> relative paths.
+See <a href="../simulation.html#resource_spawner">Resource Spawner Notes</a> for more details.</li>
 </ol>
 </div>
 </div>
-
 <div id="outline-container-org2943e90" class="outline-3">
 <h3 id="org2943e90">The Xacro URDF</h3>
 <div class="outline-text-3" id="text-org2943e90">
@@ -449,12 +452,13 @@ Write a launchfile called <code>pickplace.launch.{xml,py}</code> (your choice of
 </div>
 
 
-<div id="outline-container-orga1e040b" class="outline-3">
-<h3 id="orga1e040b">Virtual Testing (2)</h3>
-<div class="outline-text-3" id="text-orga1e040b">
+<div id="outline-container-org0555217" class="outline-3">
+<h3 id="org0555217">Testing and Documentation</h3>
+<div class="outline-text-3" id="text-org0555217">
 <ol class="org-ol">
 <li>Write an integration test that uses the kinematic Franka simulation to command the <code>Franka Panda</code> robot to move from one pose to another and verify that the pose is achieved.</li>
 <li>Write an integration test, using the <code>Franka Panda</code> Robot demonstration that creates a planning scene object and attempts to move the robot into that object and verify that planning fails.</li>
+<li>Running <code>rosdoc2</code> on your library should provide usable API documentation.</li>
 </ol>
 </div>
 </div>

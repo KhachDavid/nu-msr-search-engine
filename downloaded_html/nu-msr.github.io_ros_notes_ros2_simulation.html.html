@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-10-29 Tue 13:56 -->
+<!-- 2024-11-04 Mon 10:57 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Simulation</title>
@@ -42,6 +42,11 @@
 <li><a href="#org2c713ec">Installation</a></li>
 <li><a href="#org503b5c5">Running</a></li>
 <li><a href="#orge6cbaf0">Package Layout</a></li>
+<li><a href="#orgd91a4bd">SDF Files</a>
+<ul>
+<li><a href="#resource_spawner">Resource Spawner</a></li>
+</ul>
+</li>
 <li><a href="#org72f6d26">Loading URDF/SDF files</a>
 <ul>
 <li><a href="#orgb09d5a5">Debugging</a></li>
@@ -49,7 +54,7 @@
 </li>
 <li><a href="#org576c102">Plugins</a></li>
 <li><a href="#org4ecdd84">Bridging</a></li>
-<li><a href="#orgd91a4bd">SDF Files</a></li>
+<li><a href="#org7a90789">Simulation Time</a></li>
 <li><a href="#transition">Software in Transition</a></li>
 <li><a href="#org117ad1f">Documentation</a></li>
 </ul>
@@ -289,7 +294,11 @@ other using.  There are counterparts to ROS mesages and services,but these are e
 <ol class="org-ol">
 <li>Typically, <code>xacro</code> files go under the <code>urdf</code> directory in the package</li>
 <li>SDF files for <code>worlds</code> go in a <code>worlds/</code> directory and are installed to <code>share/&lt;pkg_name&gt;/worlds</code></li>
-<li>SDF files for <code>models</code> go in a <code>models/</code> directory and are installed to <code>share/&lt;pkg_name&gt;/models</code></li>
+<li>SDF files for <code>models</code> go in a <code>models/</code> directory and are installed to <code>share/&lt;pkg_name&gt;/models</code>
+<ul class="org-ul">
+<li>Each model has all of its assets under a subdirectory of models (e.g., <code>models/mymodel</code>)</li>
+<li>Each model has a <code>model.sdf</code> file that specifies the model name. To find the model, the name of the subdirectory must match the model name.</li>
+</ul></li>
 <li><p>
 The <code>GZ_SIM_&lt;SOMETHING&gt;_PATH</code> environment variables tells <code>gazebo</code> where to find SDF files and other resources
 </p>
@@ -306,7 +315,7 @@ prepend-non-duplicate;GZ_SIM_RESOURCE_PATH;share/&lt;pkg_name&gt;/worlds
 <ul class="org-ul">
 <li>Follow the <a href="./colcon.html#colcon-pkg">colcon.pkg</a> instructions to install the hook and have it update the environment whenever you source <code>install/setup.bash</code>
 <ul class="org-ul">
-<li>When the hook is installed properly, after <code>source install/setup.bash</code>, <code>echo $GAZEBO_RESOURCE_PATH</code> should contain the paths to the <code>gazebo</code> resources</li>
+<li>When the hook is installed properly, after <code>source install/setup.bash</code>, <code>echo $GZ_SIM_RESOURCE_PATH</code> should contain the paths to the <code>gazebo</code> resources</li>
 </ul></li>
 </ul></li>
 <li>An example of this package layout can be found at <a href="https://github.com/m-elwin/me495_gazebo">https://github.com/m-elwin/me495_gazebo</a>.</li>
@@ -316,30 +325,84 @@ we are not currently adopting this practice: see <a href="#transition">Transitio
 </div>
 </div>
 
+<div id="outline-container-orgd91a4bd" class="outline-3">
+<h3 id="orgd91a4bd">SDF Files</h3>
+<div class="outline-text-3" id="text-orgd91a4bd">
+<ul class="org-ul">
+<li>Gazebo uses <a href="https://sdformat.org">SDF</a> files to represent robots, worlds, and everything that appears in the simulation.</li>
+<li><a href="http://sdformat.org/tutorials?">SDF Tutorials</a> provides help with writing SDF files, including building worlds</li>
+<li><a href="https://app.gazebosim.org/fuel">Fuel</a> is a library where people share SDF models and worlds. The website contains functionality to preview, download, and link-to assets for simulation
+<ul class="org-ul">
+<li>There are two ways of including models from Fuel: downloading them and distributing them with your package, or referring to them via URI.</li>
+<li>Fuel allows you to copy a snippet of SDF to your clipboard that can be added to a world to link to the asset via URI, it is the <code>&lt;&gt;</code> simple.</li>
+<li>You can also download the model as a zip file and include it in your package</li>
+</ul></li>
+</ul>
+</div>
+<div id="outline-container-resource_spawner" class="outline-4">
+<h4 id="resource_spawner">Resource Spawner</h4>
+<div class="outline-text-4" id="text-resource_spawner">
+<ul class="org-ul">
+<li>Technically the resource spawner should allow you to directly add models from Fuel into the world, but that is not working as of 10/15/2024.
+<ul class="org-ul">
+<li>If you want to include a file by URI at a spawned location, put a built-in model at the desired location, then edit the SDF file manually:
+use the pose of the built-in model, but replace it with the URI of the desired model</li>
+</ul></li>
+<li>Resources added from the local machine seem to be saved with absolute paths in the <code>SDF</code> file. You should edit the SDF file to remove these
+absolute paths and replace them with <code>model://</code> URI's.  You replace the path up to and including the location of your package's <code>models</code> directory
+with <code>model://</code></li>
+</ul>
+</div>
+</div>
+</div>
 
 <div id="outline-container-org72f6d26" class="outline-3">
 <h3 id="org72f6d26">Loading URDF/SDF files</h3>
 <div class="outline-text-3" id="text-org72f6d26">
 <ul class="org-ul">
-<li>ROS can be used to load both URDF and SDF models into the simulator</li>
-<li>URDF files are automatically converted to SDF prior to being loaded</li>
+<li>ROS can be used to load both URDF and SDF models into the simulator.
+<ul class="org-ul">
+<li>URDF files are automatically converted to SDF prior to being loaded.</li>
+</ul></li>
+<li><p>
+Additional <code>sdf</code> tags can be added to a URDF by using the <code>&lt;gazebo&gt;</code> tag, which provide additional flexibility when converting a URDF to an SDF
+</p>
+<div class="org-src-container">
+<pre class="src src-xml"><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">robot</span> <span class="org-nxml-namespace-attribute-xmlns">xmlns</span><span class="org-nxml-namespace-attribute-colon">:</span><span class="org-nxml-namespace-attribute-prefix">xacro</span>=<span class="org-string">"http://www.ros.org/wiki/xacro</span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span>
+<span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span>
+<span class="org-string">&lt;!-- Resulting SDF file will have all the SDF tags here and will be associated with the full robot model at the top-level--&gt;</span>
+<span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-tag-slash">/</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span>
+<span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"> </span><span class="org-string"><span class="org-nxml-attribute-local-name">reference</span></span><span class="org-string">="</span>link_name<span class="org-string">"</span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span>
+<span class="org-string">&lt;!-- resulting SDF file will have these SDF tags under the link named "</span>link_name<span class="org-string">" --&gt;</span>
+<span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-tag-slash">/</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span>
+<span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"> </span><span class="org-string"><span class="org-nxml-attribute-local-name">reference</span></span><span class="org-string">="</span>joint_name<span class="org-string">"</span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span>
+<span class="org-string">&lt;!-- resulting SDF file will have these SDF tags under the joint named "</span>joint_name<span class="org-string">" --&gt;</span>
+<span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-tag-slash">/</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span>
+<span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-tag-slash">/</span></span><span class="org-string"><span class="org-nxml-element-local-name">robot</span></span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span>
+</pre>
+</div></li>
+<li>A typical project structure is for a robot to provide:
+<ol class="org-ol">
+<li>A <code>robot.urdf.xacro</code> file that contains robot definition without any gazebo tags.</li>
+<li>A <code>robot.gazebo.xacro</code> file that includes only the tags necessary for gazebo</li>
+<li><code>robot.urdf.xacro</code> takes an argument (e.g., <code>gazebo</code> that conditionally includes <code>robot.gazebo.xacro</code>.
+<ul class="org-ul">
+<li>If the argument is true, the <code>robot.gazebo.xacro</code> file is included</li>
+<li>If the argument is false, the <code>robot.gazebo.xacro</code> file is NOT included, and the resulting URDF file is free of any gazebo dependencies</li>
+</ul></li>
+</ol></li>
+
+<li>For a URDF model to be loaded in gazebo successfully, it is required that all links have visual, collision and inertia specified.</li>
+<li>The SDF Format specifies how the <a href="http://sdformat.org/tutorials?tut=sdformat_urdf_extensions&amp;cat=specification&amp;">Gazebo extension to URDF</a> works.</li>
+</ul>
+
+
+<ul class="org-ul">
 <li><code>ros2 run ros_gz_sim create</code> is a ROS node that can load urdf/sdf data into gazebo
 <ul class="org-ul">
 <li>The data can come from a file, a parameter, a topic, or a string</li>
 <li>Typically, you will load the data from the <code>/robot_description</code> topic</li>
 <li><code>ros2 run ros_gz_sim create --help</code> for all the options</li>
-</ul></li>
-<li>Additional <code>sdf</code> tags can be added to a URDF by using the <code>&lt;gazebo&gt;</code> tag
-<ul class="org-ul">
-<li><code>&lt;gazebo&gt;sdftags go here&lt;/gazebo&gt;</code> associates the SDF tags with the full model
-<ul class="org-ul">
-<li>Useful for adding model-wide plugins like the diff-drive robot</li>
-</ul></li>
-<li><code>&lt;gazebo reference="link_name|joint_name"&gt;sdftags go here&lt;/gazebo&gt;</code> associates the SDF tag with the specified link or joint from the URDF</li>
-</ul></li>
-<li>For a URDF model to be loaded in gazebo successfully, it requires, at a minimum:
-<ul class="org-ul">
-<li>All links must have visual, collision, and inertia</li>
 </ul></li>
 </ul>
 </div>
@@ -410,22 +473,23 @@ when trying to load your model.
 </div>
 </div>
 
-<div id="outline-container-orgd91a4bd" class="outline-3">
-<h3 id="orgd91a4bd">SDF Files</h3>
-<div class="outline-text-3" id="text-orgd91a4bd">
+<div id="outline-container-org7a90789" class="outline-3">
+<h3 id="org7a90789">Simulation Time</h3>
+<div class="outline-text-3" id="text-org7a90789">
+<ol class="org-ol">
+<li>Time in simulation can run at a different speed than time in the real world</li>
+<li>ROS 2 Nodes can use time from a simulator by setting the <code>use_sim_time</code> parameter to <code>true</code></li>
+<li>When <code>use_sim_time</code> is <code>true</code> the node will get it's time from the <code>/clock</code> topic rather than the system clock.
 <ul class="org-ul">
-<li>ROS uses URDF files to represent robots</li>
-<li>Gazebo uses <a href="https://sdformat.org">SDF</a> files to represent robots and other objects</li>
-<li>Gazebo provides extensions to URDF files that enable it to convert URDF to SDF automatically</li>
-<li><a href="http://sdformat.org/tutorials?">SDF Tutorials</a> provides help with writing SDF files, including building worlds</li>
-<li><a href="https://app.gazebosim.org/fuel">Fuel</a> is a library where people share SDF models and worlds. The website contains functionality to
-preview, download, and link-to assets for simulation</li>
-<li>Typically, the Gazebo-specific parts of the URDF are kept in a separate file called <code>&lt;robotname&gt;.gazebo.xacro</code></li>
-<li>Using the <code>xacro:include</code> tag (and with the <code>$(find package)</code> substitution), the main URDF file loads the <code>gazebo</code> file</li>
-</ul>
+<li>For example, if the simulation is running at <code>50%</code> real time, then a <code>100Hz</code> timer in a ROS 2 node using simulation time
+will have that timer go off at <code>100Hz</code> in simulation time, which corresponds to <code>50Hz</code> in realtime.</li>
+</ul></li>
+<li>To get <code>Gazebo</code> to generate <code>clock</code> topic, it must be bridged to <code>ros</code> using the <code>parameter_bridge</code>: by passing <code>/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock</code></li>
+<li>For many simulation applications, nodes do not need to use simulation time. However, if code is checking timestamps (such as the Nav2 stack), then
+ensuring that all nodes are using simulated time becomes important.</li>
+</ol>
 </div>
 </div>
-
 <div id="outline-container-transition" class="outline-3">
 <h3 id="transition">Software in Transition</h3>
 <div class="outline-text-3" id="text-transition">

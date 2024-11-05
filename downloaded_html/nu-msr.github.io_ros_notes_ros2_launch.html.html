@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-10-29 Tue 13:56 -->
+<!-- 2024-11-04 Mon 10:57 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Launchfiles</title>
@@ -347,8 +347,9 @@ however there are some things that can only be done in python and others (when l
 <ul class="org-ul">
 <li>This action includes a launchfile as described by a <a href="http://docs.ros.org/en/jazzy/p/launch/launch.launch_description_source.html#launch.launch_description_source.LaunchDescriptionSource">launch.LaunchDescriptionSource</a> object or a string</li>
 <li>Equivalent to the <code>&lt;include&gt;</code> tag in XML</li>
+<li>There is also <code>IncludePythonLaunchDescription</code>. This is entirely unnecessary to use: <code>IncludeLaunchDescription</code> will load any <code>launchfile</code> regardless of type.</li>
 </ul></li>
-<li>The <a href="http://docs.ros.org/en/jazzy/p/launch/launch.actions.execute_process.html#launch.actions.execute_process.ExecuteProcess">launch.actions.ExecuteProcess</a> enables running a (non-node) process in the launchfile 
+<li>The <a href="http://docs.ros.org/en/jazzy/p/launch/launch.actions.execute_process.html#launch.actions.execute_process.ExecuteProcess">launch.actions.ExecuteProcess</a> enables running a (non-node) process in the launchfile
 <ul class="org-ul">
 <li>Equivalent to the <code>&lt;executable&gt;</code> tag in XML (ROS 2 only)</li>
 </ul></li>

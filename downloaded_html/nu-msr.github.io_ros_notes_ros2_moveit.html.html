@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-10-29 Tue 13:56 -->
+<!-- 2024-11-04 Mon 10:57 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MoveIt 2 Introduction</title>
@@ -85,7 +85,7 @@ but it is also accessible from C++ and via ROS 2.
 <h2 id="org94c87e3">Getting Started</h2>
 <div class="outline-text-2" id="text-org94c87e3">
 <p>
-Install moveit: <code>sudo apt install ros-iron-moveit</code>.
+Install moveit: <code>sudo apt install ros-jazzy-moveit</code>.
 </p>
 </div>
 </div>
@@ -105,19 +105,20 @@ Install moveit: <code>sudo apt install ros-iron-moveit</code>.
 <li><a href="https://moveit.picknik.ai/main/api/html/classmoveit_1_1planning__interface_1_1MoveGroupInterface.html">move_group_interface</a> is a C++ library that makes interacting with the move_group node easier.
 <ul class="org-ul">
 <li>It is analogous to how Broadcasters and Listeners make interfacing with the <code>/tf</code> topic easier even though you could publish/subscribe directly.</li>
-<li>In ROS 1 there were python bindings to this library but they do not yet exist in ROS 2</li>
+<li>In ROS 1 there were python bindings that made using the ROS API easier, but this does not exist in ROS 2 (yet).</li>
 </ul></li>
 
-<li><a href="https://moveit.picknik.ai/main/doc/examples/examples.html#using-moveit-directly-through-the-c-api">MoveItCpp</a> is C++ API for MoveIt. Rather than communicating with a separate <code>move_group</code> node, it essentially makes the node you are using
-into the <code>move_group</code> node.
+<li><a href="https://moveit.picknik.ai/main/doc/examples/examples.html#using-moveit-directly-through-the-c-api">MoveItCpp</a> is C++ API for MoveIt.
 <ul class="org-ul">
-<li>One advantage is that there can be less overhead related to sending messages back and forth between your node and the move_group node.</li>
-<li>One disadvantage is that it is more complicated and requires configuring the node properly with the numerous MoveIt options</li>
+<li>Rather than communicating with a separate <code>move_group</code> node, it essentially makes the node you are using into the <code>move_group</code> node.</li>
+<li>One advantage is that there can be less latency related to sending messages back and forth between your node and the move_group node.</li>
+<li>One disadvantage is that it is more complicated and requires configuring the node properly with the numerous MoveIt options,
+and there is not necessarily one central location for tracking robot state.</li>
 </ul></li>
-<li><a href="https://moveit.picknik.ai/main/doc/examples/examples.html#using-moveit-directly-through-the-python-api">moveit_py</a> Python Library: A python library (wrapping the MoveItCpp library) is officially released as a part of <code>moveit</code>
+<li><a href="https://moveit.picknik.ai/main/doc/examples/examples.html#using-moveit-directly-through-the-python-api">moveit_py</a> Python Library.
 <ul class="org-ul">
-<li>It does not currently have all the functionality we require</li>
-<li>We are using the moveit fork where this is being developed (in the <code>nuws</code>. It might be ready by the end of October</li>
+<li>A python library (wrapping the MoveItCpp library) is officially released as a part of <code>moveit</code></li>
+<li>It does not currently have all the functionality we require.</li>
 </ul></li>
 <li><code>rviz plugin</code> MoveIt has special plugins for <code>rviz</code> to interactively perform motion planning.
 <ul class="org-ul">
@@ -138,8 +139,11 @@ into the <code>move_group</code> node.
 <h3 id="org0368679">Semantic Robot Description Format</h3>
 <div class="outline-text-3" id="text-org0368679">
 <ul class="org-ul">
-<li>An <a href="https://wiki.ros.org/srdf">srdf</a> describes information about your robot to help with motion planning</li>
-<li>Accompanies the <code>urdf</code> and describes additional information about the joints and links</li>
+<li>An <a href="https://wiki.ros.org/srdf">srdf</a> describes information about your robot to help with motion planning
+<ul class="org-ul">
+<li>See <a href="https://moveit.picknik.ai/main/doc/examples/urdf_srdf/urdf_srdf_tutorial.html">MoveIt URDF and SRDF Tutorial</a></li>
+</ul></li>
+<li>An SRDF accompanies the <code>urdf</code> and describes additional information about the joints and links</li>
 <li>For example, can tell MoveIt which joints to move as a single group,
 where the end-effector is, which joints can ignore collision detection</li>
 <li>The <code>move_group</code> node needs both a <code>urdf</code> and an <code>srdf</code> to work
@@ -150,10 +154,7 @@ where the end-effector is, which joints can ignore collision detection</li>
 <li>Both <code>urdf</code> and <code>srdf</code> files are usually written with <code>xacro</code></li>
 <li>The <a href="https://ros-planning.github.io/moveit_tutorials/doc/setup_assistant/setup_assistant_tutorial.html">MoveIt Setup Assistant</a>
 can be used to create an SRDF</li>
-<li>The Baxter and Sawyer and Interbotix moveit packages already come with <code>srdf</code> files
-<ul class="org-ul">
-<li>You may need to pass the proper parameters or even edit these files for your project</li>
-</ul></li>
+<li>The robot manufacturer typically provides the SRDF file</li>
 </ul>
 </div>
 </div>
@@ -162,14 +163,16 @@ can be used to create an SRDF</li>
 <div id="outline-container-org886d4d2" class="outline-2">
 <h2 id="org886d4d2">Interfacing with the Robot</h2>
 <div class="outline-text-2" id="text-org886d4d2">
+<p>
+MoveIt is highly configurable, but I describe the default expected interface here.
+</p>
 <ul class="org-ul">
-<li>Joint states should be published on the <code>/joint_states</code> topic</li>
-<li>A <code>robot_state_publisher</code> should be publishing transforms for the robot.</li>
-<li>The <code>/execute_trajectory</code> action (of type <code>moveit_msgs/action/ExecuteTrajectory</code>)
-tells moveit to execute the trajectory</li>
+<li>Joint states should be published on the <code>/joint_states</code> topic.</li>
+<li>A <code>robot_state_publisher</code> should be publishing transforms for the robot and the <code>/robot_description</code> topic.</li>
+<li>The <code>/execute_trajectory</code> action (of type <code>moveit_msgs/action/ExecuteTrajectory</code>) tells moveit to execute the trajectory</li>
 <li>MoveIt executes a trajectory by interacting with low-level controllers (typically provided via the <a href="https://control.ros.org/master/index.html">ros2_control</a> package).
 <ul class="org-ul">
-<li>A <a href="http://docs.ros.org/api/control_msgs/html/action/FollowJointTrajectory.html">control_msgs/FollowJointTrajectory</a> <a href="http://wiki.ros.org/actionlib">action server</a> is used to enable the robot to follow the trajectory</li>
+<li>A <a href="http://docs.ros.org/api/control_msgs/html/action/FollowJointTrajectory.html">control_msgs/FollowJointTrajectory</a> <a href="https://docs.ros.org/en/jazzy/Tutorials/Intermediate/Writing-an-Action-Server-Client/Py.html">action server</a> is used to enable the robot to follow the trajectory</li>
 <li>Low-level controllers are used to turn the trajectory into actual movements</li>
 <li>Most robots that support moveit provide the low-level controllers and the action server for you.</li>
 <li>Depending on the requirements, integrating an existing controller into the robot requires C++.</li>
@@ -184,13 +187,14 @@ tells moveit to execute the trajectory</li>
 <li>MoveIt can perform forward and inverse kinematics, as well as computing Jacobians</li>
 <li>It actually relies on external libraries and plugins to perform these calculations,
 hence it is highly flexible</li>
-<li>The <code>move_group</code> node provides the <code>/compute_ik</code> and the <code>compute_fk</code> services
+<li>The <code>move_group</code> node provides the <code>/compute_ik</code>  (of type <a href="http://docs.ros.org/en/jazzy/p/moveit_msgs/interfaces/srv/GetPositionIK.html">moveit_srvs/srv/GetPositionIK</a> and the <code>/compute_fk</code> (of type <a href="http://docs.ros.org/en/jazzy/p/moveit_msgs/interfaces/srv/GetPositionFK.html">GetPositionFK</a>) services
 <ul class="org-ul">
 <li>Note that the current state of the robot is always known via the <code>/joint_states</code> topic
 and the <code>tf</code> location of the end-effector</li>
 </ul></li>
 </ul>
 </div>
+
 <div id="outline-container-org72af962" class="outline-3">
 <h3 id="org72af962">Kinematics and Dynamics Library</h3>
 <div class="outline-text-3" id="text-org72af962">
@@ -272,8 +276,7 @@ OMPL plugins, as specified by configuration files.
 To plan a motion, send a "plan request" to the <code>move_group</code> node.
 </p>
 <ul class="org-ul">
-<li>The service (<code>/plan_kinematic_path</code>) plans a general path and returns it as the response</li>
-<li>More commonly the action interface is used (<code>/move_action</code>)
+<li>The (<code>/move_action</code>)
 <ul class="org-ul">
 <li>The <code>move_action</code> allows specifying:
 <ol class="org-ol">
@@ -284,10 +287,11 @@ To plan a motion, send a "plan request" to the <code>move_group</code> node.
 </ul></li>
 <li>The results can be returned as a path or executed immediately</li>
 <li>Because this is an action, the planning/motion can be interrupted and paused</li>
+
+<li>The service (<code>/plan_kinematic_path</code>) can also be used to plan a general path and returns it as the response</li>
 </ul>
 </div>
 </div>
-
 <div id="outline-container-orgab8906b" class="outline-3">
 <h3 id="orgab8906b">Pre and Post Processing</h3>
 <div class="outline-text-3" id="text-orgab8906b">

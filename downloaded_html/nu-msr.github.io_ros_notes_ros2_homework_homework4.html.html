@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-10-29 Tue 13:56 -->
+<!-- 2024-11-04 Mon 10:57 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Homework 4</title>
@@ -55,7 +55,7 @@ you should turn-in, including information about your <code>README.md</code> file
 <h2 id="org336e3a5">Navigation</h2>
 <div class="outline-text-2" id="text-org336e3a5">
 <ul class="org-ul">
-<li>The goal is to use the simulated robot to map an environment and then navigate within the map using the <a href="https://index.ros.org/p/slam_toolbox/github-SteveMacenski-slam_toolbox/#iron">slam_toolbox</a></li>
+<li>The goal is to use the simulated robot to map an environment and then navigate within the map using the <a href="https://index.ros.org/p/slam_toolbox/github-SteveMacenski-slam_toolbox/#jazzy">slam_toolbox</a></li>
 </ul>
 </div>
 </div>
@@ -64,8 +64,8 @@ you should turn-in, including information about your <code>README.md</code> file
 <h2 id="org407b907">The Environment</h2>
 <div class="outline-text-2" id="text-org407b907">
 <ul class="org-ul">
-<li>Clone the package <a href="https://github.com/m-elwin/nubot">nubot</a>, which is a package that simulates a mobile robot with a lidar in ignition gazebo into the source space</li>
-<li>Your repository will be next to <code>nubot</code> in the source space as well</li>
+<li>Clone the package <a href="https://github.com/m-elwin/nubot">nubot</a>, which is a package that simulates a mobile robot with a lidar in Gazebo.</li>
+<li>Your repository will be next to <code>nubot</code> in the source space as well: e.g.(<code>ws/src/nubot</code> and <code>ws/src/homework4</code>).</li>
 <li>I purposely did not put a README.md in this package, so you will need to explore it to find out how it works.</li>
 <li>HINT: There is one launchfile that runs the simulation and visualizes it in rviz.</li>
 <li>HINT: There are two worlds to use, either will be accepted for the assignment but one is significantly smaller (and hence easier to explore).</li>
@@ -77,8 +77,8 @@ you should turn-in, including information about your <code>README.md</code> file
 <h2 id="org5eb7db7">Navigation Stack Setup</h2>
 <div class="outline-text-2" id="text-org5eb7db7">
 <ul class="org-ul">
-<li>Going through the <a href="https://navigation.ros.org/setup_guides/index.html">First Time Setup Guide</a> to understand how the navigation stack works (up through Setting up the robot's footprint) will
-be immensely helpful for this homework.</li>
+<li>Going through the <a href="https://docs.nav2.org/setup_guides/index.html">First Time Setup Guide</a> (through setting up the robot's footpring) will help you understand how the
+Nav2 stack works, and be helpful for this homework.</li>
 <li>Much of the setup, however, is already done for you in <code>nubot</code>.</li>
 <li>By running the launch file in the <code>nubot</code> package you will be able to see what features required by the <code>nav_stack</code> are already implemented.</li>
 </ul>
@@ -106,11 +106,14 @@ be immensely helpful for this homework.</li>
 <li>The planned path</li>
 </ul></li>
 </ul></li>
-<li>Record a video of the robot mapping the environment until at least 1 corridor is mapped.</li>
+<li>Record a video of the robot mapping the environment until at least 1 corridor is mapped.
+<ul class="org-ul">
+<li>You can manually set waypoints using <code>rviz2</code></li>
+</ul></li>
+<li>HINT: You must enable simulation time when using the launchfiles to start navigation and SLAM</li>
 </ul>
 </div>
 </div>
-
 <div id="outline-container-orgf07b670" class="outline-3">
 <h3 id="orgf07b670">Autonomous Exploration</h3>
 <div class="outline-text-3" id="text-orgf07b670">
