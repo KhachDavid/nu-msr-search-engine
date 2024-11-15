@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-11-04 Mon 10:57 -->
+<!-- 2024-11-14 Thu 10:56 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ROS Navigation</title>
@@ -35,7 +35,7 @@
 <h2 id="org330fb27">Overview</h2>
 <div class="outline-text-2" id="text-org330fb27">
 <ul class="org-ul">
-<li>ROS <a href="https://navigation.ros.org">navigation2</a> enables mobile robots to navigate in 2D</li>
+<li>ROS <a href="https://docs.nav2.org">Nav2</a> enables mobile robots to navigate in 2D</li>
 <li>Provides the ability to estimate the location of the robot based on feedback from multiple sensors</li>
 <li>Provides global and local planning capabilities</li>
 <li>Highly configurable.  To see many of the configuration options on running examples use <code>rqt_reconfigure</code>
@@ -114,12 +114,16 @@ in order to retry planning</li>
 <div id="outline-container-org53d1cb2" class="outline-2">
 <h2 id="org53d1cb2">Navigation Packages</h2>
 <div class="outline-text-2" id="text-org53d1cb2">
-<ol class="org-ol">
-<li><a href="https://github.com/SteveMacenski/slam_toolbox#readme">slam_toolbox</a> the most up-to-date 2D SLAM method for ROS.</li>
-<li><a href="https://navigation.ros.org/configuration/packages/configuring-amcl.html?highlight=amcl">AMCL</a>  A particle filter based approach to finding the robot location given a previously
-created map. Generally SLAM Toolbox in localization mode is preferred</li>
+<p>
+Here is a brief overview of some important nav2 packages.
+</p>
+<ul class="org-ul">
+<li><a href="https://docs.nav2.org">Nav2 Website</a> has comprehensive documentation and tutorials.</li>
+<li><a href="https://docs.nav2.org/tutorials/docs/navigation2_with_slam.html">slam_toolbox</a> the most up-to-date 2D SLAM method for ROS.</li>
+<li><a href="https://docs.nav2.org/configuration/packages/configuring-amcl.html">AMCL</a>  A particle filter based approach to finding the robot location given a previously
+created map. Generally SLAM Toolbox in localization mode is preferred.</li>
 <li><a href="https://github.com/ros-planning/navigation2/tree/main/nav2_map_server">Map Server</a> - Provides maps to the rest of the navigation stack and allows saving them.</li>
-<li><a href="https://navigation.ros.org/configuration/packages/configuring-costmaps.html?highlight=costmap2d">Costmap 2D</a> An occupancy grid implementation.  Multiple layers contain information about various types of obstacles and are rated with a cost to travel through the cell ranging from 0 (free) to 254 (fully blocked).
+<li><a href="https://docs.nav2.org/configuration/packages/configuring-costmaps.html?highlight=costmap2d">Costmap 2D</a> An occupancy grid implementation.  Multiple layers contain information about various types of obstacles and are rated with a cost to travel through the cell ranging from 0 (free) to 254 (fully blocked).
 <ul class="org-ul">
 <li>"static" layer (e.g., static obstacles from a pre-existing map produced by SLAM),</li>
 <li>"inflation" layer (e.g., increasing cost near obstacles to keep the robot even farther away and make navigation more conservative)</li>
@@ -129,27 +133,30 @@ created map. Generally SLAM Toolbox in localization mode is preferred</li>
 <li>Custom layers are also possible because each layer is implemented as a plugin.</li>
 <li>There are typically two costmaps setup: a  "global costmap" setup for long-term planning and a "local costmap" for collision avoidance and short-term planning</li>
 </ul></li>
-<li>nav2_planner (<a href="https://wiki.ros.org/global_planner">global_planner</a> in ROS 1) - Contains basic global planning algorithms such as <code>A*</code>.  Publishes a <code>nav_msgs/Path</code> message.</li>
-<li>nav2_controller - the local planner (called local planner in ROS 1). Handles navigation around obstacles that pop up from sensor data</li>
-<li>DWB (<a href="https://wiki.ros.org/dwa_local_planner">dwa_local_planner</a> in ROS 1) Dynamic window approach local planner (the default local planner).  Integrates kinematics of robot forward in time given
+<li><a href="https://docs.nav2.org/configuration/packages/configuring-planner-server.html">nav2_planner</a> ([[<a href="https://wiki.ros.org/global_planner">global_planner</a> in ROS 1) - Contains basic global planning algorithms such as <code>A*</code>.  Publishes a <code>nav_msgs/Path</code> message.</li>
+<li><a href="https://docs.nav2.org/configuration/packages/configuring-controller-server.html">nav2_controller</a> - the local planner (called local planner in ROS 1). Handles navigation around obstacles that pop up from sensor data</li>
+<li><a href="https://docs.nav2.org/configuration/packages/configuring-dwb-controller.html">DWB</a> (<a href="https://wiki.ros.org/dwa_local_planner">dwa_local_planner</a> in ROS 1) Dynamic window approach local planner (the default local planner).  Integrates kinematics of robot forward in time given
 the possible controls. Then it predicts a trajectory and rates it based on if there is a collision and other criteria such as distance from the global plan.</li>
-<li><a href="https://wiki.ros.org/move_base">move_base</a> - This was the main ROS 1 navigation node. See <a href="https://navigation.ros.org/about/ros1_comparison.html?highlight=global_planner">ROS to ROS 2</a></li>
-<li><a href="https://navigation.ros.org/setup_guides/odom/setup_odom.html">Robot Localization</a> fuses various sources to deliver a smooth odometry message</li>
-</ol>
+<li><a href="https://docs.nav2.org/setup_guides/odom/setup_odom.html">Robot Localization</a> fuses various sources to deliver a smooth odometry message</li>
+<li><a href="https://wiki.ros.org/move_base">move_base</a> - This was the main ROS 1 navigation node.</li>
+</ul>
 </div>
 </div>
-
 <div id="outline-container-org9def43a" class="outline-2">
 <h2 id="org9def43a">How To Run Navigation</h2>
 <div class="outline-text-2" id="text-org9def43a">
 <ul class="org-ul">
 <li>The <a href="https://navigation.ros.org/setup_guides/index.html">First-Time Robot Setup Guide</a> provides a quick guide on how to setup a robot for use with navigation2</li>
-<li>The</li>
+<li>Run <code>ros2 launch nav2_bringup navigation_launch.py</code> to start navigation.
+<ul class="org-ul">
+<li>This needs a <code>map</code> to exist to work</li>
+<li>If using with Gazebo, make sure to pass the launchfile <code>use_sim_time:=True</code> or you will have many timestamp errors</li>
+</ul></li>
+<li>Run <code>ros2 launch slam_toolbox online_async_launch.py</code> to start SLAM and begin generating a map and localizing within it</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org1705e97" class="outline-2">
-<h2 id="org1705e97">Other Packages (ROS 1)</h2>
+<details id="org1705e97"><summary class="header-2">Other Packages (ROS 1)</summary>
 <div class="outline-text-2" id="text-org1705e97">
 <ul class="org-ul">
 <li><a href="https://wiki.ros.org/carrot_planner">carrot_planner</a> A global planner that gets robots as close to obstacles as possible</li>
@@ -167,7 +174,7 @@ Many uses including: standalone odometry or input for <code>robot_localization</
 <li><a href="https://wiki.ros.org/move_base_flex">move_base_flex</a> Replacement for <code>move_base</code> with enhanced capabilities.</li>
 </ul>
 </div>
-</div>
+</details>
 </div>
 <div id="postamble" class="status">
 <p><p class="outline-2">Author: Matthew Elwin. </p></p>

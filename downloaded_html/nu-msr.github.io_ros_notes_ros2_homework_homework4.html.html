@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-11-04 Mon 10:57 -->
+<!-- 2024-11-14 Thu 10:56 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Homework 4</title>
@@ -114,6 +114,7 @@ Nav2 stack works, and be helpful for this homework.</li>
 </ul>
 </div>
 </div>
+
 <div id="outline-container-orgf07b670" class="outline-3">
 <h3 id="orgf07b670">Autonomous Exploration</h3>
 <div class="outline-text-3" id="text-orgf07b670">
@@ -121,10 +122,10 @@ Nav2 stack works, and be helpful for this homework.</li>
 <li>Write a node called <code>explore</code> that causes the robot to explore the environment autonomously while mapping the world.</li>
 <li>The launchfile called <code>explore.launch.py</code> (or <code>.xml</code>) should start all the nodes necessary to allow the robot to explore and map its environment
 <ul class="org-ul">
-<li>This launchfile should call <code>manual_explore.launch.xml</code> and then start the <code>explore</code> node.</li>
+<li>This launchfile should include <code>manual_explore.launch.xml</code> and then start the <code>explore</code> node.</li>
 </ul></li>
 <li>Use the <code>map_saver_cli</code> in the <code>nav2_map_server</code> package to save the resulting map and place it within the <code>maps</code> directory of the git repository</li>
-<li>Record a video of the robot exploring the environment in <code>rviz</code></li>
+<li>Record a video of the robot exploring the environment in <code>rviz</code> (you need not capture what the robot is doing in gazebo)</li>
 </ul>
 </div>
 
@@ -156,7 +157,7 @@ The algorithm will ideally enable the robot to explore at least two "rooms" in t
 <h3 id="org8b2fec7">README</h3>
 <div class="outline-text-3" id="text-org8b2fec7">
 <ul class="org-ul">
-<li>The <code>README.md</code> should contain your name, and a description or citation to the exploration algorithm used.</li>
+<li>The <code>README.md</code> should contain your name, and a description or reference to the exploration algorithm used (the reference should be properly cited in <code>citations.txt</code>.</li>
 <li>It should also have the <code>ros2 launch</code> commands needed to run the manual and autonomous exploration</li>
 <li>It should embed both of the required videos directly in the README so that they can viewed on <code>github</code></li>
 </ul>

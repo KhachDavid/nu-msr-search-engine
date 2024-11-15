@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-11-04 Mon 10:57 -->
+<!-- 2024-11-14 Thu 10:56 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Simulation</title>
@@ -433,12 +433,13 @@ when trying to load your model.
 <li><a href="https://gazebosim.org/api/sim/8/">Useful Plugins</a> can be found in the API documentation, especially the Systems.
 <ul class="org-ul">
 <li>The documentation includes what tags can be used in the <code>SDF</code> to include the plugin</li>
-<li>Use <code>&lt;plugin name="&lt;C++ Namespace Path of the plugin&gt;" filename="lib_object_with_the_code"&gt;</code>
+<li>Assume the C++ namespace of the plugin is given as <code>xx::yy::zz::systems::PluginName</code> etc. Then in the SDF file the plugin is included as</li>
+<li>Use <code>&lt;plugin name="xx::yy::zz::systems::PluginName" filename="xx-yy-zz-plugin-name-system"&gt;</code>
 <ul class="org-ul">
 <li>For example, to use the <code>gz::sim::systems::DiffDrive</code> plugin:
 <ul class="org-ul">
 <li>Set <code>name</code> to <code>gz::sim::systems::DiffDrive</code></li>
-<li>set <code>filename</code> to <code>libgz-sim-diff-drive-system.so</code></li>
+<li>set <code>filename</code> to <code>gz-sim-diff-drive-system</code></li>
 <li>Options for this plugin go inside the <code>&lt;plugin&gt;&lt;/plugin&gt;</code> tag (see <a href="https://gazebosim.org/api/sim/8/classgz_1_1sim_1_1systems_1_1DiffDrive.html">API Documentation</a>)</li>
 </ul></li>
 </ul></li>

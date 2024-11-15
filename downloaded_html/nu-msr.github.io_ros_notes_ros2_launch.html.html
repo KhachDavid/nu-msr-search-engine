@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-11-04 Mon 10:57 -->
+<!-- 2024-11-14 Thu 10:56 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Launchfiles</title>
@@ -38,6 +38,7 @@
 <li><a href="#orgaf7ae87">General Concepts</a>
 <ul>
 <li><a href="#org27046b6">Theory of Launchfiles</a></li>
+<li><a href="#declarative">Declarative Python Launchfiles</a></li>
 </ul>
 </li>
 <li><a href="#orgeff0d4e">Description</a></li>
@@ -48,7 +49,7 @@
 <li><a href="#org3e6c3df">Parameter Files</a></li>
 </ul>
 </li>
-<li><a href="#org6c6840d">Best Practices</a></li>
+<li><a href="#best_practices">Best Practices</a></li>
 <li><a href="#org20b31b3">References</a></li>
 </ul>
 </div>
@@ -314,6 +315,36 @@ however there are some things that can only be done in python and others (when l
 </ul>
 </div>
 </div>
+
+<div id="outline-container-declarative" class="outline-4">
+<h4 id="declarative">Declarative Python Launchfiles</h4>
+<div class="outline-text-4" id="text-declarative">
+<p>
+Here are some properties of purely declarative Python launchfiles. These launchfiles represent a subset of the potential functionality available in
+<code>python</code> but following these principles generally makes it easier to understand what a launchfile is doing (for experienced ROS users), enables the full power of ROS 2 introspection tools
+to be used on the Launchfile, and makes the launchfile more similar and translatable to XML.
+</p>
+
+<ol class="org-ol">
+<li><code>generate_launch_description</code> consists of a single return statement returning a <code>LaunchDescription</code> object.
+<ul class="org-ul">
+<li>No variables are used.</li>
+</ul></li>
+<li>The only imports are to <code>launch</code> (and submodules) <code>launch_ros</code> (and submodules) and other python packages that implement launch objects (e.g., Actions, Substitutions, etc).
+<ul class="org-ul">
+<li>In particular, importing and using functionality from <code>os</code>, <code>yaml</code>, and other packages makes breaks declarative purity.</li>
+<li>For example, you do not explicitly read a <code>yaml</code> file: instead you compute the path to the file using substitutions and pass that path to a Node action</li>
+</ul></li>
+<li>Substitution and Conditions are used rather than python control-flow (e.g., <code>if</code>, <code>while</code>) statements</li>
+</ol>
+
+<p>
+There are cases where using imperative code makes a launchfile more clear: particularly if the goal is to provide generic functionality
+to multiple LaunchFiles. In many of these cases, such code could be converted into a custom Action or Substitution, which would then enhance
+the functionality of declarative launchfiles and also make that functionality available to XML and YAML launchfiles.
+</p>
+</div>
+</div>
 </div>
 
 <div id="outline-container-orgeff0d4e" class="outline-3">
@@ -437,9 +468,9 @@ Set <code>on_exit</code> to the <code>Shutdown()</code> action.</li>
 </div>
 </div>
 
-<div id="outline-container-org6c6840d" class="outline-2">
-<h2 id="org6c6840d">Best Practices</h2>
-<div class="outline-text-2" id="text-org6c6840d">
+<div id="outline-container-best_practices" class="outline-2">
+<h2 id="best_practices">Best Practices</h2>
+<div class="outline-text-2" id="text-best_practices">
 <p>
 Launchfile best practices in ROS 2 are still up in the air, the only "official" guidance I've found is here: <a href="https://docs.ros.org/en/jazzy/How-To-Guides/Launch-file-different-formats.html">Which Launch Format to Use?</a>. So here are some opinions:
 </p>
@@ -456,17 +487,10 @@ Launchfile best practices in ROS 2 are still up in the air, the only "official" 
 <li>Features are not yet in XML launch files (such as storing the value of a command in a parameter)</li>
 <li>You begin doing lots of logic substitutions and <code>if</code> attributes in XML and need more code-reuse and more complex actions</li>
 </ul></li>
-<li>In python launchfiles, stick to a declarative style as much as possible
-<ul class="org-ul">
-<li><code>generate_launch_description</code> should ideally be a single return statement</li>
-<li>No variables are used</li>
-<li>Prefer substitution rules to python logic (for example <code>FindPackageShare</code> substitution rule rather than importing a function that finds the package share directory)</li>
-<li>This declarative style makes it easier to see what the launchfile is doing (to experienced launchfile users) than needing to follow launchfile logic</li>
-<li>The declarative style is also more directly translatable to an XML format, if the required features become available.</li>
-</ul></li>
+<li>In python launchfiles, stick to a declarative style unless what you are trying to accomplish would be impossible or significantly more cumbersome.</li>
 <li>Remember that python launchfiles can include XML launchfiles and vice versa</li>
-<li>I have yet to see a yaml launch file in the wild. As far as I can tell it has no features that XML does not have, other than it's not XML (and yaml is typically used
-as an alternative to XML).</li>
+<li>Yaml launch files seem to be rare in practice. As far as I can tell it has no features that XML does not have, other than it's not XML (and yaml is typically used
+as an alternative to XML). It is mainly a syntactic stylistic preference between the two.</li>
 </ol>
 </div>
 </div>

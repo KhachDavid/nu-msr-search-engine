@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-11-04 Mon 10:57 -->
+<!-- 2024-11-14 Thu 10:56 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Emika Franka Panda Robot</title>
@@ -31,9 +31,9 @@
 <li><a href="#orgd5f1d8f">Enabling ROS</a></li>
 <li><a href="#org00a7161">Using ROS</a>
 <ul>
-<li><a href="#org46efe59">From Laptop</a></li>
+<li><a href="#orgbf38e24">From Laptop</a></li>
 <li><a href="#orgc510773">From station</a></li>
-<li><a href="#orge35043a">From Laptop</a></li>
+<li><a href="#orgb3b68ef">From Laptop</a></li>
 </ul>
 </li>
 <li><a href="#orgde6b5bb">Enabling Device</a></li>
@@ -219,9 +219,9 @@ If the robot is off, you will need to turn it on (obviously!).
 <li>The nodes that are responsible for controlling the robot and reading its sensor data should run on the workstation computer <sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></li>
 </ol>
 </div>
-<div id="outline-container-org46efe59" class="outline-4">
-<h4 id="org46efe59">From Laptop</h4>
-<div class="outline-text-4" id="text-org46efe59">
+<div id="outline-container-orgbf38e24" class="outline-4">
+<h4 id="orgbf38e24">From Laptop</h4>
+<div class="outline-text-4" id="text-orgbf38e24">
 <ol class="org-ol">
 <li>Make sure your <code>ROS_MASTER_URI</code> is <code>http://$(hostname):11311</code>, where <code>$(hostname)</code> is the name of your computer (you see <code>user@hostname at your command prompt</code>).
 <ul class="org-ul">
@@ -248,9 +248,9 @@ a robot_description into <code>rviz</code> to visualize the robot location.</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-orge35043a" class="outline-4">
-<h4 id="orge35043a">From Laptop</h4>
-<div class="outline-text-4" id="text-orge35043a">
+<div id="outline-container-orgb3b68ef" class="outline-4">
+<h4 id="orgb3b68ef">From Laptop</h4>
+<div class="outline-text-4" id="text-orgb3b68ef">
 <ol class="org-ol">
 <li><code>rosnode list</code> and <code>rostopic list</code> should now show several franka-related nodes and topics</li>
 <li>Start <code>moveit</code> with <code>roslaunch panda_moveit_config panda_control_moveit_rviz.launch launch_franka_control:=false robot_ip:=robot.franka.de</code></li>

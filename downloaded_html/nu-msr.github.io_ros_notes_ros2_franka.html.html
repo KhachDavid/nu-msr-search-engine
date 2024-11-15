@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-11-04 Mon 10:57 -->
+<!-- 2024-11-14 Thu 10:56 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Emika Franka Panda Robot</title>
@@ -152,15 +152,15 @@ local stratum 5
 <h3 id="org7e152e4">Rules</h3>
 <div class="outline-text-3" id="text-org7e152e4">
 <ol class="org-ol">
-<li>Make sure the workspace is clear of people objects whenever the robot's lights are blue or green.</li>
+<li>Make sure the workspace is clear of people and objects whenever the robot's lights are blue or green.</li>
 <li>Never force the robot to move physically. Always use the guided movement mode (pressing buttons on arm, lights are white).</li>
-<li>Be gentle in the guided movement mode and don't try to force the robot. 
+<li>Be gentle in the guided movement mode and don't try to force the robot.
 <ul class="org-ul">
 <li>In guided mode the robot should be easy to move. If it is resisting stop and investigate.</li>
 </ul></li>
-<li>Test actions in MoveIt with the fake hardware before deploying on the robot:
+<li>Test actions in MoveIt with the mock hardware before deploying on the robot:
 <ul class="org-ul">
-<li>Make sure that the robot moves as you expect</li>
+<li>Make sure that the robot moves as you expect.</li>
 </ul></li>
 <li>Always have somebody ready to press the enabling device to stop the robot.
 <ul class="org-ul">
@@ -248,17 +248,17 @@ If the robot is off, you will need to turn it on (obviously!).
 <li>You can also use <code>ssh-copy-id</code> to install your <code>ssh</code> certificate and avoid entering the password each time.</li>
 </ul></li>
 <li>Release the enabling device, so that the robot lights are blue</li>
-<li>On <code>station</code> run <code>ros2 launch franka_fer_moveit_config moveit.launch.py use_rviz:=false robot_ip:=panda0.robot</code> to start the controllers and moveit</li>
-<li>On laptop run <code>ros2 launch franka_fer_moveit_config rviz.launch.py robot_ip:=panda0.robot</code> to launch <code>rviz</code>
+<li>On <code>station</code> run <code>ros2 launch franka_fer_moveit_config real.launch.py use_rviz:=false robot_ip:=panda0.robot</code> to start the controllers and moveit</li>
+<li>On laptop run <code>ros2 launch franka_fer_moveit_config moveit_rviz.launch.py robot_ip:=panda0.robot</code> to launch <code>rviz</code>
 <ul class="org-ul">
 <li>You can also specify the <code>rviz_config</code> parameter to load an alternative <code>rviz</code> file, if you want to customize the visualization</li>
 </ul></li>
 <li>The <code>move_group</code> node is running on <code>station</code>, but you can communicate with it via its <code>actions</code>, <code>services</code>, and <code>topics</code> without worrying about that</li>
 <li>Pressing the <code>enabling</code> device will stop the robot and cause some nodes to crash</li>
+<li>The <code>ROS_DOMAIN_ID</code> of the Franka robot is 0 by default. You need your <code>ROS_DOMAIN_ID</code> to match that of the robot</li>
 </ol>
 </div>
 </div>
-
 <div id="outline-container-org9fa14fa" class="outline-3">
 <h3 id="org9fa14fa">Enabling Device</h3>
 <div class="outline-text-3" id="text-org9fa14fa">
@@ -266,9 +266,9 @@ If the robot is off, you will need to turn it on (obviously!).
 <li>Feel free to press the enabling device at any time to stop the robot</li>
 <li>After pressing, you will need to
 <ul class="org-ul">
-<li>Make sure to terminate the <code>moveit.launch.py</code> launchfile</li>
+<li>Make sure to terminate the <code>real.launch.py</code> launchfile on the station</li>
 <li>Release the enabling device (possibly after manually guiding the robot to a new position)</li>
-<li>Re-run the <code>moveit.launch.py</code> launchfile</li>
+<li>Re-run the <code>real.launch.py</code> launchfile</li>
 </ul></li>
 </ol>
 </div>
@@ -371,6 +371,7 @@ Before you step away from the robot:
 </ul></li>
 <li><a href="https://franka.world">Franka World</a> (Free signup required): provides access to the manual, and some useful SolidWorks models
 (for example to attach a realsense to the robot).</li>
+<li><a href="../../nu-msr.github.io/franka_setup.html">Franka Setup</a> More details on how the workstation was setup.</li>
 </ol>
 </div>
 </div>
