@@ -5,4 +5,4 @@ python3 get_files.py katana
 git add .
 git commit -m "Update files"
 git push origin main
-
+deactivate
