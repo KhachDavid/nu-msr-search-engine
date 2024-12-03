@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-11-25 Mon 23:02 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Image Processing with ROS</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">Image Processing with ROS</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgc9e4b06">Overview</a></li>
+<li><a href="#org807cc28">Cameras On Linux</a></li>
+<li><a href="#org41d9ade">ROS Camera "Drivers"</a>
+<ul>
+<li><a href="#orgae38895">Using usb_cam</a></li>
+<li><a href="#orgad06898">Using v4l2_camera</a></li>
+</ul>
+</li>
+<li><a href="#org2787eea">The Image Pipeline</a>
+<ul>
+<li><a href="#orgc09a6ba">Image Pipeline</a></li>
+<li><a href="#org8cab3eb">Camera Calibration</a>
+<ul>
+<li><a href="#orgf79697f">Example</a></li>
+</ul>
+</li>
+<li><a href="#org2582a41">MrCal</a></li>
+<li><a href="#org8797c3d">Image Proc</a></li>
+<li><a href="#orga7e9d0b">Depth Images</a></li>
+</ul>
+</li>
+<li><a href="#org95d5633">Other Image Tools</a></li>
+<li><a href="#org54c8c7c">OpenCV</a>
+<ul>
+<li>
+<ul>
+<li><a href="#org0098857">Not In ROS 2 (yet)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org749d4d2">Tag Tracking</a>
+<ul>
+<li><a href="#org96f2e93">April Tags in ROS</a></li>
+</ul>
+</li>
+<li><a href="#orge459f4a">Other Image Packages and Libraries</a></li>
+<li><a href="#orge1084b9">Other Learning Resources</a></li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-orgc9e4b06" class="outline-2">
+<h2 id="orgc9e4b06">Overview</h2>
+<div class="outline-text-2" id="text-orgc9e4b06">
+<p>
+This lecture is about how to interface ROS with cameras and vision processing libraries.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org807cc28" class="outline-2">
+<h2 id="org807cc28">Cameras On Linux</h2>
+<div class="outline-text-2" id="text-org807cc28">
+<ul class="org-ul">
+<li>Cameras on Linux are viewed as files (like any other device).</li>
+<li>A <i>driver</i> in the Linux Kernel enables users to work with cameras using a common interface</li>
+<li>The <i>driver</i> framework for USB cameras in Linux is called <a href="https://www.kernel.org/doc/html/latest/driver-api/media/v4l2-core.html">V4l2</a>
+<ul class="org-ul">
+<li>Some machine-vision cameras use vendor-specific or proprietary Linux drivers rather than V4L2</li>
+<li>Some machine-vision cameras don't provide drivers for Linux</li>
+</ul></li>
+<li>USB cameras on Linux are usually called <code>/dev/videoX</code>, where <code>X</code> is a number
+<ul class="org-ul">
+<li>Some cameras create two video devices, the lower numbered one is usually the one to use</li>
+</ul></li>
+<li><code>v4l2-ctl</code> is a command line tool for interfacing with cameras. See <code>man v4l2-ctl</code></li>
+<li><code>v4l2-ctl --list-formats-ext</code> prints useful information about the formats supported by cameras connected to your computer
+<ul class="org-ul">
+<li>You often need to specify these parameters to the ROS camera node, as parameters</li>
+</ul></li>
+<li><code>v4l2-ctl --all</code> prints all information about your cameras</li>
+<li><code>v4l2-ctl --list-devices</code> Lists all the usb cameras.  Some cameras have
+multiple <code>/dev/video*</code> devices so it is useful to see what goes with what</li>
+<li>When working with cameras you should use <a href="http://www.reactivated.net/writing_udev_rules.html">udev rules</a> to give your cameras
+the proper permissions and a persistent name.
+<ul class="org-ul">
+<li>These rules are triggered when hardware is connected to the system and can (among other things) set permissions of the devices</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org41d9ade" class="outline-2">
+<h2 id="org41d9ade">ROS Camera "Drivers"</h2>
+<div class="outline-text-2" id="text-org41d9ade">
+<ul class="org-ul">
+<li>A <i>ros driver</i> is a node (or set of nodes) that interacts with hardware and provides a standard ROS interface</li>
+<li>There are at least two packages that contain ROS drivers for interacting with USB cameras that operate via the v4l2 interface</li>
+<li><a href="https://github.com/ros-drivers/usb_cam/tree/ros2">usb_cam</a>  and <a href="https://gitlab.com/boldhearts/ros2_v4l2_camera/-/tree/humble/">v4l2_camera</a>
+<ul class="org-ul">
+<li>Sometimes you need to experiment with camera drivers, as which one works better may depend on your hardware</li>
+</ul></li>
+<li>Nodes in these package access your camera via the video device file (<code>/dev/videoX</code>)
+<ul class="org-ul">
+<li>Parameters control options for the camera (such as framerate and resolution)</li>
+<li>Sometimes, you need to experiment with various options to get a usable webcam image, because every camera is different</li>
+</ul></li>
+<li>The image display type in rviz can be used to see the video from a camera</li>
+<li>However, all camera drivers ultimately provide a consistent ROS interface</li>
+</ul>
+</div>
+
+<div id="outline-container-orgae38895" class="outline-3">
+<h3 id="orgae38895">Using usb_cam</h3>
+<div class="outline-text-3" id="text-orgae38895">
+<ol class="org-ol">
+<li>The <a href="https://index.ros.org/p/usb_cam/github-ros-drivers-usb_cam/#jazzy">usb_cam</a> package can be used with many cameras</li>
+<li>The camera is one of the <code>/dev/videoX</code> devices, and can be specified with the <code>video_device</code> parameter</li>
+<li>Run the <code>usb_cam</code> node.  A command with parameters that work well with the webcam on the System76 laptops are
+<ul class="org-ul">
+<li><code>ros2 run usb_cam usb_cam_node_exe --ros-args -p framerate:=30.0 -p pixel_format:=yuyv</code></li>
+<li>Cameras have many settings that are important for machine vision. Use <code>v4l2-ctl</code> to view and tweak them</li>
+<li>The <code>camera_info_url</code> parameter can be passed to provide a camera calibration file that for most cameras you will need to generate.
+<ul class="org-ul">
+<li>Without this file images can still be processed but pixel coordinates in the images cannot be converted to real world coordinates via ROS</li>
+</ul></li>
+</ul></li>
+<li>After running you can view the image in several ways
+<ol class="org-ol">
+<li>Use <code>rviz2</code> and add an Image view</li>
+<li><code>ros2 run usb_cam show_image.py</code> (Image might be laggy at high resolutions)</li>
+<li><code>ros2 run rqt_image_view rqt_image_view</code></li>
+<li><code>ros2 run image_view image_view --ros-args -r image:=/topic_image_is_published_on</code> to view the image</li>
+</ol></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgad06898" class="outline-3">
+<h3 id="orgad06898">Using v4l2_camera</h3>
+<div class="outline-text-3" id="text-orgad06898">
+<ul class="org-ul">
+<li>The <a href="https://index.ros.org/p/v4l2_camera/gitlab-boldhearts-ros2_v4l2_camera/#jazzy">v4l2_camera</a> package is designed to expose many v4l2 camera options to ROS via parameters
+<ul class="org-ul">
+<li>It automatically enumerates all available v4l2 options (which vary by camera model) and exposes them</li>
+</ul></li>
+<li>It can be used with <code>ros2 run v4l2_camera v4l2_camera_node</code></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2787eea" class="outline-2">
+<h2 id="org2787eea">The Image Pipeline</h2>
+<div class="outline-text-2" id="text-org2787eea">
+</div>
+<div id="outline-container-orgc09a6ba" class="outline-3">
+<h3 id="orgc09a6ba">Image Pipeline</h3>
+<div class="outline-text-3" id="text-orgc09a6ba">
+<p>
+The <a href="http://docs.ros.org/en/jazzy/p/image_pipeline/">image_pipeline</a> contains several packages relating to image manipulation in ROS.
+</p>
+<ul class="org-ul">
+<li>The idea is to chain various calibration and image processing steps together to complete computer vision tasks.</li>
+<li>The pipeline also applies to stereo-vision cameras and 3D point clouds as well as monocular images.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org8cab3eb" class="outline-3">
+<h3 id="org8cab3eb">Camera Calibration</h3>
+<div class="outline-text-3" id="text-org8cab3eb">
+<p>
+<a href="http://docs.ros.org/en/jazzy/p/camera_calibration/index.html">camera_calibration</a> finds the intrinsic parameters of a camera using a checkerboard pattern and OpenCV.
+</p>
+<ul class="org-ul">
+<li>See this <a href="http://docs.ros.org/en/jazzy/p/camera_calibration/doc/tutorial_mono.html">tutorial</a> for information on how to calibrate a monocular camera in ROS 2.
+
+<ul class="org-ul">
+<li>More information about camera calibration <a href="http://docs.ros.org/en/jazzy/p/image_pipeline/camera_info.html">CameraInfo</a></li>
+<li>Some more information on calibration matrices for the <a href="http://ksimek.github.io/2012/08/13/introduction/#toc">pinhole camera model</a></li>
+<li><a href="https://www.mathworks.com/help/vision/ug/camera-calibration.html">Matlab tutorial on camera calibration</a></li>
+</ul></li>
+<li>The calibration can be stored and used to provide a <code>camera_info</code> topic so that the calibration
+can be used by other nodes.
+<ul class="org-ul">
+<li>The <a href="http://docs.ros.org/en/jazzy/p/sensor_msgs/interfaces/msg/CameraInfo.html">CameraInfo</a> has
+useful information about camera calibration</li>
+</ul></li>
+<li>Calibrations can be loaded by setting the <code>camera_info_url</code> parameter
+<ul class="org-ul">
+<li>Each driver may be different, <code>camera_info_url</code> is a ROS convention however</li>
+</ul></li>
+
+<li>It is also possible to perform a stereo calibration for two cameras, which results in receiving depth information</li>
+
+<li>The <code>camera_check</code> node can be used to check the calibration
+<ul class="org-ul">
+<li><code>ros2 run camera_calibration cameracheck --ros-args -r /monocular/image:=image_rect-r /monocular/camera_info:=camera_info</code></li>
+</ul></li>
+</ul>
+</div>
+<div id="outline-container-orgf79697f" class="outline-4">
+<h4 id="orgf79697f">Example</h4>
+<div class="outline-text-4" id="text-orgf79697f">
+<p>
+Here is an example for how to start the camera calibration using <code>usb_cam</code> as the camera source.
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">ros2 run usb_cam usb_cam_node_exe --ros-args -p framerate:=30 -p pixel_format:=yuyv -r __ns:=/camera
+ros2 run camera_calibration cameracalibrator --size 8x6 --square 0.108 --ros-args -r camera/set_camera_info:=usb_cam/set_camera_info -r image:=/raw_image
+ros2 launch image_proc image_proc.launch.py
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org2582a41" class="outline-3">
+<h3 id="org2582a41">MrCal</h3>
+<div class="outline-text-3" id="text-org2582a41">
+<ol class="org-ol">
+<li>The <a href="https://mrcal.secretsauce.net/">mrcal</a> package provides routines for calibrating (and verifying the calibration) in a way that is much more rigorous and precise than the usual calibration methods</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org8797c3d" class="outline-3">
+<h3 id="org8797c3d">Image Proc</h3>
+<div class="outline-text-3" id="text-org8797c3d">
+<ul class="org-ul">
+<li>The <a href="http://docs.ros.org/en/jazzy/p/image_proc/">image_proc</a> package handles rectifying and debayering images.</li>
+<li>Rectification is a method to compensate for camera lens distortion (which can make parallel lines appear curved in an image)</li>
+<li>Debayering is a compensation that accounts for the individual color pixel layout on color cameras <a href="https://www.altairastro.help/why_debayer_before_stacking/">More Info</a></li>
+<li>Run <code>image_proc</code> with <code>ros2 launch image_proc image_proc.launch.py</code>
+<ul class="org-ul">
+<li>This launchfile launches several <i>component nodes</i> (that is nodes that all run in the same process) that subscribe to
+<code>/image_raw</code> and <code>/camera_info</code> to create the rectified and debayerd images</li>
+</ul></li>
+<li><code>image_proc</code> publishes the following
+<ol class="org-ol">
+<li><code>image_mono</code>: A monochrome unrectified image</li>
+<li><code>image_rect</code>: A monochrome rectified image</li>
+<li><code>image_color</code>: A color unrectified image. These images are de-omsaiced 
+(that is it accounts for the rgb pixel pattern of the camera)</li>
+<li><code>image_rect_color</code> A color rectified image.</li>
+<li>The subtopics (e.g., <code>image_rect/compressed</code>) are various compressed versions of the image. These are referred to as <code>transports</code>.</li>
+<li>Transmitting uncompressed images takes a lot of bandwidth (even with modern networks), so compressed images are preferred</li>
+<li>However, there is no convenient way in python of subscribing to compressed images</li>
+</ol></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga7e9d0b" class="outline-3">
+<h3 id="orga7e9d0b">Depth Images</h3>
+<div class="outline-text-3" id="text-orga7e9d0b">
+<p>
+<a href="http://docs.ros.org/en/jazzy/p/depth_image_proc/">depth_image_proc</a> Processes depth image
+</p>
+<ul class="org-ul">
+<li>In a depth image, each pixel corresponds to the depth (i.e., how far light has to travel before hitting something)
+in the scene.</li>
+<li>Used by RGB-D cameras such as the intel RealSense.</li>
+<li>Used to make point clouds (basically 3 dimensional pixelized images) from calibrated depth cameras</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org95d5633" class="outline-2">
+<h2 id="org95d5633">Other Image Tools</h2>
+<div class="outline-text-2" id="text-org95d5633">
+<ol class="org-ol">
+<li><a href="http://docs.ros.org/en/jazzy/p/image_transport/">image_transport</a> determines how image data is sent across the system.</li>
+</ol>
+<p>
+Rather than raw camera data, the image data can be compressed to use less bandwidth.
+</p>
+<ul class="org-ul">
+<li>For python usage, the <code>republish</code> node is the most important.
+<ul class="org-ul">
+<li>It can subscribe to a compressed image, decompress it, and publish it as a raw image</li>
+<li>Thus, you can publish a compressed image on a remote computer on the network, subscribe to it with the <code>republish</code> node,
+and have it republish the uncompressed image, allowing easier access from python.</li>
+</ul></li>
+<li><a href="https://index.ros.org/p/web_video_server/github-RobotWebTools-web_video_server/#jazzy">web_video_server</a> is used to create an http stream of video,
+useful if interfacing your robot to a website.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org54c8c7c" class="outline-2">
+<h2 id="org54c8c7c">OpenCV</h2>
+<div class="outline-text-2" id="text-org54c8c7c">
+<p>
+<a href="https://opencv.org">OpenCV</a> is a major image processing library.
+Their website has many tutorials on how to process images.
+</p>
+
+<p>
+Some packages that use/relate to OpenCV are:
+</p>
+<ol class="org-ol">
+<li><a href="https://index.ros.org/p/cv_bridge/">cv_bridge</a>
+<ul class="org-ul">
+<li>Converts between OpenCV data and ROS messages.</li>
+<li>If you want to use opencv with ROS, you should use this package to convert between OpenCV formats and ROS 2 image messages</li>
+<li>Currentlyt he best documentation is the <a href="http://wiki.ros.org/cv_bridge">ROS 1 wiki</a> or the source code</li>
+</ul></li>
+<li><a href="https://index.ros.org/p/image_geometry/">image_geometry</a> Using a camera calibration,
+<ul class="org-ul">
+<li>lets you convert between pixel coordinates and the other frames in your system.</li>
+<li>Python API documentation is not hosted properly but can be build locally with <code>rosdoc2</code>.</li>
+<li>For those too lazy to build the documentation, the ROS 1 python API is substantially similar and is documented online <a href="http://docs.ros.org/en/noetic/api/image_geometry/html/python/">Python API documentation</a></li>
+</ul></li>
+</ol>
+</div>
+<div id="outline-container-org0098857" class="outline-4">
+<h4 id="org0098857">Not In ROS 2 (yet)</h4>
+<div class="outline-text-4" id="text-org0098857">
+<ol class="org-ol">
+<li><a href="http://wiki.ros.org/opencv_apps">opencv_apps</a> Each "app" is a node that performs a single
+image processing function using opencv.  Thus you can chain together many computer vision algorithms
+by connecting some nodes together in a launchfile.</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org749d4d2" class="outline-2">
+<h2 id="org749d4d2">Tag Tracking</h2>
+<div class="outline-text-2" id="text-org749d4d2">
+<p>
+Tags are special 2-Dimensional patterns that are designed to be viewed with a camera. 
+Computer vision algorithms can then determine the 6 Degree of freedom pose of the tag and
+often an identifier (thus Tags are like QR codes but they also contain geometric information.
+</p>
+
+<ul class="org-ul">
+<li><a href="https://april.eecs.umich.edu/software/apriltag">Information on the Theory of April Tags</a>
+<ul class="org-ul">
+<li>Includes code for generating the tags</li>
+</ul></li>
+<li><a href="https://github.com/AprilRobotics/apriltag/wiki/AprilTag-User-Guide">AprilTags User Guide</a></li>
+<li><a href="https://www.sciencedirect.com/science/article/pii/S0262885619300903">STags</a> are another type of tag that have been newly developed, and the linked paper provides a good overview of other tags</li>
+<li>The April tags library is <a href="https://github.com/AprilRobotics/apriltag/tree/master/">April Tags</a>
+<ul class="org-ul">
+<li>This is a ros-independent library written in C (with python bindings).</li>
+<li>It can be used directly from python: <a href="https://github.com/AprilRobotics/apriltag/wiki/AprilTag-User-Guide">https://github.com/AprilRobotics/apriltag/wiki/AprilTag-User-Guide</a></li>
+</ul></li>
+</ul>
+</div>
+
+<div id="outline-container-org96f2e93" class="outline-3">
+<h3 id="org96f2e93">April Tags in ROS</h3>
+<div class="outline-text-3" id="text-org96f2e93">
+<ol class="org-ol">
+<li>The <a href="https://index.ros.org/p/apriltag_ros/github-christianrauch-apriltag_ros/#jazzy">apriltag_ros</a> provides april-tag related functionality for ROS
+<ul class="org-ul">
+<li>This is a meta-package that also installs the ROS-independent apriltag library (<code>ros-jazzy-apriltag</code>) and messages for apriltags (<code>ros-jazzy-apriltag-msgs</code>).</li>
+</ul></li>
+<li><a href="https://index.ros.org/p/apriltag/github-AprilRobotics-apriltag/#jazzy">apriltag</a> has documentation for apriltags.</li>
+<li>Choose a <a href="https://github.com/AprilRobotics/apriltag/wiki/AprilTag-User-Guide#choosing-a-tag-family">Tag Family</a>
+<ul class="org-ul">
+<li>Download images here: <a href="https://github.com/AprilRobotics/apriltag-imgs">https://github.com/AprilRobotics/apriltag-imgs</a></li>
+<li>Resize the images and print them (for example, use <code>gimp</code>):
+<ul class="org-ul">
+<li>Choose <code>Image-&gt;Scale Image</code></li>
+<li>Set the Size of the image (choose the resolution and then set the size in real-world units (e.g. meters)</li>
+<li>Choose "None" for interpolation</li>
+<li>Print it out</li>
+<li>It is important that the tag's scaling is correct or the tag will not work.</li>
+<li>April tags must have a boarder around them. There are some tag families that have a white border and others that have a black border</li>
+</ul></li>
+</ul></li>
+<li>See <a href="http://docs.ros.org/en/jazzy/p/apriltag/">apriltag documentation</a> for more instructions on how to use them.</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge459f4a" class="outline-2">
+<h2 id="orge459f4a">Other Image Packages and Libraries</h2>
+<div class="outline-text-2" id="text-orge459f4a">
+<ol class="org-ol">
+<li><a href="https://github.com/ros2/openrobotics_darknet_ros">Darknet ROS 2</a> - realtime object detection (last released for foxy)</li>
+<li><a href="https://github.com/tzutalin/awesome-visual-slam">Up to date list of visual SLAM solutions</a></li>
+<li><a href="http://wiki.ros.org/face_detector">face_detector</a></li>
+<li><a href="http://wiki.ros.org/face_recognition">facial_recognition</a> You will need to compile this since it was last
+released for ROS indigo.</li>
+<li><a href="http://florisvb.github.io/multi_tracker/">2D tracking of multiple objects</a></li>
+<li><a href="http://wiki.ros.org/find_object_2d">Find object 2D</a> Feature detection to find objects</li>
+<li><a href="https://github.com/mgonzs13/yolo_ros">YoloV8 wrapper for ROS 2</a></li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-orge1084b9" class="outline-2">
+<h2 id="orge1084b9">Other Learning Resources</h2>
+<div class="outline-text-2" id="text-orge1084b9">
+<ul class="org-ul">
+<li><a href="https://ciechanow.ski/cameras-and-lenses/">Cameras and Lenses</a> (Highly recommend this)</li>
+<li><a href="http://mrcal.secretsauce.net/">mrcal</a> NASA-quality lenses modeling and calibration software.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

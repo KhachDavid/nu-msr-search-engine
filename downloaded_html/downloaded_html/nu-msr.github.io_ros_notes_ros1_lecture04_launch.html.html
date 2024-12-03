@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-11-25 Mon 23:03 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Launchfiles</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">Launchfiles</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org4fae7a2">Launchfiles and ROS</a></li>
+<li><a href="#org956aa6c">Using roslaunch</a>
+<ul>
+<li><a href="#orgcf265f8">Roslaunch options</a></li>
+</ul>
+</li>
+<li><a href="#org9625c97">Writing a Launchfile</a></li>
+<li><a href="#orge9db084">References</a></li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-org4fae7a2" class="outline-2">
+<h2 id="org4fae7a2">Launchfiles and ROS</h2>
+<div class="outline-text-2" id="text-org4fae7a2">
+<ul class="org-ul">
+<li>ROS programs consist of many nodes communicating over topics and services</li>
+<li>For non-trivial programs, manually running nodes using <code>rosrun</code> becomes tedious
+and hard to reproduce</li>
+<li>Launchfiles solve this problem by enabling you to specify 
+<ul class="org-ul">
+<li>Which nodes are run</li>
+<li>What parameters they use</li>
+<li>What topics are named</li>
+<li>and more!</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org956aa6c" class="outline-2">
+<h2 id="org956aa6c">Using roslaunch</h2>
+<div class="outline-text-2" id="text-org956aa6c">
+<ul class="org-ul">
+<li>The command-line tool for using launch files is <a href="https://wiki.ros.org/roslaunch">roslaunch</a>.</li>
+<li>There are two ways of invoking a launchfile:
+<ol class="org-ol">
+<li><code>roslaunch package file.launch [arg_name:=value]...</code></li>
+<li><code>roslaunch package /path/to/launch/file.launch [arg_name:=value...]</code>
+<ul class="org-ul">
+<li>Here, the launch file at the given location is directly used.</li>
+<li>This method is not used very often</li>
+</ul></li>
+</ol></li>
+<li>You can pass arguments to a launch file using the <code>arg_name:=value</code> syntax,
+which is shared with the remapping arguments syntax.</li>
+<li><code>roslaunch</code> automatically starts <code>roscore</code>, if it is not already running.</li>
+</ul>
+</div>
+<div id="outline-container-orgcf265f8" class="outline-3">
+<h3 id="orgcf265f8">Roslaunch options</h3>
+<div class="outline-text-3" id="text-orgcf265f8">
+<p>
+Note: - <code>roslaunch --help</code> provides more options
+</p>
+<ol class="org-ol">
+<li><code>--nodes</code>  shows the nodes that are launched by the launchfile</li>
+<li><code>--args = NODE</code> shows the arguments passed to run the Node</li>
+<li><code>--ros-args</code> You can pass arguments to a launchfile (using <code>arg_name:=value</code>) to change
+the behavior of the launchfile.  This flag shows all the possible arguments and their documentation.</li>
+<li><code>--files</code>: Launchfiles can include other launchfiles. This shows which launchfiles a given launchfile includes.</li>
+<li><code>--find /node</code>: Used to find which of the included launchfiles started the node with the given name.</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-org9625c97" class="outline-2">
+<h2 id="org9625c97">Writing a Launchfile</h2>
+<div class="outline-text-2" id="text-org9625c97">
+<ol class="org-ol">
+<li>The <a href="http://wiki.ros.org/roslaunch/XML">Launchfile format</a> relies on XML
+along with a special enhanced substitution argument syntax.</li>
+<li>Launchfiles list nodes to be launched; however, the order in which they start is
+non-deterministic.</li>
+<li>Important Launchfile XML elements:
+<ul class="org-ul">
+<li><a href="http://wiki.ros.org/roslaunch/XML/launch">&lt;launch&gt;</a> - the root element, every launchfile starts with this</li>
+<li><a href="http://wiki.ros.org/roslaunch/XML/node">&lt;node&gt;</a> - Used to run a node.
+Attributes:
+<ul class="org-ul">
+<li>pkg: the package the node is in</li>
+<li>type: the name of the node executable file</li>
+<li>name: the basename of the node</li>
+<li>ns: the node's namespace</li>
+<li>output: determine where to send the output to (a log file or the screen)</li>
+<li>required: if the node dies, the whole roslaunch is terminated</li>
+</ul></li>
+<li><a href="http://wiki.ros.org/roslaunch/XML/include">&lt;include&gt;</a> - Lets you include a launchfile in another launchfile</li>
+<li><a href="http://wiki.ros.org/roslaunch/XML/remap">&lt;remap&gt;</a> - Used for <a href="http://wiki.ros.org/Remapping%20Arguments">Remapping arguments</a></li>
+<li><a href="http://wiki.ros.org/roslaunch/XML/param">&lt;param&gt;</a> - Sets an individual parameter on the parameter server</li>
+<li><a href="http://wiki.ros.org/roslaunch/XML/rosparam">&lt;rosparam&gt;</a> - Controls groups of parameters using <code>.yaml</code> files.</li>
+<li><a href="http://wiki.ros.org/roslaunch/XML/group">&lt;group&gt;</a> - Groups nodes together and allows you to easily apply common settings</li>
+<li><a href="http://wiki.ros.org/roslaunch/XML/arg">&lt;arg&gt;</a> - Used to specify arguments which can be used to change the behavior of the launchfile from the command-line</li>
+<li><a href="http://wiki.ros.org/roslaunch/XML/machine">&lt;machine&gt;</a> - Used to specify a remote machine upon which nodes will be run</li>
+<li><a href="http://wiki.ros.org/roslaunch/XML/env">&lt;env&gt;</a> - Used to set environment variables for the underlying node</li>
+</ul></li>
+<li>Conditionals:
+<ul class="org-ul">
+<li><a href="http://wiki.ros.org/roslaunch/XML#if_and_unless_attributes">Conditional Attributes</a> All elements have attributes <code>if</code> and <code>unless</code> to be conditionally included.</li>
+</ul></li>
+<li><p>
+Substitution arguments:
+The following items can be used within attribute values to perform a computation and expand into the result of that computation
+The general syntax uses <code>$()</code> (just like bash substitution arguments.
+Within XML, a substitution argument would be used like <code>&lt;tag attribute ="$()" /&gt;</code>.
+</p>
+
+<p>
+A list of some possible substitution arguments is below:
+</p>
+<ol class="org-ol">
+<li><code>$(env ENVIRONMENT_VARIABLE)</code> Expands into the value of the environment variable</li>
+<li><code>$(find pkg)$</code> expands to the location of a given package.  Useful for referencing
+a specific file in another package</li>
+<li><code>$(arg myarg)$ expands into the value of =myarg</code>, as specified by an <code>&lt;arg&gt;</code> element and
+passed in on the call to <code>roslaunch</code></li>
+<li><code>$(eval &lt;expression&gt;)</code> Runs python code <code>&lt;expression&gt;</code> and expands to the result of the code evaluation</li>
+</ol></li>
+<li><a href="https://wiki.ros.org/roswtf">roswtf</a> can be used to check launchfiles: <code>roswtf file.launch</code>.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orge9db084" class="outline-2">
+<h2 id="orge9db084">References</h2>
+<div class="outline-text-2" id="text-orge9db084">
+<ul class="org-ul">
+<li><a href="http://wiki.ros.org/roslaunch">Roslaunch</a></li>
+<li><a href="http://wiki.ros.org/roslaunch/XML">Roslaunch XML format</a></li>
+<li><a href="http://wiki.ros.org/roslaunch/API%20Usage">Roslaunch Python API</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

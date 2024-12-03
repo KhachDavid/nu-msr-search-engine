@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-11-25 Mon 23:03 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Transforms in ROS</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../pubme.css" type="text/css"/>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">Transforms in ROS</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org57cf0ed">Transforms</a>
+<ul>
+<li><a href="#orgbf1d2d2">Transform Tree</a></li>
+</ul>
+</li>
+<li><a href="#org26a6925">ROS Transform API</a>
+<ul>
+<li><a href="#org2778b44">Listeners</a></li>
+<li><a href="#orgc7210df">Broadcasters</a></li>
+<li><a href="#org9dec365">Static frames</a></li>
+<li><a href="#org0263805">Datatypes and Representation</a></li>
+</ul>
+</li>
+<li><a href="#org0627065">Frame Conventions</a></li>
+<li><a href="#org34d0de1">Tools</a></li>
+<li><a href="#orgdf8c232">Tips and Tricks</a></li>
+<li><a href="#orgbc0934c">Other Resources</a></li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-org57cf0ed" class="outline-2">
+<h2 id="org57cf0ed">Transforms</h2>
+<div class="outline-text-2" id="text-org57cf0ed">
+<ul class="org-ul">
+<li>In robotics, the positions and orientations of objects
+(e.g., robots, sensors, and obstacles) are often expressed
+as transformations of one coordinate frame into another</li>
+<li>As time advances, these transformations change (e.g., if the robot moves).</li>
+<li>Although the choice of frames (and therefore the coordinates used to represent the state of the system)
+is arbitrary, the right choice of frames can greatly simplify the math required</li>
+<li>ROS provides an API for tracking these frames as they evolve in time</li>
+<li><a href="https://docs.ros.org/en/jazzy/Tutorials/Intermediate/Tf2/Introduction-To-Tf2.html">tf2 Tutorials</a></li>
+<li><a href="https://docs.ros.org/en/jazzy/Concepts/About-Tf2.html">Information about Transforms in ROS 2</a></li>
+</ul>
+</div>
+<div id="outline-container-orgbf1d2d2" class="outline-3">
+<h3 id="orgbf1d2d2">Transform Tree</h3>
+<div class="outline-text-3" id="text-orgbf1d2d2">
+<ul class="org-ul">
+<li>In ROS, the transforms form a tree, with every node corresponding to a frame</li>
+<li>Every frame has one parent and an unlimited number of children</li>
+<li>The location of a frame is specified relative to its parent</li>
+<li>Every frame has a unique name, called a <i>frame_id</i></li>
+<li>Every transform on the tree is timestamped.  All queries specify not just the
+<code>frame_id</code> but also the time.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org26a6925" class="outline-2">
+<h2 id="org26a6925">ROS Transform API</h2>
+<div class="outline-text-2" id="text-org26a6925">
+<ul class="org-ul">
+<li>The transform (<i>tf</i>) tree is available on the <code>/tf</code> topic</li>
+<li>Any node can publish transforms on <code>/tf</code> or retrieve information from <code>/tf</code></li>
+<li>ROS has a special API for manipulating the Transform Tree.
+<ul class="org-ul">
+<li>The <code>tf2_ros</code> package implements this API</li>
+</ul></li>
+</ul>
+</div>
+
+<div id="outline-container-org2778b44" class="outline-3">
+<h3 id="org2778b44"><a href="https://docs.ros.org/en/jazzy/Tutorials/Intermediate/Tf2/Writing-A-Tf2-Listener-Py.html">Listeners</a></h3>
+<div class="outline-text-3" id="text-org2778b44">
+<ul class="org-ul">
+<li>a <i>listener</i> subscribes to <code>/tf</code> and maintains a time-history of the received frames</li>
+<li>The buffer can then be queried for information about the transforms</li>
+<li>For example, what is the transformation between frame X at time T and frame Y at time U?</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgc7210df" class="outline-3">
+<h3 id="orgc7210df"><a href="https://docs.ros.org/en/jazzy/Tutorials/Intermediate/Tf2/Writing-A-Tf2-Broadcaster-Py.html">Broadcasters</a></h3>
+<div class="outline-text-3" id="text-orgc7210df">
+<ul class="org-ul">
+<li>A <i>broadcaster</i> publishes frames to <code>/tf</code></li>
+<li>Multiple nodes can publish different frames to <code>/tf</code> and they will
+be added into the tree based on their names</li>
+<li>Each message you broadcast on <code>/tf</code> creates an edge in the tree
+<ul class="org-ul">
+<li>The transform converts <i>frame_id</i> into <i>child_frame_id</i></li>
+<li>Equivalently the transform converts coordinates in <i>child_frame_id</i> into
+coordinates in <i>frame_id</i></li>
+</ul></li>
+<li>Be careful not to broadcast conflicting frame information or information
+that violates the tree structure.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org9dec365" class="outline-3">
+<h3 id="org9dec365"><a href="https://docs.ros.org/en/jazzy/Tutorials/Intermediate/Tf2/Writing-A-Tf2-Static-Broadcaster-Py.html">Static frames</a></h3>
+<div class="outline-text-3" id="text-org9dec365">
+<ul class="org-ul">
+<li>Some frames do not change: these are known as <i>static frames</i></li>
+<li>Static frames can be broadcast to the <code>/tf_static</code> to consume less bandwidth</li>
+<li>These frames are <i>latched</i>, which means that the last message sent on <code>/tf_static</code>
+will be sent to new subscribers.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org0263805" class="outline-3">
+<h3 id="org0263805">Datatypes and Representation</h3>
+<div class="outline-text-3" id="text-org0263805">
+<ul class="org-ul">
+<li>A transformation consists of a Translation and a Rotation</li>
+<li>The main message type of a transformation is a <a href="https://github.com/ros2/common_interfaces/blob/jazzy/geometry_msgs/msg/TransformStamped.msg">geometry_msgs/msg/TransformStamped</a></li>
+<li>It contains
+<ul class="org-ul">
+<li>A timestamp.</li>
+<li>A parent frame</li>
+<li>A child frame</li>
+<li>A Transform, which consists of
+<ul class="org-ul">
+<li>A translation</li>
+<li>A rotation (represented as a quaternion)</li>
+</ul></li>
+</ul></li>
+<li>The <code>tf2</code> python tutorials provide some sample code for converting between quaternions and Euler angles</li>
+<li>A rote conversion from axis-angle representation to a quaternion is as follows:
+<ul class="org-ul">
+<li>Let $\hat{w} = \begin{bmatrix}w_x \\ w_y \\ w_z \end{bmatrix} be a unit rotation axis and let \(\theta\) be the angle of rotation</li>
+<li>The equivalent quaternion is \(cos\frac{\theta}{2} + (w_x \hat{i} + w_y \hat{j} + w_z \hat{k}) \sin\frac{\theta}{2}\)</li>
+</ul></li>
+<li>The <a href="https://github.com/matthew-brett/transforms3d">transforms3d</a> package can be used to handle 3D transformations (including quaternions).
+<ul class="org-ul">
+<li>Install with <code>sudo apt install python3-transforms3d</code>, the <code>&lt;exec_depend&gt;</code> is on <code>python3-transforms3d</code></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0627065" class="outline-2">
+<h2 id="org0627065">Frame Conventions</h2>
+<div class="outline-text-2" id="text-org0627065">
+<p>
+ROS follows a set of conventions for frames.
+</p>
+<ul class="org-ul">
+<li>From <a href="https://www.ros.org/reps/rep-0103.html">REP 0103 Standard Units of Measure and Coordinate Conventions</a>
+<ul class="org-ul">
+<li>All distances are in meters</li>
+<li>All angles are in radians</li>
+<li>All coordinate systems are right-handed</li>
+<li>Transforms  <i>frame_id</i> into <i>child_frame_id</i>: thus the transform
+converts points in <i>child_frame_id</i> to into the frame <i>frame_id</i></li>
+<li>There are four descriptions for orientation, in preferred order
+<ol class="org-ol">
+<li>Quaternions</li>
+<li>Rotation matrices in \(SO(3)\)</li>
+<li>Fixed-axis rotations using roll-pitch-yaw (a.k.a. fixed XYZ Euler angles)</li>
+<li>Relative-axis ZYX Euler axis</li>
+</ol></li>
+</ul></li>
+<li>From <a href="https://www.ros.org/reps/rep-0105.html">REP 105 Coordinate Frames for Mobile Platforms</a>
+<ul class="org-ul">
+<li>On a mobile robot, \(x\) is forward, \(y\) is left, and \(z\) is up</li>
+<li>For cameras \(z\) is forward, \(x\) is right, \(y\) is down, and <code>frame_id</code> ends with <code>_optical</code></li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org34d0de1" class="outline-2">
+<h2 id="org34d0de1">Tools</h2>
+<div class="outline-text-2" id="text-org34d0de1">
+<p>
+There are several <a href="https://docs.ros.org/en/jazzy/Tutorials/Intermediate/Tf2/Introduction-To-Tf2.html#tf2-tools">tools</a> that can be used to debug the transform tree.
+</p>
+<ol class="org-ol">
+<li><code>ros2 run tf2_tools view_frames</code>: generates <code>frames.pdf</code> file image of the current frames and how they are connected.</li>
+<li><code>ros2 run tf2_ros tf2_echo [from_frame] [to_frame]</code> - print transformations between frames</li>
+<li><code>ros2 run tf2_ros static_transform_publisher</code> - Creates a static tf2 frame</li>
+<li><code>ros2 doctor</code> May scan for failures in the tf</li>
+<li><code>ros2 run rqt_tf_tree rqt_tf_tree</code> lets you see examine the tf tree interactively
+<ul class="org-ul">
+<li>You may need to separately install the <code>rqt_tf_tree</code> package</li>
+</ul></li>
+<li><code>rviz</code> can be used to visualize frames.
+<ul class="org-ul">
+<li>You must choose the correct <code>fixed frame</code> in rviz to see any of the frames.</li>
+<li>All frames are displayed relative to the <code>fixed frame</code></li>
+<li>Having an invalid <code>fixed frame</code> will prevent your data from showing up in rviz.</li>
+<li>You can add the <code>Tf</code> view to see all the frames on tf</li>
+<li>You can also add individual <code>axes</code> objects</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgdf8c232" class="outline-2">
+<h2 id="orgdf8c232">Tips and Tricks</h2>
+<div class="outline-text-2" id="text-orgdf8c232">
+<ol class="org-ol">
+<li>The timing of the transforms you look up is crucial.
+<ul class="org-ul">
+<li>If two frames came in too far apart <code>tf</code> will throw an exception rather than interpolating</li>
+<li>The ideal way to solve this problem is to
+<ol class="org-ol">
+<li>Understand the frequency at which the frames are coming in</li>
+<li>Only query the listener when recent-enough data is available</li>
+</ol></li>
+<li>The practical way to solve this problem is to
+<ol class="org-ol">
+<li>Use <code>try-except</code> around transform calls</li>
+<li>Ignore the exceptions and try again on your next iteration.</li>
+</ol></li>
+</ul></li>
+<li>To ask for the most recent transforms, use <code>rclpy.Time()</code> as the time:
+<ul class="org-ul">
+<li><code>rclpy.Time.now()</code> gets the current time, but a transform may not be available at the current time.</li>
+</ul></li>
+<li>Make sure your transforms form a connected tree
+<ul class="org-ul">
+<li>There should be a path from the root of the tree to every node (i.e., no disconnected components)</li>
+<li>Every frame should have only one parent.</li>
+<li>Each transform should be provided from a single location</li>
+</ul></li>
+<li>There are no default frames, only frames that you add.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgbc0934c" class="outline-2">
+<h2 id="orgbc0934c">Other Resources</h2>
+<div class="outline-text-2" id="text-orgbc0934c">
+<ul class="org-ul">
+<li>The activity that goes with this work can be found <a href="./activity/tf_activity.html">TF Activity</a></li>
+<li><a href="http://docs.ros.org/en/rolling/p/tf2_ros/">tf2_ros API Docs</a>
+<ul class="org-ul">
+<li>Jazzy documentation is very incomplete as of 10/2024</li>
+<li>Rolling documentation is somewhat incomplete as of 10/24
+<ul class="org-ul">
+<li><p>
+Self generate the complete documentation:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">git clone https://github.com/ros2/geometry2
+rosdoc2 build --package-path geometry2/tf2_ros
+<span class="org-comment-delimiter"># </span><span class="org-comment">Documentation is under docs_output/tf2_ros</span>
+</pre>
+</div></li>
+</ul></li>
+</ul></li>
+<li><a href="https://www.youtube.com/watch?v=d4EgbgTm0Bg">3Blue1Brown Quaternion Video</a></li>
+<li><a href="https://eater.net/quaternions">Interactive quaternions</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

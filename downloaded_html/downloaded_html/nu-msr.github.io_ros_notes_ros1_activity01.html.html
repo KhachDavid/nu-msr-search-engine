@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-11-25 Mon 23:03 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ROS Basic Activity</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">ROS Basic Activity</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgbe54613">Introduction</a></li>
+<li><a href="#org0258a92">Examples</a>
+<ul>
+<li><a href="#org6d4c9ef">Publisher</a></li>
+<li><a href="#org8c09408">Subscriber</a></li>
+<li><a href="#org85c6ebe">Services</a></li>
+</ul>
+</li>
+<li><a href="#orgb2e62aa">Reference</a></li>
+<li><a href="#orgd482248">Tutorials</a></li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-orgbe54613" class="outline-2">
+<h2 id="orgbe54613">Introduction</h2>
+<div class="outline-text-2" id="text-orgbe54613">
+<p>
+Create a node that accomplishes the following tasks:
+</p>
+
+<ol class="org-ol">
+<li>Publishes on <code>turtle1/cmd_vel</code> and causes the turtle to move forward in the x direction</li>
+<li>Subscribes to <code>turtle1/pose</code> and, when the turtle's x coordinate is greater than 7 resets the turtle's x position to 0
+<ul class="org-ul">
+<li>To reset the position use the <code>turtle1/teleport_absolute</code> service</li>
+</ul></li>
+<li>Offers a service to flip the turtle's direction (so it's x velocity is negative).  The turtle
+should then reset when it's x coordinate is smaller than 3.</li>
+<li>Instead of using a threshold of 7, read a parameter called <code>thresh</code> from the parameter server</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org0258a92" class="outline-2">
+<h2 id="org0258a92">Examples</h2>
+<div class="outline-text-2" id="text-org0258a92">
+</div>
+<div id="outline-container-org6d4c9ef" class="outline-3">
+<h3 id="org6d4c9ef">Publisher</h3>
+<div class="outline-text-3" id="text-org6d4c9ef">
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-comment-delimiter">#</span><span class="org-comment">!/usr/bin/env python</span>
+
+<span class="org-keyword">import</span> rospy
+<span class="org-keyword">from</span> geometry_msgs.msg <span class="org-keyword">import</span> Twist, Vector3
+
+<span class="org-keyword">if</span> <span class="org-builtin">__name__</span> <span class="org-operator">==</span> <span class="org-string">'__main__'</span>:
+      <span class="org-variable-name">pub</span> <span class="org-operator">=</span> rospy.Publisher(<span class="org-string">"test"</span>, Twist, queue_size <span class="org-operator">=</span> 10)
+      rospy.init_node(<span class="org-string">'cartesian'</span>)
+      <span class="org-variable-name">rate</span> <span class="org-operator">=</span> rospy.Rate(1)
+      <span class="org-keyword">while</span> <span class="org-keyword">not</span> rospy.is_shutdown():
+            rospy.loginfo(<span class="org-string">"Next"</span>)
+            pub.publish(Twist(Vector3(1,2,3),Vector3(4,5,6)))
+            rate.sleep()
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8c09408" class="outline-3">
+<h3 id="org8c09408">Subscriber</h3>
+<div class="outline-text-3" id="text-org8c09408">
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-comment-delimiter">#</span><span class="org-comment">!/usr/bin/env python</span>
+<span class="org-keyword">import</span> rospy
+<span class="org-keyword">from</span> turtlesim.msg <span class="org-keyword">import</span> Pose
+
+<span class="org-keyword">def</span> <span class="org-function-name">callback</span>(data):
+        rospy.loginfo(f<span class="org-string">"x: </span>{data.x}<span class="org-string">, y: </span>{data.y}<span class="org-string">"</span>)
+
+<span class="org-keyword">if</span> <span class="org-builtin">__name__</span> <span class="org-operator">==</span> <span class="org-string">"__main__"</span>:
+        rospy.Subscriber(<span class="org-string">"turtle1/pose"</span>, Pose, callback)
+        rospy.ServiceProxy(<span class="org-string">"turtle1/teleport_absolute"</span>, TeleportAbsolute)
+        rospy.init_node(<span class="org-string">"quadrant"</span>)
+        rospy.spin()
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org85c6ebe" class="outline-3">
+<h3 id="org85c6ebe">Services</h3>
+<div class="outline-text-3" id="text-org85c6ebe">
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-doc">"""</span>
+<span class="org-doc">SERVICES:</span>
+<span class="org-doc">   jump_turtle (std_srvs/Empty): Cause the turtle to jump</span>
+<span class="org-doc">"""</span>
+<span class="org-keyword">import</span> rospy
+<span class="org-keyword">from</span> turtlesim.srv <span class="org-keyword">import</span> TeleportRelative
+<span class="org-keyword">from</span> std_srvs.srv <span class="org-keyword">import</span> Empty, EmptyResponse
+<span class="org-keyword">import</span> math
+
+<span class="org-keyword">class</span> <span class="org-type">Jump</span>:
+   <span class="org-doc">""" Manage the services for the jump node """</span>
+   <span class="org-keyword">def</span> <span class="org-function-name">__init__</span>(<span class="org-keyword">self</span>):
+      <span class="org-keyword">self</span>.<span class="org-variable-name">__teleport_relative</span> <span class="org-operator">=</span> rospy.ServiceProxy(<span class="org-string">"turtle1/teleport_relative"</span>,
+                                                    TeleportRelative)
+      <span class="org-keyword">self</span>.<span class="org-variable-name">__service</span> <span class="org-operator">=</span> rospy.Service(<span class="org-string">"jump_turtle"</span>, Empty, <span class="org-keyword">self</span>.jump_turtle_handler)
+
+   <span class="org-keyword">def</span> <span class="org-function-name">jump_turtle_handler</span>(<span class="org-keyword">self</span>, req):
+      <span class="org-doc">""" Cause the turtle to make a relative move </span>
+
+<span class="org-doc">          Args:</span>
+<span class="org-doc">            req - this is empty for this service</span>
+<span class="org-doc">      """</span>
+      <span class="org-keyword">self</span>.__teleport_relative(0.5, math.pi<span class="org-operator">/</span>4)
+      <span class="org-keyword">return</span> EmptyResponse()
+
+
+<span class="org-keyword">if</span> <span class="org-builtin">__name__</span> <span class="org-operator">==</span> <span class="org-string">"__main__"</span>:
+   rospy.init_node(<span class="org-string">"jump"</span>)
+   <span class="org-variable-name">node</span> <span class="org-operator">=</span> Jump()
+   rospy.spin()
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb2e62aa" class="outline-2">
+<h2 id="orgb2e62aa">Reference</h2>
+<div class="outline-text-2" id="text-orgb2e62aa">
+<ul class="org-ul">
+<li><a href="http://wiki.ros.org/rospy/Overview">Rospy Overview</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgd482248" class="outline-2">
+<h2 id="orgd482248">Tutorials</h2>
+<div class="outline-text-2" id="text-orgd482248">
+<ol class="org-ol">
+<li><a href="https://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment">Create Your First Workspace</a></li>
+<li><a href="https://wiki.ros.org/ROS/Tutorials/CreatingPackage">Create Your First Package</a></li>
+<li><a href="https://wiki.ros.org/ROS/Tutorials/BuildingPackages">Build Your First Package</a></li>
+<li><a href="https://wiki.ros.org/ROS/Tutorials/UnderstandingNodes">Understanding Nodes</a></li>
+<li><a href="https://wiki.ros.org/ROS/Tutorials/UnderstandingTopics">Understanding Topics</a></li>
+<li><a href="https://wiki.ros.org/ROS/Tutorials/UnderstandingServicesParams">Understanding Services and Parameters</a></li>
+<li><a href="https://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28python%29">Publisher/Subscriber</a></li>
+<li><a href="https://wiki.ros.org/ROS/Tutorials/ExaminingPublisherSubscriber">Examine the Publisher/Subscriber</a></li>
+<li><a href="https://wiki.ros.org/ROS/Tutorials/WritingServiceClient%28python%29">Service/Client</a></li>
+<li><a href="https://wiki.ros.org/ROS/Tutorials/ExaminingServiceClient">Examine the Service/Client</a></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

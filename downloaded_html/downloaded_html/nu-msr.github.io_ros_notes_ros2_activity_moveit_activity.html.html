@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-11-25 Mon 23:03 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MoveWhat? Activity</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">MoveWhat? Activity</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org5fe08cd">Introduction</a></li>
+<li><a href="#org914e9eb">Preliminaries</a></li>
+<li><a href="#org1e02346">First Steps</a>
+<ul>
+<li><a href="#org4e24ea9">Rviz2</a></li>
+<li><a href="#orgddb8dc2">Motion Plan</a>
+<ul>
+<li><a href="#org88233cf">Joints</a></li>
+</ul>
+</li>
+<li><a href="#orgacfa5bb">Planning Scene</a></li>
+</ul>
+</li>
+<li><a href="#org078af8e">How It Works</a>
+<ul>
+<li><a href="#org59ef7de">The Plan</a></li>
+<li><a href="#orgc87053a">Basic Action Inspection</a></li>
+<li><a href="#org0b85d08">Documentation</a></li>
+<li><a href="#org9561ffd">Answers</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-org5fe08cd" class="outline-2">
+<h2 id="org5fe08cd">Introduction</h2>
+<div class="outline-text-2" id="text-org5fe08cd">
+<ol class="org-ol">
+<li>MoveIt 2 is a massive package, with many features, but it is still under development and is under-documented.</li>
+<li>To make our robot move, without using C++, we will need to do some detective work</li>
+<li>This guide is designed as a tutorial to introduce you to MoveIt and prepare your group for Homework 3</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org914e9eb" class="outline-2">
+<h2 id="org914e9eb">Preliminaries</h2>
+<div class="outline-text-2" id="text-org914e9eb">
+<ol class="org-ol">
+<li>Setup the <a href="..//franka.html#franka_setup">franka workspace</a> on your computer.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org1e02346" class="outline-2">
+<h2 id="org1e02346">First Steps</h2>
+<div class="outline-text-2" id="text-org1e02346">
+<ol class="org-ol">
+<li>To start the franka robot <code>ros2 launch franka_fer_moveit_config demo.launch.py</code>
+<ul class="org-ul">
+<li>This command will start a Franka MoveIt setup, with the MoveIt GUI in <code>rviz</code></li>
+<li>Rather than connecting to the actual robot or a simulation, a <i>mock</i> controller is used that takes
+joint positions as inputs and returns fake joint states as sensor data.</li>
+</ul></li>
+</ol>
+</div>
+
+<div id="outline-container-org4e24ea9" class="outline-3">
+<h3 id="org4e24ea9">Rviz2</h3>
+<div class="outline-text-3" id="text-org4e24ea9">
+<ol class="org-ol">
+<li>There are two new Rviz widgets (which show up in the left-pane) that have been added by the setup when you run these launch files
+<ul class="org-ul">
+<li><code>PlanningScene</code>, which keeps track of obstacles in the environment</li>
+<li><code>MotionPlanning</code>, which is a gui interface to move the robot</li>
+</ul></li>
+<li>There will be an interactive marker displayed near the robot's end-effector that you can drag to set the target location for the motion plan.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgddb8dc2" class="outline-3">
+<h3 id="orgddb8dc2">Motion Plan</h3>
+<div class="outline-text-3" id="text-orgddb8dc2">
+<ol class="org-ol">
+<li>You should see an orange overlay on the robot.
+<ul class="org-ul">
+<li>The orange robot represents the <i>planning group</i>, the collection of joints (and there associated links) that are currently being controlled</li>
+<li>In the MotionPlanning GUI, under the Planning Tab, you can change the planning group to, for example, control the gripper instead of the arm</li>
+<li>While you can plan a path for the gripper the execution is simulated by simply snapping it to the commanded position immediately.
+<ul class="org-ul">
+<li>On the real robot there are multiple control modes for the gripper, accessible through the <code>gripper_action</code> server.</li>
+<li>Not all gripper control modes are position controlled and are therefore not accessible via MoveIt</li>
+</ul></li>
+</ul></li>
+<li>An interactive marker, which can be dragged to move the arm to various positions
+<ul class="org-ul">
+<li>This marker controls the goal state, which is the target location of the robot's end-effector</li>
+<li>As you drag the robot around, some of the links may turn red, which indicates a (possibly self) collision or otherwise invalid state</li>
+<li>Try it!</li>
+</ul></li>
+<li>There are also pre-set positions that the arm can be moved to
+<ul class="org-ul">
+<li>The gripper has no interactive marker and can only be moved to set positions via the GUI (though it can be moved to arbitrary positions in code).</li>
+</ul></li>
+<li>It is also possible to plan from a goal state that is not the current location of the robot by setting the Start State</li>
+<li>In the Planning Tab, press plan to generate a motion plan
+<ul class="org-ul">
+<li>You should see an animation of the arm moving from start to goal</li>
+<li>Press Execute to run the plan, and watch the arm move (Try It!)</li>
+<li>If you press Plan &amp; Execute you will see the robot start to move, with the plan happening slightly ahead of robot motion (Try It!)</li>
+<li>You can change the speed of the motion by selecting Velocity Scaling and Accel Scaling
+<ul class="org-ul">
+<li>On the real robot be very careful with these, the robot can move fast!</li>
+</ul></li>
+<li>There are also many options that are available for motion planning that are accessible via the GUI</li>
+</ul></li>
+</ol>
+</div>
+<div id="outline-container-org88233cf" class="outline-4">
+<h4 id="org88233cf">Joints</h4>
+<div class="outline-text-4" id="text-org88233cf">
+<ol class="org-ol">
+<li>The Joints tab allows you to plan to a specific joint configuration rather than an end-effector configuration</li>
+<li>Notice that if you move the marker at the end-effector, the joint states move as well indicating that inverse kinematics is happening here!
+<ul class="org-ul">
+<li>In other words, planning to an end-effector position means computing inverse kinematics to find the corresponding joint positions</li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-orgacfa5bb" class="outline-3">
+<h3 id="orgacfa5bb">Planning Scene</h3>
+<div class="outline-text-3" id="text-orgacfa5bb">
+<ol class="org-ol">
+<li>Under the <i>Scene Objects</i> tab, you can manipulate obstacles in the environment
+<ol class="org-ol">
+<li>Click the plus sign next to the word box to add a box into the scene
+<ul class="org-ul">
+<li>Move it to somewhere where the robot can potentially hit it</li>
+</ul></li>
+<li>Click "publish" to set the box as part of the planning scene</li>
+<li>It is also possible to attach objects to the end-effector (e.g., so that collision detection accounts for a grabbed object)</li>
+</ol></li>
+<li>With the scene set, drag the end-effector into the box
+<ul class="org-ul">
+<li>What happens? (The links that collide should turn red)</li>
+<li>What happens if you click plan? (The plan will fail)</li>
+<li>Check "collision-aware IK" and move the end-effector into the box and hold it
+<ul class="org-ul">
+<li>You should see the IK solver try to keep moving the joints to avoid the collision
+<ul class="org-ul">
+<li>If the end-effector is colliding with the box, no IK solution can succeed at avoiding it</li>
+<li>But it is possible if another link is hitting the box (maybe another arm orienation does not have that same collision)</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Objects in the planning scene can be attached to the end-effector (e.g., to indicate that the robot has picked up the object).
+<ul class="org-ul">
+<li>This enables them to be checked for collision during planning</li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org078af8e" class="outline-2">
+<h2 id="org078af8e">How It Works</h2>
+<div class="outline-text-2" id="text-org078af8e">
+<ol class="org-ol">
+<li>The <a href="https://moveit.picknik.ai/main/index.html">Moveit Documentation</a> provides an overview, particularly the <a href="https://moveit.picknik.ai/main/doc/concepts/move_group.html">Move Group</a> diagram.</li>
+<li>The <a href="http://docs.ros.org/en/jazzy/p/moveit_msgs/">moveit_msgs</a> documentation explains how to use the ROS API for the <code>/move_group</code> node.</li>
+<li>Take a look at the <code>rqt_graph</code> (be sure to refresh)
+<ul class="org-ul">
+<li>The key node for planning is the <code>/move_group</code> node</li>
+</ul></li>
+<li>Run <code>ros2 node info /move_group</code> to see it's ROS API
+<ul class="org-ul">
+<li>You can of course get info on these interface with the <code>ros2</code> command line
+<code>ros2 service/action/topic</code> and <code>ros2 interface</code></li>
+<li>The key actions here, however, are
+<ul class="org-ul">
+<li><code>/move_action</code>, which is used to plan the path</li>
+<li><code>/execute_trajectory</code>, which does exactly what it sounds like</li>
+</ul></li>
+<li>The key service is <code>/compute_ik</code> which computes the inverse kinematics</li>
+</ul></li>
+<li>If you use <code>ros2 interface</code> on the types (which you should do) you can learn how these actions work a bit more
+<ul class="org-ul">
+<li>For more information on actions see <a href="../basics.html#actions">the notes on actions</a></li>
+</ul></li>
+</ol>
+</div>
+<div id="outline-container-org59ef7de" class="outline-3">
+<h3 id="org59ef7de">The Plan</h3>
+<div class="outline-text-3" id="text-org59ef7de">
+<ol class="org-ol">
+<li>Let's use our working interface to the move-group node (that is, Rviz) to help us better understand how the ROS API for the <code>/move_group</code> node works
+<ul class="org-ul">
+<li>Make sure the <code>MotionPlanning</code> panel in Rviz is selected and activated</li>
+</ul></li>
+<li>To be as thorough as possible we would want to capture all the data that <code>rviz</code> sends to the <code>move_group</code> node
+<ul class="org-ul">
+<li>That is, all <code>move_group</code> service servers, action servers, and subscriptions that <code>rviz2</code> connects to</li>
+<li>We can find these by comparing <code>ros2 node info /move_group</code> to <code>ros2 node info /rviz2</code></li>
+</ul></li>
+<li>Capturing actions and services is not as straightforward as subscribing because there can only be one <code>service</code> or <code>action</code> server with a given name.
+<ul class="org-ul">
+<li>Instead the approach is to write a new node that has an action server that prints out the requests</li>
+<li>The node could also forward traffic to the actual underlying action with an action client.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgc87053a" class="outline-3">
+<h3 id="orgc87053a">Basic Action Inspection</h3>
+<div class="outline-text-3" id="text-orgc87053a">
+<ol class="org-ol">
+<li>Make a new package to inspect actions</li>
+<li>Create a node and an action Server for <code>/viz/move_action</code>:
+<ul class="org-ul">
+<li>The server, for now, can simply print out the request.</li>
+</ul></li>
+<li><p>
+Write a launchfile that
+</p>
+<ul class="org-ul">
+<li>Launches your node</li>
+<li>Launches <code>rviz</code></li>
+<li>Remaps the <code>/move_action</code> to <code>/viz/move_action</code></li>
+<li>Here is an example. Note that the MoveIt rviz gui requires that rviz have some parameters to be setup for moveit</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">from</span> moveit_configs_utils <span class="org-keyword">import</span> MoveItConfigsBuilder
+<span class="org-keyword">from</span> launch <span class="org-keyword">import</span> LaunchDescription
+<span class="org-keyword">from</span> launch_ros.actions <span class="org-keyword">import</span> Node
+<span class="org-keyword">from</span> launch_ros.substitutions <span class="org-keyword">import</span> FindPackageShare
+<span class="org-keyword">from</span> launch.substitutions <span class="org-keyword">import</span> PathJoinSubstitution
+
+<span class="org-keyword">def</span> <span class="org-function-name">generate_launch_description</span>():
+    <span class="org-variable-name">moveit_config</span> <span class="org-operator">=</span> MoveItConfigsBuilder(<span class="org-string">"fer"</span>, package_name<span class="org-operator">=</span><span class="org-string">"franka_fer_moveit_config"</span>).to_moveit_configs()
+
+    <span class="org-keyword">return</span> LaunchDescription([
+        Node(package<span class="org-operator">=</span><span class="org-string">"rviz2"</span>,
+            executable<span class="org-operator">=</span><span class="org-string">"rviz2"</span>,
+            output<span class="org-operator">=</span><span class="org-string">"log"</span>,
+            arguments<span class="org-operator">=</span>[<span class="org-string">"-d"</span>, PathJoinSubstitution([FindPackageShare(<span class="org-string">"franka_fer_moveit_config"</span>), <span class="org-string">"config"</span>, <span class="org-string">"moveit.rviz"</span>])],
+            parameters <span class="org-operator">=</span> [ moveit_config.planning_pipelines, moveit_config.robot_description_kinematics],
+            <span class="org-comment-delimiter"># </span><span class="org-comment">Remapping actions not implemented, must remap individual topics/services</span>
+            <span class="org-comment-delimiter"># </span><span class="org-comment">https://github.com/ros2/ros2/issues/1312 Accessed on 10/30/2024</span>
+            remappings <span class="org-operator">=</span> [(<span class="org-string">"/move_action/_action/feedback"</span>, <span class="org-string">"/viz/move_action/_action/feedback"</span>),
+                        (<span class="org-string">"/move_action/_action/status"</span>, <span class="org-string">"/viz/move_action/_action/status"</span>),
+                        (<span class="org-string">"/move_action/_action/cancel_goal"</span>, <span class="org-string">"/viz/move_action/_action/cancel_goal"</span>),
+                        (<span class="org-string">"/move_action/_action/get_result"</span>, <span class="org-string">"/viz/move_action/_action/get_result"</span>),
+                        (<span class="org-string">"/move_action/_action/send_goal"</span>, <span class="org-string">"/viz/move_action/_action/send_goal"</span>)
+                        ]
+            ),
+        Node(package<span class="org-operator">=</span><span class="org-string">"inspector"</span>,
+            executable<span class="org-operator">=</span><span class="org-string">"inspector"</span>
+            )
+        ])
+</pre>
+</div></li>
+<li>If you want more visibility, you can have your action forward the request to the actual <code>/move_action</code>, and forward the
+responses back. This can get complicated for actions because there are several methods of feedback, but it is relatively straightforward for services.</li>
+
+<li>You can now run <code>demo.launch.py</code> for the franka, kill <code>rviz</code> and launch your own <code>rviz</code>
+<ul class="org-ul">
+<li>Now planning requests from <code>rviz</code> can be printed.</li>
+</ul></li>
+<li>Other actions to try are <code>/execute_trajectory</code></li>
+
+<li>The same can be done with services:
+<ul class="org-ul">
+<li>Some services to try are <code>/compute_ik</code>.</li>
+</ul></li>
+
+<li>The planning scene is published on a topic, so subscribing and printing out that topic can help</li>
+<li>By doing these exercises you will learn how the <code>move_it</code> rviz plugin uses the <code>move_group</code>
+<ul class="org-ul">
+<li>Try to discover what sequence of events happens to plan a motion and then execute it</li>
+<li>Try to discover the difference between Plan, Execute, and Plan &amp; Execute</li>
+<li>Try to discover what features of the planning message are used and which are not</li>
+</ul></li>
+<li>The goal of this exploration is to be able to call an action manually that causes a path to be planned and executed</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org0b85d08" class="outline-3">
+<h3 id="org0b85d08">Documentation</h3>
+<div class="outline-text-3" id="text-org0b85d08">
+<ul class="org-ul">
+<li>It is not necessary to fully reverse engineer the action service. Though it can be helpful because <code>rviz</code> provides a working example of using the ROS API.</li>
+<li>The API documentation for <code>moveit_msgs</code> (available on <a href="https://index.ros.org">https://index.ros.org</a>) is very helpful for understanding the capabilities of the <code>/move_action</code></li>
+<li>It is also possible to read the source code for <code>moveit</code> though it can be quite complicated.</li>
+</ul>
+</div>
+</div>
+
+<details id="org9561ffd"><summary class="header-3">Answers</summary>
+<div class="outline-text-3" id="text-org9561ffd">
+<ol class="org-ol">
+<li>Here is a repository (<a href="https://github.com/m-elwin/me495_inspector">https://github.com/m-elwin/me495_inspector</a>) that intercepts and forwards actions from <code>rviz</code> to the move_group node.
+<ul class="org-ul">
+<li>It is a good exercise to attempt this task yourself before looking at the answer.</li>
+</ul></li>
+</ol>
+</div>
+</details>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

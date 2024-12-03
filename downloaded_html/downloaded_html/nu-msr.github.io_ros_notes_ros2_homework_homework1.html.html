@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-11-25 Mon 23:03 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ME495: Embedded Systems in Robotics</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">ME495: Embedded Systems in Robotics</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org8e9584f">Logistics</a></li>
+<li><a href="#org7087262">Part I: Inspection</a></li>
+<li><a href="#org8854024">Part II: Turtle Control</a>
+<ul>
+<li><a href="#orgb1d9742">Package Setup</a></li>
+<li><a href="#org48534e8">Waypoint Node</a></li>
+<li><a href="#orgbed54a9">Toggle Service</a></li>
+<li><a href="#orgb0fa97a">Load Waypoints</a></li>
+<li><a href="#org7902829">Position Feedback</a></li>
+<li><a href="#org12794c8">Command Publisher</a></li>
+<li><a href="#orged79ce4">Distance Estimate</a></li>
+<li><a href="#org99b9539">Launch File XML</a></li>
+<li><a href="#org7aec134">Example Run</a></li>
+<li><a href="#org308ffc0">README</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-org8e9584f" class="outline-2">
+<h2 id="org8e9584f">Logistics</h2>
+<div class="outline-text-2" id="text-org8e9584f">
+<ol class="org-ol">
+<li>Create a git repository using the link provided in Canvas.</li>
+<li>Your homework will be submitted via this git repository.</li>
+<li>I will grade whatever is on the <code>main</code> branch when I clone the repository.</li>
+<li>See <a href="./guidelines.html">Guidelines</a> for important information about coding standards.
+<ul class="org-ul">
+<li>Read over the guidelines prior to starting this assignment and prior to submitting the assignment.</li>
+<li>Your code need not pass <code>colcon test</code> for this assignment, but it is good practice for the future.</li>
+</ul></li>
+<li>In this document, the notation <code>${ws}</code> means substitute the appropriate value for <code>${ws}</code>
+<ul class="org-ul">
+<li>For example, if <code>${item} = Hello There</code> than <code>"This is the message: ${item}"</code> becomes <code>"This is the message: Hello There"</code></li>
+<li>Be sure to remove the <code>${}</code></li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org7087262" class="outline-2">
+<h2 id="org7087262">Part I: Inspection</h2>
+<div class="outline-text-2" id="text-org7087262">
+<p>
+Here you will inspect a poorly-documented ROS package called <code>crazy_turtle</code> and improve its documentation.
+</p>
+
+<ol class="org-ol">
+<li>Create a new ROS workspace. Your workspace directory is <code>${ws}</code>.
+<ul class="org-ul">
+<li>Do not have any spaces in the full path to your workspace: this may cause trouble later.</li>
+</ul></li>
+<li>Clone <a href="https://github.com/m-elwin/crazy_turtle">https://github.com/m-elwin/crazy_turtle</a> into the source space (i.e., <code>${ws}/src</code>) of the workspace and checkout the <code>ros2</code> branch.</li>
+<li>Create a git repository for homework1 located at <code>${ws}/src/homework1</code>
+<ul class="org-ul">
+<li><p>
+Your directory structure should look like
+</p>
+<pre class="example">
+${ws}                         # NOT a git repository
+├─── src                      # NOT a git repository
+│     ├── crazy_turtle (ros2) # A git repository on the ros2 branch
+│     └── homework1 (main)    # Your git repository for Homework 1
+</pre></li>
+</ul></li>
+<li>Copy <code>${ws}/src/crazy_turtle/README.md</code> into <code>${ws}/src/homework1/inspection.md</code> and add it to your git repository.</li>
+<li><code>inspection.md</code> contains additional exercises that you should complete.
+<ul class="org-ul">
+<li>Read <code>inspection.md</code> and replace the <code>${item}</code> substitutions with the answer.</li>
+<li>This exercise also serves as a quick introduction to some <a href="https://guides.github.com/features/mastering-markdown">Markdown</a> basics.</li>
+</ul></li>
+<li>Copy <code>crazy_turtle/crazy_turtle/crazy_turtle/mover.py</code> to <code>$ws/$src/homework1/mover.py</code>.  Edit the file and search for <code>${item}</code> substitutions,
+replacing them with the appropriate word or phrase.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org8854024" class="outline-2">
+<h2 id="org8854024">Part II: Turtle Control</h2>
+<div class="outline-text-2" id="text-org8854024">
+<p>
+In this section you will control a turtle in <code>turtlesim</code> to follow waypoints, while tracing it's path.
+Each step in this section can be viewed as a milestone where it would be appropriate to commit to git and merge into <code>main</code>.
+You can (and should) add additional commits when appropriate.
+</p>
+</div>
+
+<div id="outline-container-orgb1d9742" class="outline-3">
+<h3 id="orgb1d9742">Package Setup</h3>
+<div class="outline-text-3" id="text-orgb1d9742">
+<ol class="org-ol">
+<li>The <code>turtle_control</code> package is an <code>ament_python</code> package and should be located at <code>${ws}/src/homework1/turtle_control</code>
+<ul class="org-ul">
+<li>This package has <code>exec_depends</code> on <code>rclpy</code> and <code>turtlesim</code></li>
+</ul></li>
+<li>The <code>turtle_interfaces</code> package is an <code>ament_cmake</code> package and should be located at <code>${ws}/src/homework1/turtle_interfaces</code></li>
+<li>Use <code>ros2 pkg create</code> to create the packages.</li>
+<li>Edit <code>package.xml</code> to change the default but required fields to reflect your name, email, and a description of each package.</li>
+<li>As you develop the package make sure to maintain consistency with <code>package.xml</code> and add any extra dependencies as they are needed.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org48534e8" class="outline-3">
+<h3 id="org48534e8">Waypoint Node</h3>
+<div class="outline-text-3" id="text-org48534e8">
+<ol class="org-ol">
+<li>Create a node called <code>waypoint</code> that (for now) logs a <code>DEBUG</code> message that says "Issuing Command!" at a fixed frequency using a timer.
+<ul class="org-ul">
+<li>This node will be expanded throughout this assignment and will form the base of the project.</li>
+<li>The frequency should be specified as a parameter called "frequency" and should default to 90 Hz.</li>
+<li>You will only see <code>DEBUG</code> messages when the <code>node</code> is run in a mode that enables the <code>DEBUG</code> logger level.</li>
+</ul></li>
+<li>Make sure you can run the node with <code>ros2 run</code></li>
+</ol>
+</div>
+
+<div id="outline-container-orgfad6a5e" class="outline-4">
+<h4 id="orgfad6a5e">Hints</h4>
+<div class="outline-text-4" id="text-orgfad6a5e">
+<ol class="org-ol">
+<li>First make the node work using a hard-coded frequency, then add in the parameter.</li>
+<li>You need to set the logger level when running the node to see <code>DEBUG</code> messages.</li>
+<li>To test if your code is working without setting the logger level, use an <code>ERROR</code> message at first and later change it to <code>DEBUG</code>.</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbed54a9" class="outline-3">
+<h3 id="orgbed54a9">Toggle Service</h3>
+<div class="outline-text-3" id="text-orgbed54a9">
+<ol class="org-ol">
+<li>Using the <code>std_srvs/Empty</code> Service type, create service called <code>toggle</code> and have the <code>waypoint</code> node offer it.
+<ul class="org-ul">
+<li>The node will now have two states: <code>MOVING</code> and <code>STOPPED</code>. It starts in the <code>STOPPED</code> state.</li>
+<li>When <code>toggle</code> is called, the node switches states.
+<ul class="org-ul">
+<li>When switching from <code>MOVING</code> to <code>STOPPED</code> the node <code>INFO</code> logs "Stopping." one time.</li>
+<li>While in the "MOVING" state, the node <code>DEBUG</code> logs "Issuing Command!" repeatedly</li>
+<li>While moving the turtle should leave a visual trail behind to show where it has been</li>
+</ul></li>
+</ul></li>
+<li>Your code should not attempt to stop the timer or create multiple timers: instead it should change what the timer is doing based on whether the state is <code>MOVING</code> or <code>STOPPED</code>.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgb0fa97a" class="outline-3">
+<h3 id="orgb0fa97a">Load Waypoints</h3>
+<div class="outline-text-3" id="text-orgb0fa97a">
+<ol class="org-ol">
+<li>Create a custom service of type <code>turtle_interfaces/srv/Waypoints</code> in the <code>turtle_interfaces</code> package that allows you to send an arbitrary number of waypoints to a node
+and responds with the total straight-line distance that the turtle will travel to complete one cycle of the waypoints (i.e., starting and ending at the same place).
+<ul class="org-ul">
+<li>The fields in this service are defined as follows:</li>
+<li>The request has a <code>waypoints</code> field that is an array of <code>geometry_msgs/msg/Point</code> objects. The <code>z</code> field of the point is ignored.</li>
+<li>The response is a <code>distance</code> of type <code>float64</code></li>
+<li>Do not forget to update the <code>package.xml</code> and <code>CMakeLists.txt</code> as needed for the <code>turtle_interfaces</code> package.</li>
+</ul></li>
+<li>Add a service called <code>load</code> of the <code>turtle_interfaces/srv/Waypoints</code> type to the <code>waypoint</code> node. This service shall:
+<ul class="org-ul">
+<li>Reset the <code>turtlesim</code> node to its initial state.</li>
+<li>Draw an <code>X</code> at each waypoint.</li>
+<li>Place the turtle at the first waypoint.  The node should be <code>STOPPED</code> and turtle should not move.</li>
+<li>Compute the straight-line distance from traversing the waypoints and return that as a response.</li>
+</ul></li>
+</ol>
+</div>
+<div id="outline-container-orgbc5df56" class="outline-4">
+<h4 id="orgbc5df56">Hint</h4>
+<div class="outline-text-4" id="text-orgbc5df56">
+<ol class="org-ol">
+<li>The turtle is able to "teleport". Teleportation can be used to draw the <code>X</code> but not to follow the waypoints</li>
+<li>See <a href="../spin.html#blocking_calls">Blocking Calls</a> for a useful pattern that enables calling "teleport" sequentially, while waiting for each step to complete.</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7902829" class="outline-3">
+<h3 id="org7902829">Position Feedback</h3>
+<div class="outline-text-3" id="text-org7902829">
+<ol class="org-ol">
+<li>Subscribe to a <code>turtlesim</code> topic that provides the position and orientation of the turtle.</li>
+<li>This subscriber should store the received data for later use</li>
+<li>The subscriber should not publish any messages or call any services.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org12794c8" class="outline-3">
+<h3 id="org12794c8">Command Publisher</h3>
+<div class="outline-text-3" id="text-org12794c8">
+<ol class="org-ol">
+<li>When the <code>toggle</code> service puts the node into the <code>MOVING</code> state, the turtle should start following the most recently loaded waypoints.
+<ul class="org-ul">
+<li>If no waypoints are loaded log an <code>ERROR</code> message saying <code>No waypoints loaded. Load them with the "load" service</code>.</li>
+</ul></li>
+<li>When <code>MOVING</code>, you should publish <code>cmd_vel</code> commands at the control loop frequency.
+<ul class="org-ul">
+<li>The <code>cmd_vel</code> velocities must have <code>linear.y = 0</code> to emulate a differential-drive robot.</li>
+</ul></li>
+<li>If the turtle is <code>STOPPED</code> (by another call to <code>toggle</code>) it should stop moving.
+<ul class="org-ul">
+<li>Resuming (by another call to <code>toggle</code>) should have the turtle continue along the waypoints.</li>
+</ul></li>
+<li>A turtle reaches a waypoint if it is within some threshold distance of that the waypoint
+<ul class="org-ul">
+<li>This threshold should be set via a <code>tolerance</code> parameter</li>
+</ul></li>
+</ol>
+</div>
+<div id="outline-container-orga3f6d49" class="outline-4">
+<h4 id="orga3f6d49">Hints</h4>
+<div class="outline-text-4" id="text-orga3f6d49">
+<ol class="org-ol">
+<li>Before working on the control algorithm itself, publish a constant command velocity
+<ul class="org-ul">
+<li>Verify that the turtle moves</li>
+<li>use <code>ros2 topic hz</code> to verify the frequency</li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orged79ce4" class="outline-3">
+<h3 id="orged79ce4">Distance Estimate</h3>
+<div class="outline-text-3" id="text-orged79ce4">
+<ol class="org-ol">
+<li>Create a custom message type called <code>ErrorMetric</code> in the <code>turtle_interfaces</code> package that contains 3 values:
+<ul class="org-ul">
+<li><code>complete_loops</code>: An integer counting the number of times the turtle has cycled through all the waypoints.</li>
+<li><code>actual_distance</code>: The actual distance traveled (this can be estimated as a linear interpolation between position feedback subscriber callbacks).</li>
+<li><code>error</code>: When a loop is completed, compute the difference between the straight-line distance of the path and the actual distance traveled.</li>
+</ul></li>
+<li>Publish this message on the <code>/loop_metrics</code> topic every time the turtle completes a new cycle of the waypoints.
+<ul class="org-ul">
+<li>In this sense, the <code>ErrorMetric</code> is only updated once per full cycle.</li>
+<li>The <code>actual_distance</code> and <code>error</code> are cumulative (i.e., if the <code>turtle</code> has completed 3 loops this is the actual distance traveled for the 3 loops and the error
+over that time).</li>
+</ul></li>
+<li>All metrics should be reset whenever the <code>/load</code> service is called.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org99b9539" class="outline-3">
+<h3 id="org99b9539">Launch File XML</h3>
+<div class="outline-text-3" id="text-org99b9539">
+<p>
+Write an <code>xml</code> launchfile called <code>waypoints.launch.xml</code> (put it in the <code>launch/</code> directory of the <code>turtle_control</code> package).
+The launchfile should:
+</p>
+<ol class="org-ol">
+<li>Start the <code>turtlesim_node</code> and the <code>waypoint</code> node.</li>
+<li>Load parameters from <code>colors.yaml</code> (stored in the <code>config/</code> directory of the <code>turtle_control</code> package) to set the colors of the <code>turtlesim_node</code>.
+<ul class="org-ul">
+<li>The color you set should be visually distinct from the default value (e.g., it should not primarily be a shade of blue).</li>
+</ul></li>
+<li>Specify the following parameters for <code>waypoints</code>
+<ol class="org-ol">
+<li><code>frequency</code> should be 100 Hz</li>
+<li><code>tolerance</code> should be, at most, <code>0.05m</code></li>
+</ol></li>
+</ol>
+</div>
+
+<div id="outline-container-org7b4f6d4" class="outline-4">
+<h4 id="org7b4f6d4">Hint</h4>
+<div class="outline-text-4" id="text-org7b4f6d4">
+<ol class="org-ol">
+<li>Don't forget to install the launchfile or config files using  <code>setup.py</code></li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7aec134" class="outline-3">
+<h3 id="org7aec134">Example Run</h3>
+<div class="outline-text-3" id="text-org7aec134">
+<p>
+In the example run:
+</p>
+<ol class="org-ol">
+<li>The turtle traverses the following waypoints: <code>(1.4, 1.6), (2.2, 9.4), (7.2, 6.1), (4.0, 2.6), (8.2, 1.5), (4.1, 5.3)</code></li>
+<li>You stop and resume the turtle one time.</li>
+<li>The turtle completes more than 1 but less than 2 cycles.</li>
+</ol>
+<ol class="org-ol">
+<li>Capture a screen-cast and a <code>ros2 bag</code> capture of <code>/turtle1/cmd_vel</code> while performing this experiment.
+<ul class="org-ul">
+<li>Save the bag to <code>homework1/turtle.bag</code> and be sure to include it in the <code>git</code> repository</li>
+</ul></li>
+<li>Manually reset the turtlesim and kill the <code>waypoint</code> node.</li>
+<li>Use <code>ros2 bag</code> to play-back the bagged data to make the turtle move. Describe what happens in the <code>README.md</code></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org308ffc0" class="outline-3">
+<h3 id="org308ffc0">README</h3>
+<div class="outline-text-3" id="text-org308ffc0">
+<p>
+In the base directory of your repository (e.g. <code>homework1</code>) create a <code>README.md</code> using the following template (be sure to update the <code>${}</code> with the answers.)
+</p>
+<pre class="example">
+# ME495 Embedded Systems Homework 1
+Author: ${Your Name}
+1. Use `ros2 launch ${pkg} ${launchfile}` to run the code
+2. The `${ros2 service call /load &lt;put arguments here that you used to make the video&gt;}` service loads waypoints for the turtle to follow
+3. The `${ros2 service call /stop &lt;put arguments here that you used to make the video&gt;}` starts and stops the turtle.
+4. Here is a video of the turtle in action.
+
+   ${embed video here, must show up inline in the README.md when rendered on github. Video file itself should be uploaded as a github issue and linked here, not in the repository}`
+
+</pre>
+</div>
+
+<div id="outline-container-orge18c2a8" class="outline-4">
+<h4 id="orge18c2a8">Video Upload Instructions</h4>
+<div class="outline-text-4" id="text-orge18c2a8">
+<ol class="org-ol">
+<li>To upload a video:
+<ol class="org-ol">
+<li>Create a github issue on your repository, and attach the file to the issue.</li>
+<li>The video will then have a github link. Placing that link in the README.md will embed the video.
+<ul class="org-ul">
+<li>The video link must be on a its own line in the README.md. with a blank line preceding it.</li>
+</ul></li>
+<li>The video must play properly when viewing your README.md on GitHub in order for it to count as having been submitted.</li>
+</ol></li>
+<li>The directory structure of your git repository should look like
+<ul class="org-ul">
+<li><code>homework1</code></li>
+<li><code>homework1/inspection.md</code></li>
+<li><code>homework1/README.md</code></li>
+<li><code>homework1/turtle_control</code></li>
+<li><code>homework1/turtle_interfaces</code></li>
+<li><code>homework1/mover.py</code></li>
+<li><code>homework1/turtle.bag</code></li>
+<li><code>homework1/citations.txt</code></li>
+<li><code>homework1/rosgraph.svg</code></li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

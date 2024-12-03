@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-11-25 Mon 23:03 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>April Tags Activity</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">April Tags Activity</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org6ab41bf">Camera Calibration</a></li>
+<li><a href="#orgf1bbb0c">April Tags</a></li>
+<li><a href="#org3f01a60">Rviz</a></li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-org6ab41bf" class="outline-2">
+<h2 id="org6ab41bf">Camera Calibration</h2>
+<div class="outline-text-2" id="text-org6ab41bf">
+<div class="org-src-container">
+<pre class="src src-bash">
+<span class="org-comment-delimiter"># </span><span class="org-comment">Start the camera node (exact command depends on your hardware)</span>
+ros2 run usb_cam usb_cam_node_exe --ros-args -p framerate:=30.0
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Run the camera calibration</span>
+ros2 run camera_calibration cameracalibrator --size 8x6 --square 0.108 --ros-args -r image:=/image_raw
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Do the calibration, it gets saved to /tmp/calibrationdata.tar.gz</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Extract the calibration data</span>
+<span class="org-builtin">cd</span> /tmp
+mkdir calib
+mv /tmp/calibrationdata.tar.gz /tmp/calib
+<span class="org-builtin">cd</span> /tmp/calib
+tar xf calibrationdata.tar.gz
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Kill the usb_cam node and restart, this time loading the calibration</span>
+ros2 run usb_cam usb_cam_node_exe --ros-args -p framerate:=30.0 -p camera_info_url:=file:///tmp/calib/ost.yaml
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Start the image proc pipeline</span>
+ros2 launch image_proc image_proc.launch.py
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Note that this is made up of components</span>
+ros2 component list
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">compare the rectified and non-rectified image</span>
+ros2 run rqt_image_view rqt_image_view
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf1bbb0c" class="outline-2">
+<h2 id="orgf1bbb0c">April Tags</h2>
+<div class="outline-text-2" id="text-orgf1bbb0c">
+<ol class="org-ol">
+<li>Install the <a href="https://index.ros.org/p/apriltag_ros/github-christianrauch-apriltag_ros/#iron">apriltag_ros</a> package 
+<ul class="org-ul">
+<li>This package will automatically install the <a href="https://index.ros.org/p/apriltag/github-AprilRobotics-apriltag/#iron">apriltag</a> package</li>
+<li><code>apriltag</code> is a ROS-independent library and <code>apriltag_ros</code> provides a ROS API for it</li>
+</ul></li>
+
+<li>Need to print April tags, with a specified size
+<ul class="org-ul">
+<li><a href="https://github.com/AprilRobotics/apriltag-imgs">https://github.com/AprilRobotics/apriltag-imgs</a></li>
+<li>Scale the image and print</li>
+</ul></li>
+<li>Create the <code>tags.yaml</code> file describing the april tags (see instructions in in the <a href="https://github.com/christianrauch/apriltag_ros">apriltag_ros git repository</a>.</li>
+
+<li>Run <code>ros2 run apriltag_ros apriltag_node --ros-args --params-file ./file.yaml</code>
+<ul class="org-ul">
+<li>Remap <code>image</code> and <code>camera_info</code> topics as needed</li>
+<li><code>file.yaml</code> should be the name of the file containing the configuration</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org3f01a60" class="outline-2">
+<h2 id="org3f01a60">Rviz</h2>
+<div class="outline-text-2" id="text-org3f01a60">
+<ol class="org-ol">
+<li>Run <code>rviz2</code></li>
+<li>Add the rectified image and a <code>tf</code> tree</li>
+<li>Put tag in the frame, then change fixed frame to default cam</li>
+<li>You can now add a Camera rather than an image</li>
+<li>Have fun!</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

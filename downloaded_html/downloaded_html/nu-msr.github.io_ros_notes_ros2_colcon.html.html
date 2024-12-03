@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-11-25 Mon 23:03 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Packages and Workspaces</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">Packages and Workspaces</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#packages">Packages</a>
+<ul>
+<li><a href="#org820efd0">Package Structure</a></li>
+<li><a href="#package_xml">package.xml</a></li>
+<li><a href="#ament_python">Ament Python Packages</a></li>
+<li><a href="#ament_cmake">Ament CMake Packages</a></li>
+</ul>
+</li>
+<li><a href="#custom_interfaces">Custom Interfaces</a>
+<ul>
+<li><a href="#org61449f8">Defining Custom Interfaces</a></li>
+<li><a href="#org5df5152">Using Interfaces</a></li>
+</ul>
+</li>
+<li><a href="#workspace">Workspace</a>
+<ul>
+<li><a href="#orga35c62c">Structure</a></li>
+<li><a href="#orgc02e5c1">Building a Workspace</a></li>
+<li><a href="#org44ac58d">Using a Workspace</a></li>
+</ul>
+</li>
+<li><a href="#orge3b0ab7">Colcon</a>
+<ul>
+<li><a href="#orgb9ee732">colcon_cd</a></li>
+<li><a href="#org9e85314">colcon_clean</a></li>
+<li><a href="#colcon-pkg">colcon.pkg</a></li>
+</ul>
+</li>
+<li><a href="#orga2bfa86">ROS Environment</a>
+<ul>
+<li><a href="#org4730529">Overlays</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-packages" class="outline-2">
+<h2 id="packages">Packages</h2>
+<div class="outline-text-2" id="text-packages">
+<p>
+A ROS <a href="https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html">Package</a> is a collection of source code and
+other resources that is distributed as a single unit.
+</p>
+<ul class="org-ul">
+<li>Binary versions of ROS packages are distributed on ROS's package server and can be downloaded via <code>apt</code> (as done when you installed ROS).
+<ul class="org-ul">
+<li>The naming convention when using apt is to do <code>ros-jazzy-package-name</code> where <code>package-name</code> is the name of the package, with underscores <code>_</code> converted to dashes <code>-</code>.</li>
+</ul></li>
+<li>The source code for ROS packages can be easily downloaded and compiled.</li>
+<li>It is easier and less time consuming to download a package, but to create ROS code you need to create a package.</li>
+</ul>
+</div>
+
+<div id="outline-container-org820efd0" class="outline-3">
+<h3 id="org820efd0">Package Structure</h3>
+<div class="outline-text-3" id="text-org820efd0">
+<ol class="org-ol">
+<li>All ROS packages have a base directory containing a manifest file called <code>package.xml</code>.
+<ul class="org-ul">
+<li>This file is an <a href="https://www.w3schools.com/xml/default.asp">XML</a> document.</li>
+<li>The full specification for <code>package.xml</code> is in <a href="https://ros.org/reps/rep-0149.html">ROS Rep 149</a>.</li>
+<li>The <a href="http://download.ros.org/schema/package_format3.xsd">XML Schema</a> for <code>package.xml</code> provides a machine-readable method for automatically validating the <code>package.xml</code></li>
+</ul></li>
+<li>An important element of <code>package.xml</code> is the <code>&lt;export&gt;&lt;build_type&gt;</code>, which determines the type of package
+<ul class="org-ul">
+<li><a href="https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html">ament python</a> is used for pure python packages.</li>
+<li><a href="https://docs.ros.org/en/jazzy/How-To-Guides/Ament-CMake-Documentation.html">ament_cmake</a> is used for C++ packages and packages that define custom Messages, Services, or Actions (i.e., Interfaces)</li>
+<li><a href="https://docs.ros.org/en/jazzy/How-To-Guides/Ament-CMake-Python-Documentation.html">ament_cmake_python</a> is for packages with mixed python/C++ code.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-package_xml" class="outline-3">
+<h3 id="package_xml">package.xml</h3>
+<div class="outline-text-3" id="text-package_xml">
+</div>
+<div id="outline-container-orgbb7c503" class="outline-4">
+<h4 id="orgbb7c503">Required Elements</h4>
+<div class="outline-text-4" id="text-orgbb7c503">
+<ul class="org-ul">
+<li><code>&lt;name&gt;</code> The package name</li>
+<li><code>&lt;version&gt;</code> The package Version</li>
+<li><code>&lt;description&gt;</code> A description of the package</li>
+<li><code>&lt;maintainer&gt;</code> One or more people who are responsible for the package</li>
+<li><code>&lt;license&gt;</code> One or more legal ways the package may be distributed</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgea81c6a" class="outline-4">
+<h4 id="orgea81c6a">Specifying Dependencies</h4>
+<div class="outline-text-4" id="text-orgea81c6a">
+<p>
+There are multiple types of dependencies.  The most important are:
+</p>
+<ul class="org-ul">
+<li><code>&lt;exec_depend&gt;</code> - Packages needed at runtime.
+If your python package imports code from another package, or a launchfile runs a node from another package, then
+it should be an <code>&lt;exec_depend&gt;</code>, thus this is the most common dependency for a python-only package.
+<ul class="org-ul">
+<li>For example, if you <code>import rclpy</code> then <code>rclpy</code> should be an <code>exec_depend</code></li>
+<li>Third-party (e.g., non-ros) python packages are usually referred to as <code>python3-pythonpackagename</code>.</li>
+</ul></li>
+<li><code>&lt;build_depend&gt;</code> - Package needed at build time (e.g., when <code>colcon build</code> is run).  In python, code is
+not compiled, so you usually do not need <code>&lt;build_depend&gt;</code>.  An exception is when you depend upon messages or services in another package.</li>
+<li><code>&lt;depend&gt;</code> - This is the most common dependency type for a C++ package.
+It should also be used by python packages when depending on packages containing custom messages such as <code>std_msgs</code>.
+Using <code>&lt;depend&gt;</code> automatically creates an <code>&lt;exec_depend&gt;</code> and a <code>&lt;build_depend&gt;</code> (also a <code>&lt;build_export_depend&gt;</code>).
+In python especially, whenever you have a <code>&lt;build_depend&gt;</code> you almost always also have an <code>&lt;exec_depend&gt;</code>, so you can just
+use <code>&lt;depend&gt;</code>.</li>
+<li>The tool <a href="https://docs.ros.org/en/independent/api/rosdep/html/">rosdep</a> analyzes the dependencies in <code>package.xml</code> and can
+automatically install missing dependencies.</li>
+<li>The <a href="https://docs.ros.org/en/jazzy/Tutorials/Intermediate/Rosdep.html">rosdep tutorial</a> explains these dependency types.</li>
+</ul>
+</div>
+<details id="orga5ee2a5"><summary class="header-5">Advanced Dependencies</summary>
+<div class="outline-text-5" id="text-orga5ee2a5">
+<p>
+While it is important to get the dependencies correct, you will notice that (especially with python), your project will still work even if <code>package.xml</code> does not have all dependencies.
+There are a few reasons why this can happen
+</p>
+<ol class="org-ol">
+<li><code>&lt;exec_depend&gt;</code> are not actually checked during build or run. They are used by <code>rosdep</code> to help it fetch dependencies you need.</li>
+<li><code>&lt;build_depend&gt;</code> is used to determine the order in which <code>colcon</code> traverses packages. However, colcon runs in parallel by default
+<ul class="org-ul">
+<li>Essentially, if <code>A</code> depends on <code>B</code> to build but does not declare a <code>&lt;build_depend&gt;</code> it is possible that <code>A</code> is built before <code>B</code> and fails.
+It is also possible that (due to parallel builds) <code>B</code> happens to finish before <code>A</code> and it succeeds.</li>
+<li>To help ensure that all <code>&lt;build_depend&gt;</code> are properly set it makes sense to occasionally do a <code>colcon build --executor sequential</code> on a clean workspace</li>
+</ul></li>
+</ol>
+</div>
+</details>
+</div>
+
+
+<div id="outline-container-org6f0ddb9" class="outline-4">
+<h4 id="org6f0ddb9">Groups</h4>
+<div class="outline-text-4" id="text-org6f0ddb9">
+<ul class="org-ul">
+<li><code>&lt;member_of_group&gt;</code> In ROS 2 (but not ROS 1) packages can be placed in a group, which is a collection of packages that share something in common.
+<ul class="org-ul">
+<li>This tag sets the current package to be a member of that group</li>
+<li>For example, packages that define custom messages, services, etc. can be part of the <code>rosidl_interface_packages</code> group</li>
+</ul></li>
+<li>One package can depend on a package group rather than a named package.
+<ul class="org-ul">
+<li>For example, some packages need to be re-built whenever any interface (e.g., message or service) file on the whole system changes.
+These packages would depend on <code>rosidl_interface_packages</code> so that if any package in that group changes it would be rebuilt.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-ament_python" class="outline-3">
+<h3 id="ament_python">Ament Python Packages</h3>
+<div class="outline-text-3" id="text-ament_python">
+<ul class="org-ul">
+<li><a href="https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html">Ament Python</a> is the preferred package type for pure python ROS 2 packages</li>
+<li>Boilerplate for this package can be created using <code>ros2 pkg create --build-type ament_python</code></li>
+<li><p>
+The directory structure is:
+</p>
+<pre class="example">
+pkg_name/
+├── package.xml           # package manifest
+├── pkg_name/             # python package
+│   ├── __init__.py       # Marks this directory as a python package
+│   └── module.py         # A python module
+├── launch/               # Launchfiles go here
+│   ├── file.launch.xml   # An xml launch file
+│   ├── file.launch.py    # A python launch file
+│   └── file.launch.yaml  # A yaml launch file
+├── config/               # Configuration directory
+│   ├── parameters.yaml   # File storing parameters for some nodes
+│   └── view.rviz         # Saved rviz configuration
+├── resource/             # Used for registering packages in ament_index
+│   └── package_name      # Empty file used to register package with index
+├── setup.cfg             # Sets up installation directories for ROS
+├── setup.py              # Metadata, node entry , other files to install
+└── test/                 # Unit tests
+    ├── test_copyright.py # ROS test to ensure proper copyright notice 
+    ├── test_flake8.py    # Uses flake8 to enforce code style 
+    └── test_pep257.py    # Ensures compliance with PEP 257
+</pre></li>
+</ul>
+</div>
+
+
+<div id="outline-container-orgfe7bfc2" class="outline-4">
+<h4 id="orgfe7bfc2">setup.py</h4>
+<div class="outline-text-4" id="text-orgfe7bfc2">
+<ul class="org-ul">
+<li>It is based on <a href="https://setuptools.pypa.io/en/latest/">setuptools</a>, a commonly used python packaging system created by <code>pypa</code>, the organization behind <code>pip</code>.</li>
+<li>Contains meta-information (which must be manually synchronized with <code>package.xml</code>).</li>
+<li>Contains <code>data_files</code>: these are non-code files that must be installed to the system.
+-<code>data_files</code> is a list of tuples. The first element of each tuple is an install directory, and the second is a list of files to install:
+  <code>[('install_dir1', ['file1', 'file2', 'file3'...]), ('install_dir2', ['file1' ...])]</code>
+<ul class="org-ul">
+<li><a href="https://setuptools.pypa.io/en/latest/userguide/entry_point.html">entry_points</a>: This is a dictionary of different types of entry points. 
+<ul class="org-ul">
+<li>Nodes are 'console_scripts'.</li>
+<li>Each ROS node is an entry in the 'console_scripts' list, of the form <code>'node_exec = pkg.modulename:entry_func'</code>,
+<ul class="org-ul">
+<li><code>node_exec</code> is the name you want the executable file that runs your node to be called,</li>
+<li><code>pkg</code> is the name of the python package (usually but not necessarily the name of the ROS package)</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org31b780a" class="outline-4">
+<h4 id="org31b780a">setup.cfg</h4>
+<div class="outline-text-4" id="text-org31b780a">
+<ul class="org-ul">
+<li>Provides base install directories for <code>setup.py</code>. Usually can be left as-is.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-ament_cmake" class="outline-3">
+<h3 id="ament_cmake">Ament CMake Packages</h3>
+<div class="outline-text-3" id="text-ament_cmake">
+<ul class="org-ul">
+<li><a href="https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html">Ament Cmake</a> packages are primarily used for C++ ROS projects</li>
+<li>Boilerplate for this package can be created using <code>ros2 pkg create --build-type ament_cmake</code></li>
+<li>Currently, custom interfaces (e.g., messages, services, or actions) need to be in their own Ament CMake package</li>
+<li><p>
+The directory structure is:
+</p>
+<pre class="example">
+pkg_name/
+├── package.xml           # The manifest file
+├── CMakeLists.txt        # Build instructions, uses ament_* functions
+├── msg/                  # Directory for custom message types
+│   └── MessageType.msg   # A ROS IDL file defining a message
+├── srv/                  # Directory for custom service types
+│   └── ServiceType.srv   # A ROS IDL file defining a service
+└── action                # Directory for custom action types
+    └── ActionType.action # A ROS IDL file defining an action
+</pre></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-custom_interfaces" class="outline-2">
+<h2 id="custom_interfaces">Custom Interfaces</h2>
+<div class="outline-text-2" id="text-custom_interfaces">
+</div>
+<div id="outline-container-org61449f8" class="outline-3">
+<h3 id="org61449f8">Defining Custom Interfaces</h3>
+<div class="outline-text-3" id="text-org61449f8">
+<ol class="org-ol">
+<li>Custom interfaces are created in <code>ament_cmake</code> type packages</li>
+<li>To create a custom interface file, first write an interface file using the <a href="https://docs.ros.org/en/jazzy/Concepts/About-ROS-Interfaces.html">ROS IDL</a>
+<ul class="org-ul">
+<li>Message files end with <code>.msg</code> and go in <code>&lt;package_name&gt;/msg</code></li>
+<li>Service files end with <code>.srv</code> and go in <code>&lt;package_name&gt;/srv</code></li>
+<li>Action files end with <code>.action</code> and go in <code>&lt;package_name&gt;/action</code></li>
+<li>See the <a href="https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Custom-ROS2-Interfaces.html">Custom ROS Interface Tutorial</a></li>
+</ul></li>
+
+<li><p>
+Edit <code>CMakeLists.txt</code> and add
+</p>
+<div class="org-src-container">
+<pre class="src src-cmake"><span class="org-comment-delimiter"># </span><span class="org-comment">Add in the CMake code that generates ROS interfaces</span>
+<span class="org-function-name">find_package</span>(rosidl_default_generators REQUIRED)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">If any of your interfaces depend on another interface file</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">(For example assume you are using a geometry_msgs/msg/Twist)</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Then you must first find the dependency with find_package (e.g.)</span>
+<span class="org-function-name">find_package</span>(geometry_msgs REQUIRED)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Tell Cmake what files to generate interface definitions for</span>
+<span class="org-function-name">rosidl_generate_interfaces</span>(${<span class="org-variable-name">PROJECT_NAME</span>}
+     <span class="org-string">"msg/MessageType.msg"</span> <span class="org-comment-delimiter"># </span><span class="org-comment">Whatever message file you've defined</span>
+     <span class="org-string">"srv/ServiceType.srv"</span> <span class="org-comment-delimiter"># </span><span class="org-comment">Whatever service file you've defined</span>
+     ...    <span class="org-comment-delimiter"># </span><span class="org-comment">and continue for all the interface files</span>
+     DEPENDENCIES geometry_msgs <span class="org-comment-delimiter"># </span><span class="org-comment">in this example we depend on geometry_msgs</span>
+     )
+<span class="org-comment-delimiter"># </span><span class="org-comment">Export a dependency on the ros_idl_runtime</span>
+<span class="org-function-name">ament_export_dependencies</span>(rosidl_default_runtime)
+</pre>
+</div></li>
+<li>Edit <code>package.xml</code>
+<ul class="org-ul">
+<li>Add a <code>&lt;buildtool_depend&gt;</code> on <code>rosidl_default_generators</code> (contains tools needed to generate the interface code).</li>
+<li>Add an <code>&lt;exec_depend&gt;</code> on <code>rosidl_default_runtime</code> to allow access to these types at runtime</li>
+<li>Add the package to the <code>rosidl_interface_packages</code> group with <code>&lt;member_of_group&gt;</code> because this package generates interfaces.</li>
+<li>You should also <code>&lt;depend&gt;</code> on any packages whose types were used within your custom types (in this example <code>geometry_msgs</code>)</li>
+</ul></li>
+<li>All custom interface must start with a capital letter, and the names can contain only letters and numbers</li>
+<li>More information at <a href="https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Single-Package-Define-And-Use-Interface.html">Implementing Custom Interfaces Tutorial</a></li>
+<li>It is generally good ROS practice to make interfaces is separate packages so that they can be more easily used
+<ul class="org-ul">
+<li>It is also generally good ROS practice to use existing interfaces when possible, to make your code as compatible as possible with the rest of the ROS ecosystem.</li>
+</ul></li>
+<li>An example of custom interfaces is available at <a href="https://github.com/m-elwin/me495_demo_interfaces">https://github.com/m-elwin/me495_demo_interfaces</a></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org5df5152" class="outline-3">
+<h3 id="org5df5152">Using Interfaces</h3>
+<div class="outline-text-3" id="text-org5df5152">
+<ol class="org-ol">
+<li>You must add an <code>&lt;exec_depend&gt;</code> on the package that defines the interface</li>
+<li>In python use <code>from &lt;interface_package_name&gt;.&lt;msg|srv|action&gt; import TypeName</code>
+<ul class="org-ul">
+<li><code>&lt;interface_package_name&gt;</code> is the name of the package that defines the interfaces</li>
+<li><code>&lt;msg|srv|action&gt;</code> is one of <code>msg</code>, <code>srv</code>, or <code>action</code>, as appropriate</li>
+<li><code>TypeName</code> is the name of the Message, Service, or Action Type</li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-workspace" class="outline-2">
+<h2 id="workspace">Workspace</h2>
+<div class="outline-text-2" id="text-workspace">
+</div>
+<div id="outline-container-orga35c62c" class="outline-3">
+<h3 id="orga35c62c">Structure</h3>
+<div class="outline-text-3" id="text-orga35c62c">
+<p>
+A ROS <a href="https://colcon.readthedocs.io/en/released/user/what-is-a-workspace.html">Workspace</a> is a directory (called <code>ws</code> here) containing:
+</p>
+<ol class="org-ol">
+<li>The source code to ROS packages: <code>ws/src/&lt;repo&gt;</code>
+<ul class="org-ul">
+<li>A package is any directory under <code>ws/</code> containing a <code>package.xml</code> file</li>
+<li>By convention, packages are placed under <code>ws/src/&lt;repo&gt;</code>, where <code>&lt;repo&gt;</code> is the name of the source-code repository[fn:Technically repositories can be directly under <code>ws</code> but that defies convention!]</li>
+<li>Each repository may contain multiple packages</li>
+</ul></li>
+<li>Log files generated from building the packages go in <code>ws/log</code>. The latest logs are in <code>ws/log/latest</code></li>
+<li>A directory where the packages are installed: <code>ws/install</code></li>
+<li>ROS workspaces enable you to build collections of related packages</li>
+<li>Use a new workspace for each project, that way issues in packages you aren't currently developing won't effect you.</li>
+<li>For a practical guide see the <a href="https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html">Creating a Workspace Tutorial</a>.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgc02e5c1" class="outline-3">
+<h3 id="orgc02e5c1">Building a Workspace</h3>
+<div class="outline-text-3" id="text-orgc02e5c1">
+<ul class="org-ul">
+<li>Workspaces must be <a href="https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html#build-the-workspace-with-colcon">built</a> before they can be used.</li>
+<li>Run <code>colcon build</code> from the workspace directory (<code>ws</code>) to build all the packages in the <code>ws/src</code> directory
+<ul class="org-ul">
+<li>Build artifacts are stored in <code>ws/build</code></li>
+<li>The final results are installed to <code>ws/install</code>, which is where your code (even python) actually runs from</li>
+<li>Thus, you always need to run <code>colcon build</code> at least once before using your workspace</li>
+</ul></li>
+<li>There are two important options to <code>colcon build</code>:
+<ul class="org-ul">
+<li><code>colcon build --symlink-install</code> enables you to change python files without re-running <code>colcon build</code>.
+<ul class="org-ul">
+<li>This enables faster development but comes with some caveats: for example, changes to launchfiles will require a rebuild.</li>
+</ul></li>
+<li><code>colcon build --merge-install</code> by default each package is installed into its own sub-directory tree. This can make the path very long, so merge install keeps
+all package files of a given type (e.g., libraries and executables) in common directories.</li>
+</ul></li>
+</ul>
+</div>
+
+<div id="outline-container-org1c3c91f" class="outline-4">
+<h4 id="org1c3c91f">Warnings</h4>
+<div class="outline-text-4" id="text-org1c3c91f">
+<ul class="org-ul">
+<li>Currently, many ROS 2 packages have deprecation warnings related to their use of setuptools</li>
+<li>To avoid seeing these warnings, add <code>export PYTHONWARNINGS="ignore:easy_install command is deprecated"</code></li>
+<li>See <a href="https://github.com/colcon/colcon-core/issues/454">colcon-core issue #454</a> and <a href="https://robotics.stackexchange.com/questions/24230/setuptoolsdeprecationwarning-in-ros2-humble">This StackExchage Post</a> for details</li>
+<li>It is bad practice to leave warnings lingering rather than addressing them.
+<ul class="org-ul">
+<li>Warnings should only be suppressed after careful consideration as to why they are not a problem (or in this case, where we have no control over them).</li>
+<li>Leaving some warnings to linger creates situations where all warnings are ignored, which often leads to bugs.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org44ac58d" class="outline-3">
+<h3 id="org44ac58d">Using a Workspace</h3>
+<div class="outline-text-3" id="text-org44ac58d">
+<ul class="org-ul">
+<li>After building the <code>ws/install</code> directory (called the <i>install space</i>) is created
+<ul class="org-ul">
+<li>This contains your python files and other files (as long as you properly installed them in <code>setup.py</code>)</li>
+</ul></li>
+<li>After building you must <a href="https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html#source-the-overlay">source</a> it
+to make the files in it available to ROS</li>
+<li>To source the workspace run <code>source &lt;path_to_install_space&gt;/setup.bash</code>
+<ul class="org-ul">
+<li>For example, if the current directory is the base of the workspace (e.g., <code>ws/</code>) run <code>source install/setup.bash</code></li>
+<li>Technically you should never run <code>colcon build</code> from a terminal window where you have sourced the associated workspace.</li>
+</ul></li>
+<li>Sourcing the workspace sets up the environment. See the <a href="https://colcon.readthedocs.io/en/released/developer/environment.html">Colcon Environment Documentation</a> for more details.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orge3b0ab7" class="outline-2">
+<h2 id="orge3b0ab7">Colcon</h2>
+<div class="outline-text-2" id="text-orge3b0ab7">
+<ul class="org-ul">
+<li><a href="https://colcon.readthedocs.io/en/released/"><code>colcon</code></a> is the ROS 2 build-tool, which is used to build the workspace.
+<ul class="org-ul">
+<li>It is written in <code>python</code> and implemented as a series of extensions, which anyone can make to customize the build process</li>
+<li>Common extensions are distributed as part of the <code>python3-colcon-common-extensions</code> package</li>
+<li>Other extensions can usually be installed as <code>python3-colcon-name-of-extension</code></li>
+<li>Anyone can write a colcon extension and it need not be supported or hosted by the colcon developers. However, source code for generally useful colcon extensions
+are hosted on the <a href="https://github.com/colcon">Colcon Github Organization</a> and maintained by them</li>
+</ul></li>
+<li>As a build tool, colcon is capable of building projects that use many build systems (See <a href="https://design.ros2.org/articles/build_tool.html">Colcon Design Rationale</a>)
+<ul class="org-ul">
+<li>Examples of build systems include ament_python, ament_cmake, CMake (for C++), Catkin (for ROS1), setuptools (for python)</li>
+</ul></li>
+<li><code>colcon</code> manages dependencies between multiple ROS packages written in different computer languages with different build systems
+<ul class="org-ul">
+<li>The dependencies specified in <code>package.xml</code> are used by <code>colcon</code> to build packages in the right order</li>
+<li>If <code>&lt;package A&gt;</code> has a <code>build_depend</code> on <code>&lt;package B&gt;</code> then <code>colcon</code> always builds <code>&lt;package B&gt;</code> before <code>&lt;package A&gt;</code></li>
+</ul></li>
+<li>By default <code>colcon</code> builds packages in parallel.
+<ul class="org-ul">
+<li>Your code may still compile by pure luck even if dependencies are specified indirectly. For example if <code>&lt;package A&gt;</code> depends on <code>&lt;package B&gt;</code> but the dependency
+is not specified, <code>colcon</code> may try to build both at the same time. If <code>&lt;package B&gt;</code> finishes before the <code>&lt;package A&gt;</code> process needs it the build will succeed</li>
+<li>To test that your dependencies will always build, build each package in series by specifying <code>colcon build --executor sequential</code></li>
+</ul></li>
+<li><a href="https://docs.ros.org/en/jazzy/Concepts/About-Build-System.html">More information about the ROS 2 build system</a></li>
+</ul>
+</div>
+<div id="outline-container-orgb9ee732" class="outline-3">
+<h3 id="orgb9ee732">colcon_cd</h3>
+<div class="outline-text-3" id="text-orgb9ee732">
+<ul class="org-ul">
+<li><a href="https://colcon.readthedocs.io/en/released/user/installation.html#quick-directory-changes">colcon_cd</a> allows you to quickly switch between the workspace directory and that of a package</li>
+<li>Install with <code>sudo apt install python3-colcon-cd</code></li>
+<li>Then, add <code>source /usr/share/colcon_cd/function/colcon_cd.sh</code></li>
+<li>From your workspace directory run <code>colcon_cd package</code> to go to that package</li>
+<li>You can then run <code>colcon_cd</code> to return to the workspace directory</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org9e85314" class="outline-3">
+<h3 id="org9e85314">colcon_clean</h3>
+<div class="outline-text-3" id="text-org9e85314">
+<ul class="org-ul">
+<li><a href="https://github.com/colcon/colcon-clean">colcon-clean</a> allows you to easily remove the build results from a workspace</li>
+<li>Install with <code>sudo apt install python3-colcon-clean</code></li>
+<li><code>colcon clean workspace</code> will clean all generated files</li>
+<li><code>colcon clean packages</code> allows you to select individual packages to clean</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-colcon-pkg" class="outline-3">
+<h3 id="colcon-pkg">colcon.pkg</h3>
+<div class="outline-text-3" id="text-colcon-pkg">
+<ol class="org-ol">
+<li>The <a href="https://colcon.readthedocs.io/en/released/user/configuration.html">colcon.pkg</a> file, when placed at the base of the package directory enables a package to change <code>colcon</code> settings when it is being built</li>
+<li>One use of this file is to install environment hooks, which are files that set environment variables when <code>install/setup.bash</code> is sourced</li>
+<li>To set up an environment hook
+<ol class="org-ol">
+<li>Create a <a href="https://colcon.readthedocs.io/en/released/developer/environment.html">dsv</a> file in the <code>env-hooks</code> subdirectory of your package
+<ul class="org-ul">
+<li>For example: prepend-non-duplicate;VAR_NAME;VAR_VALUE will prepend VAR_VALUE to VAR_NAME, as it is not duplicated</li>
+</ul></li>
+<li><p>
+Add the hook in <code>colcon.pkg</code>:
+</p>
+<pre class="example">
+{
+    "hooks": ["share/&lt;PACKAGE_NAME&gt;/env-hooks/&lt;DSV_NAME&gt;.dsv"]
+}
+</pre></li>
+<li>The above code adds a hook located at the specified path</li>
+<li>In <code>setup.py</code> be sure to install the <code>.dsv</code> file to the path referenced in <code>colcon.pkg</code></li>
+</ol></li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga2bfa86" class="outline-2">
+<h2 id="orga2bfa86">ROS Environment</h2>
+<div class="outline-text-2" id="text-orga2bfa86">
+<ul class="org-ul">
+<li>ROS relies on <a href="https://docs.ros.org/en/jazzy/Tutorials/Beginner-CLI-Tools/Configuring-ROS2-Environment.html">environment variables</a> to control settings and find nodes and libraries
+<ul class="org-ul">
+<li>See <a href="../../hackathon/linux_interactive.html#orgc51c559">Environment Varaibles</a> for more information on environment variables generally</li>
+</ul></li>
+<li>ROS environment variables are set when <i>underlay</i> is sourced.
+<ul class="org-ul">
+<li>To source the <code>underlay</code> run <code>source /opt/ros/jazzy/setup.bash</code></li>
+<li>When you installed <code>ROS</code> you added the above command to the <code>~/.bashrc</code> so that it runs automatically whenever <code>bash</code> is opened</li>
+<li>The underlay must be sourced to have access to the ROS command-line tools and system-installed packages</li>
+</ul></li>
+<li>Other ROS workspaces can be added by sourcing an <code>overlay</code>, which provides access to the packages installed in that <code>overlay</code>
+<ul class="org-ul">
+<li>When you <code>source install/setup.bash</code> after building the workspace you are adding the <code>overlay</code>, providing access to the packages you just built</li>
+</ul></li>
+<li>To see the ROS environment variables run <code>env | grep "AMENT\|CMAKE\|ROS\|COLCON"</code>
+<ul class="org-ul">
+<li>This command prints all the environment variables and searches for ones containing <code>AMENT</code>, <code>CMAKE</code>, or <code>ROS</code></li>
+<li><code>AMENT_PREFIX_PATH</code> is where ROS looks for packages and files during runtime</li>
+<li><code>ROS_AUTOMATIC_DISCOVERY_RANGE</code> provides settings for where on the network ROS nodes will automatically discover each other.
+<ul class="org-ul">
+<li>By default this setting is <code>SUBNET</code> which means all nodes running on the same subnet will see each other. However, Northwestern's network blocks the traffic required for automatic node discovery.</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="outline-container-org4730529" class="outline-3">
+<h3 id="org4730529">Overlays</h3>
+<div class="outline-text-3" id="text-org4730529">
+<ul class="org-ul">
+<li>Technically, you should not have the overlay <code>sourced</code> when using <code>colcon build</code>, which means you need a separate window for building and running ROS commands
+<ul class="org-ul">
+<li>Having the overlay sourced when building makes the packages built from the previous build available, which can sometimes mask or cause dependency problems</li>
+<li>In practical day-to-day usage this issue rarely matters, but it is a good habit to be in or you may eventually forget and waste a bunch of time.</li>
+</ul></li>
+<li><a href="https://colcon.readthedocs.io/en/released/user/using-multiple-workspaces.html">Multiple ROS workspaces</a> can be overlayed on top of each other allowing you to use packages from multiple workspaces or even override specific packages.
+<ul class="org-ul">
+<li>One common use case is if you are using external packages that are only available as source code (e.g., the interbotix packages).</li>
+<li>Another use case is to allow you to develop a package that is installed on your system, without needing to uninstall the system version.</li>
+</ul></li>
+<li>The <code>install/setup.bash</code> file is created when <code>colcon build</code> is run and it captures the current ROS environment and adds your workspace to that.
+<ul class="org-ul">
+<li>This means that <code>source install/setup.bash</code> will setup your environment to be what it was at the time of build plus the current workspace.</li>
+<li><code>install/local_setup.bash</code> will overlay the current workspace onto the existing ROS environment, regardless of the environment at build time</li>
+</ul></li>
+<li>The ROS 2 environment that exists when <code>colcon build</code> is run for the first time is captured by the <code>colcon build</code>.
+<ul class="org-ul">
+<li>Thus <code>source install/setup.bash</code> will bring in all the workspaces that were on the path when <code>colcon build</code> ran the first time.</li>
+</ul></li>
+<li>Each environment also has <code>local_setup.bash</code> files that can be sourced. These bring in only that environment, but not the other environments that were present when
+<code>colcon build</code> first ran.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

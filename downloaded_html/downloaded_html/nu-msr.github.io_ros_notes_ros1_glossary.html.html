@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-11-25 Mon 23:03 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ROS Glossary</title>
+<meta name="author" content="This work, &quot;ROS Glossary&quot; is a derivative of [[http://nu-msr.github.io/embedded-course-site/resources/ros_glossary.html][ROS Glossary]] by Jarvis Schultz used under [[https://creativecommons.org/licenses/by-nc-sa/4.0/][CC BY-NC-SA 4.0]] by Matthew Elwin." />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">ROS Glossary</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orge0d2de1">ROS Concepts</a></li>
+<li><a href="#orgb97d489">ROS Utilities</a></li>
+<li><a href="#org3766a9a">ROS Packages</a></li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-orge0d2de1" class="outline-2">
+<h2 id="orge0d2de1">ROS Concepts</h2>
+<div class="outline-text-2" id="text-orge0d2de1">
+<dl class="org-dl">
+<dt><a href="http://wiki.ros.org/actionlib#Overview">action</a></dt><dd>A <i>service</i> that can be interrupted prior to completion.</dd>
+
+<dt><a href="http://wiki.ros.org/Bags">bag</a></dt><dd>A file that contains recorded topic data. See <i>rosbag</i></dd>
+
+<dt>callback</dt><dd>A function that is called whenever an event occurs. 
+Events in ROS occur when a <i>subscriber</i> receives a message/ over a <i>topic</i>,
+a <i>timer</i> expires, or a <i>service</i> returns.</dd>
+
+<dt><a href="http://wiki.ros.org/catkin">catkin</a></dt><dd>This build system for ROS, used to generate code from <i>message</i> definitions,
+compile C++ code into binary form, define package installation instructions, and run unit tests.</dd>
+
+<dt><a href="http://wiki.ros.org/Client%2520Libraries">client libraries</a></dt><dd>Programming language specific libraries that enable code to interact with 
+ROS through concepts such as <i>nodes</i>, <i>parameters</i>, <i>publishers</i>, <i>subscribers</i>, etc.
+The two primary client libraries are <i><a href="http://wiki.ros.org/rospy">rospy</a></i> (for python) and <i><a href="http://wiki.ros.org/roscpp">roscpp</a></i> (for C++).</dd>
+
+<dt><a href="http://wiki.ros.org/ROS/Concepts#ROS_Computation_Graph_Level">computation graph</a></dt><dd>A network containing all ROS processes and their interconnections.  Consists of <i>nodes</i>,
+the <i>master</i> the <i>parameter server</i>, <i>messages</i>, <i>services</i>, <i>topics</i>, and <i>bags</i>.</dd>
+
+<dt><a href="http://wiki.ros.org/catkin/CMakeLists.txt">CMakeLists.txt</a></dt><dd>Part of the <a href="https://www.cmake.org">CMake</a> build system which describes how a package should be built and installed.
+Much of <i>catkin</i> is implemented using <i>CMake</i> and every ROS package has a <i>CMakeLists.txt</i> which is used
+to control the build process.</dd>
+
+<dt><a href="http://wiki.ros.org/ROS/EnvironmentVariables">environment variables</a></dt><dd>Variables stored by the shell. ROS uses several of these to determine
+where to find packages.  They are typically set in <i>setup.bash</i> (for bash) and /setup.zsh) for zsh.</dd>
+
+<dt><a href="http://wiki.ros.org/roslaunch">launching</a></dt><dd>A <i>launch</i> file along with the command line tool <i>roslaunch</i>
+allow you to perform many ROS operations with a single command. You can set
+<i>parameters</i>, run <i>nodes</i>, include other launch files, parse command line
+arguments, and more.</dd>
+
+<dt><a href="http://wiki.ros.org/rospy/Overview/Publishers%20and%20Subscribers#rospy.Publisher_initialization">latching</a></dt><dd>When a publisher is created, if it is set to <i>latch</i>, then every
+time a new subscriber to that publisher's topic is created, it will
+automatically receive a copy of the last message that was published on
+that topic. This feature can be useful for topics that are only published
+occasionally (like map data or status indicators).</dd>
+
+<dt><a href="http://wiki.ros.org/rospy/Overview/Logging">logging</a></dt><dd>ROS has a special mechanism for storing, sorting, filtering, etc.
+messages that are printed to the terminal from running nodes. Logs are created from
+messages published to the <i><a href="http://wiki.ros.org/rosout">rosout</a></i> topic, using ROS logging statements instead of standard
+print statements. Log files can be sorted and searched in real-time via
+<a href="http://wiki.ros.org/rqt_console"><i>rqt_console</i></a>, and they can be parsed/searched manually by looking in the
+'~/.ros/log/' directory. Use <i>rosclean</i> to clear old log files.</dd>
+
+<dt><a href="http://wiki.ros.org/Manifest">manifest</a></dt><dd>Alternative name for <i>package.xml</i>. The original build system in ROS was called <i>rosbuild</i>
+and it used <i>manifest.xml</i> files to identify packages.  When the build system switched to <i>catkin</i> the file
+changed names as well.</dd>
+
+<dt><a href="http://wiki.ros.org/Master">master</a></dt><dd>The <i>master</i> is a ROS process that helps <i>nodes</i> locate each other
+and establish communication channels based on their <i>publisher</i>
+<i>subscriber</i> relationships and any <i>services</i>. The <i>master</i> also manages
+the <i>parameter</i> server. The master is typically started through the
+<i>roscore</i> command-line tool, or it is automatically started via a
+<i>roslaunch</i> call.</dd>
+
+<dt><a href="http://wiki.ros.org/msg">message</a></dt><dd>A <i>.msg</i> file defines the contents of a ROS <i>message</i> using a
+simple text description format. A <i>message</i> is a data structure that is
+communicated over a ROS topic. Packages containing <i>.msg</i> files must
+add commands in their <i>CMakeLists.txt</i> that cause the <i>.msg</i> files to be converted
+to language-specific implementations which can then included in your ROS nodes (using <code>import</code> in python and <code>#include</code> in C++).
+
+<dl class="org-dl">
+<dt><a href="http://wiki.ros.org/Metapackages">metapackage</a></dt><dd>A package used for grouping other packages by declaring them as dependencies.
+Formerly and colloquially referred to as <i>stacks</i> (e.g. "the navigation stack").</dd>
+
+<dt><a href="http://wiki.ros.org/Names">names</a></dt><dd>All elements in the <a href="http://wiki.ros.org/ROS/Concepts#ROS_Computation_Graph_Level">ROS computation graph</a> (nodes, services, topics,
+parameters, etc.) must have a valid <i>graph resource name</i>. The <i>master</i>
+uses these names when forming connections, and they are an important part
+of how simple systems can scale up to complex systems through
+encapsulation.</dd>
+
+<dt><a href="http://wiki.ros.org/Nodes">node</a></dt><dd>A process that, when run, registers itself with the ROS master and serves as the basic unit of computation in ROS.
+Nodes communicate with each other via <i>topics</i>, <i>services</i>, and <i>parameters</i>.</dd>
+
+<dt><a href="http://wiki.ros.org/Packages">package</a></dt><dd>A collection of source code, configuration files, and other resources that implements functionality in ROS. By dividing
+related functionality into packages, it can be shared with others and reused across projects.
+All packages must have a <i>package.xml</i> file defining its <i>manifest</i>.</dd>
+
+<dt><a href="http://wiki.ros.org/catkin/package.xml">package.xml</a></dt><dd>A file that must be included in the root
+directory of any ROS package. The file declares the package name,
+dependencies, version number, author, and other meta information.</dd>
+</dl></dd>
+
+<dt><a href="http://wiki.ros.org/Parameter%2520Server">parameters</a></dt><dd>Globally accessible variables (all nodes can
+see them) typically containing configuration information or calibration data. They are set and retrieved via the <i>parameter server</i>
+run by <i>roscore</i>.</dd>
+
+<dt><a href="http://wiki.ros.org/rospy/Overview/Publishers%2520and%2520Subscribers">publisher</a></dt><dd>Nodes use <i>publishers</i> to send or "publish" data, on a particular <i>topic</i>.</dd>
+
+<dt><a href="http://wiki.ros.org/Remapping%2520Arguments">remapping</a></dt><dd>Many ROS <i>names</i> such as <i>topics</i>, <i>services</i>, and <i>parameters</i>
+can be changed at runtime, allowing multiple nodes of the
+same type to communicate over different topic names and nodes to be reused in different projects</dd>
+
+<dt><a href="http://wiki.ros.org/rosbuild">rosbuild</a></dt><dd>An old build-system for ROS that was replaced by <i>catkin</i> in ROS Groovy (back in 2012)</dd>
+
+<dt><a href="http://wiki.ros.org/Services">service</a></dt><dd>Request-reply communication between nodes, defined by <i>.srv</i> files.</dd>
+
+<dt><a href="http://wiki.ros.org/rosbuild/Stacks">stack</a></dt><dd>A <i>stack</i> is an older term for what are now called <i>metapackages</i></dd>
+
+<dt><a href="http://wiki.ros.org/rospy/Overview/Publishers%2520and%2520Subscribers">subscriber</a></dt><dd>Nodes use <i>subscribers</i> to listen to data being <i>published</i> on
+topics. A <i>callback</i> is issued whenever a new message arrives.</dd>
+
+<dt><a href="http://wiki.ros.org/tf">tf</a></dt><dd>A compatibility layer built on top of <i>tf2</i> for tracking coordinate systems in ROS.</dd>
+
+<dt><a href="http://wiki.ros.org/tf2">tf2</a></dt><dd>The package used to track coordinate systems and transformations in ROS.</dd>
+
+<dt><a href="http://wiki.ros.org/rospy/Overview/Time">time</a></dt><dd>ROS has built-in primitives for defining the current ROS time. Often
+messages are timestamped, and this can be an important for "synchronizing" portions of your system.</dd>
+
+<dt><a href="http://wiki.ros.org/rospy/Overview/Time#Timer">timer</a></dt><dd>Timers are used to run callbacks at a specified frequency.</dd>
+
+<dt><a href="http://wiki.ros.org/Topics">topic</a></dt><dd>A <i>topic</i> is a <i>named</i> channel over which <i>nodes</i> communicate
+<i>messages</i>. Topics facilitate a one-to-many or many-to-many communication.
+One or more <i>publishers</i> send messages to a <i>topic</i> and one or more <i>subscribers</i> receive these messages
+and call a callback function.</dd>
+
+<dt><a href="http://wiki.ros.org/urdf">URDF</a></dt><dd>The "Universal Robot Description Format" (of course it is not universal as it cannot describe closed chain robots). 
+This is an XML schema that defines a standard for describing robot models, sensors, environments, etc.</dd>
+
+<dt><a href="http://wiki.ros.org/catkin/workspaces">workspace</a></dt><dd>A directory where you develop, compile,
+and install <i>catkin</i> packages. Typically a user will work out of a single
+workspace, but workspaces allow chaining/overlaying so that you can
+combine packages in several different workspaces in varying ways to create different
+"effective-workspace" configurations.</dd>
+
+<dt><a href="http://wiki.ros.org/xacro">xacro</a></dt><dd>Most real-world URDFs are built using <code>xacro</code>, an XML macro language. 
+<code>xacro</code> files enables you to use variables, math, and other constructs to generate an XML file.</dd>
+
+<dt><a href="http://wiki.ros.org/YAML%2520Overview">YAML</a></dt><dd>YAML is a "markup language" for defining dictionary-like data (e.g., key-value pairs)
+ROS uses YAML files for defining many parameters and configurations. YAML syntax is also used in command-line options
+for several ROS tools.</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-orgb97d489" class="outline-2">
+<h2 id="orgb97d489">ROS Utilities</h2>
+<div class="outline-text-2" id="text-orgb97d489">
+<p>
+This is a list of tools I commonly use.
+</p>
+
+<dl class="org-dl">
+<dt><a href="http://wiki.ros.org/ROS/Tutorials/CreatingPackage#ROS.2BAC8-Tutorials.2BAC8-catkin.2BAC8-CreatingPackage.Creating_a_catkin_Package">catkin_create_pkg</a></dt><dd>Automatically create a new directory with a template
+<i>CMakeLists.txt</i> and <i>package.xml</i> &#x2013; the two files required by all ROS
+packages. Allows you to list dependencies and have them automatically be
+filled out in the <i>package.xml</i>.</dd>
+
+<dt><a href="http://wiki.ros.org/catkin/commands/catkin_make">catkin_make</a></dt><dd>Builds targets contained in a workspace. Must be executed
+from the root of the workspace. This is the simplest and fastest ROS build tool but it
+builds all packages as a single CMake project which often leads to difficulties.</dd>
+
+<dt><a href="https://www.ros.org/reps/rep-0134.html">catkin_make_isolated</a></dt><dd>Builds each package in your workspace as a separate CMake project. This also allows
+including non-catkin CMake project in the workspace.</dd>
+
+<dt><a href="https://catkin-tools.readthedocs.io/en/latest/">catkin_tools</a></dt><dd>The ROS build tool that is still in "beta", but works quiet well.  It has the nicest interface of
+all the <i>catkin</i> build tools.</dd>
+
+<dt><a href="https://github.com/fkie/catkin_lint">catkin_lint</a></dt><dd>A tool for finding issues with catkin <i>package.xml</i> and <i>CMakeLists.txt</i> files.</dd>
+
+<dt><a href="http://wiki.ros.org/vcstool">vcstool</a></dt><dd>This command/package is used for updating and installing multiple
+source-code-based packages into a workspace.</dd>
+
+<dt><a href="http://wiki.ros.org/rosservice">rosservice</a></dt><dd>This can be used for listing and calling <i>services</i>
+
+<dl class="org-dl">
+<dt><a href="http://wiki.ros.org/rosbag/Commandline">rosbag</a></dt><dd>This is a command line tool for creating, analyzing, playing,
+etc., bag files</dd>
+</dl></dd>
+
+<dt><a href="http://wiki.ros.org/rosinstall_generator">rosinstall_generator</a></dt><dd>Used for creating <i>rosinstall</i> files which can then be read by <i>vcstool</i> to enable compiling a workspace and
+its dependencies from source.</dd>
+
+<dt><a href="http://wiki.ros.org/rosmsg">rosmsg</a></dt><dd>Display information about messages including message definitions, packages using a message, and the messages defined in a package.</dd>
+<dt><a href="http://wiki.ros.org/rosmsg#rossrv">rossrv</a></dt><dd>Display information about services including service definitions, packages using a service, and the services defined in a package.</dd>
+<dt><a href="http://docs.ros.org/independent/api/rosdep/html/">rosdep</a></dt><dd>Used for installing system dependencies for ROS packages. Can be
+used across many different Linux distributions</dd>
+<dt><a href="http://wiki.ros.org/roslaunch">roslaunch</a></dt><dd>When called with a <i><a href="http://wiki.ros.org/roslaunch/XML">.launch</a></i> file, starts many nodes at once, sets parameters, automatically respawns crashed nodes, and
+automatically start <i>master</i>.</dd>
+<dt><a href="http://wiki.ros.org/rosbash#roscd">roscd</a></dt><dd>Change directory to the location of a package/metapackage using
+just the package name.</dd>
+<dt><a href="http://wiki.ros.org/rosnode">rosnode</a></dt><dd>Control and display information about running nodes. It can list nodes, kill nodes, display topic and parameter
+information for a particular node, and more.</dd>
+<dt><a href="http://wiki.ros.org/rosclean">rosclean</a></dt><dd>Used for checking disk usage and clearing out ROS log files.</dd>
+<dt><a href="http://docs.ros.org/independent/api/rospkg/html/rospack.html">rospack</a></dt><dd>Displays information about packages, and it is used by catkin for
+determining information about packages.</dd>
+<dt><a href="http://wiki.ros.org/rostopic">rostopic</a></dt><dd>Display debug information about ROS <i>topics</i> including
+publishers, subscribers, frequency, and raw values.</dd>
+<dt><a href="http://wiki.ros.org/rosparam">rosparam</a></dt><dd>List, get, and set <i>parameters</i></dd>
+<dt><a href="http://wiki.ros.org/roscore">roscore</a></dt><dd>Start the <i>master</i> and the parameter server.</dd>
+<dt><a href="http://wiki.ros.org/rosbash#roscp">roscp</a></dt><dd>Copy files from ROS packages</dd>
+<dt><a href="http://wiki.ros.org/ROS/Tutorials/UsingRosEd">rosed</a></dt><dd>Used to automatically open ROS files from a given ROS package in a text editor</dd>
+<dt><a href="http://wiki.ros.org/rosbash#rosls">rosls</a></dt><dd>View contents of a package/metapackage or location</dd>
+<dt><a href="http://wiki.ros.org/rosbash#rosrun">rosrun</a></dt><dd>Start a nodes.</dd>
+<dt><a href="http://wiki.ros.org/roswtf">roswtf</a></dt><dd>Diagnosing common issues with a ROS system.</dd>
+<dt><a href="http://wiki.ros.org/rqt">rqt</a></dt><dd>A Qt-based framework for GUI development in ROS. The
+<a href="http://wiki.ros.org/rqt_common_plugins">rqt_common_plugins</a> metapackage provides many pre-made ROS GUIs that are
+great for working with ROS. Built in tools include bagfile plotting,
+playing, and recording, visualization of the <code>/tf</code> tree, image stream
+viewers but you can also create ;your own GUI tools</dd>
+<dt><a href="http://wiki.ros.org/rviz">rviz</a></dt><dd>The primary 3D visualization tool used in ROS.</dd>
+</dl>
+</div>
+</div>
+
+
+<div id="outline-container-org3766a9a" class="outline-2">
+<h2 id="org3766a9a">ROS Packages</h2>
+<div class="outline-text-2" id="text-org3766a9a">
+<p>
+This is a brief list of packages and non-ros libraries that you may encounter.
+</p>
+
+<dl class="org-dl">
+<dt><a href="https://arma.sourceforge.net">armadillo</a></dt><dd>This is a C++ matrix library that works as a front-end to standardized linear algebra code.</dd>
+
+<dt><a href="http://bulletphysics.org/wordpress/">bullet</a></dt><dd>Bullet is a non-ROS physics library that is a system dependency of ROS that is used in many of the geometric calculations done in <code>tf</code>.
+It's python version <a href="https://pybullet.org/wordpress">pybullet</a> is a popular simulation engine in the machine learning community and is the way that most people interact with bullet currently.</dd>
+
+<dt><a href="http://wiki.ros.org/camera_calibration">camera_calibration</a></dt><dd>This is a ROS package that allows easy calibration of
+monocular and stereo cameras using a checkerboard pattern.</dd>
+<dt><a href="http://wiki.ros.org/cv_bridge">cv_bridge</a></dt><dd><code>cv_bridge</code> is part of the <code>vision_opencv</code> metapackage. It
+allows conversions between ROS image formats and OpenCV image
+formats.</dd>
+<dt><a href="http://wiki.ros.org/dynamic_reconfigure">dynamic_reconfigure</a></dt><dd>Provides a mechanism for changing a
+variety of node configurations without having to restart the node.</dd>
+
+<dt><a href="http://eigen.tuxfamily.org/">eigen</a></dt><dd>Eigen is a C++ template library for linear algebra, matrix math,
+etc. It is a system dependency of ROS, and many core ROS packages use
+Eigen for computation. It is probably the most popular C++ matrix library;
+however, I find <i>armadillo</i> to have a cleaner syntax and more versatile since
+it directly uses BLAS and LAPACK instead of being a complete re-implementation.</dd>
+
+<dt><a href="http://gazebosim.org/">gazebo</a></dt><dd>Gazebo is a standalone robotics simulation tool that is developed
+by OSRF. It is designed to integrate nicely with ROS, and ROS provides
+<a href="http://wiki.ros.org/gazebo_ros_pkgs">several tools</a> for the interface.</dd>
+
+<dt><a href="http://wiki.ros.org/geometry_msgs">geometry_msgs</a></dt><dd>Contains a collection of ROS message
+definitions for common geometric primitives such as points, vectors, and
+quaternions.</dd>
+
+<dt><a href="http://wiki.ros.org/image_pipeline">image_pipeline</a></dt><dd>The packages contained in this metapackage are designed to
+fill in the gap between a camera driver and an image processing node. The
+nodes in these packages implement algorithms that are extremely common in
+image processing so that you don't have to. Capabilities include
+rectifying distorted images, generating disparity maps, and converting
+color images to grayscale. The idea is to chain the topics of these nodes together
+so the final output image that you receive has already gone through basic processing steps.</dd>
+<dt><a href="http://wiki.ros.org/image_transport">image_transport</a></dt><dd>Supports transparent compression of images.
+Quoting from their Overview: <i>When working with images we often want specialized transport strategies, such as using image compression or streaming video codecs. <code>image_transport</code> provides classes and nodes for transporting images in arbitrary over-the-wire representations, while abstracting this complexity so that the developer only sees sensor_msgs/Image messages.</i></dd>
+<dt><a href="http://wiki.ros.org/joystick_drivers">joystick_drivers</a></dt><dd>A metapackage that provides tools for working with a
+variety of joysticks and game controllers (PS3, XBox, wiimote, etc.).</dd>
+<dt><a href="http://www.orocos.org/kdl">kdl</a></dt><dd>KDL stands for "Kinematics and Dynamics Library" and is part of the
+Orocos project. Several ROS tools, most notably <code>MoveIt!</code>, rely heavily
+on KDL for geometric computation.</dd>
+<dt><a href="http://moveit.ros.org/">MoveIt!</a></dt><dd>MoveIt! is the primary package for path planning and manipulation in ROS.</dd>
+<dt><a href="http://wiki.ros.org/navigation">navigation</a></dt><dd>This is a metapackage that enables safe 2D navigation of
+mobile robots. It includes tools for estimation, localization, and
+planning.</dd>
+<dt><a href="http://wiki.ros.org/nodelet">nodelet</a></dt><dd>Allows multiple nodes to share memory with
+a zero copy transport between them by running them in the same process. 
+ Nodelets are extremely useful when working with message types that have a significant memory
+footprint such as <a href="http://docs.ros.org/api/sensor_msgs/html/msg/Image.html">sensor_msgs/Image</a> and <a href="http://docs.ros.org/api/sensor_msgs/html/msg/PointCloud2.html">sensor_msgs/PointCloud2</a>, but they are only accessible through C++.</dd>
+
+<dt><a href="http://ompl.kavrakilab.org/">ompl</a></dt><dd>The Open Motion Planning Library is used within ROS for motion
+planning. Notably, <code>MoveIt!</code> uses OMPL for its default planners.</dd>
+<dt><a href="http://opencv.org/">OpenCV</a></dt><dd>OpenCV is an extremely popular open-source computer vision and
+machine learning software library. Through tools such as <code>cv_bridge</code>,
+already-existing image processing code utilizing OpenCV can easily be
+converted to work within the ROS framework.</dd>
+<dt><a href="http://wiki.ros.org/openni_launch">openni_launch</a></dt><dd>A package that facilitates using OpenNI-compliant devices
+with ROS. Specifically, most people use this for Kinects and ASUS Xtion
+PRO LIVE devices.</dd>
+<dt><a href="http://wiki.ros.org/openni_tracker">openni_tracker</a></dt><dd>This package uses the NITE skeleton tracking library in
+conjunction with an OpenNI-compliant device to provide estimates of human
+poses.</dd>
+<dt><a href="http://www.orocos.org/">orocos</a></dt><dd>The Orocos project is broken into 3 main parts: i) the Kinematics
+and Dynamics Library (KDL) ii) the Bayesian Filtering Libarary (BFL) iii)
+Orocos Toolchain (OT). All three of these parts are used by various core
+packages in the ROS world. (KDL = <a href="http://moveit.ros.org/">MoveIt!</a>, BFL = <a href="http://wiki.ros.org/robot_pose_ekf">robot_pose_ekf</a>, OT =
+<a href="https://github.com/orocos/rtt_ros_integration/blob/indigo-devel/README.md">rtt_ros_integration</a>).</dd>
+<dt><a href="http://pointclouds.org/">pcl</a></dt><dd>The Point Cloud Library (PCL) is a standalone project for 2D and 3D
+image and point cloud processing. It is used extensively by ROS users.</dd>
+<dt><a href="//www.qt.io/">Qt</a></dt><dd>Qt is a cross-platform framework most-commonly used for creating GUIs.
+Qt is used for creating nearly all GUIs that you will use in the ROS
+world.</dd>
+<dt><a href="http://wiki.ros.org/robot_localization">robot_localization</a></dt><dd>Nonlinear state estimation through sensor fusion and
+an arbitrary number of sensors.</dd>
+<dt><a href="http://wiki.ros.org/robot_pose_ekf">robot_pose_ekf</a></dt><dd>This package uses an EKF to estimate the 3D pose of a
+robot based on pose measurements coming from wheel odometry, IMU sensors,
+and visual odometry.</dd>
+<dt><a href="http://wiki.ros.org/roscpp">roscpp</a></dt><dd>This is the client library for C++. It allows C++ programmers to
+easily interface with ROS topics, services, and parameters.</dd>
+<dt><a href="http://wiki.ros.org/rospy">rospy</a></dt><dd><code>rospy</code> is a pure Python client library for ROS. We will use it
+extensively in this course.</dd>
+<dt><a href="http://wiki.ros.org/rosserial">rosserial</a></dt><dd>This metapackage defines a protocol for transmitting standard
+ROS serialized messages/services over a character device such as a serial
+port. This is commonly used for transmitting data between a
+microcontroller and a ROS node.</dd>
+<dt><a href="http://wiki.ros.org/sensor_msgs">sensor_msgs</a></dt><dd>A package containing a collection of message definitions used
+with sensors.</dd>
+<dt><a href="http://wiki.ros.org/std_msgs">std_msgs</a></dt><dd>A package containing a collection of standard ROS messages.</dd>
+<dt><a href="http://wiki.ros.org/tf">tf</a></dt><dd>This package allows users to track multiple coordinate frames over
+time. It is extremely important in nearly all ROS systems. Technically,
+<code>tf</code> isn't actually used anymore. Most of the <code>tf</code> functionality has been
+replaced by <code>tf2</code>. However, the developers of <code>tf2</code> created a
+backwards-compatible API, and many packages still use the old <code>tf</code> API
+(even though they are calling <code>tf2</code> functions).</dd>
+<dt><a href="http://wiki.ros.org/tf2">tf2</a></dt><dd>The second generation transform library; this has replaced <code>tf</code>.</dd>
+<dt><a href="http://wiki.ros.org/topic_tools">topic_tools</a></dt><dd>This package provides tools for redirecting, throttling,
+transforming, and multiplexing topics.</dd>
+<dt><a href="http://wiki.ros.org/turtlesim">turtlesim</a></dt><dd>This is a ROS package made for teaching basic ROS concepts.</dd>
+<dt><a href="http://wiki.ros.org/urdfdom_py">urdf_parser_py</a></dt><dd>This is a simple API for parsing URDF files in Python.</dd>
+<dt><a href="http://wiki.ros.org/usb_cam">usb_cam</a></dt><dd>A ROS driver for V4L cameras (most webcams). It appears to be the most recently updated of the several 
+ROS camera packages.</dd>
+<dt><a href="http://wiki.ros.org/visualization_msgs">visualization_msgs</a></dt><dd>This package contains several message definitions used
+specifically for visualization. <code>rviz</code> contains plugins that can already
+display and interact with the messages defined in this package. Using
+these messages is a very easy way to build 2D/3D user interfaces and
+displays.</dd>
+</dl>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: This work, "ROS Glossary" is a derivative of . </p></p>
+</div>
+</body>
+</html>

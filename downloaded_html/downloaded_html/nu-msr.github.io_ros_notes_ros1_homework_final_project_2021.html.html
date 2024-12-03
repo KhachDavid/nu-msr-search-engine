@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-11-25 Mon 23:03 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Final Project (Fall 2021)</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">Final Project (Fall 2021)</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orge1a5296">Important Dates</a></li>
+<li><a href="#org064acba">Overview</a></li>
+<li><a href="#orge3f1731">Requirements</a>
+<ul>
+<li><a href="#org0fb2144">The Robot</a></li>
+<li><a href="#orgffc767e">The Robot's Tasks</a></li>
+<li><a href="#orgca274ed">The Students' Tasks</a></li>
+</ul>
+</li>
+<li><a href="#org2779a9f">Grading</a></li>
+<li><a href="#org9c9f2bf">Inspiration</a></li>
+<li><a href="#org2c74373">Potentially useful ROS Packages and Libraries</a>
+<ul>
+<li><a href="#org6292424">Tags</a></li>
+<li><a href="#org14e1ebe">Perception</a></li>
+<li><a href="#org635c220">Motion</a></li>
+<li><a href="#org8449603">Simulation</a></li>
+<li><a href="#org5a2b6f5">State Machines</a></li>
+</ul>
+</li>
+<li><a href="#org85ae571">Additional Hardware</a></li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-orge1a5296" class="outline-2">
+<h2 id="orge1a5296">Important Dates</h2>
+<div class="outline-text-2" id="text-orge1a5296">
+<ol class="org-ol">
+<li>Proposal Due: November 9th, before class</li>
+<li>Final Presentation: December 6 from 3pm-5pm.</li>
+<li>Final Submission (all code and documentation on github): December 7th 12pm</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org064acba" class="outline-2">
+<h2 id="org064acba">Overview</h2>
+<div class="outline-text-2" id="text-org064acba">
+<p>
+Each team will develop a ROS package that enables a robot to perform an activity that
+they describe in their proposal. The project is open-ended, but will be judged on
+difficulty and reliability. 
+</p>
+
+<p>
+Team assignments are posted on Canvas.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge3f1731" class="outline-2">
+<h2 id="orge3f1731">Requirements</h2>
+<div class="outline-text-2" id="text-orge3f1731">
+</div>
+<div id="outline-container-org0fb2144" class="outline-3">
+<h3 id="org0fb2144">The Robot</h3>
+<div class="outline-text-3" id="text-org0fb2144">
+<ol class="org-ol">
+<li>Robots available include Franka and the Adroit robot.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgffc767e" class="outline-3">
+<h3 id="orgffc767e">The Robot's Tasks</h3>
+<div class="outline-text-3" id="text-orgffc767e">
+<ol class="org-ol">
+<li>The robot must interact with and change the state of something in it's environment.</li>
+
+<li>The robot must operate under its own power with some degree of autonomy. However, it can also take direction
+from a human operator.</li>
+
+<li>The robot must use at least one sensor to respond to an external stimulus.</li>
+
+<li>A human user should be able to do something to change what the robot does (without needing to program).
+<ul class="org-ul">
+<li>The interaction can be while the robot is running (e.g., moving a piece on a chessboard) or can be part of the setup phase (e.g., arranging puzzle pieces).</li>
+</ul></li>
+
+<li>Exceptions to these rules will be made at my discretion on a case-by-case basis
+<ul class="org-ul">
+<li>Basically, if you have a cool idea that does not satisfy all of the above let me know</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgca274ed" class="outline-3">
+<h3 id="orgca274ed">The Students' Tasks</h3>
+<div class="outline-text-3" id="text-orgca274ed">
+<ol class="org-ol">
+<li>Project Proposal 
+<ul class="org-ul">
+<li>Group Name</li>
+<li>Brief (1-3 sentence) description of the project.</li>
+<li>Goals
+<ul class="org-ul">
+<li>Core goal: what does a completely working project look like?</li>
+<li>Fallback goal: what is the bare-minimum proof-of-concept?
+<ul class="org-ul">
+<li>How can the problem be constrained to make the core goal easier?</li>
+<li>What structure can you add to the environment to make tasks easier (for example using April Tags rather than computer vision)?</li>
+</ul></li>
+<li>Stretch goal: if everything goes right, what do you hope to accomplish
+<ul class="org-ul">
+<li>What happens if you relax some assumptions to make the project more difficult?</li>
+<li>Are there any features to add?</li>
+</ul></li>
+</ul></li>
+<li>Robot Preference (Franka, Adroit, Either)</li>
+<li>List of any external equipment required that may need to be purchased.
+<ul class="org-ul">
+<li>You may ask me about this before submitting your proposal so you
+don't write a proposal around an unobtainable item.</li>
+</ul></li>
+<li>High level overview of your approach to the project
+<ul class="org-ul">
+<li>Third party packages to use or explore</li>
+<li>Concepts that are currently unfamiliar and must be learned</li>
+<li>Anything that needs to be built?
+<ul class="org-ul">
+<li>Some light 3D printing or laser cutting is permissible, but
+there is no time for significant mechanical design or fabrication.</li>
+</ul></li>
+</ul></li>
+<li>Description of the proposed role for each team member
+<ul class="org-ul">
+<li>Every team member must have a significant software contribution and be primarily responsible for at least one subsystem</li>
+<li>Every team member should also have one secondary role.  This can be as a contributor to additional subsystems or some general purpose role,
+such as the suggestions below. The needs of each team will be slightly different: the idea is to roughly divide the work evenly.
+<ol class="org-ol">
+<li>Systems Integrator: Responsible for making sure that everybody's subsystems work together, and that git workflow is followed.</li>
+<li>Reliability Engineer: Implements additional infrastructure needed to isolate and test the various subsystems.
+<ul class="org-ul">
+<li>Everybody on the team should contribute to testing, but this role takes the lead on testing</li>
+</ul></li>
+<li>Usability Engineer: Makes sure that the system can is easy to run with (ideally) a single launchfile. Also takes the lead
+on the groups' documentation
+<ul class="org-ul">
+<li>Everybody contributes to documentation, including with docstrings in their own code and portions of the readme. This role
+makes sure it all comes together and that API documentation is generated</li>
+</ul></li>
+</ol></li>
+</ul></li>
+<li>Total proposal length should be under 2 pages.</li>
+<li>The project proposal will be uploaded to Canvas as a PDF</li>
+<li>Feel free to ask questions about the proposal on the discussion board and office hours</li>
+</ul></li>
+<li>Source Code
+<ul class="org-ul">
+<li>Each team must use git to develop the project.  
+<ul class="org-ul">
+<li>The main git repository will be hosted on github classrooms, but each member is encouraged to maintain their own fork</li>
+</ul></li>
+<li>The project can consist of one or more ROS packages but should be in one git repository.</li>
+<li>If you rely on compiling external packages, provide a rosinstall file generated using <code>vcs export</code> in your main repository.</li>
+<li>The project must have multiple custom nodes, launch files, topics, and services.</li>
+<li>The project should have at least one python library in addition to the nodes that you need</li>
+<li>Each student should work in their own branches in git.  Working code should be merged into the main branch.
+<ul class="org-ul">
+<li>You may use any git workflow that works for your team, I suggest <a href="https://nu-msr.github.io/hackathon/git_intro.html">my simple git workflow</a></li>
+<li>This workflow also can be used with pull-requests on github, or all users can have write access to the central repository</li>
+</ul></li>
+<li>You should have automated tests using rostest and unittest for your code.</li>
+</ul></li>
+
+<li>Documentation
+<ul class="org-ul">
+<li>All source code must be documented, with a docstring at the top describing the ROS API and docstrings for each
+function and class</li>
+<li>There should be a single <code>README.md</code> describing the project, which can link to other documents as needed
+<ul class="org-ul">
+<li>Documentation can be done as a <code>README.md</code> that renders nicely on github or using github pages.</li>
+</ul></li>
+<li>The <code>README.md</code> must include:
+<ol class="org-ol">
+<li>Brief project overview</li>
+<li>Quickstart guide providing the exact commands</li>
+<li>List of all nodes and launchfiles and what they do</li>
+<li>A discussion of the overall system architecture and high level concepts</li>
+<li>Any other information, as appropriate (for example: algorithms used, lessons learned, future work)</li>
+</ol></li>
+<li>Setup Sphinx to autogenerate your html API documentation for your python package
+<ul class="org-ul">
+<li>You may include more detailed documentation in sphinx rather than README.md and simply have
+The README.md link to sphinx documentation hosted on github.io for example, if you wish.</li>
+<li>Details about how to do this are <a href="../design_doc_test.html">here</a></li>
+</ul></li>
+</ul></li>
+<li>Videos
+<ul class="org-ul">
+<li>You should produce a video showing your demonstration working.</li>
+<li>The video should be hosted online and embedded in your README.md</li>
+</ul></li>
+<li>Final Presentation
+<ul class="org-ul">
+<li>Each group member should be responsible for an approximately equal part of the presentation.</li>
+<li>Presentation is 15 minutes long and should cover
+<ul class="org-ul">
+<li>Overview of the project</li>
+<li>Discuss each subsystem</li>
+<li>Challenges faced and future work</li>
+<li>A live demonstration</li>
+</ul></li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-org2779a9f" class="outline-2">
+<h2 id="org2779a9f">Grading</h2>
+<div class="outline-text-2" id="text-org2779a9f">
+<ol class="org-ol">
+<li>The proposal
+<ul class="org-ul">
+<li>Did you hand it in on time?</li>
+<li>Does it concisely describe the goals of the project?</li>
+<li>Does it clearly articulate the core, fallback, and stretch goals?</li>
+<li>Does each student have a clear role?</li>
+</ul></li>
+<li>Group Grade: All students receive the same grade based on:
+<ul class="org-ul">
+<li>How well the robot worked (weighed against the complexity of the task)</li>
+<li>The documentation and tests.</li>
+<li>The quality of the python code and how well your package conforms to ROS standards.</li>
+<li>How well git was used</li>
+</ul></li>
+<li>Grade adjustments:
+<ul class="org-ul">
+<li>I will get confidential feedback from each of you about your group members effort grades.</li>
+<li>I will also look at the git history to see how much each individual contributed.</li>
+<li>Grades may be adjusted up or down based on how your effort is perceived by your peers and demonstrated in the git history.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org9c9f2bf" class="outline-2">
+<h2 id="org9c9f2bf">Inspiration</h2>
+<div class="outline-text-2" id="text-org9c9f2bf">
+<p>
+A wide range of projects is possible.  While there is no theme there are often good projects in the fields of
+sports, games, medicine, manufacturing, fabrication, construction. You may also take inspiration from previous projects.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org2c74373" class="outline-2">
+<h2 id="org2c74373">Potentially useful ROS Packages and Libraries</h2>
+<div class="outline-text-2" id="text-org2c74373">
+</div>
+<div id="outline-container-org6292424" class="outline-3">
+<h3 id="org6292424">Tags</h3>
+<div class="outline-text-3" id="text-org6292424">
+<ul class="org-ul">
+<li><a href="http://wiki.ros.org/apriltag_ros">April Tags</a>: Used for 3D pose estimation of a tag in space</li>
+<li><a href="http://wiki.ros.org/ar_track_alvar">AR Tags</a>: An older form of 3D pose estimation with tags. Don't use these</li>
+<li><a href="http://wiki.ros.org/vision_visp">Visual Servoing</a> Uses vision to determine location of objects in space</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org14e1ebe" class="outline-3">
+<h3 id="org14e1ebe">Perception</h3>
+<div class="outline-text-3" id="text-org14e1ebe">
+<ul class="org-ul">
+<li><a href="https://opencv.org/opencv">OpenCV</a>: Computer vision library, accessible through ROS
+<ul class="org-ul">
+<li>See <a href="http://wiki.ros.or/opencv_bridge">opencv_bridge</a> For ROS support</li>
+</ul></li>
+<li><a href="https://pointclouds.org">PCL</a> Point cloud library: see <a href="https://wiki.ros.org/perception_pcl">perception_pcl</a> for ROS support</li>
+<li><a href="http://wiki.ros.org/image_pipeline">ROS Image Pipeline</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org635c220" class="outline-3">
+<h3 id="org635c220">Motion</h3>
+<div class="outline-text-3" id="text-org635c220">
+<ul class="org-ul">
+<li><a href="https://moveit.ros.org">MoveIt</a> Motion planning library: sophisticated motion planning.</li>
+<li><a href="https://frankaemika.github.io/docs/">Franka Documentation</a> Lower-level control of the robot arm</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org8449603" class="outline-3">
+<h3 id="org8449603">Simulation</h3>
+<div class="outline-text-3" id="text-org8449603">
+<ul class="org-ul">
+<li>Franka and Adroit both have gazebo support. See their respective documentation</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5a2b6f5" class="outline-3">
+<h3 id="org5a2b6f5">State Machines</h3>
+<div class="outline-text-3" id="text-org5a2b6f5">
+<ul class="org-ul">
+<li><a href="http://wiki.ros.org/smach">SMACH</a> Provides a method for creating higher level state machines.
+This is a useful way to organize/switch between the higher level tasks in your robot.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org85ae571" class="outline-2">
+<h2 id="org85ae571">Additional Hardware</h2>
+<div class="outline-text-2" id="text-org85ae571">
+<p>
+Virtually any hardware in the lab can be used in this project.  If it is requested in your proposal
+we may be able to purchase additional items.  If your project hinges on a purchase, please talk to me
+before committing to it.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

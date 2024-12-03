@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-11-25 Mon 23:03 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The ROS API and Python</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">The ROS API and Python</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgfefa2a1">Client Libraries</a>
+<ul>
+<li><a href="#org030e002">Documentation</a></li>
+<li><a href="#rclpy">rclpy</a></li>
+<li><a href="#orgd01bb9a">Interfaces</a></li>
+</ul>
+</li>
+<li><a href="#names">Naming in ROS</a></li>
+<li><a href="#orgee846c5">Understanding Names</a>
+<ul>
+<li><a href="#orgfa7303d">Example</a></li>
+<li><a href="#org30a6b4e">Comparison with ROS 1</a></li>
+<li><a href="#remapping">Manipulating Names</a></li>
+<li><a href="#org13720e2">A Node's ROS API</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-orgfefa2a1" class="outline-2">
+<h2 id="orgfefa2a1">Client Libraries</h2>
+<div class="outline-text-2" id="text-orgfefa2a1">
+<p>
+<a href="https://docs.ros.org/en/jazzy/Concepts/About-ROS-2-Client-Libraries.html">ROS client libraries</a> allow programs to interact with other ROS processes.
+There are three primarily supported client libraries:
+</p>
+<ul class="org-ul">
+<li><a href="https://docs.ros.org/en/jazzy/p/rcl/">rcl</a> is the C client library, upon which the other client libraries are built.</li>
+<li><a href="https://docs.ros.org/en/jazzy/p/rclcpp/">rclcpp</a> is the C++ client library.</li>
+<li><a href="http://docs.ros.org/en/jazzy/p/rclpy/">rclpy</a> is the Python client library.</li>
+</ul>
+</div>
+
+<div id="outline-container-org030e002" class="outline-3">
+<h3 id="org030e002">Documentation</h3>
+<div class="outline-text-3" id="text-org030e002">
+<ul class="org-ul">
+<li>As of 9/2024, the <code>rclpy</code> documentation is not properly deployed on the ROS 2 website <a href="https://github.com/ros-infrastructure/rosdoc2/issues/68">https://github.com/ros-infrastructure/rosdoc2/issues/68</a></li>
+<li>As a result, the links on this website point to the <code>foxy</code> documentation</li>
+<li><p>
+You can build the documentation locally using <code>python3-rosdoc2</code> as follows:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">git clone -b jazzy https://github.com/ros2/rclpy
+rosdoc2 build --package-path rclpy/rclpy
+</pre>
+</div></li>
+<li>The documentation is in <code>docs_output/rclpy/index.html</code>.</li>
+<li>You can also use <code>import rclpy</code> in the python interpreter and use <code>help()</code></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-rclpy" class="outline-3">
+<h3 id="rclpy">rclpy</h3>
+<div class="outline-text-3" id="text-rclpy">
+<p>
+<code>rclpy</code> is a python library that allows a python program to become a ROS 2 node.
+</p>
+<ol class="org-ol">
+<li><code>import rclpy</code> to use the client library.</li>
+<li><code>rclpy.node</code> defines the <code>Node</code> class
+<ul class="org-ul">
+<li>One way to make nodes in ROS 2 is to sub-class <code>rclpy.node</code></li>
+<li>We focus on this method because it is the most flexible and makes it easier to combine nodes within the same python process.</li>
+<li>It is also possible to instantiate an <code>rclpy.node.Node</code> object and call it's methods.</li>
+</ul></li>
+<li>Each python ROS 2 node has an <code>entry_point</code> function that is called when the node is started.
+<ul class="org-ul">
+<li>The entrypoint function can have any name, and it is registered in the <code>setup.py</code>.</li>
+<li>The <code>def entry_point_name(args=None)</code> function is passed command line arguments.</li>
+<li>Call <code>rclpy.init(args=args)</code> to have the node parse its ROS command line arguments</li>
+</ul></li>
+<li>The <code>Node</code> class has methods that enable
+<ul class="org-ul">
+<li>Creating service servers: <a href="https://docs.ros2.org/foxy/api/rclpy/api/node.html#rclpy.node.Node.create_service">create_service</a></li>
+<li>Creating service clients: <a href="https://docs.ros2.org/foxy/api/rclpy/api/node.html#rclpy.node.Node.create_client">create_client</a></li>
+<li>Creating publishers: <a href="https://docs.ros2.org/foxy/api/rclpy/api/node.html#rclpy.node.Node.create_publisher">create_publisher</a></li>
+<li>Creating subscribers: <a href="https://docs.ros2.org/foxy/api/rclpy/api/node.html#rclpy.node.Node.create_subscription">create_subscription</a></li>
+<li>Creating timers: <a href="https://docs.ros2.org/foxy/api/rclpy/api/node.html#rclpy.node.Node.create_timer">create_timer</a></li>
+<li>Declaring and using parameters: <a href="https://docs.ros2.org/foxy/api/rclpy/api/node.html#rclpy.node.Node.declare_parameters">declare_parameters</a>, <a href="https://docs.ros2.org/foxy/api/rclpy/api/node.html#rclpy.node.Node.get_parameter">get_parameter</a>
+<ul class="org-ul">
+<li>The <a href="http://docs.ros.org/en/jazzy/p/rcl_interfaces/">rcl_interfaces</a> package defines some types that are useful for describing and interacting with parameters.</li>
+<li>For example, there are a few basic data types for parameters, outlined in the <a href="http://docs.ros.org/en/jazzy/p/rcl_interfaces/interfaces/msg/ParameterType.html">ParameterType</a> message</li>
+<li>The <a href="http://docs.ros.org/en/jazzy/p/rcl_interfaces/interfaces/msg/ParameterDescriptor.html">ParameterDescriptor</a> message allows setting metadata for parameters</li>
+</ul></li>
+<li>Logging: <a href="https://docs.ros2.org/foxy/api/rclpy/api/logging.html">Logging</a></li>
+</ul></li>
+<li>There are many other ROS functions and classes available in <code>rclpy</code>, look at the documentation.</li>
+<li>An example of some ROS API functions is available at <a href="https://github.com/m-elwin/me495_demo">https://github.com/m-elwin/me495_demo</a></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgd01bb9a" class="outline-3">
+<h3 id="orgd01bb9a">Interfaces</h3>
+<div class="outline-text-3" id="text-orgd01bb9a">
+<p>
+To use interfaces from a ROS node you must import the corresponding package. This will expose an object that contains the elements in that interface.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-comment-delimiter"># </span><span class="org-comment">import for a package/msg/MessageType</span>
+<span class="org-keyword">from</span> package.msg <span class="org-keyword">import</span> MessageType
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">import for a package/srv/ServiceType</span>
+<span class="org-keyword">from</span> package.srv <span class="org-keyword">import</span>  ServiceType
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">The request type:</span>
+ServiceType.Request()
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">The response Type:</span>
+ServiceType.Response()
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Each object has the same field names as set in the IDL file</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">These types can also be constructed by providing keyword arguments to the constructor</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Which in turn contains the field names of the type</span>
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>It is also possible to make <a href="../ros2/colcon.html#custom_interfaces">Custom Interfaces</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-names" class="outline-2">
+<h2 id="names">Naming in ROS</h2>
+<div class="outline-text-2" id="text-names">
+</div>
+</div>
+<div id="outline-container-orgee846c5" class="outline-2">
+<h2 id="orgee846c5">Understanding Names</h2>
+<div class="outline-text-2" id="text-orgee846c5">
+<ol class="org-ol">
+<li>Every item in the ROS Computation Graph has a <a href="https://wiki.ros.org/Names">Graph Resource Name</a>
+<ul class="org-ul">
+<li>The link is for ROS 1 as I have not yet found equivalent documentation for ROS 2 and it is substantially similar.</li>
+<li>When using <code>rclpy</code> functions to create nodes, subscribers, clients, and services, each of these entities is provided a name as one of the arguments.</li>
+<li>The name is used by <code>rclpy</code> to register the python object with the appropriate entity in the ROS graph (e.g., publisher/subscriber with a topic).</li>
+<li>Names are best thought of as placeholder default values: they can be changed by users when the node runs.</li>
+</ul></li>
+<li>Every ROS 2 node exists within a =/namespace/
+<ul class="org-ul">
+<li>Namespaces are like directories on Linux: they start from the global namespace (called <code>/</code>) and can be nested (e.g., <code>/ns1/ns2/ns3</code>).</li>
+</ul></li>
+<li>Just like paths on Linux, ROS names can be relative or absolute
+<ul class="org-ul">
+<li>An absolute name is any name that starts with a <code>/</code></li>
+<li>A <i>relative name</i> is any name that does not start with a <code>/</code>. This name will be interpreted relative to a context
+<ul class="org-ul">
+<li>For example, topics that do not start with a <code>/</code> become relative to the namespace the node is in.</li>
+</ul></li>
+<li>The <i>base name</i> is the name of the entity without any preceding namespaces.</li>
+<li>A <code>~</code> symbol makes a name <code>private</code>.
+<ul class="org-ul">
+<li>The <code>~</code> gets expanded to the full absolute name of the node (including the base name).</li>
+<li>Private is enforced by convention and just means that the node namespace and name are prepended.</li>
+</ul></li>
+<li>Suppose we have a node called <code>/this/is/mynode</code>:
+<ul class="org-ul">
+<li>The base name of the node is <code>mynode</code></li>
+</ul></li>
+</ul></li>
+<li>Names should start with a lower case letter, and then can contain letters, or underscores.</li>
+</ol>
+</div>
+<div id="outline-container-orgfa7303d" class="outline-3">
+<h3 id="orgfa7303d">Example</h3>
+<div class="outline-text-3" id="text-orgfa7303d">
+<p>
+Suppose we have a node called <code>/this/is/mynode</code>
+</p>
+<ol class="org-ol">
+<li>The base name of the node is <code>mynode</code>.</li>
+<li>The namespace of the node is <code>/this/is</code>.</li>
+<li>The <code>is</code> namespace is nested under the <code>/this</code> namespace</li>
+</ol>
+
+<p>
+Suppose <code>/this/is/mynode</code> creates a publisher on the <code>hello</code> topic and a subscriber on the <code>/foo/data</code> topic and a service server called <code>~/help</code>:
+</p>
+<ol class="org-ol">
+<li>The node (by default) will publish to <code>/this/is/hello</code>.</li>
+<li>The node (by default) will subscribe to <code>/foo/data</code>.</li>
+<li>The node will offer a service (by default) on <code>/this/is/mynode/help</code>.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org30a6b4e" class="outline-3">
+<h3 id="org30a6b4e">Comparison with ROS 1</h3>
+<div class="outline-text-3" id="text-org30a6b4e">
+<ol class="org-ol">
+<li>In ROS 1, parameters were global and followed the same naming conventions as other entities.</li>
+<li>In ROS 2, parameters are always associated with a specific node and within that node can optionally have their own <a href="https://docs.ros.org/en/jazzy/Concepts/Basic/About-Parameters.html">parameter namespace</a>.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-remapping" class="outline-3">
+<h3 id="remapping">Manipulating Names</h3>
+<div class="outline-text-3" id="text-remapping">
+<ol class="org-ol">
+<li>Resources can be <i>remapped</i> to any name that you want using <a href="https://docs.ros.org/en/jazzy/How-To-Guides/Node-arguments.html">Node Arguments</a>
+<ul class="org-ul">
+<li>This behavior is like a <code>mv</code> operation in the Linux filesystem</li>
+<li>It enables multiple copies of a node to run with different names for the topics they subscribe to</li>
+<li>Any name referred to in the node (including absolute and private names) can be remapped.</li>
+<li>To remap a specific name use <code>ros2 run package node --ros-args -r old_name:=new_name</code>
+<ul class="org-ul">
+<li>Multiple <code>-r</code> arguments can be passed after <code>--ros-args</code> to rename multiple entities</li>
+</ul></li>
+<li>The node can be renamed using <code>-r __node:=new_node_name</code> in the above</li>
+<li>The namespace can be changed using <code>-r __ns:=/new_namespace</code>. The <code>namespace</code> must start with a <code>/</code></li>
+</ul></li>
+
+<li>When the node's namespace is changed, all entities (e.g., topics) that used relative names will be moved relative to the provided namespace
+<ul class="org-ul">
+<li>This behavior makes it easy to remap groups of related names</li>
+<li>Namespaces also allow running multiple groups of nodes simultaneously with the same topics</li>
+<li>For example, the <code>turtlesim_node</code> supports multiple turtles, each controlled via the same topics. They do not interfere because each turtle is in its own namespace.</li>
+</ul></li>
+<li>In practice, ROS nodes should be written with <code>remapping</code> in mind:
+<ul class="org-ul">
+<li>Generally, use simple, base names for ROS nodes, the services they offer, and the topics they publish and subscribe to (so do not include the leading <code>/</code>.
+<ul class="org-ul">
+<li>This way, your node can easily be run under a different namespace without needing to remap each topic individually</li>
+<li>Using absolute node names makes your node less flexible and harder to use.</li>
+</ul></li>
+<li>Users of the node then remap these topics and services as needed</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org13720e2" class="outline-3">
+<h3 id="org13720e2">A Node's ROS API</h3>
+<div class="outline-text-3" id="text-org13720e2">
+<ul class="org-ul">
+<li>The publishers, subscribers, services, parameters, and actions a node declares comprise it's ROS API
+<ul class="org-ul">
+<li>They determine how other nodes interact with your node, on a ROS level</li>
+</ul></li>
+<li>These ROS inter-process communication mechanisms are how you link nodes together, much like
+how modules, functions, and classes are used from within python.</li>
+<li>These items should be documented in a docstring at the top of the file that defines your node.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

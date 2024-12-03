@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-11-25 Mon 23:02 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ROS and ROS2 Lecture Notes</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">ROS and ROS2 Lecture Notes</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgc84de41">Description</a></li>
+<li><a href="#org1967459">Schedule</a></li>
+<li><a href="#orgf6abe69">ROS 2</a>
+<ul>
+<li><a href="#org42c155c">Basics</a></li>
+<li><a href="#orge22f8b1">Modeling Robots</a></li>
+<li><a href="#org6850d56">Manipulation</a></li>
+<li><a href="#org613bb5b">Sensing</a></li>
+<li><a href="#orgbc5bb04">Hardware</a></li>
+<li><a href="#org2532dc4">Low-Level</a></li>
+<li><a href="#org8ab8123">Activities</a></li>
+<li><a href="#orgb4c18f6">Homework</a></li>
+</ul>
+</li>
+<li><a href="#org06f7e0e">ROS 1</a>
+<ul>
+<li><a href="#org8aed4a3">ROS Basics</a></li>
+<li><a href="#org2b8b6c0">Modeling Robots</a></li>
+<li><a href="#orgb7279e0">Manipulation</a></li>
+<li><a href="#org63334ef">Sensing</a></li>
+<li><a href="#org388e289">Hardware</a></li>
+<li><a href="#orgafbe48d">Activities</a></li>
+<li><a href="#org471e7c8">Homework</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-orgc84de41" class="outline-2">
+<h2 id="orgc84de41">Description</h2>
+<div class="outline-text-2" id="text-orgc84de41">
+<p>
+Welcome to the lecture notes for ME495: Embedded Systems in Robotics, a core course for Northwestern University's
+<a href="https://www.mccormick.northwestern.edu/robotics/">Master of Science in Robotics Program</a>!
+</p>
+
+<p>
+This project-based course provides experience with a variety of software tools
+and concepts useful for a robotics engineer working with practical embedded systems. The Robot Operating System
+(ROS) will be used as an example framework, and learning ROS will be a primary goal of the course.
+By the end of the course, student teams will have completed a robotics project using a real robot.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1967459" class="outline-2">
+<h2 id="org1967459">Schedule</h2>
+<div class="outline-text-2" id="text-org1967459">
+<p>
+<a href="./schedule#2024">2024 Schedule</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf6abe69" class="outline-2">
+<h2 id="orgf6abe69">ROS 2</h2>
+<div class="outline-text-2" id="text-orgf6abe69">
+</div>
+<div id="outline-container-org42c155c" class="outline-3">
+<h3 id="org42c155c">Basics</h3>
+<div class="outline-text-3" id="text-org42c155c">
+<ul class="org-ul">
+<li><a href="./ros2/preliminaries.html">Preliminaries</a></li>
+<li><a href="./ros2/ros_history.html">About ROS</a></li>
+<li><a href="./ros2/basics.html">Basics</a></li>
+<li><a href="./ros2/colcon.html">Workspaces and Packages</a></li>
+<li><a href="./ros2/ros_api.html">The ROS API and Python</a></li>
+<li><a href="./ros2/launch.html">Launchfiles</a></li>
+<li><a href="./ros2/spin.html">Spinning and Asynchronicity</a></li>
+<li><a href="./ros2/design_doc_test.html">Testing and Documentation</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge22f8b1" class="outline-3">
+<h3 id="orge22f8b1">Modeling Robots</h3>
+<div class="outline-text-3" id="text-orge22f8b1">
+<ul class="org-ul">
+<li><a href="./ros2/tf.html">The Tf Tree</a></li>
+<li><a href="./ros2/modeling.html">Modeling Robots</a></li>
+<li><a href="./ros2/visualization.html">Visualization</a></li>
+<li><a href="./ros2/simulation.html">Simulation</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org6850d56" class="outline-3">
+<h3 id="org6850d56">Manipulation</h3>
+<div class="outline-text-3" id="text-org6850d56">
+<ul class="org-ul">
+<li><a href="./ros2/moveit.html">MoveIt 2</a></li>
+<li><a href="./ros2/control.html">ROS 2 Control</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org613bb5b" class="outline-3">
+<h3 id="org613bb5b">Sensing</h3>
+<div class="outline-text-3" id="text-org613bb5b">
+<ul class="org-ul">
+<li><a href="./ros2/computer_vision.html">Computer Vision</a></li>
+<li><a href="./ros2/3dsensing.html">3D Sensing</a></li>
+<li><a href="./ros2/navigation.html">Navigation</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgbc5bb04" class="outline-3">
+<h3 id="orgbc5bb04">Hardware</h3>
+<div class="outline-text-3" id="text-orgbc5bb04">
+<ul class="org-ul">
+<li><a href="./ros2/pincherX100.html">PincherX 100</a></li>
+<li><a href="./ros2/franka.html">Emika Franka Panda</a></li>
+<li><a href="./ros2/realsense.html">Realsense</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org2532dc4" class="outline-3">
+<h3 id="org2532dc4">Low-Level</h3>
+<div class="outline-text-3" id="text-org2532dc4">
+<ul class="org-ul">
+<li><a href="./ros2/dds.html">Data Distribution Service (DDS)</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org8ab8123" class="outline-3">
+<h3 id="org8ab8123">Activities</h3>
+<div class="outline-text-3" id="text-org8ab8123">
+<ul class="org-ul">
+<li><a href="./ros2/activity/pubsub_activity.html">Publisher/Subscriber Activity</a></li>
+<li><a href="https://github.com/m-elwin/async_experiments">Asynchronous Clients</a></li>
+<li><a href="./ros2/activity/tf_activity.html">TF Activity</a></li>
+<li><a href="./ros2/activity/urdf_activity.html">URDF Activity</a></li>
+<li><a href="./ros2/activity/moveit_activity.html">MoveIt Exploration</a></li>
+<li><a href="./ros2/activity/apriltag_activity.html">AprilTag Activity</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgb4c18f6" class="outline-3">
+<h3 id="orgb4c18f6">Homework</h3>
+<div class="outline-text-3" id="text-orgb4c18f6">
+<ul class="org-ul">
+<li><a href="./ros2/homework/guidelines.html">Guidelines</a></li>
+<li><a href="./ros2/homework/homework1.html">Homework 1</a></li>
+<li><a href="./ros2/homework/homework2.html">Homework 2</a></li>
+<li><a href="./ros2/homework/homework3.html">Homework 3</a></li>
+<li><a href="./ros2/homework/homework4.html">Homework 4</a></li>
+<li><a href="./ros2/final_project.html">Final Project</a></li>
+</ul>
+</div>
+</div>
+</div>
+<details id="org06f7e0e"><summary class="header-2">ROS 1</summary>
+<div class="outline-text-2" id="text-org06f7e0e">
+<p>
+These notes are from the ROS 1 Version of the course and they remain here for reference.
+</p>
+</div>
+<div id="outline-container-org8aed4a3" class="outline-3">
+<h3 id="org8aed4a3">ROS Basics</h3>
+<div class="outline-text-3" id="text-org8aed4a3">
+<ul class="org-ul">
+<li><a href="./ros1/lecture00_preliminaries.html">Preliminaries</a></li>
+<li><a href="./ros1/lecture01_basics.html">ROS Basics</a></li>
+<li><a href="./ros1/lecture02_catkin.html">Catkin and Packages</a></li>
+<li><a href="./ros1/lecture03_rospy_names.html">Rospy and Names</a></li>
+<li><a href="./ros1/lecture04_launch.html">Launchfiles</a></li>
+<li><a href="./ros1/lecture08_threads.html">Threads</a></li>
+<li><a href="./ros1/design_doc_test.html">Design, Documentation, and Testing</a></li>
+<li><a href="./ros1/glossary.html">ROS Glossary</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org2b8b6c0" class="outline-3">
+<h3 id="org2b8b6c0">Modeling Robots</h3>
+<div class="outline-text-3" id="text-org2b8b6c0">
+<ul class="org-ul">
+<li><a href="./ros1/lecture05_tf.html">The Tf Tree</a></li>
+<li><a href="./ros1/lecture06_modeling.html">Robot Modeling</a></li>
+<li><a href="./ros1/lecture07_visual.html">Visualization</a></li>
+<li><a href="./ros1/lecture09_gazebo.html">Simulation</a></li>
+<li><a href="./ros1/lecture10_sdf_gazebo.html">Gazebo SDF</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgb7279e0" class="outline-3">
+<h3 id="orgb7279e0">Manipulation</h3>
+<div class="outline-text-3" id="text-orgb7279e0">
+<ul class="org-ul">
+<li><a href="./ros1/lecture18_moveit.html">MoveIt!</a></li>
+<li><a href="./ros1/lecture17_advanced_ros.html">Advanced ROS</a></li>
+<li><a href="./ros1/ros_control.html">ROS Control</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org63334ef" class="outline-3">
+<h3 id="org63334ef">Sensing</h3>
+<div class="outline-text-3" id="text-org63334ef">
+<ul class="org-ul">
+<li><a href="./ros1/lecture11_images.html">Image Processing</a></li>
+<li><a href="./ros1/lecture15_pointclouds.html">Point Clouds</a></li>
+<li><a href="./ros1/realsense.html">Realsense</a></li>
+<li><a href="./ros1/lecture12_navigation.html">Navigation</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org388e289" class="outline-3">
+<h3 id="org388e289">Hardware</h3>
+<div class="outline-text-3" id="text-org388e289">
+<ul class="org-ul">
+<li><a href="./ros1/turtlebot3.html">Turtlebot3 Setup</a></li>
+<li><a href="./ros1/pincherX100.html">PincherX 100</a></li>
+<li><a href="./ros1/franka.html">Emika Franka Panda</a></li>
+<li><a href="./ros1/adroit.html">HDT Adroit</a></li>
+<li><a href="./ros1/lecture13_rethink.html">Rethink Robots</a></li>
+<li><a href="./ros1/lecture14_baxter_explore.html">Exploring Baxter</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgafbe48d" class="outline-3">
+<h3 id="orgafbe48d">Activities</h3>
+<div class="outline-text-3" id="text-orgafbe48d">
+<ul class="org-ul">
+<li><a href="./ros1/activity01.html">Basic ROS Activity</a></li>
+<li><a href="./ros1/activity02.html">Names and Launchfiles</a></li>
+<li><a href="https://github.com/m-elwin/me495_threads">Exploring Threads</a></li>
+<li><a href="https://github.com/m-elwin/me495_practices">Unit Testing and Documentation Example</a></li>
+<li><a href="./ros1/tf_activity.html">TF Activity</a></li>
+<li><a href="./ros1/urdf_activity.html">URDF Activity</a></li>
+<li><a href="./ros1/gazebo_activity.html">Gazebo Activity</a></li>
+<li><a href="./ros1/activity_moveit.html">MoveIt! Activity</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org471e7c8" class="outline-3">
+<h3 id="org471e7c8">Homework</h3>
+<div class="outline-text-3" id="text-org471e7c8">
+<ol class="org-ol">
+<li><a href="./ros1/homework/guidelines.html">Guidelines</a> These apply to every homework</li>
+<li><a href="./ros1/homework/homework01.html">Homework 1</a></li>
+<li><a href="./ros1/homework/homework02.html">Homework 2</a></li>
+<li><a href="./ros1/homework/homework03.html">Homework 3</a></li>
+<li><a href="./ros1/homework/homework04.html">Homework 4</a></li>
+<li><a href="./ros1/homework/final_project_2021.html">Final Project</a></li>
+</ol>
+</div>
+</div>
+</details>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

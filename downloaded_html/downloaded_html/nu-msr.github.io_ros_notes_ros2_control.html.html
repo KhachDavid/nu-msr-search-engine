@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-11-25 Mon 23:03 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ROS Control</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">ROS Control</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgec3e769">Introduction</a></li>
+<li><a href="#org04d8a83">Basic Architecture</a>
+<ul>
+<li><a href="#orgd19c028">Hardware Interface</a></li>
+<li><a href="#org6f167e9">Controllers</a></li>
+<li><a href="#org6db6830">Controller Manager</a></li>
+<li><a href="#org8b9a400">Resource Manager</a></li>
+<li><a href="#orge21b967">Hardware Description</a></li>
+</ul>
+</li>
+<li><a href="#org3748821">Practical Guide to Using ROS 2 Control</a></li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-orgec3e769" class="outline-2">
+<h2 id="orgec3e769">Introduction</h2>
+<div class="outline-text-2" id="text-orgec3e769">
+<p>
+The <a href="https://control.ros.org/master/index.html">ROS 2 Control</a> package is a package designed to abstract away robot hardware
+and allow ROS to control many different robots in a uniform manner.
+It is also designed to manage the various control modes (e.g., torque, position) that may be used to control a signal robot.
+</p>
+
+<p>
+The ROS control package, when used in conjunction with the <a href="https://wiki.linuxfoundation.org/realtime/start">Real Time Linux</a> kernel, enables
+enforcing soft real-time constraints on the control loops.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org04d8a83" class="outline-2">
+<h2 id="org04d8a83">Basic Architecture</h2>
+<div class="outline-text-2" id="text-org04d8a83">
+</div>
+<div id="outline-container-orgd19c028" class="outline-3">
+<h3 id="orgd19c028">Hardware Interface</h3>
+<div class="outline-text-3" id="text-orgd19c028">
+<ol class="org-ol">
+<li>Robots often have low-level embedded systems running on microcontrollers that are responsible for:
+<ul class="org-ul">
+<li>Converting software signals into the voltages (e.g., PWM signals) that actually control the motors.</li>
+<li>Converting voltages from sensors into software signals (e.g, encoders)</li>
+</ul></li>
+<li>Robot manufactures implement communication between the PC and these microcontrollers using a standardized class interface:
+<ul class="org-ul">
+<li>On one end is the custom per-robot code that communicates with the hardware: this layer is different for different robot</li>
+<li>On the other end is the common code used by all ROS controllers: this is the same for each robot.</li>
+<li>Thus, the hardware interface translates standard ROS interface commands to hardware-specific commands.</li>
+</ul></li>
+<li>The embedded systems in hardware may provide different control modes, for example torque or position control.
+<ul class="org-ul">
+<li>Each of these control modes can have a separate ROS hardware interface</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org6f167e9" class="outline-3">
+<h3 id="org6f167e9">Controllers</h3>
+<div class="outline-text-3" id="text-org6f167e9">
+<ol class="org-ol">
+<li>Higher-level controllers can be implemented in ROS directly</li>
+<li>These controllers interface with the actual robot via the Hardware Interface
+<ul class="org-ul">
+<li>Controllers can be quite simple: for example, if the embedded hardware implements position control directly, then
+a position controller can pass through position commands to this hardware interface</li>
+<li>There are also standardized controllers that implement PID control loops.
+For example, if the hardware interface provides a torque-based Hardware Interface, the PID control (running in ROS) can take in position commands and sensor measurements
+and output a torque control signal.</li>
+<li>Higher level controls are possible: for example, a trajectory-following controller can use lower-level controllers (such as position or velocity)
+to make the robot follow a trajectory.</li>
+</ul></li>
+<li>The <a href="https://github.com/ros-controls/ros2_controllers">ros2_controllers</a> package contains many pre-built controllers.
+<ul class="org-ul">
+<li>Some are somewhat higher level, such as controllers for diff-drive robots.</li>
+</ul></li>
+<li>By following the same interface conventions you can also write your own controller (in C++).</li>
+
+<li><a href="https://control.ros.org/master/doc/ros2_controllers/doc/controllers_index.html">Controllers</a> are classified/grouped by their output type (and hence what Hardware Interface they need)
+<ul class="org-ul">
+<li>Effort controllers output effort (e.g., torque) to the robot
+<ul class="org-ul">
+<li>Can use to control torque directly</li>
+<li>A joint_position effort controller can take a position input, and use a PID loop to output torque</li>
+<li>A joint_velocity effort controller can take a position input, and use a PID loop to output torque</li>
+</ul></li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org6db6830" class="outline-3">
+<h3 id="org6db6830">Controller Manager</h3>
+<div class="outline-text-3" id="text-org6db6830">
+<ol class="org-ol">
+<li>There are many different controllers that can be used for a single robot</li>
+<li>The <a href="https://control.ros.org/master/doc/getting_started/getting_started.html#controller-manager">Controller Manager</a> enables users to load, unload, start, and stop controllers</li>
+<li>The controller manager package provides services and a node to interact with controllers, which can be accessed via the <code>ros2 control</code> command-line tool.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org8b9a400" class="outline-3">
+<h3 id="org8b9a400">Resource Manager</h3>
+<div class="outline-text-3" id="text-org8b9a400">
+<ol class="org-ol">
+<li>ROS Control provides access to hardware <i>resources</i> which are managed by the <a href="https://control.ros.org/master/doc/getting_started/getting_started.html#resource-manager">Resource Manager</a></li>
+<li>The resource manager enables reading and writing to various hardware components</li>
+<li>The resource manager is currently implemented as part of the Controller Manager Node</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orge21b967" class="outline-3">
+<h3 id="orge21b967">Hardware Description</h3>
+<div class="outline-text-3" id="text-orge21b967">
+<ol class="org-ol">
+<li>The philosophy of the ros2 control package is that the URDF should be a complete description of the robot</li>
+<li>Therefore, much of the ROS 2 control package requires setup using extensions to existing URDF tags, under <code>&lt;ros2_control&gt;</code></li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3748821" class="outline-2">
+<h2 id="org3748821">Practical Guide to Using ROS 2 Control</h2>
+<div class="outline-text-2" id="text-org3748821">
+<p>
+The <a href="https://control.ros.org/master/doc/getting_started/getting_started.html">ROS 2 Control Getting Started</a> documentation provides an overview of the package.
+</p>
+
+<ol class="org-ol">
+<li>The ROS 2 control package introduces terminology that for its various parts that are somewhat confusing an inconsistent due to the many layers of abstraction in this package.
+<ul class="org-ul">
+<li>The language in this section attempts to remain consistent and keep The use of the terms internally consistent and consistent with the <code>ros2 control</code> command line interface.</li>
+</ul></li>
+
+<li>ROS 2 Hardware Resources (which represent a collection of all things needed to send and recieve low-level commands to/from a robot) are configured in the URDF file
+<ul class="org-ul">
+<li>The <code>&lt;ros2_control name</code>"NameOfHardwareComponent" type="system|actuator|sensor"&gt;= defines a hardware component, which consists of the following
+<ul class="org-ul">
+<li>A hardware plugin. The plugin is implemented in C++ and exported as a plugin via an <code>xml</code> file</li>
+<li>Parameters can be passed to the hardware plugin to change it's behavior.</li>
+</ul></li>
+<li>Hardware Interfaces (either <code>command_interface</code> (read/write) or <code>state_interface</code> (read only)= are associated with either
+<ul class="org-ul">
+<li>A <code>&lt;joint&gt;</code> on the robot. This is a 1-DOF item that can be written to (e.g., given a command) and read from and must be associated with a joint in the URDF</li>
+<li>A <code>&lt;sensor&gt;</code> on the robot, which can be read from</li>
+<li>A <code>&lt;gpio&gt;</code> which is a generic read/write interface that need not be associated with a joint</li>
+</ul></li>
+</ul></li>
+<li>Each Hardware Component represents a set of interfaces that can be used to write to and read from the hardware.</li>
+
+<li>ROS 2 Controllers. These controllers are managed by the Controller Manager
+<ul class="org-ul">
+<li>Controllers are what actually run control loops (with real time deadlines if using the Real Time Linux Kernel)</li>
+<li>Controllers take inputs in the form of ROS messages and produce outputs that are sent to the hardware via Hardware Components (as loaded by the resource manager).</li>
+<li>Which controllers are loaded by default are configured in <code>.yaml</code> files</li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

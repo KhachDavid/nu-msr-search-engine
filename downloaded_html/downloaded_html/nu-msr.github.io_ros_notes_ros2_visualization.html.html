@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-11-25 Mon 23:03 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Visualization in ROS</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">Visualization in ROS</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgb1a5981">Overview</a></li>
+<li><a href="#orgc0c4995">Rviz2</a>
+<ul>
+<li><a href="#org4b61358">Paths</a></li>
+<li><a href="#orge82d85a">Visualization Messages</a></li>
+<li><a href="#org990d22d">Markers</a></li>
+<li><a href="#org16214be">MarkerArray</a>
+<ul>
+<li><a href="#org22f811b">Static Markers</a></li>
+</ul>
+</li>
+<li><a href="#orgb402038">InteractiveMarkers</a></li>
+<li><a href="#org17258ac">Plugins</a></li>
+</ul>
+</li>
+<li><a href="#orgf6dbc9b">rqt</a>
+<ul>
+<li><a href="#org9b26bb6">rqt_plot</a></li>
+<li><a href="#org6a6730c">Plot Juggler</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-orgb1a5981" class="outline-2">
+<h2 id="orgb1a5981">Overview</h2>
+<div class="outline-text-2" id="text-orgb1a5981">
+<ul class="org-ul">
+<li>ROS has several tools for interacting graphically with robotic systems.
+<ul class="org-ul">
+<li><a href="https://github.com/ros2/rviz">rviz2</a> is the primary tool for visualizing your robot and its sensor data in 3D</li>
+<li><a href="https://wiki.ros.org/rqt">rqt</a> is for creating a graphical user interface (GUI) in ROS.</li>
+</ul></li>
+<li>Much of this information has not been documented for ROS 2 but it is substantially similar to ROS 1, therefore these notes often refer to ROS 1 documentation.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgc0c4995" class="outline-2">
+<h2 id="orgc0c4995">Rviz2</h2>
+<div class="outline-text-2" id="text-orgc0c4995">
+<ul class="org-ul">
+<li><code>rviz2</code> is used to visualize data in ROS in a 3D environment</li>
+<li>In <code>rviz2</code> you add <i>Display Types</i> to the display and connect them 
+to information that <code>rviz2</code> receives via ROS messages and parameters.
+<ul class="org-ul">
+<li>There are many built in <i>Display Types</i>, documented in <a href="https://github.com/ros2/rviz/blob/rolling/docs/FEATURES.md">FEATURES.md</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="outline-container-org4b61358" class="outline-3">
+<h3 id="org4b61358">Paths</h3>
+<div class="outline-text-3" id="text-org4b61358">
+<ul class="org-ul">
+<li>Paths allow you to visualize a series of points that have been visited over time</li>
+<li>These are visualized with the <a href="http://wiki.ros.org/rviz2/DisplayTypes/Path">Path</a> datatype using <a href="http://docs.ros.org/api/nav_msgs/html/msg/Path.html">nav_msgs/Path</a> messages</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orge82d85a" class="outline-3">
+<h3 id="orge82d85a">Visualization Messages</h3>
+<div class="outline-text-3" id="text-orge82d85a">
+<ul class="org-ul">
+<li>The <a href="https://index.ros.org/p/visualization_msgs/github-ros2-common_interfaces/#jazzy">visualization_msgs</a> package contains
+messages for displaying visual primitives in <code>rviz2</code> using some Display Types in Rviz2</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org990d22d" class="outline-3">
+<h3 id="org990d22d">Markers</h3>
+<div class="outline-text-3" id="text-org990d22d">
+<ul class="org-ul">
+<li>Markers are the simplest visualization message</li>
+<li>They let you draw basic shapes at specified locations
+<ul class="org-ul">
+<li>For example, spheres, cubes, cylinders, lines</li>
+</ul></li>
+<li>Markers are drawn by publishing <a href="http://docs.ros.org/en/jazzy/p/visualization_msgs/interfaces/msg/Marker.html">visualization_msgs/msg/Marker</a> messages.
+<ul class="org-ul">
+<li>By default, the Marker display type listens on the <code>visualization_marker</code> topic, but this can be changed in the rviz2 gui or with remapping.</li>
+<li>Markers have a <code>header</code> field that requires the time.  Using <code>node.get_clock().now()</code> for this ensures the Marker will be drawn</li>
+<li>Be sure to set the alpha (<code>.a</code>) field to be non-zero (e.g. 1) so that the marker is not drawn transparently</li>
+</ul></li>
+<li>These C++ tutorials mostly apply to python as well since they are simply setting values in the marker message topic
+<ul class="org-ul">
+<li><a href="http://wiki.ros.org/rviz/Tutorials/Markers%3A%20Basic%20Shapes">Basic shapes tutorial</a></li>
+<li><a href="http://wiki.ros.org/rviz/Tutorials/Markers%3A%20Points%20and%20Lines">Points and lines tutorial</a></li>
+</ul></li>
+<li>Some important fields are
+<ul class="org-ul">
+<li><code>header</code> contains the time at which the marker comes into existence and the frame used to interpret any coordinates</li>
+<li><code>ns</code> and <code>id</code> are used to identify the marker. For a given namespace <code>ns</code> each marker has an id. 
+If you send a marker message with an <code>id</code> and <code>ns</code> that already exists, you modify the existing marker</li>
+<li><code>type</code> What the shape of the marker is: =visualization_msgs.Marker.{ARROW | CUBE | SPHERE | CYLINDER &#x2026;}</li>
+<li><code>action</code> Lets you either <code>visualization_msgs.Marker.ADD</code>, <code>visualization_msgs.Marker.DELETE</code>, or <code>visualization_msgs.Marker.DELETEALL</code> the markers</li>
+<li><code>pose</code> this is the 3D pose of the object, used to set its position and orientation relative to <code>header.frame_id</code></li>
+<li><code>scale</code> used to set the size of the object.  By default the markers are 1x1x1 meter.</li>
+<li><code>color</code> RGBA (red, green, blue, alpha) color (0 - 1). A common error is forgetting to set the alpha to a non-zero value, otherwise the marker is completely transparent</li>
+<li><code>lifetime</code> How long to display the marker before it disappears.  Set to 0 for it to last forever (well at least as long as Rviz2 remains open!)</li>
+<li><code>frame_locked</code> - Controls behavior of the marker when it's parent frame moves. If this is true then the marker will always be at the same position
+relative to its parent frame, even if that frame moves after the marker is drawn</li>
+<li><code>points</code> and <code>colors</code>, <code>text</code>, <code>mesh_resource</code> are used for some marker types</li>
+</ul></li>
+<li>An example of markers is here <a href="https://github.com/m-elwin/me495_markers">https://github.com/m-elwin/me495_markers</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org16214be" class="outline-3">
+<h3 id="org16214be">MarkerArray</h3>
+<div class="outline-text-3" id="text-org16214be">
+<ul class="org-ul">
+<li>The <a href="http://docs.ros.org/melodic/api/visualization_msgs/html/msg/MarkerArray.html">MarkerArray</a> message consists of an array of Marker messages</li>
+<li>This message type lets you publish multiple markers with a single message</li>
+<li><code>rviz2</code> has a DisplayType that can subscribe to a <code>MarkerArray</code> message and visualize all markers in the array</li>
+<li>If you are sending many markers, it is more efficient to send them as an array</li>
+</ul>
+</div>
+
+<div id="outline-container-org22f811b" class="outline-4">
+<h4 id="org22f811b">Static Markers</h4>
+<div class="outline-text-4" id="text-org22f811b">
+<ol class="org-ol">
+<li>Some markers visualize something that does not move and therefore (in an ideal world) would only be published one time
+<ul class="org-ul">
+<li>These markers could all be published in a single MarkerArray message, for example</li>
+</ul></li>
+<li>However, if <code>rviz</code> opens after the markers are published, it will not have received the message and will not display the markers
+<ul class="org-ul">
+<li>It is generally difficult and not a good idea to require one node to start before another in ROS</li>
+</ul></li>
+<li>ROS 1 had a mechanism called a "latching publisher" to help with this issue:
+<ul class="org-ul">
+<li>The latching publisher remembers the last message it published</li>
+<li>When a new subscriber connects, that message is sent to the new subscriber</li>
+<li>For example, if <code>rviz</code> launched after the message is published, it would still receive the message due to the latching</li>
+</ul></li>
+<li>In ROS 2 the <a href="https://docs.ros.org/en/jazzy/Concepts/Intermediate/About-Quality-of-Service-Settings.html">Quality of Service</a> (QoS) settings enable emulating the behavior similar to ROS 1
+<ul class="org-ul">
+<li>The publisher on the topic should have it's "Durability" set to <code>TRANSIENT_LOCAL</code></li>
+<li>The subscriber (e.g., the Marker Display in <code>rviz</code>) should also have it's "Durability" set to <code>TRANSIENT_LOCAL</code></li>
+<li>When the subscriber connects to the publisher it will receive the last message published</li>
+<li>The main difference from ROS 1 is that both publisher and subscriber must have matching settings: see <a href="https://github.com/ros2/ros2/issues/464">ros2 Issue on latching</a></li>
+</ul></li>
+<li><p>
+To set the QoS setting for Durability in python:
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">from</span> rclpy.qos <span class="org-keyword">import</span> QoSProfile, QoSDurabilityPolicy
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">The depth here is what you typically pass in as the 3rd argument to create_publisher</span>
+<span class="org-variable-name">qos</span> <span class="org-operator">=</span> QoSProfile(depth<span class="org-operator">=</span>10, durability<span class="org-operator">=</span>QoSDurabilityPolicy.TRANSIENT_LOCAL)
+create_publisher(Type, <span class="org-string">"topic_name"</span>, qos)
+</pre>
+</div></li>
+<li>In <code>rviz</code> the Durability policy is selected from a list of options for the marker display widget</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb402038" class="outline-3">
+<h3 id="orgb402038">InteractiveMarkers</h3>
+<div class="outline-text-3" id="text-orgb402038">
+<ul class="org-ul">
+<li><a href="http://wiki.ros.org/interactive_markers">Interactive Markers</a> lets users manipulate markers
+inside Rviz2.  Your nodes can then respond to the actions of the user.</li>
+<li>To use interactive markers, you create an <code>InteractiveMarkerServer</code>
+<ul class="org-ul">
+<li>This server creates the necessary publishers and subscribers</li>
+<li>You then provide a callback which gets called whenever the user manipulates the marker in rviz2</li>
+<li>You can call functions to change the marker in rviz2</li>
+</ul></li>
+<li>To learn interactive markers, you should go through at least the first two of these tutorials:
+<ul class="org-ul">
+<li><a href="https://wiki.ros.org/rviz2/Tutorials/Interactive%20Markers%3A%20Getting%20Started">Getting Started with Interactive Markers</a></li>
+<li><a href="https://wiki.ros.org/rviz2/Tutorials/Interactive%20Markers%3A%20Writing%20a%20Simple%20Interactive%20Marker%20Server">Writing a Simple Interactive Marker Server</a></li>
+<li><a href="http://wiki.ros.org/rviz2/Tutorials/Interactive%20Markers%3A%20Basic%20Controls">Basic Controls</a></li>
+</ul></li>
+<li>An additional example of using interactive markers is <a href="https://github.com/m-elwin/me495_markers">here</a></li>
+</ul>
+</div>
+</div>
+<details id="org17258ac"><summary class="header-3">Plugins</summary>
+<div class="outline-text-3" id="text-org17258ac">
+<ul class="org-ul">
+<li>Using markers enables you to create complex visualizations by building ROS messages</li>
+<li>However, marker messages are quite large and using many of them can become slow</li>
+<li>Fortunately, <code>rviz2</code> is modular: each of the built-in DisplayTypes is actually a plugin.</li>
+<li>You can write your own plugins in C++ that contain display logic for your own message types
+<ul class="org-ul">
+<li><a href="http://docs.ros.org/melodic/api/rviz2_plugin_tutorials/html/display_plugin_tutorial.html">Display Plugin Tutorial</a></li>
+</ul></li>
+<li>Plugins can also add panels in <code>rviz2</code> (<a href="http://docs.ros.org/melodic/api/rviz2_plugin_tutorials/html/panel_plugin_tutorial.html">Panels Tutorial</a>)</li>
+<li>Plugins can also add tools that change what the mouse does in <code>rviz2</code> (<a href="http://docs.ros.org/melodic/api/rviz2_plugin_tutorials/html/tool_plugin_tutorial.html">Tools Tutorial</a>).</li>
+</ul>
+</div>
+</details>
+</div>
+
+<div id="outline-container-orgf6dbc9b" class="outline-2">
+<h2 id="orgf6dbc9b">rqt</h2>
+<div class="outline-text-2" id="text-orgf6dbc9b">
+<ul class="org-ul">
+<li><a href="https://www.qt.io">Qt</a> is a library for creating graphical user interfaces</li>
+<li><a href="https://docs.ros.org/en/humble/Concepts/About-RQt.html">rqt</a> is a ROS package that enables you to create GUIs using ROS nodes</li>
+<li>If you create a widget in <code>Qt</code> you can wrap that widget with <code>rqt</code> and use it as part of the ROS user interface</li>
+<li>Essentially, <code>rqt</code> widgets can be docked and split in a parent window.  These configurations can be saved
+so that others can reproduce your view</li>
+<li>All built-in rqt plugins can be run with <code>ros2 run</code>
+<ul class="org-ul">
+<li>Type <code>ros2 run rqt_</code> then hit tab to see a list of packages.</li>
+<li>Some of these tools are so useful and popular they have there own shortcuts on the path
+<ul class="org-ul">
+<li>Type <code>rqt_</code> then tab to see these. For example</li>
+<li>rqt_graph - seeing how nodes are connected to each other via topics</li>
+<li>rqt_console - reading debugging output from ros nodes</li>
+<li>rqt_logger_level - used to set debugging output level for ROS</li>
+<li><code>rqt_plot</code> - plotting message values versus time</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="outline-container-org9b26bb6" class="outline-3">
+<h3 id="org9b26bb6">rqt_plot</h3>
+<div class="outline-text-3" id="text-org9b26bb6">
+<ul class="org-ul">
+<li><a href="http://wiki.ros.org/rqt_plot">rqt_plot</a> is the simplest way to draw real-time time-plots of data from ROS topics</li>
+<li>You can specify what fields of which topics to plot in the gui or</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org6a6730c" class="outline-3">
+<h3 id="org6a6730c">Plot Juggler</h3>
+<div class="outline-text-3" id="text-org6a6730c">
+<ol class="org-ol">
+<li><a href="https://plotjuggler.io/">Plot Juggler</a> is an advanced tool for plotting time-series data</li>
+<li>With the <a href="https://index.ros.org/p/plotjuggler_ros/github-PlotJuggler-plotjuggler-ros-plugins/#jazzy">plotjuggler-ros</a> package, it is capable of plotting topics in realtime from ROS 2</li>
+<li>Plot Juggler has significantly more capability than <code>rqt_plot</code></li>
+<li><code>ros2 run plotjuggler plotjuggler</code></li>
+<li>Click "Start" on the "ROS 2 Topic Subscriber" window to add ROS 2 topics to plot juggler
+<ul class="org-ul">
+<li>In the window below you can click and drag message fields into the plotting area to plot them</li>
+<li>Select two fields and drag-and-drop with right click will allow you to plot one topic vs another</li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

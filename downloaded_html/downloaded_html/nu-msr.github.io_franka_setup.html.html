@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-11-20 Wed 09:40 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Franka Setup</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">Franka Setup</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org34f0b9c">Overview</a></li>
+<li><a href="#org62da2aa">Workstation Computer</a>
+<ul>
+<li><a href="#org8bb9342">Operating System</a></li>
+<li><a href="#org2f08ec9">Network Setup</a>
+<ul>
+<li><a href="#orgdf5f7b6">Ethernet Connections</a></li>
+<li><a href="#org87b7fd5">DNS</a></li>
+<li><a href="#org52fe586">SSH</a></li>
+<li><a href="#org9646d50">NTP</a></li>
+<li><a href="#org64e3d53">Internet</a></li>
+</ul>
+</li>
+<li><a href="#orgbf6691b">ROS 2 Iron</a>
+<ul>
+<li><a href="#orgcf4612a">Building The Container</a></li>
+</ul>
+</li>
+<li><a href="#org8264422">Final Touches</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-org34f0b9c" class="outline-2">
+<h2 id="org34f0b9c">Overview</h2>
+<div class="outline-text-2" id="text-org34f0b9c">
+<ul class="org-ul">
+<li>Describes the setup for the <a href="https://www.mccormick.northwestern.edu/robotics/">Northwestern MS in Robotics</a> program's Franka Emika Panda robots (since renamed to FER).</li>
+<li>These setup instructions are for to configure the robots themselves: most students will want to follow <a href="./ros_notes/ros2/franka.html">Franka Notes</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org62da2aa" class="outline-2">
+<h2 id="org62da2aa">Workstation Computer</h2>
+<div class="outline-text-2" id="text-org62da2aa">
+<ul class="org-ul">
+<li>These instructions are for how our Franka workstation computers are setup.</li>
+<li>Do NOT run these instructions on your personal computer, unless you want to turn it into a Realtime Linux system capable of directly plugging in
+to the Franka Robot (likely not what you want).</li>
+</ul>
+</div>
+
+<div id="outline-container-org8bb9342" class="outline-3">
+<h3 id="org8bb9342">Operating System</h3>
+<div class="outline-text-3" id="text-org8bb9342">
+<ol class="org-ol">
+<li>Install Ubuntu according to the <a href="https://nu-msr.github.io/hackathon/computer_setup.html">Computer Setup</a> (skipping over System76-specific instructions and most desktop customization)
+<ul class="org-ul">
+<li>The default user should be for the administrator of the system.</li>
+</ul></li>
+<li>After installation create a student user:
+<ul class="org-ul">
+<li><code>sudo adduser student</code></li>
+</ul></li>
+<li>The realtime kernel is part of the <a href="https://launchpad.net/~numsr">NUMSR PPA</a>.
+<ul class="org-ul">
+<li>The package to install is <code>linux-image-6.6.43-rt38numsr</code></li>
+<li>Instructions on how the package was built can be found at <a href="../hackathon/ubuntu_minimal.html#rt_linux">Minimal Ubuntu Setup</a></li>
+</ul></li>
+<li><p>
+Permissions must be set for the user to start processes with realtime priority, as per <a href="https://frankaemika.github.io/docs/installation_linux.html#allow-a-user-to-set-real-time-permissions-for-its-processes">Franka Installation Instructions</a>:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span class="org-comment-delimiter"># </span><span class="org-comment">Create a realtime group</span>
+sudo addgroup realtime
+<span class="org-comment-delimiter"># </span><span class="org-comment">Add users to the realtime group</span>
+sudo usermod -a -G realtime $(<span class="org-sh-quoted-exec">whoami</span>)
+sudo usermod -a -G realtime student
+</pre>
+</div></li>
+<li><p>
+Edit <code>/etc/security/limits.conf</code>
+</p>
+<pre class="example">
+@realtime soft rtprio 99
+@realtime soft priority 99
+@realtime soft memlock 102400
+@realtime hard rtprio 99
+@realtime hard priority 99
+@realtime hard memlock 102400
+</pre></li>
+
+<li>Edit <code>/etc/defaults/grub</code> and change the value of <code>GRUB_DEFAULT</code> to <code>"1&gt;2"</code>
+<ul class="org-ul">
+<li>This selects the 2nd grub menu option (Advanced Options for ubuntu) and then 3rd option, which should be the rt kernel )</li>
+<li>Run <code>sudo update-grub</code></li>
+<li>Reboot and verify that the RT kernel was loaded (you should see <code>PREEMPT_RT</code> in the output of <code>uname -a</code>)</li>
+</ul></li>
+<li><p>
+Create a new ROS 2 workspace:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">sudo mkdir -p /opt/ros/franka/src
+sudo chown -R $(<span class="org-sh-quoted-exec">whoami</span>):$(<span class="org-sh-quoted-exec">whoami</span>) <span class="org-comment-delimiter"># </span><span class="org-comment">We will build everything as the current user</span>
+<span class="org-builtin">cd</span> /opt/ros/franka
+vcs import --input https://nu-msr.github.io/images/franka.repos src
+rosdep install --from-paths src -y --ignore-src -r
+colcon build --merge-install --cmake-args -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF
+sudo chown -R root:root /opt/ros/franka <span class="org-comment-delimiter"># </span><span class="org-comment">Make it all owned by root again</span>
+</pre>
+</div></li>
+<li>Users should source <code>/opt/ros/franka/install/setup.bash</code> to use the Franka code.
+<ul class="org-ul">
+<li>This line is added to the <code>.bashrc</code> of the administrator and the <code>student</code> account</li>
+</ul></li>
+<li><p>
+Add the following content to the <code>.bashrc</code> of user accounts
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span class="org-keyword">if</span> [ -z <span class="org-string">"$DISPLAY"</span>]; <span class="org-keyword">then</span>
+    <span class="org-builtin">export</span> <span class="org-variable-name">DISPLAY</span>=:0
+<span class="org-keyword">fi</span>
+</pre>
+</div>
+<ul class="org-ul">
+<li>This is a workaround because MoveitConfigsUtils assumes that the <code>DISPLAY</code> variable is set.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org2f08ec9" class="outline-3">
+<h3 id="org2f08ec9">Network Setup</h3>
+<div class="outline-text-3" id="text-org2f08ec9">
+</div>
+<div id="outline-container-orgdf5f7b6" class="outline-4">
+<h4 id="orgdf5f7b6">Ethernet Connections</h4>
+<div class="outline-text-4" id="text-orgdf5f7b6">
+<ul class="org-ul">
+<li><code>enp109s0</code>: This is the 1Gb/s ethernet port built into the motherboard. It is used to connect to the laptop.
+<ul class="org-ul">
+<li>In our computers it has the buggy r8169 driver.</li>
+<li>Upon reconnect, it will not bring the link up.</li>
+<li>A workaround is to ensure that <code>/sys/bus/pci/devices/0000:6d:00.0/power/control</code> contains the word "auto" instead of "on"
+<ul class="org-ul">
+<li>The bug is somewhat related to <a href="https://bugzilla.kernel.org/show_bug.cgi?id=207205">https://bugzilla.kernel.org/show_bug.cgi?id=207205</a></li>
+</ul></li>
+<li>Use <a href="https://www.freedesktop.org/software/systemd/man/latest/tmpfiles.d.htmlfile">systemd-tmpfiles</a> to automatically write "auto" to that file on boot:
+<ul class="org-ul">
+<li><code>echo "w /sys/bus/pci/devices/0000\:6d\:00.0/power/control - - - - auto" &gt; /etc/tmpfiles.d/r8169.conf</code></li>
+</ul></li>
+</ul></li>
+<li><code>ens24f0</code>: This is a 10Gb/S ethernet port that connects to a Franka Control box</li>
+<li><code>ens24f1</code>: This is a 10Gb/S ethernet port that connects to a Franka Control box (two Frankas can be connected to one station).</li>
+</ul>
+</div>
+
+<ul class="org-ul">
+<li><a id="org9dd874e"></a>Bridge<br>
+<div class="outline-text-5" id="text-org9dd874e">
+<ul class="org-ul">
+<li>All connections are bridged on <code>br0</code>, which is given ip address <code>192.168.18.1</code>.
+<ul class="org-ul">
+<li>Thus the robot and all connected computers are on the same subnet and can communicate</li>
+</ul></li>
+<li>The franka control boxes have static leases, based on their mac addresses.</li>
+<li><p>
+Create the bridge and slaves:
+</p>
+<pre class="example">
+# Create the bridge
+nmcli con add type bridge ifname br0
+# Add the slaves
+nmcli con add type ethernet con-name br-laptop ifname enp109s0 master br0
+nmcli con add type ethernet con-name br-pandaX ifname ens24f0 master br0
+nmcli con add type ethernet con-name br-pandaY ifname ens24f1 master br0
+</pre></li>
+<li>Disable Spanning-Tree Protocol: <code>nmcli con modify bridge-br0 bridge.stp no</code></li>
+<li>Static IP for station: <code>nmcli con modify bridge-br0 ipv4.method manual ipv4.address "192.168.18.1/24" ipv4.dns 127.0.0.1</code></li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+
+<div id="outline-container-org87b7fd5" class="outline-4">
+<h4 id="org87b7fd5">DNS</h4>
+<div class="outline-text-4" id="text-org87b7fd5">
+<ol class="org-ol">
+<li>Install dnsmasq: <code>sudo apt install dnsmasq</code>
+<ul class="org-ul">
+<li><p>
+Setup dnsmasq by copying <a href="./images/franka_dnsmasq.conf">./images/franka_dnsmasq.conf</a> to <code>/etc/dnsmasq.conf</code> on <code>station</code>
+</p>
+<ul class="org-ul">
+<li><code>wget https://nu-msr.github.io/images/franka_dnsmasq.conf</code></li>
+<li><code>sudo mv franka_dnsmasq.conf /etc/dnsmasq.conf</code></li>
+<li><code>mkdir /etc/systemd/system/dnsmasq.service.conf</code></li>
+</ul>
+<p>
+= Copy <a href="./images/dnsmasq_franka_service.conf">dnsmasq_service.conf</a> to <code>/etc/systemd/system/dnsmasq.service.conf/dnsmasq.conf</code> on station.
+</p>
+<ul class="org-ul">
+<li>This service file causes <code>dnsmasq</code> to flush all leases when it starts. It seems that this makes the system more reliable in terms of
+making clients refresh their dns settings. There is probably something to fix the problem in a better way, but this seems to work.</li>
+<li>It also ensures that dnsmasq starts after the network bridge br0 is created, enabling it to work when the station is restarted.</li>
+</ul></li>
+<li>Copy <a href="./images/franka_route.sh">./images/franka_route.sh</a> to <code>/usr/local/bin/franka_route.sh</code> on <code>station</code>
+<ul class="org-ul">
+<li>This script executes when new machines get ip addresses</li>
+<li><code>wget https://nu-msr.github.io/images/franka_route.sh</code></li>
+<li><code>sudo mv franka_route.sh /usr/local/bin</code></li>
+<li><code>sudo chmod 755 /usr/local/bin/franka_route.sh</code></li>
+</ul></li>
+<li>Disable <code>systemd-resolved</code>:
+<ul class="org-ul">
+<li><code>sudo systemctl disable --now systemd-resolved</code></li>
+</ul></li>
+<li>Restart <code>dnsmasq</code>: <code>sudo systemctl restart dnsmasq</code></li>
+<li><code>/etc/resolv.conf</code> can remain because dnsmasq is set to ignore it. This lets us easily get internet when needed.</li>
+</ul></li>
+<li>This is setup so that everything connected to <code>station</code> is on the <code>192.168.18.0/24</code> subnet
+<ul class="org-ul">
+<li>Some static addresses are created (see line 87 <code>address</code> in <a href="./etc/dnsmasq.conf)">./etc/dnsmasq.conf)</a>:
+<ul class="org-ul">
+<li><code>station</code>, <code>station.robot</code>: Resolves to 192.168.18.1, Workstation computer</li>
+<li><code>panda0</code>, <code>panda0.robot</code>: Resolves to 192.168.18.10, primary robot</li>
+<li><code>panda1</code>, <code>panda1.robot</code>: Resolves to 192.168.18.11, secondary robot</li>
+<li><code>robot.franka.de</code>: Resolves to 192.168.18.10, primary robot
+<ul class="org-ul">
+<li>Need to access web interface at <code>robot.franka.de</code> to avoid SSL certificate errors</li>
+</ul></li>
+</ul></li>
+<li>IP Addresses are assigned by mac address (see line 249 <code>dhcp-host</code>).
+<ul class="org-ul">
+<li>All mac addresses of all panda robots are assigned to both 192.168.18.10 and 192.168.18.11</li>
+<li>If there is a conflict of mac addresses with the first assignment, it falls through to the second. This
+is how both pandas can get an IP address</li>
+<li>The IP address of the <code>station</code> computer is statically assigned to <code>192.168.18.1</code></li>
+</ul></li>
+</ul></li>
+<li><code>dnsmasq</code> also uses northwestern and cloudflare dns servers upstream so when there is internet access it can resolve domains.</li>
+<li>Your laptop will be accessible via it's hostname, and via <code>laptop</code></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org52fe586" class="outline-4">
+<h4 id="org52fe586">SSH</h4>
+<div class="outline-text-4" id="text-org52fe586">
+<p>
+The <code>station</code> should have an <code>ssh</code> server:
+</p>
+<ul class="org-ul">
+<li><code>sudo apt install ssh</code></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org9646d50" class="outline-4">
+<h4 id="org9646d50">NTP</h4>
+<div class="outline-text-4" id="text-org9646d50">
+<ul class="org-ul">
+<li>The <code>station</code> computer is not usually connected to the internet.</li>
+<li>It needs to be synchronized with the user's laptop time.</li>
+<li>To avoid messing with the user's Laptop clock, the user will host an NTP server and the <code>station</code> will connect to it.
+<ul class="org-ul">
+<li>See <a href="../ros_notes/ros2/franka.html#franka_setup">Franka Notes</a> for details on how to setup the client.</li>
+</ul></li>
+<li>Install <code>chrony</code> on the <code>station</code> (<code>sudo apt install chrony</code>)</li>
+<li>Copy <a href="./images/franka_chrony.conf">./images/franka_chrony.conf</a> to  <code>/etc/chrony/chrony.conf</code> on <code>station</code>
+<ul class="org-ul">
+<li>If your laptop is running <code>chrony</code> then the <code>station</code> will connect to laptop and synchronize it's time</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org64e3d53" class="outline-4">
+<h4 id="org64e3d53">Internet</h4>
+<div class="outline-text-4" id="text-org64e3d53">
+<ol class="org-ol">
+<li>The Franka robots are, by default, intentionally disconnected from the internet</li>
+<li>To get internet on the Franka, it is easiest to route through the user's laptop:
+<ul class="org-ul">
+<li>See <a href="https://serverfault.com/questions/564866/how-to-set-up-linux-server-as-a-router-with-nat">https://serverfault.com/questions/564866/how-to-set-up-linux-server-as-a-router-with-nat</a> (MohyedeenN answer) for details.</li>
+<li><code>wlan0</code> refers to the public interface on <code>laptop</code> (e.g., the wifi card that is connected to the internet)</li>
+<li><code>eth0</code> refers to the private ethernet interface connected to <code>station</code></li>
+<li>See interface names using <code>nmcli</code></li>
+<li>The script at <a href="./images/franka_internet.sh">./images/franka_internet.sh</a> can be used. The first argument is the interface connected to the internet, the second is the interface connected to the franka</li>
+</ul></li>
+<li>The <code>dnsmasq</code> process should have created a default route on the <code>station</code>
+<ul class="org-ul">
+<li>The route tells packets on the station to be sent to your laptop for dispatch to the WAN</li>
+<li>If needed, a route can be added manually: <code>sudo ip route add default via &lt;Your laptop's ip address&gt;</code>.</li>
+</ul></li>
+<li>Another way to get internet is to plug in an ethernet cable to one the ports and remove that port from the bridge</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbf6691b" class="outline-3">
+<h3 id="orgbf6691b">ROS 2 Iron</h3>
+<div class="outline-text-3" id="text-orgbf6691b">
+<ol class="org-ol">
+<li>A ROS 2 Iron docker container is available on dockerhub at <a href="https://hub.docker.com/repository/docker/reem17/franka_iron/general">https://hub.docker.com/repository/docker/reem17/franka_iron/general</a></li>
+<li>Install docker on station: <code>sudo apt install --no-install-recommends docker.io</code></li>
+<li><p>
+Docker messes up network settings with network bridges. To fix, create <code>/etc/docker/daemon.json</code> with the following content:
+</p>
+<div class="org-src-container">
+<pre class="src src-json">{
+    "bridge": "br0"
+}
+</pre>
+</div>
+<ul class="org-ul">
+<li>See <a href="https://wiki.archlinux.org/title/Docker#Starting_Docker_breaks_KVM_bridged_networking">https://wiki.archlinux.org/title/Docker#Starting_Docker_breaks_KVM_bridged_networking</a> (accessed on 10/31/2024) for more information.</li>
+</ul></li>
+<li>To build the container: <code>sudo docker build -t reem17/franka_iron images/franka_docker</code>
+<ul class="org-ul">
+<li><code>sudo docker push reem17/franka_iron</code></li>
+</ul></li>
+<li>Get the <code>franka_iron</code> image <code>sudo docker pull reem17/franka_iron</code></li>
+<li>Create the container: <code>sudo docker create --name iron-ssh --restart unless-stopped --privileged --network host reem17/franka_iron</code></li>
+<li>Start the container and set the student password:
+<ul class="org-ul">
+<li><code>sudo docker start iron-ssh</code></li>
+<li><code>sudo docker exec -it iron-ssh passwd student</code> (then enter the password.</li>
+<li>Commit the changes to the container <code>sudo docker commit iron-ssh</code></li>
+</ul></li>
+<li>Copy the sudoers file <a href="./images/franka_docker/docker_ssh">docker_ssh</a> to <code>/etc/sudoers/docker_ssh</code> on station.
+<ul class="org-ul">
+<li>Change ownership <code>chown root:root /etc/sudoers/docker_ssh</code></li>
+<li>Changer permissions: <code>chmod 600 /etc/sudoers/docker_ssh</code></li>
+</ul></li>
+</ol>
+</div>
+<details id="orgcf4612a"><summary class="header-4">Building The Container</summary>
+<div class="outline-text-4" id="text-orgcf4612a">
+<ul class="org-ul">
+<li>The docker file context is available here: <a href="./images/franka_docker/Dockerfile">Dockerfile</a>.</li>
+<li>The <a href="./images/franka_docker/limits.conf">limits.conf</a> file must be in the build context folder.</li>
+<li>Copy both of the above folder into <code>/path/to/build/context</code>, then run
+<code>sudo docker build -t reem17/franka_iron /path/to/build/context</code> to build the container.</li>
+</ul>
+</div>
+</details>
+</div>
+
+<div id="outline-container-org8264422" class="outline-3">
+<h3 id="org8264422">Final Touches</h3>
+<div class="outline-text-3" id="text-org8264422">
+<ol class="org-ol">
+<li>Make sure that in the bios setup, the option to need to "press F1 on boot failure" is disabled. Otherwise if power is cut the user
+will need a keyboard.</li>
+<li><code>systemctl set-default multi-user.target</code> to disable graphical boot, since there is no monitor.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

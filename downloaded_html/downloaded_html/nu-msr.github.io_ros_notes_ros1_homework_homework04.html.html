@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-11-25 Mon 23:03 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Homework 4</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">Homework 4</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org66e5544">Logistics</a></li>
+<li><a href="#org2ba399f">Custom Workspace</a></li>
+<li><a href="#orgb9727ad">Navigation</a>
+<ul>
+<li><a href="#org2ca77bd">Grading</a></li>
+<li><a href="#org9c02064">Tasks</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-org66e5544" class="outline-2">
+<h2 id="org66e5544">Logistics</h2>
+<div class="outline-text-2" id="text-org66e5544">
+<ol class="org-ol">
+<li>Create a git repository using the link provided in Canvas.</li>
+<li>Your homework will be submitted via this git repository.</li>
+<li>I will grade whatever is on the <code>main</code> branch when I clone the repository.</li>
+<li><a href="./guidelines.html">Guidelines</a> provides important information about what
+you should turn-in, including information about your <code>README.md</code> file.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org2ba399f" class="outline-2">
+<h2 id="org2ba399f">Custom Workspace</h2>
+<div class="outline-text-2" id="text-org2ba399f">
+<ol class="org-ol">
+<li>Due to a bug either in <code>slam_toolbox</code> or <code>turtlebot3</code> (not sure which yet), slam_toolbox won't work with gazebo.
+<ul class="org-ul">
+<li>The workaround is to <code>git clone https://github.com/m-elwin/turtlebot3 -b slam_toolbox</code> into your <code>custom_ws</code></li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgb9727ad" class="outline-2">
+<h2 id="orgb9727ad">Navigation</h2>
+<div class="outline-text-2" id="text-orgb9727ad">
+<ul class="org-ul">
+<li>The goal is to use the turtlebot to map an environment and then navigate within the map using the <a href="http://wiki.ros.org/slam_toolbox">slam_toolbox</a>
+<ul class="org-ul">
+<li>SLAM <code>toolbox</code> is (as far as I know) the most advanced 2D SLAM method for ROS and the only one that is actively maintained.</li>
+</ul></li>
+<li>The <a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/">turtlebot3 tutorials</a> and <a href="https://github.com/ROBOTIS-GIT/turtlebot3">source code</a> will be a useful reference for you.</li>
+<li>The <a href="https://github.com/SteveMacenski/slam_toolbox/tree/noetic-devel">Slam Toolbox</a> documentation and source code (for finding launch files) will also be useful. This package is released for <code>noetic</code> so you may install it from a binary package.</li>
+</ul>
+</div>
+
+<div id="outline-container-org2ca77bd" class="outline-3">
+<h3 id="org2ca77bd">Grading</h3>
+<div class="outline-text-3" id="text-org2ca77bd">
+<ol class="org-ol">
+<li>You may choose to do this assignment in gazebo exclusively or with gazebo and the actual robot
+<ul class="org-ul">
+<li>It will likely be easier to do first use simulation and then transfer to the real robot at the end</li>
+<li>When using the real robot, your launchfiles may assume that the user has separately ssh'd into the turtlebot and run <code>roslaunch turtlebot3_bringup turtlebot3_robot.launch</code></li>
+</ul></li>
+<li>You may choose to implement a Frontier Exploration algorithm, or a significantly simpler algorithm of your own design</li>
+<li>If you choose gazebo only and a simple algorithm (not Frontier Exploration) you can earn up to a 16.5/18 on the assignment</li>
+<li>You earn up to one additional point for also implementing on the real robot</li>
+<li>You earn up to one additional point for implementing frontier exploration</li>
+<li>Therefore, you can earn up to an 18.5/18 on the assignment</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org9c02064" class="outline-3">
+<h3 id="org9c02064">Tasks</h3>
+<div class="outline-text-3" id="text-org9c02064">
+<ol class="org-ol">
+<li>Write a launchfile called <code>start_slam.launch</code> that starts the turtlebot3 (either using <code>remote_bringup</code> or gazebo in the house environment),
+loads <code>rviz</code> and visualizes it's laser scan, starts a <code>turtlebot3_teleop</code> node, and the <a href="http://wiki.ros.org/slam_toolbox">slam_toolbox</a>. 
+<ul class="org-ul">
+<li>You will need to set the <code>TURTLEBOT3_MODEL</code> environment variable to <code>burger</code> to use the launchfile</li>
+<li>You should make sure that <code>rviz</code> shows the Map, the laser scan, and the robot and the fixed frame in rviz should be the map frame.
+<ul class="org-ul">
+<li>The <code>turtlebot3</code> launchfiles that start <code>rviz</code> for doing SLAM already use the appropriate <code>rviz</code> configuration</li>
+</ul></li>
+<li>You can try either synchronous mode (for most accurate results) or asynchronous mode (guaranteed real-time mapping)</li>
+<li>You can use launchfiles for <code>turtlebot3</code> (including <code>turtlebot3_bringup</code>, <code>turtlebot3_navigation</code> and <code>turtlebot3_gazebo</code>) and <code>slam_toolbox</code></li>
+<li>Most of this task in particular can be done in a only a few lines if you include the appropriate <code>turtlebot3</code> launchfiles.
+<ul class="org-ul">
+<li><code>roscd slam_toolbox</code> and <code>ls</code> to see the <code>slam_toolbox</code> launchfiles</li>
+</ul></li>
+</ul></li>
+
+<li>Drive the turtlebot3 throughout its workspace while running slam_toolbox.  
+<ul class="org-ul">
+<li>End with the robot near it's starting position.</li>
+<li>Use the mapserver to save the map file.</li>
+<li>For the gazebo run, include <code>map_gazebo.yaml</code> and <code>map_gazebo.pgm</code> in the base directory of your repository</li>
+<li>For the real run, include <code>map_real.yaml</code> and and <code>map_real.pgm</code> in the base directory of your repository</li>
+</ul></li>
+
+<li>Create a launchfile called <code>nav_stack.launch</code> that uses <code>amcl</code> to localize your robot and the ROS navigation stack to allow the robot to move 
+using the map created in the previous step. 
+<ul class="org-ul">
+<li>Move the robot by setting 2D navigation goals in <code>Rviz</code></li>
+<li>Include a screencast showing the plan being executed in RViz along with a video of the robot moving (in the real world or in gazebo)
+<ul class="org-ul">
+<li>The robot, the motion plan, the map from SLAM, the global and local costmaps should be visible.</li>
+<li>You should show the Path that is planned</li>
+<li><code>rviz</code> as launched by the <code>turtlebot3</code> navigation launchfiles shows the appropriate items already in the rviz window</li>
+</ul></li>
+<li>This step is essentially the same as the <code>turtlebot3</code> navigation tutorial except you are writing a single launchfile to do it.</li>
+<li>The launchfile does not need to be very long if you <code>&lt;include&gt;</code> other existing launchfiles.</li>
+</ul></li>
+</ol>
+
+
+<ol class="org-ol">
+<li>Create a launchfile called <code>slam_stack.launch</code> that runs all of the nav-stack components as in the previous step except
+instead of starting <code>amcl</code> and a pre-built map uses <code>slam_toolbox</code> to create the map while navigating
+<ul class="org-ul">
+<li>Explore the space by setting 2D navigation goals manually in <code>rviz</code></li>
+<li>Capture a screencast of RViz and the robot (in the real world or in gazebo) and link to it in <code>README.md</code> of the following scenario
+<ol class="org-ol">
+<li>You set a 2D navigation goal in an uncertain part of the map</li>
+<li>The path is planned, but there is actually a (previously unseen) wall blocking the path</li>
+<li>The robot needs to replan to get to the goal using a different route</li>
+</ol></li>
+<li>Rviz should show everything requested in the previous step</li>
+</ul></li>
+
+<li>Write a node that causes the robot to explore the environment autonomously while mapping the world
+<ul class="org-ul">
+<li>Provide a launchfile that lets the robot use this node and slam_toolbox to autonomously map the environment</li>
+<li>Create a screencast of the robot exploring in rviz and a video of the robot exploring (in the real world) and include that in your <code>README.md</code></li>
+<li>Include a map called <code>expl.pgm</code> and <code>expl.yaml</code> that you created after running the exploration algorithm in your repository</li>
+<li>Your algorithm should work in conjunction with the <code>move_base</code> node to plan via waypoints and to ensure that you do not collide</li>
+<li>You can use any algorithm you want, but it should be described or cited in your <code>README.md</code>
+<ul class="org-ul">
+<li>The exploration does not need to be complete, perfect, or optimal in any way. For example, you could move randomly.</li>
+</ul></li>
+<li>A well-known strategy is called <a href="https://ieeexplore.ieee.org/document/613851">Frontier Exploration.</a> 
+<ul class="org-ul">
+<li>See <a href="http://web.archive.org/robotfrontier.com/frontier/index.html">Robot Frontier</a> for a friendly description, in particular <a href="http://web.archive.org/robotfrontier.com/frontier/detect.html">Detecting Frontiers</a></li>
+<li>Once you have detected a frontier, you can use <code>move_base</code> to move to the frontier centroid. The map should be updated along the way</li>
+</ul></li>
+<li>You can subscribe to the <code>/map</code> topic to get information about the robot's current knowledge of the environment
+<ul class="org-ul">
+<li>This topic is output by your SLAM method: in our case <code>slam_toolbox</code> and creates an occupancy map where <code>-1</code> represents unexplored areas.</li>
+</ul></li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

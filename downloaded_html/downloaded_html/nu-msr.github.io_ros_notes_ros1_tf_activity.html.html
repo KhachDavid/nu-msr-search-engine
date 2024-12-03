@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-11-25 Mon 23:03 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ROS Tf Activity</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">ROS Tf Activity</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgdde025e">Demonstration</a></li>
+<li><a href="#orgf7d6f81">Exercises</a>
+<ul>
+<li><a href="#orgd0136a9">Activity</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-orgdde025e" class="outline-2">
+<h2 id="orgdde025e">Demonstration</h2>
+<div class="outline-text-2" id="text-orgdde025e">
+<div class="org-src-container">
+<pre class="src src-bash"><span class="org-comment-delimiter"># </span><span class="org-comment">create the workspace and clone the repository and get set up</span>
+mkdir ws/src
+<span class="org-builtin">cd</span> ws/src
+git clone https://github.com/m-elwin/me495_tf.git
+<span class="org-builtin">cd</span> ..
+catkin_make
+<span class="org-builtin">source</span> devel/setup.bash
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">run the broadcaster</span>
+roscore &amp;
+rosrun me495_tf in_out &amp;
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">list the topics, notice the /tf and /tf_static</span>
+rostopic list
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">use rqt_tf_tree to see the tf_tree</span>
+rosrun rqt_tf_tree rqt_tf_tree
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">use tf_echo (from tf 1) to see translation between frame. C-c to quit</span>
+rosrun tf tf_echo right left
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">run in rviz, set everything up correctly</span>
+rviz 
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">run in rviz, using my rviz config</span>
+rviz -d src/me495_tf/rviz/view.rviz
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">run the tracker node</span>
+rosrun me495_tf tracker
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf7d6f81" class="outline-2">
+<h2 id="orgf7d6f81">Exercises</h2>
+<div class="outline-text-2" id="text-orgf7d6f81">
+</div>
+<div id="outline-container-orgd0136a9" class="outline-3">
+<h3 id="orgd0136a9">Activity</h3>
+<div class="outline-text-3" id="text-orgd0136a9">
+<ol class="org-ol">
+<li>Walk through the demonstration above, manually setting up rviz to display the transformations</li>
+<li>Modify <code>in_out</code> so that the base frame is dynamic, that is, it is broadcast from the regular broadcaster and
+not the static broadcaster.</li>
+<li>Make the base frame rotate about it's own z axis at a fixed rate, and visualize in rviz</li>
+<li>Add another frame called <code>up</code> that is a child of base.  Have this frame move in sync with left and right but perpendicular to them</li>
+<li>Modify tracker so that when the distance between <code>up</code> and <code>left</code> is above a threshold, it prints a message</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-11-25 Mon 23:02 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Launchfiles</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">Launchfiles</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org9a5b07d">Launchfiles and ROS</a>
+<ul>
+<li><a href="#org2ba58b4">Documentation Note</a></li>
+<li><a href="#orgf30ed87">Types of Launchfiles</a></li>
+</ul>
+</li>
+<li><a href="#orgd58217d">Using ros2 launch</a>
+<ul>
+<li><a href="#orgcba3e3d">Ros2 launch options</a></li>
+</ul>
+</li>
+<li><a href="#xml_launch">XML Launchfiles</a></li>
+<li><a href="#python_launch">Python Launchfiles</a>
+<ul>
+<li><a href="#orgaf7ae87">General Concepts</a>
+<ul>
+<li><a href="#org27046b6">Theory of Launchfiles</a></li>
+<li><a href="#declarative">Declarative Python Launchfiles</a></li>
+</ul>
+</li>
+<li><a href="#orgeff0d4e">Description</a></li>
+<li><a href="#org6711e64">Actions</a></li>
+<li><a href="#substitutions">Substitutions</a></li>
+<li><a href="#orgadc6e4f">Conditions</a></li>
+<li><a href="#org5471aa5">Events</a></li>
+<li><a href="#org3e6c3df">Parameter Files</a></li>
+</ul>
+</li>
+<li><a href="#best_practices">Best Practices</a></li>
+<li><a href="#org20b31b3">References</a></li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-org9a5b07d" class="outline-2">
+<h2 id="org9a5b07d">Launchfiles and ROS</h2>
+<div class="outline-text-2" id="text-org9a5b07d">
+<ul class="org-ul">
+<li>ROS programs consist of many nodes communicating over topics and services</li>
+<li>For non-trivial programs, manually running nodes using <code>ros2 run</code> becomes tedious
+and hard to reproduce</li>
+<li>Launchfiles provide a method for having a single command start the robot and enable specifying
+<ul class="org-ul">
+<li>Which nodes are run</li>
+<li>What parameters they use</li>
+<li>What topics are named</li>
+<li>and more!</li>
+</ul></li>
+<li>These <a href="https://docs.ros.org/en/jazzy/Tutorials/Intermediate/Launch/Launch-Main.html">Launchfile Tutorials</a> will help get you started.</li>
+</ul>
+</div>
+
+<div id="outline-container-org2ba58b4" class="outline-3">
+<h3 id="org2ba58b4">Documentation Note</h3>
+<div class="outline-text-3" id="text-org2ba58b4">
+<ol class="org-ol">
+<li>As of 10/2024 the <a href="http://docs.ros.org/en/jazzy/p/launch">API Documentation</a> for launch files is not fully populated: this means links here point to empty documentation</li>
+<li>To build complete documentation locally:
+<ol class="org-ol">
+<li>Clone <a href="https://github.com/ros2/launch">https://github.com/ros2/launch</a></li>
+<li>Run <code>rosdoc2 build --package-path launch/launch</code></li>
+<li>Open <code>doc_output/launch/index.html</code> in your browser</li>
+</ol></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgf30ed87" class="outline-3">
+<h3 id="orgf30ed87">Types of Launchfiles</h3>
+<div class="outline-text-3" id="text-orgf30ed87">
+<p>
+In ROS 2 (unlike ROS 1) there are multiple types of launchfiles:
+</p>
+<ul class="org-ul">
+<li>Python launchfiles: these launchfiles are python scripts that use the ROS 2 Launch API to declare what actions should be taken on Launch
+<ul class="org-ul">
+<li>These launchfiles allow more complex launch descriptions than the alternatives</li>
+</ul></li>
+<li>XML launchfiles: these are closer to ROS 1 launchfiles and they declare the nodes that should be running
+<ul class="org-ul">
+<li>Less flexible than python but easier for simple cases. However, in ROS 1 launchfiles often got complicated to the
+point of basically being programming without a real programming language. In these situations python launchfiles would be preferred.</li>
+</ul></li>
+<li>YAML launchfiles: An alternative syntax to XML launchfiles</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd58217d" class="outline-2">
+<h2 id="orgd58217d">Using ros2 launch</h2>
+<div class="outline-text-2" id="text-orgd58217d">
+<ul class="org-ul">
+<li>The command-line tool for using launch files is <a href="https://docs.ros.org/en/jazzy/Tutorials/Beginner-CLI-Tools/Launching-Multiple-Nodes/Launching-Multiple-Nodes.html">ros2 launch</a></li>
+<li>There are two ways of invoking a launchfile:
+<ol class="org-ol">
+<li><code>ros2 launch package file.launch.{xml,py} [arg_name:=value]...</code>
+<ul class="org-ul">
+<li>Here, the launch file must be installed into the install space (e.g., by setting up <code>setup.py</code>)</li>
+</ul></li>
+<li><code>ros2 launch package /path/to/launch/file.launch [arg_name:=value...]</code>
+<ul class="org-ul">
+<li>Here, the launch file at the given location is directly used.</li>
+<li>The main advantage is that you do not need to rebuild the workspace when you change the launchfile.</li>
+</ul></li>
+</ol></li>
+<li>You can pass arguments to a launch file using the <code>arg_name:=value</code> syntax, which is shared with the remapping arguments syntax.</li>
+</ul>
+</div>
+<div id="outline-container-orgcba3e3d" class="outline-3">
+<h3 id="orgcba3e3d">Ros2 launch options</h3>
+<div class="outline-text-3" id="text-orgcba3e3d">
+<ol class="org-ol">
+<li>Use <code>ros2 launch --help</code> for a complete list of the options.</li>
+<li><code>-s</code> or <code>--show-arg</code> You can pass arguments to a launchfile (using <code>arg_name:=value</code>) to change
+the behavior of the launchfile.  This flag shows all the possible arguments and their documentation.</li>
+<li><code>--debug</code> shows debugging information, which is useful if the launchfile is not working.</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-xml_launch" class="outline-2">
+<h2 id="xml_launch">XML Launchfiles</h2>
+<div class="outline-text-2" id="text-xml_launch">
+<ol class="org-ol">
+<li>The <a href="http://wiki.ros.org/roslaunch/XML">ROS 1 Launchfile format</a> relies on XML, along with a special enhanced substitution argument syntax.
+<ul class="org-ul">
+<li>Most easily understood in conjunction with <a href="https://docs.ros.org/en/jazzy/How-To-Guides/Launch-files-migration-guide.html">ROS 2 Launchfile Migration Guide</a>.</li>
+<li>The launchfile system in ROS 2 is highly extendable
+<ul class="org-ul">
+<li>The basic launch functionality is implemented in the <a href="https://github.com/ros2/launch">launch</a> package. This repository contains generic tools for running processes on a system</li>
+<li>ROS specific functionality is implemented in the <a href="https://github.com/ros2/launch_ros">launch_ros</a> package.
+<ul class="org-ul">
+<li>For example, the <code>Node</code> launch action of <code>launch_ros</code> uses the <code>ExecuteProcess</code> launch action of <code>launch</code>.</li>
+</ul></li>
+<li>The <a href="https://docs.ros.org/en/jazzy/p/launch/architecture.html">architecture of ROS 2 Launchfiles</a> explains the concepts behind the design.</li>
+<li><a href="http://docs.ros.org/en/jazzy/p/launch">API Documentation</a> contains XML examples for the python functions that have XML equivalents.</li>
+</ul></li>
+<li>This <a href="https://design.ros2.org/articles/roslaunch_xml.html">Design Document</a> lays out the format of ROS 2 XML launchfiles</li>
+</ul></li>
+<li>Launchfiles should be installed by adding them to the <code>data_files</code> section of <code>setup.py</code>.
+<ul class="org-ul">
+<li>Install the files to <code>share/package_name/launch</code>.</li>
+</ul></li>
+<li>Projects that use launchfiles should add <code>ros2launch</code> as an <code>&lt;exec_depend&gt;</code> in <code>package.xml</code> (because <code>ros2 launch</code> is required to use them).</li>
+<li>Launchfiles list nodes to be launched; however, the order in which they start is non-deterministic.</li>
+<li>Important Launchfile XML elements:
+<ul class="org-ul">
+<li><a href="http://wiki.ros.org/roslaunch/XML/launch">&lt;launch&gt;</a> - the root element, every launchfile starts with this.</li>
+<li><a href="http://wiki.ros.org/roslaunch/XML/node">&lt;node&gt;</a> - Used to run a node.
+Attributes:
+<ul class="org-ul">
+<li>pkg: the package the node is in.</li>
+<li>exec (type in ROS 1): the name of the node executable file.</li>
+<li>name: the basename of the node.</li>
+<li>namespace (ns in ROS 1): the node's namespace.</li>
+<li>output: determine where to send the output to (a log file or the screen).</li>
+<li>required: if the node dies, the whole launch is terminated.</li>
+</ul></li>
+<li><a href="http://wiki.ros.org/roslaunch/XML/include">&lt;include&gt;</a> - Lets you include a launchfile in another launchfile</li>
+<li><a href="http://wiki.ros.org/roslaunch/XML/remap">&lt;remap&gt;</a> - Used for <a href="http://wiki.ros.org/Remapping%20Arguments">Remapping arguments</a></li>
+<li><a href="http://wiki.ros.org/roslaunch/XML/param">&lt;param&gt;</a> - Sets an individual parameter for a node (or on the parameter server in ROS 1).
+<ul class="org-ul">
+<li>In ROS 2 the <code>"command"</code> attribute does not exist. To set a parameter to the output of a command use the <code>$(command)</code> substitution.</li>
+</ul></li>
+<li><a href="http://wiki.ros.org/roslaunch/XML/group">&lt;group&gt;</a> - Groups nodes together and allows you to easily apply common settings
+<ul class="org-ul">
+<li>To put all nodes within a <code>group</code> in the same namespace use the <a href="https://docs.ros.org/en/jazzy/How-To-Guides/Migrating-from-ROS1/Migrating-Launch-Files.html#push-ros-namespace">&lt;push_ros_namespace namespace="ns"&gt;</a> tag</li>
+</ul></li>
+<li><a href="http://wiki.ros.org/roslaunch/XML/arg">&lt;arg&gt;</a> - Used to specify arguments which can be used to change the behavior of the launchfile from the command-line. 
+<ul class="org-ul">
+<li>You should always provide documentation for Launchfile arguments using the <code>description</code> attribute (called <code>doc</code> in ROS 1).</li>
+</ul></li>
+<li><a href="https://docs.ros.org/en/jazzy/How-To-Guides/Launch-files-migration-guide.html#let">&lt;let&gt;</a> - used to define a constant (ROS 2 only, handled by <code>&lt;arg&gt;</code> in ROS 1)</li>
+<li><a href="http://wiki.ros.org/roslaunch/XML/env">&lt;env&gt;</a> - Used to set environment variables for the underlying node</li>
+</ul></li>
+<li>Conditionals:
+<ul class="org-ul">
+<li><a href="http://wiki.ros.org/roslaunch/XML#if_and_unless_attributes">Conditional Attributes</a> All elements have attributes <code>if</code> and <code>unless</code> to be conditionally included.</li>
+</ul></li>
+<li>Substitution arguments:
+<ul class="org-ul">
+<li>The following items can be used within attribute values to perform a computation and expand into the result of that computation</li>
+<li>The general syntax uses <code>$()</code> (just like bash substitution arguments).</li>
+<li>Within XML, a substitution argument would be used like <code>&lt;tag attribute ="$()" /&gt;</code>.</li>
+
+<li>A list of some possible substitution arguments is below:
+<ol class="org-ol">
+<li><code>$(env ENVIRONMENT_VARIABLE)</code> Expands into the value of the environment variable or is an error if that variable is not set.</li>
+<li><code>$(env ENVIRONMENT_VARIABLE default)</code> Expands into the value of an environment variable or <code>default</code> if it is not set. (In ROS 1 this was <code>$(optenv)</code>)</li>
+<li><code>$(find-pkg-share)$</code> expands to the location of a given package's share directory.  Useful for finding configuration and
+data files associated with the package</li>
+<li><code>$(find-pkg-prefix)$</code> expands</li>
+<li><code>$(var myarg)</code> expands into the value of <code>myarg</code>, as specified by an <code>&lt;arg&gt;</code> element and
+passed in on the call to <code>roslaunch</code></li>
+<li><code>$(eval &lt;expression&gt;)</code> Runs python code <code>&lt;expression&gt;</code> and expands to the result of the code evaluation
+<ul class="org-ul">
+<li>This does not yet behave exactly like the ROS 1 version:
+<ol class="org-ol">
+<li><code>&lt;expression&gt;</code> should be a single-quoted string</li>
+<li>If the expression itself uses single-quotes, those need to be escaped (e.g., 'mystring' becomes \'mystring\')</li>
+<li>Some ROS 1 shortcuts for accessing launchfile arguments are not supported: instead the substitution must be used:
+(e.g., <code>$(var argname)</code> will literally transform into the value of <code>argname</code></li>
+</ol></li>
+</ul></li>
+<li><code>$(command '&lt;expression&gt;')</code> runs a command and returns the output (ROS 2 only).</li>
+</ol></li>
+</ul></li>
+<li><a href="https://docs.ros.org/en/jazzy/How-To-Guides/Parameters-YAML-files-migration-guide.html">Loading Parameters from a file</a>:
+<ol class="org-ol">
+<li><p>
+In <code>&lt;pkg&gt;/config</code>, create a <code>&lt;myconfig&gt;.yaml</code> file
+</p>
+<ul class="org-ul">
+<li>Each key at the top level is the name of a node (or a wildcard pattern for a node name)</li>
+<li>The next subkey is <code>ros__parameters</code> (note the double <code>_</code>)</li>
+<li>Then the next keys are parameters and their values</li>
+</ul>
+<pre class="example">
+node_name_here:
+   ros__parameters:
+       param1: value
+       pram2: value
+</pre></li>
+<li><p>
+<code>ros2 param load</code> can load these files
+</p>
+<ol class="org-ol">
+<li>You must install the data by editing <code>setup.py</code> and adding it to <code>data_files</code> in <code>setup.py</code></li>
+</ol>
+<p>
+3.In an xml launchfile use <code>&lt;param from="$(find-pkg-share pkgname)/installed/path/to/configfile&gt;</code>
+</p></li>
+</ol></li>
+<li>More information on how ROS handles <code>.yaml</code> files can be found in the <a href="https://github.com/ros2/rcl/tree/master/rcl_yaml_param_parser">rcl_yaml_param_parser</a> library</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-python_launch" class="outline-2">
+<h2 id="python_launch">Python Launchfiles</h2>
+<div class="outline-text-2" id="text-python_launch">
+</div>
+<div id="outline-container-orgaf7ae87" class="outline-3">
+<h3 id="orgaf7ae87">General Concepts</h3>
+<div class="outline-text-3" id="text-orgaf7ae87">
+<ul class="org-ul">
+<li>In ROS 2, <code>launch</code> was first implemented as a python API. Ultimately the XML and YAML launch files use this API.</li>
+<li><code>python</code> launchfiles are therefore the most feature-complete version of launch files</li>
+<li>Overall, you should view python launch files as a template language for generating a description of what happens
+when <code>ros2 launch &lt;yourlaunchfile&gt;</code> is executed.
+<ul class="org-ul">
+<li>Theoretically (though not in actuality) you can view the description that you write in a <code>python</code> launchfile as
+generating a file that contains instructions for <code>ros2 launch</code></li>
+</ul></li>
+<li><a href="https://docs.ros.org/en/jazzy/Tutorials/Intermediate/Launch/Launch-Main.html">Launchfile tutorials</a></li>
+<li>Read the  <a href="http://docs.ros.org/en/jazzy/p/launch/">Launch API Documentation</a> to gain a better understanding of how launch files work and the details of their API.
+<ul class="org-ul">
+<li>This documentation is for the <code>launch</code> package, which explains both the design and low-level launch API.</li>
+</ul></li>
+<li>Comments in the <a href="https://github.com/ros2/launch_ros">Launch ROS</a> source code is currently the best place to find API documentation for most of the ROS 2 Launch API calls you will actually use.</li>
+<li>The <code>launch</code> package contains generic launchfile components for working with processes</li>
+<li>The <code>launch_ros</code> package contains ros-specific launchfile components.</li>
+</ul>
+</div>
+
+<div id="outline-container-org27046b6" class="outline-4">
+<h4 id="org27046b6">Theory of Launchfiles</h4>
+<div class="outline-text-4" id="text-org27046b6">
+<ul class="org-ul">
+<li>Python launchfile programming is meant to be declarative rather than imperative.
+<ul class="org-ul">
+<li>What this means is that generally you should be <i>declaring</i> what will be happening when <code>ros2 launch yourlaunchfile</code> is called rather than directly executing the commands</li>
+</ul></li>
+<li>Launchfiles are based on an object-oriented design pattern called the <a href="https://en.wikipedia.org/wiki/Visitor_pattern">Visitor Pattern</a>
+<ul class="org-ul">
+<li>Ultimately, a python launchfile returns a collection of objects (itself a LaunchDescription object) that describe what will happen during the launch</li>
+<li>A program (like <code>ros2 launch</code>) can iterate over the LaunchDescription and perform various tasks, for example:
+<ul class="org-ul">
+<li>Return a list of arguments that the launchfile accepts</li>
+<li>Return a list of nodes that the launchfile will run</li>
+<li>Actually run the nodes</li>
+</ul></li>
+</ul></li>
+<li>Any python code that is not inside the hierarchy of objects is imperative code that will execute immediately whenever <code>ros2 launch</code> loads the launchfile description.
+<ul class="org-ul">
+<li>This means that any actions taken are not tracked by the launch system and cannot be introspected or queried</li>
+<li>Overall it is best to do as much as possible in the declarative style, as this opens everything up to launchfile introspection methods and also is less prone to bugs,
+however there are some things that can only be done in python and others (when launchfiles get more complicated) that can only be done in python.</li>
+<li>See <a href="https://docs.ros.org/en/jazzy/How-To-Guides/Launch-file-different-formats.html#python-xml-or-yaml-which-should-i-use">Which Should I Use python or xml or yaml?</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-declarative" class="outline-4">
+<h4 id="declarative">Declarative Python Launchfiles</h4>
+<div class="outline-text-4" id="text-declarative">
+<p>
+Here are some properties of purely declarative Python launchfiles. These launchfiles represent a subset of the potential functionality available in
+<code>python</code> but following these principles generally makes it easier to understand what a launchfile is doing (for experienced ROS users), enables the full power of ROS 2 introspection tools
+to be used on the Launchfile, and makes the launchfile more similar and translatable to XML.
+</p>
+
+<ol class="org-ol">
+<li><code>generate_launch_description</code> consists of a single return statement returning a <code>LaunchDescription</code> object.
+<ul class="org-ul">
+<li>No variables are used.</li>
+</ul></li>
+<li>The only imports are to <code>launch</code> (and submodules) <code>launch_ros</code> (and submodules) and other python packages that implement launch objects (e.g., Actions, Substitutions, etc).
+<ul class="org-ul">
+<li>In particular, importing and using functionality from <code>os</code>, <code>yaml</code>, and other packages makes breaks declarative purity.</li>
+<li>For example, you do not explicitly read a <code>yaml</code> file: instead you compute the path to the file using substitutions and pass that path to a Node action</li>
+</ul></li>
+<li>Substitution and Conditions are used rather than python control-flow (e.g., <code>if</code>, <code>while</code>) statements</li>
+</ol>
+
+<p>
+There are cases where using imperative code makes a launchfile more clear: particularly if the goal is to provide generic functionality
+to multiple LaunchFiles. In many of these cases, such code could be converted into a custom Action or Substitution, which would then enhance
+the functionality of declarative launchfiles and also make that functionality available to XML and YAML launchfiles.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgeff0d4e" class="outline-3">
+<h3 id="orgeff0d4e">Description</h3>
+<div class="outline-text-3" id="text-orgeff0d4e">
+<ul class="org-ul">
+<li><code>launch.LaunchDescription</code> is the object that describes what <i>LaunchActions</i> should be taken when running the Launchfile</li>
+<li>All python launchfiles have a <code>generate_launch_description()</code> function that returns a <code>launch.LaunchDescription</code> Object</li>
+<li>The <code>LaunchDescription</code> object takes a list of <i>LaunchActions</i> that should be executed by the launchfile</li>
+<li>The <code>launch.LaunchDescription</code> object is roughly equivalent to the <code>&lt;launch&gt;</code> tag in an <code>xml</code> launchfile</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org6711e64" class="outline-3">
+<h3 id="org6711e64">Actions</h3>
+<div class="outline-text-3" id="text-org6711e64">
+<ul class="org-ul">
+<li>When executing <code>ros2 launch</code>, all of the <a href="http://docs.ros.org/en/jazzy/p/launch/architecture.html#actions">Actions</a> listed in the <code>LaunchDescription</code> object returned by <code>generate_launch_description()</code> are executed
+<ul class="org-ul">
+<li>The <a href="https://github.com/ros2/launch_ros/blob/rolling/launch_ros/launch_ros/actions/node.py">launch_ros.actions.Node</a> action causes a Node to run. Roughly corresponds to a <code>&lt;node&gt;</code> tag
+<ul class="org-ul">
+<li>When creating a <code>launch_ros.actions.Node</code>, parameters can be specified using the <code>parameters</code> keyword argument</li>
+<li>Equivalent to the <code>&lt;node&gt;</code> tag in XML.</li>
+</ul></li>
+<li>The <a href="http://docs.ros.org/en/jazzy/p/launch/launch.actions.declare_launch_argument.html#launch.actions.declare_launch_argument.DeclareLaunchArgument">launch.actions.DeclareLaunchArgument</a> action causes the launchfile to look for an argument to be specified (optionally with a default value). Roughly corresponds to an <code>&lt;arg&gt;</code> tag
+<ul class="org-ul">
+<li>Equivalent to the <code>&lt;arg&gt;</code> tag in XML.</li>
+<li>Always fill in the <code>description</code> to provide documentation for the argument</li>
+</ul></li>
+<li>The <a href="http://docs.ros.org/en/jazzy/p/launch/launch.actions.include_launch_description.html#launch.actions.include_launch_description.IncludeLaunchDescription">launch.actions.IncludeLaunchDescription</a> enables including one launchfile in another
+<ul class="org-ul">
+<li>This action includes a launchfile as described by a <a href="http://docs.ros.org/en/jazzy/p/launch/launch.launch_description_source.html#launch.launch_description_source.LaunchDescriptionSource">launch.LaunchDescriptionSource</a> object or a string</li>
+<li>Equivalent to the <code>&lt;include&gt;</code> tag in XML</li>
+<li>There is also <code>IncludePythonLaunchDescription</code>. This is entirely unnecessary to use: <code>IncludeLaunchDescription</code> will load any <code>launchfile</code> regardless of type.</li>
+</ul></li>
+<li>The <a href="http://docs.ros.org/en/jazzy/p/launch/launch.actions.execute_process.html#launch.actions.execute_process.ExecuteProcess">launch.actions.ExecuteProcess</a> enables running a (non-node) process in the launchfile
+<ul class="org-ul">
+<li>Equivalent to the <code>&lt;executable&gt;</code> tag in XML (ROS 2 only)</li>
+</ul></li>
+<li>The <a href="http://docs.ros.org/en/jazzy/p/launch/launch.actions.register_event_handler.html">launch.actions.RegisterEventHandler</a> enables the launch file to respond to events (see <a href="#org5471aa5">Events</a>)
+<ul class="org-ul">
+<li>There are not methods for handling events in XML or YAML launchfiles.</li>
+</ul></li>
+<li>The <a href="http://docs.ros.org/en/jazzy/p/launch/launch.actions.emit_event.html">launch.actions.EmitEvent</a> enables the launch file to trigger an event
+<ul class="org-ul">
+<li>There are not methods for emitting events in XML or YAML launchfiles.</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-substitutions" class="outline-3">
+<h3 id="substitutions">Substitutions</h3>
+<div class="outline-text-3" id="text-substitutions">
+<ul class="org-ul">
+<li><a href="http://docs.ros.org/en/jazzy/p/launch/architecture.html#substitutions">Substitutions</a> allow values that are computed during <code>ros2 launch</code> time to be used, inspected, and substituted when the <code>launchfile</code> is running.</li>
+<li>Remember, when declaring the launchfile several values are not yet known:
+<ul class="org-ul">
+<li>Locations of package install directories.</li>
+<li>Output of commands that are run.</li>
+<li>The value of arguments specified by the user.</li>
+</ul></li>
+<li>Roughly, substitutions are similar in use to the <code>$()</code> syntax in XML launch files.</li>
+<li>A few useful substitutions are:
+<ul class="org-ul">
+<li><a href="https://github.com/ros2/launch/blob/rolling/launch/launch/substitutions/launch_configuration.py">launch.substitutions.LaunchConfiguration</a> accesses the value of a DeclareLaunchArgument.  Roughly equivalent to <code>$(var Varname)</code> in xml</li>
+<li><a href="https://github.com/ros2/launch_ros/blob/rolling/launch_ros/launch_ros/substitutions/find_package.py">launch_ros.substitutions.FindPackageShare</a> locates the packages <code>share/</code> directory in the install space. Roughly equivalent to <code>$(find-pkg-share package)</code> in xml</li>
+<li><a href="https://github.com/ros2/launch_ros/blob/rolling/launch_ros/launch_ros/substitutions/executable_in_package.py">launch_ros.substitutions.ExecutableInPackage</a> locates an executable file within a package. Roughly equivalent to <code>$(exec-in-pkg package exec)</code> in xml</li>
+<li><a href="https://github.com/ros2/launch/blob/rolling/launch/launch/substitutions/path_join_substitution.py">launch.substitutions.PathJoinSubstitution</a> concatenates paths (accounting for differences between platforms)</li>
+<li><a href="https://github.com/ros2/launch/blob/rolling/launch/launch/substitutions/text_substitution.py">launch.substitutions.TextSubstitution</a> wraps a string in the substitution system (see <a href="https://answers.ros.org/question/390499/ros2-purpose-of-textsubstitution/">Why substitutions?</a>)</li>
+<li><a href="https://github.com/ros2/launch/blob/rolling/launch/launch/substitutions/if_else_substitution.py">launch.substitutions.IfElseSubstitution</a> conditionally expands to text depending on a condition.</li>
+<li><a href="https://github.com/ros2/launch/blob/rolling/launch/launch/substitutions/text_substitution.py">launch.substitutions.TextSubstitution</a> wraps a string in the substitution system (see <a href="https://answers.ros.org/question/390499/ros2-purpose-of-textsubstitution/">Why substitutions?</a>)</li>
+<li><a href="https://github.com/ros2/launch/blob/rolling/launch/launch/substitutions/command.py">launch.substitutions.Command</a> runs a command (e.g., <code>xacro</code>) and substitutes in the output of the command. Roughly equivalent to <code>$(command cmd)</code> in xml.</li>
+</ul></li>
+<li>Substitutions can be concatenated by putting them all in a list (i.e., a list of substitutions is a substitution containing the concatenation of each element of the list)</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgadc6e4f" class="outline-3">
+<h3 id="orgadc6e4f">Conditions</h3>
+<div class="outline-text-3" id="text-orgadc6e4f">
+<ul class="org-ul">
+<li>Conditions allow branching during <code>ros2 launch</code> time</li>
+<li><a href="https://github.com/ros2/launch/blob/rolling/launch/launch/conditions/if_condition.py">launch.conditions.IfCondition</a> when passed as a <code>condition</code> keyword argument to certain actions (e.g., Node), the action will execute if the provided expression is True or 1 (roughly equivalent to the <code>if=""</code> attribute)</li>
+<li><a href="https://github.com/ros2/launch/blob/rolling/launch/launch/conditions/unless_condition.py">launch.conditions.UnlessCondition</a> when passed as a <code>condition</code> keyword argument to certain actions, the action will execute if the provided expression is False or 0 (roughly equivalent to the <code>unless=""</code> attribute)</li>
+<li>In ros2 rolling <a href="https://github.com/ros2/launch/blob/rolling/launch/launch/substitutions/equals_substitution.py">launch.substitutions.EqualsSubstitution</a> allows testing conditions for equality by doing <code>IfCondition(EqualsSubstitution(LaunchConfiguration("config"), "comparison"))</code>
+<ul class="org-ul">
+<li>In humble or earlier, use the deprecated <a href="https://github.com/ros2/launch/blob/rolling/launch/launch/conditions/launch_configuration_equals.py">launch.conditions.LaunchConfigurationEquals</a> instead of <code>IfCondition(EqualsSubstitution(LaunchConfiguration("config"), "comparison"))</code></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5471aa5" class="outline-3">
+<h3 id="org5471aa5">Events</h3>
+<div class="outline-text-3" id="text-org5471aa5">
+<ul class="org-ul">
+<li>Python Launchfiles provide access to certain events in the lifecycle of a node</li>
+<li>Launchfiles can respond to events (via the RegisterEventHandler action)</li>
+<li>Launchfiles can trigger events (via the EmitEvent action)</li>
+<li>The <a href="https://github.com/ros2/launch/blob/rolling/launch/launch/events/shutdown.py">launch.events.Shutdown</a> event is emitted when the launch system is terminated</li>
+<li>See the <a href="https://docs.ros.org/en/jazzy/Tutorials/Intermediate/Launch/Using-Event-Handlers.html">Event Handler Tutorial</a> for details</li>
+<li>To have a node terminate the whole launchfile when it exits:
+Set <code>on_exit</code> to the <code>Shutdown()</code> action.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3e6c3df" class="outline-3">
+<h3 id="org3e6c3df">Parameter Files</h3>
+<div class="outline-text-3" id="text-org3e6c3df">
+<ul class="org-ul">
+<li>Parameter files can be created using <a href="https://github.com/ros2/launch_ros/blob/rolling/launch_ros/launch_ros/parameter_descriptions.py">launch_ros.parameter_descriptions.ParameterFile</a>
+<ul class="org-ul">
+<li>These objects represent a yaml file and can be passed directly to the <code>parameters</code> keyword of the <code>launch.action.Node</code></li>
+<li>Setting the keyword argument <code>allow_susbt</code> to true lets you use substitution rules in the <code>.yaml</code> file.
+<ul class="org-ul">
+<li>For example <code>$(var launchvar)</code> will substitute the value of the variable in the launchfile</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-best_practices" class="outline-2">
+<h2 id="best_practices">Best Practices</h2>
+<div class="outline-text-2" id="text-best_practices">
+<p>
+Launchfile best practices in ROS 2 are still up in the air, the only "official" guidance I've found is here: <a href="https://docs.ros.org/en/jazzy/How-To-Guides/Launch-file-different-formats.html">Which Launch Format to Use?</a>. So here are some opinions:
+</p>
+
+<ol class="org-ol">
+<li>Prefer XML launch files in most cases
+<ul class="org-ul">
+<li>Closer to ROS 1 (so it will help you with ROS 1, which is still very much in use)</li>
+<li>More declarative (that is no changing state) so it is easier to see what is going on and harder to make mistakes</li>
+<li>Since ROS 2 Iron, we can do everything we do in this class with XML launchfiles</li>
+</ul></li>
+<li>Use python launch files either when
+<ul class="org-ul">
+<li>Features are not yet in XML launch files (such as storing the value of a command in a parameter)</li>
+<li>You begin doing lots of logic substitutions and <code>if</code> attributes in XML and need more code-reuse and more complex actions</li>
+</ul></li>
+<li>In python launchfiles, stick to a declarative style unless what you are trying to accomplish would be impossible or significantly more cumbersome.</li>
+<li>Remember that python launchfiles can include XML launchfiles and vice versa</li>
+<li>Yaml launch files seem to be rare in practice. As far as I can tell it has no features that XML does not have, other than it's not XML (and yaml is typically used
+as an alternative to XML). It is mainly a syntactic stylistic preference between the two.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org20b31b3" class="outline-2">
+<h2 id="org20b31b3">References</h2>
+<div class="outline-text-2" id="text-org20b31b3">
+<ul class="org-ul">
+<li><a href="https://docs.ros.org/en/jazzy/Tutorials/Intermediate/Launch/Launch-Main.html#launch">ROS 2 Launchfile Tutorials</a></li>
+<li><a href="https://docs.ros.org/en/jazzy/How-To-Guides/Migrating-from-ROS1/Migrating-Launch-Files.html">Migrating from ROS1</a>
+<ul class="org-ul">
+<li>Contains useful information about ROS 2 Launchfiles that I have not found elsewhere.</li>
+</ul></li>
+<li><a href="https://design.ros2.org/articles/roslaunch_xml.html">Launchfile XML Specification</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

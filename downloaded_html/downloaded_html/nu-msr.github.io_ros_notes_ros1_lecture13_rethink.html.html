@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-11-25 Mon 23:03 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Introduction to Baxter and Sawyer</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">Introduction to Baxter and Sawyer</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org404f006">Overview</a>
+<ul>
+<li><a href="#org5c3b192">Documentation</a>
+<ul>
+<li><a href="#org9620e1d">Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org24e42ce">Setup</a>
+<ul>
+<li><a href="#org643fea5">Installation</a></li>
+<li><a href="#org1d09027">Network</a></li>
+<li><a href="#orgeea3c30">Testing Your Setup</a></li>
+<li><a href="#org759c67d">Advanced Networking</a>
+<ul>
+<li><a href="#org25a79b0">SSH</a></li>
+<li><a href="#orge0c73b9">FSM</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orge56261c">Using the Robots</a></li>
+<li><a href="#org23b82b7">Programming the Robots</a>
+<ul>
+<li><a href="#orgcacf1f1">Baxter</a></li>
+<li><a href="#orgaba51a4">Sawyer</a></li>
+<li><a href="#org7dfbb1a">URDF for Baxter and Sawyer</a></li>
+</ul>
+</li>
+<li><a href="#org2505541">Simulators</a></li>
+<li><a href="#orgca3870e">Series Elastic Actuators</a>
+<ul>
+<li><a href="#org34dc2b4">Thought Experiments</a>
+<ul>
+<li><a href="#org7fbb360">Regular Actuator</a></li>
+<li><a href="#org0397d9f">Series Elastic Actuator</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org8661a59">MoveIt for Baxter and Sawyer</a>
+<ul>
+<li><a href="#orgc81c224">Important Configuration Files</a></li>
+<li><a href="#org3eec5c0">Launch Files</a></li>
+<li><a href="#orgbeec92e">Grasped Mass</a></li>
+<li><a href="#orgc3ac611">Trajectory Execution Speed</a></li>
+<li><a href="#org7e197ef">Joint Trajectory Action Server</a></li>
+<li><a href="#orgb50bc66">Collision</a></li>
+<li><a href="#org64eb0cc">Grasping</a></li>
+<li><a href="#org2e2056f">Fake Controller</a></li>
+</ul>
+</li>
+<li><a href="#orgadbbd36">Debugging Checklist</a>
+<ul>
+<li><a href="#org8a32e59">Moviet</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-org404f006" class="outline-2">
+<h2 id="org404f006">Overview</h2>
+<div class="outline-text-2" id="text-org404f006">
+<p>
+The Baxter and Sawyer robots from <a href="http://rethinkrobotics.com">Rethink Robotics</a> are manufacturing robots designed to operate around people.
+Both robots use <a href="https://ieeexplore.ieee.org/document/525827">series elastic actuators (SEAs)</a> in all their joints, meaning that there is an elastic element (e.g., a spring) between the
+gearbox and the joint. These actuators add mechanical compliance, enabling easier force control at the expense of position control bandwidth.
+</p>
+
+<p>
+<a href="https://www.youtube.com/watch?v=b6cEKkunT7A">Promotional Video for Baxter</a>
+</p>
+</div>
+
+<div id="outline-container-org5c3b192" class="outline-3">
+<h3 id="org5c3b192">Documentation</h3>
+<div class="outline-text-3" id="text-org5c3b192">
+<ul class="org-ul">
+<li><a href="https://sdk.rethinkrobotics.com/intera/Main_Page">Sawyer Wiki</a></li>
+<li><a href="https://sdk.rethinkrobotics.com/wiki/Home">Baxter Wiki</a></li>
+<li><a href="https://sdk.rethinkrobotics.com/wiki/Hardware_Specifications">Baxter Hardware Specifications</a></li>
+<li><a href="https://sdk.rethinkrobotics.com/intera/Hardware_Components">Sawyer Hardware Specifications</a></li>
+</ul>
+</div>
+
+<div id="outline-container-org9620e1d" class="outline-4">
+<h4 id="org9620e1d">Summary</h4>
+<div class="outline-text-4" id="text-org9620e1d">
+<ul class="org-ul">
+<li>Arms
+<ul class="org-ul">
+<li>Baxter: Two arms, each with seven degrees of freedom (DOF)</li>
+<li>Sawyer: One arm with seven degrees of freedom</li>
+<li>Series elastic actuators at each joint</li>
+<li>Accurate joint torque measurements (when calibrated)</li>
+</ul></li>
+<li>Head
+<ul class="org-ul">
+<li>Pan/tilt ability</li>
+<li>Built in camera</li>
+<li>Display</li>
+</ul></li>
+<li>Control
+<ul class="org-ul">
+<li>On-board computer running Gentoo Linux and ROS Kinetic</li>
+<li>Can run ROS nodes remotely or on-board</li>
+<li>Low-level controllers prevent self-collisions and enforce limits on acceleration, torque, and position.</li>
+<li>Buttons on arm and grippers.</li>
+<li>Zero-g mode: when enabled you can grab the cuff of an arm and move it anywhere</li>
+</ul></li>
+<li>Distance sensors
+<ul class="org-ul">
+<li>Infrared distance sensor in the hand</li>
+<li>Baxter: Sonar ring around head</li>
+</ul></li>
+<li>Cameras
+<ul class="org-ul">
+<li>One camera per hand</li>
+<li>One camera in the head</li>
+<li>Baxter has three cameras, but you can only stream from two simultaneously</li>
+</ul></li>
+<li>Grippers
+<ul class="org-ul">
+<li>Interchangeable grippers and jaws</li>
+<li>We use electric grippers, but vacuum grippers are also available</li>
+<li>Custom grippers are possible as well</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org24e42ce" class="outline-2">
+<h2 id="org24e42ce">Setup</h2>
+<div class="outline-text-2" id="text-org24e42ce">
+<ul class="org-ul">
+<li>Baxter and Sawyer run <code>rosmaster</code> on their onboard computers.</li>
+<li>You run nodes on your computer that communicate with the remote <code>rosmaster</code></li>
+<li>It is also possible to have nodes run on Baxter or Sawyer
+<ul class="org-ul">
+<li>However, we do not have root access to these robots and can't install packages</li>
+<li>For most of our purposes, running our custom nodes on our own computers is fine.</li>
+</ul></li>
+</ul>
+</div>
+
+
+<div id="outline-container-org643fea5" class="outline-3">
+<h3 id="org643fea5">Installation</h3>
+<div class="outline-text-3" id="text-org643fea5">
+<ul class="org-ul">
+<li>The Baxter and Sawyer software is not released for <code>noetic</code> and in fact dates back to ROS <code>indigo</code></li>
+<li>Some code, especially for <code>baxter</code> has to be patched to work.
+<ul class="org-ul">
+<li>Some code comes from forked repositories, with fixes to make it compile on Ubuntu 20.04 with <code>noetic</code></li>
+<li>The code is written in python 2. I have done my best to patch it to work with python3, however if you run into
+python issues let me know.</li>
+</ul></li>
+<li>We will create another workspace, similar to <code>nuws</code> but exclusively for the Baxter and Sawyer robots
+<ul class="org-ul">
+<li>You may wish to source this workspace from your <code>.bashrc</code> to have the packages accessible.</li>
+</ul></li>
+</ul>
+<pre class="example">
+mkdir -p rethink_ws/src
+cd rethink_ws/src
+vcs import --input https://nu-msr.github.io/me495_site/rethink.rosinstall
+cd ..
+# Install dependencies, but ignore any errors
+rosdep install --from-paths src --ignore-src -r -y 
+catkin_make
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org1d09027" class="outline-3">
+<h3 id="org1d09027">Network</h3>
+<div class="outline-text-3" id="text-org1d09027">
+<ol class="org-ol">
+<li>You will connect to the robot via Ethernet. First, some one-time setup to install the profile</li>
+</ol>
+<pre class="example">
+# Download the Network manager profile
+curl -L https://nu-msr.github.io/me495_site/Rethink &gt; /tmp/Rethink
+sudo cp /tmp/Rethink /etc/NetworkManager/system-connections/Rethink
+# Set the ownership and permissions
+sudo chown root:root /etc/NetworkManager/system-connections/Rethink
+sudo chmod 600 /etc/NetworkManager/system-connections/Rethink
+# Reload network manager
+sudo systemctl restart NetworkManager
+
+# Append the IP address to your hosts file. This way you can resolve baxter.local and sawyer.local on your machine
+echo "10.42.0.2 baxter.local" | sudo tee -a /etc/hosts
+echo "10.42.0.2 sawyer.local" | sudo tee -a /etc/hosts
+</pre>
+
+<ol class="org-ol">
+<li>With the robot on and the ethernet cord plugged in, you can connect to the robot by doing
+<ul class="org-ul">
+<li><code>nmcli connection up Rethink</code></li>
+</ul></li>
+
+<li>The IP address of the robot is <code>10.42.0.2</code> and your IP address is <code>10.42.0.1</code>
+<ul class="org-ul">
+<li>You should be able to ping <code>10.42.0.2</code>.  If not, something is wrong.</li>
+<li>You should also be able to ping <code>sawyer.local</code> and <code>baxter.local</code></li>
+</ul></li>
+<li>To have nodes on your computer connect to the remote <code>rosmaster</code>:
+<ul class="org-ul">
+<li>The <code>ROS_MASTER_URI</code> environment variable must be set to the robot's rosmaster uri: <code>http://10.42.0.2:11311</code>
+<ul class="org-ul">
+<li>This variable tells ROS nodes how to connect to <code>rosmaster</code></li>
+</ul></li>
+<li>The <code>ROS_IP</code> environment variable should be the ip address of your computer (<code>10.42.0.1</code>). 
+<ul class="org-ul">
+<li>This variable tells <code>rosmaster</code> how to connect to your computer</li>
+</ul></li>
+<li>The <code>ROS_HOSTNAME</code> environment variable should NOT be set <code>unset ROS_HOSTNAME</code></li>
+<li><p>
+Feel free to write a <code>bash</code> script that you can source to set these environment variables appropriately
+</p>
+<pre class="example">
+export ROS_MASTER_URI=http://10.42.0.2:11311
+export ROS_IP=10.42.0.1
+unset ROS_HOSTNAME
+</pre></li>
+<li>If you read Rethink's instructions, they provide a script that sets these variables for you. I don't like everything it does so I just use my own script.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgeea3c30" class="outline-3">
+<h3 id="orgeea3c30">Testing Your Setup</h3>
+<div class="outline-text-3" id="text-orgeea3c30">
+<ol class="org-ol">
+<li>Make sure you can ping 10.42.0.2, <code>baxter.local</code> and <code>sawyer.local</code>.</li>
+<li><p>
+Set your environment variables:
+</p>
+<pre class="example">
+export ROS_MASTER_URI=http://10.42.0.2:11311
+export ROS_IP=10.42.0.1
+unset ROS_HOSTNAME
+</pre></li>
+<li>Source the rethink workspace: <code>source rethink_ws/devel/setup.bash</code></li>
+<li>When you run <code>rosnode list</code> you should see a bunch of nodes running on the baxter/sawyer</li>
+<li>Echo joint states: <code>rostopic echo /robot/joint_states</code>
+<ul class="org-ul">
+<li>You should see joint states printed to the screen</li>
+</ul></li>
+<li>Enable the robot
+<ul class="org-ul">
+<li>Baxter: <code>rosrun baxter_tools enable_robot.py -e</code></li>
+<li>Sawyer: <code>rosrun intera_interface enable_robot.py -e</code></li>
+</ul></li>
+
+<li>Disable the robot
+<ul class="org-ul">
+<li>Baxter: <code>rosrun baxter_tools enable_robot.py -d</code></li>
+<li>Sawyer: <code>rosrun intera_interface enable_robot.py -d</code></li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org759c67d" class="outline-3">
+<h3 id="org759c67d">Advanced Networking</h3>
+<div class="outline-text-3" id="text-org759c67d">
+</div>
+<div id="outline-container-org25a79b0" class="outline-4">
+<h4 id="org25a79b0">SSH</h4>
+<div class="outline-text-4" id="text-org25a79b0">
+<ol class="org-ol">
+<li>You cannot ssh into the <code>sawyer</code>, Rethink has it locked down</li>
+<li>You can ssh into the baxter. Username <code>ruser</code> password <code>rethink</code>.
+<ul class="org-ul">
+<li>You do not (and usually should not) ssh in to run the robot</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orge0c73b9" class="outline-4">
+<h4 id="orge0c73b9">FSM</h4>
+<div class="outline-text-4" id="text-orge0c73b9">
+<ol class="org-ol">
+<li>The field-service menu lets you change network settings on the baxter and the sawyer</li>
+<li>Students: Do not modify these settings without asking me first!</li>
+<li>Currently, it seems that ROS_IP mode on the robots does not work. I suspect that the ROS_MASTER_URI is set to <code>sawyer.local</code> or <code>baxter.local</code> on
+the robot, which means that, regardless of anything else, your computer must be able to resolve those addresses to receive messages from the robot</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge56261c" class="outline-2">
+<h2 id="orge56261c">Using the Robots</h2>
+<div class="outline-text-2" id="text-orge56261c">
+<ol class="org-ol">
+<li>Whenever you are using the robots, be ready to press the E-Stop to prevent the robot from crashing into anything.</li>
+<li>Each robot has a power button.  Press it once to turn on, once to turn off; never hold the power button.</li>
+<li>Each robot takes a very long time to boot up so be patient. You should leave the robots on most of the time, but
+if the robot is being left unattended it MUST be disabled.
+<ul class="org-ul">
+<li>For Baxter: <code>rosrun baxter_tools enable_robot.py -d</code> disables the robot.</li>
+<li>For Sawyer: <code>rosrun intera_interface enable_robot.py -d</code> disables the robot.</li>
+</ul></li>
+<li>If you wish to move the robot arms manually, you should enable them and use zero-g mode:
+<ul class="org-ul">
+<li>For Baxter: <code>rosrun baxter_tools enable_robot.py -e</code> enables the robot, then squeezing the cuff starts zero-g mode.</li>
+<li>For Sawyer: <code>rosrun intera_interface enable_robot.py -e</code> enables the robot.  Squeezing the cuff or pressing the O button starts zero-g mode.
+<ul class="org-ul">
+<li>The cuff does not always work.</li>
+</ul></li>
+<li>In zero-g mode the arm should be easy to move and you should not here any winding or feel resistance.</li>
+</ul></li>
+<li>If the E-stop is pressed, you need to release the e-stop by twisting and reset the robot
+<ul class="org-ul">
+<li>For Baxter: <code>rosrun baxter_tools enable_robot.py -r</code></li>
+<li>For Sawyer: <code>rosrun intera_interface enable_robot.py -r</code></li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org23b82b7" class="outline-2">
+<h2 id="org23b82b7">Programming the Robots</h2>
+<div class="outline-text-2" id="text-org23b82b7">
+<p>
+Sawyer and Baxter are programmed using very similar interfaces; therefore,
+information for one robot often applies to the other.
+Especially relevant is that much of the Baxter ROS API documentation applies to sawyer as well.
+</p>
+
+<p>
+Note: if you have your <code>ROS_MASTER_URI</code> and <code>ROS_IP</code> setup correctly you can ignore parts about running <code>baxter.sh</code> or the <code>RSDK shell</code>
+</p>
+</div>
+
+<div id="outline-container-orgcacf1f1" class="outline-3">
+<h3 id="orgcacf1f1">Baxter</h3>
+<div class="outline-text-3" id="text-orgcacf1f1">
+<ul class="org-ul">
+<li><a href="https://sdk.rethinkrobotics.com/wiki/Robot_Components">Baxter Physical Hardware</a></li>
+<li><a href="https://sdk.rethinkrobotics.com/wiki/Home">Baxter SDK Wiki</a></li>
+<li><a href="https://sdk.rethinkrobotics.com/wiki/Foundations">Foundations of Baxter</a> gives a broad overview of the various Baxter programming possibilities</li>
+<li><a href="https://sdk.rethinkrobotics.com/wiki/Baxter_Research_Robot_Software_Developers_Kit_(SDK)">Baxter SDK overview</a></li>
+<li><a href="http://api.rethinkrobotics.com/baxter_interface/html/index.html">Baxter API Reference</a> useful python API for controlling baxter</li>
+<li><a href="http://sdk.rethinkrobotics.com/wiki/API_Reference">Baxter ROS API Reference</a> control baxter with ros messages and services</li>
+<li><a href="https://sdk.rethinkrobotics.com/wiki/Advanced_Understanding">Baxter Advanced Understanding</a> (Not too advanced for you!)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgaba51a4" class="outline-3">
+<h3 id="orgaba51a4">Sawyer</h3>
+<div class="outline-text-3" id="text-orgaba51a4">
+<ul class="org-ul">
+<li><a href="https://sdk.rethinkrobotics.com/intera/Hardware_Components">Sawyer Physical Hardware</a></li>
+<li><a href="https://sdk.rethinkrobotics.com/intera/Main_Page">Sawyer SDK Wiki</a></li>
+<li><a href="https://sdk.rethinkrobotics.com/intera/SDK_System_Overview">Sawyer SDK Overview</a></li>
+<li><a href="https://sdk.rethinkrobotics.com/intera/API_Reference">Sawyer ROS API Reference</a></li>
+<li><a href="https://rethinkrobotics.github.io/intera_sdk_docs/5.1.0/intera_interface/html/index.html">Sawyer Python API</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org7dfbb1a" class="outline-3">
+<h3 id="org7dfbb1a">URDF for Baxter and Sawyer</h3>
+<div class="outline-text-3" id="text-org7dfbb1a">
+<ul class="org-ul">
+<li>Each robot has an internal URDF, with parameters that have been factory calibrated to account for manufacturing tolerances. 
+<ul class="org-ul">
+<li>This URDF is stored in <code>/robot_description</code> in the parameter server.</li>
+</ul></li>
+<li>Generic URDFs are available: 
+<ul class="org-ul">
+<li>For Baxter: <code>baxter_description</code> package (from the <code>baxter_common</code> git repo)</li>
+<li>For Sawyer: <code>sawyer_robot_package</code></li>
+</ul></li>
+<li>Two <code>robot_state_publishers</code> are used to publish the commanded and the real pose of the robot
+<ul class="org-ul">
+<li>See  <a href="https://sdk.rethinkrobotics.com/wiki/URDF">https://sdk.rethinkrobotics.com/wiki/URDF</a> (Applies to Baxter and Sawyer)</li>
+<li>The robots actually run a <a href="https://github.com/RethinkRobotics/mutable_robot_state_publisher">Mutable Robot State Publisher</a>
+<ul class="org-ul">
+<li>When grippers are added, the URDF changes</li>
+<li>The Mutable Robot State publisher subscribes to <code>/robot/urdf</code> and can have pieces
+of the URDF modified in real time.</li>
+</ul></li>
+</ul></li>
+<li>When using grippers, you should update the URDF to properly account for the gripper. We use electric grippers.
+<ul class="org-ul">
+<li>For Baxter: <code>rethink_ee_description</code> package in the <code>baxter_common</code> repository has URDF files for each gripper.</li>
+<li>For Sawyer: <code>intera_common</code> contains the <code>intera_tools_description</code> package.</li>
+<li>An example that adds a gripper to the baxter urdf can be found <a href="https://github.com/NxRLab/nxr_baxter/commit/452a2aa7ef0e3c984936e5436f883e9dee275563">here</a>.
+<ul class="org-ul">
+<li>This example is used on the Willen's Wing Baxter</li>
+<li>The launch file calls a bash script which uses Rethink's <code>send_urdf_fragment.py</code> to update the urdf.</li>
+<li>The gripper xacro file was adjusted to exactly match our gripper (see <a href="https://github.com/NxR-Baxter/baxter_common/commit/c70a194127d09fa21e2d726c171ff2c02c3baa4b">this commit</a>)</li>
+</ul></li>
+<li>When using MoveIt, you need to make sure your grippers are setup properly</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org2505541" class="outline-2">
+<h2 id="org2505541">Simulators</h2>
+<div class="outline-text-2" id="text-org2505541">
+<ul class="org-ul">
+<li><a href="https://sdk.rethinkrobotics.com/wiki/Baxter_Simulator">Baxter Gazebo</a>
+<ul class="org-ul">
+<li>Note: you do not need to actually run baxter.sh to use the simulator.</li>
+<li>baxter.sh is an example of the Rethink Setup script that I do not use because I set 
+my ROS environment variables manually</li>
+<li><code>roslaunch baxter_gazebo baxter_world.launch</code></li>
+</ul></li>
+<li><a href="https://sdk.rethinkrobotics.com/intera/Gazebo_Tutorial">Sawyer Gazebo Tutorial</a>
+<ul class="org-ul">
+<li><code>roslaunch sawyer_gazebo sawyer_world.launch</code></li>
+</ul></li>
+<li>The simulated robots use the same API's as the real robots.
+However, your <code>ROS_MASTER_URI</code> should be <code>http://localhost:11311</code>
+and <code>ROS_IP</code> unset for you to use the simulator.</li>
+
+<li>Do not run gazebo while connected to the robots, especially if your <code>ROS_MASTER_URI</code> is set to the robot's IP
+<ul class="org-ul">
+<li>This will attempt to run Gazebo on the robots themselves, which may require you to restart the robot in
+order to connect to it</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgca3870e" class="outline-2">
+<h2 id="orgca3870e">Series Elastic Actuators</h2>
+<div class="outline-text-2" id="text-orgca3870e">
+<p>
+The Baxter and Sawyer robots use Series Elastic Actuators (SEAs) at each joint.
+In a series elastic actuator, the motor drives a gearbox which is then connected
+to the joint via a spring (rather than via a stiff rigid link, as in a traditional actuator).
+This design sacrifices bandwidth in exchange for robustness and more precise force control.
+</p>
+
+<p>
+For example, rather than requiring a precise motor/gearbox model to estimate joint torque 
+from motor current estimates, with a series elastic actuator joint torque can determined by
+measuring the displacement of the elastic element.  Additionally, controlling joint torque
+can be accomplished by controlling position (i.e, the displacement of the elastic element).
+</p>
+</div>
+
+<div id="outline-container-org34dc2b4" class="outline-3">
+<h3 id="org34dc2b4">Thought Experiments</h3>
+<div class="outline-text-3" id="text-org34dc2b4">
+</div>
+<div id="outline-container-org7fbb360" class="outline-4">
+<h4 id="org7fbb360">Regular Actuator</h4>
+<div class="outline-text-4" id="text-org7fbb360">
+<p>
+Imagine you are holding a solid steel rod. The rod is stiff.
+As you move the rod around, its tip remains
+fixed relative to where your hand is; it does not bounce around.  The tip remains steady even
+if you move your hand really fast.   Thus, you have high bandwidth and high precision control of the rod tip.
+</p>
+
+<p>
+Now imagine that you want drag the rod along the wall. You move the rod against the wall.
+However, what if your position measurement is slightly imprecise? You think the rod tip is 0.001 inches away from the wall when it is actually touching.
+Your controller will continue to try to move that extra 0.001 inches, pushing into the wall.
+To accomplish this task the stiff rod (or the wall) will need to deform by 0.001 inches; however, 
+because they are stiff this deformation requires a lot of force, which you will feel in your hand.
+Thus, a small error in position can cause a large force on the motor (your hand).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0397d9f" class="outline-4">
+<h4 id="org0397d9f">Series Elastic Actuator</h4>
+<div class="outline-text-4" id="text-org0397d9f">
+<p>
+Now imagine that the tip of the rod is connected to your hand via a spring.  As you move your hand around, the tip will bounce around on the spring,
+unless you move really slowly.  Thus you experience lower positional bandwidth and precision for the location of the rod tip.
+</p>
+
+<p>
+However, when you go to move the rod against the wall, as soon as you make contact the spring will start to compress.
+Thus, even if your position controller thinks the tip is 0.001 inches away from the wall when it is actually touching,
+it can move the extra 0.001 inch easily: the spring will simply compress an amount according to its stiffness (assumed to be significantly less than the stiff rod). 
+ Furthermore, measuring the spring's displacement will tell you the applied force.
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8661a59" class="outline-2">
+<h2 id="org8661a59">MoveIt for Baxter and Sawyer</h2>
+<div class="outline-text-2" id="text-org8661a59">
+<ul class="org-ul">
+<li><a href="https://sdk.rethinkrobotics.com/wiki/MoveIt_Tutorial">Baxter MoveIt</a></li>
+<li>Baxter's moveit configuration is in the <code>moveit_robots</code> package
+<ul class="org-ul">
+<li>Clone into your source space from <code>https://github.com/ros-planning/moveit_robots.git</code></li>
+<li>Configuration and launch files are located in (respectively):
+<ul class="org-ul">
+<li><a href="https://github.com/ros-planning/moveit_robots/tree/kinetic-devel/baxter/baxter_moveit_config/config">moveit_robots/baxter/baxter_moveit_config/config</a></li>
+<li><code>moveit_robots/baxter/baxter_moveit_config/launch</code></li>
+</ul></li>
+<li>You may need to disable the robot then enable it for moveit to work</li>
+</ul></li>
+<li><a href="https://sdk.rethinkrobotics.com/intera/MoveIt_Tutorial">Sawyer MoveIt</a></li>
+<li>Sawyer's moveit configuration is in the <code>sawyer_movit</code> package
+<ul class="org-ul">
+<li>Clone into your source space from <code>https://github.com/RethinkRobotics/sawyer_moveit.git</code>
+<ul class="org-ul">
+<li>Configuration and launch files are located in (respectively):
+<ul class="org-ul">
+<li><code>sawyer_moveit_config/config</code></li>
+<li><code>sawyer_moveit_config/launch</code></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>As your project progresses, you may wish to fork their repository and modify some of the configuration files to tweak moveit settings
+<ul class="org-ul">
+<li>If your project has multiple repositories in your source space, you should create a <code>repos</code> file using <code>vcs export</code> and add it to your main git repository</li>
+<li>You may also copy some of these files (with attribution) to keep your project in a single git repository
+<ul class="org-ul">
+<li>If you go with this option, only take the files you need to modify</li>
+<li>Unlike most other cases, your modifications are likely only useful for your particular project so contributing to upstream does not make sense</li>
+<li>Having the files in your own project will make it harder to incorporate beneficial changes from upstream</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="outline-container-orgc81c224" class="outline-3">
+<h3 id="orgc81c224">Important Configuration Files</h3>
+<div class="outline-text-3" id="text-orgc81c224">
+<ul class="org-ul">
+<li><code>baxter.srdf.xacro</code> / <code>sawyer.srdf.xacro</code>: Defines several "move groups", groups of joints that are controlled and planned for together.
+It requires several arguments to configure properly (for example, what grippers are installed)
+<ul class="org-ul">
+<li>The <code>srdf</code> must match the <code>urdf</code> being used by <code>baxter=/=sawyer</code>.</li>
+<li>The <code>urdf</code> is changed using the <code>mutable_robot_state_publisher</code> depending on the status of its grippers.</li>
+<li>If the <code>urdf</code> and <code>srdf</code> are not in sync, you will have the grippers constantly in collision with the last arm joint and
+be unable to motion plan (that is at least one negative affect)</li>
+</ul></li>
+<li><code>kinematics.yaml</code> Provides options for the IK solvers.  Both <code>baxter</code> and <code>sawyer</code> can use
+either IKFast or KDL but use KDL by default.  To use a different solver, edit this file</li>
+<li><code>ompl_planning.yaml</code> Options for the motion planner.  Many of these parameters require looking
+at the <code>OMPL</code> source code to understand as they are not well documented. 
+<ul class="org-ul">
+<li>The MoveIT setup assistant tweaks these parameters so it is also documented in
+its <a href="https://github.com/ros-planning/moveit_setup_assistant/blob/e301d25cc63e0536a8aa59c7bc770f5a4953ac1b/src/tools/moveit_config_data.cpp#L301-L363">source code</a></li>
+<li>Baxter uses <a href="http://ompl.kavrakilab.org/classompl_1_1geometric_1_1RRTConnect.html">RRT Connect</a></li>
+<li>Sawyer's planner file also has good comments bout what the parameters do
+<ul class="org-ul">
+<li>it used the default <a href="http://ompl.kavrakilab.org/classompl_1_1geometric_1_1SBL.html">SBL planner</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org3eec5c0" class="outline-3">
+<h3 id="org3eec5c0">Launch Files</h3>
+<div class="outline-text-3" id="text-org3eec5c0">
+<ul class="org-ul">
+<li><code>move_group.launch</code> is the main launch file that includes many of the other launch files and
+eventually loads the configuration</li>
+<li>Do not expect the launch files to "just work".
+<ul class="org-ul">
+<li>You may be able to get them to work by passing the proper parameters</li>
+<li>You may need to include these launch files in other launch files, or fork and modify them</li>
+</ul></li>
+<li>Gripper settings:
+<ul class="org-ul">
+<li>Your URDF and SRDF must match with respect to the gripper settings to handle collisions properly</li>
+<li>For simulator, use arguments to <code>xacro</code> files, for real robots use the <code>mutable_robot_state_publisher</code></li>
+</ul></li>
+<li>Look at the arguments to the launchfile and adjust them for your situation</li>
+<li>One common problem is that the gripper configuration is not correct.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgbeec92e" class="outline-3">
+<h3 id="orgbeec92e">Grasped Mass</h3>
+<div class="outline-text-3" id="text-orgbeec92e">
+<ul class="org-ul">
+<li>Baxter (and Sawyer) can compensate for the weight of grasped objects. For Baxter see <a href="http://sdk.rethinkrobotics.com/wiki/Gripper_Customization#Gripped_Object_mass">here</a>.
+For Sawyer, assume it works like Baxter and do your best; it is not documented as far as I know.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgc3ac611" class="outline-3">
+<h3 id="orgc3ac611">Trajectory Execution Speed</h3>
+<div class="outline-text-3" id="text-orgc3ac611">
+<ul class="org-ul">
+<li>Especially at first, you will want your trajectories to move slowly</li>
+<li>Editing <code>joint_limits.yaml</code> is an effective hack for quick debugging, but ultimately that
+file should reflect the true capabilities of the robot.</li>
+<li>There is a <code>/move_group/trajectory_execution/execution_velocity_scaling</code> that can be used
+to slow down a trajectory. It has been known not to work reliably however.</li>
+<li><a href="http://docs.ros.org/kinetic/api/moveit_tutorials/html/doc/time_parameterization/time_parameterization_tutorial.html">Time Parameterization</a> of your
+trajectory can be used to slow down the speed of the trajectory. Here is some python API documentation:
+<ul class="org-ul">
+<li><a href="http://docs.ros.org/melodic/api/moveit_commander/html/classmoveit__commander_1_1move__group_1_1MoveGroupCommander.html#a0c46ebb5a29bbfe84882f5f296352b90">set_max_acceleration_scaling_factor</a></li>
+<li><a href="http://docs.ros.org/melodic/api/moveit_commander/html/classmoveit__commander_1_1move__group_1_1MoveGroupCommander.html#a7706effa66a0847496de477cf219a562">set_max_velocity_scaling_factor</a></li>
+<li><a href="http://docs.ros.org/melodic/api/moveit_commander/html/classmoveit__commander_1_1move__group_1_1MoveGroupCommander.html#a53a40aed261338e6bc108ce7275030c6">retime_trajectory</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org7e197ef" class="outline-3">
+<h3 id="org7e197ef">Joint Trajectory Action Server</h3>
+<div class="outline-text-3" id="text-org7e197ef">
+<ul class="org-ul">
+<li>To use MoveIt with sawyer or baxter, you will want to have the Joint Trajectory Action Server running</li>
+<li>This server must be explicitly run</li>
+<li>It may interfere with normal commands, so you may need to start and stop this server as needed
+if you wish to use a combination of rethink's API and moveit in your project</li>
+<li>The Joint Trajectory Action Server is part of the sawyer/baxter packages</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgb50bc66" class="outline-3">
+<h3 id="orgb50bc66">Collision</h3>
+<div class="outline-text-3" id="text-orgb50bc66">
+<ul class="org-ul">
+<li>It is a good idea to put some basic collision objects in your planning scene, such as the table</li>
+<li>The easiest way is to use <code>moveit_commander.PlanningSceneInterface()</code> in python.
+<ul class="org-ul">
+<li>You can use this class to attach objects to the gripper once they've been picked up</li>
+<li>Thus, moveit can account for objects the robot is holding</li>
+</ul></li>
+<li>Baxter has demos for using the Asus <code>xtion</code> camera (with <code>demo_xtion.launch</code>) to find collisions in the environment
+<ul class="org-ul">
+<li>It is hopefully not to difficult to adjust for the RealSense, although we have <code>xtion</code> cameras as well</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org64eb0cc" class="outline-3">
+<h3 id="org64eb0cc">Grasping</h3>
+<div class="outline-text-3" id="text-org64eb0cc">
+<ul class="org-ul">
+<li>MoveIt Has the ability to do grasping and pick and place.</li>
+<li>It is difficult to get this working and may or may not be worth the effort</li>
+<li>Recently released is a method that uses deep learning for planning grasps.  Could be interesting</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org2e2056f" class="outline-3">
+<h3 id="org2e2056f">Fake Controller</h3>
+<div class="outline-text-3" id="text-org2e2056f">
+<ul class="org-ul">
+<li>For a Kinematic simulation rather than needing gazebo you can use the
+<a href="http://docs.ros.org/melodic/api/moveit_tutorials/html/doc/fake_controller_manager/fake_controller_manager_tutorial.html?highlight=fake">Fake Controller package</a></li>
+<li>This enables you to use moveit without a separate action server.</li>
+<li>The movement will follow trajectory exactly and no dynamics are involved</li>
+<li>You can use this in conjunction with <code>rviz</code> to visualize and debug your robot without gazebo
+when working on kinematic tasks.</li>
+<li>Baxter has <a href="https://github.com/ros-planning/moveit_robots/blob/kinetic-devel/baxter/baxter_moveit_config/launch/demo_dummy.launch">demo_dummy.launch</a> to help launch in this mode.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgadbbd36" class="outline-2">
+<h2 id="orgadbbd36">Debugging Checklist</h2>
+<div class="outline-text-2" id="text-orgadbbd36">
+<ol class="org-ol">
+<li>Is the Robot On?</li>
+<li>Is the ethernet cable plugged in?</li>
+<li>Is the network up with <code>nmcli con up Rethink</code>?</li>
+<li>Can you ping the robot?</li>
+<li>Is the Rethink workspace sourced?</li>
+<li>Are the <code>ROS_IP</code> and <code>ROS_MASTER_URI</code> and <code>ROS_HOSTNAME</code> variables set properly?</li>
+<li>Is the robot enabled?
+<ul class="org-ul">
+<li>Check the <code>estop</code></li>
+<li>Check the robot state <code>enable_robot.py -s</code></li>
+</ul></li>
+</ol>
+</div>
+<div id="outline-container-org8a32e59" class="outline-3">
+<h3 id="org8a32e59">Moviet</h3>
+<div class="outline-text-3" id="text-org8a32e59">
+<ol class="org-ol">
+<li>Is the <code>joint_trajectory_action_server</code> running?</li>
+<li>Does the =SRDF and URDF match the actual robot
+<ul class="org-ul">
+<li>Grippers must be accounted for using the <code>mutable_robot_state_publisher</code></li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-11-25 Mon 23:03 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TurtleBot3 Quickstart</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">TurtleBot3 Quickstart</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org2086ef8">Overview</a></li>
+<li><a href="#org6ec24e6">Powering the Turtlebot</a></li>
+<li><a href="#org010432a">Connecting to the TurtleBot</a>
+<ul>
+<li><a href="#org6ad657c">Computer Setup</a>
+<ul>
+<li><a href="#org7372653">One-time Lab Setup</a></li>
+<li><a href="#org5ff6606">Regular Usage</a></li>
+</ul>
+</li>
+<li><a href="#orge2fd087">Firmware Setup</a></li>
+</ul>
+</li>
+<li><a href="#org0b5e284">Resources</a></li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-org2086ef8" class="outline-2">
+<h2 id="org2086ef8">Overview</h2>
+<div class="outline-text-2" id="text-org2086ef8">
+<p>
+The <a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/">turtlebot3</a> is a small mobile robot with a 2-D Lidar Sensor.
+These instructions describe Northwestern's variant of the software, which has been modified for easy deployment on our networks.
+However, most of the content of the reference manual still applies.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org6ec24e6" class="outline-2">
+<h2 id="org6ec24e6">Powering the Turtlebot</h2>
+<div class="outline-text-2" id="text-org6ec24e6">
+<ol class="org-ol">
+<li>The Turtlebot can be powered from a battery, or directly from the wall charger, which gets plugged into the OpenCR board
+<ul class="org-ul">
+<li><b>IMPORTANT</b> Always make sure the battery is unplugged prior to powering from the wall charger</li>
+<li><b>IMPORTANT</b> Never have the battery and wall charger powering the robot simultaneously</li>
+</ul></li>
+<li>When the battery voltage drops below a threshold, the turtlebot will issue a low-battery warning sound
+<ul class="org-ul">
+<li><b>IMPORTANT</b> When the battery voltage is low, stop using the turtlebot and charge the battery.  Otherwise
+you can permanently damage the battery.</li>
+</ul></li>
+<li>Do not use the PincherX 100 power brick with the turtlebot3!
+<ul class="org-ul">
+<li>It has the same plug but is rated for significantly less power.</li>
+</ul></li>
+<li>I like to test most of the software with the turtlebot3 powered from the wall and up on a block so that the wheels don't touch the ground.
+<ul class="org-ul">
+<li>This method increases development speed because charging the batteries or chasing the turtlebot3 around the room both take time.</li>
+<li>However, the odometry of the <code>stock</code> turtlebot3 depends solely on the IMU, therefore if it is up on blocks and you
+turn, the odometry will be incorrect.   
+<ul class="org-ul">
+<li>In my opinion this is an odd choice but I have not done experiments comparing its accuracy with wheel odometry</li>
+<li>If using the <code>nuturtlebot</code> firmware (e.g., those in ME495 Sensing Navigation and Machine Learning for Robotics) then odometry relies on encoders.</li>
+<li>The <code>raw</code> firmware used with Sensing Navigation and Machine Learning for Robotics does not have this problem.</li>
+</ul></li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org010432a" class="outline-2">
+<h2 id="org010432a">Connecting to the TurtleBot</h2>
+<div class="outline-text-2" id="text-org010432a">
+</div>
+<div id="outline-container-org6ad657c" class="outline-3">
+<h3 id="org6ad657c">Computer Setup</h3>
+<div class="outline-text-3" id="text-org6ad657c">
+</div>
+<div id="outline-container-org7372653" class="outline-4">
+<h4 id="org7372653">One-time Lab Setup</h4>
+<div class="outline-text-4" id="text-org7372653">
+<p>
+These instructions assume that your computer is successfully connected to the <code>eduroam</code> network (see <a href="https://kb.northwestern.edu/109238">https://kb.northwestern.edu/109238</a>).
+It assumes that the NetworkManager connection name for this network is also <code>eduroam</code> (which is the default).
+</p>
+
+<p>
+The steps below will only work if you are on campus or with a VPN.
+</p>
+<ol class="org-ol">
+<li>Download the ssh keys (<code>id_turtle</code> and <code>id_turtle.pub</code>) from Canvas and place them in <code>~/.ssh</code></li>
+<li>Download and run the installation script: <code>curl -L https://raw.githubusercontent.com/m-elwin/robotdns/main/setup_client.sh | sh -s -- eduroam beast.mech.northwestern.edu</code></li>
+<li>The script will print instructions and create <code>~/.ssh/id_robotdns.pub</code>. TO submit, upload this file on Canvas.</li>
+<li>Connect to the robotdns server, and accept the fingerprint: <code>ssh -T -i $HOME/.ssh/id_robotdns robotdns@beast.mech.northwestern.edu</code>
+<ul class="org-ul">
+<li>If this command fails, you do not yet have access</li>
+</ul></li>
+<li>See <a href="https://github.com/m-elwin/robotdns">robotdns</a> for more details</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org5ff6606" class="outline-4">
+<h4 id="org5ff6606">Regular Usage</h4>
+<div class="outline-text-4" id="text-org5ff6606">
+<ol class="org-ol">
+<li>Turn on the turtlebot and note its name (e.g. <code>leonardo</code>)</li>
+<li>Activate the <code>eduroam.robot</code> network with <code>nmcli con up eduroam.robot</code></li>
+<li>You should now be able to
+<ol class="org-ol">
+<li><code>ping leonardo</code></li>
+<li><code>ssh msr@leonardo</code> and be logged in automatically with your ssh key (if not <code>ssh-add ~/.ssh/id_turtle</code>).</li>
+<li>From <code>leonardo</code> be able to <code>ping &lt;hostname&gt;</code>, where <code>&lt;hostname&gt;</code> is the name of your computer.</li>
+</ol></li>
+<li>To use the turtlebot in accordance with the <a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/">ROBOTIS documentation</a>:
+<ul class="org-ul">
+<li>Run <code>roscore</code> on your computer</li>
+<li><code>ssh -o SendEnv=ROS_MASTER_URI msr@leonardo</code> (make sure that <code>ROS_MASTER_URI</code> is properly set to <code>http://$(hostname):11311</code></li>
+<li><code>msr@leonardo$ roslaunch turtlebot3_bringup turtlebot3_robot.launch</code></li>
+<li>From your computer, you can <code>rostopic</code> list all the topics from the turtlebot, <code>echo</code> them, and <code>publish</code> to them</li>
+</ul></li>
+<li>Alternatively you can run <code>roscore</code> on the turtlebot by <code>export ROS_MASTER_URI=http://leonardo:11311</code> and then following
+the same sequence (the <code>SendEnv</code> flag ensures that the value of <code>ROS_MASTER_URI</code> on the turtlebot matches the value in your local terminal</li>
+<li>When you are done using the turtlebots,  run <code>nmcli con up eduroam</code> to reconnect with regular wireless settings.</li>
+</ol>
+</div>
+
+<ul class="org-ul">
+<li><a id="org22c8122"></a>Examples<br>
+<div class="outline-text-5" id="text-org22c8122">
+<p>
+Some example commands when the turtlebot launchfile is running
+</p>
+<ol class="org-ol">
+<li><code>rostopic pub /sound turtlebot3_msgs/Sound "value: 2"</code> - This sound is the low-battery sound.
+<ul class="org-ul">
+<li>Try other sound values <a href="http://docs.ros.org/noetic/api/turtlebot3_msgs/html/msg/Sound.html">(Sound.msg</a>)</li>
+</ul></li>
+<li>Put the turtlebot3 up on a block so that the wheels are slightly above the ground (a RealSense box works well for this)
+<ul class="org-ul">
+<li>If using stock firmware: Try publishing some <code>cmd_vel</code> messages and experiment with how the wheels move</li>
+<li>If using custom firmware: Try publishing some <code>wheel_cmd</code> messages and experimenting with how the wheels move</li>
+</ul></li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-orge2fd087" class="outline-3">
+<h3 id="orge2fd087">Firmware Setup</h3>
+<div class="outline-text-3" id="text-orge2fd087">
+<p>
+There are two firmwares used for the turtlebot, <code>stock</code> (which is what the turtlebot comes with) and <code>raw</code> (modified to provide low-level access).
+The appropriate firmware should be pre-installed if using the turtlebot for a class.
+</p>
+<ol class="org-ol">
+<li><code>ssh msr@&lt;turtlebotname&gt; opencr_update stock</code> to load the <code>stock</code> firmware</li>
+<li><code>ssh msr@&lt;turtlebotname&gt; opencr_update raw</code> to load the <code>raw</code> firmware</li>
+<li>When using the raw firmware,  you need to have <a href="https://github.com/ME495-Navigation/nuturtlebot">nuturtlebot</a> on your ROS path
+(so either installed or in one of the overlayed workspaces).</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0b5e284" class="outline-2">
+<h2 id="org0b5e284">Resources</h2>
+<div class="outline-text-2" id="text-org0b5e284">
+<ul class="org-ul">
+<li><a href="http://emanual.robotis.com/docs/en/platform/turtlebot3/overview/">Main turtlebot documentation</a></li>
+<li><a href="http://github.com/ME495-Navigation/nuturtlebot">nuturtlebot</a>
+<ul class="org-ul">
+<li>Contains the scripts used to create the full turtlebot image and also messages for use with <code>raw</code> mode</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>
