@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-11-18 Mon 10:51 -->
+<!-- 2024-11-25 Mon 23:03 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>3-D Sensing</title>
@@ -31,7 +31,6 @@
 </li>
 <li><a href="#org57acf65">Point Clouds</a>
 <ul>
-<li><a href="#orgdec975b">Not Ported ROS 1 (yet)</a></li>
 <li><a href="#orgc90956f">How To Point Cloud</a></li>
 </ul>
 </li>
@@ -110,23 +109,11 @@ There are several methods for generating a depth image.
 <ul class="org-ul">
 <li>A Point Cloud is a group of 3 dimensional coordinates (points) that
 constitute a discrete description of 3-dimensional objects.</li>
-<li>The <a href="https://pointclouds.org">point cloud library</a> contains routines for manipulating point clouds</li>
-<li><a href="https://github.com/ros-perception/perception_pcl">perception_pcl</a> is a ROS meta-package for point clouds: install <code>ros-iron-perception-pcl</code></li>
+<li>The <a href="https://pointclouds.org">point cloud library</a> contains routines for manipulating point clouds, from C++</li>
+<li><a href="https://index.ros.org/p/perception_pcl/">perception_pcl</a> is a ros meta-package for point clouds.</li>
+<li><a href="https://index.ros.org/p/pcl_ros/">pcl_ros</a> Is used to convert between the point cloud library and ROS 2 data types</li>
 </ul>
 </div>
-
-
-<details id="orgdec975b"><summary class="header-3">Not Ported ROS 1 (yet)</summary>
-<div class="outline-text-3" id="text-orgdec975b">
-<ul class="org-ul">
-<li><a href="http://wiki.ros.org/pcl_ros/Tutorials">Point Cloud Tutorials</a></li>
-<li><a href="https://github.com/ros-perception/perception_pcl/issues/225">pcl_ros</a> is a package that enabled a user to run a series of nodes performing specific point-cloud operations
-<ul class="org-ul">
-<li>It appears that it is installable on <code>iron</code> and parts of it work but parts of it definitely do not.</li>
-</ul></li>
-</ul>
-</div>
-</details>
 
 <div id="outline-container-orgc90956f" class="outline-3">
 <h3 id="orgc90956f">How To Point Cloud</h3>
@@ -144,20 +131,17 @@ constitute a discrete description of 3-dimensional objects.</li>
 <h2 id="org767d74a">Devices that Generate Point Clouds</h2>
 <div class="outline-text-2" id="text-org767d74a">
 <ul class="org-ul">
-<li>Lidars/Laser Scanners 
-<a href="http://wiki.ros/org/velodyne">Velodyne</a>
-<a href="http://wiki.ros.node/urg_node">SCIP 2.2 laser range-finders</a></li>
+<li>Lidars/Laser Scanners
+<a href="https://index.ros.org/p/velodyne/">Velodyne</a>
+<a href="https://index.ros.org/p/urg_node/">SCIP 2.2 laser range-finders</a></li>
 <li>Stereo Cameras
 <ul class="org-ul">
 <li><a href="https://www.stereolabs.com/zed/">ZED 2</a></li>
-<li><a href="https://www.flir.com/support/products/bumblebee2-firewire/?page=4#Overview">Bumblebee 2</a></li>
+<li><a href="https://index.ros.org/p/depthai/">Oak Cameras</a></li>
 </ul></li>
 <li>Depth Cameras
 <ul class="org-ul">
 <li><a href="./realsense.html">Intel RealSense</a></li>
-<li><a href="http://wiki.ros.org/openni2_launch">opennni</a> (Like the Asus Xtion 2)</li>
-<li>Kinect for Box 360 using <a href="http://wiki.ros.org/freenect_launch">freenect_launch</a></li>
-<li>Kinect for Xbox One using <a href="https://github.com/code-iai/iai_kinect2">iai_kinect2</a></li>
 </ul></li>
 </ul>
 </div>
@@ -167,14 +151,14 @@ constitute a discrete description of 3-dimensional objects.</li>
 <h2 id="orgf47266b">Manipulating Point Clouds</h2>
 <div class="outline-text-2" id="text-orgf47266b">
 <p>
-There are several ways of manipulating point clouds in ROS. 
+There are several ways of manipulating point clouds in ROS.
 </p>
 </div>
 <div id="outline-container-org2a7fea6" class="outline-3">
 <h3 id="org2a7fea6">ROS</h3>
 <div class="outline-text-3" id="text-org2a7fea6">
 <ul class="org-ul">
-<li>In ROS, point clouds are sent using the <a href="https://github.com/ros2/common_interfaces/blob/iron/sensor_msgs/msg/PointCloud2.msg">sensor_msgs/msg/PointCloud2</a> messages
+<li>In ROS, point clouds are sent using the <a href="http://docs.ros.org/en/jazzy/p/sensor_msgs/interfaces/msg/PointCloud2.html">PointCloud2</a> messages
 <ul class="org-ul">
 <li>You can access the message fields directly but the format is not the most intuitive</li>
 </ul></li>
@@ -194,15 +178,17 @@ There are several ways of manipulating point clouds in ROS.
 <ul class="org-ul">
 <li>While this is the most common way of handling point clouds in ROS, it is also a C++ only way</li>
 </ul></li>
+<li>Unfortunately, the <a href="https://github.com/strawlab/python-pcl">python bindings</a> to the PointCloud Library are no longer maintained</li>
 </ul>
 </div>
 </div>
+
 
 <div id="outline-container-orgc821e43" class="outline-3">
 <h3 id="orgc821e43">Python</h3>
 <div class="outline-text-3" id="text-orgc821e43">
 <ul class="org-ul">
-<li>The <a href="https://index.ros.org/p/sensor_msgs_py/github-ros2-common_interfaces/#iron">sensor_msgs_py</a> package contains utilities for converting from PointCloud2 datatypes to numpy arrays</li>
+<li>The <a href="https://index.ros.org/p/sensor_msgs_py">sensor_msgs_py</a> package contains utilities for converting from PointCloud2 datatypes to numpy arrays</li>
 <li><p>
 For details:
 </p>
@@ -211,9 +197,7 @@ For details:
 <span class="org-builtin">help</span>(point_cloud2)
 </pre>
 </div></li>
-<li>The <a href="https://github.com/strawlab/python-pcl">python-pcl</a> library lets you use the point cloud library from python (install with <code>apt install python-pcl</code>)</li>
 <li>More details at <a href="https://pointclouds.org/">https://pointclouds.org/</a></li>
-<li>An example project <a href="https://github.com/m-elwin/pointcloud_demo">https://github.com/m-elwin/pointcloud_demo</a></li>
 </ul>
 </div>
 </div>

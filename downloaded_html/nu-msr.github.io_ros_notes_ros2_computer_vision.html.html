@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-11-18 Mon 10:51 -->
+<!-- 2024-11-25 Mon 23:02 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Image Processing with ROS</title>
@@ -314,14 +314,15 @@ Their website has many tutorials on how to process images.
 Some packages that use/relate to OpenCV are:
 </p>
 <ol class="org-ol">
-<li><a href="https://github.com/ros-perception/vision_opencv/tree/humble/cv_bridge">cv_bridge</a>
+<li><a href="https://index.ros.org/p/cv_bridge/">cv_bridge</a>
 <ul class="org-ul">
 <li>Converts between OpenCV data and ROS messages.</li>
 <li>If you want to use opencv with ROS, you should use this package to convert between OpenCV formats and ROS 2 image messages</li>
+<li>Currentlyt he best documentation is the <a href="http://wiki.ros.org/cv_bridge">ROS 1 wiki</a> or the source code</li>
 </ul></li>
-<li><a href="https://index.ros.org/p/image_geometry/github-ros-perception-vision_opencv/#jazzy">image_geometry</a> Using a camera calibration,
+<li><a href="https://index.ros.org/p/image_geometry/">image_geometry</a> Using a camera calibration,
 <ul class="org-ul">
-<li>lets you convert between pixel coordinates and the other frames in your system..</li>
+<li>lets you convert between pixel coordinates and the other frames in your system.</li>
 <li>Python API documentation is not hosted properly but can be build locally with <code>rosdoc2</code>.</li>
 <li>For those too lazy to build the documentation, the ROS 1 python API is substantially similar and is documented online <a href="http://docs.ros.org/en/noetic/api/image_geometry/html/python/">Python API documentation</a></li>
 </ul></li>

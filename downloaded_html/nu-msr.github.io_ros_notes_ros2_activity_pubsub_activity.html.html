@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-11-18 Mon 10:51 -->
+<!-- 2024-11-25 Mon 23:03 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Publishers and Subscriber Activity</title>
@@ -55,19 +55,19 @@
 <ul>
 <li><a href="#org6347998">Tasks</a>
 <ul>
-<li><a href="#org400a5b6">Basic Node</a>
+<li><a href="#org1dddbe6">Basic Node</a>
 <ul>
 <li><a href="#org377622f">Step-by-Step Guide</a></li>
 </ul>
 </li>
-<li><a href="#org07bbc97">Custom Parameters</a></li>
-<li><a href="#orgaafdf65">Namespaces</a></li>
+<li><a href="#org61fe9c8">Custom Parameters</a></li>
+<li><a href="#org7e1d0bb">Namespaces</a></li>
 <li><a href="#org1867bc2">Service Call</a></li>
 </ul>
 </li>
 <li><a href="#org64390a7">Answers</a>
 <ul>
-<li><a href="#org1dddbe6">Basic Node</a>
+<li><a href="#org5acce5d">Basic Node</a>
 <ul>
 <li><a href="#orgf078fe2">Creating The Workspace</a></li>
 <li><a href="#org973b95c">Editing package.xml and setup.py</a></li>
@@ -81,12 +81,12 @@
 </li>
 <li><a href="#orgdf94e69">Parameters</a>
 <ul>
-<li><a href="#org61fe9c8">Custom Parameters</a></li>
+<li><a href="#org80a8ed0">Custom Parameters</a></li>
 <li><a href="#org60d56b8">Testing the Parameters</a></li>
 <li><a href="#org5bfb31f">Parameters in launch file</a></li>
 </ul>
 </li>
-<li><a href="#org7e1d0bb">Namespaces</a>
+<li><a href="#org404f0d8">Namespaces</a>
 <ul>
 <li><a href="#org71c381e">Changing the Namespace</a></li>
 <li><a href="#org537e7ca">Namespace Launchfile</a></li>
@@ -114,9 +114,9 @@
 <h2 id="org6347998">Tasks</h2>
 <div class="outline-text-2" id="text-org6347998">
 </div>
-<div id="outline-container-org400a5b6" class="outline-3">
-<h3 id="org400a5b6">Basic Node</h3>
-<div class="outline-text-3" id="text-org400a5b6">
+<div id="outline-container-org1dddbe6" class="outline-3">
+<h3 id="org1dddbe6">Basic Node</h3>
+<div class="outline-text-3" id="text-org1dddbe6">
 <p>
 Create a node that accomplishes the following:
 </p>
@@ -195,9 +195,9 @@ Here is an approximate step-by-step guide.
 </div>
 </div>
 </div>
-<div id="outline-container-org07bbc97" class="outline-3">
-<h3 id="org07bbc97">Custom Parameters</h3>
-<div class="outline-text-3" id="text-org07bbc97">
+<div id="outline-container-org61fe9c8" class="outline-3">
+<h3 id="org61fe9c8">Custom Parameters</h3>
+<div class="outline-text-3" id="text-org61fe9c8">
 <ol class="org-ol">
 <li>Control the minimum and maximum \(x\) values using parameters called <code>xmin</code> and <code>xmax</code>.</li>
 <li>Make sure the parameters have meaningful default values and have the node log the parameter values to the DEBUG log when it starts.</li>
@@ -211,9 +211,9 @@ Here is an approximate step-by-step guide.
 </div>
 </div>
 
-<div id="outline-container-orgaafdf65" class="outline-3">
-<h3 id="orgaafdf65">Namespaces</h3>
-<div class="outline-text-3" id="text-orgaafdf65">
+<div id="outline-container-org7e1d0bb" class="outline-3">
+<h3 id="org7e1d0bb">Namespaces</h3>
+<div class="outline-text-3" id="text-org7e1d0bb">
 <ol class="org-ol">
 <li>Run two instances of your node and the <code>turtlesim</code> in two separate namespaces with two separate <code>xmin</code> and <code>xmax</code> values.
 <ul class="org-ul">
@@ -253,7 +253,7 @@ verify your work after completing the task.
 </p>
 </div>
 
-<details id="org1dddbe6"><summary class="header-3">Basic Node</summary>
+<details id="org5acce5d"><summary class="header-3">Basic Node</summary>
 <details id="orgf078fe2"><summary class="header-4">Creating The Workspace</summary>
 <div class="outline-text-4" id="text-orgf078fe2">
 <div class="org-src-container">
@@ -489,8 +489,8 @@ ros2 interface show turtlesim/msg/Pose
 </details>
 
 <details id="orgdf94e69"><summary class="header-3">Parameters</summary>
-<details id="org61fe9c8"><summary class="header-4">Custom Parameters</summary>
-<div class="outline-text-4" id="text-org61fe9c8">
+<details id="org80a8ed0"><summary class="header-4">Custom Parameters</summary>
+<div class="outline-text-4" id="text-org80a8ed0">
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-comment-delimiter"># </span><span class="org-comment">In PubsubNode.__init__</span>
 <span class="org-keyword">self</span>.declare_parameter(<span class="org-string">"xmin"</span>, 2.0)
@@ -529,7 +529,7 @@ To test the node: <code>ros2 run pubsub pubsub --ros-args -p xmin:=3.1 -p xmax:=
 </details>
 </details>
 
-<details id="org7e1d0bb"><summary class="header-3">Namespaces</summary>
+<details id="org404f0d8"><summary class="header-3">Namespaces</summary>
 <div id="outline-container-org71c381e" class="outline-4">
 <h4 id="org71c381e">Changing the Namespace</h4>
 <div class="outline-text-4" id="text-org71c381e">
