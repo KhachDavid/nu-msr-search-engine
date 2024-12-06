@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-11-25 Mon 23:02 -->
+<!-- 2024-12-04 Wed 21:56 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Image Processing with ROS</title>
@@ -57,6 +57,7 @@
 <li><a href="#org96f2e93">April Tags in ROS</a></li>
 </ul>
 </li>
+<li><a href="#org91efc72">Ultralytics Yolo</a></li>
 <li><a href="#orge459f4a">Other Image Packages and Libraries</a></li>
 <li><a href="#orge1084b9">Other Learning Resources</a></li>
 </ul>
@@ -390,6 +391,24 @@ often an identifier (thus Tags are like QR codes but they also contain geometric
 <li>See <a href="http://docs.ros.org/en/jazzy/p/apriltag/">apriltag documentation</a> for more instructions on how to use them.</li>
 </ol>
 </div>
+</div>
+</div>
+
+<div id="outline-container-org91efc72" class="outline-2">
+<h2 id="org91efc72">Ultralytics Yolo</h2>
+<div class="outline-text-2" id="text-org91efc72">
+<ul class="org-ul">
+<li>YOLO "You Only Look Once" is a family of machine-learning vision algorithms</li>
+<li>The <a href="https://github.com/ultralytics/ultralytics">Ultralytics YOLO Models</a> are a convenient implementation of various pre-trained YOLO models implemented in <a href="https://pytorch.org">pytorch</a></li>
+<li>To most easily use this package from ROS follow the instructions <a href="./colcon.html#pip_ros">to use pip with ROS</a> and use <code>pip</code> to install <code>ultralytics</code>
+<ul class="org-ul">
+<li>These instructions have you <code>pip install</code> packages inside a ROS workspace that then <i>underlays</i> your project</li>
+</ul></li>
+<li>The <a href="https://docs.ultralytics.com">Ultralytics Documentation</a> describes how you can use and customize the provided YOLO models
+<ul class="org-ul">
+<li>Various models for image identification, tracking, object segmentation, etc are included.</li>
+</ul></li>
+</ul>
 </div>
 </div>
 
