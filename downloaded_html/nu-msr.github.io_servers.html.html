@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2025-01-03 Fri 10:39 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MSR GPU Servers</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">MSR GPU Servers</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org3d2e67e">Servers</a>
+<ul>
+<li><a href="#org80a343a">Hardware</a></li>
+<li><a href="#orgd69f5b0">Access</a></li>
+<li><a href="#software">Software</a></li>
+</ul>
+</li>
+<li><a href="#org5db85c1">Docker</a></li>
+<li><a href="#orgf571a97">Usage Hints</a></li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-org3d2e67e" class="outline-2">
+<h2 id="org3d2e67e">Servers</h2>
+<div class="outline-text-2" id="text-org3d2e67e">
+</div>
+<div id="outline-container-org80a343a" class="outline-3">
+<h3 id="org80a343a">Hardware</h3>
+<div class="outline-text-3" id="text-org80a343a">
+<p>
+Lambda Labs Workstations with:
+</p>
+<ol class="org-ol">
+<li>AMD Ryzen Threadripper PRO 5995WX with 64 Cores</li>
+<li>1 TB of RAM</li>
+<li>Two NVIDIA RTX 6000 Ada GPUs with 48 GB Ram</li>
+<li>Disks: a 4TB and a 14TB NVME Drive</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgd69f5b0" class="outline-3">
+<h3 id="orgd69f5b0">Access</h3>
+<div class="outline-text-3" id="text-orgd69f5b0">
+<ol class="org-ol">
+<li>The servers maintained by MSR are accessible only on the Northwestern Network
+<ul class="org-ul">
+<li>NUIT does not maintain and is unable to help you with these servers (even though you initially access them via your netID).</li>
+</ul></li>
+<li>For off-campus access, users must connect to the Northwestern network via <a href="./hackathon/computer_setup.html#vpn">VPN</a>.</li>
+<li>The servers are available at:
+<ul class="org-ul">
+<li><code>lamb.mech.northwestern.edu</code></li>
+<li><code>sheep.mech.northwestern.edu</code></li>
+</ul></li>
+<li>You will need your <code>netid</code> (e.g., <code>nuit1337</code>) and it's associated password, as provided by NUIT.</li>
+<li>Use <code>ssh-copy-id netid@server</code> to copy the ssh key to the server you want access to.
+<ul class="org-ul">
+<li>Your password is your <a href="https://services.northwestern.edu/TDClient/30/Portal/Requests/ServiceDet?ID=99">netID password</a></li>
+<li>For example <code>ssh-copy-id nuit1337@lamb.mech.northwestern.edu</code> to gain access to <code>lamb</code></li>
+</ul></li>
+<li>After running the above command you should be able to <code>ssh netid@server</code> and not be prompted for your password (e.g., <code>ssh nuit1337@lamb.mech.northwestern.edu</code>).
+If you are prompted for a password:
+<ol class="org-ol">
+<li>If your <code>netID</code> password grants access, then the previous command failed, likely because you have not setup an <a href="./hackathon/linux_introduction.html#ssh_keys">ssh key</a> (these were setup during the hackathon).</li>
+<li>If your <code>ssh_key</code> password grants access then, you have not loaded the key into the <code>ssh-agent</code>. Either review the <a href="./hackathon/linux_introduction.html#ssh_keys">these instructions</a> or suffer and enter your password every time!</li>
+</ol></li>
+<li>You should assume that data on the server can be deleted at the end of each quarter.
+<ul class="org-ul">
+<li>There is no redundancy on the server so backup everything that is important to you.</li>
+</ul></li>
+<li>In addition to your home directory you have access to <code>/data/users/netID</code>, which provides additional storage.
+<ul class="org-ul">
+<li>Each user is limited to <code>150GB</code> in their <code>/home/netID</code> directory</li>
+<li>Each netID has an additional <code>850GB</code> in their <code>/data/users/netID</code> directory</li>
+<li>Use <code>quota -vs</code> to see how much disk space you are using relative to your quotas.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-software" class="outline-3">
+<h3 id="software">Software</h3>
+<div class="outline-text-3" id="text-software">
+<p>
+Some useful software includes:
+</p>
+<ol class="org-ol">
+<li>Ubuntu 24.04 LTS (using the <a href="./hackathon/ubuntu_minimal.html">Ubuntu Minimal</a> installation.</li>
+<li>ROS 2 Jazzy (and image pipeline, moveit2, simulator, nav2, rtabmap, and others).</li>
+<li><a href="https://lambdalabs.com/lambda-stack-deep-learning-software">Lambda Stack</a> (provides PyTorch, TensorFlow, etc.)</li>
+<li>Docker</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5db85c1" class="outline-2">
+<h2 id="org5db85c1">Docker</h2>
+<div class="outline-text-2" id="text-org5db85c1">
+<ul class="org-ul">
+<li>If the preinstalled software is not sufficient (wrong versions etc) then you should make a <a href="https://docs.docker.com/get-started/">docker image</a> to do what you need</li>
+<li>All users can access Docker only in rootless mode. Docker rootless mode is already set up for you.</li>
+<li>When interpreting instructions for docker on the internet:
+<ul class="org-ul">
+<li>Skip anything related to installing <code>docker</code>, nvidia drivers, or the nvidia container toolkit.</li>
+<li>If the instructions involve <code>sudo</code> omit the <code>sudo</code>. Most commands should work but if they don't that means you can't (and likely do not actually need to) run it.</li>
+<li>If the instructions involve <code>systemctl &lt;SOMETHING&gt; docker</code> substitute <code>systemctl --user &lt;SOMETHING&gt; docker</code> instead.
+<ul class="org-ul">
+<li>The docker daemon must be running. It should start automatically but use <code>systemctl --user start docker</code> to start it if it is not.</li>
+</ul></li>
+<li>If the instructions involve <code>--privileged</code> you can't do it (but there is likely another way to do what you need to do).</li>
+</ul></li>
+<li>To use the <code>nvidia</code> gpus in a docker container add the following flags to the <code>docker run</code> command: <code>--runtime=nvidia --gpus all</code>
+<ul class="org-ul">
+<li>For example <code>docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi</code></li>
+</ul></li>
+<li>For more information see <a href="https://docs.docker.com/engine/security/rootless/">Rootless Docker</a> and <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#rootless-mode">NVIDIA Docker Rootless Mode</a></li>
+<li>By default your docker images are stored in <code>/data/users/&lt;netID&gt;/docker</code>
+<ul class="org-ul">
+<li>Use <code>docker image ls</code> to see downloaded docker images and the amount of disk space they are using</li>
+<li>Use <code>docker image rm</code> to delete a docker image.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf571a97" class="outline-2">
+<h2 id="orgf571a97">Usage Hints</h2>
+<div class="outline-text-2" id="text-orgf571a97">
+<ol class="org-ol">
+<li>Use <a href="https://github.com/tmux/tmux/wiki">tmux</a> to persist your session across ssh logins
+<ul class="org-ul">
+<li>Otherwise, what you run in an ssh session (e.g., a long ML training) will exit when ssh disconnects</li>
+</ul></li>
+<li>If doing RL training, run the simulator in <code>headless</code> mode on the server.
+<ul class="org-ul">
+<li>There is no GUI on the server, so everything will be via the command line.</li>
+<li>A useful workflow is to test small batches on laptop, then run on server</li>
+<li>Be sure to save checkpoints so you can train a little, see what is happening, then continue training.</li>
+</ul></li>
+<li>Use <a href="https://rsync.samba.org/">rsync</a> to synchronize files between the server and your computer
+<ul class="org-ul">
+<li>rsync can operate directly over ssh by specifying <code>user@server:/path/to/file</code> as either a source or destination</li>
+<li>Be careful, rsync can delete files. I recommend never using it directly on your home directory but rather a sub-directory</li>
+<li>If you completely destroy your home directory the hidden files in <code>/etc/skel</code> have the default configuration and you can ssh-copy-id to gain passwordless access again.</li>
+</ul></li>
+<li>It is possible to <a href="https://stackoverflow.com/questions/69244218/how-to-run-a-jupyter-notebook-through-a-remote-server-on-local-machine">run a jupyter notebook on the server</a> and connect to it via your computer's web browser.</li>
+<li>You can use python3 virtual environments for python development
+<ul class="org-ul">
+<li>However, most packages you would need (if starting from scratch) are already pre-installed</li>
+</ul></li>
+<li>Many C++ and Python packages can be placed directly in a <code>colcon</code> workspace and compiled from scratch</li>
+<li>If pre-existing software has dependencies that differ from our system (as is likely) your quickest path to success is a docker container.</li>
+<li>If you are coding your own script, your quickest path to success is to use the versions of the pre-installed packages that are on the server and on your laptop.</li>
+<li>There are no limits on GPU or CPU usage, but be mindful of other students by coordinating when you will use each machine and GPU.</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

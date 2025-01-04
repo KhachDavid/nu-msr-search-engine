@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-10-04 Fri 17:27 -->
+<!-- 2025-01-03 Fri 10:50 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Who Stole My Pen?</title>
@@ -67,7 +67,7 @@
 <li><a href="#org2206203">Image Pipeline</a></li>
 </ul>
 </li>
-<li><a href="#org662e59b">Robot Control</a>
+<li><a href="#orgcc9a03f">Robot Control</a>
 <ul>
 <li><a href="#org9b650bd">Caution</a></li>
 <li><a href="#org6ab033a">First Moves</a></li>
@@ -83,7 +83,7 @@
 <li><a href="#org882a641">Calibration Procedure</a></li>
 </ul>
 </li>
-<li><a href="#orgecf864d">Robot Control</a>
+<li><a href="#orgf0fa82d">Robot Control</a>
 <ul>
 <li><a href="#org13ce45f">Multi-Processing</a></li>
 </ul>
@@ -188,9 +188,9 @@ a controller that will enable the robot to grab the pen.
 </ol></li>
 </ol>
 </div>
-<div id="outline-container-org59aaec2" class="outline-4">
-<h4 id="org59aaec2">Design Notes</h4>
-<div class="outline-text-4" id="text-org59aaec2">
+<div id="outline-container-org8113e0e" class="outline-4">
+<h4 id="org8113e0e">Design Notes</h4>
+<div class="outline-text-4" id="text-org8113e0e">
 <ol class="org-ol">
 <li>What follows are some notes on how to think about designing and organizing your code:</li>
 <li>A good strategy, after running and understanding the <a href="https://github.com/IntelRealSense/librealsense/blob/master/wrappers/python/examples/align-depth2color.py">Alignment Example</a> is to divide it into the components that you need and encapsulate them in a class.</li>
@@ -242,9 +242,9 @@ program to be designed to operate in a loop where one of these functions are cal
 </ul>
 </div>
 
-<div id="outline-container-org1953fb0" class="outline-4">
-<h4 id="org1953fb0">Design Notes</h4>
-<div class="outline-text-4" id="text-org1953fb0">
+<div id="outline-container-org7f8cbe1" class="outline-4">
+<h4 id="org7f8cbe1">Design Notes</h4>
+<div class="outline-text-4" id="text-org7f8cbe1">
 <ol class="org-ol">
 <li>By encapsulating the camera streaming in a class, it is easier to write a program that lets a user choose between playing from a recording or streaming live data.</li>
 <li>The recording and playback functionalities are useful to implement before moving forward with the image pipeline.</li>
@@ -364,9 +364,9 @@ cylindrical coordinates centered at the base frame of the pincherX</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-org2926641" class="outline-4">
-<h4 id="org2926641">Design Notes</h4>
-<div class="outline-text-4" id="text-org2926641">
+<div id="outline-container-orgcbd2837" class="outline-4">
+<h4 id="orgcbd2837">Design Notes</h4>
+<div class="outline-text-4" id="text-orgcbd2837">
 <ol class="org-ol">
 <li>The ultimate goal of the pipeline is to get the 3D pen location from the RGB image and depth map.</li>
 <li>Do not worry about precision and accuracy at this stage: just get a rough reasonable version working.
@@ -386,9 +386,9 @@ cylindrical coordinates centered at the base frame of the pincherX</li>
 </div>
 </div>
 
-<div id="outline-container-org662e59b" class="outline-2">
-<h2 id="org662e59b">Robot Control</h2>
-<div class="outline-text-2" id="text-org662e59b">
+<div id="outline-container-orgcc9a03f" class="outline-2">
+<h2 id="orgcc9a03f">Robot Control</h2>
+<div class="outline-text-2" id="text-orgcc9a03f">
 <p>
 We will use the <code>interbotix_xs_toolbox</code> to control the robot.
 Although the arm can be fully controlled with ROS 2, we will use only minimally use it during the hackathon,
@@ -712,9 +712,9 @@ Write a script that performs the calibration procedure:
 </ol>
 </div>
 
-<div id="outline-container-orge838941" class="outline-4">
-<h4 id="orge838941">Design Notes</h4>
-<div class="outline-text-4" id="text-orge838941">
+<div id="outline-container-orgb0307e3" class="outline-4">
+<h4 id="orgb0307e3">Design Notes</h4>
+<div class="outline-text-4" id="text-orgb0307e3">
 <ol class="org-ol">
 <li>There is an offset between where the pen is detected and the center of the robot's end-effector frame:
 this offset can be manually accounted for.</li>
@@ -736,9 +736,9 @@ this offset can be manually accounted for.</li>
 </div>
 </div>
 
-<div id="outline-container-orgecf864d" class="outline-2">
-<h2 id="orgecf864d">Robot Control</h2>
-<div class="outline-text-2" id="text-orgecf864d">
+<div id="outline-container-orgf0fa82d" class="outline-2">
+<h2 id="orgf0fa82d">Robot Control</h2>
+<div class="outline-text-2" id="text-orgf0fa82d">
 <p>
 A basic robot control loop consists of the following steps:
 </p>
@@ -785,9 +785,9 @@ When rotating (this assumes that both the arm and pen's locations are expressed 
 </div>
 
 
-<div id="outline-container-org675d4be" class="outline-4">
-<h4 id="org675d4be">Design Notes</h4>
-<div class="outline-text-4" id="text-org675d4be">
+<div id="outline-container-org78ebab2" class="outline-4">
+<h4 id="org78ebab2">Design Notes</h4>
+<div class="outline-text-4" id="text-org78ebab2">
 <ol class="org-ol">
 <li>There may be a few modes of operation as you control the robot (e.g., moving to the pen, closing grippers, etc). It makes sense to track these modes
 by assigning a state to each of them. You can use a python <a href="https://docs.python.org/3/library/enum.html">enum</a> to label and track states</li>

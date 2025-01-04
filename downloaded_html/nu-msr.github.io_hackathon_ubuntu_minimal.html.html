@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-10-04 Fri 17:27 -->
+<!-- 2025-01-03 Fri 10:50 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Minimal Ubuntu Install</title>
@@ -57,7 +57,7 @@
 <li><a href="#org9730c5d">Netplan</a></li>
 <li><a href="#orga947887">Ubuntu Pro Client</a></li>
 <li><a href="#org706691a">Cloud-init</a></li>
-<li><a href="#orge5869d6">Additional Packages</a></li>
+<li><a href="#org9d10a79">Additional Packages</a></li>
 <li><a href="#org5cddc9a">Blocked packages</a></li>
 <li><a href="#orgac32702">Additional Package Options</a></li>
 </ul>
@@ -66,7 +66,7 @@
 <ul>
 <li><a href="#org3f9f439">Required</a></li>
 <li><a href="#orgf524557">Recommended</a></li>
-<li><a href="#orgad71be5">Additional Packages</a></li>
+<li><a href="#org5041c1f">Additional Packages</a></li>
 <li><a href="#org9f8a1c5">The Commands in the Chroot</a></li>
 </ul>
 </li>
@@ -78,7 +78,7 @@
 <ul>
 <li><a href="#orgb257ff9">How To Make A PPA</a>
 <ul>
-<li><a href="#org1183aff">References</a></li>
+<li><a href="#orgd46ddd5">References</a></li>
 </ul>
 </li>
 <li><a href="#orga72a917">How To Rebuild a Debian Package</a></li>
@@ -88,12 +88,12 @@
 <ul>
 <li>
 <ul>
-<li><a href="#org9a77a17">References</a></li>
+<li><a href="#org41ef83e">References</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org7197540">RT Kernel</a></li>
+<li><a href="#rt_linux">RT Kernel</a></li>
 </ul>
 </div>
 </nav>
@@ -964,9 +964,9 @@ In Ubuntu 24.04, they also use cloud-init as part of the desktop.
 
 
 
-<div id="outline-container-orge5869d6" class="outline-4">
-<h4 id="orge5869d6">Additional Packages</h4>
-<div class="outline-text-4" id="text-orge5869d6">
+<div id="outline-container-org9d10a79" class="outline-4">
+<h4 id="org9d10a79">Additional Packages</h4>
+<div class="outline-text-4" id="text-org9d10a79">
 <ol class="org-ol">
 <li><code>language-selector-common</code> is used by <code>curtin</code> (I don't know exactly what it does but it seems to setup languages</li>
 <li><code>network-manager</code> (from the <a href="https://launchpad.net/~numsr">nu-msr ppa</a>) is used to configure networking</li>
@@ -1083,9 +1083,9 @@ Packages that are <b>NOT</b> included
 </div>
 </div>
 
-<div id="outline-container-orgad71be5" class="outline-4">
-<h4 id="orgad71be5">Additional Packages</h4>
-<div class="outline-text-4" id="text-orgad71be5">
+<div id="outline-container-org5041c1f" class="outline-4">
+<h4 id="org5041c1f">Additional Packages</h4>
+<div class="outline-text-4" id="text-org5041c1f">
 <p>
 Since the move to snaps, there are no mainstream web-browsers that are regular <code>apt</code> packages.
 We will install <code>firefox</code> from the <a href="https://support.mozilla.org/en-US/kb/install-firefox-linux#w_install-firefox-deb-package-for-debian-based-distributions">Official Mozila APT Repository</a>
@@ -1310,9 +1310,9 @@ The following steps should be done from Ubuntu LTS
 <li>While logged into launchpad, assign (or affirm) the <a href="https://launchpad.net/codeofconduct">Code of Conduct</a></li>
 </ol>
 </div>
-<div id="outline-container-org1183aff" class="outline-4">
-<h4 id="org1183aff">References</h4>
-<div class="outline-text-4" id="text-org1183aff">
+<div id="outline-container-orgd46ddd5" class="outline-4">
+<h4 id="orgd46ddd5">References</h4>
+<div class="outline-text-4" id="text-orgd46ddd5">
 <ol class="org-ol">
 <li><a href="https://launchpad.net/+help-registry/openpgp-keys.html">Launchpad Keys</a></li>
 <li><a href="https://help.ubuntu.com/community/GnuPrivacyGuardHowto">Ubuntu GPG Guide</a></li>
@@ -1397,9 +1397,9 @@ Now the debian source package contains the patches made against the upstream ver
 Quilt environment variable QUILT_PATCHES=debian/patches should be set
 </p>
 </div>
-<div id="outline-container-org9a77a17" class="outline-4">
-<h4 id="org9a77a17">References</h4>
-<div class="outline-text-4" id="text-org9a77a17">
+<div id="outline-container-org41ef83e" class="outline-4">
+<h4 id="org41ef83e">References</h4>
+<div class="outline-text-4" id="text-org41ef83e">
 <p>
 <a href="https://help.launchpad.net/Packaging/PPA/BuildingASourcePackage">Building A Source Package</a>
 <a href="https://manpages.ubuntu.com/manpages/trusty/man1/quilt.1.html">Quilt Manpage</a>
@@ -1410,13 +1410,13 @@ Quilt environment variable QUILT_PATCHES=debian/patches should be set
 </div>
 
 
-<div id="outline-container-org7197540" class="outline-2">
-<h2 id="org7197540">RT Kernel</h2>
-<div class="outline-text-2" id="text-org7197540">
+<div id="outline-container-rt_linux" class="outline-2">
+<h2 id="rt_linux">RT Kernel</h2>
+<div class="outline-text-2" id="text-rt_linux">
 <ol class="org-ol">
 <li>Get RT Kernel sources (must get via git to make the debian source package)
 git clone <a href="https://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.git/">https://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.git/</a>
-CHeckout the latest rt branch</li>
+Checkout the latest rt branch</li>
 
 <li>Make menu config and setup the kernel.
 <ul class="org-ul">

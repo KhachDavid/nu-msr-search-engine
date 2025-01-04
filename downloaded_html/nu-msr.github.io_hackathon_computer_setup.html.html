@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-10-04 Fri 17:27 -->
+<!-- 2025-01-03 Fri 10:50 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Computer Setup</title>
@@ -36,7 +36,7 @@
 <li><a href="#org404e838">First Boot</a>
 <ul>
 <li><a href="#orgcec4db6">Login</a></li>
-<li><a href="#org2eea256">Terminal</a></li>
+<li><a href="#orge48871c">Terminal</a></li>
 <li><a href="#orgf325a81">Internet</a></li>
 <li><a href="#org3d270b1">System76 Setup</a></li>
 <li><a href="#orgac81d56">Web Browser</a></li>
@@ -47,9 +47,9 @@
 <ul>
 <li><a href="#TextEditor">Text Editors</a></li>
 <li><a href="#org4ae7405">Version Control (git)</a></li>
-<li><a href="#org26ecdb3">Python</a></li>
+<li><a href="#org95332ff">Python</a></li>
 <li><a href="#org2f44b29">Robot Operating System (ROS 2)</a></li>
-<li><a href="#org20c2832">Realsense</a></li>
+<li><a href="#realsense">Realsense</a></li>
 <li><a href="#interbotix_setup">Interbotix Arms</a></li>
 </ul>
 </li>
@@ -71,7 +71,7 @@
 <li><a href="#orgb07050f">Ooops!</a></li>
 <li><a href="#org889459c">Northwestern IT</a>
 <ul>
-<li><a href="#org650b5fb">Northwestern VPN</a></li>
+<li><a href="#vpn">Northwestern VPN</a></li>
 <li><a href="#org8cc9ecc">Printer</a></li>
 </ul>
 </li>
@@ -248,9 +248,9 @@ The installation will bring you through a series of screens.
 </div>
 </div>
 
-<div id="outline-container-org2eea256" class="outline-3">
-<h3 id="org2eea256">Terminal</h3>
-<div class="outline-text-3" id="text-org2eea256">
+<div id="outline-container-orge48871c" class="outline-3">
+<h3 id="orge48871c">Terminal</h3>
+<div class="outline-text-3" id="text-orge48871c">
 <ol class="org-ol">
 <li>Type <code>Ctrl-Alt-T</code> to open a terminal window.
 <ul class="org-ul">
@@ -504,7 +504,7 @@ So <a href="https://wiki.archlinux.org/index.php/List_of_applications/Documents#
 </p>
 
 
-<figure id="org7ee7223">
+<figure id="org690d053">
 <img src="https://imgs.xkcd.com/comics/real_programmers.png" alt="real_programmers.png">
 
 <figcaption><span class="figure-number">Figure 1: </span><a href="https://xkcd.com/378/">https://xkcd.com/378/</a>.</figcaption>
@@ -544,9 +544,9 @@ git config --global init.defaultBranch main
 </div>
 </div>
 
-<div id="outline-container-org26ecdb3" class="outline-3">
-<h3 id="org26ecdb3">Python</h3>
-<div class="outline-text-3" id="text-org26ecdb3">
+<div id="outline-container-org95332ff" class="outline-3">
+<h3 id="org95332ff">Python</h3>
+<div class="outline-text-3" id="text-org95332ff">
 <p>
 Install <a href="https://pypi.org/project/pip/">pip</a>, a package manager for python, <a href="https://ipython.org/">ipython</a>, an interactive python read-eval-print-loop (REPL),
 and support for virtual environments:
@@ -605,9 +605,9 @@ rosdep update
 </div>
 </div>
 
-<div id="outline-container-org20c2832" class="outline-3">
-<h3 id="org20c2832">Realsense</h3>
-<div class="outline-text-3" id="text-org20c2832">
+<div id="outline-container-realsense" class="outline-3">
+<h3 id="realsense">Realsense</h3>
+<div class="outline-text-3" id="text-realsense">
 <ol class="org-ol">
 <li>Use <code>sudo apt install ros-jazzy-realsense2-camera ros-jazzy-realsense2-description</code> to install the  realsense SDK and ROS packages.
 <ul class="org-ul">
@@ -764,9 +764,9 @@ to open commonly-used applications.</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-orgc70dd90" class="outline-4">
-<h4 id="orgc70dd90">Terminal</h4>
-<div class="outline-text-4" id="text-orgc70dd90">
+<div id="outline-container-orga6e79b9" class="outline-4">
+<h4 id="orga6e79b9">Terminal</h4>
+<div class="outline-text-4" id="text-orga6e79b9">
 <ul class="org-ul">
 <li>The <code>gsettings</code> command provides access to all settings via the command line.</li>
 <li>Settings are grouped into <code>schemas</code>, and individual options are stored as keys under a schema</li>
@@ -850,34 +850,47 @@ If something really bad happens to your computer, fear not!
 This section provides Linux-specific information for systems maintained by the IT department.
 </p>
 </div>
-<div id="outline-container-org650b5fb" class="outline-3">
-<h3 id="org650b5fb">Northwestern VPN</h3>
-<div class="outline-text-3" id="text-org650b5fb">
-<ul class="org-ul">
-<li>The main reason for using the VPN is to access papers from sources such as IEEE and our internal servers while away from campus.</li>
-</ul>
+<div id="outline-container-vpn" class="outline-3">
+<h3 id="vpn">Northwestern VPN</h3>
+<div class="outline-text-3" id="text-vpn">
+<p>
+There are a few alternatives for connecting to <a href="https://services.northwestern.edu/TDClient/30/Portal/Requests/ServiceDet?ID=50">Northwestern VPN</a>.
+</p>
 </div>
 <div id="outline-container-org56e0ffd" class="outline-4">
 <h4 id="org56e0ffd">gp-saml-gui</h4>
 <div class="outline-text-4" id="text-org56e0ffd">
+<ol class="org-ol">
+<li>Install <code>openconnect</code>: <code>sudo apt install openconnect</code></li>
+<li>Install the client:  <code>sudo apt install gp-saml-gui</code></li>
+<li>Connect <code>gp-saml-gui -vg -S vpn-connect2.northwestern.edu -- --disable-ipv6</code></li>
+<li>A web-browser window will pop-up asking for your NetID and password, followed by a Duo Authentication screen</li>
+<li>You remain connected to the VPN as long as the above <code>gp-saml-gui</code> command is running</li>
+<li>The main advantage of this method is it is mostly command-line driven and simple</li>
+<li>The main disadvantage is there is not an easy way to see at a glance that you are connected to the VPN</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org83efdf6" class="outline-4">
+<h4 id="org83efdf6">Network Manager</h4>
+<div class="outline-text-4" id="text-org83efdf6">
+<ol class="org-ol">
+<li>Install <code>openconnect</code>: <code>sudo apt install openconnect</code></li>
+<li>Install the Network Manger Plugin: <code>sudo apt install network-manager-openconnect-gnome</code></li>
+<li>Create a New VPN connection of type "OpenConnect (GlobalProtect)"</li>
+<li>The gateway is <code>vpn-connect.northwestern.edu</code></li>
+<li>Authentication takes place in multiple steps:
 <ul class="org-ul">
-<li>This method has the easiest installation because it is distributed by Ubuntu.</li>
-<li>It is also potentially less reliable because I do not know if the setup I describe will always work or if it
-is time or netID dependent (since it involves directly connecting to a server that was not mentioned by NUIT).</li>
-
-<li>Install the vpn client <code>sudo apt install gp-saml-gui</code></li>
-<li>Connect to the vpn <code>gp-saml-gui -vg -S vpn-connect2.northwestern.edu</code>.</li>
-<li>If the above does not work, try to find the server using <code>gp-saml-gui -v -S vpn-connect.northwestern.edu</code>
-<ul class="org-ul">
-<li><code>vpn-connect.northwestern.edu</code> is the official connection point provided by NUIT.</li>
-<li>When your login it told me to connect to the gateway at <code>vpn-connect2.northwestern.edu</code>, it might tell you something different.</li>
+<li>First login to the gateway</li>
+<li>Enter NetID, Password, and do DUO authentication</li>
 </ul></li>
-</ul>
+<li>After authentication, you choose the portal (there is only 1, vpn-connect2.northwestern.edu) and connect to that.</li>
+<li>The disadvantage of this method is there are some semi-awkward gui screens to go through: it is not just one-click and connect</li>
+<li>The advantage of this method is it is integrated with NetworkManager so it is easy to see VPN status and it works like other network connections.</li>
+</ol>
 </div>
 </div>
-
-<div id="outline-container-org59e7d50" class="outline-4">
-<h4 id="org59e7d50">GlobalProtect-openconnect</h4>
+<details id="org59e7d50"><summary class="header-4">GlobalProtect-openconnect</summary>
 <div class="outline-text-4" id="text-org59e7d50">
 <ul class="org-ul">
 <li>This client works, but is currently a pain to install due to dependency issues, so I am not currently recommending it.</li>
@@ -895,23 +908,68 @@ sudo apt install globalprotect-openconnect
 <li>You will need Duo Authentication.</li>
 </ul>
 </div>
-</div>
+</details>
 
-<div id="outline-container-org43c89d4" class="outline-4">
-<h4 id="org43c89d4">Official Instructions</h4>
-<div class="outline-text-4" id="text-org43c89d4">
+<details id="orga6a2439"><summary class="header-4">Official client</summary>
+<div class="outline-text-4" id="text-orga6a2439">
 <p>
-If you want to try your luck with the official proprietary client see these <a href="https://www.it.northwestern.edu/oncampus/vpn/">instructions</a>.
+The official proprietary client can be installed and used by following see these <a href="https://www.it.northwestern.edu/oncampus/vpn/">instructions</a>.
 </p>
 <ul class="org-ul">
-<li>I have gotten the client to connect to VPN successfully; however, it is buggy.  I have not successfully
-disconnected without manually killing the processes involved. By default, it also tries to connect to VPN every-time you login.</li>
-<li>It supports only older versions of Ubuntu.</li>
+<li>The client "works" but it is a buggy piece of proprietary software that I would never want to have on my computer.
+<ul class="org-ul">
+<li>The official NUIT setup instructions have you manually editing a config file to use your system's default web browser because their built-in authentication method does not work!</li>
+</ul></li>
+<li>It's support often lags behind the version of Ubuntu we are using.</li>
+<li>It starts a background process whenever your computer starts, even when not using the VPN
+<ul class="org-ul">
+<li>Disable this with <code>systemctl disable --now gpd</code>. You will need to <code>systemctl start gpd</code> to connect to the VPN</li>
+</ul></li>
 </ul>
+<p>
+-. It prompts you to connect to the VPN every time you login, which is very annoying.
+</p>
+<ol class="org-ol">
+<li>It sends a HIP report about the software you are running on your computer to Northwestern (and who knows who else) for "security" purposes.
+<ul class="org-ul">
+<li>The information is gathered by a third-party proprietary binary program that runs with root privileges.</li>
+</ul></li>
+<li>My main use for this client is to debug the open-source alternatives when sometimes a new version of their server software breaks them.</li>
+</ol>
 </div>
-</div>
-</div>
+</details>
 
+<details id="org4ed7326"><summary class="header-4">SAML Authentication</summary>
+<div class="outline-text-4" id="text-org4ed7326">
+<p>
+Here is a brief summary of what I've learned about how GlobalProtect VPN works
+</p>
+<ol class="org-ol">
+<li>Authentication is done using the University's Single-Sign-On process with Two-Factor Authentication</li>
+<li>This authentication process uses something called SAML.
+<ul class="org-ul">
+<li>You can manually see this authentication process by going to <code>vpn-connect.northwestern.edu</code> in the web browser</li>
+<li>Essentially the end-result of this authentication process is an authentication cookie</li>
+</ul></li>
+<li>The open-source clients essentially wrap a web-browser to allow you to enter your credentials and obtain the cookie
+<ul class="org-ul">
+<li>The cookie is then passed to <code>openconnect</code> which uses the cookie to authenticate with the VPN.</li>
+</ul></li>
+<li>Global protect has separate "portal" and "gateway" URLs.
+<ul class="org-ul">
+<li>After authenticating with the <code>portal</code> (<code>vpn-connect.northwestern.edu</code>) you are given a "choice" of gateways</li>
+<li>The only gateway that seems to be used by Northwestern is <code>vpn-connect2.northwestern.edu</code></li>
+<li>Some of the open-source clients don't properly redirect from portal to gateway, so instead it is easier to connect directly to the gateway</li>
+</ul></li>
+<li>Version <code>9.12</code> of <code>openconnect</code> (which comes with Ubuntu 24.04) has a bug that prevents it from working with the version of GlobalProtect currently deployed by NUIT
+<ul class="org-ul">
+<li>This bug is fixed and the fix will be in the next version of <code>openconnect</code></li>
+<li>In the meantime, I have packaged a version <code>openconnect</code> on the PPA which contains the necessary fix.</li>
+</ul></li>
+</ol>
+</div>
+</details>
+</div>
 <div id="outline-container-org8cc9ecc" class="outline-3">
 <h3 id="org8cc9ecc">Printer</h3>
 <div class="outline-text-3" id="text-org8cc9ecc">
@@ -1233,9 +1291,9 @@ These package managers often offer the same software that is available via <code
 </p>
 </div>
 
-<div id="outline-container-org7fc1501" class="outline-4">
-<h4 id="org7fc1501">Python</h4>
-<div class="outline-text-4" id="text-org7fc1501">
+<div id="outline-container-orgbbb5f21" class="outline-4">
+<h4 id="orgbbb5f21">Python</h4>
+<div class="outline-text-4" id="text-orgbbb5f21">
 <p>
 Python package management will come up a lot in this course. Furthermore doing things like trying to uninstall python
 or install another python version can cause great damage to the your system.
