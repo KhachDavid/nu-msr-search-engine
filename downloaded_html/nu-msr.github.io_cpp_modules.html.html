@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2025-04-25 Fri 09:13 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Effective C++20 Modules</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">Effective C++20 Modules</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org9c76cca">Overview</a>
+<ul>
+<li><a href="#org250e759">Caveats</a></li>
+</ul>
+</li>
+<li><a href="#org3709f2f">The Old Way</a></li>
+<li><a href="#org384463e">The New Way</a></li>
+<li><a href="#org6492c03">Migration</a></li>
+<li><a href="#org890127d">Explanation</a></li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-org9c76cca" class="outline-2">
+<h2 id="org9c76cca">Overview</h2>
+<div class="outline-text-2" id="text-org9c76cca">
+<p>
+This is a prescriptive conceptual guide for using C++20 modules effectively.
+It does not cover all the nuances or possibilities, but rather focuses on one method of organizing
+C++20 modules and how that method maps on to traditional C++ library organization.
+</p>
+
+<p>
+It assumes basic knowledge of C++20 modules and <code>cmake</code>:
+</p>
+<ol class="org-ol">
+<li><a href="https://www.kitware.com/import-cmake-c20-modules/">Kitware Guide to C++20 Modules</a></li>
+<li><a href="https://cmake.org/cmake/help/latest/manual/cmake-cxxmodules.7.html">CMake C++ Modules Documentation</a></li>
+<li><a href="https://learn.microsoft.com/en-us/cpp/cpp/modules-cpp?view=msvc-170">Microsoft Overview of C++20 Modules</a></li>
+</ol>
+</div>
+
+<div id="outline-container-org250e759" class="outline-3">
+<h3 id="org250e759">Caveats</h3>
+<div class="outline-text-3" id="text-org250e759">
+<p>
+These notes are based primarily on experience was gathered on Linux using:
+</p>
+<ul class="org-ul">
+<li><code>clang 19.1.7</code></li>
+<li><code>gcc 15.0.1 20250222 (experimental)</code> (i.e., I compiled gcc from git, it is unreleased).</li>
+<li><code>cmake 3.31</code></li>
+</ul>
+
+<p>
+The experience as of (April 2025) revealed stark mismatches between how <code>clang</code> and <code>gcc</code> interpreted code,
+with many instances of code being valid in <code>clang</code> but not <code>gcc</code> or vice versa, and occasional <code>gcc</code> crashes.
+While I did not pore over the standard, I assume that <code>clang</code>'s implementation is more correct than <code>gcc</code>'s as
+the <code>gcc</code>'s version is explicitly incomplete and experimental. The method I outline here did not work completely with <code>gcc 14</code>, which
+is why I use a newer version (which magically fixed many problems). Overall, it seems that much progress is being made!
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3709f2f" class="outline-2">
+<h2 id="org3709f2f">The Old Way</h2>
+<div class="outline-text-2" id="text-org3709f2f">
+<p>
+Prior to C++ modules, most C++ libraries are organized into several header (<code>.hpp</code>) files and implementation (<code>.cpp</code>) files (yes there are header-only libraries too).
+The creator of the library compiles the <code>.cpp</code> files and the <code>.hpp</code> files (which are <code>#included</code> by the <code>.cpp</code> files and each other) into
+a single binary (e.g., a <code>.a</code> or <code>.so</code> file).
+</p>
+
+<p>
+Users need the <code>.hpp</code> files and the binary (<code>.a</code>) to use the library. The user <code>#includes</code> the header files and links against the <code>.a</code> file.
+This results in the user's compiler needing to re-compile each header file in every file that the user uses it, which is bad for compilation time.
+Some compilers offer pre-compiled headers, which is a non-standard way to speed-up compilation time for headers that don't change much.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org384463e" class="outline-2">
+<h2 id="org384463e">The New Way</h2>
+<div class="outline-text-2" id="text-org384463e">
+<p>
+C++20 modules provide a method for the compiler to compile each "header" file only once, greatly speeding up compilation time (in theory).
+There is a cost, however: the compiler must determine dependencies between modules, which at times has been shown to increase compilation time [citation needed].
+</p>
+
+<p>
+Here are some differences between using traditional C++ headers and modules:
+</p>
+<ul class="org-ul">
+<li>Instead of a development library consisting of a binary and <code>.hpp</code> files, the module is distributed as a binary (<code>.a</code> or <code>.so</code>, same as before)
+and module interface <code>.ixx</code> files (somewhat analogous to <code>.hpp</code> files).</li>
+<li>Instead of header files being <code>#include=d, a module =interface</code> is <code>import</code> ed.</li>
+<li>For module writers, the module interface is compiled every time it or something it depends on changes.
+<ul class="org-ul">
+<li>The build system automatically detects these changes and does "the right thing".</li>
+</ul></li>
+<li>For module users, the module interface is compiled only once.
+<ul class="org-ul">
+<li>The compilation artifact from compiling a module interface is compiler-specific, so interfaces <code>.ixx</code> should be distributed in source-code form (just as headers are distributed as source code).</li>
+<li>Modules can also have separate implementation files that get compiled into the binary library: these could be distributed in binary form.</li>
+</ul></li>
+<li>In summary, not much has changed with modules, except you distribute <i>module interface files</i> and the library rather than <i>header files</i> and a library.
+When you do this, the user needs to compile the <i>module interface files</i> only one time, as opposed to every time for every <code>.cpp</code> file that includes the header.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org6492c03" class="outline-2">
+<h2 id="org6492c03">Migration</h2>
+<div class="outline-text-2" id="text-org6492c03">
+<p>
+Here is a suggested migration path for existing projects.
+</p>
+<ol class="org-ol">
+<li>Each module corresponds to a library (call it <code>MyLib</code>).
+<ul class="org-ul">
+<li>There are other choices, but it does not seem to make sense to divide modules up into many libraries (as evidenced by the entire C++ standard library being in a single <code>std</code> module).</li>
+</ul></li>
+<li>Each module consists of a single primary interface file named <code>MyLib.ixx</code> that exports a module name <code>MyLib</code> (e.g, <code>export module MyLib</code>).
+<ul class="org-ul">
+<li>According the specification (I believe), each module can have only one primary interface.</li>
+<li>I have adopted the <code>.ixx</code> convention used by MSVC. Other compiler's don't require this extension, but don't mind it either.</li>
+<li>Users will <code>import MyLib</code> and gain access to everything in the library. There should not be separate imports for separate features.
+<ul class="org-ul">
+<li>Of course, you can (and should!) still use <i>namespaces</i> within a module to avoid polluting the global namespace when importing</li>
+</ul></li>
+</ul></li>
+<li>Each individual <code>.hpp</code> file in your library now becomes a <code>.ixx</code> file with the same name.
+<ul class="org-ul">
+<li>Each <code>.ixx</code> file is setup as a partition of <code>MyLib</code>.</li>
+<li>So each header <code>export module MyLib:PartitionName</code> to make it's code available to the main module interface.</li>
+</ul></li>
+<li>The main <code>MyLib.ixx</code> file should <code>export import</code> each partition (e.g., <code>export import :PartitionName</code>), making it available to users who <code>import MyLib</code>.</li>
+<li>The <code>.cpp</code> files are renamed to <code>.cxx</code> (just for clarity, not actually necessary).
+<ul class="org-ul">
+<li>They all declare themselves as <code>module MyLib</code> at the top, marking them as <i>implementation</i> files for the <code>MyLib</code> module.</li>
+<li>They <code>import :PartitionName</code> for any of the partitions that they need to use</li>
+<li>They do not (and cannot) declare themselves to be <code>module MyLib:PartitionName</code>. Partitions are for interfaces, not implementations.</li>
+</ul></li>
+<li><p>
+The <code>.cpp</code> files are included in the library as normal.
+The <code>.ixx</code> files are listed as part of the <code>FILE_SET CXX_MODULES FILES</code> in the <code>target_sources</code> command in CMake.
+</p>
+<div class="org-src-container">
+<pre class="src src-cmake"><span class="org-function-name">add_library</span>(mylib impl1.cxx impl2.cxx)
+<span class="org-function-name">target_sources</span>(mylib FILE_SET CXX_MODULES FILES MyLib.ixx other_impl.ixx)
+</pre>
+</div></li>
+<li><code>export</code> any entities that users of your library needs to use directly from the corresponding module interface partition file.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org890127d" class="outline-2">
+<h2 id="org890127d">Explanation</h2>
+<div class="outline-text-2" id="text-org890127d">
+<p>
+There were some opinionated choices in the above migration guide. Here is an explanation for some of them.
+</p>
+<ol class="org-ol">
+<li>The guidelines try to maintain as close a mapping as possible between files in traditional setups and modules.
+<ul class="org-ul">
+<li>There should be little need to, for example, take all the code in a <code>.cpp</code> file and implement it in the header file instead.</li>
+</ul></li>
+<li>Maintaining a separation between <code>.ixx</code> and <code>.cxx</code> files is less necessary/advantageous with modules than traditional headers,
+however, there are still benefits to maintaining the separation
+<ul class="org-ul">
+<li>Interface files need not be re-compiled when the implementation changes.</li>
+<li>Implementation files need not be recompiled if the interface changes in a way that is unrelated to the implementation file.
+<ul class="org-ul">
+<li>E.g., if <code>interface1.ixx</code> changes but <code>impl2.cxx</code> doesn't <code>import :interface1</code> then <code>impl2.cxx</code> will not be recompiled when <code>interface1.ixx</code> changes.</li>
+</ul></li>
+</ul></li>
+<li>Maintaining the module as separate partitions improves compile times for the library creator (versus using a single interface file without partitions)
+<ul class="org-ul">
+<li>When an interface file is changed, only the <code>.ixx</code> files that import that file need to be recompiled.</li>
+</ul></li>
+<li>Some sources suggest using a convention of <code>MyLib.SmallerLib</code> to divide up the library into parts
+<ul class="org-ul">
+<li>The <code>.</code> is just a character like any other with modules, there is no semantic meaning</li>
+<li>It seems unnecessary to introduce a naming hierarchy to modules, as a single large module can be imported quickly (like <code>std</code>).</li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>
