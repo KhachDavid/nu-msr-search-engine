@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-01-03 Fri 10:50 -->
+<!-- 2025-09-02 Tue 08:45 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Introduction to Python</title>
@@ -53,43 +53,43 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgcec0b22">Overview</a></li>
-<li><a href="#orgac99c76">Python Basics</a>
+<li><a href="#overview-1-P-2">Overview</a></li>
+<li><a href="#python-basics-1-P-1">Python Basics</a>
 <ul>
-<li><a href="#org29f8442">Python REPL</a></li>
-<li><a href="#org5518b28">Best Practices</a></li>
-<li><a href="#org4d0be53">Language Properties</a></li>
-<li><a href="#org678e593">Syntax Properties</a></li>
-<li><a href="#org8df5724">Built-in Types</a></li>
-<li><a href="#org2678882">Exploring Python and getting help</a></li>
+<li><a href="#python-repl-2-P-1">Python REPL</a></li>
+<li><a href="#best-practices-2-P-1">Best Practices</a></li>
+<li><a href="#language-properties-2-P-1">Language Properties</a></li>
+<li><a href="#syntax-properties-2-P-1">Syntax Properties</a></li>
+<li><a href="#built-in-types-2-P-1">Built-in Types</a>
+<ul>
+<li><a href="#python2-types-3-P-1">Python2 Types</a></li>
 </ul>
 </li>
-<li><a href="#orge4cefb8">Libraries and Pip</a>
-<ul>
-<li><a href="#orgc2eaaa7">Pip</a></li>
-<li><a href="#org05bf701">Virtual Environments</a></li>
-<li><a href="#org4443fe9">Python and ROS 2</a></li>
-<li><a href="#orgedb9a14">Python</a>
-<ul>
-<li><a href="#org1633bfa">Pytorch</a></li>
+<li><a href="#exploring-python-and-getting-help-2-P-1">Exploring Python and Getting help</a></li>
+<li><a href="#documentation-in-the-age-of-ai-chat-bots-2-P-1">Documentation in the Age of AI Chat Bots</a></li>
 </ul>
 </li>
-<li><a href="#orgb3b6005">Anaconda</a></li>
-<li><a href="#orgbb4c304">Important Third-Party Libraries</a>
+<li><a href="#libraries-and-pip-1-P-1">Libraries and Pip</a>
 <ul>
-<li><a href="#orgcc57086">Exceptions to using apt</a></li>
+<li><a href="#pip-2-P-1">Pip</a></li>
+<li><a href="#virtual-environments-2-P-1">Virtual Environments</a></li>
+<li><a href="#python-and-ros-2-2-P-1">Python and ROS 2</a></li>
+<li><a href="#anaconda-2-P-1">Anaconda</a></li>
+<li><a href="#important-third-party-libraries-2-P-1">Important Third-Party Libraries</a>
+<ul>
+<li><a href="#exceptions-to-using-apt-3-P-1">Exceptions to using apt</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgf07259d">Warm-up Exercises</a></li>
+<li><a href="#warm-up-exercises-1-P-1">Warm-up Exercises</a></li>
 <li><a href="#other-resources">Other Learning Resources</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-orgcec0b22" class="outline-2">
-<h2 id="orgcec0b22">Overview</h2>
-<div class="outline-text-2" id="text-orgcec0b22">
+<div id="outline-container-overview-1-P-2" class="outline-2">
+<h2 id="overview-1-P-2">Overview</h2>
+<div class="outline-text-2" id="text-org346533b">
 <p>
 This document is a guide to python tailored to the <a href="https://www.mccormick.northwestern.edu/robotics/">MS in Robotics program at Northwestern University</a>.
 It is meant to be a quick reference and a place to gather external resources rather than a full tutorial.
@@ -98,13 +98,13 @@ For more information see <a href="#other-resources">Other Learning Resources.</a
 </div>
 </div>
 
-<div id="outline-container-orgac99c76" class="outline-2">
-<h2 id="orgac99c76">Python Basics</h2>
-<div class="outline-text-2" id="text-orgac99c76">
+<div id="outline-container-python-basics-1-P-1" class="outline-2">
+<h2 id="python-basics-1-P-1">Python Basics</h2>
+<div class="outline-text-2" id="text-python-basics-1-P-1">
 </div>
-<div id="outline-container-org29f8442" class="outline-3">
-<h3 id="org29f8442">Python REPL</h3>
-<div class="outline-text-3" id="text-org29f8442">
+<div id="outline-container-python-repl-2-P-1" class="outline-3">
+<h3 id="python-repl-2-P-1">Python REPL</h3>
+<div class="outline-text-3" id="text-orga0bb76f">
 <ul class="org-ul">
 <li>A read-evaluate-print loop (REPL) lets you code interactively.  Can run <code>python3</code> or (recommended) <code>ipython3</code> to enter the REPL.</li>
 <li>IPython has many nice features: for example better tab completion and (with a little work) auto reloading of changed modules</li>
@@ -113,9 +113,9 @@ For more information see <a href="#other-resources">Other Learning Resources.</a
 </div>
 </div>
 
-<div id="outline-container-org5518b28" class="outline-3">
-<h3 id="org5518b28">Best Practices</h3>
-<div class="outline-text-3" id="text-org5518b28">
+<div id="outline-container-best-practices-2-P-1" class="outline-3">
+<h3 id="best-practices-2-P-1">Best Practices</h3>
+<div class="outline-text-3" id="text-orgcf4e33c">
 <ul class="org-ul">
 <li>These practices are good to think about, even when learning.
 <ul class="org-ul">
@@ -134,7 +134,7 @@ as an <i>engineering discipline</i> requires thinking about not just the functio
 <ul class="org-ul">
 <li><a href="https://peps.python.org/pep-0257/">PEP257</a> discusses docstrings</li>
 </ul></li>
-<li>When you write a class (and python is Object Oriented so you should be), use a docstring to describe the class</li>
+<li>When you write a class (and python is Object Oriented so you should), use a docstring to describe the class</li>
 <li>When you write a method or function, use a docstring to describe the method and parameters</li>
 <li>Docstring should be formatted for use with sphinx, which, using <code>autodoc</code> can be setup to automatically generate nice documentation.
 <ul class="org-ul">
@@ -162,12 +162,19 @@ as an <i>engineering discipline</i> requires thinking about not just the functio
 <li>Python has a built-in unit testing framework called <a href="https://docs.python.org/3/library/unittest.html">unittest</a>.</li>
 <li>The third-party <a href="https://docs.pytest.org/en/stable">pytest</a> unit testing framework is commonly used because it enables testing with less boilerplate code</li>
 </ul></li>
+<li>Type Annotations
+<ul class="org-ul">
+<li>Python now has type annotations, allowing you to specify the types of variables</li>
+<li>These types provide information to the programmer but are not enforced by the interpreter (although a separate type checker can be run)</li>
+<li>I would recommend types for long-running and complex projects, but for short throw-away scripts they become less useful</li>
+</ul></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org4d0be53" class="outline-3">
-<h3 id="org4d0be53">Language Properties</h3>
-<div class="outline-text-3" id="text-org4d0be53">
+
+<div id="outline-container-language-properties-2-P-1" class="outline-3">
+<h3 id="language-properties-2-P-1">Language Properties</h3>
+<div class="outline-text-3" id="text-org75c3066">
 <p>
 Some basic properties of <code>python</code>:
 </p>
@@ -192,9 +199,9 @@ Some basic properties of <code>python</code>:
 </div>
 </div>
 
-<div id="outline-container-org678e593" class="outline-3">
-<h3 id="org678e593">Syntax Properties</h3>
-<div class="outline-text-3" id="text-org678e593">
+<div id="outline-container-syntax-properties-2-P-1" class="outline-3">
+<h3 id="syntax-properties-2-P-1">Syntax Properties</h3>
+<div class="outline-text-3" id="text-org744db78">
 <ul class="org-ul">
 <li>Significant Whitespace: tab, newlines, spaces matter.
 <ul class="org-ul">
@@ -220,34 +227,52 @@ can be useful, especially to test something in the <code>repl</code> quickly</li
 </ul>
 </div>
 </div>
-<div id="outline-container-org8df5724" class="outline-3">
-<h3 id="org8df5724">Built-in Types</h3>
-<div class="outline-text-3" id="text-org8df5724">
+
+<div id="outline-container-built-in-types-2-P-1" class="outline-3">
+<h3 id="built-in-types-2-P-1">Built-in Types</h3>
+<div class="outline-text-3" id="text-orgc6becf3">
 <p>
 Some types are <a href="https://docs.python.org/3/library/stdtypes.html">built in</a> to the python interpreter (as opposed to types you define yourself).
 </p>
 <ul class="org-ul">
-<li>int, float, long, complex, boolean (True, False).</li>
-<li>Sequence Types: strings, lists, tuple
+<li><code>int</code>, <code>float</code>, <code>long</code>, <code>complex</code>, <code>boolean</code> (<code>True</code>, <code>False</code>).</li>
+<li>Sequence Types: <code>string</code>, <code>list</code>, <code>tuple</code>
 <ul class="org-ul">
-<li>Strings - can use double or single quotes. "Hello" or 'hello'</li>
-<li>list - a collection of objects, can be modified, uses square brackets []. Objects in a list need not be the same type [1, "2434", True].</li>
-<li>tuple - a collection of objects, can't be modified, uses parentheses (a, b)</li>
-<li>dictionary - type of hashtable { key : value}</li>
-<li>Other types are: unicode, bytearray, buffer, xrange.</li>
-<li>Note: xrange is not in python3, all strings are unicode in python3, these are
-some of the major differences between python2 and python 3</li>
+<li><code>string</code> - Use double or single quotes. <code>"Hello"</code> or <code>'hello'</code></li>
+<li><code>list</code> - A collection of objects that can be modified. Use square brackets <code>[1, "2434", True]</code>. Objects in a list need not be the same type.
+<ul class="org-ul">
+<li>Lists can be indexed with square brackets <code>mylist[index]</code>.</li>
+<li>The first element in the list is <code>0</code>.</li>
+<li>Indexes can count backwards from the end: the last element is index <code>-1</code>.</li>
+<li>A sub-list can be returned using a range: <code>mylist[2:4]</code> retrieves elements <code>2</code> and <code>3</code> from <code>mylist</code></li>
 </ul></li>
-<li>List indexing - first index is 0. Can also do -1 to index from back to front. <code>[3:4]</code> returns part of a list.</li>
-<li>Mapping type: dictionary (aka a hashtable). Associates a key with a value ={"key" : value}.</li>
-<li>collections: high performance and advanced data types. <code>import collections</code></li>
+<li><code>tuple</code> - a collection of objects that cannot be modified, uses parentheses <code>(a, b)</code>. Tuples can be indexed like lists</li>
+<li><code>dict</code> - A hashtable that enables looking up a <code>value</code> based on a <code>key</code>. Uses curly braces. <code>{ key : value}</code>
+<ul class="org-ul">
+<li>A value can be accessed with a key <code>mydict["hello"]</code> refers to the value associated with the <code>"hello"</code> key.</li>
+</ul></li>
+<li><code>bytes</code> - An immutable array of bytes.</li>
+<li><code>bytearray</code> - A mutable array of bytes.</li>
+</ul></li>
+<li>High performance and advanced data types can be accessed using the collections package: <code>import collections</code>.</li>
 </ul>
 </div>
+
+<details id="orge6e4942"><summary class="header-4">Python2 Types</summary>
+<div class="outline-text-4" id="text-orge6e4942">
+<p>
+Some types that were removed in Python 3 but are present in Python 2 are
+<code>unicode</code> (not needed in Python 3 because all strings are unicode), <code>buffer</code>, and <code>xrange</code>.
+The lack of these types is part of the major incompatibilities between python 2 and 3.
+</p>
+</div>
+</details>
 </div>
 
-<div id="outline-container-org2678882" class="outline-3">
-<h3 id="org2678882">Exploring Python and getting help</h3>
-<div class="outline-text-3" id="text-org2678882">
+
+<div id="outline-container-exploring-python-and-getting-help-2-P-1" class="outline-3">
+<h3 id="exploring-python-and-getting-help-2-P-1">Exploring Python and Getting help</h3>
+<div class="outline-text-3" id="text-orge1d7045">
 <ol class="org-ol">
 <li>Official python documentation: <a href="https://docs.python.org/3">https://docs.python.org/3</a>. There is also a <a href="https://docs.python.org/3/tutorial/">tutorial</a>.
 If you go through the tutorial, you will be pretty well on your way.
@@ -266,11 +291,25 @@ help(dict), help([1,2,3]).</li>
 </ol>
 </div>
 </div>
+
+<div id="outline-container-documentation-in-the-age-of-ai-chat-bots-2-P-1" class="outline-3">
+<h3 id="documentation-in-the-age-of-ai-chat-bots-2-P-1">Documentation in the Age of AI Chat Bots</h3>
+<div class="outline-text-3" id="text-org080b96f">
+<p>
+You may be wondering: are the built-in help methods useful in the age of AI chat-bots?
+This question could have been similarly asked prior to these bots being viable sources of information, why use <code>help()</code> inside the <code>repl</code>
+when you can just google it? The answer is up to each individual, however, it can be helpful to directly receive authoritative and comprehensive
+information (you have narrowed down the most likely source of error to yourself).
+Sometimes, however, it is faster to get someone (or something) elses quick explanation, even if it may be slightly incorrect or
+not cover all scenarios.
+</p>
+</div>
+</div>
 </div>
 
-<div id="outline-container-orge4cefb8" class="outline-2">
-<h2 id="orge4cefb8">Libraries and Pip</h2>
-<div class="outline-text-2" id="text-orge4cefb8">
+<div id="outline-container-libraries-and-pip-1-P-1" class="outline-2">
+<h2 id="libraries-and-pip-1-P-1">Libraries and Pip</h2>
+<div class="outline-text-2" id="text-org56daac9">
 <p>
 There are many libraries available for <code>python</code>. Many of these libraries are native python code
 while others are thin wrappers around a <code>C</code> or <code>C++</code> library. Incompatibilities between versions
@@ -279,9 +318,9 @@ should help you avoid many of them.
 </p>
 </div>
 
-<div id="outline-container-orgc2eaaa7" class="outline-3">
-<h3 id="orgc2eaaa7">Pip</h3>
-<div class="outline-text-3" id="text-orgc2eaaa7">
+<div id="outline-container-pip-2-P-1" class="outline-3">
+<h3 id="pip-2-P-1">Pip</h3>
+<div class="outline-text-3" id="text-orgf7c186c">
 <ul class="org-ul">
 <li>Python has its own package manager, called <code>pip</code>. On Ubuntu you call it via <code>pip3</code>.</li>
 <li>Packages for <code>pip</code> are hosted on <a href="https://www.pypi.org">https://www.pypi.org</a>.</li>
@@ -290,14 +329,14 @@ should help you avoid many of them.
 <ul class="org-ul">
 <li>These packages are referred to as <i>system packages</i></li>
 </ul></li>
-<li>The current version of pip on Ubuntu is configured to disallow you from installing packages with pip unless they are installed into a virtual environment.</li>
+<li>The current version of pip on Ubuntu prevents you from installing packages with pip unless they are installed into a virtual environment.</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org05bf701" class="outline-3">
-<h3 id="org05bf701">Virtual Environments</h3>
-<div class="outline-text-3" id="text-org05bf701">
+<div id="outline-container-virtual-environments-2-P-1" class="outline-3">
+<h3 id="virtual-environments-2-P-1">Virtual Environments</h3>
+<div class="outline-text-3" id="text-org27f9557">
 <p>
 <a href="https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/">Virtual Environments</a> enable you to create separate directories with
 different versions and combinations of python packages installed. Modern python development practices highly encourage the use of virtual environments for everything
@@ -310,7 +349,7 @@ To create a virtual environment:
 <li>Run <code>python3 -m venv path/to/my/venv</code> (the path can be anything, but is ideally an empty or non-existent directory)
 <ul class="org-ul">
 <li>This command creates a virtual environment in a directory called <code>path/to/my/venv/</code></li>
-<li>If you need python 2 replace <code>venv</code> with <code>virtualenv</code>.</li>
+<li>By default packages in the virtual environment will not use your system-wide packages. Pass <code>--system-site-packages</code> to allow access.</li>
 </ul></li>
 <li>Activate the virtual environment using <code>source path/to/my/venv/bin/activate</code></li>
 <li>When the virtual environment is active, <code>pip</code> will install packages to that environment.
@@ -318,28 +357,26 @@ To create a virtual environment:
 <li>These packages will not affect the rest of the system, and will not be used outside the virtual environment.</li>
 </ul></li>
 <li>To leave the virtual environment, type <code>deactivate</code></li>
-<li>Note: pip packages that depend on external C/C++ libraries can get complicated. You will either have to follow
+<li>Pip packages that depend on external C/C++ libraries can get complicated. You will either have to follow
 special instructions for how to install them into the virtual environment or rely on system-wide installed packages</li>
 </ol>
 </div>
 </div>
 
-<div id="outline-container-org4443fe9" class="outline-3">
-<h3 id="org4443fe9">Python and ROS 2</h3>
-<div class="outline-text-3" id="text-org4443fe9">
+<div id="outline-container-python-and-ros-2-2-P-1" class="outline-3">
+<h3 id="python-and-ros-2-2-P-1">Python and ROS 2</h3>
+<div class="outline-text-3" id="text-org96f6aa9">
 <ol class="org-ol">
 <li>ROS 2 is designed around the use of <code>system-packages</code>, not virtual environments
 <ul class="org-ul">
-<li>This means that all (most? maybe there are exceptions, but I don't know of any) ROS 2 packages that distributed by ROS
-(e.g., you can <code>apt install</code> them from ROS's package repository) depend on the system version of that packagethat have python dependencies</li>
+<li>This means that all (most? maybe there are exceptions, but I don't know of any) ROS 2 packages that are distributed by ROS
+(e.g., you can <code>apt install</code> them from ROS's package repository) depend on the system version of that package that have python dependencies</li>
 <li>If your project is using ROS 2 then it is generally best to rely on system packages</li>
 </ul></li>
-<li>If you wish to distribute a ROS 2 package in binary form from the ROS 2 package server and it depends on a pip package:
-<ul class="org-ul">
-<li>You need get the python package accepted into Ubuntu.</li>
-</ul></li>
-<li>In your own development you can use packages installed via pip.</li>
-<li>The best way to do so is as follows:
+<li>If you wish to distribute a ROS 2 package in binary form from the ROS 2 package server and it depends on a pip package, get
+the python package accepted into Ubuntu or ROS directly</li>
+<li>In your own development you can use packages installed via <code>pip</code>.</li>
+<li>The best way to do so (in the context of ROS) is as follows:
 <ol class="org-ol">
 <li>Obtain a list of the project's python dependencies (e.g., the <code>requirements.txt</code>)</li>
 <li>For each dependency, check if it is available via <code>apt</code> (using <code>apt-search</code>)</li>
@@ -352,53 +389,16 @@ special instructions for how to install them into the virtual environment or rel
 <li>Build ROS package as normal, with the virtual environment active</li>
 <li>If some of the system-packages don't work or are the wrong version, install the correct version into the virtual environment.</li>
 </ol></li>
+<li>Usually in ROS 2, a python package's source code can be placed in the <code>src</code> directory and it will be installed into the ROS workspace</li>
 </ol>
 </div>
 </div>
 
-
-<div id="outline-container-orgedb9a14" class="outline-3">
-<h3 id="orgedb9a14">Python</h3>
-<div class="outline-text-3" id="text-orgedb9a14">
-<ol class="org-ol">
-<li>Modern python development encourages the use of virtual environments</li>
-<li>Current ros2 packages depend on system-provided packages</li>
-<li>Modern Ubuntu highly discourages the use of <code>pip</code> to install python packages, unless in a virtual environment</li>
-</ol>
-</div>
-
-
-<div id="outline-container-org1633bfa" class="outline-4">
-<h4 id="org1633bfa">Pytorch</h4>
-<div class="outline-text-4" id="text-org1633bfa">
-<ul class="org-ul">
-<li><a href="https://pytorch.org">Pytorch</a> is Meta's open-source machine learning (ML) library.</li>
-<li>It is most easily installed into a virtual environment. H</li>
-<li>However, sometimes we may w</li>
-<li>python3-astunparse</li>
-<li>python3-expecttest
-python3-hypothesis
-python3-filelock
-python3-networkx
-python3-fsspec</li>
-</ul>
-
-
-<ul class="org-ul">
-<li>Add the <code>pip</code> binary directory to your PATH by adding the following line to <code>~/.bashrc</code>, just before the <code>source /opt/ros/iron/setup.bash</code> line:
-<code>export PATH=$PATH:~/.local/bin</code></li>
-<li>Install pytorch: <code>pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124</code>.</li>
-<li>Pytorch comes with its own version of CUDA, so you do not need to install CUDA separately to use pytorch.</li>
-</ul>
-</div>
-</div>
-</div>
-
-<div id="outline-container-orgb3b6005" class="outline-3">
-<h3 id="orgb3b6005">Anaconda</h3>
-<div class="outline-text-3" id="text-orgb3b6005">
+<div id="outline-container-anaconda-2-P-1" class="outline-3">
+<h3 id="anaconda-2-P-1">Anaconda</h3>
+<div class="outline-text-3" id="text-orgc50ac65">
 <p>
-Anaconda is a distribution of python primarily designed to make it easier to install.
+Anaconda is a distribution of python primarily designed to make it easier to install on non-linux systems.
 </p>
 <ol class="org-ol">
 <li>You have no reason to install anaconda; you already have python on your system and are able to use <code>pip</code> and virtual environments.</li>
@@ -427,9 +427,9 @@ solved by uninstalling anaconda.</li>
 </div>
 </div>
 
-<div id="outline-container-orgbb4c304" class="outline-3">
-<h3 id="orgbb4c304">Important Third-Party Libraries</h3>
-<div class="outline-text-3" id="text-orgbb4c304">
+<div id="outline-container-important-third-party-libraries-2-P-1" class="outline-3">
+<h3 id="important-third-party-libraries-2-P-1">Important Third-Party Libraries</h3>
+<div class="outline-text-3" id="text-org0102d5e">
 <p>
 Here are some commonly used libraries.  I typically install these through <code>apt</code> since I like to have them
 available whenever I run <code>python3</code> casually from the command line and also want the version shipped with Ubuntu to be used for maximum ROS compatibility.
@@ -440,6 +440,7 @@ available whenever I run <code>python3</code> casually from the command line and
 <li>Scipy - extra scientific programming tools, like numerical integration. Builds on numpy</li>
 <li>pandas - useful for manipulating data tables</li>
 <li>pyserial - for using the serial port</li>
+<li>pytorch - for machine learning</li>
 <li>sympy - symbolic algebra</li>
 <li>pygame - python gaming library.  Not all fun and games though, useful for doing animated graphics</li>
 <li>PyQt - used for making guis in python using the QT framework</li>
@@ -448,12 +449,12 @@ available whenever I run <code>python3</code> casually from the command line and
 </ol>
 </div>
 
-<div id="outline-container-orgcc57086" class="outline-4">
-<h4 id="orgcc57086">Exceptions to using apt</h4>
-<div class="outline-text-4" id="text-orgcc57086">
+<div id="outline-container-exceptions-to-using-apt-3-P-1" class="outline-4">
+<h4 id="exceptions-to-using-apt-3-P-1">Exceptions to using apt</h4>
+<div class="outline-text-4" id="text-orga26c4ee">
 <p>
 Some scientific libraries (particularly machine learning libraries) are out-of-date in Ubuntu in a way that inhibits their functionality. Using these libraries
-also puts you behind the curve in a fast moving field. In this case, pip is often the solution.
+also puts you behind the curve in a fast moving field. In this case, <code>pip</code> and a virtual environment is often the solution.
 </p>
 <ol class="org-ol">
 <li><code>pytorch</code> - A machine learning library from Meta. My preferred library because it has an easier to use API than tensorflow and is more widely used in academia (and catching up rapidly in industry).</li>
@@ -464,9 +465,9 @@ also puts you behind the curve in a fast moving field. In this case, pip is ofte
 </div>
 </div>
 
-<div id="outline-container-orgf07259d" class="outline-2">
-<h2 id="orgf07259d">Warm-up Exercises</h2>
-<div class="outline-text-2" id="text-orgf07259d">
+<div id="outline-container-warm-up-exercises-1-P-1" class="outline-2">
+<h2 id="warm-up-exercises-1-P-1">Warm-up Exercises</h2>
+<div class="outline-text-2" id="text-org65edf00">
 <ol class="org-ol">
 <li>Write a "guess-the-number" game.
 <ul class="org-ul">

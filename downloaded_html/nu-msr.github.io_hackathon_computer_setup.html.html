@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-01-03 Fri 10:50 -->
+<!-- 2025-09-02 Tue 08:45 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Computer Setup</title>
@@ -21,82 +21,83 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org8e22c39">Hardware Overview</a>
+<li><a href="#hardware-overview-1-P-1">Hardware Overview</a>
 <ul>
-<li><a href="#org01893f6">Why Linux?</a></li>
+<li><a href="#why-linux--2-P-1">Why Linux?</a></li>
 </ul>
 </li>
-<li><a href="#orgfeedff5">Caution</a></li>
-<li><a href="#org394300d">Installing Linux</a>
+<li><a href="#caution-1-P-1">Caution</a></li>
+<li><a href="#installing-linux-1-P-1">Installing Linux</a>
 <ul>
-<li><a href="#org676d430">Booting</a></li>
-<li><a href="#orgec61c02">Installation</a></li>
+<li><a href="#booting-2-P-1">Booting</a></li>
+<li><a href="#installation-2-P-1">Installation</a></li>
 </ul>
 </li>
-<li><a href="#org404e838">First Boot</a>
+<li><a href="#first-boot-1-P-1">First Boot</a>
 <ul>
-<li><a href="#orgcec4db6">Login</a></li>
-<li><a href="#orge48871c">Terminal</a></li>
-<li><a href="#orgf325a81">Internet</a></li>
-<li><a href="#org3d270b1">System76 Setup</a></li>
-<li><a href="#orgac81d56">Web Browser</a></li>
-<li><a href="#org51d53cc">Turn Off The Beep</a></li>
+<li><a href="#login-2-P-1">Login</a></li>
+<li><a href="#terminal-2-P-1">Terminal</a></li>
+<li><a href="#internet-2-P-1">Internet</a></li>
+<li><a href="#system76-setup-2-P-1">System76 Setup</a></li>
+<li><a href="#dell-setup-2-P-1">Dell Setup</a></li>
+<li><a href="#web-browser-2-P-1">Web Browser</a></li>
+<li><a href="#turn-off-the-beep-2-P-1">Turn Off The Beep</a></li>
 </ul>
 </li>
-<li><a href="#orgea84b8c">Development Environment</a>
+<li><a href="#development-environment-1-P-1">Development Environment</a>
 <ul>
 <li><a href="#TextEditor">Text Editors</a></li>
-<li><a href="#org4ae7405">Version Control (git)</a></li>
-<li><a href="#org95332ff">Python</a></li>
-<li><a href="#org2f44b29">Robot Operating System (ROS 2)</a></li>
+<li><a href="#version-control-git--2-P-1">Version Control (git)</a></li>
+<li><a href="#python-2-P-1">Python</a></li>
+<li><a href="#robot-operating-system-ros-2--2-P-1">Robot Operating System (ROS 2)</a></li>
 <li><a href="#realsense">Realsense</a></li>
 <li><a href="#interbotix_setup">Interbotix Arms</a></li>
 </ul>
 </li>
-<li><a href="#org4e2233e">Backups</a>
+<li><a href="#backups-1-P-1">Backups</a>
 <ul>
-<li><a href="#orgb3da556">First Line of Defense</a></li>
-<li><a href="#orgf25bbca">Additional Options</a></li>
+<li><a href="#first-line-of-defense-2-P-1">First Line of Defense</a></li>
+<li><a href="#additional-options-2-P-1">Additional Options</a></li>
 </ul>
 </li>
-<li><a href="#org494c567">Additional Customization</a>
+<li><a href="#additional-customization-1-P-1">Additional Customization</a>
 <ul>
-<li><a href="#org24b12f1">The Dock</a></li>
-<li><a href="#org4bf44e7">Terminal Settings</a></li>
-<li><a href="#orgdf27de4">System Settings</a></li>
-<li><a href="#orgc769bf7">Keyboard shortcuts</a></li>
-<li><a href="#orgc96ef6b">Disable Graphical Boot</a></li>
+<li><a href="#the-dock-2-P-1">The Dock</a></li>
+<li><a href="#terminal-settings-2-P-1">Terminal Settings</a></li>
+<li><a href="#system-settings-2-P-1">System Settings</a></li>
+<li><a href="#keyboard-shortcuts-2-P-1">Keyboard shortcuts</a></li>
+<li><a href="#disable-graphical-boot-2-P-1">Disable Graphical Boot</a></li>
 </ul>
 </li>
-<li><a href="#orgb07050f">Ooops!</a></li>
-<li><a href="#org889459c">Northwestern IT</a>
+<li><a href="#ooops--1-P-1">Ooops!</a></li>
+<li><a href="#northwestern-it-1-P-1">Northwestern IT</a>
 <ul>
 <li><a href="#vpn">Northwestern VPN</a></li>
-<li><a href="#org8cc9ecc">Printer</a></li>
+<li><a href="#printer-2-P-1">Printer</a></li>
 </ul>
 </li>
-<li><a href="#org78ca607">Non-Free Applications</a>
+<li><a href="#non-free-applications-1-P-1">Non-Free Applications</a>
 <ul>
-<li><a href="#orga7045c3">Zoom</a></li>
-<li><a href="#org2274a37">Slack</a></li>
-<li><a href="#orga511bb4">Discord</a></li>
+<li><a href="#zoom-2-P-1">Zoom</a></li>
+<li><a href="#slack-2-P-1">Slack</a></li>
+<li><a href="#discord-2-P-1">Discord</a></li>
 </ul>
 </li>
-<li><a href="#org9040011">Software Management</a>
+<li><a href="#software-management-1-P-1">Software Management</a>
 <ul>
-<li><a href="#orgccd26fa">Apt</a></li>
-<li><a href="#org9f642dd">Sandboxed Applications</a></li>
-<li><a href="#orgd3ca6f2">Language-specific Package Managers</a></li>
-<li><a href="#org8fbf6f5">Build From Source</a></li>
+<li><a href="#apt-2-P-1">Apt</a></li>
+<li><a href="#sandboxed-applications-2-P-1">Sandboxed Applications</a></li>
+<li><a href="#language-specific-package-managers-2-P-1">Language-specific Package Managers</a></li>
+<li><a href="#build-from-source-2-P-1">Build From Source</a></li>
 </ul>
 </li>
-<li><a href="#org3dcc914">Ubuntu Cleanup</a></li>
+<li><a href="#ubuntu-cleanup-1-P-1">Ubuntu Cleanup</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org8e22c39" class="outline-2">
-<h2 id="org8e22c39">Hardware Overview</h2>
-<div class="outline-text-2" id="text-org8e22c39">
+<div id="outline-container-hardware-overview-1-P-1" class="outline-2">
+<h2 id="hardware-overview-1-P-1">Hardware Overview</h2>
+<div class="outline-text-2" id="text-orgbc7c0f6">
 <ol class="org-ol">
 <li>MSR provides new Linux laptops for you to use while in the program.</li>
 <li>To build your Linux skills, use these laptops for everything!</li>
@@ -104,26 +105,25 @@
 </ol>
 </div>
 
-<div id="outline-container-orge158d55" class="outline-4">
-<h4 id="orge158d55">Laptop Specifications</h4>
-<div class="outline-text-4" id="text-orge158d55">
+<div id="outline-container-laptop-specifications-3-P-1" class="outline-4">
+<h4 id="laptop-specifications-3-P-1">Laptop Specifications</h4>
+<div class="outline-text-4" id="text-org94a15cb">
 <ul class="org-ul">
-<li>System76 Adder 4 Workstation (addws4)</li>
-<li>Intel Core i9-14900HX (5.8 GHz, 36 MB Cache, 8 P-Cores 16 E-Cores)</li>
-<li>8GB NVIDIA GeForce RTX 4060 with 3072 CUDA Cores</li>
-<li>64 GB RAM (DDR4 5200 MHz)</li>
+<li>Dell Precision Mobile Workstation 3590</li>
+<li>Intel Core Ultra 7 165H (24MB Cache, 16 cores, 5.0 GHz)</li>
+<li>NVidia RTX 500 Ada 4GB</li>
+<li>32 GB RAM (DDR5 5600 MHz)</li>
 <li>1 TB PCIe4 Hard Drive</li>
 <li>15.6"  1920x1080@144Hz LCD</li>
-<li><a href="https://tech-docs.system76.com/models/addw4/README.html">Full Technical Documentation</a></li>
 
 <li>This laptop is big, heavy, and powerful. Think of it more like a portable desktop than a laptop.</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org01893f6" class="outline-3">
-<h3 id="org01893f6">Why Linux?</h3>
-<div class="outline-text-3" id="text-org01893f6">
+<div id="outline-container-why-linux--2-P-1" class="outline-3">
+<h3 id="why-linux--2-P-1">Why Linux?</h3>
+<div class="outline-text-3" id="text-org9eab54d">
 <p>
 Being able to use Linux is an important skill for robotics engineers, but it a skill that is not usually taught explicitly.
 By using Linux every day as your main computing platform and providing your own technical support you will
@@ -135,9 +135,9 @@ and fix the problems you encounter (or create) is a great way to become proficie
 </div>
 </div>
 
-<div id="outline-container-orgfeedff5" class="outline-2">
-<h2 id="orgfeedff5">Caution</h2>
-<div class="outline-text-2" id="text-orgfeedff5">
+<div id="outline-container-caution-1-P-1" class="outline-2">
+<h2 id="caution-1-P-1">Caution</h2>
+<div class="outline-text-2" id="text-orgf034687">
 <ol class="org-ol">
 <li>Read this document carefully.</li>
 <li>Backup your work regularly.</li>
@@ -149,9 +149,9 @@ and fix the problems you encounter (or create) is a great way to become proficie
 </div>
 </div>
 
-<div id="outline-container-org394300d" class="outline-2">
-<h2 id="org394300d">Installing Linux</h2>
-<div class="outline-text-2" id="text-org394300d">
+<div id="outline-container-installing-linux-1-P-1" class="outline-2">
+<h2 id="installing-linux-1-P-1">Installing Linux</h2>
+<div class="outline-text-2" id="text-org8de917f">
 <p>
 The laptops come with Ubuntu 22.04 LTS, but we will be using Ubuntu 24.04 LTS.
 </p>
@@ -166,9 +166,9 @@ For more details see <a href="./ubuntu_minimal.html">Ubuntu Minimal.</a>
 </p>
 </div>
 
-<div id="outline-container-org676d430" class="outline-3">
-<h3 id="org676d430">Booting</h3>
-<div class="outline-text-3" id="text-org676d430">
+<div id="outline-container-booting-2-P-1" class="outline-3">
+<h3 id="booting-2-P-1">Booting</h3>
+<div class="outline-text-3" id="text-org11aec34">
 <ol class="org-ol">
 <li>Ensure that there is no ethernet cable plugged in.</li>
 <li>Ensure that the power cable is connected.</li>
@@ -183,9 +183,9 @@ For more details see <a href="./ubuntu_minimal.html">Ubuntu Minimal.</a>
 </div>
 </div>
 
-<div id="outline-container-orgec61c02" class="outline-3">
-<h3 id="orgec61c02">Installation</h3>
-<div class="outline-text-3" id="text-orgec61c02">
+<div id="outline-container-installation-2-P-1" class="outline-3">
+<h3 id="installation-2-P-1">Installation</h3>
+<div class="outline-text-3" id="text-org42b07b0">
 <p>
 The installation will bring you through a series of screens.
 </p>
@@ -196,9 +196,9 @@ The installation will bring you through a series of screens.
 </ul>
 </div>
 
-<div id="outline-container-orgb503757" class="outline-4">
-<h4 id="orgb503757">The Installation Screens</h4>
-<div class="outline-text-4" id="text-orgb503757">
+<div id="outline-container-the-installation-screens-3-P-1" class="outline-4">
+<h4 id="the-installation-screens-3-P-1">The Installation Screens</h4>
+<div class="outline-text-4" id="text-orgc9b529b">
 <dl class="org-dl">
 <dt>Welcome To Ubuntu</dt><dd>Keep the default (<i>English</i>).
 <ul class="org-ul">
@@ -235,22 +235,22 @@ The installation will bring you through a series of screens.
 </div>
 </div>
 </div>
-<div id="outline-container-org404e838" class="outline-2">
-<h2 id="org404e838">First Boot</h2>
-<div class="outline-text-2" id="text-org404e838">
+<div id="outline-container-first-boot-1-P-1" class="outline-2">
+<h2 id="first-boot-1-P-1">First Boot</h2>
+<div class="outline-text-2" id="text-first-boot-1-P-1">
 </div>
-<div id="outline-container-orgcec4db6" class="outline-3">
-<h3 id="orgcec4db6">Login</h3>
-<div class="outline-text-3" id="text-orgcec4db6">
+<div id="outline-container-login-2-P-1" class="outline-3">
+<h3 id="login-2-P-1">Login</h3>
+<div class="outline-text-3" id="text-org7aa7f3e">
 <ul class="org-ul">
 <li>Click your username and enter your password to login.</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orge48871c" class="outline-3">
-<h3 id="orge48871c">Terminal</h3>
-<div class="outline-text-3" id="text-orge48871c">
+<div id="outline-container-terminal-2-P-1" class="outline-3">
+<h3 id="terminal-2-P-1">Terminal</h3>
+<div class="outline-text-3" id="text-org31ada9b">
 <ol class="org-ol">
 <li>Type <code>Ctrl-Alt-T</code> to open a terminal window.
 <ul class="org-ul">
@@ -263,9 +263,9 @@ The installation will bring you through a series of screens.
 </div>
 </div>
 
-<div id="outline-container-orgf325a81" class="outline-3">
-<h3 id="orgf325a81">Internet</h3>
-<div class="outline-text-3" id="text-orgf325a81">
+<div id="outline-container-internet-2-P-1" class="outline-3">
+<h3 id="internet-2-P-1">Internet</h3>
+<div class="outline-text-3" id="text-org1002d0c">
 <ul class="org-ul">
 <li>List wireless connections with <code>nmcli dev wifi list</code>.</li>
 <li>For on-campus WiFi connect to <code>eduroam</code> network (be sure to substitute <code>&lt;netid&gt;</code> with your netid):
@@ -310,10 +310,10 @@ Here are details on how to setup an eduroam connection from scratch.
 </details>
 </div>
 
-<div id="outline-container-org3d270b1" class="outline-3">
-<h3 id="org3d270b1">System76 Setup</h3>
+<details id="org3d270b1"><summary class="header-3">System76 Setup</summary>
 <div class="outline-text-3" id="text-org3d270b1">
 <p>
+These instructions are for users with System76 Laptops
 System76 provides drivers for their laptops
 </p>
 <ul class="org-ul">
@@ -321,9 +321,9 @@ System76 provides drivers for their laptops
 <li>These instructions are adapted from <a href="https://support.system76.com/articles/install-ubuntu/">System76 Ubuntu Installation</a></li>
 </ul>
 </div>
-<div id="outline-container-org7aa4edb" class="outline-4">
-<h4 id="org7aa4edb">System76 Driver</h4>
-<div class="outline-text-4" id="text-org7aa4edb">
+<div id="outline-container-system76-driver-3-P-1" class="outline-4">
+<h4 id="system76-driver-3-P-1">System76 Driver</h4>
+<div class="outline-text-4" id="text-org03c0d65">
 <p>
 Install the System76 Driver and <code>nvidia</code> drivers. All commands are entered in the Terminal:
 </p>
@@ -351,46 +351,44 @@ System76 makes its own Linux Distribution and makes (or at least specs-out) the 
 <li>These computers have two graphics cards: the NVIDIA and the integrated Intel, and several modes:
 <ul class="org-ul">
 <li><code>nvidia</code> - exclusively use the NVIDIA graphics card. Most power usage, most performance, medium stability (nvidia drivers right now have some quirks)</li>
-<li><code>integrated</code> - intel only: least power usage, least performance, most stability (Intel's drivers are open-source and integrated with the Linux Kernel)
-<ul class="org-ul">
-<li>nvidia card is not visible to the operating system, the HDMI port will not work (external monitor via USB-C only)</li>
-</ul></li>
-<li><code>hybrid</code> - uses both, graphics are routed through the NVIDIA card but most rendering done on intel: medium power usage, tunable performace, worst stability (this is complicated)</li>
-<li><code>compute</code> - uses the intel card for graphics but the nvidia is available for compute tasks
-<ul class="org-ul">
-<li>HDMI port will not work (external monitor via USB-C only)</li>
-<li>Maximizes compute on the GPU while still enabling a GUI (the desktop uses GPU resources, but its running on the intel GPU).</li>
-</ul></li>
-<li>Change the setting by running <code>sudo system76-power graphics &lt;mode&gt;</code> and rebooting. By default you will be using hybrid</li>
-</ul></li>
-
-<li>Display Server:
-<ul class="org-ul">
-<li>X11 - Legacy display server. Still used because it has features not fully realized in its replacement. Highest-level of compatibility but worse performance</li>
-<li>Wayland - Newest display server, some programs or features of programs not compatible. Best performance, worse compatibility (particularly with NVIDIA cards)</li>
-<li>Change between X11 and Wayland by clicking the gear icon in the lower-left corner when logging in.</li>
-</ul></li>
-<li>As you can see, there are many combinations of  Graphics Mode and Display Server.
-<ul class="org-ul">
-<li>Depending on what you are doing it may be advantageous to switch.</li>
-<li>It is certainly easier to stick to one and stay with it.</li>
-<li>The ideal in my view is <code>hybrid</code> and <code>wayland</code> but this tends to be the least-stable combination.</li>
-<li>Use <code>echo $XDG_SESSION_TYPE</code> to determine if you are using X11 or Wayland</li>
+<li><code>integrated</code> - intel only: least power usage, least perforland</li>
 </ul></li>
 </ol>
 </div>
 </details>
+</details>
+<div id="outline-container-dell-setup-2-P-1" class="outline-3">
+<h3 id="dell-setup-2-P-1">Dell Setup</h3>
+<div class="outline-text-3" id="text-org56fcf79">
+<ol class="org-ol">
+<li>Install the Nvidia drivers
+<ul class="org-ul">
+<li><code>sudo apt install nvidia-driver-550-server-open</code></li>
+<li>Due to secure boot being enabled, you will need to set a password. Set it to something very easy to remember: it will only be used once.</li>
+</ul></li>
+<li>A note on drivers:
+<ul class="org-ul">
+<li>The command <code>ubuntu-drivers devices</code> shows missing drivers and the packages that provide them</li>
+<li>There are several drivers to choose from for the NVIDIA graphics one. We may revisit this choice at a later date</li>
+<li>Reboot the computer
+<ul class="org-ul">
+<li>When prompted, enroll MOK</li>
+<li>Enter the simple password you used followed by the enter key. You will see no indication that you are typing.</li>
+</ul></li>
+</ul></li>
+</ol>
 </div>
-<div id="outline-container-orgac81d56" class="outline-3">
-<h3 id="orgac81d56">Web Browser</h3>
-<div class="outline-text-3" id="text-orgac81d56">
 </div>
-<div id="outline-container-org4739703" class="outline-4">
-<h4 id="org4739703">Firefox</h4>
-<div class="outline-text-4" id="text-org4739703">
+<div id="outline-container-web-browser-2-P-1" class="outline-3">
+<h3 id="web-browser-2-P-1">Web Browser</h3>
+<div class="outline-text-3" id="text-web-browser-2-P-1">
+</div>
+<div id="outline-container-firefox-3-P-1" class="outline-4">
+<h4 id="firefox-3-P-1">Firefox</h4>
+<div class="outline-text-4" id="text-orgbc83fac">
 <p>
 Firefox is already installed.
-It comes from a <a href="https://support.mozilla.org/en-US/kb/install-firefox-linux#w_install-firefox-deb-package-for-debian-based-distributions">package repository</a> provided by Mozilla.
+It comes from a <a href="https://support.mozilla.org/en-US/kb/install-firefox-linux#w_install-firefox-deb-package-for-debian-based-distributions">package repository</a> provided by Mozilla. This repository was added during installation.
 </p>
 
 <ul class="org-ul">
@@ -399,12 +397,11 @@ It comes from a <a href="https://support.mozilla.org/en-US/kb/install-firefox-li
 </div>
 </div>
 
-<div id="outline-container-org30c655c" class="outline-4">
-<h4 id="org30c655c">Google Chrome</h4>
-<div class="outline-text-4" id="text-org30c655c">
+<div id="outline-container-google-chrome-3-P-1" class="outline-4">
+<h4 id="google-chrome-3-P-1">Google Chrome</h4>
+<div class="outline-text-4" id="text-orgcf61a8e">
 <ul class="org-ul">
 <li>Google Chrome is not part of Ubuntu so it must be downloaded directly from Google.</li>
-<li>It is also available as a snap, but these instructions assume we are avoiding snaps</li>
 <li><p>
 Download and install the <code>google chrome</code> package:
 </p>
@@ -418,9 +415,9 @@ sudo apt install /tmp/chrome.deb
 </div>
 </div>
 
-<div id="outline-container-org51d53cc" class="outline-3">
-<h3 id="org51d53cc">Turn Off The Beep</h3>
-<div class="outline-text-3" id="text-org51d53cc">
+<div id="outline-container-turn-off-the-beep-2-P-1" class="outline-3">
+<h3 id="turn-off-the-beep-2-P-1">Turn Off The Beep</h3>
+<div class="outline-text-3" id="text-orgd3e843b">
 <ul class="org-ul">
 <li>You may have already heard some annoying sound effects and beeping. (Try it by pressing <code>Backspace</code> several times on an empty terminal line).</li>
 <li>To mute these sounds run <code>gsettings set org.gnome.desktop.sound event-sounds false</code>.</li>
@@ -429,9 +426,9 @@ sudo apt install /tmp/chrome.deb
 </div>
 </div>
 
-<div id="outline-container-orgea84b8c" class="outline-2">
-<h2 id="orgea84b8c">Development Environment</h2>
-<div class="outline-text-2" id="text-orgea84b8c">
+<div id="outline-container-development-environment-1-P-1" class="outline-2">
+<h2 id="development-environment-1-P-1">Development Environment</h2>
+<div class="outline-text-2" id="text-development-environment-1-P-1">
 </div>
 <div id="outline-container-TextEditor" class="outline-3">
 <h3 id="TextEditor">Text Editors</h3>
@@ -442,9 +439,9 @@ Fortunately there are many choices available.  Some suggestions are below: feel 
 </p>
 </div>
 
-<div id="outline-container-org3ca50b9" class="outline-4">
-<h4 id="org3ca50b9"><a href="https://code.visualstudio.com">Visual Studio Code</a></h4>
-<div class="outline-text-4" id="text-org3ca50b9">
+<div id="outline-container--https-code-visualstudio-com-visual-studio-code--3-P-1" class="outline-4">
+<h4 id="-https-code-visualstudio-com-visual-studio-code--3-P-1"><a href="https://code.visualstudio.com">Visual Studio Code</a></h4>
+<div class="outline-text-4" id="text-org820f294">
 <ol class="org-ol">
 <li>The most popular choice for recent MSR students.
 <ul class="org-ul">
@@ -468,11 +465,11 @@ sudo apt install /tmp/code.deb
 </ol>
 </div>
 </div>
-<div id="outline-container-orgf3982a1" class="outline-4">
-<h4 id="orgf3982a1"><a href="https://vim.org">vim</a></h4>
-<div class="outline-text-4" id="text-orgf3982a1">
+<div id="outline-container--https-vim-org-vim--3-P-1" class="outline-4">
+<h4 id="-https-vim-org-vim--3-P-1"><a href="https://vim.org">vim</a></h4>
+<div class="outline-text-4" id="text-org8b0b467">
 <p>
-If you like simplicity and modal text editing.  
+If you like simplicity and modal text editing.
 </p>
 <ul class="org-ul">
 <li>Install with <code>apt install vim</code> (terminal-only) or <code>apt install vim-gtk3</code> (with gui).</li>
@@ -482,9 +479,9 @@ If you like simplicity and modal text editing.
 </div>
 </div>
 
-<div id="outline-container-org8f1e956" class="outline-4">
-<h4 id="org8f1e956"><a href="https://emacs.org">emacs</a></h4>
-<div class="outline-text-4" id="text-org8f1e956">
+<div id="outline-container--https-emacs-org-emacs--3-P-1" class="outline-4">
+<h4 id="-https-emacs-org-emacs--3-P-1"><a href="https://emacs.org">emacs</a></h4>
+<div class="outline-text-4" id="text-org93cd98d">
 <p>
 Eight Megabytes and Constantly Swapping (this is a dated joke).
 </p>
@@ -496,15 +493,15 @@ Eight Megabytes and Constantly Swapping (this is a dated joke).
 </div>
 </div>
 
-<div id="outline-container-org0b110ce" class="outline-4">
-<h4 id="org0b110ce">Other</h4>
-<div class="outline-text-4" id="text-org0b110ce">
+<div id="outline-container-other-3-P-1" class="outline-4">
+<h4 id="other-3-P-1">Other</h4>
+<div class="outline-text-4" id="text-orgeb1dae7">
 <p>
 So <a href="https://wiki.archlinux.org/index.php/List_of_applications/Documents#Text_editors">many others</a> to choose from.
 </p>
 
 
-<figure id="org690d053">
+<figure id="orgb9d04f7">
 <img src="https://imgs.xkcd.com/comics/real_programmers.png" alt="real_programmers.png">
 
 <figcaption><span class="figure-number">Figure 1: </span><a href="https://xkcd.com/378/">https://xkcd.com/378/</a>.</figcaption>
@@ -513,9 +510,9 @@ So <a href="https://wiki.archlinux.org/index.php/List_of_applications/Documents#
 </div>
 </div>
 
-<div id="outline-container-org4ae7405" class="outline-3">
-<h3 id="org4ae7405">Version Control (git)</h3>
-<div class="outline-text-3" id="text-org4ae7405">
+<div id="outline-container-version-control-git--2-P-1" class="outline-3">
+<h3 id="version-control-git--2-P-1">Version Control (git)</h3>
+<div class="outline-text-3" id="text-org8291070">
 <ol class="org-ol">
 <li>Install <code>git</code> from apt (<code>sudo apt install git gitk</code>)
 <ul class="org-ul">
@@ -544,9 +541,9 @@ git config --global init.defaultBranch main
 </div>
 </div>
 
-<div id="outline-container-org95332ff" class="outline-3">
-<h3 id="org95332ff">Python</h3>
-<div class="outline-text-3" id="text-org95332ff">
+<div id="outline-container-python-2-P-1" class="outline-3">
+<h3 id="python-2-P-1">Python</h3>
+<div class="outline-text-3" id="text-org8f3552f">
 <p>
 Install <a href="https://pypi.org/project/pip/">pip</a>, a package manager for python, <a href="https://ipython.org/">ipython</a>, an interactive python read-eval-print-loop (REPL),
 and support for virtual environments:
@@ -557,26 +554,22 @@ and support for virtual environments:
 </div>
 </div>
 
-<div id="outline-container-org2f44b29" class="outline-3">
-<h3 id="org2f44b29">Robot Operating System (ROS 2)</h3>
-<div class="outline-text-3" id="text-org2f44b29">
+<div id="outline-container-robot-operating-system-ros-2--2-P-1" class="outline-3">
+<h3 id="robot-operating-system-ros-2--2-P-1">Robot Operating System (ROS 2)</h3>
+<div class="outline-text-3" id="text-org638e5c3">
 <p>
-Here are some abbreviated instructions for installing ROS 2 on an x86 PC, Many steps are skipped, assuming you have completed the prior steps in this guide.
+Here are some abbreviated instructions for installing ROS 2 on an x86 PC, which should work assuming you have completed the previous steps in this guide.
 </p>
 <ul class="org-ul">
 <li>We'll learn more about ROS 2 later, these instructions are focused on getting it installed quickly.</li>
 <li><p>
-The instructions below are summarized from <a href="http://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debians.html">Official ROS 2 Jazzy Install Instructions</a>
+The instructions below are summarized from <a href="http://docs.ros.org/en/kilted/Installation/Ubuntu-Install-Debians.html">Official ROS 2 Kilted Install Instructions</a>
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span class="org-comment-delimiter"># </span><span class="org-comment">Download ROS encryption keys</span>
-sudo wget -O /usr/share/keyrings/ros-archive-keyring.gpg <span class="org-sh-escaped-newline">\</span>
-     https://raw.githubusercontent.com/ros/rosdistro/master/ros.key
-
-<span class="org-comment-delimiter"># </span><span class="org-comment">Add the Repository by creating /etc/apt/sources.list.d</span>
-<span class="org-builtin">echo</span> <span class="org-string">"deb [arch=amd64 signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] \</span>
-<span class="org-string">      http://packages.ros.org/ros2/ubuntu noble main"</span> <span class="org-sh-escaped-newline">\</span>
-      | sudo tee /etc/apt/sources.list.d/ros2.list
+<pre class="src src-bash"><span class="org-comment-delimiter"># </span><span class="org-comment">Install the ROS repositories</span>
+wget https://github.com/ros-infrastructure/ros-apt-source/releases/download/1.1.0/ros2-apt-source_1.1.0.noble_all.deb
+sudo apt install ./ros2-apt-source_1.1.0.noble_all.deb
+rm ./ros2-apt-source_1.1.0.noble_all.deb
 
 <span class="org-comment-delimiter"># </span><span class="org-comment">Update the package list</span>
 sudo apt update
@@ -584,8 +577,8 @@ sudo apt update
 <span class="org-comment-delimiter"># </span><span class="org-comment">Install the development tools</span>
 sudo apt install ros-dev-tools
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Install ros2 iron</span>
-sudo apt install ros-jazzy-desktop
+<span class="org-comment-delimiter"># </span><span class="org-comment">Install ros2 kilted</span>
+sudo apt install ros-kilted-desktop
 
 <span class="org-comment-delimiter"># </span><span class="org-comment">Initialize rosdep (makes it easy to install ros dependencies)</span>
 sudo rosdep init
@@ -593,13 +586,13 @@ rosdep update
 </pre>
 </div>
 <ul class="org-ul">
-<li>Add the line <code>source /opt/ros/jazzy/setup.bash</code> to the end of  <code>~/.bashrc</code> file. 
+<li>Add the line <code>source /opt/ros/kilted/setup.bash</code> to the end of  <code>~/.bashrc</code> file.
 <ul class="org-ul">
 <li>The <code>~</code> expands to <code>/home/&lt;user&gt;</code> where <code>&lt;user&gt;</code> is your username, so the file's path is <code>/home/&lt;user&gt;/.bashrc</code>.</li>
 <li>Edit the file using the <a href="#TextEditor">Text Editor</a> of your choice, for example <code>code ~/.bashrc</code>.</li>
 <li>This file is executed whenever you start <code>bash</code> and automatically configures the ROS environment.</li>
 </ul></li>
-<li>Restart the terminal and <code>echo $ROS_DISTRO</code>. It should display <code>jazzy</code>.</li>
+<li>Restart the terminal and <code>echo $ROS_DISTRO</code>. It should display <code>kilted</code>.</li>
 </ul></li>
 </ul>
 </div>
@@ -609,12 +602,10 @@ rosdep update
 <h3 id="realsense">Realsense</h3>
 <div class="outline-text-3" id="text-realsense">
 <ol class="org-ol">
-<li>Use <code>sudo apt install ros-jazzy-realsense2-camera ros-jazzy-realsense2-description</code> to install the  realsense SDK and ROS packages.
-<ul class="org-ul">
-<li><code>ros-jazzy-realsense2-camera</code> brings in <code>ros-jazzy-librealsense2</code>, the <a href="https://github.com/IntelRealSense/librealsense">realsense library</a></li>
-<li>You will be receiving a version of <code>ros-jazzy-librealsense2</code> modified from the standard ROS 2 version, from the <a href="https://launchpad.net/~numsr/+archive/ubuntu/robotics">NUMSR PPA</a></li>
-<li>The modified version of the library enables support for python, cuda, and <a href="https://github.com/IntelRealSense/realsense-ros/issues/1426">installs the udev rules</a> automatically</li>
-</ul></li>
+<li>The <a href="https://github.com/IntelRealSense/librealsense">realsense library</a> is used to interact with Realsense cameras</li>
+<li>For convenience, I have created packages to install the necessary Realsense library on the <a href="https://launchpad.net/~numsr">numsr ppa</a>.</li>
+<li>Install the packages: <code>sudo apt install librealsense2-dkms librealsense2 ros-kilted-realsense2-camera ros-kilted-realsense2-description</code></li>
+<li>For details see <a href="./msr_ppa.html#rsense_ppa">Realsense PPA Modifications</a></li>
 </ol>
 </div>
 </div>
@@ -661,18 +652,18 @@ To use this new workspace, <code>source ~/ws/interbotix/install/setup.bash</code
 </div>
 
 
-<div id="outline-container-org4e2233e" class="outline-2">
-<h2 id="org4e2233e">Backups</h2>
-<div class="outline-text-2" id="text-org4e2233e">
+<div id="outline-container-backups-1-P-1" class="outline-2">
+<h2 id="backups-1-P-1">Backups</h2>
+<div class="outline-text-2" id="text-orgd42bcc7">
 <p>
 You should frequently backup your work (e.g., the data in your home directory).
 Aside from hardware failures, as you experiment with the command-line it is easy to make a mistake.
 </p>
 </div>
 
-<div id="outline-container-orgb3da556" class="outline-3">
-<h3 id="orgb3da556">First Line of Defense</h3>
-<div class="outline-text-3" id="text-orgb3da556">
+<div id="outline-container-first-line-of-defense-2-P-1" class="outline-3">
+<h3 id="first-line-of-defense-2-P-1">First Line of Defense</h3>
+<div class="outline-text-3" id="text-orgc305576">
 <ol class="org-ol">
 <li>We have provided you with an external SSD. You can backup regularly.</li>
 <li>You can reformat the whole drive or you can keep it and use the 3rd partition for backups:
@@ -690,11 +681,12 @@ to "factory reset" your computer to a basic installation with the other componen
 </div>
 </div>
 
-<div id="outline-container-orgf25bbca" class="outline-3">
-<h3 id="orgf25bbca">Additional Options</h3>
-<div class="outline-text-3" id="text-orgf25bbca">
+<div id="outline-container-additional-options-2-P-1" class="outline-3">
+<h3 id="additional-options-2-P-1">Additional Options</h3>
+<div class="outline-text-3" id="text-org434e491">
 <ol class="org-ol">
 <li><a href="https://restic.net/">Restic</a> does encrypted incremental backups to local devices or cloud services.</li>
+<li><a href="https://borgbackup.org">BorgBackup</a> de-duplicating file backups</li>
 <li>The Cloud:
 <ul class="org-ul">
 <li><a href="https://dropbox.com">Dropbox</a>: Has a good <a href="https://www.dropbox.com/install-linux">Linux client</a> but costs money.</li>
@@ -711,9 +703,9 @@ to "factory reset" your computer to a basic installation with the other componen
 </div>
 </div>
 </div>
-<div id="outline-container-org494c567" class="outline-2">
-<h2 id="org494c567">Additional Customization</h2>
-<div class="outline-text-2" id="text-org494c567">
+<div id="outline-container-additional-customization-1-P-1" class="outline-2">
+<h2 id="additional-customization-1-P-1">Additional Customization</h2>
+<div class="outline-text-2" id="text-orgb8374b6">
 <ul class="org-ul">
 <li>Here are some suggestions and ideas for customizing your computer further.</li>
 <li>Almost nothing is required in Linux and everything is possible (with enough time).</li>
@@ -721,9 +713,9 @@ to "factory reset" your computer to a basic installation with the other componen
 </ul>
 </div>
 
-<div id="outline-container-org24b12f1" class="outline-3">
-<h3 id="org24b12f1">The Dock</h3>
-<div class="outline-text-3" id="text-org24b12f1">
+<div id="outline-container-the-dock-2-P-1" class="outline-3">
+<h3 id="the-dock-2-P-1">The Dock</h3>
+<div class="outline-text-3" id="text-org8878f6c">
 <ul class="org-ul">
 <li>The icons on the left of your screen allow you to switch between windows, and
 to open commonly-used applications.</li>
@@ -735,9 +727,9 @@ to open commonly-used applications.</li>
 </div>
 
 
-<div id="outline-container-org4bf44e7" class="outline-3">
-<h3 id="org4bf44e7">Terminal Settings</h3>
-<div class="outline-text-3" id="text-org4bf44e7">
+<div id="outline-container-terminal-settings-2-P-1" class="outline-3">
+<h3 id="terminal-settings-2-P-1">Terminal Settings</h3>
+<div class="outline-text-3" id="text-orgf5ad148">
 <ul class="org-ul">
 <li>You can add transparency and change terminal colors in the preferences.</li>
 <li>A common choice is to have the terminal transparent enough to read text behind it but opaque enough to easily see text in it.</li>
@@ -746,13 +738,13 @@ to open commonly-used applications.</li>
 </div>
 </div>
 
-<div id="outline-container-orgdf27de4" class="outline-3">
-<h3 id="orgdf27de4">System Settings</h3>
-<div class="outline-text-3" id="text-orgdf27de4">
+<div id="outline-container-system-settings-2-P-1" class="outline-3">
+<h3 id="system-settings-2-P-1">System Settings</h3>
+<div class="outline-text-3" id="text-system-settings-2-P-1">
 </div>
-<div id="outline-container-orge98f41c" class="outline-4">
-<h4 id="orge98f41c">GUI</h4>
-<div class="outline-text-4" id="text-orge98f41c">
+<div id="outline-container-gui-3-P-1" class="outline-4">
+<h4 id="gui-3-P-1">GUI</h4>
+<div class="outline-text-4" id="text-orgc474322">
 <ol class="org-ol">
 <li>Many settings are contained in the Settings menu.  I encourage you to explore them.</li>
 <li>You can also install some additional tools. None are necessary (you can always edit configuration files)
@@ -764,9 +756,9 @@ to open commonly-used applications.</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-orga6e79b9" class="outline-4">
-<h4 id="orga6e79b9">Terminal</h4>
-<div class="outline-text-4" id="text-orga6e79b9">
+<div id="outline-container-terminal-3-P-1" class="outline-4">
+<h4 id="terminal-3-P-1">Terminal</h4>
+<div class="outline-text-4" id="text-org6ad7a32">
 <ul class="org-ul">
 <li>The <code>gsettings</code> command provides access to all settings via the command line.</li>
 <li>Settings are grouped into <code>schemas</code>, and individual options are stored as keys under a schema</li>
@@ -782,9 +774,9 @@ to open commonly-used applications.</li>
 </div>
 </div>
 
-<div id="outline-container-orgc769bf7" class="outline-3">
-<h3 id="orgc769bf7">Keyboard shortcuts</h3>
-<div class="outline-text-3" id="text-orgc769bf7">
+<div id="outline-container-keyboard-shortcuts-2-P-1" class="outline-3">
+<h3 id="keyboard-shortcuts-2-P-1">Keyboard shortcuts</h3>
+<div class="outline-text-3" id="text-org6e3af58">
 <ul class="org-ul">
 <li>GNOME (the default desktop environment) has several keyboard shortcuts.</li>
 <li>See them and change them in the <code>Devices-&gt;Keyboard</code> under <code>System Settings</code></li>
@@ -794,9 +786,9 @@ to open commonly-used applications.</li>
 </div>
 </div>
 
-<div id="outline-container-orgc96ef6b" class="outline-3">
-<h3 id="orgc96ef6b">Disable Graphical Boot</h3>
-<div class="outline-text-3" id="text-orgc96ef6b">
+<div id="outline-container-disable-graphical-boot-2-P-1" class="outline-3">
+<h3 id="disable-graphical-boot-2-P-1">Disable Graphical Boot</h3>
+<div class="outline-text-3" id="text-org7b97105">
 <p>
 Why would you want to disable the graphical boot?
 </p>
@@ -825,9 +817,9 @@ sudo systemctl isolate multi-user
 </div>
 </div>
 
-<div id="outline-container-orgb07050f" class="outline-2">
-<h2 id="orgb07050f">Ooops!</h2>
-<div class="outline-text-2" id="text-orgb07050f">
+<div id="outline-container-ooops--1-P-1" class="outline-2">
+<h2 id="ooops--1-P-1">Ooops!</h2>
+<div class="outline-text-2" id="text-org8311ba8">
 <p>
 If something really bad happens to your computer, fear not!
 </p>
@@ -843,9 +835,9 @@ If something really bad happens to your computer, fear not!
 </div>
 </div>
 
-<div id="outline-container-org889459c" class="outline-2">
-<h2 id="org889459c">Northwestern IT</h2>
-<div class="outline-text-2" id="text-org889459c">
+<div id="outline-container-northwestern-it-1-P-1" class="outline-2">
+<h2 id="northwestern-it-1-P-1">Northwestern IT</h2>
+<div class="outline-text-2" id="text-orgab017cd">
 <p>
 This section provides Linux-specific information for systems maintained by the IT department.
 </p>
@@ -857,9 +849,9 @@ This section provides Linux-specific information for systems maintained by the I
 There are a few alternatives for connecting to <a href="https://services.northwestern.edu/TDClient/30/Portal/Requests/ServiceDet?ID=50">Northwestern VPN</a>.
 </p>
 </div>
-<div id="outline-container-org56e0ffd" class="outline-4">
-<h4 id="org56e0ffd">gp-saml-gui</h4>
-<div class="outline-text-4" id="text-org56e0ffd">
+<div id="outline-container-gp-saml-gui-3-P-1" class="outline-4">
+<h4 id="gp-saml-gui-3-P-1">gp-saml-gui</h4>
+<div class="outline-text-4" id="text-org176f086">
 <ol class="org-ol">
 <li>Install <code>openconnect</code>: <code>sudo apt install openconnect</code></li>
 <li>Install the client:  <code>sudo apt install gp-saml-gui</code></li>
@@ -871,9 +863,9 @@ There are a few alternatives for connecting to <a href="https://services.northwe
 </ol>
 </div>
 </div>
-<div id="outline-container-org83efdf6" class="outline-4">
-<h4 id="org83efdf6">Network Manager</h4>
-<div class="outline-text-4" id="text-org83efdf6">
+<div id="outline-container-network-manager-3-P-1" class="outline-4">
+<h4 id="network-manager-3-P-1">Network Manager</h4>
+<div class="outline-text-4" id="text-org0660c2a">
 <ol class="org-ol">
 <li>Install <code>openconnect</code>: <code>sudo apt install openconnect</code></li>
 <li>Install the Network Manger Plugin: <code>sudo apt install network-manager-openconnect-gnome</code></li>
@@ -970,13 +962,13 @@ Here is a brief summary of what I've learned about how GlobalProtect VPN works
 </div>
 </details>
 </div>
-<div id="outline-container-org8cc9ecc" class="outline-3">
-<h3 id="org8cc9ecc">Printer</h3>
-<div class="outline-text-3" id="text-org8cc9ecc">
+<div id="outline-container-printer-2-P-1" class="outline-3">
+<h3 id="printer-2-P-1">Printer</h3>
+<div class="outline-text-3" id="text-printer-2-P-1">
 </div>
-<div id="outline-container-org265b0af" class="outline-4">
-<h4 id="org265b0af">ME Office Printer</h4>
-<div class="outline-text-4" id="text-org265b0af">
+<div id="outline-container-me-office-printer-3-P-1" class="outline-4">
+<h4 id="me-office-printer-3-P-1">ME Office Printer</h4>
+<div class="outline-text-4" id="text-org11e19ba">
 <p>
 These are instructions for using the printer in the Mechanical Engineering office and only work while on campus.
 You will need a printer code (referred to as <code>&lt;USERCODE&gt;</code>).
@@ -1014,9 +1006,9 @@ sudo cupsaccept ME_Office
 </div>
 </div>
 
-<div id="outline-container-org90e812f" class="outline-4">
-<h4 id="org90e812f">CRB Printer</h4>
-<div class="outline-text-4" id="text-org90e812f">
+<div id="outline-container-crb-printer-3-P-1" class="outline-4">
+<h4 id="crb-printer-3-P-1">CRB Printer</h4>
+<div class="outline-text-4" id="text-orgc011d5c">
 <ol class="org-ol">
 <li><p>
 Setup the printer:
@@ -1038,9 +1030,9 @@ sudo cupsaccept CRB_Lab
 </div>
 </div>
 </div>
-<div id="outline-container-org78ca607" class="outline-2">
-<h2 id="org78ca607">Non-Free Applications</h2>
-<div class="outline-text-2" id="text-org78ca607">
+<div id="outline-container-non-free-applications-1-P-1" class="outline-2">
+<h2 id="non-free-applications-1-P-1">Non-Free Applications</h2>
+<div class="outline-text-2" id="text-orgfba079f">
 <p>
 Free software tends to work much better on Linux than proprietary software (and when something goes wrong you can fix it!)
 However there are some applications that, (partially due to network effects), it is desirable or necessary to use.
@@ -1048,9 +1040,9 @@ There are free alternatives to all of these but I have not tried any.
 </p>
 </div>
 
-<div id="outline-container-orga7045c3" class="outline-3">
-<h3 id="orga7045c3">Zoom</h3>
-<div class="outline-text-3" id="text-orga7045c3">
+<div id="outline-container-zoom-2-P-1" class="outline-3">
+<h3 id="zoom-2-P-1">Zoom</h3>
+<div class="outline-text-3" id="text-org0975ff4">
 <ol class="org-ol">
 <li>Zoom can be used from a web-browser.
 <ul class="org-ul">
@@ -1068,9 +1060,9 @@ domain.</li>
 </div>
 </div>
 
-<div id="outline-container-org2274a37" class="outline-3">
-<h3 id="org2274a37">Slack</h3>
-<div class="outline-text-3" id="text-org2274a37">
+<div id="outline-container-slack-2-P-1" class="outline-3">
+<h3 id="slack-2-P-1">Slack</h3>
+<div class="outline-text-3" id="text-orgc8565ad">
 <ol class="org-ol">
 <li>Slack has a web interface</li>
 <li>The Slack download page promotes the snap but there is also a package and installed:</li>
@@ -1081,9 +1073,9 @@ domain.</li>
 </div>
 </div>
 
-<div id="outline-container-orga511bb4" class="outline-3">
-<h3 id="orga511bb4">Discord</h3>
-<div class="outline-text-3" id="text-orga511bb4">
+<div id="outline-container-discord-2-P-1" class="outline-3">
+<h3 id="discord-2-P-1">Discord</h3>
+<div class="outline-text-3" id="text-orga0e1a5b">
 <ol class="org-ol">
 <li>Discord has a web interface, but it can also be downloaded as a package and installed:</li>
 <li><code>wget -o /tmp/discord.deb https://dl.discordapp.net/apps/linux/0.0.60/discord-0.0.60.deb</code></li>
@@ -1093,9 +1085,9 @@ domain.</li>
 </div>
 </div>
 
-<div id="outline-container-org9040011" class="outline-2">
-<h2 id="org9040011">Software Management</h2>
-<div class="outline-text-2" id="text-org9040011">
+<div id="outline-container-software-management-1-P-1" class="outline-2">
+<h2 id="software-management-1-P-1">Software Management</h2>
+<div class="outline-text-2" id="text-org3951c2b">
 <p>
 As you dive into robotics research and development, you will find yourself needing to install software, which is distributed in different ways (some better than others).
 This situation can get complicated, especially as you venture into lesser used scientific code (e.g., released by researchers as part of a publication).
@@ -1104,17 +1096,17 @@ Here I outline methods of handling this complexity while maintaining your system
 </div>
 
 
-<div id="outline-container-orgccd26fa" class="outline-3">
-<h3 id="orgccd26fa">Apt</h3>
-<div class="outline-text-3" id="text-orgccd26fa">
+<div id="outline-container-apt-2-P-1" class="outline-3">
+<h3 id="apt-2-P-1">Apt</h3>
+<div class="outline-text-3" id="text-orga24edab">
 <p>
 Ubuntu Linux comes with a strongly preferred method of managing packages: <code>apt</code>.<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>
 </p>
 </div>
 
-<div id="outline-container-org2c15b5a" class="outline-4">
-<h4 id="org2c15b5a">Why Apt?</h4>
-<div class="outline-text-4" id="text-org2c15b5a">
+<div id="outline-container-why-apt--3-P-1" class="outline-4">
+<h4 id="why-apt--3-P-1">Why Apt?</h4>
+<div class="outline-text-4" id="text-org0860d45">
 <p>
 Most computer applications that you use are built using libraries: collections of code that is generally useful across applications.  Rather
 than duplicating this code every time it is needing (wasting both hard drive space and RAM), Ubuntu distributes one copy of each library which any
@@ -1150,9 +1142,9 @@ How I wish I could end the story there!
 </div>
 </div>
 
-<div id="outline-container-orga95ec6a" class="outline-4">
-<h4 id="orga95ec6a">Why not Apt?</h4>
-<div class="outline-text-4" id="text-orga95ec6a">
+<div id="outline-container-why-not-apt--3-P-1" class="outline-4">
+<h4 id="why-not-apt--3-P-1">Why not Apt?</h4>
+<div class="outline-text-4" id="text-org820a247">
 <p>
 Unfortunately, people (especially in robotics) often need packages that are not distributed by Ubuntu, for a few reasons:
 </p>
@@ -1181,9 +1173,9 @@ One of your main goals when obtaining this software should be to minimize the ef
 </div>
 </div>
 
-<div id="outline-container-org410f855" class="outline-4">
-<h4 id="org410f855">Alternative Repositories</h4>
-<div class="outline-text-4" id="text-org410f855">
+<div id="outline-container-alternative-repositories-3-P-1" class="outline-4">
+<h4 id="alternative-repositories-3-P-1">Alternative Repositories</h4>
+<div class="outline-text-4" id="text-org36b1af4">
 <p>
 Ubuntu enables <code>apt</code> to download packages from servers other than the officially provide ones, enabling third parties to distribute software through apt.
 Ubuntu also has it's own service, called Personal Package Archives (PPAs), which hosts custom third-party packages for downloading by apt.
@@ -1210,8 +1202,8 @@ should
 </div>
 
 <ul class="org-ul">
-<li><a id="org72ac05d"></a>Example Alternative Repositories<br>
-<div class="outline-text-5" id="text-org72ac05d">
+<li><a id="example-alternative-repositories-4-P-1"></a>Example Alternative Repositories<br>
+<div class="outline-text-5" id="text-org150012c">
 <ol class="org-ol">
 <li>The ROS repository.</li>
 <li>The <a href="https://launchpad.net/~numsr">Northwestern MSR repository</a></li>
@@ -1228,9 +1220,9 @@ should
 </ul>
 </div>
 
-<div id="outline-container-org6ee3401" class="outline-4">
-<h4 id="org6ee3401">Standalone packages</h4>
-<div class="outline-text-4" id="text-org6ee3401">
+<div id="outline-container-standalone-packages-3-P-1" class="outline-4">
+<h4 id="standalone-packages-3-P-1">Standalone packages</h4>
+<div class="outline-text-4" id="text-org529db2a">
 <p>
 Packages can also be distributed as standalone <code>.deb</code> packages and installed with <code>apt</code>.
 These packages can not generally be updated automatically via <code>apt upgrade</code>.
@@ -1240,9 +1232,9 @@ However, some standalone <code>.deb</code> packages (such as the one for VSCode)
 </div>
 </div>
 
-<div id="outline-container-org9f642dd" class="outline-3">
-<h3 id="org9f642dd">Sandboxed Applications</h3>
-<div class="outline-text-3" id="text-org9f642dd">
+<div id="outline-container-sandboxed-applications-2-P-1" class="outline-3">
+<h3 id="sandboxed-applications-2-P-1">Sandboxed Applications</h3>
+<div class="outline-text-3" id="text-orgd0d04e5">
 <p>
 Flatpack, AppImage, and snap are three competing standards for "sandboxed applications".  These systems essentially include the program and all of its
 dependencies in a single directory and isolate themselves from the rest of the system. These systems enable the original application creator to
@@ -1265,9 +1257,9 @@ A few alternatives are <a href="https://appimage.github.io/AppImage">AppImage</a
 <li>The Ubuntu Linux we installed was modified from the original version to remove Snaps.</li>
 </ul>
 </div>
-<div id="outline-container-orged37ebb" class="outline-4">
-<h4 id="orged37ebb">Docker</h4>
-<div class="outline-text-4" id="text-orged37ebb">
+<div id="outline-container-docker-3-P-1" class="outline-4">
+<h4 id="docker-3-P-1">Docker</h4>
+<div class="outline-text-4" id="text-org744cc0e">
 <p>
 Docker is containerization software that enables deploying a full Linux environment that is separate from the main system.
 For example, it can enable you to run Ubuntu 18.04 applications within Ubuntu 22.04. Discussing docker in detail is out-of-scope here,
@@ -1282,18 +1274,18 @@ for deploying software to servers (or robots) and maintaining completely separat
 </div>
 </div>
 
-<div id="outline-container-orgd3ca6f2" class="outline-3">
-<h3 id="orgd3ca6f2">Language-specific Package Managers</h3>
-<div class="outline-text-3" id="text-orgd3ca6f2">
+<div id="outline-container-language-specific-package-managers-2-P-1" class="outline-3">
+<h3 id="language-specific-package-managers-2-P-1">Language-specific Package Managers</h3>
+<div class="outline-text-3" id="text-org5b753df">
 <p>
 Many programming languages have their own package managers (e.g., <code>pip</code>, <code>cargo</code>) designed for distributing software and libraries written in that language.
 These package managers often offer the same software that is available via <code>apt</code> but typically in a newer version.
 </p>
 </div>
 
-<div id="outline-container-orgbbb5f21" class="outline-4">
-<h4 id="orgbbb5f21">Python</h4>
-<div class="outline-text-4" id="text-orgbbb5f21">
+<div id="outline-container-python-3-P-1" class="outline-4">
+<h4 id="python-3-P-1">Python</h4>
+<div class="outline-text-4" id="text-org1d07c35">
 <p>
 Python package management will come up a lot in this course. Furthermore doing things like trying to uninstall python
 or install another python version can cause great damage to the your system.
@@ -1316,9 +1308,9 @@ or install another python version can cause great damage to the your system.
 </div>
 </div>
 
-<div id="outline-container-org8fbf6f5" class="outline-3">
-<h3 id="org8fbf6f5">Build From Source</h3>
-<div class="outline-text-3" id="text-org8fbf6f5">
+<div id="outline-container-build-from-source-2-P-1" class="outline-3">
+<h3 id="build-from-source-2-P-1">Build From Source</h3>
+<div class="outline-text-3" id="text-org1f515bb">
 <p>
 Most programs and libraries that we use are open source. This means we can modify and build them to suit our needs.
 </p>
@@ -1327,9 +1319,9 @@ Most programs and libraries that we use are open source. This means we can modif
 </ul>
 </div>
 
-<div id="outline-container-org747021e" class="outline-4">
-<h4 id="org747021e">Colcon Workspace</h4>
-<div class="outline-text-4" id="text-org747021e">
+<div id="outline-container-colcon-workspace-3-P-1" class="outline-4">
+<h4 id="colcon-workspace-3-P-1">Colcon Workspace</h4>
+<div class="outline-text-4" id="text-org7be7a8f">
 <ul class="org-ul">
 <li>Colcon is the build tool for ROS 2, but it can compile a variety of ROS and non-ROS packages.</li>
 <li>Many ROS packages are written in C++ which has no official package manager. There are some attempts (like vcpkg or conan) but they are far from standard or ubiquitous.</li>
@@ -1340,9 +1332,9 @@ Most programs and libraries that we use are open source. This means we can modif
 </div>
 </div>
 
-<div id="outline-container-org9a7eec9" class="outline-4">
-<h4 id="org9a7eec9">Compile By Hand</h4>
-<div class="outline-text-4" id="text-org9a7eec9">
+<div id="outline-container-compile-by-hand-3-P-1" class="outline-4">
+<h4 id="compile-by-hand-3-P-1">Compile By Hand</h4>
+<div class="outline-text-4" id="text-orgc289537">
 <p>
 Compiling "by hand" means following the instructions provided in the source code for compiling that particular project (or figuring out what to do from reading if there
 are no instructions). The main difficulty is obtaining all the dependencies.  Once the dependencies are installed the main program can be installed.
@@ -1369,9 +1361,9 @@ An alternative pattern is to do the following
 </div>
 </div>
 
-<div id="outline-container-org9b747ef" class="outline-4">
-<h4 id="org9b747ef">Modifying Source Code</h4>
-<div class="outline-text-4" id="text-org9b747ef">
+<div id="outline-container-modifying-source-code-3-P-1" class="outline-4">
+<h4 id="modifying-source-code-3-P-1">Modifying Source Code</h4>
+<div class="outline-text-4" id="text-orgb024a90">
 <p>
 If you need to modify source code, for the long run here is the procedure (assuming the project uses git):
 </p>
@@ -1386,9 +1378,9 @@ If you need to modify source code, for the long run here is the procedure (assum
 </div>
 </div>
 
-<div id="outline-container-org9a9787b" class="outline-4">
-<h4 id="org9a9787b">Building Custom Packages</h4>
-<div class="outline-text-4" id="text-org9a9787b">
+<div id="outline-container-building-custom-packages-3-P-1" class="outline-4">
+<h4 id="building-custom-packages-3-P-1">Building Custom Packages</h4>
+<div class="outline-text-4" id="text-orgf2aa03c">
 <p>
 If you can compile the code you can also package it as a Debian package and install it, enabling it to be managed by <code>apt</code>.
 </p>
@@ -1401,9 +1393,9 @@ If you can compile the code you can also package it as a Debian package and inst
 </div>
 </div>
 
-<div id="outline-container-org3dcc914" class="outline-2">
-<h2 id="org3dcc914">Ubuntu Cleanup</h2>
-<div class="outline-text-2" id="text-org3dcc914">
+<div id="outline-container-ubuntu-cleanup-1-P-1" class="outline-2">
+<h2 id="ubuntu-cleanup-1-P-1">Ubuntu Cleanup</h2>
+<div class="outline-text-2" id="text-orgd09d3de">
 <p>
 After a regular Ubuntu 24.04 LTS install there would be some steps remaining to undo some annoying choices that Canonical has made for Ubuntu.
 However, the <a href="./ubuntu_minimal.html">customized install</a> that we used already cleared these items out of the base Ubuntu system.

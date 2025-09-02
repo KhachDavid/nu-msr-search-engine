@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2025-09-02 Tue 08:45 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Northwestern MS Robotics Personal Package Archive</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">The Northwestern MS Robotics Personal Package Archive</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#msr-ppa-1-P-1">MSR PPA</a>
+<ul>
+<li><a href="#how-to-make-a-ppa-2-P-1">How To Make A PPA</a>
+<ul>
+<li><a href="#references-3-P-1">References</a></li>
+</ul>
+</li>
+<li><a href="#how-to-rebuild-a-debian-package-2-P-1">How To Rebuild a Debian Package</a>
+<ul>
+<li><a href="#from-a-source-debian-3-P-1">From a Source Debian</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#package-format-1-P-1">Package Format</a>
+<ul>
+<li><a href="#git-and-quilt-2-P-1">Git and Quilt</a>
+<ul>
+<li><a href="#references-3-P-2">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#rt_linux">RT Kernel</a></li>
+<li><a href="#rsense_ppa">Realsense</a>
+<ul>
+<li><a href="#realsense-dkms-2-P-1">realsense-dkms</a></li>
+<li><a href="#librealsense2-2-P-1">librealsense2</a></li>
+<li><a href="#ros-jazzy-librealsense2-2-P-1">ros-jazzy-librealsense2</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-msr-ppa-1-P-1" class="outline-2">
+<h2 id="msr-ppa-1-P-1">MSR PPA</h2>
+<div class="outline-text-2" id="text-orgb2adac9">
+<p>
+A personal package archive (PPA) is a way for users of Ubuntu to distribute personal packages.
+Northwestern MS in Robotics has a PPA at <a href="https://launchpad.net/~numsr/robotics">https://launchpad.net/~numsr/robotics</a>.
+</p>
+
+<p>
+This document describes how to make a PPA and provides details about the NU MSR PPA.
+</p>
+
+<p>
+The following steps should be done from Ubuntu LTS
+</p>
+</div>
+<div id="outline-container-how-to-make-a-ppa-2-P-1" class="outline-3">
+<h3 id="how-to-make-a-ppa-2-P-1">How To Make A PPA</h3>
+<div class="outline-text-3" id="text-org953a9e2">
+<ol class="org-ol">
+<li>Sign up for a launchpad.net account</li>
+<li>Create an OpenPGP key:
+<code>gpg --full-gen-key</code></li>
+<li>See the keys with <code>gpg --list-keys</code></li>
+<li>Send your key to the Ubuntu keyserver:
+<code>gpg --send-keys --keyserver keyserver.ubuntu.com &lt;keyid&gt;</code></li>
+<li>Wait 10 minutes for the server to update</li>
+<li>In your launchpad profile, add the pgp key (use <code>gpg --fingerprint</code> to get the fingerprint you needed)</li>
+<li>Assuming your email is not setup with <code>gpg</code>, copy the encrypted message to a file and decrypt with <code>gpg -d</code>, then follow the instructions.</li>
+<li>While logged into launchpad, assign (or affirm) the <a href="https://launchpad.net/codeofconduct">Code of Conduct</a></li>
+</ol>
+</div>
+<div id="outline-container-references-3-P-1" class="outline-4">
+<h4 id="references-3-P-1">References</h4>
+<div class="outline-text-4" id="text-org25cb9f4">
+<ol class="org-ol">
+<li><a href="https://launchpad.net/+help-registry/openpgp-keys.html">Launchpad Keys</a></li>
+<li><a href="https://help.ubuntu.com/community/GnuPrivacyGuardHowto">Ubuntu GPG Guide</a></li>
+<li><a href="https://wiki.archlinux.org/title/GnuPG">Archlinux GPG Wiki</a></li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-how-to-rebuild-a-debian-package-2-P-1" class="outline-3">
+<h3 id="how-to-rebuild-a-debian-package-2-P-1">How To Rebuild a Debian Package</h3>
+<div class="outline-text-3" id="text-how-to-rebuild-a-debian-package-2-P-1">
+</div>
+<div id="outline-container-from-a-source-debian-3-P-1" class="outline-4">
+<h4 id="from-a-source-debian-3-P-1">From a Source Debian</h4>
+<div class="outline-text-4" id="text-org42b139d">
+<ol class="org-ol">
+<li>Make sure the <code>pgp</code> keys are setup on the system you are building the package on.</li>
+<li>Install the <code>devscripts</code> package</li>
+<li><p>
+Create <code>/etc/apt/sources.list.d/ubuntu-src.sources to let =apt</code> know where to get source packages from.
+</p>
+<pre class="example">
+Types: deb-src
+URIs: http://archive.ubuntu.com/ubuntu/
+Suites: noble noble-updates noble-backports
+Components: main universe restricted multiverse
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+</pre></li>
+<li><code>sudo apt update</code></li>
+<li><code>apt build-dep &lt;packagename&gt;</code> installs the build dependencies</li>
+<li>Create a working directory <code>&lt;workdir&gt;</code> and <code>cd &lt;workdir&gt;</code>.</li>
+<li><code>apt source &lt;packagename&gt;</code> downloads the source package to <code>&lt;workdir&gt;</code>.</li>
+<li>The debian build process likes to spew and refer to files in the parent directory.
+<ul class="org-ul">
+<li>To help with this it makes sense to copy the workdir when issuing a new <code>debuild</code> command.</li>
+</ul></li>
+<li>The package download should have created a directory with the upstream package name and version <code>&lt;package&gt;</code>. Enter this directory</li>
+<li>Most debian packages use the <a href="https://wiki.debian.org/UsingQuilt">Quilt</a>  patch management system to manage patches
+<ul class="org-ul">
+<li>Use <code>quilt push -a</code> to make sure the package is up-to-date</li>
+<li>You can also track things as patches using quilt if you would like:
+<ul class="org-ul">
+<li><code>quilt new patchname.patch</code> creates a new patch</li>
+<li><code>quilt add filename</code> adds a file to the patchset. This must be done prior to editing the file</li>
+<li>When done editing use <code>quilt refresh</code> to apply the patch.</li>
+</ul></li>
+</ul></li>
+<li>Edit <code>debian/changelog</code>, adding a new entry for yourself outlining the changes you made
+<ul class="org-ul">
+<li>Be sure to boost the version number in the changelog.</li>
+<li>If you have just made changing to the packaging, change the debian version (the part after the <code>-</code>)</li>
+<li>Appending a <code>~&lt;N&gt;</code> makes the package be considered less new than the version without the <code>~&lt;N&gt;</code> appended.</li>
+<li>Name and email address should likely be consistent with the pgp key you use to sign the ppa.</li>
+<li>These packages are very finicky about the version naming scheme, and various items have different semantic meanings. For my purpose, incrementing
+the revision number seems to work best.</li>
+</ul></li>
+<li>The <code>debian/control</code> has information about package dependencies</li>
+<li>When ready to build run <code>debuild -k&lt;your-pgp-key-id&gt; -b</code> (from a new <code>&lt;workspace&gt;</code> directory)
+<ul class="org-ul">
+<li>You may wish to install and test the package.</li>
+<li>The key id is listed on the ppa homepage (e.g., <a href="https://launchpad.net/~numsr">https://launchpad.net/~numsr</a> for NU MSR's ppa) under OpenPGP keys</li>
+</ul></li>
+<li>When ready to upload to the ppa run:
+<code>debuild -k&lt;your-pgp-key-id&gt; -S -sa</code></li>
+<li>If the source built successfully upload the packages using <code>dput ppa:&lt;username&gt;/&lt;ppaname&gt; &lt;package_name&gt;.changes</code> (according to the instructions on the ppa page).</li>
+<li>Refresh your  ppa homepage. It may take a little while. If the build failed, you will get an email with some diagnostic information.</li>
+<li>There is no need to keep track of your changes in git: once uploaded to launchpad you can see the source and your changes to it by downloading the source package.
+<ul class="org-ul">
+<li>Essentially, your changes are being tracked in launchpad. This is fine for changes to the packaging itself, but if you
+are changing source code you likely want to make the changes in a fork or even submit them to the upstream project.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-package-format-1-P-1" class="outline-2">
+<h2 id="package-format-1-P-1">Package Format</h2>
+<div class="outline-text-2" id="text-org88bbeaa">
+<p>
+There are two package formats, as specified in <code>debian/source/format</code>
+</p>
+<ol class="org-ol">
+<li><code>3.0 (quilt)</code> this uses the quilt patch system and assumes source code is provided as a separate tarball from the <code>debian/</code> folder</li>
+<li><code>3.0 (native)</code> this mode allows the <code>debian/</code> folder to be directly in the repository</li>
+<li>For packages that I make for the PPA going forward, I find it easiest to use the native format. The process goes like
+<ul class="org-ul">
+<li>Fork the repository in git, make whatever changes</li>
+<li>Add the debian directory, in native format</li>
+<li>Build the package and upload to the ppa</li>
+<li>Optionally, the debian/ directory can be added to the repository, but also it is obtainable from the debian source package.
+It can make maintaining the fork easier to not have the debian/ directory</li>
+</ul></li>
+</ol>
+</div>
+<div id="outline-container-git-and-quilt-2-P-1" class="outline-3">
+<h3 id="git-and-quilt-2-P-1">Git and Quilt</h3>
+<div class="outline-text-3" id="text-org0b60a7d">
+<p>
+Quilt is used in debian packages to keep track of "upstream debian changes" and the source code version.
+Here is how to use git to manage the changes and turn those changes into quilt-compatible patches
+</p>
+
+<p>
+I like to fork a package and make changes in the fork.
+I then use "git format-patch &lt;commit&gt;" to turn the commits to HEAD from &lt;commit&gt; into a patchset
+In the original debain package (say it's version 2.44), I then use "quilt import" on each patch created by git format-patch.
+Now the debian source package contains the patches made against the upstream version to debianize it, but meanwhile all my code is in git
+Quilt environment variable QUILT_PATCHES=debian/patches should be set
+</p>
+</div>
+<div id="outline-container-references-3-P-2" class="outline-4">
+<h4 id="references-3-P-2">References</h4>
+<div class="outline-text-4" id="text-org8754e9b">
+<p>
+<a href="https://help.launchpad.net/Packaging/PPA/BuildingASourcePackage">Building A Source Package</a>
+<a href="https://manpages.ubuntu.com/manpages/trusty/man1/quilt.1.html">Quilt Manpage</a>
+<a href="https://man7.org/linux/man-pages/man1/dpkg-source.1.html">Man page for dpkg-source</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-rt_linux" class="outline-2">
+<h2 id="rt_linux">RT Kernel</h2>
+<div class="outline-text-2" id="text-rt_linux">
+<ol class="org-ol">
+<li>Get RT Kernel sources (must get via git to make the debian source package)
+git clone <a href="https://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.git/">https://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.git/</a>
+Checkout the latest rt branch</li>
+
+<li>Make menu config and setup the kernel.
+<ul class="org-ul">
+<li>I made a custom version based on the config available in /boot/config</li>
+<li>The kernel is designed for x86 systems and removes support for a lot of legacy hardwaree tc</li>
+<li>It's nto fully minimal as it tries to stay close to ubuntu defaults</li>
+</ul></li>
+
+<li>In kernel source tree:
+make menuconfig</li>
+</ol>
+
+
+<ol class="org-ol">
+<li>To build a debian package: make deb-pkg
+<ul class="org-ul">
+<li>Test this by installing it</li>
+</ul></li>
+
+<li>To prepare for the ppa</li>
+
+<li>Use make srcdeb-pkg to make the source package
+<ul class="org-ul">
+<li>This creates a gzip of the package directory.</li>
+<li>The original source is the orig.tar.gz file</li>
+</ul></li>
+<li>What we need to do is
+<ol class="org-ol">
+<li>Extract the orig.tar.gz file to a file that matches the name of what you actually want to call
+the package</li>
+</ol></li>
+
+<li>Unpack the source package to a new directory</li>
+<li>tar czvf name_of_package.orig.tar.gz source_dir
+<ul class="org-ul">
+<li>This creates the original tarball</li>
+</ul></li>
+<li>Extract the source tarball into the extracted source directory</li>
+<li>Edit control and changelog to set the version and the package name that you want</li>
+<li>debuild -k&lt;KEYID&gt; -S -sa  to build the source package that can be uploaded to the ppa</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-rsense_ppa" class="outline-2">
+<h2 id="rsense_ppa">Realsense</h2>
+<div class="outline-text-2" id="text-rsense_ppa">
+<p>
+There are two Realsense packages in the PPA
+</p>
+</div>
+<div id="outline-container-realsense-dkms-2-P-1" class="outline-3">
+<h3 id="realsense-dkms-2-P-1">realsense-dkms</h3>
+<div class="outline-text-3" id="text-org2da0255">
+<ol class="org-ol">
+<li>The realsense has some slightly modified kernel drivers to help it report timing information better.
+<ul class="org-ul">
+<li>The realsense will work without this package, but it timestamp information is more reliable if you use it.</li>
+</ul></li>
+<li>The process by which Intel releases it's kernel patches is not entirely clear, but the build process involves scripts and patches under the <code>librealsense2/scripts</code> directory</li>
+<li>Intel has it's own apt repository that contains binary packages for the <code>dkms</code> driver
+<ul class="org-ul">
+<li>Each of these packages belongs to a specific kernel</li>
+</ul></li>
+<li>The version I provide on the PPA is for the 6.8.0 kernel. It was created by
+<ol class="org-ol">
+<li>Downloading and extracting the files from the binary librealsense2-dkms package</li>
+<li>Recreating the source package from scratch from the binary package</li>
+</ol></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-librealsense2-2-P-1" class="outline-3">
+<h3 id="librealsense2-2-P-1">librealsense2</h3>
+<div class="outline-text-3" id="text-orga921d61">
+<ol class="org-ol">
+<li>My version package has the python bindings compiled in, and installed</li>
+<li>It also provides <code>ros-jazzy-librealsense2</code> and <code>ros-kilted-librealsense2</code> so that ROS packages that depend on the realsense can be installed
+<ul class="org-ul">
+<li>The versions provided by ROS don't have the utilities or the python bindings.</li>
+<li>This version also installs the udev rules</li>
+</ul></li>
+<li>I do not provide a cuda-version package, but you can create a cuda version by modifying <code>debian/rules</code> and setting <code>BUILD_WITH_CUDA</code> to <code>ON</code> under the <code>override_dh_auto_configure</code>
+<ul class="org-ul">
+<li>Including CUDA necessitates the user having CUDA installed: this is why all official binaries do not have CUDA support by default.</li>
+</ul></li>
+<li>This version of the package is based off the <code>m-elwin/librealsense2</code> fork (<code>kilted</code> branch).
+<ul class="org-ul">
+<li>The <code>debian</code> files are not in git, they are stored in the source package.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<details id="org1a2e3f3"><summary class="header-3">ros-jazzy-librealsense2</summary>
+<div class="outline-text-3" id="text-org1a2e3f3">
+<p>
+This package used to be used to override the version that shipped with ROS. It required extra patches to install python bindings under
+the proper ROS <code>/opt/ros</code> directory. Instead, <code>librealsense2</code> installs everything in a standard location (so it is decoupled from ROS) but it
+provides this package so that the dependency can be satisfied.
+</p>
+</div>
+</details>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

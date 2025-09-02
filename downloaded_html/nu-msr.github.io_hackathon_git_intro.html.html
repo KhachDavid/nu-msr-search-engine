@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-01-03 Fri 10:50 -->
+<!-- 2025-09-02 Tue 08:45 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Introduction to git</title>
@@ -21,66 +21,66 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org2903a98">What is Version Control</a>
+<li><a href="#what-is-version-control-1-P-1">What is Version Control</a>
 <ul>
-<li><a href="#orgb99e596">Why Version Control?</a></li>
-<li><a href="#orga066d7a">Non-git version control</a></li>
+<li><a href="#why-version-control--2-P-1">Why Version Control?</a></li>
+<li><a href="#non-git-version-control-2-P-1">Non-git version control</a></li>
 </ul>
 </li>
-<li><a href="#org6ae2b56">What is git?</a>
+<li><a href="#what-is-git--1-P-1">What is git?</a>
 <ul>
-<li><a href="#org8f2f9c5">Why git?</a></li>
-<li><a href="#orgf6f0d03">Jupyter Notebooks</a></li>
+<li><a href="#why-git--2-P-1">Why git?</a></li>
+<li><a href="#jupyter-notebooks-2-P-1">Jupyter Notebooks</a></li>
 </ul>
 </li>
-<li><a href="#org8a8ddcd">Git Help</a></li>
-<li><a href="#org3040790">The Three Areas of Git</a></li>
-<li><a href="#org6d95407">Basic git usage</a></li>
-<li><a href="#org45e2738">Git Tips</a></li>
+<li><a href="#git-help-1-P-1">Git Help</a></li>
+<li><a href="#the-three-areas-of-git-1-P-1">The Three Areas of Git</a></li>
+<li><a href="#basic-git-usage-1-P-1">Basic git usage</a></li>
+<li><a href="#git-tips-1-P-1">Git Tips</a></li>
 <li><a href="#simple-git-workflow">Simple Git Workflow</a>
 <ul>
-<li><a href="#org738c310">Setup</a></li>
-<li><a href="#org0e9a2a9">Process</a></li>
-<li><a href="#org6459e1c">Extensions</a></li>
-<li><a href="#org86b9dc2">Recovery</a></li>
-<li><a href="#org9042a04">Discussion</a></li>
+<li><a href="#setup-2-P-1">Setup</a></li>
+<li><a href="#process-2-P-1">Process</a></li>
+<li><a href="#extensions-2-P-1">Extensions</a></li>
+<li><a href="#recovery-2-P-1">Recovery</a></li>
+<li><a href="#discussion-2-P-1">Discussion</a></li>
 </ul>
 </li>
-<li><a href="#orgf5ba5eb">Git hosting services</a></li>
-<li><a href="#org12adf30">How to learn</a></li>
-<li><a href="#orgf59ca61">Git Prompt</a></li>
-<li><a href="#orgb7e40b3">Demonstration</a>
+<li><a href="#git-hosting-services-1-P-1">Git hosting services</a></li>
+<li><a href="#how-to-learn-1-P-1">How to learn</a></li>
+<li><a href="#git-prompt-1-P-1">Git Prompt</a></li>
+<li><a href="#demonstration-1-P-1">Demonstration</a>
 <ul>
-<li><a href="#org82bbbc2">Basic Branching</a></li>
-<li><a href="#orgf6d32ce">Conflicts!</a></li>
-<li><a href="#orgd2643e5">Clone Me</a></li>
-<li><a href="#orgc6e5515">Meanwhile bash</a></li>
-<li><a href="#org068bb61">Ready to commit</a></li>
+<li><a href="#basic-branching-2-P-1">Basic Branching</a></li>
+<li><a href="#conflicts--2-P-1">Conflicts!</a></li>
+<li><a href="#clone-me-2-P-1">Clone Me</a></li>
+<li><a href="#meanwhile-bash-2-P-1">Meanwhile bash</a></li>
+<li><a href="#ready-to-commit-2-P-1">Ready to commit</a></li>
 </ul>
 </li>
-<li><a href="#org84c85c3">Exercises</a>
+<li><a href="#exercises-1-P-1">Exercises</a>
 <ul>
-<li><a href="#org13942f2">Basic Operations</a></li>
-<li><a href="#org8afdb0c">Remotes</a></li>
-<li><a href="#orgda4fccf">Collaboration</a></li>
-<li><a href="#org8e726e6">Simultaneous editing</a></li>
+<li><a href="#basic-operations-2-P-1">Basic Operations</a></li>
+<li><a href="#remotes-2-P-1">Remotes</a></li>
+<li><a href="#collaboration-2-P-1">Collaboration</a></li>
+<li><a href="#simultaneous-editing-2-P-1">Simultaneous editing</a></li>
 </ul>
 </li>
-<li><a href="#orge768d22">Resources</a></li>
+<li><a href="#resources-1-P-2">Resources</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org2903a98" class="outline-2">
-<h2 id="org2903a98">What is Version Control</h2>
-<div class="outline-text-2" id="text-org2903a98">
+<div id="outline-container-what-is-version-control-1-P-1" class="outline-2">
+<h2 id="what-is-version-control-1-P-1">What is Version Control</h2>
+<div class="outline-text-2" id="text-org07875b1">
 <p>
 A tool for tracking changes to files and synchronizing updates between multiple developers.
 </p>
 </div>
 
-<div id="outline-container-orgb99e596" class="outline-3">
-<h3 id="orgb99e596">Why Version Control?</h3>
-<div class="outline-text-3" id="text-orgb99e596">
+<div id="outline-container-why-version-control--2-P-1" class="outline-3">
+<h3 id="why-version-control--2-P-1">Why Version Control?</h3>
+<div class="outline-text-3" id="text-org0cf9c61">
 <ul class="org-ul">
 <li>Go back to previous versions</li>
 <li>No saving of <code>final_final_really_final_version.doc</code></li>
@@ -90,9 +90,9 @@ A tool for tracking changes to files and synchronizing updates between multiple 
 </div>
 </div>
 
-<div id="outline-container-orga066d7a" class="outline-3">
-<h3 id="orga066d7a">Non-git version control</h3>
-<div class="outline-text-3" id="text-orga066d7a">
+<div id="outline-container-non-git-version-control-2-P-1" class="outline-3">
+<h3 id="non-git-version-control-2-P-1">Non-git version control</h3>
+<div class="outline-text-3" id="text-orgf248f9e">
 <ul class="org-ul">
 <li>Concurrent Versions System (cvs)</li>
 <li>Subversion (svn)</li>
@@ -104,9 +104,9 @@ A tool for tracking changes to files and synchronizing updates between multiple 
 </div>
 </div>
 
-<div id="outline-container-org6ae2b56" class="outline-2">
-<h2 id="org6ae2b56">What is git?</h2>
-<div class="outline-text-2" id="text-org6ae2b56">
+<div id="outline-container-what-is-git--1-P-1" class="outline-2">
+<h2 id="what-is-git--1-P-1">What is git?</h2>
+<div class="outline-text-2" id="text-org803af95">
 <ol class="org-ol">
 <li>Git is a version control system originally developed by Linus Torvalds for use with the Linux kernel.</li>
 <li>Git is used by Google, Facebook, Microsoft, Netflix, Boston Dynamics, and the Linux Kernel (and almost everyone else too!).</li>
@@ -114,9 +114,9 @@ A tool for tracking changes to files and synchronizing updates between multiple 
 </ol>
 </div>
 
-<div id="outline-container-org8f2f9c5" class="outline-3">
-<h3 id="org8f2f9c5">Why git?</h3>
-<div class="outline-text-3" id="text-org8f2f9c5">
+<div id="outline-container-why-git--2-P-1" class="outline-3">
+<h3 id="why-git--2-P-1">Why git?</h3>
+<div class="outline-text-3" id="text-org2ea7ffc">
 <p>
 Git enables you to easily keep a history of the changes, the reasons behind them, and combine your work with others.
 It is ubiquitous, distributed, fast, and flexible. Used properly, it frees you to experiment with your code, without
@@ -139,9 +139,9 @@ mistakes that you may gain mastery of <code>git</code>.</li>
 </div>
 </div>
 
-<div id="outline-container-orgf6f0d03" class="outline-3">
-<h3 id="orgf6f0d03">Jupyter Notebooks</h3>
-<div class="outline-text-3" id="text-orgf6f0d03">
+<div id="outline-container-jupyter-notebooks-2-P-1" class="outline-3">
+<h3 id="jupyter-notebooks-2-P-1">Jupyter Notebooks</h3>
+<div class="outline-text-3" id="text-org416e7f1">
 <ol class="org-ol">
 <li>While git works with any type of file, it works best with text files designed to be edited by humans.</li>
 <li>One type of file you may encounter that does not quite fit this model is a Jupyter notebook
@@ -155,9 +155,9 @@ mistakes that you may gain mastery of <code>git</code>.</li>
 </div>
 
 
-<div id="outline-container-org8a8ddcd" class="outline-2">
-<h2 id="org8a8ddcd">Git Help</h2>
-<div class="outline-text-2" id="text-org8a8ddcd">
+<div id="outline-container-git-help-1-P-1" class="outline-2">
+<h2 id="git-help-1-P-1">Git Help</h2>
+<div class="outline-text-2" id="text-org755cf77">
 <ol class="org-ol">
 <li>Often, when you do something slightly wrong in <code>git</code>, <code>git</code> will suggest the appropriate action.</li>
 <li>Getting help: <code>git help &lt;verb&gt;</code></li>
@@ -167,9 +167,9 @@ mistakes that you may gain mastery of <code>git</code>.</li>
 </div>
 </div>
 
-<div id="outline-container-org3040790" class="outline-2">
-<h2 id="org3040790">The Three Areas of Git</h2>
-<div class="outline-text-2" id="text-org3040790">
+<div id="outline-container-the-three-areas-of-git-1-P-1" class="outline-2">
+<h2 id="the-three-areas-of-git-1-P-1">The Three Areas of Git</h2>
+<div class="outline-text-2" id="text-org258b24a">
 <ol class="org-ol">
 <li>Working directory - The contents of your files on disk, as they appear with <code>ls</code> etc.
 <ul class="org-ul">
@@ -185,9 +185,9 @@ from the staging area.</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-org6d95407" class="outline-2">
-<h2 id="org6d95407">Basic git usage</h2>
-<div class="outline-text-2" id="text-org6d95407">
+<div id="outline-container-basic-git-usage-1-P-1" class="outline-2">
+<h2 id="basic-git-usage-1-P-1">Basic git usage</h2>
+<div class="outline-text-2" id="text-org3875794">
 <ol class="org-ol">
 <li>A git repository is a directed acyclic garph (DAC) of objects, called commits. 
 <ul class="org-ul">
@@ -260,9 +260,9 @@ If used in conjunction with a git workflow with strict rules can be quite useful
 </ol>
 </div>
 </div>
-<div id="outline-container-org45e2738" class="outline-2">
-<h2 id="org45e2738">Git Tips</h2>
-<div class="outline-text-2" id="text-org45e2738">
+<div id="outline-container-git-tips-1-P-1" class="outline-2">
+<h2 id="git-tips-1-P-1">Git Tips</h2>
+<div class="outline-text-2" id="text-orgb05ac73">
 <ol class="org-ol">
 <li>When in doubt, copy your repository, and try out commands. Repeat until you get the desired result
 <ul class="org-ul">
@@ -311,9 +311,9 @@ The main benefits of this workflow are
 </ol>
 </div>
 
-<div id="outline-container-org738c310" class="outline-3">
-<h3 id="org738c310">Setup</h3>
-<div class="outline-text-3" id="text-org738c310">
+<div id="outline-container-setup-2-P-1" class="outline-3">
+<h3 id="setup-2-P-1">Setup</h3>
+<div class="outline-text-3" id="text-org206a8b9">
 <ol class="org-ol">
 <li>There is a central repository called <code>origin</code>. Everybody clones <code>origin</code></li>
 <li>The <code>main</code> branch on the central repository must always contain the latest working code.
@@ -328,9 +328,9 @@ The main benefits of this workflow are
 </ol>
 </div>
 </div>
-<div id="outline-container-org0e9a2a9" class="outline-3">
-<h3 id="org0e9a2a9">Process</h3>
-<div class="outline-text-3" id="text-org0e9a2a9">
+<div id="outline-container-process-2-P-1" class="outline-3">
+<h3 id="process-2-P-1">Process</h3>
+<div class="outline-text-3" id="text-orgc8ce540">
 <ol class="org-ol">
 <li>Get the latest code from your team. You always track this progress on your local <code>main</code> branch:
 <ol class="org-ol">
@@ -397,9 +397,9 @@ arbitrarily low level (i.e., you may even agree to commit broken code that does 
 </div>
 </div>
 
-<div id="outline-container-org6459e1c" class="outline-3">
-<h3 id="org6459e1c">Extensions</h3>
-<div class="outline-text-3" id="text-org6459e1c">
+<div id="outline-container-extensions-2-P-1" class="outline-3">
+<h3 id="extensions-2-P-1">Extensions</h3>
+<div class="outline-text-3" id="text-org6ccdd8e">
 <p>
 One shortcoming of this workflow is that your <code>name/feature</code> branch only exists on your local computer.
 If you are properly backing up your system, this should not be a problem; however it is probably a good idea
@@ -482,9 +482,9 @@ you directly merged your code into the local main branch).</li>
 </details>
 </div>
 
-<div id="outline-container-orgf5ba5eb" class="outline-2">
-<h2 id="orgf5ba5eb">Git hosting services</h2>
-<div class="outline-text-2" id="text-orgf5ba5eb">
+<div id="outline-container-git-hosting-services-1-P-1" class="outline-2">
+<h2 id="git-hosting-services-1-P-1">Git hosting services</h2>
+<div class="outline-text-2" id="text-orge759118">
 <ol class="org-ol">
 <li>Some popular git hosting services are:
 <ul class="org-ul">
@@ -511,9 +511,9 @@ that provide services related to that tool.</li>
 </div>
 </div>
 
-<div id="outline-container-org12adf30" class="outline-2">
-<h2 id="org12adf30">How to learn</h2>
-<div class="outline-text-2" id="text-org12adf30">
+<div id="outline-container-how-to-learn-1-P-1" class="outline-2">
+<h2 id="how-to-learn-1-P-1">How to learn</h2>
+<div class="outline-text-2" id="text-orgd64e9d6">
 <ol class="org-ol">
 <li>Use <code>git</code> often.  Use it for everything.</li>
 <li>Use the command line rather than GUI tools or GitHub to manipulate the repository.</li>
@@ -525,9 +525,9 @@ experiment with them in a copy of your repository and understand what they are d
 </div>
 </div>
 
-<div id="outline-container-orgf59ca61" class="outline-2">
-<h2 id="orgf59ca61">Git Prompt</h2>
-<div class="outline-text-2" id="text-orgf59ca61">
+<div id="outline-container-git-prompt-1-P-1" class="outline-2">
+<h2 id="git-prompt-1-P-1">Git Prompt</h2>
+<div class="outline-text-2" id="text-org199b689">
 <ol class="org-ol">
 <li>It is extremely useful to setup your terminal to show information about git</li>
 <li>To add this to bash you must modify the <code>PS1</code> variable in your <code>~/.bashrc</code>
@@ -546,9 +546,9 @@ experiment with them in a copy of your repository and understand what they are d
 Here is the code from the live demonstration
 </p>
 </div>
-<div id="outline-container-org82bbbc2" class="outline-3">
-<h3 id="org82bbbc2">Basic Branching</h3>
-<div class="outline-text-3" id="text-org82bbbc2">
+<div id="outline-container-basic-branching-2-P-1" class="outline-3">
+<h3 id="basic-branching-2-P-1">Basic Branching</h3>
+<div class="outline-text-3" id="text-orgff98289">
 <div class="org-src-container">
 <pre class="src src-bash">git init --bare central <span class="org-comment-delimiter"># </span><span class="org-comment">Mimic a central repository (e.g., on GitHub)</span>
 git clone central repo1
@@ -573,9 +573,9 @@ less file1.txt
 </div>
 </div>
 </div>
-<div id="outline-container-orgf6d32ce" class="outline-3">
-<h3 id="orgf6d32ce">Conflicts!</h3>
-<div class="outline-text-3" id="text-orgf6d32ce">
+<div id="outline-container-conflicts--2-P-1" class="outline-3">
+<h3 id="conflicts--2-P-1">Conflicts!</h3>
+<div class="outline-text-3" id="text-orgf697c55">
 <div class="org-src-container">
 <pre class="src src-bash"><span class="org-builtin">echo</span> <span class="org-string">"I have other ideas"</span> &gt;&gt; file1.txt
 git commit -a <span class="org-comment-delimiter"># </span><span class="org-comment">Conflict created!</span>
@@ -594,9 +594,9 @@ git push
 </div>
 </div>
 </div>
-<div id="outline-container-orgd2643e5" class="outline-3">
-<h3 id="orgd2643e5">Clone Me</h3>
-<div class="outline-text-3" id="text-orgd2643e5">
+<div id="outline-container-clone-me-2-P-1" class="outline-3">
+<h3 id="clone-me-2-P-1">Clone Me</h3>
+<div class="outline-text-3" id="text-orgf9092e5">
 <div class="org-src-container">
 <pre class="src src-bash"><span class="org-builtin">cd</span> ..
 git clone central repo2
@@ -612,9 +612,9 @@ gitk --all &amp;
 </div>
 </div>
 </div>
-<div id="outline-container-orgc6e5515" class="outline-3">
-<h3 id="orgc6e5515">Meanwhile bash</h3>
-<div class="outline-text-3" id="text-orgc6e5515">
+<div id="outline-container-meanwhile-bash-2-P-1" class="outline-3">
+<h3 id="meanwhile-bash-2-P-1">Meanwhile bash</h3>
+<div class="outline-text-3" id="text-orgef26ce1">
 <div class="org-src-container">
 <pre class="src src-bash"><span class="org-builtin">cd</span> ../repo1
 <span class="org-builtin">echo</span> <span class="org-string">"important bug fix"</span> &gt;&gt; file2.txt
@@ -625,9 +625,9 @@ git push
 </div>
 </div>
 </div>
-<div id="outline-container-org068bb61" class="outline-3">
-<h3 id="org068bb61">Ready to commit</h3>
-<div class="outline-text-3" id="text-org068bb61">
+<div id="outline-container-ready-to-commit-2-P-1" class="outline-3">
+<h3 id="ready-to-commit-2-P-1">Ready to commit</h3>
+<div class="outline-text-3" id="text-orgda5019a">
 <div class="org-src-container">
 <pre class="src src-bash"><span class="org-builtin">cd</span> ../repo2
 git push origin elwin/feature:main
@@ -645,9 +645,9 @@ git pull
 </div>
 </details>
 
-<div id="outline-container-org84c85c3" class="outline-2">
-<h2 id="org84c85c3">Exercises</h2>
-<div class="outline-text-2" id="text-org84c85c3">
+<div id="outline-container-exercises-1-P-1" class="outline-2">
+<h2 id="exercises-1-P-1">Exercises</h2>
+<div class="outline-text-2" id="text-org3e5fc54">
 <p>
 Follow along with these Git exercises to practice your git usage.
 Along the way, if you don't understand something use the built-in git help 
@@ -666,9 +666,9 @@ After every action on the repository you must refresh <code>gitk</code> to see t
 </p>
 </div>
 
-<div id="outline-container-org13942f2" class="outline-3">
-<h3 id="org13942f2">Basic Operations</h3>
-<div class="outline-text-3" id="text-org13942f2">
+<div id="outline-container-basic-operations-2-P-1" class="outline-3">
+<h3 id="basic-operations-2-P-1">Basic Operations</h3>
+<div class="outline-text-3" id="text-org28c00f2">
 <ol class="org-ol">
 <li><p>
 First time git setup:
@@ -703,7 +703,7 @@ Create a directory using <code>mkdir</code>, <code>cd</code> into it, and use <c
 Try to predict what you are going to see before refreshing the view
 </p>
 
-<figure id="org3c608e1">
+<figure id="orgbeb1991">
 <img src="./images/git1.png" alt="git1.png">
 
 </figure></li>
@@ -715,7 +715,7 @@ Try to predict what you are going to see before refreshing the view
 This file should name your favorite robot and why you like it.
 </p>
 
-<figure id="orgf7af12a">
+<figure id="orge3f7d5a">
 <img src="./images/git2.png" alt="git2.png">
 
 </figure></li>
@@ -733,7 +733,7 @@ This file should name your favorite robot and why you like it.
 Write a good log message. Remember, the better your log messages are, the more useful git becomes
 </p>
 
-<figure id="org2df3731">
+<figure id="orge2a43fa">
 <img src="./images/git3.png" alt="git3.png">
 
 </figure></li>
@@ -746,7 +746,7 @@ Write a good log message. Remember, the better your log messages are, the more u
 Some commands that may be useful are <code>branch</code> and <code>switch</code>.
 </p>
 
-<figure id="orgce829d6">
+<figure id="orge642ae9">
 <img src="./images/git4.png" alt="git4.png">
 
 </figure></li>
@@ -760,7 +760,7 @@ Append some more information about your favorite robot to <code>robot.txt</code>
 <li>You can also stage them manually with <code>git add</code> and <code>git rm</code></li>
 </ul>
 
-<figure id="orgbe759bc">
+<figure id="orgf020d42">
 <img src="./images/git4_1.png" alt="git4_1.png">
 
 </figure></li>
@@ -772,7 +772,7 @@ Switch to the <code>main</code> branch.
 <li>What changed in <code>git status</code> and <code>gitk</code>?</li>
 </ul>
 
-<figure id="org8a6867f">
+<figure id="org8b74931">
 <img src="./images/git5.png" alt="git5.png">
 
 </figure></li>
@@ -790,7 +790,7 @@ essentially just taking the commit from <code>test</code> and adding it to your 
 </ul></li>
 </ul>
 
-<figure id="orga3d9180">
+<figure id="org7383f4f">
 <img src="./images/git6.png" alt="git6.png">
 
 </figure></li>
@@ -805,9 +805,9 @@ not show up in <code>git status</code>.  Commit <code>.gitignore</code> to the r
 </div>
 </div>
 
-<div id="outline-container-org8afdb0c" class="outline-3">
-<h3 id="org8afdb0c">Remotes</h3>
-<div class="outline-text-3" id="text-org8afdb0c">
+<div id="outline-container-remotes-2-P-1" class="outline-3">
+<h3 id="remotes-2-P-1">Remotes</h3>
+<div class="outline-text-3" id="text-org42e21ff">
 <ol class="org-ol">
 <li>Log in to your GitHub account
 <ul class="org-ul">
@@ -852,9 +852,9 @@ not show up in <code>git status</code>.  Commit <code>.gitignore</code> to the r
 </ol>
 </div>
 </div>
-<div id="outline-container-orgda4fccf" class="outline-3">
-<h3 id="orgda4fccf">Collaboration</h3>
-<div class="outline-text-3" id="text-orgda4fccf">
+<div id="outline-container-collaboration-2-P-1" class="outline-3">
+<h3 id="collaboration-2-P-1">Collaboration</h3>
+<div class="outline-text-3" id="text-org25791c7">
 <p>
 You will now be divided into teams.
 </p>
@@ -885,9 +885,9 @@ their feature branch should be <code>up-to-date</code> as well.</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-org8e726e6" class="outline-3">
-<h3 id="org8e726e6">Simultaneous editing</h3>
-<div class="outline-text-3" id="text-org8e726e6">
+<div id="outline-container-simultaneous-editing-2-P-1" class="outline-3">
+<h3 id="simultaneous-editing-2-P-1">Simultaneous editing</h3>
+<div class="outline-text-3" id="text-org54c599c">
 <p>
 We will now engage in some mayhem.
 </p>
@@ -907,8 +907,8 @@ We will now engage in some mayhem.
 </div>
 </div>
 
-<div id="outline-container-orge768d22" class="outline-2">
-<h2 id="orge768d22">Resources</h2>
+<div id="outline-container-resources-1-P-2" class="outline-2">
+<h2 id="resources-1-P-2">Resources</h2>
 <div class="outline-text-2" id="text-orge768d22">
 <ol class="org-ol">
 <li><a href="https://git-scm.com/book/en/v2">Pro Book</a>: A definitive guide to git. Definitely recommend reading the first few chapters.</li>

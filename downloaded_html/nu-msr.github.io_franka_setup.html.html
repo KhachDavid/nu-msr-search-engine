@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-04-25 Fri 09:13 -->
+<!-- 2025-09-02 Tue 08:10 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Franka Setup</title>
@@ -21,32 +21,32 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org34f0b9c">Overview</a></li>
-<li><a href="#org62da2aa">Workstation Computer</a>
+<li><a href="#overview-1-P-3">Overview</a></li>
+<li><a href="#workstation-computer-1-P-1">Workstation Computer</a>
 <ul>
-<li><a href="#org8bb9342">Operating System</a></li>
-<li><a href="#org2f08ec9">Network Setup</a>
+<li><a href="#operating-system-2-P-1">Operating System</a></li>
+<li><a href="#network-setup-2-P-1">Network Setup</a>
 <ul>
-<li><a href="#orgdf5f7b6">Ethernet Connections</a></li>
-<li><a href="#org87b7fd5">DNS</a></li>
-<li><a href="#org52fe586">SSH</a></li>
-<li><a href="#org9646d50">NTP</a></li>
-<li><a href="#org64e3d53">Internet</a></li>
+<li><a href="#ethernet-connections-3-P-1">Ethernet Connections</a></li>
+<li><a href="#dns-3-P-1">DNS</a></li>
+<li><a href="#ssh-3-P-1">SSH</a></li>
+<li><a href="#ntp-3-P-1">NTP</a></li>
+<li><a href="#internet-3-P-1">Internet</a></li>
 </ul>
 </li>
-<li><a href="#orgbf6691b">ROS 2 Iron</a>
+<li><a href="#ros-2-iron-2-P-1">ROS 2 Iron</a>
 <ul>
-<li><a href="#orgcf4612a">Building The Container</a></li>
+<li><a href="#building-the-container-3-P-1">Building The Container</a></li>
 </ul>
 </li>
-<li><a href="#org8264422">Final Touches</a></li>
+<li><a href="#final-touches-2-P-1">Final Touches</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org34f0b9c" class="outline-2">
-<h2 id="org34f0b9c">Overview</h2>
+<div id="outline-container-overview-1-P-3" class="outline-2">
+<h2 id="overview-1-P-3">Overview</h2>
 <div class="outline-text-2" id="text-org34f0b9c">
 <ul class="org-ul">
 <li>Describes the setup for the <a href="https://www.mccormick.northwestern.edu/robotics/">Northwestern MS in Robotics</a> program's Franka Emika Panda robots (since renamed to FER).</li>
@@ -55,8 +55,8 @@
 </div>
 </div>
 
-<div id="outline-container-org62da2aa" class="outline-2">
-<h2 id="org62da2aa">Workstation Computer</h2>
+<div id="outline-container-workstation-computer-1-P-1" class="outline-2">
+<h2 id="workstation-computer-1-P-1">Workstation Computer</h2>
 <div class="outline-text-2" id="text-org62da2aa">
 <ul class="org-ul">
 <li>These instructions are for how our Franka workstation computers are setup.</li>
@@ -65,8 +65,8 @@ to the Franka Robot (likely not what you want).</li>
 </ul>
 </div>
 
-<div id="outline-container-org8bb9342" class="outline-3">
-<h3 id="org8bb9342">Operating System</h3>
+<div id="outline-container-operating-system-2-P-1" class="outline-3">
+<h3 id="operating-system-2-P-1">Operating System</h3>
 <div class="outline-text-3" id="text-org8bb9342">
 <ol class="org-ol">
 <li>Install Ubuntu according to the <a href="https://nu-msr.github.io/hackathon/computer_setup.html">Computer Setup</a> (skipping over System76-specific instructions and most desktop customization)
@@ -89,7 +89,7 @@ Permissions must be set for the user to start processes with realtime priority, 
 <pre class="src src-bash"><span class="org-comment-delimiter"># </span><span class="org-comment">Create a realtime group</span>
 sudo addgroup realtime
 <span class="org-comment-delimiter"># </span><span class="org-comment">Add users to the realtime group</span>
-sudo usermod -a -G realtime $(<span class="org-sh-quoted-exec">whoami</span>)
+sudo usermod -a -G realtime $(whoami)
 sudo usermod -a -G realtime student
 </pre>
 </div></li>
@@ -116,7 +116,7 @@ Create a new ROS 2 workspace:
 </p>
 <div class="org-src-container">
 <pre class="src src-bash">sudo mkdir -p /opt/ros/franka/src
-sudo chown -R $(<span class="org-sh-quoted-exec">whoami</span>):$(<span class="org-sh-quoted-exec">whoami</span>) <span class="org-comment-delimiter"># </span><span class="org-comment">We will build everything as the current user</span>
+sudo chown -R $(whoami):$(whoami) <span class="org-comment-delimiter"># </span><span class="org-comment">We will build everything as the current user</span>
 <span class="org-builtin">cd</span> /opt/ros/franka
 vcs import --input https://nu-msr.github.io/images/franka.repos src
 rosdep install --from-paths src -y --ignore-src -r
@@ -143,12 +143,12 @@ Add the following content to the <code>.bashrc</code> of user accounts
 </ol>
 </div>
 </div>
-<div id="outline-container-org2f08ec9" class="outline-3">
-<h3 id="org2f08ec9">Network Setup</h3>
-<div class="outline-text-3" id="text-org2f08ec9">
+<div id="outline-container-network-setup-2-P-1" class="outline-3">
+<h3 id="network-setup-2-P-1">Network Setup</h3>
+<div class="outline-text-3" id="text-network-setup-2-P-1">
 </div>
-<div id="outline-container-orgdf5f7b6" class="outline-4">
-<h4 id="orgdf5f7b6">Ethernet Connections</h4>
+<div id="outline-container-ethernet-connections-3-P-1" class="outline-4">
+<h4 id="ethernet-connections-3-P-1">Ethernet Connections</h4>
 <div class="outline-text-4" id="text-orgdf5f7b6">
 <ul class="org-ul">
 <li><code>enp109s0</code>: This is the 1Gb/s ethernet port built into the motherboard. It is used to connect to the laptop.
@@ -170,7 +170,7 @@ Add the following content to the <code>.bashrc</code> of user accounts
 </div>
 
 <ul class="org-ul">
-<li><a id="org9dd874e"></a>Bridge<br>
+<li><a id="bridge-4-P-1"></a>Bridge<br>
 <div class="outline-text-5" id="text-org9dd874e">
 <ul class="org-ul">
 <li>All connections are bridged on <code>br0</code>, which is given ip address <code>192.168.18.1</code>.
@@ -197,8 +197,8 @@ nmcli con add type ethernet con-name br-pandaY ifname ens24f1 master br0
 </ul>
 </div>
 
-<div id="outline-container-org87b7fd5" class="outline-4">
-<h4 id="org87b7fd5">DNS</h4>
+<div id="outline-container-dns-3-P-1" class="outline-4">
+<h4 id="dns-3-P-1">DNS</h4>
 <div class="outline-text-4" id="text-org87b7fd5">
 <ol class="org-ol">
 <li>Install dnsmasq: <code>sudo apt install dnsmasq</code>
@@ -258,8 +258,8 @@ is how both pandas can get an IP address</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-org52fe586" class="outline-4">
-<h4 id="org52fe586">SSH</h4>
+<div id="outline-container-ssh-3-P-1" class="outline-4">
+<h4 id="ssh-3-P-1">SSH</h4>
 <div class="outline-text-4" id="text-org52fe586">
 <p>
 The <code>station</code> should have an <code>ssh</code> server:
@@ -270,8 +270,8 @@ The <code>station</code> should have an <code>ssh</code> server:
 </div>
 </div>
 
-<div id="outline-container-org9646d50" class="outline-4">
-<h4 id="org9646d50">NTP</h4>
+<div id="outline-container-ntp-3-P-1" class="outline-4">
+<h4 id="ntp-3-P-1">NTP</h4>
 <div class="outline-text-4" id="text-org9646d50">
 <ul class="org-ul">
 <li>The <code>station</code> computer is not usually connected to the internet.</li>
@@ -288,8 +288,8 @@ The <code>station</code> should have an <code>ssh</code> server:
 </ul>
 </div>
 </div>
-<div id="outline-container-org64e3d53" class="outline-4">
-<h4 id="org64e3d53">Internet</h4>
+<div id="outline-container-internet-3-P-1" class="outline-4">
+<h4 id="internet-3-P-1">Internet</h4>
 <div class="outline-text-4" id="text-org64e3d53">
 <ol class="org-ol">
 <li>The Franka robots are, by default, intentionally disconnected from the internet</li>
@@ -312,8 +312,8 @@ The <code>station</code> should have an <code>ssh</code> server:
 </div>
 </div>
 
-<div id="outline-container-orgbf6691b" class="outline-3">
-<h3 id="orgbf6691b">ROS 2 Iron</h3>
+<div id="outline-container-ros-2-iron-2-P-1" class="outline-3">
+<h3 id="ros-2-iron-2-P-1">ROS 2 Iron</h3>
 <div class="outline-text-3" id="text-orgbf6691b">
 <ol class="org-ol">
 <li>A ROS 2 Iron docker container is available on dockerhub at <a href="https://hub.docker.com/repository/docker/reem17/franka_iron/general">https://hub.docker.com/repository/docker/reem17/franka_iron/general</a></li>
@@ -361,8 +361,8 @@ Docker messes up network settings with network bridges. To fix, create <code>/et
 </details>
 </div>
 
-<div id="outline-container-org8264422" class="outline-3">
-<h3 id="org8264422">Final Touches</h3>
+<div id="outline-container-final-touches-2-P-1" class="outline-3">
+<h3 id="final-touches-2-P-1">Final Touches</h3>
 <div class="outline-text-3" id="text-org8264422">
 <ol class="org-ol">
 <li>Make sure that in the bios setup, the option to need to "press F1 on boot failure" is disabled. Otherwise if power is cut the user

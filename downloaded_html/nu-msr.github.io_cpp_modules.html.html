@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-04-25 Fri 09:13 -->
+<!-- 2025-09-02 Tue 08:10 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Effective C++20 Modules</title>
@@ -21,21 +21,21 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org9c76cca">Overview</a>
+<li><a href="#overview-1-P-2">Overview</a>
 <ul>
-<li><a href="#org250e759">Caveats</a></li>
+<li><a href="#caveats-2-P-1">Caveats</a></li>
 </ul>
 </li>
-<li><a href="#org3709f2f">The Old Way</a></li>
-<li><a href="#org384463e">The New Way</a></li>
-<li><a href="#org6492c03">Migration</a></li>
-<li><a href="#org890127d">Explanation</a></li>
+<li><a href="#the-old-way-1-P-1">The Old Way</a></li>
+<li><a href="#the-new-way-1-P-1">The New Way</a></li>
+<li><a href="#migration-1-P-1">Migration</a></li>
+<li><a href="#explanation-1-P-1">Explanation</a></li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-org9c76cca" class="outline-2">
-<h2 id="org9c76cca">Overview</h2>
+<div id="outline-container-overview-1-P-2" class="outline-2">
+<h2 id="overview-1-P-2">Overview</h2>
 <div class="outline-text-2" id="text-org9c76cca">
 <p>
 This is a prescriptive conceptual guide for using C++20 modules effectively.
@@ -53,8 +53,8 @@ It assumes basic knowledge of C++20 modules and <code>cmake</code>:
 </ol>
 </div>
 
-<div id="outline-container-org250e759" class="outline-3">
-<h3 id="org250e759">Caveats</h3>
+<div id="outline-container-caveats-2-P-1" class="outline-3">
+<h3 id="caveats-2-P-1">Caveats</h3>
 <div class="outline-text-3" id="text-org250e759">
 <p>
 These notes are based primarily on experience was gathered on Linux using:
@@ -76,8 +76,8 @@ is why I use a newer version (which magically fixed many problems). Overall, it 
 </div>
 </div>
 
-<div id="outline-container-org3709f2f" class="outline-2">
-<h2 id="org3709f2f">The Old Way</h2>
+<div id="outline-container-the-old-way-1-P-1" class="outline-2">
+<h2 id="the-old-way-1-P-1">The Old Way</h2>
 <div class="outline-text-2" id="text-org3709f2f">
 <p>
 Prior to C++ modules, most C++ libraries are organized into several header (<code>.hpp</code>) files and implementation (<code>.cpp</code>) files (yes there are header-only libraries too).
@@ -93,8 +93,8 @@ Some compilers offer pre-compiled headers, which is a non-standard way to speed-
 </div>
 </div>
 
-<div id="outline-container-org384463e" class="outline-2">
-<h2 id="org384463e">The New Way</h2>
+<div id="outline-container-the-new-way-1-P-1" class="outline-2">
+<h2 id="the-new-way-1-P-1">The New Way</h2>
 <div class="outline-text-2" id="text-org384463e">
 <p>
 C++20 modules provide a method for the compiler to compile each "header" file only once, greatly speeding up compilation time (in theory).
@@ -123,8 +123,8 @@ When you do this, the user needs to compile the <i>module interface files</i> on
 </div>
 </div>
 
-<div id="outline-container-org6492c03" class="outline-2">
-<h2 id="org6492c03">Migration</h2>
+<div id="outline-container-migration-1-P-1" class="outline-2">
+<h2 id="migration-1-P-1">Migration</h2>
 <div class="outline-text-2" id="text-org6492c03">
 <p>
 Here is a suggested migration path for existing projects.
@@ -169,8 +169,8 @@ The <code>.ixx</code> files are listed as part of the <code>FILE_SET CXX_MODULES
 </div>
 </div>
 
-<div id="outline-container-org890127d" class="outline-2">
-<h2 id="org890127d">Explanation</h2>
+<div id="outline-container-explanation-1-P-1" class="outline-2">
+<h2 id="explanation-1-P-1">Explanation</h2>
 <div class="outline-text-2" id="text-org890127d">
 <p>
 There were some opinionated choices in the above migration guide. Here is an explanation for some of them.
