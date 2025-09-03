@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-09-02 Tue 08:45 -->
+<!-- 2025-09-03 Wed 08:54 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Introduction to Python</title>
@@ -82,7 +82,13 @@
 </li>
 </ul>
 </li>
-<li><a href="#warm-up-exercises-1-P-1">Warm-up Exercises</a></li>
+<li><a href="#warm-up-exercise-1-P-1">Warm-up Exercise</a>
+<ul>
+<li><a href="#game-description-2-P-1">Game Description</a></li>
+<li><a href="#basic-game-2-P-1">Basic game</a></li>
+<li><a href="#additional-features-2-P-1">Additional Features</a></li>
+</ul>
+</li>
 <li><a href="#other-resources">Other Learning Resources</a></li>
 </ul>
 </div>
@@ -465,30 +471,44 @@ also puts you behind the curve in a fast moving field. In this case, <code>pip</
 </div>
 </div>
 
-<div id="outline-container-warm-up-exercises-1-P-1" class="outline-2">
-<h2 id="warm-up-exercises-1-P-1">Warm-up Exercises</h2>
-<div class="outline-text-2" id="text-org65edf00">
+<div id="outline-container-warm-up-exercise-1-P-1" class="outline-2">
+<h2 id="warm-up-exercise-1-P-1">Warm-up Exercise</h2>
+<div class="outline-text-2" id="text-warm-up-exercise-1-P-1">
+</div>
+<div id="outline-container-game-description-2-P-1" class="outline-3">
+<h3 id="game-description-2-P-1">Game Description</h3>
+<div class="outline-text-3" id="text-org0dcb097">
 <ol class="org-ol">
-<li>Write a "guess-the-number" game.
-<ul class="org-ul">
-<li>User enters a number between <code>a</code> and <code>b</code></li>
-<li>The computer tells them if it is too high, or too low</li>
-<li>If too many guesses are taken, then the game is over</li>
-</ul></li>
-<li>Write a program that converts between <a href="https://en.wikipedia.org/wiki/Roman_numerals">Roman Numerals</a> and  <a href="https://en.wikipedia.org/wiki/Arabic_numerals">Arabic Numerals</a></li>
-<li>Implement the mathematical game <a href="https://en.wikipedia.org/wiki/Nim">Nim</a></li>
-<li>Using <code>sympy</code> and <code>matplotlib</code> create a program that lets a user
-enter and plot equations</li>
-<li>Using <code>pygame</code>, write a simple two-player game (such as snake).
-<ul class="org-ul">
-<li>In the game of Snake, the player controls a snake that is \(N\) blocks long</li>
-<li>If the Snake hits itself or the walls, the player loses</li>
-<li>There is food in the arena (which is a single block). When the Snake
-hits the foot, it grows in length (e.g., by one block).</li>
-<li>The snake moves through the arena by removing the tile that is it's tail
-and placing that tile at the head, in the direction of travel.</li>
-</ul></li>
+<li>In the game of <a href="https://en.wikipedia.org/wiki/Nim">Nim</a>, there are \(N\) rows with \(M_N\) matchsticks in row \(N\).</li>
+<li>There are two players who take turns.</li>
+<li>On each turn, the player may take any number of matchsticks from a single row.</li>
+<li>The goal of the game is to force the other player to take the last matchstick.</li>
 </ol>
+</div>
+</div>
+
+<div id="outline-container-basic-game-2-P-1" class="outline-3">
+<h3 id="basic-game-2-P-1">Basic game</h3>
+<div class="outline-text-3" id="text-org8201352">
+<ol class="org-ol">
+<li>Implement the game with \(N = 3\), \(M_1 = 3\), \(M_2 = 4\), and \(M_3 = 5\).</li>
+<li>The game board can be represented with ASCII characters printed to the console.</li>
+<li>After each turn, the next state of the game is displayed.</li>
+<li>Each player taking turns at the same keyboard</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-additional-features-2-P-1" class="outline-3">
+<h3 id="additional-features-2-P-1">Additional Features</h3>
+<div class="outline-text-3" id="text-org742329c">
+<ol class="org-ol">
+<li>Allow the user to setup the initial game board with as many rows and items in each row as desired.</li>
+<li>Implement a computer player that executes perfect play for the game.</li>
+<li>Implement a networked version, that allows players to connect to a game server and play each other.</li>
+<li>Use <code>pygame</code> to make a graphical version of the game.</li>
+</ol>
+</div>
 </div>
 </div>
 <div id="outline-container-other-resources" class="outline-2">
