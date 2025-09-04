@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-09-03 Wed 08:54 -->
+<!-- 2025-09-04 Thu 08:50 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Recursive Backtracking</title>
@@ -50,7 +50,7 @@ it will find a path (if it exists), and does not require full knowledge of the m
 <li>The robot starts at the start. This square is marked as part of the path.</li>
 </ol>
 
-<figure id="org1bbb920">
+<figure id="orgcd0bbd2">
 <img src="./images/rbmaze1.svg" alt="rbmaze1.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 1: </span>The Goal is the red square.  The robot (purple circle) starts at the green square. Obstacles are Black, free space is white.</figcaption>
@@ -67,7 +67,7 @@ it will find a path (if it exists), and does not require full knowledge of the m
 <li>The robot can move East. It moves east and marks the new square as part of the path.</li>
 </ol>
 
-<figure id="orgb78c6d8">
+<figure id="org874480c">
 <img src="./images/rbmaze2.svg" alt="rbmaze2.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 2: </span>State after the first step.</figcaption>
@@ -83,7 +83,7 @@ it will find a path (if it exists), and does not require full knowledge of the m
 <li>The robot can move East (again). It moves east and marks the new square as part of the path.</li>
 </ol>
 
-<figure id="orgf3730ed">
+<figure id="orgab8580e">
 <img src="./images/rbmaze3.svg" alt="rbmaze3.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 3: </span>State after second step to the East</figcaption>
@@ -105,7 +105,7 @@ it will find a path (if it exists), and does not require full knowledge of the m
 </ol>
 
 
-<figure id="org08b9137">
+<figure id="orgc9b28e5">
 <img src="./images/rbmaze4.svg" alt="rbmaze4.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 4: </span>With no adjacent unexplored free squares, the robot must backtrack.</figcaption>
@@ -122,7 +122,7 @@ it will find a path (if it exists), and does not require full knowledge of the m
 <li>The Robot can move South, so it does so.</li>
 </ol>
 
-<figure id="org38d5511">
+<figure id="org64f7396">
 <img src="./images/rbmaze5.svg" alt="rbmaze5.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 5: </span>Resuming where the robot left off, it decides to move to the south.</figcaption>
@@ -139,7 +139,7 @@ it will find a path (if it exists), and does not require full knowledge of the m
 <li>The robot can move South, and does so.</li>
 </ol>
 
-<figure id="org3227e24">
+<figure id="org3296251">
 <img src="./images/rbmaze6.svg" alt="rbmaze6.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 6: </span>Another Step to the South, followed by two steps to the east</figcaption>
@@ -155,7 +155,7 @@ it will find a path (if it exists), and does not require full knowledge of the m
 <li>Repeat one more time.</li>
 </ol>
 
-<figure id="org4787d70">
+<figure id="org37fc27d">
 <img src="./images/rbmaze7.svg" alt="rbmaze7.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 7: </span>After two steps, the robot has gone as far East as possible</figcaption>
@@ -171,7 +171,7 @@ it will find a path (if it exists), and does not require full knowledge of the m
 <li>The new location has the same problem, so the robot backtracks again.</li>
 </ol>
 
-<figure id="orgca093dd">
+<figure id="orge949b85">
 <img src="./images/rbmaze8.svg" alt="rbmaze8.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 8: </span>Two backtracks in a row!</figcaption>
@@ -188,7 +188,7 @@ it will find a path (if it exists), and does not require full knowledge of the m
 <li>The robot can move West, so it does so.</li>
 </ol>
 
-<figure id="orge0b87bb">
+<figure id="org97db525">
 <img src="./images/rbmaze9.svg" alt="rbmaze9.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 9: </span>After moving one square to the west</figcaption>
@@ -206,7 +206,7 @@ it will find a path (if it exists), and does not require full knowledge of the m
 <li>The robot also has a path from the start to the goal.</li>
 </ol>
 
-<figure id="orgc36df55">
+<figure id="orgac6946b">
 <img src="./images/rbmaze10.svg" alt="rbmaze10.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 10: </span>The robot has found the goal</figcaption>
