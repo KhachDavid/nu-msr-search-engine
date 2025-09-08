@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-09-04 Thu 08:50 -->
+<!-- 2025-09-08 Mon 14:42 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>The Northwestern MS Robotics Personal Package Archive</title>
@@ -57,7 +57,7 @@
 </nav>
 <div id="outline-container-msr-ppa-1-P-1" class="outline-2">
 <h2 id="msr-ppa-1-P-1">MSR PPA</h2>
-<div class="outline-text-2" id="text-orgb2adac9">
+<div class="outline-text-2" id="text-orgf9d6426">
 <p>
 A personal package archive (PPA) is a way for users of Ubuntu to distribute personal packages.
 Northwestern MS in Robotics has a PPA at <a href="https://launchpad.net/~numsr/robotics">https://launchpad.net/~numsr/robotics</a>.
@@ -73,7 +73,7 @@ The following steps should be done from Ubuntu LTS
 </div>
 <div id="outline-container-how-to-make-a-ppa-2-P-1" class="outline-3">
 <h3 id="how-to-make-a-ppa-2-P-1">How To Make A PPA</h3>
-<div class="outline-text-3" id="text-org953a9e2">
+<div class="outline-text-3" id="text-orge517123">
 <ol class="org-ol">
 <li>Sign up for a launchpad.net account</li>
 <li>Create an OpenPGP key:
@@ -89,7 +89,7 @@ The following steps should be done from Ubuntu LTS
 </div>
 <div id="outline-container-references-3-P-1" class="outline-4">
 <h4 id="references-3-P-1">References</h4>
-<div class="outline-text-4" id="text-org5cc6851">
+<div class="outline-text-4" id="text-orgd4af031">
 <ol class="org-ol">
 <li><a href="https://launchpad.net/+help-registry/openpgp-keys.html">Launchpad Keys</a></li>
 <li><a href="https://help.ubuntu.com/community/GnuPrivacyGuardHowto">Ubuntu GPG Guide</a></li>
@@ -105,7 +105,7 @@ The following steps should be done from Ubuntu LTS
 </div>
 <div id="outline-container-from-a-source-debian-3-P-1" class="outline-4">
 <h4 id="from-a-source-debian-3-P-1">From a Source Debian</h4>
-<div class="outline-text-4" id="text-org42b139d">
+<div class="outline-text-4" id="text-orgc1b7c84">
 <ol class="org-ol">
 <li>Make sure the <code>pgp</code> keys are setup on the system you are building the package on.</li>
 <li>Install the <code>devscripts</code> package</li>
@@ -170,7 +170,7 @@ are changing source code you likely want to make the changes in a fork or even s
 
 <div id="outline-container-package-format-1-P-1" class="outline-2">
 <h2 id="package-format-1-P-1">Package Format</h2>
-<div class="outline-text-2" id="text-org88bbeaa">
+<div class="outline-text-2" id="text-org17ce0b1">
 <p>
 There are two package formats, as specified in <code>debian/source/format</code>
 </p>
@@ -189,7 +189,7 @@ It can make maintaining the fork easier to not have the debian/ directory</li>
 </div>
 <div id="outline-container-git-and-quilt-2-P-1" class="outline-3">
 <h3 id="git-and-quilt-2-P-1">Git and Quilt</h3>
-<div class="outline-text-3" id="text-org0b60a7d">
+<div class="outline-text-3" id="text-orgfe83334">
 <p>
 Quilt is used in debian packages to keep track of "upstream debian changes" and the source code version.
 Here is how to use git to manage the changes and turn those changes into quilt-compatible patches
@@ -205,7 +205,7 @@ Quilt environment variable QUILT_PATCHES=debian/patches should be set
 </div>
 <div id="outline-container-references-3-P-2" class="outline-4">
 <h4 id="references-3-P-2">References</h4>
-<div class="outline-text-4" id="text-org9a9cfb7">
+<div class="outline-text-4" id="text-org5a34837">
 <p>
 <a href="https://help.launchpad.net/Packaging/PPA/BuildingASourcePackage">Building A Source Package</a>
 <a href="https://manpages.ubuntu.com/manpages/trusty/man1/quilt.1.html">Quilt Manpage</a>
@@ -277,7 +277,7 @@ There are two Realsense packages in the PPA
 </div>
 <div id="outline-container-realsense-dkms-2-P-1" class="outline-3">
 <h3 id="realsense-dkms-2-P-1">realsense-dkms</h3>
-<div class="outline-text-3" id="text-org2da0255">
+<div class="outline-text-3" id="text-org553c005">
 <ol class="org-ol">
 <li>The realsense has some slightly modified kernel drivers to help it report timing information better.
 <ul class="org-ul">
@@ -299,7 +299,7 @@ There are two Realsense packages in the PPA
 
 <div id="outline-container-librealsense2-2-P-1" class="outline-3">
 <h3 id="librealsense2-2-P-1">librealsense2</h3>
-<div class="outline-text-3" id="text-orga921d61">
+<div class="outline-text-3" id="text-org258be39">
 <ol class="org-ol">
 <li>My version package has the python bindings compiled in, and installed</li>
 <li>It also provides <code>ros-jazzy-librealsense2</code> and <code>ros-kilted-librealsense2</code> so that ROS packages that depend on the realsense can be installed
@@ -319,8 +319,8 @@ There are two Realsense packages in the PPA
 </div>
 </div>
 
-<details id="org1a2e3f3"><summary class="header-3">ros-jazzy-librealsense2</summary>
-<div class="outline-text-3" id="text-org1a2e3f3">
+<details id="org3311aa5"><summary class="header-3">ros-jazzy-librealsense2</summary>
+<div class="outline-text-3" id="text-org3311aa5">
 <p>
 This package used to be used to override the version that shipped with ROS. It required extra patches to install python bindings under
 the proper ROS <code>/opt/ros</code> directory. Instead, <code>librealsense2</code> installs everything in a standard location (so it is decoupled from ROS) but it
