@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-09-08 Mon 14:42 -->
+<!-- 2025-09-09 Tue 08:45 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Wavefront Planner</title>
@@ -22,20 +22,20 @@
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
 <li><a href="#summary-1-P-1">Summary</a></li>
-<li><a href="#setup-1-P-4">Setup</a></li>
+<li><a href="#setup-1-P-5">Setup</a></li>
 <li><a href="#first-step-1-P-2">First Step</a></li>
 <li><a href="#first-expansion-1-P-1">First Expansion</a></li>
 <li><a href="#next-expansion-1-P-1">Next Expansion</a></li>
 <li><a href="#subsequent-expansions-1-P-1">Subsequent Expansions</a></li>
 <li><a href="#using-the-plan-1-P-1">Using the Plan</a></li>
-<li><a href="#resources-1-P-3">Resources</a></li>
+<li><a href="#resources-1-P-4">Resources</a></li>
 </ul>
 </div>
 </nav>
 
 <div id="outline-container-summary-1-P-1" class="outline-2">
 <h2 id="summary-1-P-1">Summary</h2>
-<div class="outline-text-2" id="text-org695ed51">
+<div class="outline-text-2" id="text-org6bed870">
 <ul class="org-ul">
 <li>A wavefront planner is a breadth-first technique for finding paths in a maze</li>
 <li>It provides the shortest path from any starting location to a given goal.</li>
@@ -44,11 +44,11 @@
 </div>
 </div>
 
-<div id="outline-container-setup-1-P-4" class="outline-2">
-<h2 id="setup-1-P-4">Setup</h2>
-<div class="outline-text-2" id="text-orgc4f5d4f">
+<div id="outline-container-setup-1-P-5" class="outline-2">
+<h2 id="setup-1-P-5">Setup</h2>
+<div class="outline-text-2" id="text-org9beac96">
 
-<figure id="org77b8afd">
+<figure id="org577a534">
 <img src="./images/maze1.svg" alt="maze1.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 1: </span>The Goal is the red square.  The robot starts at the green square and knows the full layout of the maze.</figcaption>
@@ -59,9 +59,9 @@
 
 <div id="outline-container-first-step-1-P-2" class="outline-2">
 <h2 id="first-step-1-P-2">First Step</h2>
-<div class="outline-text-2" id="text-org92a3d71">
+<div class="outline-text-2" id="text-orgf7dea03">
 
-<figure id="org588f230">
+<figure id="org820b3b3">
 <img src="./images/maze2.svg" alt="maze2.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 2: </span>Start at the goal. It is 0 squares from the goal so label it 0.</figcaption>
@@ -71,9 +71,9 @@
 
 <div id="outline-container-first-expansion-1-P-1" class="outline-2">
 <h2 id="first-expansion-1-P-1">First Expansion</h2>
-<div class="outline-text-2" id="text-org884fb4e">
+<div class="outline-text-2" id="text-org364a9ed">
 
-<figure id="org6e0746b">
+<figure id="org834dcd6">
 <img src="./images/maze3.svg" alt="maze3.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 3: </span>All the neighbors of the goal are a distance of 1 from the goal. (In this example the robot cannot move diagonally).</figcaption>
@@ -83,9 +83,9 @@
 
 <div id="outline-container-next-expansion-1-P-1" class="outline-2">
 <h2 id="next-expansion-1-P-1">Next Expansion</h2>
-<div class="outline-text-2" id="text-org616e473">
+<div class="outline-text-2" id="text-org28ff854">
 
-<figure id="org928ca69">
+<figure id="org243626a">
 <img src="./images/maze4.svg" alt="maze4.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 4: </span>All the neighbors of the 1-distance squares are a distance of 2 from the goal.</figcaption>
@@ -96,9 +96,9 @@
 
 <div id="outline-container-subsequent-expansions-1-P-1" class="outline-2">
 <h2 id="subsequent-expansions-1-P-1">Subsequent Expansions</h2>
-<div class="outline-text-2" id="text-orgdeb8ade">
+<div class="outline-text-2" id="text-orgcbfb489">
 
-<figure id="orgca09ab4">
+<figure id="orga10a9a5">
 <img src="./images/maze5.svg" alt="maze5.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 5: </span>Keep expanding until every square is labeled with its distance from the goal.</figcaption>
@@ -108,9 +108,9 @@
 
 <div id="outline-container-using-the-plan-1-P-1" class="outline-2">
 <h2 id="using-the-plan-1-P-1">Using the Plan</h2>
-<div class="outline-text-2" id="text-org3fafd4b">
+<div class="outline-text-2" id="text-orgcb33d13">
 
-<figure id="orgc5550dc">
+<figure id="org5b9a44a">
 <img src="./images/maze6.svg" alt="maze6.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 6: </span>Starting at any square (say the green one) the robot moves to the neighbor that is closest to the goal.</figcaption>
@@ -118,9 +118,9 @@
 </div>
 </div>
 
-<div id="outline-container-resources-1-P-3" class="outline-2">
-<h2 id="resources-1-P-3">Resources</h2>
-<div class="outline-text-2" id="text-org9570671">
+<div id="outline-container-resources-1-P-4" class="outline-2">
+<h2 id="resources-1-P-4">Resources</h2>
+<div class="outline-text-2" id="text-orgc7682e0">
 <ol class="org-ol">
 <li><a href="https://www.cs.tufts.edu/comp/150IR/labs/wavefront.html">Wavefront Planner</a></li>
 <li><a href="http://www.personal.kent.edu/~rmuhamma/Algorithms/MyAlgorithms/GraphAlgor/breadthSearch.htm">Breadth-First Search</a></li>
