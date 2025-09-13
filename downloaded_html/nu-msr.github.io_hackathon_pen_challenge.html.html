@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-09-12 Fri 13:21 -->
+<!-- 2025-09-12 Fri 16:38 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Who Stole My Pen?</title>
@@ -190,7 +190,7 @@ a controller that will enable the robot to grab the pen.
 </div>
 <div id="outline-container-design-notes-3-P-1" class="outline-4">
 <h4 id="design-notes-3-P-1">Design Notes</h4>
-<div class="outline-text-4" id="text-org3607939">
+<div class="outline-text-4" id="text-orgc203a93">
 <ol class="org-ol">
 <li>What follows are some notes on how to think about designing and organizing your code:</li>
 <li>A good strategy, after running and understanding the <a href="https://github.com/IntelRealSense/librealsense/blob/master/wrappers/python/examples/align-depth2color.py">Alignment Example</a> is to divide it into the components that you need and encapsulate them in a class.</li>
@@ -244,7 +244,7 @@ program to be designed to operate in a loop where one of these functions are cal
 
 <div id="outline-container-design-notes-3-P-2" class="outline-4">
 <h4 id="design-notes-3-P-2">Design Notes</h4>
-<div class="outline-text-4" id="text-org1649653">
+<div class="outline-text-4" id="text-org0778dbe">
 <ol class="org-ol">
 <li>By encapsulating the camera streaming in a class, it is easier to write a program that lets a user choose between playing from a recording or streaming live data.</li>
 <li>The recording and playback functionalities are useful to implement before moving forward with the image pipeline.</li>
@@ -366,7 +366,7 @@ cylindrical coordinates centered at the base frame of the pincherX</li>
 </div>
 <div id="outline-container-design-notes-3-P-3" class="outline-4">
 <h4 id="design-notes-3-P-3">Design Notes</h4>
-<div class="outline-text-4" id="text-org4ba2441">
+<div class="outline-text-4" id="text-orgca2e1dc">
 <ol class="org-ol">
 <li>The ultimate goal of the pipeline is to get the 3D pen location from the RGB image and depth map.</li>
 <li>Do not worry about precision and accuracy at this stage: just get a rough reasonable version working.
@@ -388,7 +388,7 @@ cylindrical coordinates centered at the base frame of the pincherX</li>
 
 <div id="outline-container-robot-control-1-P-1" class="outline-2">
 <h2 id="robot-control-1-P-1">Robot Control</h2>
-<div class="outline-text-2" id="text-org4779329">
+<div class="outline-text-2" id="text-org6fbcd4f">
 <p>
 We will use the <code>interbotix_xs_toolbox</code> to control the robot.
 Although the arm can be fully controlled with ROS 2, we will use only minimally use it during the hackathon,
@@ -714,7 +714,7 @@ Write a script that performs the calibration procedure:
 
 <div id="outline-container-design-notes-3-P-4" class="outline-4">
 <h4 id="design-notes-3-P-4">Design Notes</h4>
-<div class="outline-text-4" id="text-org1239085">
+<div class="outline-text-4" id="text-orgfdb279d">
 <ol class="org-ol">
 <li>There is an offset between where the pen is detected and the center of the robot's end-effector frame:
 this offset can be manually accounted for.</li>
@@ -738,7 +738,7 @@ this offset can be manually accounted for.</li>
 
 <div id="outline-container-robot-control-1-P-2" class="outline-2">
 <h2 id="robot-control-1-P-2">Robot Control</h2>
-<div class="outline-text-2" id="text-org6fbcd4f">
+<div class="outline-text-2" id="text-org7f30639">
 <p>
 A basic robot control loop consists of the following steps:
 </p>
@@ -787,7 +787,7 @@ When rotating (this assumes that both the arm and pen's locations are expressed 
 
 <div id="outline-container-design-notes-3-P-5" class="outline-4">
 <h4 id="design-notes-3-P-5">Design Notes</h4>
-<div class="outline-text-4" id="text-orgc203a93">
+<div class="outline-text-4" id="text-org756bcc6">
 <ol class="org-ol">
 <li>There may be a few modes of operation as you control the robot (e.g., moving to the pen, closing grippers, etc). It makes sense to track these modes
 by assigning a state to each of them. You can use a python <a href="https://docs.python.org/3/library/enum.html">enum</a> to label and track states</li>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-09-12 Fri 13:21 -->
+<!-- 2025-09-12 Fri 16:38 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Wavefront Planner</title>
@@ -48,7 +48,7 @@
 <h2 id="setup-1-P-2">Setup</h2>
 <div class="outline-text-2" id="text-orgaf292cf">
 
-<figure id="orgb090ffc">
+<figure id="org8278ecc">
 <img src="./images/maze1.svg" alt="maze1.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 1: </span>The Goal is the red square.  The robot starts at the green square and knows the full layout of the maze.</figcaption>
@@ -61,7 +61,7 @@
 <h2 id="first-step-1-P-2">First Step</h2>
 <div class="outline-text-2" id="text-orga602ffa">
 
-<figure id="org26256e4">
+<figure id="orgd120110">
 <img src="./images/maze2.svg" alt="maze2.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 2: </span>Start at the goal. It is 0 squares from the goal so label it 0.</figcaption>
@@ -73,7 +73,7 @@
 <h2 id="first-expansion-1-P-1">First Expansion</h2>
 <div class="outline-text-2" id="text-org045d63b">
 
-<figure id="orgb4f4833">
+<figure id="orgb48d957">
 <img src="./images/maze3.svg" alt="maze3.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 3: </span>All the neighbors of the goal are a distance of 1 from the goal. (In this example the robot cannot move diagonally).</figcaption>
@@ -85,7 +85,7 @@
 <h2 id="next-expansion-1-P-1">Next Expansion</h2>
 <div class="outline-text-2" id="text-org44c2d49">
 
-<figure id="org0654356">
+<figure id="orgabbaa56">
 <img src="./images/maze4.svg" alt="maze4.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 4: </span>All the neighbors of the 1-distance squares are a distance of 2 from the goal.</figcaption>
@@ -98,7 +98,7 @@
 <h2 id="subsequent-expansions-1-P-1">Subsequent Expansions</h2>
 <div class="outline-text-2" id="text-org84ce550">
 
-<figure id="org70ef7a3">
+<figure id="org9311e97">
 <img src="./images/maze5.svg" alt="maze5.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 5: </span>Keep expanding until every square is labeled with its distance from the goal.</figcaption>
@@ -110,7 +110,7 @@
 <h2 id="using-the-plan-1-P-1">Using the Plan</h2>
 <div class="outline-text-2" id="text-orgd14b55d">
 
-<figure id="orgb3413c6">
+<figure id="org85336d2">
 <img src="./images/maze6.svg" alt="maze6.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 6: </span>Starting at any square (say the green one) the robot moves to the neighbor that is closest to the goal.</figcaption>
