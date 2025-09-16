@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-12-04 Wed 21:56 -->
+<!-- 2025-09-16 Tue 13:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Catkin and Packages</title>
@@ -21,54 +21,54 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgbe1414d">Catkin, the build system for ROS</a></li>
-<li><a href="#org76aec3d">Catkin Workspaces</a>
+<li><a href="#catkin-the-build-system-for-ros-1-P-1">Catkin, the build system for ROS</a></li>
+<li><a href="#catkin-workspaces-1-P-1">Catkin Workspaces</a>
 <ul>
-<li><a href="#org8bd4927"><code>install</code> vs <code>devel</code></a></li>
-<li><a href="#org6259848">Building the Workspace</a></li>
-<li><a href="#orgb234d27">Creating a workspace</a></li>
+<li><a href="#-install-vs-devel--2-P-1"><code>install</code> vs <code>devel</code></a></li>
+<li><a href="#building-the-workspace-2-P-1">Building the Workspace</a></li>
+<li><a href="#creating-a-workspace-2-P-1">Creating a workspace</a></li>
 </ul>
 </li>
-<li><a href="#org19d736d">Activating Workspaces</a>
+<li><a href="#activating-workspaces-1-P-1">Activating Workspaces</a>
 <ul>
-<li><a href="#org39a7ce2">Modifying existing packages</a></li>
+<li><a href="#modifying-existing-packages-2-P-1">Modifying existing packages</a></li>
 </ul>
 </li>
-<li><a href="#org09932d3">Packages</a>
+<li><a href="#packages-1-P-2">Packages</a>
 <ul>
-<li><a href="#orgde5543c">Creating</a></li>
-<li><a href="#org3cdf414">package.xml</a>
+<li><a href="#creating-2-P-1">Creating</a></li>
+<li><a href="#package-xml-2-P-1">package.xml</a>
 <ul>
-<li><a href="#org4661123">Required elements:</a></li>
-<li><a href="#org33a39f9">Dependencies</a></li>
+<li><a href="#required-elements--3-P-1">Required elements:</a></li>
+<li><a href="#dependencies-3-P-2">Dependencies</a></li>
 </ul>
 </li>
-<li><a href="#orgefedfb8">CMakeLists.txt</a></li>
-<li><a href="#org44ef44a">Package Layout</a></li>
-<li><a href="#org7e31b52">Python Packages</a></li>
-<li><a href="#org1566b29">Custom Messages and Services</a>
+<li><a href="#cmakelists-txt-2-P-1">CMakeLists.txt</a></li>
+<li><a href="#package-layout-2-P-2">Package Layout</a></li>
+<li><a href="#python-packages-2-P-1">Python Packages</a></li>
+<li><a href="#custom-messages-and-services-2-P-1">Custom Messages and Services</a>
 <ul>
-<li><a href="#orgde6dd09">package.xml</a></li>
-<li><a href="#org0667d85">CMakeLists.txt</a></li>
+<li><a href="#package-xml-3-P-1">package.xml</a></li>
+<li><a href="#cmakelists-txt-3-P-1">CMakeLists.txt</a></li>
 </ul>
 </li>
-<li><a href="#org410ae81">catkin lint</a></li>
+<li><a href="#catkin-lint-2-P-1">catkin lint</a></li>
 </ul>
 </li>
-<li><a href="#org9148bd6">Environment Variables</a>
+<li><a href="#environment-variables-1-P-1">Environment Variables</a>
 <ul>
-<li><a href="#orgddf2896">Environment Variable Basics</a></li>
-<li><a href="#org5f0fa2f">ROS Environment Variables</a></li>
+<li><a href="#environment-variable-basics-2-P-1">Environment Variable Basics</a></li>
+<li><a href="#ros-environment-variables-2-P-1">ROS Environment Variables</a></li>
 </ul>
 </li>
-<li><a href="#orgdec4f9e">rosdep</a></li>
+<li><a href="#rosdep-1-P-1">rosdep</a></li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-orgbe1414d" class="outline-2">
-<h2 id="orgbe1414d">Catkin, the build system for ROS</h2>
-<div class="outline-text-2" id="text-orgbe1414d">
+<div id="outline-container-catkin-the-build-system-for-ros-1-P-1" class="outline-2">
+<h2 id="catkin-the-build-system-for-ros-1-P-1">Catkin, the build system for ROS</h2>
+<div class="outline-text-2" id="text-orge444bc0">
 <ul class="org-ul">
 <li><a href="https://wiki.ros.org/catkin">catkin</a> is used to build ROS packages</li>
 <li>In-depth documentation is <a href="http://docs.ros.org/noetic/api/catkin/html/index.html">here</a>
@@ -90,9 +90,9 @@ and in <code>package.xml</code> (so they can be used by the installation process
 </div>
 </div>
 
-<div id="outline-container-org76aec3d" class="outline-2">
-<h2 id="org76aec3d">Catkin Workspaces</h2>
-<div class="outline-text-2" id="text-org76aec3d">
+<div id="outline-container-catkin-workspaces-1-P-1" class="outline-2">
+<h2 id="catkin-workspaces-1-P-1">Catkin Workspaces</h2>
+<div class="outline-text-2" id="text-org266ca33">
 <ul class="org-ul">
 <li>Catkin uses <a href="https://wiki.ros.org/catkin/workspaces">workspaces</a> to find your packages</li>
 <li>Calling <code>catkin_make</code> in the workspace builds it</li>
@@ -113,9 +113,9 @@ with all the files that come with your project and are needed to run your progra
 </ul></li>
 </ul>
 </div>
-<div id="outline-container-org8bd4927" class="outline-3">
-<h3 id="org8bd4927"><code>install</code> vs <code>devel</code></h3>
-<div class="outline-text-3" id="text-org8bd4927">
+<div id="outline-container--install-vs-devel--2-P-1" class="outline-3">
+<h3 id="-install-vs-devel--2-P-1"><code>install</code> vs <code>devel</code></h3>
+<div class="outline-text-3" id="text-org66f2fc3">
 <ul class="org-ul">
 <li>Both spaces (referred to as <i>result spaces</i>) contain files generated from the build</li>
 <li>The devel space is designed for quick iteration during development while install is for releases.</li>
@@ -132,9 +132,9 @@ you install using <code>apt</code> have been built by the ROS build farm and pac
 </div>
 </div>
 
-<div id="outline-container-org6259848" class="outline-3">
-<h3 id="org6259848">Building the Workspace</h3>
-<div class="outline-text-3" id="text-org6259848">
+<div id="outline-container-building-the-workspace-2-P-1" class="outline-3">
+<h3 id="building-the-workspace-2-P-1">Building the Workspace</h3>
+<div class="outline-text-3" id="text-orgd365143">
 <p>
 There are three ROS 1 tools that can be used to build the workspace.
 </p>
@@ -153,9 +153,9 @@ just use CMake to be built as well. Some projects only build using this tool, an
 </ol>
 </div>
 </div>
-<div id="outline-container-orgb234d27" class="outline-3">
-<h3 id="orgb234d27">Creating a workspace</h3>
-<div class="outline-text-3" id="text-orgb234d27">
+<div id="outline-container-creating-a-workspace-2-P-1" class="outline-3">
+<h3 id="creating-a-workspace-2-P-1">Creating a workspace</h3>
+<div class="outline-text-3" id="text-org40df95a">
 <ul class="org-ul">
 <li>Workspaces can be created using <code>mkdir -p &lt;ws_name&gt;/src</code>.
 When you run the build tool for the first time, the result spaces will be created.</li>
@@ -166,9 +166,9 @@ When you run the build tool for the first time, the result spaces will be create
 </div>
 
 
-<div id="outline-container-org19d736d" class="outline-2">
-<h2 id="org19d736d">Activating Workspaces</h2>
-<div class="outline-text-2" id="text-org19d736d">
+<div id="outline-container-activating-workspaces-1-P-1" class="outline-2">
+<h2 id="activating-workspaces-1-P-1">Activating Workspaces</h2>
+<div class="outline-text-2" id="text-org726cd9c">
 <ul class="org-ul">
 <li>Workspaces are activated by sourcing their <code>setup.bash</code> files</li>
 <li>When you installed ROS, you should have added <code>source /opt/ros/melodic/setup.bash</code> to your <code>.bashrc</code>
@@ -190,9 +190,9 @@ to contain all the paths already on it at the time of running <code>catkin_make<
 </ul></li>
 </ul>
 </div>
-<div id="outline-container-org39a7ce2" class="outline-3">
-<h3 id="org39a7ce2">Modifying existing packages</h3>
-<div class="outline-text-3" id="text-org39a7ce2">
+<div id="outline-container-modifying-existing-packages-2-P-1" class="outline-3">
+<h3 id="modifying-existing-packages-2-P-1">Modifying existing packages</h3>
+<div class="outline-text-3" id="text-orga200da1">
 <p>
 Sometimes, ROS packages have bugs and you want to help fix them.  Sometimes you need a new feature or slightly different behavior from a different package.
 The workspace mechanism provides a useful means of handling this case without needing to modify your base system.
@@ -209,13 +209,13 @@ The workspace mechanism provides a useful means of handling this case without ne
 </div>
 </div>
 
-<div id="outline-container-org09932d3" class="outline-2">
-<h2 id="org09932d3">Packages</h2>
-<div class="outline-text-2" id="text-org09932d3">
+<div id="outline-container-packages-1-P-2" class="outline-2">
+<h2 id="packages-1-P-2">Packages</h2>
+<div class="outline-text-2" id="text-packages-1-P-2">
 </div>
-<div id="outline-container-orgde5543c" class="outline-3">
-<h3 id="orgde5543c">Creating</h3>
-<div class="outline-text-3" id="text-orgde5543c">
+<div id="outline-container-creating-2-P-1" class="outline-3">
+<h3 id="creating-2-P-1">Creating</h3>
+<div class="outline-text-3" id="text-org8035e5d">
 <p>
 You create a package using <code>catkin_create_pkg</code>.  
 After using this command, you usually need to edit the <code>package.xml</code> and <code>CMakeLists.txt</code>.
@@ -223,9 +223,9 @@ After using this command, you usually need to edit the <code>package.xml</code> 
 </div>
 </div>
 
-<div id="outline-container-org3cdf414" class="outline-3">
-<h3 id="org3cdf414">package.xml</h3>
-<div class="outline-text-3" id="text-org3cdf414">
+<div id="outline-container-package-xml-2-P-1" class="outline-3">
+<h3 id="package-xml-2-P-1">package.xml</h3>
+<div class="outline-text-3" id="text-orgb53a818">
 <p>
 The <code>package.xml</code> is a file describing meta-data about the package.  
 It is an <a href="https://www.w3schools.com/xml/default.asp">XML</a> document,
@@ -235,9 +235,9 @@ in the <a href="http://docs.ros.org/noetic/api/catkin/html/howto/format2/index.h
 </p>
 </div>
 
-<div id="outline-container-org4661123" class="outline-4">
-<h4 id="org4661123">Required elements:</h4>
-<div class="outline-text-4" id="text-org4661123">
+<div id="outline-container-required-elements--3-P-1" class="outline-4">
+<h4 id="required-elements--3-P-1">Required elements:</h4>
+<div class="outline-text-4" id="text-org3fda155">
 <ul class="org-ul">
 <li><code>&lt;name&gt;</code> The package name</li>
 <li><code>&lt;version&gt;</code> The package Version</li>
@@ -248,9 +248,9 @@ in the <a href="http://docs.ros.org/noetic/api/catkin/html/howto/format2/index.h
 </div>
 </div>
 
-<div id="outline-container-org33a39f9" class="outline-4">
-<h4 id="org33a39f9">Dependencies</h4>
-<div class="outline-text-4" id="text-org33a39f9">
+<div id="outline-container-dependencies-3-P-2" class="outline-4">
+<h4 id="dependencies-3-P-2">Dependencies</h4>
+<div class="outline-text-4" id="text-org45c04a2">
 <p>
 There are multiple types of dependencies.  The most important are
 </p>
@@ -280,9 +280,9 @@ use <code>&lt;depend&gt;</code>.</li>
 </div>
 </div>
 
-<div id="outline-container-orgefedfb8" class="outline-3">
-<h3 id="orgefedfb8">CMakeLists.txt</h3>
-<div class="outline-text-3" id="text-orgefedfb8">
+<div id="outline-container-cmakelists-txt-2-P-1" class="outline-3">
+<h3 id="cmakelists-txt-2-P-1">CMakeLists.txt</h3>
+<div class="outline-text-3" id="text-org50c69b5">
 <ul class="org-ul">
 <li>Information on the <a href="http://wiki.ros.org/catkin/CMakeLists.txt">CMakeLists.txt</a> is found here.</li>
 <li>The file generated by <code>catkin_create_pkg</code> is well commented, so reading the file helps explain what you need to do.</li>
@@ -309,9 +309,9 @@ it with the proper shebang for the system.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org44ef44a" class="outline-3">
-<h3 id="org44ef44a">Package Layout</h3>
-<div class="outline-text-3" id="text-org44ef44a">
+<div id="outline-container-package-layout-2-P-2" class="outline-3">
+<h3 id="package-layout-2-P-2">Package Layout</h3>
+<div class="outline-text-3" id="text-org03ec662">
 <p>
 For a ROS packages, the general layout is as follows, where <code>${ros_pkg}</code> is the base directory of the package
 </p>
@@ -331,9 +331,9 @@ For a ROS packages, the general layout is as follows, where <code>${ros_pkg}</co
 </ul>
 </div>
 </div>
-<div id="outline-container-org7e31b52" class="outline-3">
-<h3 id="org7e31b52">Python Packages</h3>
-<div class="outline-text-3" id="text-org7e31b52">
+<div id="outline-container-python-packages-2-P-1" class="outline-3">
+<h3 id="python-packages-2-P-1">Python Packages</h3>
+<div class="outline-text-3" id="text-org4e3a7e2">
 <ol class="org-ol">
 <li>ROS packages can contain one or more python packages. This is useful to allow the distribution of python packages that are tightly related to your ROS code</li>
 <li>Let <code>${ros_pkg}</code> be the name of a ROS package, and <code>${py_pkg}</code> be the name of the python package.</li>
@@ -375,9 +375,9 @@ setup(<span class="org-operator">**</span>d)
 </div>
 </div>
 
-<div id="outline-container-org1566b29" class="outline-3">
-<h3 id="org1566b29">Custom Messages and Services</h3>
-<div class="outline-text-3" id="text-org1566b29">
+<div id="outline-container-custom-messages-and-services-2-P-1" class="outline-3">
+<h3 id="custom-messages-and-services-2-P-1">Custom Messages and Services</h3>
+<div class="outline-text-3" id="text-org3741f82">
 <p>
 To create custom ROS <a href="https://wiki.ros.org/msg">message</a> and <a href="https://wiki.ros.org/srv">service</a> types, edit <code>CMakeLists.txt</code> and <code>package.xml</code>.
 </p>
@@ -392,9 +392,9 @@ Conceptually there are three pieces required to generate messages and services:
 </ol>
 </div>
 
-<div id="outline-container-orgde6dd09" class="outline-4">
-<h4 id="orgde6dd09">package.xml</h4>
-<div class="outline-text-4" id="text-orgde6dd09">
+<div id="outline-container-package-xml-3-P-1" class="outline-4">
+<h4 id="package-xml-3-P-1">package.xml</h4>
+<div class="outline-text-4" id="text-orgd9aceb6">
 <ol class="org-ol">
 <li>You must <code>&lt;build_depend&gt;</code> on <code>message_generation</code>: this ROS package generates the required code from <code>.msg</code> and <code>.srv</code> files</li>
 <li>You must <code>&lt;exec_depend&gt;</code> on <code>message_runtime</code>: this ROS package allows your code to use custom messages at runtime</li>
@@ -406,9 +406,9 @@ as <code>&lt;pkg&gt;/Type</code> in the <code>.msg</code> or <code>.srv</code> f
 </ol>
 </div>
 </div>
-<div id="outline-container-org0667d85" class="outline-4">
-<h4 id="org0667d85">CMakeLists.txt</h4>
-<div class="outline-text-4" id="text-org0667d85">
+<div id="outline-container-cmakelists-txt-3-P-1" class="outline-4">
+<h4 id="cmakelists-txt-3-P-1">CMakeLists.txt</h4>
+<div class="outline-text-4" id="text-org5cc0d24">
 <ol class="org-ol">
 <li>Make <code>CMake</code> aware of message generation and your message dependencies
 <ul class="org-ul">
@@ -432,9 +432,9 @@ other <code>catkin</code> packages to easily import your messages</li>
 </div>
 </div>
 </div>
-<div id="outline-container-org410ae81" class="outline-3">
-<h3 id="org410ae81">catkin lint</h3>
-<div class="outline-text-3" id="text-org410ae81">
+<div id="outline-container-catkin-lint-2-P-1" class="outline-3">
+<h3 id="catkin-lint-2-P-1">catkin lint</h3>
+<div class="outline-text-3" id="text-orgdfb0e10">
 <ul class="org-ul">
 <li><a href="https://fkie.github.io/catkin_lint">catkin_lint</a> is a tool used to help check that your <code>CMakeLists.txt</code> and <code>package.xml</code>
 have the required information and are synchronized.</li>
@@ -456,16 +456,16 @@ however, heeding checks helps ensure that other people won't have problems when 
 </div>
 </div>
 </div>
-<div id="outline-container-org9148bd6" class="outline-2">
-<h2 id="org9148bd6">Environment Variables</h2>
-<div class="outline-text-2" id="text-org9148bd6">
+<div id="outline-container-environment-variables-1-P-1" class="outline-2">
+<h2 id="environment-variables-1-P-1">Environment Variables</h2>
+<div class="outline-text-2" id="text-orgf16784d">
 <p>
 Environment Variables are used in Linux to control the behavior of programs.
 </p>
 </div>
-<div id="outline-container-orgddf2896" class="outline-3">
-<h3 id="orgddf2896">Environment Variable Basics</h3>
-<div class="outline-text-3" id="text-orgddf2896">
+<div id="outline-container-environment-variable-basics-2-P-1" class="outline-3">
+<h3 id="environment-variable-basics-2-P-1">Environment Variable Basics</h3>
+<div class="outline-text-3" id="text-org810323c">
 <ul class="org-ul">
 <li>See all environment variables using <code>env</code></li>
 <li>See all ROS environment variables using <code>env | grep ROS</code>, the <code>| grep ROS</code> part filters for variables containing the word ROS</li>
@@ -488,9 +488,9 @@ Thus every time you open the <code>Terminal</code> the variables that you set in
 </ul>
 </div>
 </div>
-<div id="outline-container-org5f0fa2f" class="outline-3">
-<h3 id="org5f0fa2f">ROS Environment Variables</h3>
-<div class="outline-text-3" id="text-org5f0fa2f">
+<div id="outline-container-ros-environment-variables-2-P-1" class="outline-3">
+<h3 id="ros-environment-variables-2-P-1">ROS Environment Variables</h3>
+<div class="outline-text-3" id="text-orgc34ac1b">
 <p>
 ROS relies on several <a href="https://wiki.ros.org/ROS/EnvironmentVariables">environment variables</a> to work.
 </p>
@@ -518,9 +518,9 @@ If the computer you are running nodes on is accessible via hostname lookup from 
 </div>
 </div>
 
-<div id="outline-container-orgdec4f9e" class="outline-2">
-<h2 id="orgdec4f9e">rosdep</h2>
-<div class="outline-text-2" id="text-orgdec4f9e">
+<div id="outline-container-rosdep-1-P-1" class="outline-2">
+<h2 id="rosdep-1-P-1">rosdep</h2>
+<div class="outline-text-2" id="text-org44e5fb4">
 <p>
 <a href="https://wiki.ros.org/rosdep">rosdep</a> is ROS's tool for installing system dependencies and released ROS packages.  
 </p>

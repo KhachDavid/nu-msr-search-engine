@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-12-04 Wed 21:56 -->
+<!-- 2025-09-16 Tue 13:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Threads in ROS and Python</title>
@@ -21,31 +21,31 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgae1e036">Overview</a></li>
-<li><a href="#orgdeb0cac">Thread Basics</a>
+<li><a href="#overview-1-P-23">Overview</a></li>
+<li><a href="#thread-basics-1-P-1">Thread Basics</a>
 <ul>
-<li><a href="#org4c3c138">What is a process?</a></li>
-<li><a href="#org3c5508b">What is a thread?</a></li>
-<li><a href="#orgabe385e">Threads in Python</a></li>
+<li><a href="#what-is-a-process--2-P-1">What is a process?</a></li>
+<li><a href="#what-is-a-thread--2-P-1">What is a thread?</a></li>
+<li><a href="#threads-in-python-2-P-2">Threads in Python</a></li>
 </ul>
 </li>
-<li><a href="#org58962b2">Threads in rospy</a>
+<li><a href="#threads-in-rospy-1-P-1">Threads in rospy</a>
 <ul>
-<li><a href="#org8c2ee78">Timers</a></li>
-<li><a href="#org391692f">Subscribers</a></li>
-<li><a href="#org8efdd77">Service Handlers</a></li>
-<li><a href="#orgf336de7">What this threading model means for you</a></li>
+<li><a href="#timers-2-P-1">Timers</a></li>
+<li><a href="#subscribers-2-P-1">Subscribers</a></li>
+<li><a href="#service-handlers-2-P-1">Service Handlers</a></li>
+<li><a href="#what-this-threading-model-means-for-you-2-P-1">What this threading model means for you</a></li>
 </ul>
 </li>
-<li><a href="#org277bd25">roscpp and threads</a></li>
-<li><a href="#org1232fd5">Threads Example</a></li>
+<li><a href="#roscpp-and-threads-1-P-1">roscpp and threads</a></li>
+<li><a href="#threads-example-1-P-1">Threads Example</a></li>
 <li><a href="#resources">Python Resources</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-orgae1e036" class="outline-2">
-<h2 id="orgae1e036">Overview</h2>
-<div class="outline-text-2" id="text-orgae1e036">
+<div id="outline-container-overview-1-P-23" class="outline-2">
+<h2 id="overview-1-P-23">Overview</h2>
+<div class="outline-text-2" id="text-orge504b5a">
 <p>
 This is a practical guide to threads in ROS, focused on python. 
 There are two goals:
@@ -61,13 +61,13 @@ Resources for learning more about threads in python are at the <a href="#resourc
 </div>
 </div>
 
-<div id="outline-container-orgdeb0cac" class="outline-2">
-<h2 id="orgdeb0cac">Thread Basics</h2>
-<div class="outline-text-2" id="text-orgdeb0cac">
+<div id="outline-container-thread-basics-1-P-1" class="outline-2">
+<h2 id="thread-basics-1-P-1">Thread Basics</h2>
+<div class="outline-text-2" id="text-thread-basics-1-P-1">
 </div>
-<div id="outline-container-org4c3c138" class="outline-3">
-<h3 id="org4c3c138">What is a process?</h3>
-<div class="outline-text-3" id="text-org4c3c138">
+<div id="outline-container-what-is-a-process--2-P-1" class="outline-3">
+<h3 id="what-is-a-process--2-P-1">What is a process?</h3>
+<div class="outline-text-3" id="text-orga864d9c">
 <ol class="org-ol">
 <li>A <a href="https://www.tldp.org/LDP/tlk/kernel/processes.html">process</a> is an abstraction used by
 the Linux Kernel (and other operating systems) to segregate sequences of machine instructions into
@@ -82,9 +82,9 @@ of the operating system.</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-org3c5508b" class="outline-3">
-<h3 id="org3c5508b">What is a thread?</h3>
-<div class="outline-text-3" id="text-org3c5508b">
+<div id="outline-container-what-is-a-thread--2-P-1" class="outline-3">
+<h3 id="what-is-a-thread--2-P-1">What is a thread?</h3>
+<div class="outline-text-3" id="text-orgc5162f7">
 <ol class="org-ol">
 <li>A <a href="https://www.tldp.org/FAQ/Threads-FAQ/Types.html">thread</a> is subordinate unit of execution within a process</li>
 <li>Each process can have multiple threads each of which executes its respective machine code instructions simultaneously (as scheduled by the kernel)
@@ -122,9 +122,9 @@ schedules execution, which in turn depends on what else is happening on the comp
 </div>
 </div>
 
-<div id="outline-container-orgabe385e" class="outline-3">
-<h3 id="orgabe385e">Threads in Python</h3>
-<div class="outline-text-3" id="text-orgabe385e">
+<div id="outline-container-threads-in-python-2-P-2" class="outline-3">
+<h3 id="threads-in-python-2-P-2">Threads in Python</h3>
+<div class="outline-text-3" id="text-org3846cfa">
 <ol class="org-ol">
 <li>The most common python interpreter, CPython, implements a <a href="http://wiki.python.org/moin/GlobalInterpreterLock">Global Interpreter Lock (GIL)</a>
 <ul class="org-ul">
@@ -195,18 +195,18 @@ Thread 2 stores 1 in i
 </div>
 </div>
 
-<div id="outline-container-org58962b2" class="outline-2">
-<h2 id="org58962b2">Threads in rospy</h2>
-<div class="outline-text-2" id="text-org58962b2">
+<div id="outline-container-threads-in-rospy-1-P-1" class="outline-2">
+<h2 id="threads-in-rospy-1-P-1">Threads in rospy</h2>
+<div class="outline-text-2" id="text-org856f7c6">
 <p>
 The threading model for rospy is poorly documented by ROS
 The information here comes from my own explorations and discussion here <a href="https://answers.ros.org/question/9543/rospy-threading-model/">https://answers.ros.org/question/9543/rospy-threading-model/</a> (the whole series of answers).
 </p>
 </div>
 
-<div id="outline-container-org8c2ee78" class="outline-3">
-<h3 id="org8c2ee78">Timers</h3>
-<div class="outline-text-3" id="text-org8c2ee78">
+<div id="outline-container-timers-2-P-1" class="outline-3">
+<h3 id="timers-2-P-1">Timers</h3>
+<div class="outline-text-3" id="text-org1d29ebe">
 <ul class="org-ul">
 <li><code>rospy.Timer(Rate(hz), callback)</code> lets you execute a callback at a given frequency.</li>
 <li>Each timer runs in its own thread as soon as you create the timer.</li>
@@ -219,9 +219,9 @@ The timer will effectively only trigger once every 3 seconds</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org391692f" class="outline-3">
-<h3 id="org391692f">Subscribers</h3>
-<div class="outline-text-3" id="text-org391692f">
+<div id="outline-container-subscribers-2-P-1" class="outline-3">
+<h3 id="subscribers-2-P-1">Subscribers</h3>
+<div class="outline-text-3" id="text-org26763bc">
 <ul class="org-ul">
 <li>In rospy, it seems that each topic you subscribe to gets one thread per publisher.</li>
 <li>This means that a given subscriber callback can execute in different threads.</li>
@@ -230,18 +230,18 @@ The timer will effectively only trigger once every 3 seconds</li>
 </div>
 </div>
 
-<div id="outline-container-org8efdd77" class="outline-3">
-<h3 id="org8efdd77">Service Handlers</h3>
-<div class="outline-text-3" id="text-org8efdd77">
+<div id="outline-container-service-handlers-2-P-1" class="outline-3">
+<h3 id="service-handlers-2-P-1">Service Handlers</h3>
+<div class="outline-text-3" id="text-orgc50ef63">
 <ul class="org-ul">
 <li>Service Handlers execute in their own threads</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgf336de7" class="outline-3">
-<h3 id="orgf336de7">What this threading model means for you</h3>
-<div class="outline-text-3" id="text-orgf336de7">
+<div id="outline-container-what-this-threading-model-means-for-you-2-P-1" class="outline-3">
+<h3 id="what-this-threading-model-means-for-you-2-P-1">What this threading model means for you</h3>
+<div class="outline-text-3" id="text-org06e8c83">
 <ol class="org-ol">
 <li>Be aware that the callbacks you write may operate in a separate threads</li>
 <li>These threads are different from the main thread of your program</li>
@@ -264,9 +264,9 @@ One thread puts data onto the queue, the other thread reads it from the queue.</
 </div>
 </div>
 
-<div id="outline-container-org277bd25" class="outline-2">
-<h2 id="org277bd25">roscpp and threads</h2>
-<div class="outline-text-2" id="text-org277bd25">
+<div id="outline-container-roscpp-and-threads-1-P-1" class="outline-2">
+<h2 id="roscpp-and-threads-1-P-1">roscpp and threads</h2>
+<div class="outline-text-2" id="text-org7a57e67">
 <ol class="org-ol">
 <li>The thread model for ROS is different in python and in C++</li>
 <li>In roscpp, there is a single thread unless you explicitly create multiple threads</li>
@@ -278,9 +278,9 @@ therefore, you must be very careful when synchronizing threads</li>
 </div>
 </div>
 
-<div id="outline-container-org1232fd5" class="outline-2">
-<h2 id="org1232fd5">Threads Example</h2>
-<div class="outline-text-2" id="text-org1232fd5">
+<div id="outline-container-threads-example-1-P-1" class="outline-2">
+<h2 id="threads-example-1-P-1">Threads Example</h2>
+<div class="outline-text-2" id="text-orgcc21f9f">
 <ol class="org-ol">
 <li>Here is an interactive example for exploring threads in python <a href="https://github.com/m-elwin/me495_threads">Threads</a></li>
 </ol>

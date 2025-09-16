@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-12-04 Wed 21:56 -->
+<!-- 2025-09-16 Tue 13:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Introduction to Baxter and Sawyer</title>
@@ -21,70 +21,70 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org404f006">Overview</a>
+<li><a href="#overview-1-P-25">Overview</a>
 <ul>
-<li><a href="#org5c3b192">Documentation</a>
+<li><a href="#documentation-2-P-6">Documentation</a>
 <ul>
-<li><a href="#org9620e1d">Summary</a></li>
+<li><a href="#summary-3-P-1">Summary</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org24e42ce">Setup</a>
+<li><a href="#setup-1-P-4">Setup</a>
 <ul>
-<li><a href="#org643fea5">Installation</a></li>
-<li><a href="#org1d09027">Network</a></li>
-<li><a href="#orgeea3c30">Testing Your Setup</a></li>
-<li><a href="#org759c67d">Advanced Networking</a>
+<li><a href="#installation-2-P-4">Installation</a></li>
+<li><a href="#network-2-P-1">Network</a></li>
+<li><a href="#testing-your-setup-2-P-1">Testing Your Setup</a></li>
+<li><a href="#advanced-networking-2-P-1">Advanced Networking</a>
 <ul>
-<li><a href="#org25a79b0">SSH</a></li>
-<li><a href="#orge0c73b9">FSM</a></li>
+<li><a href="#ssh-3-P-1">SSH</a></li>
+<li><a href="#fsm-3-P-1">FSM</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orge56261c">Using the Robots</a></li>
-<li><a href="#org23b82b7">Programming the Robots</a>
+<li><a href="#using-the-robots-1-P-1">Using the Robots</a></li>
+<li><a href="#programming-the-robots-1-P-1">Programming the Robots</a>
 <ul>
-<li><a href="#orgcacf1f1">Baxter</a></li>
-<li><a href="#orgaba51a4">Sawyer</a></li>
-<li><a href="#org7dfbb1a">URDF for Baxter and Sawyer</a></li>
+<li><a href="#baxter-2-P-1">Baxter</a></li>
+<li><a href="#sawyer-2-P-1">Sawyer</a></li>
+<li><a href="#urdf-for-baxter-and-sawyer-2-P-1">URDF for Baxter and Sawyer</a></li>
 </ul>
 </li>
-<li><a href="#org2505541">Simulators</a></li>
-<li><a href="#orgca3870e">Series Elastic Actuators</a>
+<li><a href="#simulators-1-P-1">Simulators</a></li>
+<li><a href="#series-elastic-actuators-1-P-1">Series Elastic Actuators</a>
 <ul>
-<li><a href="#org34dc2b4">Thought Experiments</a>
+<li><a href="#thought-experiments-2-P-1">Thought Experiments</a>
 <ul>
-<li><a href="#org7fbb360">Regular Actuator</a></li>
-<li><a href="#org0397d9f">Series Elastic Actuator</a></li>
+<li><a href="#regular-actuator-3-P-1">Regular Actuator</a></li>
+<li><a href="#series-elastic-actuator-3-P-1">Series Elastic Actuator</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org8661a59">MoveIt for Baxter and Sawyer</a>
+<li><a href="#moveit-for-baxter-and-sawyer-1-P-1">MoveIt for Baxter and Sawyer</a>
 <ul>
-<li><a href="#orgc81c224">Important Configuration Files</a></li>
-<li><a href="#org3eec5c0">Launch Files</a></li>
-<li><a href="#orgbeec92e">Grasped Mass</a></li>
-<li><a href="#orgc3ac611">Trajectory Execution Speed</a></li>
-<li><a href="#org7e197ef">Joint Trajectory Action Server</a></li>
-<li><a href="#orgb50bc66">Collision</a></li>
-<li><a href="#org64eb0cc">Grasping</a></li>
-<li><a href="#org2e2056f">Fake Controller</a></li>
+<li><a href="#important-configuration-files-2-P-1">Important Configuration Files</a></li>
+<li><a href="#launch-files-2-P-1">Launch Files</a></li>
+<li><a href="#grasped-mass-2-P-1">Grasped Mass</a></li>
+<li><a href="#trajectory-execution-speed-2-P-1">Trajectory Execution Speed</a></li>
+<li><a href="#joint-trajectory-action-server-2-P-1">Joint Trajectory Action Server</a></li>
+<li><a href="#collision-2-P-1">Collision</a></li>
+<li><a href="#grasping-2-P-1">Grasping</a></li>
+<li><a href="#fake-controller-2-P-1">Fake Controller</a></li>
 </ul>
 </li>
-<li><a href="#orgadbbd36">Debugging Checklist</a>
+<li><a href="#debugging-checklist-1-P-1">Debugging Checklist</a>
 <ul>
-<li><a href="#org8a32e59">Moviet</a></li>
+<li><a href="#moviet-2-P-1">Moviet</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org404f006" class="outline-2">
-<h2 id="org404f006">Overview</h2>
-<div class="outline-text-2" id="text-org404f006">
+<div id="outline-container-overview-1-P-25" class="outline-2">
+<h2 id="overview-1-P-25">Overview</h2>
+<div class="outline-text-2" id="text-orgb66ec49">
 <p>
 The Baxter and Sawyer robots from <a href="http://rethinkrobotics.com">Rethink Robotics</a> are manufacturing robots designed to operate around people.
 Both robots use <a href="https://ieeexplore.ieee.org/document/525827">series elastic actuators (SEAs)</a> in all their joints, meaning that there is an elastic element (e.g., a spring) between the
@@ -96,9 +96,9 @@ gearbox and the joint. These actuators add mechanical compliance, enabling easie
 </p>
 </div>
 
-<div id="outline-container-org5c3b192" class="outline-3">
-<h3 id="org5c3b192">Documentation</h3>
-<div class="outline-text-3" id="text-org5c3b192">
+<div id="outline-container-documentation-2-P-6" class="outline-3">
+<h3 id="documentation-2-P-6">Documentation</h3>
+<div class="outline-text-3" id="text-orgc597313">
 <ul class="org-ul">
 <li><a href="https://sdk.rethinkrobotics.com/intera/Main_Page">Sawyer Wiki</a></li>
 <li><a href="https://sdk.rethinkrobotics.com/wiki/Home">Baxter Wiki</a></li>
@@ -107,9 +107,9 @@ gearbox and the joint. These actuators add mechanical compliance, enabling easie
 </ul>
 </div>
 
-<div id="outline-container-org9620e1d" class="outline-4">
-<h4 id="org9620e1d">Summary</h4>
-<div class="outline-text-4" id="text-org9620e1d">
+<div id="outline-container-summary-3-P-1" class="outline-4">
+<h4 id="summary-3-P-1">Summary</h4>
+<div class="outline-text-4" id="text-org814f1e7">
 <ul class="org-ul">
 <li>Arms
 <ul class="org-ul">
@@ -155,9 +155,9 @@ gearbox and the joint. These actuators add mechanical compliance, enabling easie
 </div>
 </div>
 
-<div id="outline-container-org24e42ce" class="outline-2">
-<h2 id="org24e42ce">Setup</h2>
-<div class="outline-text-2" id="text-org24e42ce">
+<div id="outline-container-setup-1-P-4" class="outline-2">
+<h2 id="setup-1-P-4">Setup</h2>
+<div class="outline-text-2" id="text-org711a926">
 <ul class="org-ul">
 <li>Baxter and Sawyer run <code>rosmaster</code> on their onboard computers.</li>
 <li>You run nodes on your computer that communicate with the remote <code>rosmaster</code></li>
@@ -170,9 +170,9 @@ gearbox and the joint. These actuators add mechanical compliance, enabling easie
 </div>
 
 
-<div id="outline-container-org643fea5" class="outline-3">
-<h3 id="org643fea5">Installation</h3>
-<div class="outline-text-3" id="text-org643fea5">
+<div id="outline-container-installation-2-P-4" class="outline-3">
+<h3 id="installation-2-P-4">Installation</h3>
+<div class="outline-text-3" id="text-org0d7370b">
 <ul class="org-ul">
 <li>The Baxter and Sawyer software is not released for <code>noetic</code> and in fact dates back to ROS <code>indigo</code></li>
 <li>Some code, especially for <code>baxter</code> has to be patched to work.
@@ -198,9 +198,9 @@ catkin_make
 </div>
 </div>
 
-<div id="outline-container-org1d09027" class="outline-3">
-<h3 id="org1d09027">Network</h3>
-<div class="outline-text-3" id="text-org1d09027">
+<div id="outline-container-network-2-P-1" class="outline-3">
+<h3 id="network-2-P-1">Network</h3>
+<div class="outline-text-3" id="text-org3948b2d">
 <ol class="org-ol">
 <li>You will connect to the robot via Ethernet. First, some one-time setup to install the profile</li>
 </ol>
@@ -255,9 +255,9 @@ unset ROS_HOSTNAME
 </div>
 </div>
 
-<div id="outline-container-orgeea3c30" class="outline-3">
-<h3 id="orgeea3c30">Testing Your Setup</h3>
-<div class="outline-text-3" id="text-orgeea3c30">
+<div id="outline-container-testing-your-setup-2-P-1" class="outline-3">
+<h3 id="testing-your-setup-2-P-1">Testing Your Setup</h3>
+<div class="outline-text-3" id="text-org8b23036">
 <ol class="org-ol">
 <li>Make sure you can ping 10.42.0.2, <code>baxter.local</code> and <code>sawyer.local</code>.</li>
 <li><p>
@@ -288,13 +288,13 @@ unset ROS_HOSTNAME
 </ol>
 </div>
 </div>
-<div id="outline-container-org759c67d" class="outline-3">
-<h3 id="org759c67d">Advanced Networking</h3>
-<div class="outline-text-3" id="text-org759c67d">
+<div id="outline-container-advanced-networking-2-P-1" class="outline-3">
+<h3 id="advanced-networking-2-P-1">Advanced Networking</h3>
+<div class="outline-text-3" id="text-advanced-networking-2-P-1">
 </div>
-<div id="outline-container-org25a79b0" class="outline-4">
-<h4 id="org25a79b0">SSH</h4>
-<div class="outline-text-4" id="text-org25a79b0">
+<div id="outline-container-ssh-3-P-1" class="outline-4">
+<h4 id="ssh-3-P-1">SSH</h4>
+<div class="outline-text-4" id="text-org637f76c">
 <ol class="org-ol">
 <li>You cannot ssh into the <code>sawyer</code>, Rethink has it locked down</li>
 <li>You can ssh into the baxter. Username <code>ruser</code> password <code>rethink</code>.
@@ -304,9 +304,9 @@ unset ROS_HOSTNAME
 </ol>
 </div>
 </div>
-<div id="outline-container-orge0c73b9" class="outline-4">
-<h4 id="orge0c73b9">FSM</h4>
-<div class="outline-text-4" id="text-orge0c73b9">
+<div id="outline-container-fsm-3-P-1" class="outline-4">
+<h4 id="fsm-3-P-1">FSM</h4>
+<div class="outline-text-4" id="text-orgfe4511b">
 <ol class="org-ol">
 <li>The field-service menu lets you change network settings on the baxter and the sawyer</li>
 <li>Students: Do not modify these settings without asking me first!</li>
@@ -318,9 +318,9 @@ the robot, which means that, regardless of anything else, your computer must be 
 </div>
 </div>
 
-<div id="outline-container-orge56261c" class="outline-2">
-<h2 id="orge56261c">Using the Robots</h2>
-<div class="outline-text-2" id="text-orge56261c">
+<div id="outline-container-using-the-robots-1-P-1" class="outline-2">
+<h2 id="using-the-robots-1-P-1">Using the Robots</h2>
+<div class="outline-text-2" id="text-org03f6cd0">
 <ol class="org-ol">
 <li>Whenever you are using the robots, be ready to press the E-Stop to prevent the robot from crashing into anything.</li>
 <li>Each robot has a power button.  Press it once to turn on, once to turn off; never hold the power button.</li>
@@ -348,9 +348,9 @@ if the robot is being left unattended it MUST be disabled.
 </div>
 </div>
 
-<div id="outline-container-org23b82b7" class="outline-2">
-<h2 id="org23b82b7">Programming the Robots</h2>
-<div class="outline-text-2" id="text-org23b82b7">
+<div id="outline-container-programming-the-robots-1-P-1" class="outline-2">
+<h2 id="programming-the-robots-1-P-1">Programming the Robots</h2>
+<div class="outline-text-2" id="text-org2061dd9">
 <p>
 Sawyer and Baxter are programmed using very similar interfaces; therefore,
 information for one robot often applies to the other.
@@ -362,9 +362,9 @@ Note: if you have your <code>ROS_MASTER_URI</code> and <code>ROS_IP</code> setup
 </p>
 </div>
 
-<div id="outline-container-orgcacf1f1" class="outline-3">
-<h3 id="orgcacf1f1">Baxter</h3>
-<div class="outline-text-3" id="text-orgcacf1f1">
+<div id="outline-container-baxter-2-P-1" class="outline-3">
+<h3 id="baxter-2-P-1">Baxter</h3>
+<div class="outline-text-3" id="text-org2607a49">
 <ul class="org-ul">
 <li><a href="https://sdk.rethinkrobotics.com/wiki/Robot_Components">Baxter Physical Hardware</a></li>
 <li><a href="https://sdk.rethinkrobotics.com/wiki/Home">Baxter SDK Wiki</a></li>
@@ -377,9 +377,9 @@ Note: if you have your <code>ROS_MASTER_URI</code> and <code>ROS_IP</code> setup
 </div>
 </div>
 
-<div id="outline-container-orgaba51a4" class="outline-3">
-<h3 id="orgaba51a4">Sawyer</h3>
-<div class="outline-text-3" id="text-orgaba51a4">
+<div id="outline-container-sawyer-2-P-1" class="outline-3">
+<h3 id="sawyer-2-P-1">Sawyer</h3>
+<div class="outline-text-3" id="text-org8da6e91">
 <ul class="org-ul">
 <li><a href="https://sdk.rethinkrobotics.com/intera/Hardware_Components">Sawyer Physical Hardware</a></li>
 <li><a href="https://sdk.rethinkrobotics.com/intera/Main_Page">Sawyer SDK Wiki</a></li>
@@ -390,9 +390,9 @@ Note: if you have your <code>ROS_MASTER_URI</code> and <code>ROS_IP</code> setup
 </div>
 </div>
 
-<div id="outline-container-org7dfbb1a" class="outline-3">
-<h3 id="org7dfbb1a">URDF for Baxter and Sawyer</h3>
-<div class="outline-text-3" id="text-org7dfbb1a">
+<div id="outline-container-urdf-for-baxter-and-sawyer-2-P-1" class="outline-3">
+<h3 id="urdf-for-baxter-and-sawyer-2-P-1">URDF for Baxter and Sawyer</h3>
+<div class="outline-text-3" id="text-org6f488e4">
 <ul class="org-ul">
 <li>Each robot has an internal URDF, with parameters that have been factory calibrated to account for manufacturing tolerances. 
 <ul class="org-ul">
@@ -431,9 +431,9 @@ of the URDF modified in real time.</li>
 </div>
 
 
-<div id="outline-container-org2505541" class="outline-2">
-<h2 id="org2505541">Simulators</h2>
-<div class="outline-text-2" id="text-org2505541">
+<div id="outline-container-simulators-1-P-1" class="outline-2">
+<h2 id="simulators-1-P-1">Simulators</h2>
+<div class="outline-text-2" id="text-orga60c7d7">
 <ul class="org-ul">
 <li><a href="https://sdk.rethinkrobotics.com/wiki/Baxter_Simulator">Baxter Gazebo</a>
 <ul class="org-ul">
@@ -458,9 +458,9 @@ order to connect to it</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgca3870e" class="outline-2">
-<h2 id="orgca3870e">Series Elastic Actuators</h2>
-<div class="outline-text-2" id="text-orgca3870e">
+<div id="outline-container-series-elastic-actuators-1-P-1" class="outline-2">
+<h2 id="series-elastic-actuators-1-P-1">Series Elastic Actuators</h2>
+<div class="outline-text-2" id="text-org19f355c">
 <p>
 The Baxter and Sawyer robots use Series Elastic Actuators (SEAs) at each joint.
 In a series elastic actuator, the motor drives a gearbox which is then connected
@@ -476,13 +476,13 @@ can be accomplished by controlling position (i.e, the displacement of the elasti
 </p>
 </div>
 
-<div id="outline-container-org34dc2b4" class="outline-3">
-<h3 id="org34dc2b4">Thought Experiments</h3>
-<div class="outline-text-3" id="text-org34dc2b4">
+<div id="outline-container-thought-experiments-2-P-1" class="outline-3">
+<h3 id="thought-experiments-2-P-1">Thought Experiments</h3>
+<div class="outline-text-3" id="text-thought-experiments-2-P-1">
 </div>
-<div id="outline-container-org7fbb360" class="outline-4">
-<h4 id="org7fbb360">Regular Actuator</h4>
-<div class="outline-text-4" id="text-org7fbb360">
+<div id="outline-container-regular-actuator-3-P-1" class="outline-4">
+<h4 id="regular-actuator-3-P-1">Regular Actuator</h4>
+<div class="outline-text-4" id="text-org52085a2">
 <p>
 Imagine you are holding a solid steel rod. The rod is stiff.
 As you move the rod around, its tip remains
@@ -501,9 +501,9 @@ Thus, a small error in position can cause a large force on the motor (your hand)
 </div>
 </div>
 
-<div id="outline-container-org0397d9f" class="outline-4">
-<h4 id="org0397d9f">Series Elastic Actuator</h4>
-<div class="outline-text-4" id="text-org0397d9f">
+<div id="outline-container-series-elastic-actuator-3-P-1" class="outline-4">
+<h4 id="series-elastic-actuator-3-P-1">Series Elastic Actuator</h4>
+<div class="outline-text-4" id="text-orgf27da81">
 <p>
 Now imagine that the tip of the rod is connected to your hand via a spring.  As you move your hand around, the tip will bounce around on the spring,
 unless you move really slowly.  Thus you experience lower positional bandwidth and precision for the location of the rod tip.
@@ -520,9 +520,9 @@ it can move the extra 0.001 inch easily: the spring will simply compress an amou
 </div>
 </div>
 
-<div id="outline-container-org8661a59" class="outline-2">
-<h2 id="org8661a59">MoveIt for Baxter and Sawyer</h2>
-<div class="outline-text-2" id="text-org8661a59">
+<div id="outline-container-moveit-for-baxter-and-sawyer-1-P-1" class="outline-2">
+<h2 id="moveit-for-baxter-and-sawyer-1-P-1">MoveIt for Baxter and Sawyer</h2>
+<div class="outline-text-2" id="text-org885266f">
 <ul class="org-ul">
 <li><a href="https://sdk.rethinkrobotics.com/wiki/MoveIt_Tutorial">Baxter MoveIt</a></li>
 <li>Baxter's moveit configuration is in the <code>moveit_robots</code> package
@@ -559,9 +559,9 @@ it can move the extra 0.001 inch easily: the spring will simply compress an amou
 </ul></li>
 </ul>
 </div>
-<div id="outline-container-orgc81c224" class="outline-3">
-<h3 id="orgc81c224">Important Configuration Files</h3>
-<div class="outline-text-3" id="text-orgc81c224">
+<div id="outline-container-important-configuration-files-2-P-1" class="outline-3">
+<h3 id="important-configuration-files-2-P-1">Important Configuration Files</h3>
+<div class="outline-text-3" id="text-org2afd95a">
 <ul class="org-ul">
 <li><code>baxter.srdf.xacro</code> / <code>sawyer.srdf.xacro</code>: Defines several "move groups", groups of joints that are controlled and planned for together.
 It requires several arguments to configure properly (for example, what grippers are installed)
@@ -588,9 +588,9 @@ its <a href="https://github.com/ros-planning/moveit_setup_assistant/blob/e301d25
 </div>
 </div>
 
-<div id="outline-container-org3eec5c0" class="outline-3">
-<h3 id="org3eec5c0">Launch Files</h3>
-<div class="outline-text-3" id="text-org3eec5c0">
+<div id="outline-container-launch-files-2-P-1" class="outline-3">
+<h3 id="launch-files-2-P-1">Launch Files</h3>
+<div class="outline-text-3" id="text-orgdc02e5d">
 <ul class="org-ul">
 <li><code>move_group.launch</code> is the main launch file that includes many of the other launch files and
 eventually loads the configuration</li>
@@ -609,18 +609,18 @@ eventually loads the configuration</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgbeec92e" class="outline-3">
-<h3 id="orgbeec92e">Grasped Mass</h3>
-<div class="outline-text-3" id="text-orgbeec92e">
+<div id="outline-container-grasped-mass-2-P-1" class="outline-3">
+<h3 id="grasped-mass-2-P-1">Grasped Mass</h3>
+<div class="outline-text-3" id="text-org0f07be6">
 <ul class="org-ul">
 <li>Baxter (and Sawyer) can compensate for the weight of grasped objects. For Baxter see <a href="http://sdk.rethinkrobotics.com/wiki/Gripper_Customization#Gripped_Object_mass">here</a>.
 For Sawyer, assume it works like Baxter and do your best; it is not documented as far as I know.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgc3ac611" class="outline-3">
-<h3 id="orgc3ac611">Trajectory Execution Speed</h3>
-<div class="outline-text-3" id="text-orgc3ac611">
+<div id="outline-container-trajectory-execution-speed-2-P-1" class="outline-3">
+<h3 id="trajectory-execution-speed-2-P-1">Trajectory Execution Speed</h3>
+<div class="outline-text-3" id="text-org44df5a2">
 <ul class="org-ul">
 <li>Especially at first, you will want your trajectories to move slowly</li>
 <li>Editing <code>joint_limits.yaml</code> is an effective hack for quick debugging, but ultimately that
@@ -638,9 +638,9 @@ trajectory can be used to slow down the speed of the trajectory. Here is some py
 </div>
 </div>
 
-<div id="outline-container-org7e197ef" class="outline-3">
-<h3 id="org7e197ef">Joint Trajectory Action Server</h3>
-<div class="outline-text-3" id="text-org7e197ef">
+<div id="outline-container-joint-trajectory-action-server-2-P-1" class="outline-3">
+<h3 id="joint-trajectory-action-server-2-P-1">Joint Trajectory Action Server</h3>
+<div class="outline-text-3" id="text-org6e2f4d4">
 <ul class="org-ul">
 <li>To use MoveIt with sawyer or baxter, you will want to have the Joint Trajectory Action Server running</li>
 <li>This server must be explicitly run</li>
@@ -650,9 +650,9 @@ if you wish to use a combination of rethink's API and moveit in your project</li
 </ul>
 </div>
 </div>
-<div id="outline-container-orgb50bc66" class="outline-3">
-<h3 id="orgb50bc66">Collision</h3>
-<div class="outline-text-3" id="text-orgb50bc66">
+<div id="outline-container-collision-2-P-1" class="outline-3">
+<h3 id="collision-2-P-1">Collision</h3>
+<div class="outline-text-3" id="text-orgdaaeca9">
 <ul class="org-ul">
 <li>It is a good idea to put some basic collision objects in your planning scene, such as the table</li>
 <li>The easiest way is to use <code>moveit_commander.PlanningSceneInterface()</code> in python.
@@ -668,9 +668,9 @@ if you wish to use a combination of rethink's API and moveit in your project</li
 </div>
 </div>
 
-<div id="outline-container-org64eb0cc" class="outline-3">
-<h3 id="org64eb0cc">Grasping</h3>
-<div class="outline-text-3" id="text-org64eb0cc">
+<div id="outline-container-grasping-2-P-1" class="outline-3">
+<h3 id="grasping-2-P-1">Grasping</h3>
+<div class="outline-text-3" id="text-org5f08738">
 <ul class="org-ul">
 <li>MoveIt Has the ability to do grasping and pick and place.</li>
 <li>It is difficult to get this working and may or may not be worth the effort</li>
@@ -678,9 +678,9 @@ if you wish to use a combination of rethink's API and moveit in your project</li
 </ul>
 </div>
 </div>
-<div id="outline-container-org2e2056f" class="outline-3">
-<h3 id="org2e2056f">Fake Controller</h3>
-<div class="outline-text-3" id="text-org2e2056f">
+<div id="outline-container-fake-controller-2-P-1" class="outline-3">
+<h3 id="fake-controller-2-P-1">Fake Controller</h3>
+<div class="outline-text-3" id="text-orgc204ea9">
 <ul class="org-ul">
 <li>For a Kinematic simulation rather than needing gazebo you can use the
 <a href="http://docs.ros.org/melodic/api/moveit_tutorials/html/doc/fake_controller_manager/fake_controller_manager_tutorial.html?highlight=fake">Fake Controller package</a></li>
@@ -693,9 +693,9 @@ when working on kinematic tasks.</li>
 </div>
 </div>
 </div>
-<div id="outline-container-orgadbbd36" class="outline-2">
-<h2 id="orgadbbd36">Debugging Checklist</h2>
-<div class="outline-text-2" id="text-orgadbbd36">
+<div id="outline-container-debugging-checklist-1-P-1" class="outline-2">
+<h2 id="debugging-checklist-1-P-1">Debugging Checklist</h2>
+<div class="outline-text-2" id="text-org6c83622">
 <ol class="org-ol">
 <li>Is the Robot On?</li>
 <li>Is the ethernet cable plugged in?</li>
@@ -710,9 +710,9 @@ when working on kinematic tasks.</li>
 </ul></li>
 </ol>
 </div>
-<div id="outline-container-org8a32e59" class="outline-3">
-<h3 id="org8a32e59">Moviet</h3>
-<div class="outline-text-3" id="text-org8a32e59">
+<div id="outline-container-moviet-2-P-1" class="outline-3">
+<h3 id="moviet-2-P-1">Moviet</h3>
+<div class="outline-text-3" id="text-orgf1c0cce">
 <ol class="org-ol">
 <li>Is the <code>joint_trajectory_action_server</code> running?</li>
 <li>Does the =SRDF and URDF match the actual robot

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-12-04 Wed 21:56 -->
+<!-- 2025-09-16 Tue 13:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Homework 4</title>
@@ -21,26 +21,26 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org13e6adb">Logistics</a></li>
-<li><a href="#org336e3a5">Navigation</a></li>
-<li><a href="#org407b907">The Environment</a></li>
-<li><a href="#org5eb7db7">Navigation Stack Setup</a>
+<li><a href="#logistics-1-P-3">Logistics</a></li>
+<li><a href="#navigation-1-P-1">Navigation</a></li>
+<li><a href="#the-environment-1-P-1">The Environment</a></li>
+<li><a href="#navigation-stack-setup-1-P-1">Navigation Stack Setup</a>
 <ul>
-<li><a href="#orgbb7fc0a">A Launch File</a></li>
-<li><a href="#orgf07b670">Autonomous Exploration</a>
+<li><a href="#a-launch-file-2-P-1">A Launch File</a></li>
+<li><a href="#autonomous-exploration-2-P-1">Autonomous Exploration</a>
 <ul>
-<li><a href="#org2e89294">Exploration Algorithm</a></li>
+<li><a href="#exploration-algorithm-3-P-1">Exploration Algorithm</a></li>
 </ul>
 </li>
-<li><a href="#org8b2fec7">README</a></li>
+<li><a href="#readme-2-P-2">README</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org13e6adb" class="outline-2">
-<h2 id="org13e6adb">Logistics</h2>
-<div class="outline-text-2" id="text-org13e6adb">
+<div id="outline-container-logistics-1-P-3" class="outline-2">
+<h2 id="logistics-1-P-3">Logistics</h2>
+<div class="outline-text-2" id="text-org986bc49">
 <ol class="org-ol">
 <li>Create a git repository using the link provided in Canvas.</li>
 <li>Your homework will be submitted via this git repository.</li>
@@ -51,18 +51,18 @@ you should turn-in, including information about your <code>README.md</code> file
 </div>
 </div>
 
-<div id="outline-container-org336e3a5" class="outline-2">
-<h2 id="org336e3a5">Navigation</h2>
-<div class="outline-text-2" id="text-org336e3a5">
+<div id="outline-container-navigation-1-P-1" class="outline-2">
+<h2 id="navigation-1-P-1">Navigation</h2>
+<div class="outline-text-2" id="text-org6d1e230">
 <ul class="org-ul">
 <li>The goal is to use the simulated robot to map an environment and then navigate within the map using the <a href="https://index.ros.org/p/slam_toolbox/github-SteveMacenski-slam_toolbox/#jazzy">slam_toolbox</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org407b907" class="outline-2">
-<h2 id="org407b907">The Environment</h2>
-<div class="outline-text-2" id="text-org407b907">
+<div id="outline-container-the-environment-1-P-1" class="outline-2">
+<h2 id="the-environment-1-P-1">The Environment</h2>
+<div class="outline-text-2" id="text-org749586b">
 <ul class="org-ul">
 <li>Clone the package <a href="https://github.com/m-elwin/nubot">nubot</a>, which is a package that simulates a mobile robot with a lidar in Gazebo.</li>
 <li>Your repository will be next to <code>nubot</code> in the source space as well: e.g.(<code>ws/src/nubot</code> and <code>ws/src/homework4</code>).</li>
@@ -73,9 +73,9 @@ you should turn-in, including information about your <code>README.md</code> file
 </div>
 </div>
 
-<div id="outline-container-org5eb7db7" class="outline-2">
-<h2 id="org5eb7db7">Navigation Stack Setup</h2>
-<div class="outline-text-2" id="text-org5eb7db7">
+<div id="outline-container-navigation-stack-setup-1-P-1" class="outline-2">
+<h2 id="navigation-stack-setup-1-P-1">Navigation Stack Setup</h2>
+<div class="outline-text-2" id="text-org4a6f70d">
 <ul class="org-ul">
 <li>Going through the <a href="https://docs.nav2.org/setup_guides/index.html">First Time Setup Guide</a> (through setting up the robot's footpring) will help you understand how the
 Nav2 stack works, and be helpful for this homework.</li>
@@ -84,9 +84,9 @@ Nav2 stack works, and be helpful for this homework.</li>
 </ul>
 </div>
 
-<div id="outline-container-orgbb7fc0a" class="outline-3">
-<h3 id="orgbb7fc0a">A Launch File</h3>
-<div class="outline-text-3" id="text-orgbb7fc0a">
+<div id="outline-container-a-launch-file-2-P-1" class="outline-3">
+<h3 id="a-launch-file-2-P-1">A Launch File</h3>
+<div class="outline-text-3" id="text-org3207532">
 <ul class="org-ul">
 <li>Your package will be called <code>nubot_nav</code></li>
 <li>In <code>nubot_nav</code>, write a launch file called <code>manual_explore.launch.xml</code> (or you can use a <code>python</code> launch file).
@@ -115,9 +115,9 @@ Nav2 stack works, and be helpful for this homework.</li>
 </div>
 </div>
 
-<div id="outline-container-orgf07b670" class="outline-3">
-<h3 id="orgf07b670">Autonomous Exploration</h3>
-<div class="outline-text-3" id="text-orgf07b670">
+<div id="outline-container-autonomous-exploration-2-P-1" class="outline-3">
+<h3 id="autonomous-exploration-2-P-1">Autonomous Exploration</h3>
+<div class="outline-text-3" id="text-org6827124">
 <ul class="org-ul">
 <li>Write a node called <code>explore</code> that causes the robot to explore the environment autonomously while mapping the world.</li>
 <li>The launchfile called <code>explore.launch.py</code> (or <code>.xml</code>) should start all the nodes necessary to allow the robot to explore and map its environment
@@ -129,9 +129,9 @@ Nav2 stack works, and be helpful for this homework.</li>
 </ul>
 </div>
 
-<div id="outline-container-org2e89294" class="outline-4">
-<h4 id="org2e89294">Exploration Algorithm</h4>
-<div class="outline-text-4" id="text-org2e89294">
+<div id="outline-container-exploration-algorithm-3-P-1" class="outline-4">
+<h4 id="exploration-algorithm-3-P-1">Exploration Algorithm</h4>
+<div class="outline-text-4" id="text-org1ba84ad">
 <p>
 You can use any algorithm you want, but it should be described or cited in your <code>README.md</code>.
 </p>
@@ -153,9 +153,9 @@ The algorithm will ideally enable the robot to explore at least two "rooms" in t
 </div>
 
 
-<div id="outline-container-org8b2fec7" class="outline-3">
-<h3 id="org8b2fec7">README</h3>
-<div class="outline-text-3" id="text-org8b2fec7">
+<div id="outline-container-readme-2-P-2" class="outline-3">
+<h3 id="readme-2-P-2">README</h3>
+<div class="outline-text-3" id="text-org731e2f1">
 <ul class="org-ul">
 <li>The <code>README.md</code> should contain your name, and a description or reference to the exploration algorithm used (the reference should be properly cited in <code>citations.txt</code>.</li>
 <li>It should also have the <code>ros2 launch</code> commands needed to run the manual and autonomous exploration</li>

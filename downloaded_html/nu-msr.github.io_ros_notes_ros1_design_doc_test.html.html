@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-12-04 Wed 21:56 -->
+<!-- 2025-09-16 Tue 13:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Testing, Documentation, and Design</title>
@@ -53,49 +53,49 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgd3b00c6">Testing</a>
+<li><a href="#testing-1-P-3">Testing</a>
 <ul>
-<li><a href="#orge980ff2">Unit Testing vs Integration Testing</a></li>
-<li><a href="#org2f10b23">Why Automating Testing</a>
+<li><a href="#unit-testing-vs-integration-testing-2-P-1">Unit Testing vs Integration Testing</a></li>
+<li><a href="#why-automating-testing-2-P-1">Why Automating Testing</a>
 <ul>
-<li><a href="#org5331850">Test Strategies</a></li>
+<li><a href="#test-strategies-3-P-1">Test Strategies</a></li>
 </ul>
 </li>
-<li><a href="#org5c46bee">Testing in ROS and Python</a></li>
-<li><a href="#org428ae61">Test as plain python Code</a></li>
-<li><a href="#orgb10f04e">Test a ROS node</a></li>
+<li><a href="#testing-in-ros-and-python-2-P-1">Testing in ROS and Python</a></li>
+<li><a href="#test-as-plain-python-code-2-P-1">Test as plain python Code</a></li>
+<li><a href="#test-a-ros-node-2-P-1">Test a ROS node</a></li>
 </ul>
 </li>
-<li><a href="#org0dcee77">Documentation</a>
+<li><a href="#documentation-1-P-6">Documentation</a>
 <ul>
-<li><a href="#org9e59b69">Quick Setup</a></li>
-<li><a href="#orga36ac90">Setup</a></li>
-<li><a href="#orgeb93504">Git</a></li>
+<li><a href="#quick-setup-2-P-1">Quick Setup</a></li>
+<li><a href="#setup-2-P-1">Setup</a></li>
+<li><a href="#git-2-P-3">Git</a></li>
 </ul>
 </li>
-<li><a href="#orgb2220f9">Design Guidelines</a></li>
-<li><a href="#org7f29e65">Node Design Patterns</a>
+<li><a href="#design-guidelines-1-P-2">Design Guidelines</a></li>
+<li><a href="#node-design-patterns-1-P-1">Node Design Patterns</a>
 <ul>
-<li><a href="#org44bd9d7">Reactive</a></li>
-<li><a href="#org7d94d40">Fixed</a></li>
-<li><a href="#org2f804e3">State Machine</a>
+<li><a href="#reactive-2-P-1">Reactive</a></li>
+<li><a href="#fixed-2-P-1">Fixed</a></li>
+<li><a href="#state-machine-2-P-1">State Machine</a>
 <ul>
-<li><a href="#org2183290">Traffic Light Example</a></li>
+<li><a href="#traffic-light-example-3-P-1">Traffic Light Example</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgcf7dd66">Example</a>
+<li><a href="#example-1-P-1">Example</a>
 <ul>
-<li><a href="#orge1e664c">Other Resources</a></li>
+<li><a href="#other-resources-2-P-1">Other Resources</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-orgd3b00c6" class="outline-2">
-<h2 id="orgd3b00c6">Testing</h2>
-<div class="outline-text-2" id="text-orgd3b00c6">
+<div id="outline-container-testing-1-P-3" class="outline-2">
+<h2 id="testing-1-P-3">Testing</h2>
+<div class="outline-text-2" id="text-org1a83139">
 <p>
 <i>Program testing can be used to show the presence of bugs, never to show their absence!</i> 
 </p>
@@ -104,9 +104,9 @@
 \(-\) Edsger Dijkstra
 </p>
 </div>
-<div id="outline-container-orge980ff2" class="outline-3">
-<h3 id="orge980ff2">Unit Testing vs Integration Testing</h3>
-<div class="outline-text-3" id="text-orge980ff2">
+<div id="outline-container-unit-testing-vs-integration-testing-2-P-1" class="outline-3">
+<h3 id="unit-testing-vs-integration-testing-2-P-1">Unit Testing vs Integration Testing</h3>
+<div class="outline-text-3" id="text-orgdf56e86">
 <ul class="org-ul">
 <li>Unit Testing usually refers to testing a single function</li>
 <li>Unit tests should ideally be run after every "compile" and can also be run after
@@ -120,9 +120,9 @@ and encompass a broader range of functionality</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org2f10b23" class="outline-3">
-<h3 id="org2f10b23">Why Automating Testing</h3>
-<div class="outline-text-3" id="text-org2f10b23">
+<div id="outline-container-why-automating-testing-2-P-1" class="outline-3">
+<h3 id="why-automating-testing-2-P-1">Why Automating Testing</h3>
+<div class="outline-text-3" id="text-org87678de">
 <ul class="org-ul">
 <li>Provides some level of assurance that your code is correct</li>
 <li>When your code changes, it helps you avoid breaking existing functionality</li>
@@ -131,9 +131,9 @@ and encompass a broader range of functionality</li>
 <li><a href="http://wiki.ros.org/Quality/Tutorials/UnitTesting">Why Test?</a></li>
 </ul>
 </div>
-<div id="outline-container-org5331850" class="outline-4">
-<h4 id="org5331850">Test Strategies</h4>
-<div class="outline-text-4" id="text-org5331850">
+<div id="outline-container-test-strategies-3-P-1" class="outline-4">
+<h4 id="test-strategies-3-P-1">Test Strategies</h4>
+<div class="outline-text-4" id="text-org2404153">
 <ul class="org-ul">
 <li>Write tests whenever you encounter a bug
 <ul class="org-ul">
@@ -150,9 +150,9 @@ and encompass a broader range of functionality</li>
 </div>
 </div>
 </div>
-<div id="outline-container-org5c46bee" class="outline-3">
-<h3 id="org5c46bee">Testing in ROS and Python</h3>
-<div class="outline-text-3" id="text-org5c46bee">
+<div id="outline-container-testing-in-ros-and-python-2-P-1" class="outline-3">
+<h3 id="testing-in-ros-and-python-2-P-1">Testing in ROS and Python</h3>
+<div class="outline-text-3" id="text-org123b57e">
 <ul class="org-ul">
 <li>Testing ROS python code involves several layers</li>
 <li>At its core, ROS uses the built-in python unit testing framework, <a href="https://docs.python.org/3/library/unittest.html">unittest</a></li>
@@ -176,9 +176,9 @@ in a format ROS understands (see <a href="http://wiki.ros.org/unittest">unittest
 </ul>
 </div>
 </div>
-<div id="outline-container-org428ae61" class="outline-3">
-<h3 id="org428ae61">Test as plain python Code</h3>
-<div class="outline-text-3" id="text-org428ae61">
+<div id="outline-container-test-as-plain-python-code-2-P-1" class="outline-3">
+<h3 id="test-as-plain-python-code-2-P-1">Test as plain python Code</h3>
+<div class="outline-text-3" id="text-orgcbc4d98">
 <ul class="org-ul">
 <li>Place your test in a <code>test/</code> directory</li>
 <li><p>
@@ -216,9 +216,9 @@ Add the test (if <code>CATKIN_ENABLE_TESTING</code> is true) in the <code>CMakeL
 </ul>
 </div>
 </div>
-<div id="outline-container-orgb10f04e" class="outline-3">
-<h3 id="orgb10f04e">Test a ROS node</h3>
-<div class="outline-text-3" id="text-orgb10f04e">
+<div id="outline-container-test-a-ros-node-2-P-1" class="outline-3">
+<h3 id="test-a-ros-node-2-P-1">Test a ROS node</h3>
+<div class="outline-text-3" id="text-orge1649e0">
 <ul class="org-ul">
 <li>Testing with ROS nodes is done with <a href="http://wiki.ros.org/rostest">rostest</a></li>
 <li><code>rostest</code> reads launchfiles, enabling you to create tests involving multiple nodes</li>
@@ -270,17 +270,17 @@ If you do create a service/subscriber after <code>rospy.init_node</code> has bee
 for example:
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span class="org-variable-name">srv</span> <span class="org-operator">=</span> rospy.Service(<span class="org-string">"myserve"</span>, Type, callback) <span class="org-comment-delimiter"># </span><span class="org-comment">create the service</span>
-<span class="org-keyword">self</span>.<span class="org-variable-name">i</span> <span class="org-operator">=</span> 2 <span class="org-comment-delimiter"># </span><span class="org-comment">it is possible that callback is called prior to this line!</span>
+<pre class="src src-python"><span class="org-variable-name">srv</span> <span class="org-operator">=</span> rospy.Service(<span class="org-string">"myserve"</span>, Type, callback) <span class="org-comment-delimiter"># </span><span class="org-comment">create the service
+</span><span class="org-keyword">self</span>.<span class="org-variable-name">i</span> <span class="org-operator">=</span> 2 <span class="org-comment-delimiter"># </span><span class="org-comment">it is possible that callback is called prior to this line!</span>
 </pre>
 </div></li>
 </ul>
 </div>
 </div>
 </div>
-<div id="outline-container-org0dcee77" class="outline-2">
-<h2 id="org0dcee77">Documentation</h2>
-<div class="outline-text-2" id="text-org0dcee77">
+<div id="outline-container-documentation-1-P-6" class="outline-2">
+<h2 id="documentation-1-P-6">Documentation</h2>
+<div class="outline-text-2" id="text-org3236acf">
 <ul class="org-ul">
 <li><a href="http://sphinx-doc.org/en/master">Sphinx</a> is a tool that converts docstrings in your python source code into well-formatted documentation
 <ul class="org-ul">
@@ -290,9 +290,9 @@ for example:
 <li>It also helps setup Sphinx appropriately for a ROS project</li>
 </ul>
 </div>
-<div id="outline-container-org9e59b69" class="outline-3">
-<h3 id="org9e59b69">Quick Setup</h3>
-<div class="outline-text-3" id="text-org9e59b69">
+<div id="outline-container-quick-setup-2-P-1" class="outline-3">
+<h3 id="quick-setup-2-P-1">Quick Setup</h3>
+<div class="outline-text-3" id="text-orgfc1bbd7">
 <ul class="org-ul">
 <li>Create a <code>doc</code> directory in your package</li>
 <li><p>
@@ -316,9 +316,9 @@ will then become a part of your project.</li>
 </div>
 </div>
 
-<div id="outline-container-orga36ac90" class="outline-3">
-<h3 id="orga36ac90">Setup</h3>
-<div class="outline-text-3" id="text-orga36ac90">
+<div id="outline-container-setup-2-P-1" class="outline-3">
+<h3 id="setup-2-P-1">Setup</h3>
+<div class="outline-text-3" id="text-org771f965">
 <p>
 These are more complete setup instructions that explain what I did to create the example <code>conf.py</code> file above.
 </p>
@@ -344,9 +344,9 @@ to annotate your functions using a hard-to-read format.</li>
 </div>
 </div>
 
-<div id="outline-container-orgeb93504" class="outline-3">
-<h3 id="orgeb93504">Git</h3>
-<div class="outline-text-3" id="text-orgeb93504">
+<div id="outline-container-git-2-P-3" class="outline-3">
+<h3 id="git-2-P-3">Git</h3>
+<div class="outline-text-3" id="text-org6ecc6dc">
 <ul class="org-ul">
 <li>Git is an important part of the documentation process</li>
 <li>Think of git as documentation for your collaborators (including your future-self)</li>
@@ -357,9 +357,9 @@ to annotate your functions using a hard-to-read format.</li>
 </div>
 </div>
 </div>
-<div id="outline-container-orgb2220f9" class="outline-2">
-<h2 id="orgb2220f9">Design Guidelines</h2>
-<div class="outline-text-2" id="text-orgb2220f9">
+<div id="outline-container-design-guidelines-1-P-2" class="outline-2">
+<h2 id="design-guidelines-1-P-2">Design Guidelines</h2>
+<div class="outline-text-2" id="text-orga702059">
 <p>
 ROS adds methods for abstraction beyond those provided by a programming language.
 When thinking about the design of a ROS system, here are some questions that often arise and
@@ -404,9 +404,9 @@ There is also a list of ROS design patterns <a href="https://wiki.ros.org/ROS/Pa
 </div>
 </div>
 
-<div id="outline-container-org7f29e65" class="outline-2">
-<h2 id="org7f29e65">Node Design Patterns</h2>
-<div class="outline-text-2" id="text-org7f29e65">
+<div id="outline-container-node-design-patterns-1-P-1" class="outline-2">
+<h2 id="node-design-patterns-1-P-1">Node Design Patterns</h2>
+<div class="outline-text-2" id="text-orgea1c735">
 <p>
 I often find myself writing two basic types of nodes in ROS which I call <i>reactive</i> and <i>fixed</i>.
 </p>
@@ -431,48 +431,48 @@ global, and in this pattern a single object implements everything.
 </p>
 </div>
 
-<div id="outline-container-org44bd9d7" class="outline-3">
-<h3 id="org44bd9d7">Reactive</h3>
-<div class="outline-text-3" id="text-org44bd9d7">
+<div id="outline-container-reactive-2-P-1" class="outline-3">
+<h3 id="reactive-2-P-1">Reactive</h3>
+<div class="outline-text-3" id="text-org22ac326">
 <p>
 Here is an example of a the reactive pattern, using a class.
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span class="org-comment-delimiter">#</span><span class="org-comment">!/usr/bin/env python</span>
-
+<pre class="src src-python"><span class="org-comment-delimiter">#</span><span class="org-comment">!/usr/bin/env python
+</span>
 <span class="org-keyword">import</span> rospy
-<span class="org-comment-delimiter"># </span><span class="org-comment">Other imports go here</span>
-
+<span class="org-comment-delimiter"># </span><span class="org-comment">Other imports go here
+</span>
 <span class="org-keyword">class</span> <span class="org-type">Node</span>:
-    <span class="org-doc">""" This class manages the node lifecycle </span>
-<span class="org-doc">        For bigger projects, I try to limit the scope of this node</span>
-<span class="org-doc">        to code that must directly interact with ROS and use classes </span>
-<span class="org-doc">        in a python package to manage everything</span>
-<span class="org-doc">    """</span>
+    <span class="org-doc">""" This class manages the node lifecycle 
+        For bigger projects, I try to limit the scope of this node
+        to code that must directly interact with ROS and use classes 
+        in a python package to manage everything
+    """</span>
     <span class="org-keyword">def</span> <span class="org-function-name">__init__</span>(<span class="org-keyword">self</span>):
         <span class="org-keyword">self</span>.<span class="org-variable-name">sub</span> <span class="org-operator">=</span> rospy.Subscriber(<span class="org-string">"topic"</span>, MyType, <span class="org-keyword">self</span>.callback)
-        <span class="org-comment-delimiter"># </span><span class="org-comment">Wait for a service to become available for creating a client</span>
-        rospy.wait_for_service(<span class="org-string">'helper_service'</span>)
+        <span class="org-comment-delimiter"># </span><span class="org-comment">Wait for a service to become available for creating a client
+</span>        rospy.wait_for_service(<span class="org-string">'helper_service'</span>)
         <span class="org-keyword">self</span>.<span class="org-variable-name">serv</span> <span class="org-operator">=</span> rospy.ServiceProxy(<span class="org-string">'helper_service'</span>, SomeType) 
-        <span class="org-keyword">self</span>.<span class="org-variable-name">pub</span> <span class="org-operator">=</span> rospy.Publisher(...) <span class="org-comment-delimiter"># </span><span class="org-comment">if you need a publisher</span>
-        <span class="org-keyword">self</span>.<span class="org-variable-name">other_var</span> <span class="org-operator">=</span> 2 <span class="org-comment-delimiter"># </span><span class="org-comment">if you need to share data between states</span>
-        rospy.init_node(<span class="org-string">'name'</span>)
+        <span class="org-keyword">self</span>.<span class="org-variable-name">pub</span> <span class="org-operator">=</span> rospy.Publisher(...) <span class="org-comment-delimiter"># </span><span class="org-comment">if you need a publisher
+</span>        <span class="org-keyword">self</span>.<span class="org-variable-name">other_var</span> <span class="org-operator">=</span> 2 <span class="org-comment-delimiter"># </span><span class="org-comment">if you need to share data between states
+</span>        rospy.init_node(<span class="org-string">'name'</span>)
 
     <span class="org-keyword">def</span> <span class="org-function-name">callback</span>(<span class="org-keyword">self</span>, msg):
         <span class="org-doc">""" This is the callback for the topic subscriber """</span>
-        <span class="org-comment-delimiter"># </span><span class="org-comment">Do calculations here</span>
-        <span class="org-comment-delimiter"># </span><span class="org-comment">Note that you can read and save state through the self variable</span>
-        <span class="org-comment-delimiter"># </span><span class="org-comment">and it is shared with other callbacks in this class;</span>
-        <span class="org-comment-delimiter"># </span><span class="org-comment">However, usually we just need to access the publisher here</span>
-        <span class="org-keyword">self</span>.<span class="org-variable-name">other_var</span> <span class="org-operator">=</span> <span class="org-keyword">self</span>.serv(...)
-        <span class="org-keyword">self</span>.pub(...) <span class="org-comment-delimiter"># </span><span class="org-comment">publish the message</span>
-
+        <span class="org-comment-delimiter"># </span><span class="org-comment">Do calculations here
+</span>        <span class="org-comment-delimiter"># </span><span class="org-comment">Note that you can read and save state through the self variable
+</span>        <span class="org-comment-delimiter"># </span><span class="org-comment">and it is shared with other callbacks in this class;
+</span>        <span class="org-comment-delimiter"># </span><span class="org-comment">However, usually we just need to access the publisher here
+</span>        <span class="org-keyword">self</span>.<span class="org-variable-name">other_var</span> <span class="org-operator">=</span> <span class="org-keyword">self</span>.serv(...)
+        <span class="org-keyword">self</span>.pub(...) <span class="org-comment-delimiter"># </span><span class="org-comment">publish the message
+</span>
 <span class="org-keyword">def</span> <span class="org-function-name">main</span>():
     <span class="org-doc">""" The main() function makes the code easier to import in the REPL"""</span>
     <span class="org-variable-name">n</span> <span class="org-operator">=</span> Node()
-    <span class="org-comment-delimiter"># </span><span class="org-comment">Spin is outside of the Node constructor</span>
-    <span class="org-comment-delimiter"># </span><span class="org-comment">This way the Node() object is fully constructed when it is used</span>
-    rospy.spin()
+    <span class="org-comment-delimiter"># </span><span class="org-comment">Spin is outside of the Node constructor
+</span>    <span class="org-comment-delimiter"># </span><span class="org-comment">This way the Node() object is fully constructed when it is used
+</span>    rospy.spin()
 
 
 <span class="org-keyword">if</span> <span class="org-builtin">__name__</span> <span class="org-operator">==</span> <span class="org-string">"__main__"</span>:
@@ -491,9 +491,9 @@ The example above could be made to not use a class by
 </ol>
 </div>
 </div>
-<div id="outline-container-org7d94d40" class="outline-3">
-<h3 id="org7d94d40">Fixed</h3>
-<div class="outline-text-3" id="text-org7d94d40">
+<div id="outline-container-fixed-2-P-1" class="outline-3">
+<h3 id="fixed-2-P-1">Fixed</h3>
+<div class="outline-text-3" id="text-orgff7470d">
 <p>
 For the fixed pattern the basic idea is that all calculation, and publishing
 occurs from the main timer callback.  The subscribers and services that are offered modify variables that are
@@ -509,61 +509,61 @@ multiple callbacks.</li>
 <pre class="src src-python"><span class="org-keyword">from</span> enum <span class="org-keyword">import</span> Enum, auto
 
 <span class="org-keyword">class</span> <span class="org-type">State</span>(Enum):
-    <span class="org-doc">""" The state of the control loop </span>
-<span class="org-doc">        These are different modes that the controller can be in</span>
-<span class="org-doc">    """</span>
+    <span class="org-doc">""" The state of the control loop 
+        These are different modes that the controller can be in
+    """</span>
     <span class="org-variable-name">RUNNING</span> <span class="org-operator">=</span> auto()
     <span class="org-variable-name">STOPPED</span> <span class="org-operator">=</span> auto()
 
 <span class="org-keyword">class</span> <span class="org-type">Node</span>:
     <span class="org-keyword">def</span> <span class="org-function-name">__init__</span>(<span class="org-keyword">self</span>):
-        <span class="org-comment-delimiter"># </span><span class="org-comment">We subscribe to sensor data</span>
-        <span class="org-keyword">self</span>.<span class="org-variable-name">sub</span> <span class="org-operator">=</span> rospy.Subscriber(<span class="org-string">"sensor"</span>, MySensor, feedback)
-        <span class="org-comment-delimiter"># </span><span class="org-comment">We publish a control signal</span>
-        <span class="org-keyword">self</span>.<span class="org-variable-name">pub</span> <span class="org-operator">=</span> rospy.Publisher(<span class="org-string">"control"</span>, ControlType)
+        <span class="org-comment-delimiter"># </span><span class="org-comment">We subscribe to sensor data
+</span>        <span class="org-keyword">self</span>.<span class="org-variable-name">sub</span> <span class="org-operator">=</span> rospy.Subscriber(<span class="org-string">"sensor"</span>, MySensor, feedback)
+        <span class="org-comment-delimiter"># </span><span class="org-comment">We publish a control signal
+</span>        <span class="org-keyword">self</span>.<span class="org-variable-name">pub</span> <span class="org-operator">=</span> rospy.Publisher(<span class="org-string">"control"</span>, ControlType)
 
-        <span class="org-comment-delimiter"># </span><span class="org-comment">Definie some services that become events in the internal state machine</span>
-        <span class="org-comment-delimiter"># </span><span class="org-comment">Stop the controller</span>
-        <span class="org-keyword">self</span>.<span class="org-variable-name">stop</span> <span class="org-operator">=</span> rospy.Service(<span class="org-string">"stop"</span>, EmptyType, stop_cback)
+        <span class="org-comment-delimiter"># </span><span class="org-comment">Definie some services that become events in the internal state machine
+</span>        <span class="org-comment-delimiter"># </span><span class="org-comment">Stop the controller
+</span>        <span class="org-keyword">self</span>.<span class="org-variable-name">stop</span> <span class="org-operator">=</span> rospy.Service(<span class="org-string">"stop"</span>, EmptyType, stop_cback)
         <span class="org-keyword">self</span>.<span class="org-variable-name">start</span> <span class="org-operator">=</span> rospy.Service(<span class="org-string">"start"</span>, IntType, start_cback)
         <span class="org-keyword">self</span>.<span class="org-variable-name">state</span> <span class="org-operator">=</span> State.STOPPED
         <span class="org-keyword">self</span>.<span class="org-variable-name">sensor</span> <span class="org-operator">=</span> 0
         <span class="org-keyword">self</span>.<span class="org-variable-name">goal</span> <span class="org-operator">=</span> 0
         rospy.init_node(<span class="org-string">'name'</span>)
 
-        <span class="org-comment-delimiter"># </span><span class="org-comment">The main loop runs in a timer (timers must be created after rospy.init_node() is called)</span>
-        <span class="org-keyword">self</span>.<span class="org-variable-name">tmr</span> <span class="org-operator">=</span> rospy.Timer(rospy.Duration(0.01), main_loop)
+        <span class="org-comment-delimiter"># </span><span class="org-comment">The main loop runs in a timer (timers must be created after rospy.init_node() is called)
+</span>        <span class="org-keyword">self</span>.<span class="org-variable-name">tmr</span> <span class="org-operator">=</span> rospy.Timer(rospy.Duration(0.01), main_loop)
 
     <span class="org-keyword">def</span> <span class="org-function-name">feedback</span>(<span class="org-keyword">self</span>, data):
-        <span class="org-doc">""" Subscribe to the sensor data and store it for use by the main loop</span>
-<span class="org-doc">        In this pattern, subscribers mainly just store data for the main loop</span>
-<span class="org-doc">        to use</span>
-<span class="org-doc">        """</span>
-        <span class="org-comment-delimiter"># </span><span class="org-comment">note: assignment of this source is atomic in python</span>
-        <span class="org-keyword">self</span>.<span class="org-variable-name">sensor</span> <span class="org-operator">=</span> data
+        <span class="org-doc">""" Subscribe to the sensor data and store it for use by the main loop
+        In this pattern, subscribers mainly just store data for the main loop
+        to use
+        """</span>
+        <span class="org-comment-delimiter"># </span><span class="org-comment">note: assignment of this source is atomic in python
+</span>        <span class="org-keyword">self</span>.<span class="org-variable-name">sensor</span> <span class="org-operator">=</span> data
 
     <span class="org-keyword">def</span> <span class="org-function-name">stop_cback</span>(<span class="org-keyword">self</span>, req):
         <span class="org-doc">""" Response to the stop service """</span>
-        <span class="org-comment-delimiter"># </span><span class="org-comment">Put the main loop into the Stopped state</span>
-        <span class="org-keyword">self</span>.<span class="org-variable-name">state</span> <span class="org-operator">=</span> State.Stopped
+        <span class="org-comment-delimiter"># </span><span class="org-comment">Put the main loop into the Stopped state
+</span>        <span class="org-keyword">self</span>.<span class="org-variable-name">state</span> <span class="org-operator">=</span> State.Stopped
         <span class="org-keyword">return</span> EmptyResponse()
 
     <span class="org-keyword">def</span> <span class="org-function-name">start_cback</span>(<span class="org-keyword">self</span>, req):
         <span class="org-doc">""" Response to the start service """</span>
-        <span class="org-comment-delimiter"># </span><span class="org-comment">Put the main loop into the RUNNING state</span>
-        <span class="org-keyword">self</span>.<span class="org-variable-name">state</span> <span class="org-operator">=</span> State.Running
+        <span class="org-comment-delimiter"># </span><span class="org-comment">Put the main loop into the RUNNING state
+</span>        <span class="org-keyword">self</span>.<span class="org-variable-name">state</span> <span class="org-operator">=</span> State.Running
         <span class="org-keyword">self</span>.<span class="org-variable-name">goal</span> <span class="org-operator">=</span> req.value
         <span class="org-keyword">return</span> EmptyResponse()
 
     <span class="org-keyword">def</span> <span class="org-function-name">main_loop</span>(<span class="org-keyword">self</span>, event):
-        <span class="org-doc">""" The main control loop timer callback</span>
+        <span class="org-doc">""" The main control loop timer callback
 
-<span class="org-doc">             Args:</span>
-<span class="org-doc">                event: A rospy.Timer event</span>
-<span class="org-doc">        """</span>
+             Args:
+                event: A rospy.Timer event
+        """</span>
         <span class="org-keyword">if</span> <span class="org-keyword">self</span>.state <span class="org-operator">==</span> State.STOPPED:
-            <span class="org-keyword">self</span>.pub(0) <span class="org-comment-delimiter"># </span><span class="org-comment">publish no control</span>
-        <span class="org-keyword">elif</span> <span class="org-keyword">self</span>.state <span class="org-operator">==</span> State.RUNNING:
+            <span class="org-keyword">self</span>.pub(0) <span class="org-comment-delimiter"># </span><span class="org-comment">publish no control
+</span>        <span class="org-keyword">elif</span> <span class="org-keyword">self</span>.state <span class="org-operator">==</span> State.RUNNING:
             <span class="org-variable-name">u</span> <span class="org-operator">=</span> compute_control(<span class="org-keyword">self</span>.goal, <span class="org-keyword">self</span>.sensor_value)
             <span class="org-keyword">self</span>.pub(u)
         <span class="org-keyword">else</span>:
@@ -573,9 +573,9 @@ multiple callbacks.</li>
 </div>
 </div>
 
-<div id="outline-container-org2f804e3" class="outline-3">
-<h3 id="org2f804e3">State Machine</h3>
-<div class="outline-text-3" id="text-org2f804e3">
+<div id="outline-container-state-machine-2-P-1" class="outline-3">
+<h3 id="state-machine-2-P-1">State Machine</h3>
+<div class="outline-text-3" id="text-orgafb1b7e">
 <p>
 When implementing the <i>main loop</i> you may find yourself with a complex tangle of <code>if</code> statement, checking various state variable.
 The logic can become quite complex. Often this can be simplified by using a Finite State Machine (FSM).
@@ -595,14 +595,14 @@ with an overall if statement.
 </p>
 </div>
 
-<details id="org2183290"><summary class="header-4">Traffic Light Example</summary>
-<div class="outline-text-4" id="text-org2183290">
+<details id="org45ab323"><summary class="header-4">Traffic Light Example</summary>
+<div class="outline-text-4" id="text-org45ab323">
 <p>
 Here is a graphical depiction of a FSM for a traffic light controller at the intersection of Sheridan Rd. and Noyes St.
 </p>
 
 
-<figure id="orgba32ba1">
+<figure id="org5866efd">
 <img src="./statemachine_trafficlights.svg" alt="statemachine_trafficlights.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 1: </span>State Machine for a Basic Traffic Light Controller</figcaption>
@@ -660,17 +660,17 @@ And identify the state transitions
 </div>
 
 
-<div id="outline-container-orgcf7dd66" class="outline-2">
-<h2 id="orgcf7dd66">Example</h2>
-<div class="outline-text-2" id="text-orgcf7dd66">
+<div id="outline-container-example-1-P-1" class="outline-2">
+<h2 id="example-1-P-1">Example</h2>
+<div class="outline-text-2" id="text-org291529d">
 <p>
 See <a href="http://github.com/m-elwin/me495_practices">github</a> for an example combining Sphinx documentation, unit testing, and integration testing.
 </p>
 </div>
 
-<div id="outline-container-orge1e664c" class="outline-3">
-<h3 id="orge1e664c">Other Resources</h3>
-<div class="outline-text-3" id="text-orge1e664c">
+<div id="outline-container-other-resources-2-P-1" class="outline-3">
+<h3 id="other-resources-2-P-1">Other Resources</h3>
+<div class="outline-text-3" id="text-org2a7cf30">
 <p>
 <a href="http://wiki.ros.org/rostest/Nodes">Standard Test Nodes</a> Some nodes that perform some standard tests
 <a href="http://wiki.ros.org/Quality/Tutorials">Tutorials on ROS Quality</a> 

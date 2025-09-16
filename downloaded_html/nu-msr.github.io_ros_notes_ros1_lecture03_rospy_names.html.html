@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-12-04 Wed 21:56 -->
+<!-- 2025-09-16 Tue 13:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Rospy and Naming</title>
@@ -21,19 +21,19 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgc3078d7">rospy</a>
+<li><a href="#rospy-1-P-1">rospy</a>
 <ul>
-<li><a href="#orgb2f0348">How to use</a></li>
-<li><a href="#orgee93b2f">Messages and Services in Python</a></li>
-<li><a href="#org6eea8a4">ROS API</a></li>
+<li><a href="#how-to-use-2-P-1">How to use</a></li>
+<li><a href="#messages-and-services-in-python-2-P-1">Messages and Services in Python</a></li>
+<li><a href="#ros-api-2-P-1">ROS API</a></li>
 </ul>
 </li>
-<li><a href="#org93159de">Naming in ROS</a>
+<li><a href="#naming-in-ros-1-P-1">Naming in ROS</a>
 <ul>
-<li><a href="#org158d298">What's in a name?</a></li>
-<li><a href="#org42fce3d">Understanding Names</a></li>
-<li><a href="#orgcb9aca6">Remapping</a></li>
-<li><a href="#orgdf977bd">Example</a></li>
+<li><a href="#what-s-in-a-name--2-P-1">What's in a name?</a></li>
+<li><a href="#understanding-names-2-P-1">Understanding Names</a></li>
+<li><a href="#remapping-2-P-1">Remapping</a></li>
+<li><a href="#example-2-P-4">Example</a></li>
 </ul>
 </li>
 </ul>
@@ -44,9 +44,9 @@ The python ROS client library rospy allows your python programs to interact with
 ROS uses a special naming convention to allow multiple ROS clients to communicate.
 </p>
 
-<div id="outline-container-orgc3078d7" class="outline-2">
-<h2 id="orgc3078d7">rospy</h2>
-<div class="outline-text-2" id="text-orgc3078d7">
+<div id="outline-container-rospy-1-P-1" class="outline-2">
+<h2 id="rospy-1-P-1">rospy</h2>
+<div class="outline-text-2" id="text-org8c117c3">
 <ul class="org-ul">
 <li>The <a href="https://wiki.ros.org/rospy">python client library</a> for ROS.</li>
 <li><a href="http://wiki.ros.org/rospy/Overview">Overview of Rospy</a></li>
@@ -56,9 +56,9 @@ ROS uses a special naming convention to allow multiple ROS clients to communicat
 </ul></li>
 </ul>
 </div>
-<div id="outline-container-orgb2f0348" class="outline-3">
-<h3 id="orgb2f0348">How to use</h3>
-<div class="outline-text-3" id="text-orgb2f0348">
+<div id="outline-container-how-to-use-2-P-1" class="outline-3">
+<h3 id="how-to-use-2-P-1">How to use</h3>
+<div class="outline-text-3" id="text-orgf9ddfe3">
 <p>
 Rospy is just like any other python library.
 </p>
@@ -79,9 +79,9 @@ Rospy is just like any other python library.
 </div>
 
 
-<div id="outline-container-orgee93b2f" class="outline-3">
-<h3 id="orgee93b2f">Messages and Services in Python</h3>
-<div class="outline-text-3" id="text-orgee93b2f">
+<div id="outline-container-messages-and-services-in-python-2-P-1" class="outline-3">
+<h3 id="messages-and-services-in-python-2-P-1">Messages and Services in Python</h3>
+<div class="outline-text-3" id="text-org15e3e6b">
 <p>
 When a package uses a custom <code>.msg</code> or <code>.srv</code> file, <code>catkin</code> generates python classes that
 encapsulates the data types used by the service.  The python package that is created
@@ -118,9 +118,9 @@ To use a service type <code>SType</code> defined in <code>srv/SType.srv</code> w
 </ol>
 </div>
 </div>
-<div id="outline-container-org6eea8a4" class="outline-3">
-<h3 id="org6eea8a4">ROS API</h3>
-<div class="outline-text-3" id="text-org6eea8a4">
+<div id="outline-container-ros-api-2-P-1" class="outline-3">
+<h3 id="ros-api-2-P-1">ROS API</h3>
+<div class="outline-text-3" id="text-orgf87c170">
 <ol class="org-ol">
 <li>The collection of services, publishers, subscribers, and parameters of a node is its ROS API</li>
 <li>These ROS inter-process communication mechanisms are how you link nodes together, much like
@@ -131,13 +131,13 @@ how modules, functions, and classes are used from within python.</li>
 </div>
 </div>
 
-<div id="outline-container-org93159de" class="outline-2">
-<h2 id="org93159de">Naming in ROS</h2>
-<div class="outline-text-2" id="text-org93159de">
+<div id="outline-container-naming-in-ros-1-P-1" class="outline-2">
+<h2 id="naming-in-ros-1-P-1">Naming in ROS</h2>
+<div class="outline-text-2" id="text-naming-in-ros-1-P-1">
 </div>
-<div id="outline-container-org158d298" class="outline-3">
-<h3 id="org158d298">What's in a name?</h3>
-<div class="outline-text-3" id="text-org158d298">
+<div id="outline-container-what-s-in-a-name--2-P-1" class="outline-3">
+<h3 id="what-s-in-a-name--2-P-1">What's in a name?</h3>
+<div class="outline-text-3" id="text-org95fbc68">
 <ol class="org-ol">
 <li>Every item in the ROS Computation Graph has a <a href="https://wiki.ros.org/Names">Graph Resource Name</a></li>
 <li>You manipulate names in ROS using <a href="http://wiki.ros.org/Remapping%20Arguments">Remapping</a>, which 
@@ -148,9 +148,9 @@ enables you to re-wire the computation graph and connect otherwise unrelated com
 </div>
 </div>
 
-<div id="outline-container-org42fce3d" class="outline-3">
-<h3 id="org42fce3d">Understanding Names</h3>
-<div class="outline-text-3" id="text-org42fce3d">
+<div id="outline-container-understanding-names-2-P-1" class="outline-3">
+<h3 id="understanding-names-2-P-1">Understanding Names</h3>
+<div class="outline-text-3" id="text-orgeaa7c11">
 <ol class="org-ol">
 <li>In ROS, every topic, parameter, and service has a <a href="https://wiki.ros.org/Names">Graph Resource Name</a></li>
 <li>Message Types, Service Types, and Node Types also have names that can be referred to by a similar mechanism:
@@ -211,9 +211,9 @@ enables you to re-wire the computation graph and connect otherwise unrelated com
 </ol>
 </div>
 </div>
-<div id="outline-container-orgcb9aca6" class="outline-3">
-<h3 id="orgcb9aca6">Remapping</h3>
-<div class="outline-text-3" id="text-orgcb9aca6">
+<div id="outline-container-remapping-2-P-1" class="outline-3">
+<h3 id="remapping-2-P-1">Remapping</h3>
+<div class="outline-text-3" id="text-org1f903ea">
 <ol class="org-ol">
 <li>Resources can be <i>remapped</i> to any name that you want
 <ul class="org-ul">
@@ -241,9 +241,9 @@ move your node and all its topics under a desired namespace</li>
 </div>
 </div>
 
-<div id="outline-container-orgdf977bd" class="outline-3">
-<h3 id="orgdf977bd">Example</h3>
-<div class="outline-text-3" id="text-orgdf977bd">
+<div id="outline-container-example-2-P-4" class="outline-3">
+<h3 id="example-2-P-4">Example</h3>
+<div class="outline-text-3" id="text-orgd97a89a">
 <p>
 Suppose we are referring to names from <code>node1</code>, which is in the namespace <code>ns1</code>.
 </p>

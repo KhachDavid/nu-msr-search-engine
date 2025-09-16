@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-12-04 Wed 21:56 -->
+<!-- 2025-09-16 Tue 13:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ROS Tf Activity</title>
@@ -21,61 +21,61 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgdde025e">Demonstration</a></li>
-<li><a href="#orgf7d6f81">Exercises</a>
+<li><a href="#demonstration-1-P-1">Demonstration</a></li>
+<li><a href="#exercises-1-P-2">Exercises</a>
 <ul>
-<li><a href="#orgd0136a9">Activity</a></li>
+<li><a href="#activity-2-P-1">Activity</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-orgdde025e" class="outline-2">
-<h2 id="orgdde025e">Demonstration</h2>
-<div class="outline-text-2" id="text-orgdde025e">
+<div id="outline-container-demonstration-1-P-1" class="outline-2">
+<h2 id="demonstration-1-P-1">Demonstration</h2>
+<div class="outline-text-2" id="text-org3b83f1f">
 <div class="org-src-container">
-<pre class="src src-bash"><span class="org-comment-delimiter"># </span><span class="org-comment">create the workspace and clone the repository and get set up</span>
-mkdir ws/src
+<pre class="src src-bash"><span class="org-comment-delimiter"># </span><span class="org-comment">create the workspace and clone the repository and get set up
+</span>mkdir ws/src
 <span class="org-builtin">cd</span> ws/src
 git clone https://github.com/m-elwin/me495_tf.git
 <span class="org-builtin">cd</span> ..
 catkin_make
 <span class="org-builtin">source</span> devel/setup.bash
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">run the broadcaster</span>
-roscore &amp;
+<span class="org-comment-delimiter"># </span><span class="org-comment">run the broadcaster
+</span>roscore &amp;
 rosrun me495_tf in_out &amp;
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">list the topics, notice the /tf and /tf_static</span>
-rostopic list
+<span class="org-comment-delimiter"># </span><span class="org-comment">list the topics, notice the /tf and /tf_static
+</span>rostopic list
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">use rqt_tf_tree to see the tf_tree</span>
-rosrun rqt_tf_tree rqt_tf_tree
+<span class="org-comment-delimiter"># </span><span class="org-comment">use rqt_tf_tree to see the tf_tree
+</span>rosrun rqt_tf_tree rqt_tf_tree
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">use tf_echo (from tf 1) to see translation between frame. C-c to quit</span>
-rosrun tf tf_echo right left
+<span class="org-comment-delimiter"># </span><span class="org-comment">use tf_echo (from tf 1) to see translation between frame. C-c to quit
+</span>rosrun tf tf_echo right left
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">run in rviz, set everything up correctly</span>
-rviz 
+<span class="org-comment-delimiter"># </span><span class="org-comment">run in rviz, set everything up correctly
+</span>rviz 
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">run in rviz, using my rviz config</span>
-rviz -d src/me495_tf/rviz/view.rviz
+<span class="org-comment-delimiter"># </span><span class="org-comment">run in rviz, using my rviz config
+</span>rviz -d src/me495_tf/rviz/view.rviz
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">run the tracker node</span>
-rosrun me495_tf tracker
+<span class="org-comment-delimiter"># </span><span class="org-comment">run the tracker node
+</span>rosrun me495_tf tracker
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgf7d6f81" class="outline-2">
-<h2 id="orgf7d6f81">Exercises</h2>
-<div class="outline-text-2" id="text-orgf7d6f81">
+<div id="outline-container-exercises-1-P-2" class="outline-2">
+<h2 id="exercises-1-P-2">Exercises</h2>
+<div class="outline-text-2" id="text-exercises-1-P-2">
 </div>
-<div id="outline-container-orgd0136a9" class="outline-3">
-<h3 id="orgd0136a9">Activity</h3>
-<div class="outline-text-3" id="text-orgd0136a9">
+<div id="outline-container-activity-2-P-1" class="outline-3">
+<h3 id="activity-2-P-1">Activity</h3>
+<div class="outline-text-3" id="text-org2c10c21">
 <ol class="org-ol">
 <li>Walk through the demonstration above, manually setting up rviz to display the transformations</li>
 <li>Modify <code>in_out</code> so that the base frame is dynamic, that is, it is broadcast from the regular broadcaster and

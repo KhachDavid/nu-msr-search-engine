@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-12-04 Wed 21:56 -->
+<!-- 2025-09-16 Tue 13:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Transforms in ROS</title>
@@ -53,29 +53,29 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org57cf0ed">Transforms</a>
+<li><a href="#transforms-1-P-1">Transforms</a>
 <ul>
-<li><a href="#orgbf1d2d2">Transform Tree</a></li>
+<li><a href="#transform-tree-2-P-1">Transform Tree</a></li>
 </ul>
 </li>
-<li><a href="#org26a6925">ROS Transform API</a>
+<li><a href="#ros-transform-api-1-P-1">ROS Transform API</a>
 <ul>
-<li><a href="#org2778b44">Listeners</a></li>
-<li><a href="#orgc7210df">Broadcasters</a></li>
-<li><a href="#org9dec365">Static frames</a></li>
-<li><a href="#org0263805">Datatypes and Representation</a></li>
+<li><a href="#-https-docs-ros-org-en-jazzy-tutorials-intermediate-tf2-writing-a-tf2-listener-py-html-listeners--2-P-1">Listeners</a></li>
+<li><a href="#-https-docs-ros-org-en-jazzy-tutorials-intermediate-tf2-writing-a-tf2-broadcaster-py-html-broadcasters--2-P-1">Broadcasters</a></li>
+<li><a href="#-https-docs-ros-org-en-jazzy-tutorials-intermediate-tf2-writing-a-tf2-static-broadcaster-py-html-static-frames--2-P-1">Static frames</a></li>
+<li><a href="#datatypes-and-representation-2-P-1">Datatypes and Representation</a></li>
 </ul>
 </li>
-<li><a href="#org0627065">Frame Conventions</a></li>
-<li><a href="#org34d0de1">Tools</a></li>
-<li><a href="#orgdf8c232">Tips and Tricks</a></li>
-<li><a href="#orgbc0934c">Other Resources</a></li>
+<li><a href="#frame-conventions-1-P-1">Frame Conventions</a></li>
+<li><a href="#tools-1-P-1">Tools</a></li>
+<li><a href="#tips-and-tricks-1-P-1">Tips and Tricks</a></li>
+<li><a href="#other-resources-1-P-1">Other Resources</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org57cf0ed" class="outline-2">
-<h2 id="org57cf0ed">Transforms</h2>
-<div class="outline-text-2" id="text-org57cf0ed">
+<div id="outline-container-transforms-1-P-1" class="outline-2">
+<h2 id="transforms-1-P-1">Transforms</h2>
+<div class="outline-text-2" id="text-org557b16f">
 <ul class="org-ul">
 <li>In robotics, the positions and orientations of objects
 (e.g., robots, sensors, and obstacles) are often expressed
@@ -88,9 +88,9 @@ is arbitrary, the right choice of frames can greatly simplify the math required<
 <li><a href="https://docs.ros.org/en/jazzy/Concepts/About-Tf2.html">Information about Transforms in ROS 2</a></li>
 </ul>
 </div>
-<div id="outline-container-orgbf1d2d2" class="outline-3">
-<h3 id="orgbf1d2d2">Transform Tree</h3>
-<div class="outline-text-3" id="text-orgbf1d2d2">
+<div id="outline-container-transform-tree-2-P-1" class="outline-3">
+<h3 id="transform-tree-2-P-1">Transform Tree</h3>
+<div class="outline-text-3" id="text-orgcf3767b">
 <ul class="org-ul">
 <li>In ROS, the transforms form a tree, with every node corresponding to a frame</li>
 <li>Every frame has one parent and an unlimited number of children</li>
@@ -103,9 +103,9 @@ is arbitrary, the right choice of frames can greatly simplify the math required<
 </div>
 </div>
 
-<div id="outline-container-org26a6925" class="outline-2">
-<h2 id="org26a6925">ROS Transform API</h2>
-<div class="outline-text-2" id="text-org26a6925">
+<div id="outline-container-ros-transform-api-1-P-1" class="outline-2">
+<h2 id="ros-transform-api-1-P-1">ROS Transform API</h2>
+<div class="outline-text-2" id="text-orgc5ed79f">
 <ul class="org-ul">
 <li>The transform (<i>tf</i>) tree is available on the <code>/tf</code> topic</li>
 <li>Any node can publish transforms on <code>/tf</code> or retrieve information from <code>/tf</code></li>
@@ -116,9 +116,9 @@ is arbitrary, the right choice of frames can greatly simplify the math required<
 </ul>
 </div>
 
-<div id="outline-container-org2778b44" class="outline-3">
-<h3 id="org2778b44"><a href="https://docs.ros.org/en/jazzy/Tutorials/Intermediate/Tf2/Writing-A-Tf2-Listener-Py.html">Listeners</a></h3>
-<div class="outline-text-3" id="text-org2778b44">
+<div id="outline-container--https-docs-ros-org-en-jazzy-tutorials-intermediate-tf2-writing-a-tf2-listener-py-html-listeners--2-P-1" class="outline-3">
+<h3 id="-https-docs-ros-org-en-jazzy-tutorials-intermediate-tf2-writing-a-tf2-listener-py-html-listeners--2-P-1"><a href="https://docs.ros.org/en/jazzy/Tutorials/Intermediate/Tf2/Writing-A-Tf2-Listener-Py.html">Listeners</a></h3>
+<div class="outline-text-3" id="text-org6345a25">
 <ul class="org-ul">
 <li>a <i>listener</i> subscribes to <code>/tf</code> and maintains a time-history of the received frames</li>
 <li>The buffer can then be queried for information about the transforms</li>
@@ -127,9 +127,9 @@ is arbitrary, the right choice of frames can greatly simplify the math required<
 </div>
 </div>
 
-<div id="outline-container-orgc7210df" class="outline-3">
-<h3 id="orgc7210df"><a href="https://docs.ros.org/en/jazzy/Tutorials/Intermediate/Tf2/Writing-A-Tf2-Broadcaster-Py.html">Broadcasters</a></h3>
-<div class="outline-text-3" id="text-orgc7210df">
+<div id="outline-container--https-docs-ros-org-en-jazzy-tutorials-intermediate-tf2-writing-a-tf2-broadcaster-py-html-broadcasters--2-P-1" class="outline-3">
+<h3 id="-https-docs-ros-org-en-jazzy-tutorials-intermediate-tf2-writing-a-tf2-broadcaster-py-html-broadcasters--2-P-1"><a href="https://docs.ros.org/en/jazzy/Tutorials/Intermediate/Tf2/Writing-A-Tf2-Broadcaster-Py.html">Broadcasters</a></h3>
+<div class="outline-text-3" id="text-orgc6550d5">
 <ul class="org-ul">
 <li>A <i>broadcaster</i> publishes frames to <code>/tf</code></li>
 <li>Multiple nodes can publish different frames to <code>/tf</code> and they will
@@ -146,9 +146,9 @@ that violates the tree structure.</li>
 </div>
 </div>
 
-<div id="outline-container-org9dec365" class="outline-3">
-<h3 id="org9dec365"><a href="https://docs.ros.org/en/jazzy/Tutorials/Intermediate/Tf2/Writing-A-Tf2-Static-Broadcaster-Py.html">Static frames</a></h3>
-<div class="outline-text-3" id="text-org9dec365">
+<div id="outline-container--https-docs-ros-org-en-jazzy-tutorials-intermediate-tf2-writing-a-tf2-static-broadcaster-py-html-static-frames--2-P-1" class="outline-3">
+<h3 id="-https-docs-ros-org-en-jazzy-tutorials-intermediate-tf2-writing-a-tf2-static-broadcaster-py-html-static-frames--2-P-1"><a href="https://docs.ros.org/en/jazzy/Tutorials/Intermediate/Tf2/Writing-A-Tf2-Static-Broadcaster-Py.html">Static frames</a></h3>
+<div class="outline-text-3" id="text-orge45a7f9">
 <ul class="org-ul">
 <li>Some frames do not change: these are known as <i>static frames</i></li>
 <li>Static frames can be broadcast to the <code>/tf_static</code> to consume less bandwidth</li>
@@ -158,9 +158,9 @@ will be sent to new subscribers.</li>
 </div>
 </div>
 
-<div id="outline-container-org0263805" class="outline-3">
-<h3 id="org0263805">Datatypes and Representation</h3>
-<div class="outline-text-3" id="text-org0263805">
+<div id="outline-container-datatypes-and-representation-2-P-1" class="outline-3">
+<h3 id="datatypes-and-representation-2-P-1">Datatypes and Representation</h3>
+<div class="outline-text-3" id="text-orge05c9b3">
 <ul class="org-ul">
 <li>A transformation consists of a Translation and a Rotation</li>
 <li>The main message type of a transformation is a <a href="https://github.com/ros2/common_interfaces/blob/jazzy/geometry_msgs/msg/TransformStamped.msg">geometry_msgs/msg/TransformStamped</a></li>
@@ -190,9 +190,9 @@ will be sent to new subscribers.</li>
 </div>
 </div>
 
-<div id="outline-container-org0627065" class="outline-2">
-<h2 id="org0627065">Frame Conventions</h2>
-<div class="outline-text-2" id="text-org0627065">
+<div id="outline-container-frame-conventions-1-P-1" class="outline-2">
+<h2 id="frame-conventions-1-P-1">Frame Conventions</h2>
+<div class="outline-text-2" id="text-orga3b4b23">
 <p>
 ROS follows a set of conventions for frames.
 </p>
@@ -221,9 +221,9 @@ converts points in <i>child_frame_id</i> to into the frame <i>frame_id</i></li>
 </div>
 </div>
 
-<div id="outline-container-org34d0de1" class="outline-2">
-<h2 id="org34d0de1">Tools</h2>
-<div class="outline-text-2" id="text-org34d0de1">
+<div id="outline-container-tools-1-P-1" class="outline-2">
+<h2 id="tools-1-P-1">Tools</h2>
+<div class="outline-text-2" id="text-org79bed14">
 <p>
 There are several <a href="https://docs.ros.org/en/jazzy/Tutorials/Intermediate/Tf2/Introduction-To-Tf2.html#tf2-tools">tools</a> that can be used to debug the transform tree.
 </p>
@@ -248,9 +248,9 @@ There are several <a href="https://docs.ros.org/en/jazzy/Tutorials/Intermediate/
 </div>
 </div>
 
-<div id="outline-container-orgdf8c232" class="outline-2">
-<h2 id="orgdf8c232">Tips and Tricks</h2>
-<div class="outline-text-2" id="text-orgdf8c232">
+<div id="outline-container-tips-and-tricks-1-P-1" class="outline-2">
+<h2 id="tips-and-tricks-1-P-1">Tips and Tricks</h2>
+<div class="outline-text-2" id="text-org49b7548">
 <ol class="org-ol">
 <li>The timing of the transforms you look up is crucial.
 <ul class="org-ul">
@@ -281,9 +281,9 @@ There are several <a href="https://docs.ros.org/en/jazzy/Tutorials/Intermediate/
 </div>
 </div>
 
-<div id="outline-container-orgbc0934c" class="outline-2">
-<h2 id="orgbc0934c">Other Resources</h2>
-<div class="outline-text-2" id="text-orgbc0934c">
+<div id="outline-container-other-resources-1-P-1" class="outline-2">
+<h2 id="other-resources-1-P-1">Other Resources</h2>
+<div class="outline-text-2" id="text-orgea3367a">
 <ul class="org-ul">
 <li>The activity that goes with this work can be found <a href="./activity/tf_activity.html">TF Activity</a></li>
 <li><a href="http://docs.ros.org/en/rolling/p/tf2_ros/">tf2_ros API Docs</a>

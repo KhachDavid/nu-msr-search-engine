@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-12-04 Wed 21:56 -->
+<!-- 2025-09-16 Tue 13:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ROS Control</title>
@@ -21,22 +21,22 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org18b15b6">Introduction</a></li>
-<li><a href="#org084f8c1">Documentation</a></li>
-<li><a href="#orge5b8d8e">Basic Architecture</a>
+<li><a href="#introduction-1-P-6">Introduction</a></li>
+<li><a href="#documentation-1-P-4">Documentation</a></li>
+<li><a href="#basic-architecture-1-P-2">Basic Architecture</a>
 <ul>
-<li><a href="#org0f6db58">Hardware Interface</a></li>
-<li><a href="#org2f1f038">Controller Layer</a></li>
-<li><a href="#org9568611">Controller Manager</a></li>
+<li><a href="#hardware-interface-2-P-2">Hardware Interface</a></li>
+<li><a href="#controller-layer-2-P-1">Controller Layer</a></li>
+<li><a href="#controller-manager-2-P-2">Controller Manager</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-org18b15b6" class="outline-2">
-<h2 id="org18b15b6">Introduction</h2>
-<div class="outline-text-2" id="text-org18b15b6">
+<div id="outline-container-introduction-1-P-6" class="outline-2">
+<h2 id="introduction-1-P-6">Introduction</h2>
+<div class="outline-text-2" id="text-org8fffb79">
 <p>
 The <a href="https://wiki.ros.org/ros_control">ROS control</a> package is a package designed to abstract away robot hardware
 and allow ROS to control many different robots in a uniform manner.
@@ -46,9 +46,9 @@ may be used to control a signal robot.
 </div>
 </div>
 
-<div id="outline-container-org084f8c1" class="outline-2">
-<h2 id="org084f8c1">Documentation</h2>
-<div class="outline-text-2" id="text-org084f8c1">
+<div id="outline-container-documentation-1-P-4" class="outline-2">
+<h2 id="documentation-1-P-4">Documentation</h2>
+<div class="outline-text-2" id="text-orgca08735">
 <ul class="org-ul">
 <li>The ROS control package is documented <a href="http://wiki.ros.org/ros_control">here</a> and on the <a href="https://github.com/ros-controls/ros_control/wiki">Github Wiki</a>.</li>
 <li>Sometimes the documentation links directly to source code</li>
@@ -57,13 +57,13 @@ may be used to control a signal robot.
 </div>
 
 
-<div id="outline-container-orge5b8d8e" class="outline-2">
-<h2 id="orge5b8d8e">Basic Architecture</h2>
-<div class="outline-text-2" id="text-orge5b8d8e">
+<div id="outline-container-basic-architecture-1-P-2" class="outline-2">
+<h2 id="basic-architecture-1-P-2">Basic Architecture</h2>
+<div class="outline-text-2" id="text-basic-architecture-1-P-2">
 </div>
-<div id="outline-container-org0f6db58" class="outline-3">
-<h3 id="org0f6db58">Hardware Interface</h3>
-<div class="outline-text-3" id="text-org0f6db58">
+<div id="outline-container-hardware-interface-2-P-2" class="outline-3">
+<h3 id="hardware-interface-2-P-2">Hardware Interface</h3>
+<div class="outline-text-3" id="text-org163d09e">
 <ol class="org-ol">
 <li>Robots often have low-level embedded systems running on microcontrollers that are responsible for actually controlling the motors.</li>
 <li>Robot manufactures implement communication between the PC and these microcontrollers using a standardized class interface:
@@ -80,9 +80,9 @@ may be used to control a signal robot.
 </ol>
 </div>
 </div>
-<div id="outline-container-org2f1f038" class="outline-3">
-<h3 id="org2f1f038">Controller Layer</h3>
-<div class="outline-text-3" id="text-org2f1f038">
+<div id="outline-container-controller-layer-2-P-1" class="outline-3">
+<h3 id="controller-layer-2-P-1">Controller Layer</h3>
+<div class="outline-text-3" id="text-org6033c38">
 <ol class="org-ol">
 <li>Higher-level controllers can be implemented in ROS directly</li>
 <li>These controllers interface with the actual robot via the Hardware Interface
@@ -112,9 +112,9 @@ for diff-drive robots.</li>
 </div>
 </div>
 
-<div id="outline-container-org9568611" class="outline-3">
-<h3 id="org9568611">Controller Manager</h3>
-<div class="outline-text-3" id="text-org9568611">
+<div id="outline-container-controller-manager-2-P-2" class="outline-3">
+<h3 id="controller-manager-2-P-2">Controller Manager</h3>
+<div class="outline-text-3" id="text-orgdd649f4">
 <ol class="org-ol">
 <li>There are many different controllers that can be used for a single robot</li>
 <li>The <a href="https://wiki.ros.org/controller_manager">Controller manager</a> enables users to load, unload, start, and stop controllers</li>

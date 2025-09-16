@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-12-04 Wed 21:56 -->
+<!-- 2025-09-16 Tue 13:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Emika Franka Panda Robot</title>
@@ -21,36 +21,36 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org72d2790">Introduction</a></li>
-<li><a href="#org3eb630e">Layers of Control</a></li>
-<li><a href="#orgfcbb3e8">Software Setup</a></li>
-<li><a href="#org815c4cd">Getting Started</a>
+<li><a href="#introduction-1-P-9">Introduction</a></li>
+<li><a href="#layers-of-control-1-P-2">Layers of Control</a></li>
+<li><a href="#software-setup-1-P-1">Software Setup</a></li>
+<li><a href="#getting-started-1-P-3">Getting Started</a>
 <ul>
-<li><a href="#orgdc782e6">Power On</a></li>
-<li><a href="#org6a3a2f5">The Web Interface</a></li>
-<li><a href="#orgd5f1d8f">Enabling ROS</a></li>
-<li><a href="#org00a7161">Using ROS</a>
+<li><a href="#power-on-2-P-2">Power On</a></li>
+<li><a href="#the-web-interface-2-P-2">The Web Interface</a></li>
+<li><a href="#enabling-ros-2-P-2">Enabling ROS</a></li>
+<li><a href="#using-ros-2-P-2">Using ROS</a>
 <ul>
-<li><a href="#org9356009">From Laptop</a></li>
-<li><a href="#orgc510773">From station</a></li>
-<li><a href="#org8b0e92c">From Laptop</a></li>
+<li><a href="#from-laptop-3-P-1">From Laptop</a></li>
+<li><a href="#from-station-3-P-1">From station</a></li>
+<li><a href="#from-laptop-3-P-2">From Laptop</a></li>
 </ul>
 </li>
-<li><a href="#orgde6b5bb">Enabling Device</a></li>
-<li><a href="#org362bc6d">Finished With Robot</a></li>
-<li><a href="#org701da01">Power Off</a></li>
+<li><a href="#enabling-device-2-P-2">Enabling Device</a></li>
+<li><a href="#finished-with-robot-2-P-2">Finished With Robot</a></li>
+<li><a href="#power-off-2-P-2">Power Off</a></li>
 </ul>
 </li>
-<li><a href="#orgd5cb52e">Robot Status Lights</a></li>
-<li><a href="#orgb31c171">Mechanical</a></li>
-<li><a href="#org92278ce">Resources</a></li>
+<li><a href="#robot-status-lights-1-P-2">Robot Status Lights</a></li>
+<li><a href="#mechanical-1-P-2">Mechanical</a></li>
+<li><a href="#resources-1-P-12">Resources</a></li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-org72d2790" class="outline-2">
-<h2 id="org72d2790">Introduction</h2>
-<div class="outline-text-2" id="text-org72d2790">
+<div id="outline-container-introduction-1-P-9" class="outline-2">
+<h2 id="introduction-1-P-9">Introduction</h2>
+<div class="outline-text-2" id="text-org6dabfd0">
 <p>
 The Emika Franka Panda robot is a 7-DOF robot arm with a 3kg max payload
 and full torque sensing at each joint.
@@ -66,9 +66,9 @@ it is possible to run your code on the workstation computers.
 </div>
 </div>
 
-<div id="outline-container-org3eb630e" class="outline-2">
-<h2 id="org3eb630e">Layers of Control</h2>
-<div class="outline-text-2" id="text-org3eb630e">
+<div id="outline-container-layers-of-control-1-P-2" class="outline-2">
+<h2 id="layers-of-control-1-P-2">Layers of Control</h2>
+<div class="outline-text-2" id="text-org333fc3f">
 <ol class="org-ol">
 <li>MoveIt: At the highest layer, the robot can be controlled
 through MoveIt and ROS.</li>
@@ -91,9 +91,9 @@ interactively placing the robot and storing its position.</li>
 </div>
 
 
-<div id="outline-container-orgfcbb3e8" class="outline-2">
-<h2 id="orgfcbb3e8">Software Setup</h2>
-<div class="outline-text-2" id="text-orgfcbb3e8">
+<div id="outline-container-software-setup-1-P-1" class="outline-2">
+<h2 id="software-setup-1-P-1">Software Setup</h2>
+<div class="outline-text-2" id="text-org49bf2ae">
 <p>
 These instructions are somewhat in flux, as the relevant
 franka and MoveIt packages are being updated for noetic.
@@ -138,13 +138,13 @@ catkin_make
 </ol>
 </div>
 </div>
-<div id="outline-container-org815c4cd" class="outline-2">
-<h2 id="org815c4cd">Getting Started</h2>
-<div class="outline-text-2" id="text-org815c4cd">
+<div id="outline-container-getting-started-1-P-3" class="outline-2">
+<h2 id="getting-started-1-P-3">Getting Started</h2>
+<div class="outline-text-2" id="text-getting-started-1-P-3">
 </div>
-<div id="outline-container-orgdc782e6" class="outline-3">
-<h3 id="orgdc782e6">Power On</h3>
-<div class="outline-text-3" id="text-orgdc782e6">
+<div id="outline-container-power-on-2-P-2" class="outline-3">
+<h3 id="power-on-2-P-2">Power On</h3>
+<div class="outline-text-3" id="text-org0ea4c34">
 <p>
 If the robot is off, you will need to turn it on (obviously!).
 </p>
@@ -165,9 +165,9 @@ If the robot is off, you will need to turn it on (obviously!).
 </div>
 </div>
 
-<div id="outline-container-org6a3a2f5" class="outline-3">
-<h3 id="org6a3a2f5">The Web Interface</h3>
-<div class="outline-text-3" id="text-org6a3a2f5">
+<div id="outline-container-the-web-interface-2-P-2" class="outline-3">
+<h3 id="the-web-interface-2-P-2">The Web Interface</h3>
+<div class="outline-text-3" id="text-orge059858">
 <ol class="org-ol">
 <li>Plug the ethernet cord into your computer.</li>
 <li>Make sure the enabling device is within reach and pressed down (robot is disabled)</li>
@@ -201,9 +201,9 @@ If the robot is off, you will need to turn it on (obviously!).
 </div>
 </div>
 
-<div id="outline-container-orgd5f1d8f" class="outline-3">
-<h3 id="orgd5f1d8f">Enabling ROS</h3>
-<div class="outline-text-3" id="text-orgd5f1d8f">
+<div id="outline-container-enabling-ros-2-P-2" class="outline-3">
+<h3 id="enabling-ros-2-P-2">Enabling ROS</h3>
+<div class="outline-text-3" id="text-org81a1fe8">
 <ol class="org-ol">
 <li>We need to relinquish web control of the robot to use ROS</li>
 <li>In the hamburger menu in the upper-right corner, select Activate Franka Control Interface (FCI)</li>
@@ -212,16 +212,16 @@ If the robot is off, you will need to turn it on (obviously!).
 </div>
 </div>
 
-<div id="outline-container-org00a7161" class="outline-3">
-<h3 id="org00a7161">Using ROS</h3>
-<div class="outline-text-3" id="text-org00a7161">
+<div id="outline-container-using-ros-2-P-2" class="outline-3">
+<h3 id="using-ros-2-P-2">Using ROS</h3>
+<div class="outline-text-3" id="text-orgca1f105">
 <ol class="org-ol">
 <li>The nodes that are responsible for controlling the robot and reading its sensor data should run on the workstation computer <sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></li>
 </ol>
 </div>
-<div id="outline-container-org9356009" class="outline-4">
-<h4 id="org9356009">From Laptop</h4>
-<div class="outline-text-4" id="text-org9356009">
+<div id="outline-container-from-laptop-3-P-1" class="outline-4">
+<h4 id="from-laptop-3-P-1">From Laptop</h4>
+<div class="outline-text-4" id="text-org883540f">
 <ol class="org-ol">
 <li>Make sure your <code>ROS_MASTER_URI</code> is <code>http://$(hostname):11311</code>, where <code>$(hostname)</code> is the name of your computer (you see <code>user@hostname at your command prompt</code>).
 <ul class="org-ul">
@@ -235,9 +235,9 @@ If the robot is off, you will need to turn it on (obviously!).
 </div>
 </div>
 
-<div id="outline-container-orgc510773" class="outline-4">
-<h4 id="orgc510773">From station</h4>
-<div class="outline-text-4" id="text-orgc510773">
+<div id="outline-container-from-station-3-P-1" class="outline-4">
+<h4 id="from-station-3-P-1">From station</h4>
+<div class="outline-text-4" id="text-org929bb4e">
 <ol class="org-ol">
 <li>Start the <code>franka_ros</code> controllers: <code>roslaunch franka_control franka_control.launch robot_ip:=robot.franka.de</code>
 <ul class="org-ul">
@@ -248,9 +248,9 @@ a robot_description into <code>rviz</code> to visualize the robot location.</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-org8b0e92c" class="outline-4">
-<h4 id="org8b0e92c">From Laptop</h4>
-<div class="outline-text-4" id="text-org8b0e92c">
+<div id="outline-container-from-laptop-3-P-2" class="outline-4">
+<h4 id="from-laptop-3-P-2">From Laptop</h4>
+<div class="outline-text-4" id="text-org328046d">
 <ol class="org-ol">
 <li><code>rosnode list</code> and <code>rostopic list</code> should now show several franka-related nodes and topics</li>
 <li>Start <code>moveit</code> with <code>roslaunch panda_moveit_config panda_control_moveit_rviz.launch launch_franka_control:=false robot_ip:=robot.franka.de</code></li>
@@ -262,9 +262,9 @@ a robot_description into <code>rviz</code> to visualize the robot location.</li>
 </div>
 </div>
 </div>
-<div id="outline-container-orgde6b5bb" class="outline-3">
-<h3 id="orgde6b5bb">Enabling Device</h3>
-<div class="outline-text-3" id="text-orgde6b5bb">
+<div id="outline-container-enabling-device-2-P-2" class="outline-3">
+<h3 id="enabling-device-2-P-2">Enabling Device</h3>
+<div class="outline-text-3" id="text-org1b48eb9">
 <ol class="org-ol">
 <li>If the robot is disabled (white lights) the robot will not move</li>
 <li>To enable the robot, twist the enabling device so it pops up. The robot lights should turn blue</li>
@@ -274,9 +274,9 @@ a robot_description into <code>rviz</code> to visualize the robot location.</li>
 </div>
 </div>
 
-<div id="outline-container-org362bc6d" class="outline-3">
-<h3 id="org362bc6d">Finished With Robot</h3>
-<div class="outline-text-3" id="text-org362bc6d">
+<div id="outline-container-finished-with-robot-2-P-2" class="outline-3">
+<h3 id="finished-with-robot-2-P-2">Finished With Robot</h3>
+<div class="outline-text-3" id="text-orgb55ced9">
 <p>
 Before you step away from the robot:
 </p>
@@ -290,9 +290,9 @@ Before you step away from the robot:
 </div>
 </div>
 
-<div id="outline-container-org701da01" class="outline-3">
-<h3 id="org701da01">Power Off</h3>
-<div class="outline-text-3" id="text-org701da01">
+<div id="outline-container-power-off-2-P-2" class="outline-3">
+<h3 id="power-off-2-P-2">Power Off</h3>
+<div class="outline-text-3" id="text-orgd0b3bc5">
 <ol class="org-ol">
 <li>In the <code>robot.franka.de</code> menu, select shutdown.</li>
 <li>Wait for the robot's lights to turn off and the fans in the control box to stop spinning</li>
@@ -303,9 +303,9 @@ Before you step away from the robot:
 </div>
 </div>
 
-<div id="outline-container-orgd5cb52e" class="outline-2">
-<h2 id="orgd5cb52e">Robot Status Lights</h2>
-<div class="outline-text-2" id="text-orgd5cb52e">
+<div id="outline-container-robot-status-lights-1-P-2" class="outline-2">
+<h2 id="robot-status-lights-1-P-2">Robot Status Lights</h2>
+<div class="outline-text-2" id="text-orged899d8">
 <ol class="org-ol">
 <li>Yellow: Robot is Locked. Do not attempt to move the arm, you can damage it.
 <ul class="org-ul">
@@ -340,18 +340,18 @@ Before you step away from the robot:
 </div>
 
 
-<div id="outline-container-orgb31c171" class="outline-2">
-<h2 id="orgb31c171">Mechanical</h2>
-<div class="outline-text-2" id="text-orgb31c171">
+<div id="outline-container-mechanical-1-P-2" class="outline-2">
+<h2 id="mechanical-1-P-2">Mechanical</h2>
+<div class="outline-text-2" id="text-org07d9cf2">
 <ol class="org-ol">
 <li>Franka World provides a full SolidWorks Model of the robot and also CAD for mounting cameras to the arm</li>
 </ol>
 </div>
 </div>
 
-<div id="outline-container-org92278ce" class="outline-2">
-<h2 id="org92278ce">Resources</h2>
-<div class="outline-text-2" id="text-org92278ce">
+<div id="outline-container-resources-1-P-12" class="outline-2">
+<h2 id="resources-1-P-12">Resources</h2>
+<div class="outline-text-2" id="text-org610eb3a">
 <ol class="org-ol">
 <li><a href="https://frankaemika.github.io/docs/">Software Documentation</a>
 <ul class="org-ul">

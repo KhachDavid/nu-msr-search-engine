@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-12-04 Wed 21:56 -->
+<!-- 2025-09-16 Tue 13:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ROS Control</title>
@@ -21,24 +21,24 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgec3e769">Introduction</a></li>
-<li><a href="#org04d8a83">Basic Architecture</a>
+<li><a href="#introduction-1-P-1">Introduction</a></li>
+<li><a href="#basic-architecture-1-P-1">Basic Architecture</a>
 <ul>
-<li><a href="#orgd19c028">Hardware Interface</a></li>
-<li><a href="#org6f167e9">Controllers</a></li>
-<li><a href="#org6db6830">Controller Manager</a></li>
-<li><a href="#org8b9a400">Resource Manager</a></li>
-<li><a href="#orge21b967">Hardware Description</a></li>
+<li><a href="#hardware-interface-2-P-1">Hardware Interface</a></li>
+<li><a href="#controllers-2-P-1">Controllers</a></li>
+<li><a href="#controller-manager-2-P-1">Controller Manager</a></li>
+<li><a href="#resource-manager-2-P-1">Resource Manager</a></li>
+<li><a href="#hardware-description-2-P-1">Hardware Description</a></li>
 </ul>
 </li>
-<li><a href="#org3748821">Practical Guide to Using ROS 2 Control</a></li>
+<li><a href="#practical-guide-to-using-ros-2-control-1-P-1">Practical Guide to Using ROS 2 Control</a></li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-orgec3e769" class="outline-2">
-<h2 id="orgec3e769">Introduction</h2>
-<div class="outline-text-2" id="text-orgec3e769">
+<div id="outline-container-introduction-1-P-1" class="outline-2">
+<h2 id="introduction-1-P-1">Introduction</h2>
+<div class="outline-text-2" id="text-org39516b9">
 <p>
 The <a href="https://control.ros.org/master/index.html">ROS 2 Control</a> package is a package designed to abstract away robot hardware
 and allow ROS to control many different robots in a uniform manner.
@@ -52,13 +52,13 @@ enforcing soft real-time constraints on the control loops.
 </div>
 </div>
 
-<div id="outline-container-org04d8a83" class="outline-2">
-<h2 id="org04d8a83">Basic Architecture</h2>
-<div class="outline-text-2" id="text-org04d8a83">
+<div id="outline-container-basic-architecture-1-P-1" class="outline-2">
+<h2 id="basic-architecture-1-P-1">Basic Architecture</h2>
+<div class="outline-text-2" id="text-basic-architecture-1-P-1">
 </div>
-<div id="outline-container-orgd19c028" class="outline-3">
-<h3 id="orgd19c028">Hardware Interface</h3>
-<div class="outline-text-3" id="text-orgd19c028">
+<div id="outline-container-hardware-interface-2-P-1" class="outline-3">
+<h3 id="hardware-interface-2-P-1">Hardware Interface</h3>
+<div class="outline-text-3" id="text-org3b02aea">
 <ol class="org-ol">
 <li>Robots often have low-level embedded systems running on microcontrollers that are responsible for:
 <ul class="org-ul">
@@ -79,9 +79,9 @@ enforcing soft real-time constraints on the control loops.
 </div>
 </div>
 
-<div id="outline-container-org6f167e9" class="outline-3">
-<h3 id="org6f167e9">Controllers</h3>
-<div class="outline-text-3" id="text-org6f167e9">
+<div id="outline-container-controllers-2-P-1" class="outline-3">
+<h3 id="controllers-2-P-1">Controllers</h3>
+<div class="outline-text-3" id="text-orgdf9d126">
 <ol class="org-ol">
 <li>Higher-level controllers can be implemented in ROS directly</li>
 <li>These controllers interface with the actual robot via the Hardware Interface
@@ -113,9 +113,9 @@ to make the robot follow a trajectory.</li>
 </div>
 </div>
 
-<div id="outline-container-org6db6830" class="outline-3">
-<h3 id="org6db6830">Controller Manager</h3>
-<div class="outline-text-3" id="text-org6db6830">
+<div id="outline-container-controller-manager-2-P-1" class="outline-3">
+<h3 id="controller-manager-2-P-1">Controller Manager</h3>
+<div class="outline-text-3" id="text-orgd790fcf">
 <ol class="org-ol">
 <li>There are many different controllers that can be used for a single robot</li>
 <li>The <a href="https://control.ros.org/master/doc/getting_started/getting_started.html#controller-manager">Controller Manager</a> enables users to load, unload, start, and stop controllers</li>
@@ -124,9 +124,9 @@ to make the robot follow a trajectory.</li>
 </div>
 </div>
 
-<div id="outline-container-org8b9a400" class="outline-3">
-<h3 id="org8b9a400">Resource Manager</h3>
-<div class="outline-text-3" id="text-org8b9a400">
+<div id="outline-container-resource-manager-2-P-1" class="outline-3">
+<h3 id="resource-manager-2-P-1">Resource Manager</h3>
+<div class="outline-text-3" id="text-org7d8517a">
 <ol class="org-ol">
 <li>ROS Control provides access to hardware <i>resources</i> which are managed by the <a href="https://control.ros.org/master/doc/getting_started/getting_started.html#resource-manager">Resource Manager</a></li>
 <li>The resource manager enables reading and writing to various hardware components</li>
@@ -135,9 +135,9 @@ to make the robot follow a trajectory.</li>
 </div>
 </div>
 
-<div id="outline-container-orge21b967" class="outline-3">
-<h3 id="orge21b967">Hardware Description</h3>
-<div class="outline-text-3" id="text-orge21b967">
+<div id="outline-container-hardware-description-2-P-1" class="outline-3">
+<h3 id="hardware-description-2-P-1">Hardware Description</h3>
+<div class="outline-text-3" id="text-org68757d6">
 <ol class="org-ol">
 <li>The philosophy of the ros2 control package is that the URDF should be a complete description of the robot</li>
 <li>Therefore, much of the ROS 2 control package requires setup using extensions to existing URDF tags, under <code>&lt;ros2_control&gt;</code></li>
@@ -146,9 +146,9 @@ to make the robot follow a trajectory.</li>
 </div>
 </div>
 
-<div id="outline-container-org3748821" class="outline-2">
-<h2 id="org3748821">Practical Guide to Using ROS 2 Control</h2>
-<div class="outline-text-2" id="text-org3748821">
+<div id="outline-container-practical-guide-to-using-ros-2-control-1-P-1" class="outline-2">
+<h2 id="practical-guide-to-using-ros-2-control-1-P-1">Practical Guide to Using ROS 2 Control</h2>
+<div class="outline-text-2" id="text-org440f67f">
 <p>
 The <a href="https://control.ros.org/master/doc/getting_started/getting_started.html">ROS 2 Control Getting Started</a> documentation provides an overview of the package.
 </p>

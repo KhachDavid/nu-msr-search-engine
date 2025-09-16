@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-12-04 Wed 21:56 -->
+<!-- 2025-09-16 Tue 13:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>3-D Sensing</title>
@@ -21,34 +21,34 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org6fd5f5f">Overview</a></li>
-<li><a href="#org689b76e">Depth Image</a>
+<li><a href="#overview-1-P-2">Overview</a></li>
+<li><a href="#depth-image-1-P-1">Depth Image</a>
 <ul>
-<li><a href="#org2b9be6c">Structured Light</a></li>
-<li><a href="#org2de20f0">Stereo Depth</a></li>
-<li><a href="#orgee1053c">Time of Flight</a></li>
+<li><a href="#structured-light-2-P-1">Structured Light</a></li>
+<li><a href="#stereo-depth-2-P-1">Stereo Depth</a></li>
+<li><a href="#time-of-flight-2-P-1">Time of Flight</a></li>
 </ul>
 </li>
-<li><a href="#org57acf65">Point Clouds</a>
+<li><a href="#point-clouds-1-P-1">Point Clouds</a>
 <ul>
-<li><a href="#orgc90956f">How To Point Cloud</a></li>
+<li><a href="#how-to-point-cloud-2-P-1">How To Point Cloud</a></li>
 </ul>
 </li>
-<li><a href="#org767d74a">Devices that Generate Point Clouds</a></li>
-<li><a href="#orgf47266b">Manipulating Point Clouds</a>
+<li><a href="#devices-that-generate-point-clouds-1-P-1">Devices that Generate Point Clouds</a></li>
+<li><a href="#manipulating-point-clouds-1-P-1">Manipulating Point Clouds</a>
 <ul>
-<li><a href="#org2a7fea6">ROS</a></li>
-<li><a href="#org6b69722">C++</a></li>
-<li><a href="#orgc821e43">Python</a></li>
+<li><a href="#ros-2-P-1">ROS</a></li>
+<li><a href="#c--2-P-1">C++</a></li>
+<li><a href="#python-2-P-1">Python</a></li>
 </ul>
 </li>
-<li><a href="#orge6f4de2">Resources</a></li>
+<li><a href="#resources-1-P-2">Resources</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org6fd5f5f" class="outline-2">
-<h2 id="org6fd5f5f">Overview</h2>
-<div class="outline-text-2" id="text-org6fd5f5f">
+<div id="outline-container-overview-1-P-2" class="outline-2">
+<h2 id="overview-1-P-2">Overview</h2>
+<div class="outline-text-2" id="text-org8f919ff">
 <p>
 There are many methods of providing 3-D sensor data to a robot, including ultrasound, sonar, radar, lidar, and stereo-vision.
 Here we specifically focus on various light (lidar or vision) based sensing modalities.
@@ -56,17 +56,17 @@ Here we specifically focus on various light (lidar or vision) based sensing moda
 </div>
 </div>
 
-<div id="outline-container-org689b76e" class="outline-2">
-<h2 id="org689b76e">Depth Image</h2>
-<div class="outline-text-2" id="text-org689b76e">
+<div id="outline-container-depth-image-1-P-1" class="outline-2">
+<h2 id="depth-image-1-P-1">Depth Image</h2>
+<div class="outline-text-2" id="text-orgcfb9b5c">
 <p>
 A depth image or depth map is a 2D dimensional image where each pixel value corresponds to the distance of an object from the camera.
 There are several methods for generating a depth image.
 </p>
 </div>
-<div id="outline-container-org2b9be6c" class="outline-3">
-<h3 id="org2b9be6c">Structured Light</h3>
-<div class="outline-text-3" id="text-org2b9be6c">
+<div id="outline-container-structured-light-2-P-1" class="outline-3">
+<h3 id="structured-light-2-P-1">Structured Light</h3>
+<div class="outline-text-3" id="text-orgd2b9522">
 <ol class="org-ol">
 <li>An active light emitter outputs a pattern</li>
 <li>Objects deform the pattern</li>
@@ -77,9 +77,9 @@ There are several methods for generating a depth image.
 </div>
 </div>
 
-<div id="outline-container-org2de20f0" class="outline-3">
-<h3 id="org2de20f0">Stereo Depth</h3>
-<div class="outline-text-3" id="text-org2de20f0">
+<div id="outline-container-stereo-depth-2-P-1" class="outline-3">
+<h3 id="stereo-depth-2-P-1">Stereo Depth</h3>
+<div class="outline-text-3" id="text-orgc936eb6">
 <ol class="org-ol">
 <li>Two images taken some known fixed distance apart</li>
 <li>By comparing the images taken from known different angles, the depth can be known</li>
@@ -90,9 +90,9 @@ There are several methods for generating a depth image.
 </ol>
 </div>
 </div>
-<div id="outline-container-orgee1053c" class="outline-3">
-<h3 id="orgee1053c">Time of Flight</h3>
-<div class="outline-text-3" id="text-orgee1053c">
+<div id="outline-container-time-of-flight-2-P-1" class="outline-3">
+<h3 id="time-of-flight-2-P-1">Time of Flight</h3>
+<div class="outline-text-3" id="text-org4054f89">
 <ul class="org-ul">
 <li>LiDar</li>
 <li>Measure depth by emitting light and timing how long it takes to reach the sensor</li>
@@ -103,9 +103,9 @@ There are several methods for generating a depth image.
 </div>
 
 
-<div id="outline-container-org57acf65" class="outline-2">
-<h2 id="org57acf65">Point Clouds</h2>
-<div class="outline-text-2" id="text-org57acf65">
+<div id="outline-container-point-clouds-1-P-1" class="outline-2">
+<h2 id="point-clouds-1-P-1">Point Clouds</h2>
+<div class="outline-text-2" id="text-org55b2981">
 <ul class="org-ul">
 <li>A Point Cloud is a group of 3 dimensional coordinates (points) that
 constitute a discrete description of 3-dimensional objects.</li>
@@ -115,9 +115,9 @@ constitute a discrete description of 3-dimensional objects.</li>
 </ul>
 </div>
 
-<div id="outline-container-orgc90956f" class="outline-3">
-<h3 id="orgc90956f">How To Point Cloud</h3>
-<div class="outline-text-3" id="text-orgc90956f">
+<div id="outline-container-how-to-point-cloud-2-P-1" class="outline-3">
+<h3 id="how-to-point-cloud-2-P-1">How To Point Cloud</h3>
+<div class="outline-text-3" id="text-org9677c11">
 <ol class="org-ol">
 <li>A depth map provides the distance from the camera in pixel coordinates</li>
 <li>Using a camera calibration, this depth map is converted into real-world x,y,z coordinates</li>
@@ -127,9 +127,9 @@ constitute a discrete description of 3-dimensional objects.</li>
 </div>
 </div>
 
-<div id="outline-container-org767d74a" class="outline-2">
-<h2 id="org767d74a">Devices that Generate Point Clouds</h2>
-<div class="outline-text-2" id="text-org767d74a">
+<div id="outline-container-devices-that-generate-point-clouds-1-P-1" class="outline-2">
+<h2 id="devices-that-generate-point-clouds-1-P-1">Devices that Generate Point Clouds</h2>
+<div class="outline-text-2" id="text-org4210783">
 <ul class="org-ul">
 <li>Lidars/Laser Scanners
 <a href="https://index.ros.org/p/velodyne/">Velodyne</a>
@@ -147,16 +147,16 @@ constitute a discrete description of 3-dimensional objects.</li>
 </div>
 </div>
 
-<div id="outline-container-orgf47266b" class="outline-2">
-<h2 id="orgf47266b">Manipulating Point Clouds</h2>
-<div class="outline-text-2" id="text-orgf47266b">
+<div id="outline-container-manipulating-point-clouds-1-P-1" class="outline-2">
+<h2 id="manipulating-point-clouds-1-P-1">Manipulating Point Clouds</h2>
+<div class="outline-text-2" id="text-org06f565d">
 <p>
 There are several ways of manipulating point clouds in ROS.
 </p>
 </div>
-<div id="outline-container-org2a7fea6" class="outline-3">
-<h3 id="org2a7fea6">ROS</h3>
-<div class="outline-text-3" id="text-org2a7fea6">
+<div id="outline-container-ros-2-P-1" class="outline-3">
+<h3 id="ros-2-P-1">ROS</h3>
+<div class="outline-text-3" id="text-org22f175d">
 <ul class="org-ul">
 <li>In ROS, point clouds are sent using the <a href="http://docs.ros.org/en/jazzy/p/sensor_msgs/interfaces/msg/PointCloud2.html">PointCloud2</a> messages
 <ul class="org-ul">
@@ -170,9 +170,9 @@ There are several ways of manipulating point clouds in ROS.
 </div>
 </div>
 
-<div id="outline-container-org6b69722" class="outline-3">
-<h3 id="org6b69722">C++</h3>
-<div class="outline-text-3" id="text-org6b69722">
+<div id="outline-container-c--2-P-1" class="outline-3">
+<h3 id="c--2-P-1">C++</h3>
+<div class="outline-text-3" id="text-orgbd16cc9">
 <ul class="org-ul">
 <li><a href="https://github.com/ros-perception/perception_pcl/tree/ros2/pcl_conversions">pcl_conversions</a> package also lets you convert point cloud messages into C++ data types for use with the <a href="https://pointclouds.org">Point Cloud Library</a>
 <ul class="org-ul">
@@ -184,9 +184,9 @@ There are several ways of manipulating point clouds in ROS.
 </div>
 
 
-<div id="outline-container-orgc821e43" class="outline-3">
-<h3 id="orgc821e43">Python</h3>
-<div class="outline-text-3" id="text-orgc821e43">
+<div id="outline-container-python-2-P-1" class="outline-3">
+<h3 id="python-2-P-1">Python</h3>
+<div class="outline-text-3" id="text-orgf03cb81">
 <ul class="org-ul">
 <li>The <a href="https://index.ros.org/p/sensor_msgs_py">sensor_msgs_py</a> package contains utilities for converting from PointCloud2 datatypes to numpy arrays</li>
 <li><p>
@@ -202,9 +202,9 @@ For details:
 </div>
 </div>
 </div>
-<div id="outline-container-orge6f4de2" class="outline-2">
-<h2 id="orge6f4de2">Resources</h2>
-<div class="outline-text-2" id="text-orge6f4de2">
+<div id="outline-container-resources-1-P-2" class="outline-2">
+<h2 id="resources-1-P-2">Resources</h2>
+<div class="outline-text-2" id="text-org37095dd">
 <p>
 <a href="https://www.intelrealsense.com/beginners-guide-to-depth/">Beginner's guide to depth</a>
 </p>

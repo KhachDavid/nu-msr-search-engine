@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-12-04 Wed 21:56 -->
+<!-- 2025-09-16 Tue 13:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ROS Tf Activity</title>
@@ -22,8 +22,8 @@
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
 <li><a href="#demo">Demonstration</a></li>
-<li><a href="#orgc622f86">Exercises</a></li>
-<li><a href="#org32ec918">Resources</a></li>
+<li><a href="#exercises-1-P-1">Exercises</a></li>
+<li><a href="#resources-1-P-4">Resources</a></li>
 </ul>
 </div>
 </nav>
@@ -32,45 +32,45 @@
 <h2 id="demo">Demonstration</h2>
 <div class="outline-text-2" id="text-demo">
 <div class="org-src-container">
-<pre class="src src-bash"><span class="org-comment-delimiter"># </span><span class="org-comment">create the workspace and clone the repository and get set up</span>
-mkdir -p ws/src
+<pre class="src src-bash"><span class="org-comment-delimiter"># </span><span class="org-comment">create the workspace and clone the repository and get set up
+</span>mkdir -p ws/src
 <span class="org-builtin">cd</span> ws/src
 git clone https://github.com/m-elwin/me495_tf.git -b ros2
 <span class="org-builtin">cd</span> ..
 colcon build --symlink-install
 <span class="org-builtin">source</span> install/setup.bash
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">run the broadcaster</span>
-ros2 run me495_tf in_out &amp;
+<span class="org-comment-delimiter"># </span><span class="org-comment">run the broadcaster
+</span>ros2 run me495_tf in_out &amp;
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">list the topics, notice the /tf and /tf_static</span>
-ros2 topic list
+<span class="org-comment-delimiter"># </span><span class="org-comment">list the topics, notice the /tf and /tf_static
+</span>ros2 topic list
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">use rqt_tf_tree to see the tf_tree</span>
-ros2 run tf2_tools view_frames
+<span class="org-comment-delimiter"># </span><span class="org-comment">use rqt_tf_tree to see the tf_tree
+</span>ros2 run tf2_tools view_frames
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Also can use rqt_tf_tree. Need to install the rqt_tf_tree package</span>
-ros2 run rqt_tf_tree rqt_tf_tree
+<span class="org-comment-delimiter"># </span><span class="org-comment">Also can use rqt_tf_tree. Need to install the rqt_tf_tree package
+</span>ros2 run rqt_tf_tree rqt_tf_tree
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">use tf_echo to see translation between frames. C-c to quit</span>
-ros2 run tf2_ros tf2_echo right left
+<span class="org-comment-delimiter"># </span><span class="org-comment">use tf_echo to see translation between frames. C-c to quit
+</span>ros2 run tf2_ros tf2_echo right left
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">run in rviz, set everything up correctly</span>
-rviz2
+<span class="org-comment-delimiter"># </span><span class="org-comment">run in rviz, set everything up correctly
+</span>rviz2
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">run in rviz, using my rviz config</span>
-rviz2 -d src/me495_tf/config/view.rviz
+<span class="org-comment-delimiter"># </span><span class="org-comment">run in rviz, using my rviz config
+</span>rviz2 -d src/me495_tf/config/view.rviz
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">run the tracker node</span>
-ros2 run me495_tf tracker
+<span class="org-comment-delimiter"># </span><span class="org-comment">run the tracker node
+</span>ros2 run me495_tf tracker
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgc622f86" class="outline-2">
-<h2 id="orgc622f86">Exercises</h2>
-<div class="outline-text-2" id="text-orgc622f86">
+<div id="outline-container-exercises-1-P-1" class="outline-2">
+<h2 id="exercises-1-P-1">Exercises</h2>
+<div class="outline-text-2" id="text-orgc4f08ba">
 <ol class="org-ol">
 <li>Walk through the demonstration above, manually setting up rviz to display the transformations</li>
 <li>Modify <code>in_out</code> so that the base frame is dynamic, that is, it is broadcast from the regular broadcaster and
@@ -82,9 +82,9 @@ not the static broadcaster.</li>
 </div>
 </div>
 
-<div id="outline-container-org32ec918" class="outline-2">
-<h2 id="org32ec918">Resources</h2>
-<div class="outline-text-2" id="text-org32ec918">
+<div id="outline-container-resources-1-P-4" class="outline-2">
+<h2 id="resources-1-P-4">Resources</h2>
+<div class="outline-text-2" id="text-orgb3a1cca">
 <p>
 <a href="../tf.html">TF Notes</a>
 </p>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-12-04 Wed 21:56 -->
+<!-- 2025-09-16 Tue 13:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Homework 3</title>
@@ -21,50 +21,50 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org35ff576">Logistics</a></li>
-<li><a href="#org34695c0">Part I: Gazebo Differential Drive Challenge (Individual)</a>
+<li><a href="#logistics-1-P-4">Logistics</a></li>
+<li><a href="#part-i-gazebo-differential-drive-challenge-individual--1-P-1">Part I: Gazebo Differential Drive Challenge (Individual)</a>
 <ul>
-<li><a href="#org6c44f1c">Package Structure</a></li>
-<li><a href="#org0bc4fbb">Creating the World</a></li>
-<li><a href="#org2943e90">The Xacro URDF</a>
+<li><a href="#package-structure-2-P-2">Package Structure</a></li>
+<li><a href="#creating-the-world-2-P-1">Creating the World</a></li>
+<li><a href="#the-xacro-urdf-2-P-1">The Xacro URDF</a>
 <ul>
-<li><a href="#org7750e7a">Robot Description</a></li>
-<li><a href="#orgbc32162">Gazebo Extensions</a></li>
-<li><a href="#orgc502304">Control</a></li>
+<li><a href="#robot-description-3-P-1">Robot Description</a></li>
+<li><a href="#gazebo-extensions-3-P-1">Gazebo Extensions</a></li>
+<li><a href="#control-3-P-1">Control</a></li>
 </ul>
 </li>
-<li><a href="#org2a1da48">Hints</a></li>
+<li><a href="#hints-2-P-2">Hints</a></li>
 </ul>
 </li>
-<li><a href="#orgf85b96e">Part II: Motion Planning Interface (Group)</a>
+<li><a href="#part-ii-motion-planning-interface-group--1-P-1">Part II: Motion Planning Interface (Group)</a>
 <ul>
-<li><a href="#org985238d">Group Organization</a>
+<li><a href="#group-organization-2-P-1">Group Organization</a>
 <ul>
-<li><a href="#orgb52226f">Dividing the Work</a></li>
-<li><a href="#org7fea994">Work Flow</a></li>
+<li><a href="#dividing-the-work-3-P-1">Dividing the Work</a></li>
+<li><a href="#work-flow-3-P-1">Work Flow</a></li>
 </ul>
 </li>
-<li><a href="#orgf80b86e">Motion Planning</a></li>
-<li><a href="#org5e8eb6e">Planning Scene</a></li>
-<li><a href="#orgb4adc9a">Robot State</a></li>
-<li><a href="#orgcfe7637">Integration</a></li>
-<li><a href="#org29bb2e9">Sample Task</a>
+<li><a href="#motion-planning-2-P-1">Motion Planning</a></li>
+<li><a href="#planning-scene-2-P-2">Planning Scene</a></li>
+<li><a href="#robot-state-2-P-1">Robot State</a></li>
+<li><a href="#integration-2-P-1">Integration</a></li>
+<li><a href="#sample-task-2-P-1">Sample Task</a>
 <ul>
-<li><a href="#orgc7dd808">Setting The Scene</a></li>
-<li><a href="#org2dfddea">The Node</a></li>
-<li><a href="#orgea709bc">The Launchfile</a></li>
-<li><a href="#org125340a">The Videos</a></li>
+<li><a href="#setting-the-scene-3-P-1">Setting The Scene</a></li>
+<li><a href="#the-node-3-P-1">The Node</a></li>
+<li><a href="#the-launchfile-3-P-1">The Launchfile</a></li>
+<li><a href="#the-videos-3-P-1">The Videos</a></li>
 </ul>
 </li>
-<li><a href="#org0555217">Testing and Documentation</a></li>
+<li><a href="#testing-and-documentation-2-P-1">Testing and Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org35ff576" class="outline-2">
-<h2 id="org35ff576">Logistics</h2>
-<div class="outline-text-2" id="text-org35ff576">
+<div id="outline-container-logistics-1-P-4" class="outline-2">
+<h2 id="logistics-1-P-4">Logistics</h2>
+<div class="outline-text-2" id="text-org7632949">
 <ol class="org-ol">
 <li>Create a git repository using the link provided in Canvas.</li>
 <li>Your homework will be submitted via this git repository.</li>
@@ -75,9 +75,9 @@ you should turn-in, including information about your <code>README.md</code> file
 </div>
 </div>
 
-<div id="outline-container-org34695c0" class="outline-2">
-<h2 id="org34695c0">Part I: Gazebo Differential Drive Challenge (Individual)</h2>
-<div class="outline-text-2" id="text-org34695c0">
+<div id="outline-container-part-i-gazebo-differential-drive-challenge-individual--1-P-1" class="outline-2">
+<h2 id="part-i-gazebo-differential-drive-challenge-individual--1-P-1">Part I: Gazebo Differential Drive Challenge (Individual)</h2>
+<div class="outline-text-2" id="text-orgff7f20e">
 <p>
 The challenge is to create a differential-drive robot that can be simulated in Gazebo and controlled by ROS.
 </p>
@@ -86,9 +86,9 @@ The challenge is to create a differential-drive robot that can be simulated in G
 <li>The robot will move through a world filled with Jersey Barriers and trash.</li>
 </ul>
 </div>
-<div id="outline-container-org6c44f1c" class="outline-3">
-<h3 id="org6c44f1c">Package Structure</h3>
-<div class="outline-text-3" id="text-org6c44f1c">
+<div id="outline-container-package-structure-2-P-2" class="outline-3">
+<h3 id="package-structure-2-P-2">Package Structure</h3>
+<div class="outline-text-3" id="text-org9b9701f">
 <p>
 The package should be called <code>diff_drive</code>
 In addition to the standard ROS directories, the package should be structured as
@@ -107,9 +107,9 @@ There is a hints section at the bottom of each section.
 </div>
 </div>
 
-<div id="outline-container-org0bc4fbb" class="outline-3">
-<h3 id="org0bc4fbb">Creating the World</h3>
-<div class="outline-text-3" id="text-org0bc4fbb">
+<div id="outline-container-creating-the-world-2-P-1" class="outline-3">
+<h3 id="creating-the-world-2-P-1">Creating the World</h3>
+<div class="outline-text-3" id="text-orgd4cec40">
 <ol class="org-ol">
 <li>Using models from <a href="https://app.gazebosim.org/fuel/models">Gazebo Fuel</a> (and optionally the resource spawner) create a world called <code>worlds/ddrive.world.sdf</code> with the following features
 <ul class="org-ul">
@@ -131,13 +131,13 @@ See <a href="../simulation.html#resource_spawner">Resource Spawner Notes</a> for
 </ol>
 </div>
 </div>
-<div id="outline-container-org2943e90" class="outline-3">
-<h3 id="org2943e90">The Xacro URDF</h3>
-<div class="outline-text-3" id="text-org2943e90">
+<div id="outline-container-the-xacro-urdf-2-P-1" class="outline-3">
+<h3 id="the-xacro-urdf-2-P-1">The Xacro URDF</h3>
+<div class="outline-text-3" id="text-the-xacro-urdf-2-P-1">
 </div>
-<div id="outline-container-org7750e7a" class="outline-4">
-<h4 id="org7750e7a">Robot Description</h4>
-<div class="outline-text-4" id="text-org7750e7a">
+<div id="outline-container-robot-description-3-P-1" class="outline-4">
+<h4 id="robot-description-3-P-1">Robot Description</h4>
+<div class="outline-text-4" id="text-orgebbc6d6">
 <ol class="org-ol">
 <li>The robot has a body consisting of a rectangular prism.  It has two cylindrical wheels on the front and a caster at the rear.
 <ul class="org-ul">
@@ -160,9 +160,9 @@ See <a href="../simulation.html#resource_spawner">Resource Spawner Notes</a> for
 </div>
 </div>
 
-<div id="outline-container-orgbc32162" class="outline-4">
-<h4 id="orgbc32162">Gazebo Extensions</h4>
-<div class="outline-text-4" id="text-orgbc32162">
+<div id="outline-container-gazebo-extensions-3-P-1" class="outline-4">
+<h4 id="gazebo-extensions-3-P-1">Gazebo Extensions</h4>
+<div class="outline-text-4" id="text-org2a0eb30">
 <ol class="org-ol">
 <li>Add the "Differential Drive" plugin to your robot, as appropriate (in the <code>ddrive.gazebo.xacro</code> file).</li>
 <li>Add a new <code>rviz</code> configuration that also shows the <code>odom</code> message in <code>rviz</code>.
@@ -178,9 +178,9 @@ See <a href="../simulation.html#resource_spawner">Resource Spawner Notes</a> for
 </ol>
 </div>
 </div>
-<div id="outline-container-orgc502304" class="outline-4">
-<h4 id="orgc502304">Control</h4>
-<div class="outline-text-4" id="text-orgc502304">
+<div id="outline-container-control-3-P-1" class="outline-4">
+<h4 id="control-3-P-1">Control</h4>
+<div class="outline-text-4" id="text-org5088161">
 <ol class="org-ol">
 <li>Write a node called <code>flip</code> that makes the robot move back and forth along a line by flipping over itself rather than turning.
 <ul class="org-ul">
@@ -194,9 +194,9 @@ See <a href="../simulation.html#resource_spawner">Resource Spawner Notes</a> for
 </div>
 </div>
 </div>
-<div id="outline-container-org2a1da48" class="outline-3">
-<h3 id="org2a1da48">Hints</h3>
-<div class="outline-text-3" id="text-org2a1da48">
+<div id="outline-container-hints-2-P-2" class="outline-3">
+<h3 id="hints-2-P-2">Hints</h3>
+<div class="outline-text-3" id="text-org679b9ff">
 <ol class="org-ol">
 <li>For this exercise, you may wish to use <code>xacro</code> macros to create the visual, collision, and inertial elements from a single set of
 parameters specifying the geometry and orientation of the link.
@@ -217,9 +217,9 @@ outputting the urdf file from the xacro file.</li>
 </div>
 
 
-<div id="outline-container-orgf85b96e" class="outline-2">
-<h2 id="orgf85b96e">Part II: Motion Planning Interface (Group)</h2>
-<div class="outline-text-2" id="text-orgf85b96e">
+<div id="outline-container-part-ii-motion-planning-interface-group--1-P-1" class="outline-2">
+<h2 id="part-ii-motion-planning-interface-group--1-P-1">Part II: Motion Planning Interface (Group)</h2>
+<div class="outline-text-2" id="text-org1fe59a6">
 <p>
 The ROS 2 API for motion planning revolves around actions, services, and topics provided by the <code>/move_group</code> node.
 However, filling in the appropriate messages, requests, and goals can become tedious.
@@ -235,9 +235,9 @@ to get a wider understanding of the project itself.
 </p>
 </div>
 
-<div id="outline-container-org985238d" class="outline-3">
-<h3 id="org985238d">Group Organization</h3>
-<div class="outline-text-3" id="text-org985238d">
+<div id="outline-container-group-organization-2-P-1" class="outline-3">
+<h3 id="group-organization-2-P-1">Group Organization</h3>
+<div class="outline-text-3" id="text-org72ea237">
 <ul class="org-ul">
 <li>This part is done in your final project groups and should be submitted as a single git repository via the link on canvas.</li>
 <li>Everyone is expected to contribute equally (as evidenced by commits and peer evaluations).</li>
@@ -252,9 +252,9 @@ familiar with ROS 2).
 </ul></li>
 </ul>
 </div>
-<div id="outline-container-orgb52226f" class="outline-4">
-<h4 id="orgb52226f">Dividing the Work</h4>
-<div class="outline-text-4" id="text-orgb52226f">
+<div id="outline-container-dividing-the-work-3-P-1" class="outline-4">
+<h4 id="dividing-the-work-3-P-1">Dividing the Work</h4>
+<div class="outline-text-4" id="text-org9d74b73">
 <ul class="org-ul">
 <li>I have divided the project into components that can be worked on mostly independently, once interfaces between them are designed.</li>
 <li>I have also rated the effort required for each task
@@ -262,17 +262,17 @@ familiar with ROS 2).
 <li>Each person should take on approximately 4 units of effort as their primary responsibility, and should also try to work on at least two areas.</li>
 <li>Each person should be available to help on any of the sections.</li>
 </ul></li>
-<li><a href="#orgf80b86e">Motion Planning</a>: 8 units</li>
-<li><a href="#org5e8eb6e">Planning Scene</a>: 2 units</li>
-<li><a href="#orgb4adc9a">Robot State</a>: 2 units</li>
-<li><a href="#orgcfe7637">Integration</a>: 4 units</li>
-<li><a href="#org29bb2e9">Sample Task</a> 4 units</li>
+<li><a href="#org4edde6f">Motion Planning</a>: 8 units</li>
+<li><a href="#org1d52bf1">Planning Scene</a>: 2 units</li>
+<li><a href="#orgae2d1a8">Robot State</a>: 2 units</li>
+<li><a href="#orgc835ac6">Integration</a>: 4 units</li>
+<li><a href="#org85503bd">Sample Task</a> 4 units</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org7fea994" class="outline-4">
-<h4 id="org7fea994">Work Flow</h4>
-<div class="outline-text-4" id="text-org7fea994">
+<div id="outline-container-work-flow-3-P-1" class="outline-4">
+<h4 id="work-flow-3-P-1">Work Flow</h4>
+<div class="outline-text-4" id="text-org9ec4462">
 <ol class="org-ol">
 <li>It makes sense to setup the project so that different people are working in different files.</li>
 <li>If one module depends on another, define the module boundaries early and implement stubs. Then fill in the stubs later.</li>
@@ -292,9 +292,9 @@ some basic functionality working.</li>
 </div>
 </div>
 
-<div id="outline-container-orgf80b86e" class="outline-3">
-<h3 id="orgf80b86e">Motion Planning</h3>
-<div class="outline-text-3" id="text-orgf80b86e">
+<div id="outline-container-motion-planning-2-P-1" class="outline-3">
+<h3 id="motion-planning-2-P-1">Motion Planning</h3>
+<div class="outline-text-3" id="text-org4edde6f">
 <p>
 Write a class called <code>MotionPlanner</code> that enables a user to:
 </p>
@@ -323,9 +323,9 @@ Write a class called <code>MotionPlanner</code> that enables a user to:
 </ol>
 </div>
 </div>
-<div id="outline-container-org5e8eb6e" class="outline-3">
-<h3 id="org5e8eb6e">Planning Scene</h3>
-<div class="outline-text-3" id="text-org5e8eb6e">
+<div id="outline-container-planning-scene-2-P-2" class="outline-3">
+<h3 id="planning-scene-2-P-2">Planning Scene</h3>
+<div class="outline-text-3" id="text-org1d52bf1">
 <p>
 Write a class called <code>PlanningScene</code> that enables a user to:
 </p>
@@ -338,9 +338,9 @@ Write a class called <code>PlanningScene</code> that enables a user to:
 </div>
 </div>
 
-<div id="outline-container-orgb4adc9a" class="outline-3">
-<h3 id="orgb4adc9a">Robot State</h3>
-<div class="outline-text-3" id="text-orgb4adc9a">
+<div id="outline-container-robot-state-2-P-1" class="outline-3">
+<h3 id="robot-state-2-P-1">Robot State</h3>
+<div class="outline-text-3" id="text-orgae2d1a8">
 <p>
 Write a class called <code>RobotState</code> that enables a user to:
 </p>
@@ -359,9 +359,9 @@ Write a class called <code>RobotState</code> that enables a user to:
 </div>
 </div>
 
-<div id="outline-container-orgcfe7637" class="outline-3">
-<h3 id="orgcfe7637">Integration</h3>
-<div class="outline-text-3" id="text-orgcfe7637">
+<div id="outline-container-integration-2-P-1" class="outline-3">
+<h3 id="integration-2-P-1">Integration</h3>
+<div class="outline-text-3" id="text-orgc835ac6">
 <p>
 The goal of integration is to combine the <code>MotionPlanner</code>, <code>PlanningScene</code>, and <code>RobotState</code> (referred to as <code>MotionPlanningInterface</code>)
 with each other and present it in a form that makes it easy to incorporate into a custom node (referred to as <code>UserNode</code>).
@@ -387,13 +387,13 @@ wait for the task to complete or initiate a task, work on something else, and ch
 </div>
 </div>
 
-<div id="outline-container-org29bb2e9" class="outline-3">
-<h3 id="org29bb2e9">Sample Task</h3>
-<div class="outline-text-3" id="text-org29bb2e9">
+<div id="outline-container-sample-task-2-P-1" class="outline-3">
+<h3 id="sample-task-2-P-1">Sample Task</h3>
+<div class="outline-text-3" id="text-sample-task-2-P-1">
 </div>
-<div id="outline-container-orgc7dd808" class="outline-4">
-<h4 id="orgc7dd808">Setting The Scene</h4>
-<div class="outline-text-4" id="text-orgc7dd808">
+<div id="outline-container-setting-the-scene-3-P-1" class="outline-4">
+<h4 id="setting-the-scene-3-P-1">Setting The Scene</h4>
+<div class="outline-text-4" id="text-org36c8f1a">
 <p>
 For this task you will assume full knowledge of locations and sizes of the following objects:
 </p>
@@ -405,9 +405,9 @@ For this task you will assume full knowledge of locations and sizes of the follo
 </div>
 </div>
 
-<div id="outline-container-org2dfddea" class="outline-4">
-<h4 id="org2dfddea">The Node</h4>
-<div class="outline-text-4" id="text-org2dfddea">
+<div id="outline-container-the-node-3-P-1" class="outline-4">
+<h4 id="the-node-3-P-1">The Node</h4>
+<div class="outline-text-4" id="text-org6ee38b7">
 <p>
 Write a node called <code>pick_node</code> that does the following in response to a call to it's <code>/pick</code> service:
 </p>
@@ -424,9 +424,9 @@ Write a node called <code>pick_node</code> that does the following in response t
 </div>
 </div>
 
-<div id="outline-container-orgea709bc" class="outline-4">
-<h4 id="orgea709bc">The Launchfile</h4>
-<div class="outline-text-4" id="text-orgea709bc">
+<div id="outline-container-the-launchfile-3-P-1" class="outline-4">
+<h4 id="the-launchfile-3-P-1">The Launchfile</h4>
+<div class="outline-text-4" id="text-orgac29283">
 <p>
 Write a launchfile called <code>pickplace.launch.{xml,py}</code> (your choice of <code>xml</code> or <code>python</code> that
 </p>
@@ -442,9 +442,9 @@ Write a launchfile called <code>pickplace.launch.{xml,py}</code> (your choice of
 </div>
 </div>
 
-<div id="outline-container-org125340a" class="outline-4">
-<h4 id="org125340a">The Videos</h4>
-<div class="outline-text-4" id="text-org125340a">
+<div id="outline-container-the-videos-3-P-1" class="outline-4">
+<h4 id="the-videos-3-P-1">The Videos</h4>
+<div class="outline-text-4" id="text-org246b8ea">
 <ul class="org-ul">
 <li>Take a screencast of the robot performing it's task in demonstration mode.</li>
 <li>Take a video of the the robot performing the task in the real world.</li>
@@ -455,9 +455,9 @@ Write a launchfile called <code>pickplace.launch.{xml,py}</code> (your choice of
 </div>
 
 
-<div id="outline-container-org0555217" class="outline-3">
-<h3 id="org0555217">Testing and Documentation</h3>
-<div class="outline-text-3" id="text-org0555217">
+<div id="outline-container-testing-and-documentation-2-P-1" class="outline-3">
+<h3 id="testing-and-documentation-2-P-1">Testing and Documentation</h3>
+<div class="outline-text-3" id="text-org77ffc53">
 <ol class="org-ol">
 <li>Write an integration test that uses the kinematic Franka simulation to command the <code>Franka Panda</code> robot to move from one pose to another and verify that the pose is achieved.</li>
 <li>Write an integration test, using the <code>Franka Panda</code> Robot demonstration that creates a planning scene object and attempts to move the robot into that object and verify that planning fails.</li>

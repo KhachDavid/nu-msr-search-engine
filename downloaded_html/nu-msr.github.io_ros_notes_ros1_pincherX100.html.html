@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-12-04 Wed 21:56 -->
+<!-- 2025-09-16 Tue 13:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>PincherX 100</title>
@@ -21,19 +21,19 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org0ce1490">Overview</a></li>
-<li><a href="#org3e09983">Installation</a></li>
-<li><a href="#org848c5b7">Documentation</a>
+<li><a href="#overview-1-P-19">Overview</a></li>
+<li><a href="#installation-1-P-2">Installation</a></li>
+<li><a href="#documentation-1-P-5">Documentation</a>
 <ul>
-<li><a href="#org0b2be11">Software</a></li>
+<li><a href="#software-2-P-1">Software</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org0ce1490" class="outline-2">
-<h2 id="org0ce1490">Overview</h2>
-<div class="outline-text-2" id="text-org0ce1490">
+<div id="outline-container-overview-1-P-19" class="outline-2">
+<h2 id="overview-1-P-19">Overview</h2>
+<div class="outline-text-2" id="text-org99e6567">
 <p>
 The <a href="https://www.trossenrobotics.com/pincherx-100-robot-arm.aspx">PincherX 100</a> is a small 5-DOF robot arm.
 The arm can be controlled through ROS or directly through its python API.
@@ -44,9 +44,9 @@ The arm can be controlled through ROS or directly through its python API.
 </ul>
 </div>
 </div>
-<div id="outline-container-org3e09983" class="outline-2">
-<h2 id="org3e09983">Installation</h2>
-<div class="outline-text-2" id="text-org3e09983">
+<div id="outline-container-installation-1-P-2" class="outline-2">
+<h2 id="installation-1-P-2">Installation</h2>
+<div class="outline-text-2" id="text-org8477363">
 <ol class="org-ol">
 <li>Install the <a href="./lecture00_preliminaries.html">Preliminaries</a></li>
 <li>Install the <a href="./realsense.html">Realsense Software</a></li>
@@ -55,25 +55,25 @@ The arm can be controlled through ROS or directly through its python API.
 Create a ROS workspace to compile ROS packages from source:
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span class="org-comment-delimiter"># </span><span class="org-comment">Create the workspace</span>
-mkdir -p ~/custom_ws/src
+<pre class="src src-bash"><span class="org-comment-delimiter"># </span><span class="org-comment">Create the workspace
+</span>mkdir -p ~/custom_ws/src
 <span class="org-builtin">cd</span> ~/custom_ws/src
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Clone the repositories</span>
-git clone https://github.com/Interbotix/interbotix_ros_core.git
+<span class="org-comment-delimiter"># </span><span class="org-comment">Clone the repositories
+</span>git clone https://github.com/Interbotix/interbotix_ros_core.git
 git clone https://github.com/Interbotix/interbotix_ros_manipulators.git -b noetic
 git clone https://github.com/Interbotix/interbotix_ros_toolboxes.git
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Remove some CATKIN_IGNORE files so we build these packages</span>
-find . -name CATKIN_IGNORE | xargs rm
+<span class="org-comment-delimiter"># </span><span class="org-comment">Remove some CATKIN_IGNORE files so we build these packages
+</span>find . -name CATKIN_IGNORE | xargs rm
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Install the udev rules for the arm</span>
-sudo cp interbotix_ros_core/interbotix_ros_xseries/interbotix_xs_sdk/99-interbotix-udev.rules /etc/udev/rules.d
+<span class="org-comment-delimiter"># </span><span class="org-comment">Install the udev rules for the arm
+</span>sudo cp interbotix_ros_core/interbotix_ros_xseries/interbotix_xs_sdk/99-interbotix-udev.rules /etc/udev/rules.d
 sudo udevadm control --reload-rules
 sudo udevadm trigger
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Install remaining depenencies and build the workspace</span>
-rosdep install --from-paths src --ignore-src -r -y
+<span class="org-comment-delimiter"># </span><span class="org-comment">Install remaining depenencies and build the workspace
+</span>rosdep install --from-paths src --ignore-src -r -y
 catkin_make
 </pre>
 </div></li>
@@ -86,13 +86,13 @@ catkin_make
 </div>
 
 
-<div id="outline-container-org848c5b7" class="outline-2">
-<h2 id="org848c5b7">Documentation</h2>
-<div class="outline-text-2" id="text-org848c5b7">
+<div id="outline-container-documentation-1-P-5" class="outline-2">
+<h2 id="documentation-1-P-5">Documentation</h2>
+<div class="outline-text-2" id="text-documentation-1-P-5">
 </div>
-<div id="outline-container-org0b2be11" class="outline-3">
-<h3 id="org0b2be11">Software</h3>
-<div class="outline-text-3" id="text-org0b2be11">
+<div id="outline-container-software-2-P-1" class="outline-3">
+<h3 id="software-2-P-1">Software</h3>
+<div class="outline-text-3" id="text-org5c40d2e">
 <ol class="org-ol">
 <li><a href="https://github.com/Interbotix/interbotix_ros_manipulators/tree/main/interbotix_ros_xsarms">The main documentation page</a></li>
 <li><a href="https://github.com/Interbotix/interbotix_ros_manipulators/tree/main/interbotix_ros_xsarms/examples">Examples</a> 

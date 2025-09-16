@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-12-04 Wed 21:56 -->
+<!-- 2025-09-16 Tue 13:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Threads, Spinning, and Async in ROS 2</title>
@@ -21,69 +21,69 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org344a40c">Overview</a></li>
+<li><a href="#overview-1-P-1">Overview</a></li>
 <li><a href="#service_client">Service Clients</a>
 <ul>
-<li><a href="#orgaee1b7f">Steps to Call a Service</a></li>
+<li><a href="#steps-to-call-a-service-2-P-1">Steps to Call a Service</a></li>
 </ul>
 </li>
-<li><a href="#orgb098918">Events</a></li>
-<li><a href="#org1c09f23">Callbacks</a></li>
-<li><a href="#org7a0eb92">Callback Groups</a>
+<li><a href="#events-1-P-1">Events</a></li>
+<li><a href="#callbacks-1-P-1">Callbacks</a></li>
+<li><a href="#callback-groups-1-P-1">Callback Groups</a>
 <ul>
-<li><a href="#orgbe9f79a">MutuallyExclusiveCallbackGroup</a></li>
-<li><a href="#org82c425c">ReentrantCallbackGroup</a></li>
+<li><a href="#mutuallyexclusivecallbackgroup-2-P-1">MutuallyExclusiveCallbackGroup</a></li>
+<li><a href="#reentrantcallbackgroup-2-P-1">ReentrantCallbackGroup</a></li>
 </ul>
 </li>
-<li><a href="#orge6eeb03">ROS and Python Async I/O</a>
+<li><a href="#ros-and-python-async-i-o-1-P-1">ROS and Python Async I/O</a>
 <ul>
 <li>
 <ul>
-<li><a href="#org3b17a38">Python</a></li>
-<li><a href="#orgf23b10d">ROS 2</a></li>
-<li><a href="#org82a5851">ROS 2 vs Python</a></li>
+<li><a href="#python-3-P-1">Python</a></li>
+<li><a href="#ros-2-3-P-1">ROS 2</a></li>
+<li><a href="#ros-2-vs-python-3-P-1">ROS 2 vs Python</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org9b428dc">Deadlocks</a></li>
+<li><a href="#deadlocks-1-P-1">Deadlocks</a></li>
 <li><a href="#patterns">Patterns</a>
 <ul>
-<li><a href="#orgcfec863">Basic ROS 2 Node</a></li>
-<li><a href="#org8807191">Service Clients</a>
+<li><a href="#basic-ros-2-node-2-P-1">Basic ROS 2 Node</a></li>
+<li><a href="#service-clients-2-P-1">Service Clients</a>
 <ul>
 <li><a href="#blocking_calls">Blocking Calls</a></li>
-<li><a href="#orgd6c2c79">Non-blocking</a></li>
+<li><a href="#non-blocking-3-P-1">Non-blocking</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li><a href="#walkthrough">Walkthrough</a>
 <ul>
-<li><a href="#orgdc3405c">Deadlock</a></li>
-<li><a href="#orgf39feb7">Await</a></li>
+<li><a href="#deadlock-2-P-1">Deadlock</a></li>
+<li><a href="#await-2-P-1">Await</a></li>
 </ul>
 </li>
-<li><a href="#org5f3b0fe">Concurrency</a>
+<li><a href="#concurrency-1-P-1">Concurrency</a>
 <ul>
-<li><a href="#org9dd5a63">Execution Models</a></li>
-<li><a href="#org703ed2d">Process</a></li>
-<li><a href="#orgcc0c9f9">Thread</a></li>
-<li><a href="#org2f32a99">Threads in Python</a>
+<li><a href="#execution-models-2-P-1">Execution Models</a></li>
+<li><a href="#process-2-P-1">Process</a></li>
+<li><a href="#thread-2-P-1">Thread</a></li>
+<li><a href="#threads-in-python-2-P-1">Threads in Python</a>
 <ul>
-<li><a href="#org5996ab6">Example</a></li>
+<li><a href="#example-3-P-1">Example</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org6889301">Resources</a></li>
+<li><a href="#resources-1-P-1">Resources</a></li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-org344a40c" class="outline-2">
-<h2 id="org344a40c">Overview</h2>
-<div class="outline-text-2" id="text-org344a40c">
+<div id="outline-container-overview-1-P-1" class="outline-2">
+<h2 id="overview-1-P-1">Overview</h2>
+<div class="outline-text-2" id="text-org6bdcf02">
 <ul class="org-ul">
 <li>Python ROS 2 nodes (unlike their counterparts in ROS 1) are single-threaded and sequential by default.</li>
 <li>Lack of threads makes reasoning about ROS 2 python nodes easier, makes them more similar to C++ nodes (which were single-threaded in ROS 1) and also provides more control over execution</li>
@@ -116,9 +116,9 @@ If the node cares about the response, it needs some way to process the response 
 </ul>
 </div>
 
-<div id="outline-container-orgaee1b7f" class="outline-3">
-<h3 id="orgaee1b7f">Steps to Call a Service</h3>
-<div class="outline-text-3" id="text-orgaee1b7f">
+<div id="outline-container-steps-to-call-a-service-2-P-1" class="outline-3">
+<h3 id="steps-to-call-a-service-2-P-1">Steps to Call a Service</h3>
+<div class="outline-text-3" id="text-org39a9b66">
 <ol class="org-ol">
 <li>Create a service client (call it <code>client</code>) using <code>Node.create_client</code></li>
 <li>Wait for the service to become available using <code>client.wait_for_service(timeout_sec</code>&#x2026;)=</li>
@@ -148,9 +148,9 @@ required to make it happen. For quick instruction see <a href="#patterns">Patter
 </div>
 </div>
 
-<div id="outline-container-orgb098918" class="outline-2">
-<h2 id="orgb098918">Events</h2>
-<div class="outline-text-2" id="text-orgb098918">
+<div id="outline-container-events-1-P-1" class="outline-2">
+<h2 id="events-1-P-1">Events</h2>
+<div class="outline-text-2" id="text-org21fead4">
 <ul class="org-ul">
 <li>External events in ROS include
 <ul class="org-ul">
@@ -177,9 +177,9 @@ required to make it happen. For quick instruction see <a href="#patterns">Patter
 </div>
 </div>
 
-<div id="outline-container-org1c09f23" class="outline-2">
-<h2 id="org1c09f23">Callbacks</h2>
-<div class="outline-text-2" id="text-org1c09f23">
+<div id="outline-container-callbacks-1-P-1" class="outline-2">
+<h2 id="callbacks-1-P-1">Callbacks</h2>
+<div class="outline-text-2" id="text-org3a9e021">
 <ul class="org-ul">
 <li>A callback is a function (or callable object) that is provided to an object to be called at a later time.</li>
 <li>In ROS 2, callbacks are explicitly registered when (for example)
@@ -197,9 +197,9 @@ required to make it happen. For quick instruction see <a href="#patterns">Patter
 </div>
 </div>
 
-<div id="outline-container-org7a0eb92" class="outline-2">
-<h2 id="org7a0eb92">Callback Groups</h2>
-<div class="outline-text-2" id="text-org7a0eb92">
+<div id="outline-container-callback-groups-1-P-1" class="outline-2">
+<h2 id="callback-groups-1-P-1">Callback Groups</h2>
+<div class="outline-text-2" id="text-org2ddde2e">
 <ul class="org-ul">
 <li>By default, ROS 2 only allows only one callback function to be pending on the callstack.
 <ul class="org-ul">
@@ -211,9 +211,9 @@ required to make it happen. For quick instruction see <a href="#patterns">Patter
 </ul>
 </div>
 
-<div id="outline-container-orgbe9f79a" class="outline-3">
-<h3 id="orgbe9f79a">MutuallyExclusiveCallbackGroup</h3>
-<div class="outline-text-3" id="text-orgbe9f79a">
+<div id="outline-container-mutuallyexclusivecallbackgroup-2-P-1" class="outline-3">
+<h3 id="mutuallyexclusivecallbackgroup-2-P-1">MutuallyExclusiveCallbackGroup</h3>
+<div class="outline-text-3" id="text-org3547480">
 <ul class="org-ul">
 <li>No more than one callback in the same <code>MutuallyExclusiveCallbackGroup</code> can ever be running concurrently.</li>
 <li>By default, all callbacks are placed in the same <code>MutuallyExclusiveCallbackGroup</code>.</li>
@@ -231,9 +231,9 @@ even if the timer expires sooner or if multiple threads are used</li>
 </div>
 </div>
 
-<div id="outline-container-org82c425c" class="outline-3">
-<h3 id="org82c425c">ReentrantCallbackGroup</h3>
-<div class="outline-text-3" id="text-org82c425c">
+<div id="outline-container-reentrantcallbackgroup-2-P-1" class="outline-3">
+<h3 id="reentrantcallbackgroup-2-P-1">ReentrantCallbackGroup</h3>
+<div class="outline-text-3" id="text-orgb5b0c0c">
 <ul class="org-ul">
 <li>All callbacks in a <code>ReentrantCallbackGroup</code> can run concurrently, this means that it is possible for a callback to be only partially complete before it is called again</li>
 <li>If you explicitly <code>spin_once</code> from within a callback that is part of a <code>ReentrantCallbackGroup</code> then any callback in that same group can be called</li>
@@ -245,13 +245,13 @@ the timer's period), the <code>timer</code> callback will be called again.</li>
 </div>
 
 
-<div id="outline-container-orge6eeb03" class="outline-2">
-<h2 id="orge6eeb03">ROS and Python Async I/O</h2>
-<div class="outline-text-2" id="text-orge6eeb03">
+<div id="outline-container-ros-and-python-async-i-o-1-P-1" class="outline-2">
+<h2 id="ros-and-python-async-i-o-1-P-1">ROS and Python Async I/O</h2>
+<div class="outline-text-2" id="text-ros-and-python-async-i-o-1-P-1">
 </div>
-<div id="outline-container-org3b17a38" class="outline-4">
-<h4 id="org3b17a38">Python</h4>
-<div class="outline-text-4" id="text-org3b17a38">
+<div id="outline-container-python-3-P-1" class="outline-4">
+<h4 id="python-3-P-1">Python</h4>
+<div class="outline-text-4" id="text-orgfc72c9f">
 <ul class="org-ul">
 <li>The python <a href="https://docs.python.org/3/library/asyncio.html">asyncio</a> library, along with the <code>async</code> and <code>await</code> keywords, enables single-threaded cooperative concurrency in python.</li>
 <li>The heart of any asynchronous (async) program is an <i>event loop</i>. In ROS, the event loop is provided by <code>rclpy.spin</code>.</li>
@@ -286,9 +286,9 @@ A function that may take a long time to compute a result (call it <code>long_fun
 </div>
 </div>
 
-<div id="outline-container-orgf23b10d" class="outline-4">
-<h4 id="orgf23b10d">ROS 2</h4>
-<div class="outline-text-4" id="text-orgf23b10d">
+<div id="outline-container-ros-2-3-P-1" class="outline-4">
+<h4 id="ros-2-3-P-1">ROS 2</h4>
+<div class="outline-text-4" id="text-orgbeaf5d1">
 <ul class="org-ul">
 <li>In ROS 2, the <i>event loop</i> is provided by <code>rclpy.spin</code>, and callbacks are scheduled by this <i>event loop</i></li>
 <li>Callbacks in ROS 2 can be functions or co-routines.</li>
@@ -306,9 +306,9 @@ A function that may take a long time to compute a result (call it <code>long_fun
 </div>
 </div>
 
-<div id="outline-container-org82a5851" class="outline-4">
-<h4 id="org82a5851">ROS 2 vs Python</h4>
-<div class="outline-text-4" id="text-org82a5851">
+<div id="outline-container-ros-2-vs-python-3-P-1" class="outline-4">
+<h4 id="ros-2-vs-python-3-P-1">ROS 2 vs Python</h4>
+<div class="outline-text-4" id="text-org5d792a1">
 <ul class="org-ul">
 <li>In <code>python asyncio</code> the event loop is created by calling <code>asyncio.run</code>. In ROS 2, an event loop iteration us implemented using an <code>rclpy.executor</code></li>
 <li>In <code>python asyncio</code> a task is created with <code>asyncio.create_task</code>. In ROS 2, a task is created with <code>rclpy.executor.create_task</code> and is associated
@@ -324,9 +324,9 @@ of different types of event loops, and these objects are associated with these l
 </div>
 </div>
 
-<div id="outline-container-org9b428dc" class="outline-2">
-<h2 id="org9b428dc">Deadlocks</h2>
-<div class="outline-text-2" id="text-org9b428dc">
+<div id="outline-container-deadlocks-1-P-1" class="outline-2">
+<h2 id="deadlocks-1-P-1">Deadlocks</h2>
+<div class="outline-text-2" id="text-org1c90974">
 <ul class="org-ul">
 <li>A deadlock occurs when code cannot make progress</li>
 <li>It is easy to accidentally cause a deadlock (where your program can make no further progress).
@@ -357,9 +357,9 @@ can help reduce the decisions that the programmer needs to make while also simpl
 </ul>
 </div>
 
-<div id="outline-container-orgcfec863" class="outline-3">
-<h3 id="orgcfec863">Basic ROS 2 Node</h3>
-<div class="outline-text-3" id="text-orgcfec863">
+<div id="outline-container-basic-ros-2-node-2-P-1" class="outline-3">
+<h3 id="basic-ros-2-node-2-P-1">Basic ROS 2 Node</h3>
+<div class="outline-text-3" id="text-orgd068654">
 <ol class="org-ol">
 <li>Use <code>rclpy.spin</code> in only one place in  your program (likely the main entry point)
 <ul class="org-ul">
@@ -385,9 +385,9 @@ but doing a subdivision can be a good choice because it gives more deterministic
 </div>
 </div>
 
-<div id="outline-container-org8807191" class="outline-3">
-<h3 id="org8807191">Service Clients</h3>
-<div class="outline-text-3" id="text-org8807191">
+<div id="outline-container-service-clients-2-P-1" class="outline-3">
+<h3 id="service-clients-2-P-1">Service Clients</h3>
+<div class="outline-text-3" id="text-org67ac64c">
 <p>
 Here is information on two types of service calls: blocking/synchronous and non-blocking/asynchronous.
 Examples can be found at <a href="https://github.com/m-elwin/async_experiments">https://github.com/m-elwin/async_experiments</a> and a walkthrough of the code is provided at <a href="#walkthrough">here</a>
@@ -411,9 +411,9 @@ Examples can be found at <a href="https://github.com/m-elwin/async_experiments">
 </ol>
 </div>
 </div>
-<div id="outline-container-orgd6c2c79" class="outline-4">
-<h4 id="orgd6c2c79">Non-blocking</h4>
-<div class="outline-text-4" id="text-orgd6c2c79">
+<div id="outline-container-non-blocking-3-P-1" class="outline-4">
+<h4 id="non-blocking-3-P-1">Non-blocking</h4>
+<div class="outline-text-4" id="text-orgf74c510">
 <ol class="org-ol">
 <li>For non-blocking service calls you need to implement logic that periodically checks the result of the future returned by <code>service_client.call_async</code></li>
 <li>The logic that checks the result should be in a timer that checks the <code>.done()</code> status of the future.
@@ -437,9 +437,9 @@ Examples can be found at <a href="https://github.com/m-elwin/async_experiments">
 These walkthroughs take you through the code in  <a href="https://github.com/m-elwin/async_experiments">https://github.com/m-elwin/async_experiments</a> in the order in which it is executed and provide a conceptual guide to what is happening.
 </p>
 </div>
-<div id="outline-container-orgdc3405c" class="outline-3">
-<h3 id="orgdc3405c">Deadlock</h3>
-<div class="outline-text-3" id="text-orgdc3405c">
+<div id="outline-container-deadlock-2-P-1" class="outline-3">
+<h3 id="deadlock-2-P-1">Deadlock</h3>
+<div class="outline-text-3" id="text-org145987d">
 <ol class="org-ol">
 <li><code>ros2 launch async_experiments experiment.launch.xml experiment:=deadlock</code></li>
 <li>The deadlock node starts in the <code>async_client.py:deadlock_entry</code> function.</li>
@@ -474,9 +474,9 @@ These walkthroughs take you through the code in  <a href="https://github.com/m-e
 </div>
 </div>
 
-<div id="outline-container-orgf39feb7" class="outline-3">
-<h3 id="orgf39feb7">Await</h3>
-<div class="outline-text-3" id="text-orgf39feb7">
+<div id="outline-container-await-2-P-1" class="outline-3">
+<h3 id="await-2-P-1">Await</h3>
+<div class="outline-text-3" id="text-orga7620c3">
 <ol class="org-ol">
 <li><code>ros2 launch async_experiments experiment.launch.xml experiment:=await</code></li>
 <li>The <code>await</code> node starts in the <code>async_client.py:await_entry</code> function.</li>
@@ -539,13 +539,13 @@ Control of the <code>await</code> node is in <code>rclpy.spin</code>:
 </div>
 </div>
 </div>
-<div id="outline-container-org5f3b0fe" class="outline-2">
-<h2 id="org5f3b0fe">Concurrency</h2>
-<div class="outline-text-2" id="text-org5f3b0fe">
+<div id="outline-container-concurrency-1-P-1" class="outline-2">
+<h2 id="concurrency-1-P-1">Concurrency</h2>
+<div class="outline-text-2" id="text-concurrency-1-P-1">
 </div>
-<div id="outline-container-org9dd5a63" class="outline-3">
-<h3 id="org9dd5a63">Execution Models</h3>
-<div class="outline-text-3" id="text-org9dd5a63">
+<div id="outline-container-execution-models-2-P-1" class="outline-3">
+<h3 id="execution-models-2-P-1">Execution Models</h3>
+<div class="outline-text-3" id="text-org3b188f0">
 <ul class="org-ul">
 <li>In sequential computing, only one computation happens at a given time. The computations happen in sequence.
 <ul class="org-ul">
@@ -572,9 +572,9 @@ but the person is not making a move in each game simultaneously.</li>
 </div>
 
 
-<div id="outline-container-org703ed2d" class="outline-3">
-<h3 id="org703ed2d">Process</h3>
-<div class="outline-text-3" id="text-org703ed2d">
+<div id="outline-container-process-2-P-1" class="outline-3">
+<h3 id="process-2-P-1">Process</h3>
+<div class="outline-text-3" id="text-orgbcf1f91">
 <ol class="org-ol">
 <li>A <a href="https://www.tldp.org/LDP/tlk/kernel/processes.html">process</a> is an abstraction used by the Linux Kernel (and other operating systems) to segregate memory address space.
 <ul class="org-ul">
@@ -586,9 +586,9 @@ but the person is not making a move in each game simultaneously.</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-orgcc0c9f9" class="outline-3">
-<h3 id="orgcc0c9f9">Thread</h3>
-<div class="outline-text-3" id="text-orgcc0c9f9">
+<div id="outline-container-thread-2-P-1" class="outline-3">
+<h3 id="thread-2-P-1">Thread</h3>
+<div class="outline-text-3" id="text-orgf4a8566">
 <ol class="org-ol">
 <li>A <a href="https://www.tldp.org/FAQ/Threads-FAQ/Types.html">thread</a> is subordinate unit of execution within a process, and it is what actually executes the machine code</li>
 <li>By default each process has a single "main" thread. But it can also create additional threads to run code simultaneously.
@@ -629,9 +629,9 @@ schedules execution, which in turn depends on what else is happening on the comp
 </div>
 </div>
 
-<div id="outline-container-org2f32a99" class="outline-3">
-<h3 id="org2f32a99">Threads in Python</h3>
-<div class="outline-text-3" id="text-org2f32a99">
+<div id="outline-container-threads-in-python-2-P-1" class="outline-3">
+<h3 id="threads-in-python-2-P-1">Threads in Python</h3>
+<div class="outline-text-3" id="text-org51c0583">
 <ol class="org-ol">
 <li>The most common python interpreter, CPython, implements a <a href="http://wiki.python.org/moin/GlobalInterpreterLock">Global Interpreter Lock (GIL)</a>
 <ul class="org-ul">
@@ -673,9 +673,9 @@ another thread can run while the other thread waits for the system.</li>
 </ul></li>
 </ol>
 </div>
-<div id="outline-container-org5996ab6" class="outline-4">
-<h4 id="org5996ab6">Example</h4>
-<div class="outline-text-4" id="text-org5996ab6">
+<div id="outline-container-example-3-P-1" class="outline-4">
+<h4 id="example-3-P-1">Example</h4>
+<div class="outline-text-4" id="text-orgd951d39">
 <p>
 If you perform a non-atomic operation, the thread you are running on can be interrupted in the middle.
 Assume we have two threads, both performing  <code>i = i + 1</code>, a non-atomic operation.  Thus what is actually executed gets broken into several interruptable steps
@@ -712,9 +712,9 @@ Thread 2 stores 1 in i
 
 
 
-<div id="outline-container-org6889301" class="outline-2">
-<h2 id="org6889301">Resources</h2>
-<div class="outline-text-2" id="text-org6889301">
+<div id="outline-container-resources-1-P-1" class="outline-2">
+<h2 id="resources-1-P-1">Resources</h2>
+<div class="outline-text-2" id="text-org6b78382">
 <ul class="org-ul">
 <li><a href="https://docs.ros.org/en/iron/How-To-Guides/Sync-Vs-Async.html">Async vs Synchronous Service Clients</a></li>
 <li><a href="https://docs.ros.org/en/iron/How-To-Guides/Using-callback-groups.html">Callback Groups</a></li>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-12-04 Wed 21:56 -->
+<!-- 2025-09-16 Tue 13:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Homework 2</title>
@@ -53,37 +53,37 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org9fd2da3">Logistics</a>
+<li><a href="#logistics-1-P-7">Logistics</a>
 <ul>
-<li><a href="#org2c12037">Robots</a></li>
+<li><a href="#robots-2-P-2">Robots</a></li>
 </ul>
 </li>
-<li><a href="#orge37d09d">Part I: Turtle Trajectories</a>
+<li><a href="#part-i-turtle-trajectories-1-P-1">Part I: Turtle Trajectories</a>
 <ul>
-<li><a href="#org5ee6815">Overview</a></li>
-<li><a href="#orgb30d7f5">The Kinematics</a></li>
-<li><a href="#org3b45810">What to implement</a>
+<li><a href="#overview-2-P-1">Overview</a></li>
+<li><a href="#the-kinematics-2-P-1">The Kinematics</a></li>
+<li><a href="#what-to-implement-2-P-1">What to implement</a>
 <ul>
-<li><a href="#org2079644">Trajectory Node</a></li>
-<li><a href="#org4fcc07e">Simulated Odom Node</a></li>
-<li><a href="#org7ec0ae7">Python Package</a></li>
-<li><a href="#org5f96ef4">Tests</a></li>
-<li><a href="#org1cedb99">Configuration</a></li>
-<li><a href="#orgd77d930">Documentation</a></li>
+<li><a href="#trajectory-node-3-P-1">Trajectory Node</a></li>
+<li><a href="#simulated-odom-node-3-P-1">Simulated Odom Node</a></li>
+<li><a href="#python-package-3-P-1">Python Package</a></li>
+<li><a href="#tests-3-P-1">Tests</a></li>
+<li><a href="#configuration-3-P-1">Configuration</a></li>
+<li><a href="#documentation-3-P-2">Documentation</a></li>
 </ul>
 </li>
-<li><a href="#org2721ec2">Hints</a>
+<li><a href="#hints-2-P-5">Hints</a>
 <ul>
-<li><a href="#org9cc774c">Practical Differential Flatness Guide</a></li>
+<li><a href="#practical-differential-flatness-guide-3-P-1">Practical Differential Flatness Guide</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orged32638">Part II: Xacro ARM</a>
+<li><a href="#part-ii-xacro-arm-1-P-1">Part II: Xacro ARM</a>
 <ul>
-<li><a href="#org8d8f9d3">Specifications</a>
+<li><a href="#specifications-2-P-1">Specifications</a>
 <ul>
-<li><a href="#org983a445">The Xacro File</a></li>
+<li><a href="#the-xacro-file-3-P-1">The Xacro File</a></li>
 </ul>
 </li>
 </ul>
@@ -91,9 +91,9 @@
 </ul>
 </div>
 </nav>
-<div id="outline-container-org9fd2da3" class="outline-2">
-<h2 id="org9fd2da3">Logistics</h2>
-<div class="outline-text-2" id="text-org9fd2da3">
+<div id="outline-container-logistics-1-P-7" class="outline-2">
+<h2 id="logistics-1-P-7">Logistics</h2>
+<div class="outline-text-2" id="text-org3ad5903">
 <ol class="org-ol">
 <li>Create a git repository using the link provided in Canvas.</li>
 <li>Your homework will be submitted via this git repository.</li>
@@ -105,9 +105,9 @@ you should turn-in, including information about your <code>README.md</code> file
 </ol>
 </div>
 
-<div id="outline-container-org2c12037" class="outline-3">
-<h3 id="org2c12037">Robots</h3>
-<div class="outline-text-3" id="text-org2c12037">
+<div id="outline-container-robots-2-P-2" class="outline-3">
+<h3 id="robots-2-P-2">Robots</h3>
+<div class="outline-text-3" id="text-orgeb9990c">
 <p>
 The turtlebots are in A275. See <a href="../turtlebot3.html">Turtlebot3 Setup</a> for more information.
 </p>
@@ -115,13 +115,13 @@ The turtlebots are in A275. See <a href="../turtlebot3.html">Turtlebot3 Setup</a
 </div>
 </div>
 
-<div id="outline-container-orge37d09d" class="outline-2">
-<h2 id="orge37d09d">Part I: Turtle Trajectories</h2>
-<div class="outline-text-2" id="text-orge37d09d">
+<div id="outline-container-part-i-turtle-trajectories-1-P-1" class="outline-2">
+<h2 id="part-i-turtle-trajectories-1-P-1">Part I: Turtle Trajectories</h2>
+<div class="outline-text-2" id="text-part-i-turtle-trajectories-1-P-1">
 </div>
-<div id="outline-container-org5ee6815" class="outline-3">
-<h3 id="org5ee6815">Overview</h3>
-<div class="outline-text-3" id="text-org5ee6815">
+<div id="outline-container-overview-2-P-1" class="outline-3">
+<h3 id="overview-2-P-1">Overview</h3>
+<div class="outline-text-3" id="text-org12f7e18">
 <p>
 The goal of this assignment is to make a turtlebot follow a figure-8 trajectory.
 </p>
@@ -133,9 +133,9 @@ The goal of this assignment is to make a turtlebot follow a figure-8 trajectory.
 </div>
 </div>
 
-<div id="outline-container-orgb30d7f5" class="outline-3">
-<h3 id="orgb30d7f5">The Kinematics</h3>
-<div class="outline-text-3" id="text-orgb30d7f5">
+<div id="outline-container-the-kinematics-2-P-1" class="outline-3">
+<h3 id="the-kinematics-2-P-1">The Kinematics</h3>
+<div class="outline-text-3" id="text-org6aacf3e">
 <p>
 The <a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/overview">turtlebot3</a> is a differential-drive robot that can be modeled as kinematic car
 (also known as a unicycle model). The control inputs for the robot are linear velocity \(v\) and the angular velocity \(\omega\), and result in motion according to the kinematic equations
@@ -165,18 +165,18 @@ where \(t\) is time, \(T\) is the time to finish one figure-eight,
 </div>
 
 
-<div id="outline-container-org3b45810" class="outline-3">
-<h3 id="org3b45810">What to implement</h3>
-<div class="outline-text-3" id="text-org3b45810">
+<div id="outline-container-what-to-implement-2-P-1" class="outline-3">
+<h3 id="what-to-implement-2-P-1">What to implement</h3>
+<div class="outline-text-3" id="text-org670ce62">
 <p>
-This homework is presented in the form of a specification, rather than a step-by-step guide.  The <a href="#org2721ec2">Hints</a> section provides
+This homework is presented in the form of a specification, rather than a step-by-step guide.  The <a href="#org3b661af">Hints</a> section provides
 useful information for how to implement everything.
 </p>
 </div>
 
-<div id="outline-container-org2079644" class="outline-4">
-<h4 id="org2079644">Trajectory Node</h4>
-<div class="outline-text-4" id="text-org2079644">
+<div id="outline-container-trajectory-node-3-P-1" class="outline-4">
+<h4 id="trajectory-node-3-P-1">Trajectory Node</h4>
+<div class="outline-text-4" id="text-orge3ecd98">
 <p>
 Create a node called <code>trajectory</code> that
 </p>
@@ -210,9 +210,9 @@ frame it is at \(0, 0, \theta_0\) in the  world frame, where \(\theta_0\) is the
 </div>
 </div>
 
-<div id="outline-container-org4fcc07e" class="outline-4">
-<h4 id="org4fcc07e">Simulated Odom Node</h4>
-<div class="outline-text-4" id="text-org4fcc07e">
+<div id="outline-container-simulated-odom-node-3-P-1" class="outline-4">
+<h4 id="simulated-odom-node-3-P-1">Simulated Odom Node</h4>
+<div class="outline-text-4" id="text-orga00952e">
 <p>
 The purpose of this node is to allow you to use the turtlesim node instead of a real robot while refining your trajectory
 </p>
@@ -238,9 +238,9 @@ it first was turned on.</li>
 </div>
 </div>
 
-<div id="outline-container-org7ec0ae7" class="outline-4">
-<h4 id="org7ec0ae7">Python Package</h4>
-<div class="outline-text-4" id="text-org7ec0ae7">
+<div id="outline-container-python-package-3-P-1" class="outline-4">
+<h4 id="python-package-3-P-1">Python Package</h4>
+<div class="outline-text-4" id="text-org4ceb07b">
 <p>
 A python package called <code>homework2</code> and located under <code>src/homework2</code>
 </p>
@@ -264,9 +264,9 @@ so it makes sense to split it from the node code.</li>
 </div>
 </div>
 
-<div id="outline-container-org5f96ef4" class="outline-4">
-<h4 id="org5f96ef4">Tests</h4>
-<div class="outline-text-4" id="text-org5f96ef4">
+<div id="outline-container-tests-3-P-1" class="outline-4">
+<h4 id="tests-3-P-1">Tests</h4>
+<div class="outline-text-4" id="text-org11925bc">
 <p>
 Unit tests for your python package using <code>rossunit</code> 
 </p>
@@ -279,9 +279,9 @@ Unit tests for your python package using <code>rossunit</code>
 </div>
 </div>
 
-<div id="outline-container-org1cedb99" class="outline-4">
-<h4 id="org1cedb99">Configuration</h4>
-<div class="outline-text-4" id="text-org1cedb99">
+<div id="outline-container-configuration-3-P-1" class="outline-4">
+<h4 id="configuration-3-P-1">Configuration</h4>
+<div class="outline-text-4" id="text-org1c4196d">
 <ol class="org-ol">
 <li>A <code>config</code> directory containing 
 <ol class="org-ol">
@@ -317,9 +317,9 @@ need to simulate the wheels actually turning.</li>
 </div>
 </div>
 
-<div id="outline-container-orgd77d930" class="outline-4">
-<h4 id="orgd77d930">Documentation</h4>
-<div class="outline-text-4" id="text-orgd77d930">
+<div id="outline-container-documentation-3-P-2" class="outline-4">
+<h4 id="documentation-3-P-2">Documentation</h4>
+<div class="outline-text-4" id="text-org23874ee">
 <ol class="org-ol">
 <li>Documentation showing how you computed the control inputs from the trajectory is required. You should link/refer to the documentation in your README.md. 
 A few valid methods of showing the computations are:
@@ -347,9 +347,9 @@ A few valid methods of showing the computations are:
 </div>
 </div>
 </div>
-<div id="outline-container-org2721ec2" class="outline-3">
-<h3 id="org2721ec2">Hints</h3>
-<div class="outline-text-3" id="text-org2721ec2">
+<div id="outline-container-hints-2-P-5" class="outline-3">
+<h3 id="hints-2-P-5">Hints</h3>
+<div class="outline-text-3" id="text-org3b661af">
 <ol class="org-ol">
 <li>Even if you have a robot, it makes sense to test this in the turtlesim if you like</li>
 <li>Use a timer running at a specified frequency to publish the velocity commands to the turtle.
@@ -384,15 +384,15 @@ in your own launchfile so it does not need to be called separately (when running
 <li>The overall goal is to solve for the control inputs \(v\) and \(\omega\) that will result in the desired trajectory</li>
 <li>Because the system is differentially flat, we can find these expressions without integrating the differential equations
 describing the kinematics of the robot</li>
-<li>See my <a href="#org9cc774c">Practical Differential Flatness Guide</a></li>
+<li>See my <a href="#org8995288">Practical Differential Flatness Guide</a></li>
 </ul></li>
 <li>Use the <code>-d</code> argument to <code>rviz</code> to load a <code>.rviz</code> configuration file that you create to set up the fixed frame properly and make.</li>
 <li>Remember to use <code>$(find)$</code> when referencing files stored in packages.</li>
 </ol>
 </div>
-<div id="outline-container-org9cc774c" class="outline-4">
-<h4 id="org9cc774c">Practical Differential Flatness Guide</h4>
-<div class="outline-text-4" id="text-org9cc774c">
+<div id="outline-container-practical-differential-flatness-guide-3-P-1" class="outline-4">
+<h4 id="practical-differential-flatness-guide-3-P-1">Practical Differential Flatness Guide</h4>
+<div class="outline-text-4" id="text-org8995288">
 <ol class="org-ol">
 <li>Solve the kinematic equations for \(\theta = f(\dot{x}, \dot{y})\), (thus \(\theta\) is some function \(f\) that depends only on \(\dot{x}\) and \(\dot{y}\).
 <ul class="org-ul">
@@ -425,33 +425,33 @@ dynamics, and control timing.</li>
 </div>
 </div>
 
-<div id="outline-container-orged32638" class="outline-2">
-<h2 id="orged32638">Part II: Xacro ARM</h2>
-<div class="outline-text-2" id="text-orged32638">
+<div id="outline-container-part-ii-xacro-arm-1-P-1" class="outline-2">
+<h2 id="part-ii-xacro-arm-1-P-1">Part II: Xacro ARM</h2>
+<div class="outline-text-2" id="text-org0b330f1">
 <p>
 In this section you will be creating a <a href="http://wiki.ros.org/xacro">Xacro</a> <a href="https://wiki.ros.org/urdf">URDF</a> for the robot arm shown below and visualizing it in rviz,
  and then making it's end-effector follow a trajectory.
 </p>
 
 
-<figure id="org7f5c21c">
+<figure id="org4e5a724">
 <img src="../twolink.png" alt="twolink.png">
 
 <figcaption><span class="figure-number">Figure 1: </span>A 2 - link robot arm. The length of the upper and lower links are \(L_1\) and \(L_2\).</figcaption>
 </figure>
 </div>
-<div id="outline-container-org8d8f9d3" class="outline-3">
-<h3 id="org8d8f9d3">Specifications</h3>
-<div class="outline-text-3" id="text-org8d8f9d3">
+<div id="outline-container-specifications-2-P-1" class="outline-3">
+<h3 id="specifications-2-P-1">Specifications</h3>
+<div class="outline-text-3" id="text-orgeb9a0e8">
 <p>
 These specifications are not necessarily ordered by what you should do first.
 Pay close attention to the desired orientation of the arm and its reference frames.
 </p>
 </div>
 
-<div id="outline-container-org983a445" class="outline-4">
-<h4 id="org983a445">The Xacro File</h4>
-<div class="outline-text-4" id="text-org983a445">
+<div id="outline-container-the-xacro-file-3-P-1" class="outline-4">
+<h4 id="the-xacro-file-3-P-1">The Xacro File</h4>
+<div class="outline-text-4" id="text-org10eec1e">
 <ol class="org-ol">
 <li>Create a xacro urdf file called <code>twoarm.urdf.xacro</code> for the robot arm.  
 <ul class="org-ul">

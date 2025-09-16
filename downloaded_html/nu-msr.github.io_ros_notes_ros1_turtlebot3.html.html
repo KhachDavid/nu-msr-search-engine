@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-12-04 Wed 21:56 -->
+<!-- 2025-09-16 Tue 13:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>TurtleBot3 Quickstart</title>
@@ -21,26 +21,26 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org2086ef8">Overview</a></li>
-<li><a href="#org6ec24e6">Powering the Turtlebot</a></li>
-<li><a href="#org010432a">Connecting to the TurtleBot</a>
+<li><a href="#overview-1-P-26">Overview</a></li>
+<li><a href="#powering-the-turtlebot-1-P-2">Powering the Turtlebot</a></li>
+<li><a href="#connecting-to-the-turtlebot-1-P-2">Connecting to the TurtleBot</a>
 <ul>
-<li><a href="#org6ad657c">Computer Setup</a>
+<li><a href="#computer-setup-2-P-1">Computer Setup</a>
 <ul>
-<li><a href="#org7372653">One-time Lab Setup</a></li>
-<li><a href="#org5ff6606">Regular Usage</a></li>
+<li><a href="#one-time-lab-setup-3-P-1">One-time Lab Setup</a></li>
+<li><a href="#regular-usage-3-P-1">Regular Usage</a></li>
 </ul>
 </li>
-<li><a href="#orge2fd087">Firmware Setup</a></li>
+<li><a href="#firmware-setup-2-P-1">Firmware Setup</a></li>
 </ul>
 </li>
-<li><a href="#org0b5e284">Resources</a></li>
+<li><a href="#resources-1-P-10">Resources</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org2086ef8" class="outline-2">
-<h2 id="org2086ef8">Overview</h2>
-<div class="outline-text-2" id="text-org2086ef8">
+<div id="outline-container-overview-1-P-26" class="outline-2">
+<h2 id="overview-1-P-26">Overview</h2>
+<div class="outline-text-2" id="text-orgfbc7c72">
 <p>
 The <a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/">turtlebot3</a> is a small mobile robot with a 2-D Lidar Sensor.
 These instructions describe Northwestern's variant of the software, which has been modified for easy deployment on our networks.
@@ -50,9 +50,9 @@ However, most of the content of the reference manual still applies.
 </div>
 
 
-<div id="outline-container-org6ec24e6" class="outline-2">
-<h2 id="org6ec24e6">Powering the Turtlebot</h2>
-<div class="outline-text-2" id="text-org6ec24e6">
+<div id="outline-container-powering-the-turtlebot-1-P-2" class="outline-2">
+<h2 id="powering-the-turtlebot-1-P-2">Powering the Turtlebot</h2>
+<div class="outline-text-2" id="text-org7f5ee63">
 <ol class="org-ol">
 <li>The Turtlebot can be powered from a battery, or directly from the wall charger, which gets plugged into the OpenCR board
 <ul class="org-ul">
@@ -82,17 +82,17 @@ turn, the odometry will be incorrect.
 </ol>
 </div>
 </div>
-<div id="outline-container-org010432a" class="outline-2">
-<h2 id="org010432a">Connecting to the TurtleBot</h2>
-<div class="outline-text-2" id="text-org010432a">
+<div id="outline-container-connecting-to-the-turtlebot-1-P-2" class="outline-2">
+<h2 id="connecting-to-the-turtlebot-1-P-2">Connecting to the TurtleBot</h2>
+<div class="outline-text-2" id="text-connecting-to-the-turtlebot-1-P-2">
 </div>
-<div id="outline-container-org6ad657c" class="outline-3">
-<h3 id="org6ad657c">Computer Setup</h3>
-<div class="outline-text-3" id="text-org6ad657c">
+<div id="outline-container-computer-setup-2-P-1" class="outline-3">
+<h3 id="computer-setup-2-P-1">Computer Setup</h3>
+<div class="outline-text-3" id="text-computer-setup-2-P-1">
 </div>
-<div id="outline-container-org7372653" class="outline-4">
-<h4 id="org7372653">One-time Lab Setup</h4>
-<div class="outline-text-4" id="text-org7372653">
+<div id="outline-container-one-time-lab-setup-3-P-1" class="outline-4">
+<h4 id="one-time-lab-setup-3-P-1">One-time Lab Setup</h4>
+<div class="outline-text-4" id="text-orgd5647af">
 <p>
 These instructions assume that your computer is successfully connected to the <code>eduroam</code> network (see <a href="https://kb.northwestern.edu/109238">https://kb.northwestern.edu/109238</a>).
 It assumes that the NetworkManager connection name for this network is also <code>eduroam</code> (which is the default).
@@ -115,9 +115,9 @@ The steps below will only work if you are on campus or with a VPN.
 </div>
 
 
-<div id="outline-container-org5ff6606" class="outline-4">
-<h4 id="org5ff6606">Regular Usage</h4>
-<div class="outline-text-4" id="text-org5ff6606">
+<div id="outline-container-regular-usage-3-P-1" class="outline-4">
+<h4 id="regular-usage-3-P-1">Regular Usage</h4>
+<div class="outline-text-4" id="text-orgdef4795">
 <ol class="org-ol">
 <li>Turn on the turtlebot and note its name (e.g. <code>leonardo</code>)</li>
 <li>Activate the <code>eduroam.robot</code> network with <code>nmcli con up eduroam.robot</code></li>
@@ -141,8 +141,8 @@ the same sequence (the <code>SendEnv</code> flag ensures that the value of <code
 </div>
 
 <ul class="org-ul">
-<li><a id="org22c8122"></a>Examples<br>
-<div class="outline-text-5" id="text-org22c8122">
+<li><a id="examples-4-P-1"></a>Examples<br>
+<div class="outline-text-5" id="text-orge0b3006">
 <p>
 Some example commands when the turtlebot launchfile is running
 </p>
@@ -164,9 +164,9 @@ Some example commands when the turtlebot launchfile is running
 </div>
 
 
-<div id="outline-container-orge2fd087" class="outline-3">
-<h3 id="orge2fd087">Firmware Setup</h3>
-<div class="outline-text-3" id="text-orge2fd087">
+<div id="outline-container-firmware-setup-2-P-1" class="outline-3">
+<h3 id="firmware-setup-2-P-1">Firmware Setup</h3>
+<div class="outline-text-3" id="text-orgb19ffa4">
 <p>
 There are two firmwares used for the turtlebot, <code>stock</code> (which is what the turtlebot comes with) and <code>raw</code> (modified to provide low-level access).
 The appropriate firmware should be pre-installed if using the turtlebot for a class.
@@ -181,9 +181,9 @@ The appropriate firmware should be pre-installed if using the turtlebot for a cl
 </div>
 </div>
 
-<div id="outline-container-org0b5e284" class="outline-2">
-<h2 id="org0b5e284">Resources</h2>
-<div class="outline-text-2" id="text-org0b5e284">
+<div id="outline-container-resources-1-P-10" class="outline-2">
+<h2 id="resources-1-P-10">Resources</h2>
+<div class="outline-text-2" id="text-org7595913">
 <ul class="org-ul">
 <li><a href="http://emanual.robotis.com/docs/en/platform/turtlebot3/overview/">Main turtlebot documentation</a></li>
 <li><a href="http://github.com/ME495-Navigation/nuturtlebot">nuturtlebot</a>

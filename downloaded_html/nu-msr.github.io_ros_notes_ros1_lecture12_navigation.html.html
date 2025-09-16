@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-12-04 Wed 21:56 -->
+<!-- 2025-09-16 Tue 13:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ROS Navigation</title>
@@ -21,21 +21,21 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org833548b">Overview</a></li>
-<li><a href="#orge5e7dda">Frames of Reference</a></li>
-<li><a href="#org4973523">Conceptual Components</a></li>
-<li><a href="#orgb35c38c">Navigation Packages</a></li>
-<li><a href="#orgc525b24">Other Packages</a></li>
-<li><a href="#orgf2a8cec">Recover Nodes</a></li>
-<li><a href="#orgf344c48">Older/ packages</a></li>
-<li><a href="#org3772a1b">Example</a></li>
+<li><a href="#overview-1-P-24">Overview</a></li>
+<li><a href="#frames-of-reference-1-P-2">Frames of Reference</a></li>
+<li><a href="#conceptual-components-1-P-2">Conceptual Components</a></li>
+<li><a href="#navigation-packages-1-P-2">Navigation Packages</a></li>
+<li><a href="#other-packages-1-P-1">Other Packages</a></li>
+<li><a href="#recover-nodes-1-P-1">Recover Nodes</a></li>
+<li><a href="#older-packages-1-P-1">Older/ packages</a></li>
+<li><a href="#example-1-P-2">Example</a></li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-org833548b" class="outline-2">
-<h2 id="org833548b">Overview</h2>
-<div class="outline-text-2" id="text-org833548b">
+<div id="outline-container-overview-1-P-24" class="outline-2">
+<h2 id="overview-1-P-24">Overview</h2>
+<div class="outline-text-2" id="text-orgeb08f41">
 <ul class="org-ul">
 <li>The ROS <a href="https://wiki.ros.org/navigation">navigation stack</a> enables mobile robots to navigate in 2D</li>
 <li>Provides the ability to estimate the location of the robot based on feedback from multiple sensors</li>
@@ -50,9 +50,9 @@
 </div>
 
 
-<div id="outline-container-orge5e7dda" class="outline-2">
-<h2 id="orge5e7dda">Frames of Reference</h2>
-<div class="outline-text-2" id="text-orge5e7dda">
+<div id="outline-container-frames-of-reference-1-P-2" class="outline-2">
+<h2 id="frames-of-reference-1-P-2">Frames of Reference</h2>
+<div class="outline-text-2" id="text-org60e19e4">
 <ul class="org-ul">
 <li><a href="https://www.ros.org/reps/rep-0105.html">REP 105</a> defines standard ROS frames for robots, and the navigation stack adheres to this standard</li>
 <li>Your robot should have a frame called <code>base_link</code>.  All other frames on the robot are relative to this frame</li>
@@ -68,9 +68,9 @@ the transform from <code>map -&gt; base_link</code> is always the map estimate.<
 </div>
 </div>
 
-<div id="outline-container-org4973523" class="outline-2">
-<h2 id="org4973523">Conceptual Components</h2>
-<div class="outline-text-2" id="text-org4973523">
+<div id="outline-container-conceptual-components-1-P-2" class="outline-2">
+<h2 id="conceptual-components-1-P-2">Conceptual Components</h2>
+<div class="outline-text-2" id="text-org1357996">
 <ol class="org-ol">
 <li>Base Controller: Subscribes to a <code>geometry_msgs/Twist</code> (by default on the <code>cmd_vel</code> topic) and makes the robot move.
 <ul class="org-ul">
@@ -108,9 +108,9 @@ in order to retry planning</li>
 </div>
 </div>
 
-<div id="outline-container-orgb35c38c" class="outline-2">
-<h2 id="orgb35c38c">Navigation Packages</h2>
-<div class="outline-text-2" id="text-orgb35c38c">
+<div id="outline-container-navigation-packages-1-P-2" class="outline-2">
+<h2 id="navigation-packages-1-P-2">Navigation Packages</h2>
+<div class="outline-text-2" id="text-org3ef1230">
 <p>
 There are many packages available in the navigation stack
 </p>
@@ -157,9 +157,9 @@ with the rest of the nav stack.</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-orgc525b24" class="outline-2">
-<h2 id="orgc525b24">Other Packages</h2>
-<div class="outline-text-2" id="text-orgc525b24">
+<div id="outline-container-other-packages-1-P-1" class="outline-2">
+<h2 id="other-packages-1-P-1">Other Packages</h2>
+<div class="outline-text-2" id="text-orgaa9374a">
 <ul class="org-ul">
 <li><a href="https://wiki.ros.org/carrot_planner">carrot_planner</a> A global planner that gets robots as close to obstacles as possible</li>
 <li><a href="https://wiki.ros.org/sbpl">sbpl</a> Search based planning library: a global planner based on "motion primitives"</li>
@@ -178,9 +178,9 @@ Many uses including: standalone odometry or input for <code>robot_localization</
 </div>
 </div>
 
-<div id="outline-container-orgf2a8cec" class="outline-2">
-<h2 id="orgf2a8cec">Recover Nodes</h2>
-<div class="outline-text-2" id="text-orgf2a8cec">
+<div id="outline-container-recover-nodes-1-P-1" class="outline-2">
+<h2 id="recover-nodes-1-P-1">Recover Nodes</h2>
+<div class="outline-text-2" id="text-orgfb6e40e">
 <p>
 There are several nodes that can implement recovery behaviors when planning fails:
 </p>
@@ -192,9 +192,9 @@ There are several nodes that can implement recovery behaviors when planning fail
 </div>
 </div>
 
-<div id="outline-container-orgf344c48" class="outline-2">
-<h2 id="orgf344c48">Older/ packages</h2>
-<div class="outline-text-2" id="text-orgf344c48">
+<div id="outline-container-older-packages-1-P-1" class="outline-2">
+<h2 id="older-packages-1-P-1">Older/ packages</h2>
+<div class="outline-text-2" id="text-org02b1236">
 <ul class="org-ul">
 <li><a href="https://wiki.ros.org/gmapping">gmapping</a> Basic map generation and localization (SLAM): running this algorithm is how the map is produced, after which you save it
 using the <code>map_server</code>.  This is the most popular 2D SLAM method in ROS and the original so you will see it recommended everywhere.  But it is actually no longer maintained.</li>
@@ -209,9 +209,9 @@ using the <code>map_server</code>.  This is the most popular 2D SLAM method in R
 
 
 
-<div id="outline-container-org3772a1b" class="outline-2">
-<h2 id="org3772a1b">Example</h2>
-<div class="outline-text-2" id="text-org3772a1b">
+<div id="outline-container-example-1-P-2" class="outline-2">
+<h2 id="example-1-P-2">Example</h2>
+<div class="outline-text-2" id="text-org74be291">
 <p>
 Below is an example of how to use the ROS navigation stack with slam_toolbox
 #+BEGIN_SRC bash

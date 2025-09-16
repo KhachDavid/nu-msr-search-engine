@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-12-04 Wed 21:56 -->
+<!-- 2025-09-16 Tue 13:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Homework 3</title>
@@ -21,36 +21,36 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org24d7592">Logistics</a>
+<li><a href="#logistics-1-P-6">Logistics</a>
 <ul>
-<li><a href="#org52bfc33">Robots</a></li>
+<li><a href="#robots-2-P-1">Robots</a></li>
 </ul>
 </li>
-<li><a href="#orgc8905ec">Part I: Gazebo Differential Drive Challenge</a>
+<li><a href="#part-i-gazebo-differential-drive-challenge-1-P-1">Part I: Gazebo Differential Drive Challenge</a>
 <ul>
-<li><a href="#orga571457">Creating the World</a></li>
-<li><a href="#orgc3d730c">The Xacro URDF</a>
+<li><a href="#creating-the-world-2-P-2">Creating the World</a></li>
+<li><a href="#the-xacro-urdf-2-P-2">The Xacro URDF</a>
 <ul>
-<li><a href="#org04bff68">Robot Description</a></li>
-<li><a href="#org55bd899">Gazebo Extensions</a></li>
-<li><a href="#org112b306">Control</a></li>
+<li><a href="#robot-description-3-P-2">Robot Description</a></li>
+<li><a href="#gazebo-extensions-3-P-2">Gazebo Extensions</a></li>
+<li><a href="#control-3-P-2">Control</a></li>
 </ul>
 </li>
-<li><a href="#org5c9c977">Hints</a></li>
+<li><a href="#hints-2-P-3">Hints</a></li>
 </ul>
 </li>
-<li><a href="#org75c97f1">Part II: Motion Planning</a>
+<li><a href="#part-ii-motion-planning-1-P-1">Part II: Motion Planning</a>
 <ul>
-<li><a href="#org4987be0">Hints</a></li>
-<li><a href="#orga457be5">Resources</a></li>
+<li><a href="#hints-2-P-4">Hints</a></li>
+<li><a href="#resources-2-P-1">Resources</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org24d7592" class="outline-2">
-<h2 id="org24d7592">Logistics</h2>
-<div class="outline-text-2" id="text-org24d7592">
+<div id="outline-container-logistics-1-P-6" class="outline-2">
+<h2 id="logistics-1-P-6">Logistics</h2>
+<div class="outline-text-2" id="text-orgc3e2461">
 <ol class="org-ol">
 <li>Create a git repository using the link provided in Canvas.</li>
 <li>Your homework will be submitted via this git repository.</li>
@@ -70,9 +70,9 @@ my_git_repository/arm_move/{package.xml, CMakeLists.txt, README.md, etc}
 </ol>
 </div>
 
-<div id="outline-container-org52bfc33" class="outline-3">
-<h3 id="org52bfc33">Robots</h3>
-<div class="outline-text-3" id="text-org52bfc33">
+<div id="outline-container-robots-2-P-1" class="outline-3">
+<h3 id="robots-2-P-1">Robots</h3>
+<div class="outline-text-3" id="text-org1934c61">
 <ol class="org-ol">
 <li>This assignment will use the <code>pincherX 100</code> robot.</li>
 <li>If you are not an MSR student, follow the setup guide: <a href="../pincherX100.html">PincherX 100</a></li>
@@ -81,9 +81,9 @@ my_git_repository/arm_move/{package.xml, CMakeLists.txt, README.md, etc}
 </div>
 </div>
 
-<div id="outline-container-orgc8905ec" class="outline-2">
-<h2 id="orgc8905ec">Part I: Gazebo Differential Drive Challenge</h2>
-<div class="outline-text-2" id="text-orgc8905ec">
+<div id="outline-container-part-i-gazebo-differential-drive-challenge-1-P-1" class="outline-2">
+<h2 id="part-i-gazebo-differential-drive-challenge-1-P-1">Part I: Gazebo Differential Drive Challenge</h2>
+<div class="outline-text-2" id="text-org67bdc44">
 <p>
 The challenge is to create a differential-drive robot that can be simulated in Gazebo and controlled by ROS.
 </p>
@@ -110,9 +110,9 @@ There is a hints section at the bottom of each section.
 </p>
 </div>
 
-<div id="outline-container-orga571457" class="outline-3">
-<h3 id="orga571457">Creating the World</h3>
-<div class="outline-text-3" id="text-orga571457">
+<div id="outline-container-creating-the-world-2-P-2" class="outline-3">
+<h3 id="creating-the-world-2-P-2">Creating the World</h3>
+<div class="outline-text-3" id="text-org001110a">
 <ol class="org-ol">
 <li>Use the Gazebo GUI to create your world.  Place an asphalt plane over the ground plane.
 Then add some Jersey Barriers (at least 2), A few cardboard boxes (at least 3) and something
@@ -124,13 +124,13 @@ it should launch gazebo and load the world you just created.</li>
 </div>
 </div>
 
-<div id="outline-container-orgc3d730c" class="outline-3">
-<h3 id="orgc3d730c">The Xacro URDF</h3>
-<div class="outline-text-3" id="text-orgc3d730c">
+<div id="outline-container-the-xacro-urdf-2-P-2" class="outline-3">
+<h3 id="the-xacro-urdf-2-P-2">The Xacro URDF</h3>
+<div class="outline-text-3" id="text-the-xacro-urdf-2-P-2">
 </div>
-<div id="outline-container-org04bff68" class="outline-4">
-<h4 id="org04bff68">Robot Description</h4>
-<div class="outline-text-4" id="text-org04bff68">
+<div id="outline-container-robot-description-3-P-2" class="outline-4">
+<h4 id="robot-description-3-P-2">Robot Description</h4>
+<div class="outline-text-4" id="text-org24df5f6">
 <ol class="org-ol">
 <li>The robot has a body consisting of a rectangular prism.  It has two cylindrical wheels on the front and a caster at the rear.
 <ul class="org-ul">
@@ -155,9 +155,9 @@ actually want the simulation to run.</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-org55bd899" class="outline-4">
-<h4 id="org55bd899">Gazebo Extensions</h4>
-<div class="outline-text-4" id="text-org55bd899">
+<div id="outline-container-gazebo-extensions-3-P-2" class="outline-4">
+<h4 id="gazebo-extensions-3-P-2">Gazebo Extensions</h4>
+<div class="outline-text-4" id="text-org64ae8ae">
 <ol class="org-ol">
 <li>Add gazebo materials to each of your links so they appear as an appropriate color.</li>
 <li><p>
@@ -203,9 +203,9 @@ by the differential drive gazebo plugin</li>
 </div>
 </div>
 
-<div id="outline-container-org112b306" class="outline-4">
-<h4 id="org112b306">Control</h4>
-<div class="outline-text-4" id="text-org112b306">
+<div id="outline-container-control-3-P-2" class="outline-4">
+<h4 id="control-3-P-2">Control</h4>
+<div class="outline-text-4" id="text-org09ad776">
 <ol class="org-ol">
 <li>Write a node called <code>flip</code> that makes the robot move back and forth along a line by flipping over itself rather than turning.
 (i.e., both wheels should move with the same velocity at all times). You will need to use the dynamics of the robot to accomplish this task.
@@ -217,9 +217,9 @@ You may find that the <code>teleop_twist_keyboard</code> package is useful for l
 </div>
 </div>
 </div>
-<div id="outline-container-org5c9c977" class="outline-3">
-<h3 id="org5c9c977">Hints</h3>
-<div class="outline-text-3" id="text-org5c9c977">
+<div id="outline-container-hints-2-P-3" class="outline-3">
+<h3 id="hints-2-P-3">Hints</h3>
+<div class="outline-text-3" id="text-org2b213bb">
 <ol class="org-ol">
 <li>If your model is loaded into the <code>/robot_description parameter</code>, and gazebo is running: 
 use <code>rosrun gazebo_ros spawn_model -urdf -param robot_description -model ddrive -b</code>
@@ -298,9 +298,9 @@ for this by always explicitly sending a <code>/cmd_vel</code> command of 0.</li>
 </div>
 </div>
 </div>
-<div id="outline-container-org75c97f1" class="outline-2">
-<h2 id="org75c97f1">Part II: Motion Planning</h2>
-<div class="outline-text-2" id="text-org75c97f1">
+<div id="outline-container-part-ii-motion-planning-1-P-1" class="outline-2">
+<h2 id="part-ii-motion-planning-1-P-1">Part II: Motion Planning</h2>
+<div class="outline-text-2" id="text-orga9feaf0">
 <ol class="org-ol">
 <li>You will do this final task on the real robot and in gazebo.</li>
 <li>The overall goal is to train a robot to follow a series of waypoints to grab an object</li>
@@ -364,9 +364,9 @@ a sequence of waypoints that allows the robot to pick up the object from a fixed
 <li>Include a link to a video in your README.md of the robot in gazebo and in the real world accomplishing its task</li>
 </ol>
 </div>
-<div id="outline-container-org4987be0" class="outline-3">
-<h3 id="org4987be0">Hints</h3>
-<div class="outline-text-3" id="text-org4987be0">
+<div id="outline-container-hints-2-P-4" class="outline-3">
+<h3 id="hints-2-P-4">Hints</h3>
+<div class="outline-text-3" id="text-orgc2b6a1b">
 <ol class="org-ol">
 <li>It is often easier to launch gazebo and keep it running.  Then just kill and manually restart your node</li>
 <li>You may wish to do the bulk of your testing with the <code>fake</code> MoveIt node prior to involving the simulation or the real robot.
@@ -417,9 +417,9 @@ increase the coefficient of friction on the grippers.</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-orga457be5" class="outline-3">
-<h3 id="orga457be5">Resources</h3>
-<div class="outline-text-3" id="text-orga457be5">
+<div id="outline-container-resources-2-P-1" class="outline-3">
+<h3 id="resources-2-P-1">Resources</h3>
+<div class="outline-text-3" id="text-orgb3d55f6">
 <ol class="org-ol">
 <li>The <a href="./lecture18_moveit.html">MoveIt Notes</a></li>
 <li>The <a href="./lecture09_gazebo.html">Gazebo notes</a></li>

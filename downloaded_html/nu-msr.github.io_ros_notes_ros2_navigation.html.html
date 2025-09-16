@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-12-04 Wed 21:56 -->
+<!-- 2025-09-16 Tue 13:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ROS Navigation</title>
@@ -21,19 +21,19 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org330fb27">Overview</a></li>
-<li><a href="#org74016d6">Frames of Reference</a></li>
-<li><a href="#org9a54a68">Conceptual Components</a></li>
-<li><a href="#org53d1cb2">Navigation Packages</a></li>
-<li><a href="#org9def43a">How To Run Navigation</a></li>
-<li><a href="#org1705e97">Other Packages (ROS 1)</a></li>
+<li><a href="#overview-1-P-10">Overview</a></li>
+<li><a href="#frames-of-reference-1-P-1">Frames of Reference</a></li>
+<li><a href="#conceptual-components-1-P-1">Conceptual Components</a></li>
+<li><a href="#navigation-packages-1-P-1">Navigation Packages</a></li>
+<li><a href="#how-to-run-navigation-1-P-1">How To Run Navigation</a></li>
+<li><a href="#other-packages-ros-1--1-P-1">Other Packages (ROS 1)</a></li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-org330fb27" class="outline-2">
-<h2 id="org330fb27">Overview</h2>
-<div class="outline-text-2" id="text-org330fb27">
+<div id="outline-container-overview-1-P-10" class="outline-2">
+<h2 id="overview-1-P-10">Overview</h2>
+<div class="outline-text-2" id="text-org3bd3c42">
 <ul class="org-ul">
 <li>ROS <a href="https://docs.nav2.org">Nav2</a> enables mobile robots to navigate in 2D</li>
 <li>Provides the ability to estimate the location of the robot based on feedback from multiple sensors</li>
@@ -48,9 +48,9 @@
 </div>
 
 
-<div id="outline-container-org74016d6" class="outline-2">
-<h2 id="org74016d6">Frames of Reference</h2>
-<div class="outline-text-2" id="text-org74016d6">
+<div id="outline-container-frames-of-reference-1-P-1" class="outline-2">
+<h2 id="frames-of-reference-1-P-1">Frames of Reference</h2>
+<div class="outline-text-2" id="text-org403043b">
 <ul class="org-ul">
 <li><a href="https://www.ros.org/reps/rep-0105.html">REP 105</a> defines standard ROS frames for robots, and the navigation stack adheres to this standard</li>
 <li>Your robot should have a frame called <code>base_link</code>, which is the root of the robot and is at its "chassis" center.
@@ -71,9 +71,9 @@ the transform from <code>map -&gt; base_link</code> is always the map estimate.<
 </div>
 </div>
 
-<div id="outline-container-org9a54a68" class="outline-2">
-<h2 id="org9a54a68">Conceptual Components</h2>
-<div class="outline-text-2" id="text-org9a54a68">
+<div id="outline-container-conceptual-components-1-P-1" class="outline-2">
+<h2 id="conceptual-components-1-P-1">Conceptual Components</h2>
+<div class="outline-text-2" id="text-orgc94a9bf">
 <ol class="org-ol">
 <li>Base Controller: Subscribes to a <code>geometry_msgs/Twist</code> (by default on the <code>cmd_vel</code> topic) and makes the robot move.
 <ul class="org-ul">
@@ -111,9 +111,9 @@ in order to retry planning</li>
 </div>
 </div>
 
-<div id="outline-container-org53d1cb2" class="outline-2">
-<h2 id="org53d1cb2">Navigation Packages</h2>
-<div class="outline-text-2" id="text-org53d1cb2">
+<div id="outline-container-navigation-packages-1-P-1" class="outline-2">
+<h2 id="navigation-packages-1-P-1">Navigation Packages</h2>
+<div class="outline-text-2" id="text-org29397b4">
 <p>
 Here is a brief overview of some important nav2 packages.
 </p>
@@ -142,9 +142,9 @@ the possible controls. Then it predicts a trajectory and rates it based on if th
 </ul>
 </div>
 </div>
-<div id="outline-container-org9def43a" class="outline-2">
-<h2 id="org9def43a">How To Run Navigation</h2>
-<div class="outline-text-2" id="text-org9def43a">
+<div id="outline-container-how-to-run-navigation-1-P-1" class="outline-2">
+<h2 id="how-to-run-navigation-1-P-1">How To Run Navigation</h2>
+<div class="outline-text-2" id="text-org492013c">
 <ul class="org-ul">
 <li>The <a href="https://navigation.ros.org/setup_guides/index.html">First-Time Robot Setup Guide</a> provides a quick guide on how to setup a robot for use with navigation2</li>
 <li>Run <code>ros2 launch nav2_bringup navigation_launch.py</code> to start navigation.
@@ -156,8 +156,8 @@ the possible controls. Then it predicts a trajectory and rates it based on if th
 </ul>
 </div>
 </div>
-<details id="org1705e97"><summary class="header-2">Other Packages (ROS 1)</summary>
-<div class="outline-text-2" id="text-org1705e97">
+<details id="orgf16b3ea"><summary class="header-2">Other Packages (ROS 1)</summary>
+<div class="outline-text-2" id="text-orgf16b3ea">
 <ul class="org-ul">
 <li><a href="https://wiki.ros.org/carrot_planner">carrot_planner</a> A global planner that gets robots as close to obstacles as possible</li>
 <li><a href="https://wiki.ros.org/sbpl">sbpl</a> Search based planning library: a global planner based on "motion primitives"</li>

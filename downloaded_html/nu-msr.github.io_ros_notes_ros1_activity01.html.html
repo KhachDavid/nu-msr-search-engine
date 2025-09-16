@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-12-04 Wed 21:56 -->
+<!-- 2025-09-16 Tue 13:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ROS Basic Activity</title>
@@ -21,23 +21,23 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgbe54613">Introduction</a></li>
-<li><a href="#org0258a92">Examples</a>
+<li><a href="#introduction-1-P-7">Introduction</a></li>
+<li><a href="#examples-1-P-1">Examples</a>
 <ul>
-<li><a href="#org6d4c9ef">Publisher</a></li>
-<li><a href="#org8c09408">Subscriber</a></li>
-<li><a href="#org85c6ebe">Services</a></li>
+<li><a href="#publisher-2-P-1">Publisher</a></li>
+<li><a href="#subscriber-2-P-1">Subscriber</a></li>
+<li><a href="#services-2-P-4">Services</a></li>
 </ul>
 </li>
-<li><a href="#orgb2e62aa">Reference</a></li>
-<li><a href="#orgd482248">Tutorials</a></li>
+<li><a href="#reference-1-P-2">Reference</a></li>
+<li><a href="#tutorials-1-P-3">Tutorials</a></li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-orgbe54613" class="outline-2">
-<h2 id="orgbe54613">Introduction</h2>
-<div class="outline-text-2" id="text-orgbe54613">
+<div id="outline-container-introduction-1-P-7" class="outline-2">
+<h2 id="introduction-1-P-7">Introduction</h2>
+<div class="outline-text-2" id="text-orgfdec3e4">
 <p>
 Create a node that accomplishes the following tasks:
 </p>
@@ -54,16 +54,16 @@ should then reset when it's x coordinate is smaller than 3.</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-org0258a92" class="outline-2">
-<h2 id="org0258a92">Examples</h2>
-<div class="outline-text-2" id="text-org0258a92">
+<div id="outline-container-examples-1-P-1" class="outline-2">
+<h2 id="examples-1-P-1">Examples</h2>
+<div class="outline-text-2" id="text-examples-1-P-1">
 </div>
-<div id="outline-container-org6d4c9ef" class="outline-3">
-<h3 id="org6d4c9ef">Publisher</h3>
-<div class="outline-text-3" id="text-org6d4c9ef">
+<div id="outline-container-publisher-2-P-1" class="outline-3">
+<h3 id="publisher-2-P-1">Publisher</h3>
+<div class="outline-text-3" id="text-org182b263">
 <div class="org-src-container">
-<pre class="src src-python"><span class="org-comment-delimiter">#</span><span class="org-comment">!/usr/bin/env python</span>
-
+<pre class="src src-python"><span class="org-comment-delimiter">#</span><span class="org-comment">!/usr/bin/env python
+</span>
 <span class="org-keyword">import</span> rospy
 <span class="org-keyword">from</span> geometry_msgs.msg <span class="org-keyword">import</span> Twist, Vector3
 
@@ -80,12 +80,12 @@ should then reset when it's x coordinate is smaller than 3.</li>
 </div>
 </div>
 
-<div id="outline-container-org8c09408" class="outline-3">
-<h3 id="org8c09408">Subscriber</h3>
-<div class="outline-text-3" id="text-org8c09408">
+<div id="outline-container-subscriber-2-P-1" class="outline-3">
+<h3 id="subscriber-2-P-1">Subscriber</h3>
+<div class="outline-text-3" id="text-org84f9e46">
 <div class="org-src-container">
-<pre class="src src-python"><span class="org-comment-delimiter">#</span><span class="org-comment">!/usr/bin/env python</span>
-<span class="org-keyword">import</span> rospy
+<pre class="src src-python"><span class="org-comment-delimiter">#</span><span class="org-comment">!/usr/bin/env python
+</span><span class="org-keyword">import</span> rospy
 <span class="org-keyword">from</span> turtlesim.msg <span class="org-keyword">import</span> Pose
 
 <span class="org-keyword">def</span> <span class="org-function-name">callback</span>(data):
@@ -101,14 +101,14 @@ should then reset when it's x coordinate is smaller than 3.</li>
 </div>
 </div>
 
-<div id="outline-container-org85c6ebe" class="outline-3">
-<h3 id="org85c6ebe">Services</h3>
-<div class="outline-text-3" id="text-org85c6ebe">
+<div id="outline-container-services-2-P-4" class="outline-3">
+<h3 id="services-2-P-4">Services</h3>
+<div class="outline-text-3" id="text-org68b3afa">
 <div class="org-src-container">
-<pre class="src src-python"><span class="org-doc">"""</span>
-<span class="org-doc">SERVICES:</span>
-<span class="org-doc">   jump_turtle (std_srvs/Empty): Cause the turtle to jump</span>
-<span class="org-doc">"""</span>
+<pre class="src src-python"><span class="org-doc">"""
+SERVICES:
+   jump_turtle (std_srvs/Empty): Cause the turtle to jump
+"""</span>
 <span class="org-keyword">import</span> rospy
 <span class="org-keyword">from</span> turtlesim.srv <span class="org-keyword">import</span> TeleportRelative
 <span class="org-keyword">from</span> std_srvs.srv <span class="org-keyword">import</span> Empty, EmptyResponse
@@ -122,11 +122,11 @@ should then reset when it's x coordinate is smaller than 3.</li>
       <span class="org-keyword">self</span>.<span class="org-variable-name">__service</span> <span class="org-operator">=</span> rospy.Service(<span class="org-string">"jump_turtle"</span>, Empty, <span class="org-keyword">self</span>.jump_turtle_handler)
 
    <span class="org-keyword">def</span> <span class="org-function-name">jump_turtle_handler</span>(<span class="org-keyword">self</span>, req):
-      <span class="org-doc">""" Cause the turtle to make a relative move </span>
+      <span class="org-doc">""" Cause the turtle to make a relative move 
 
-<span class="org-doc">          Args:</span>
-<span class="org-doc">            req - this is empty for this service</span>
-<span class="org-doc">      """</span>
+          Args:
+            req - this is empty for this service
+      """</span>
       <span class="org-keyword">self</span>.__teleport_relative(0.5, math.pi<span class="org-operator">/</span>4)
       <span class="org-keyword">return</span> EmptyResponse()
 
@@ -141,17 +141,17 @@ should then reset when it's x coordinate is smaller than 3.</li>
 </div>
 </div>
 
-<div id="outline-container-orgb2e62aa" class="outline-2">
-<h2 id="orgb2e62aa">Reference</h2>
-<div class="outline-text-2" id="text-orgb2e62aa">
+<div id="outline-container-reference-1-P-2" class="outline-2">
+<h2 id="reference-1-P-2">Reference</h2>
+<div class="outline-text-2" id="text-org142ae45">
 <ul class="org-ul">
 <li><a href="http://wiki.ros.org/rospy/Overview">Rospy Overview</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgd482248" class="outline-2">
-<h2 id="orgd482248">Tutorials</h2>
-<div class="outline-text-2" id="text-orgd482248">
+<div id="outline-container-tutorials-1-P-3" class="outline-2">
+<h2 id="tutorials-1-P-3">Tutorials</h2>
+<div class="outline-text-2" id="text-org69729df">
 <ol class="org-ol">
 <li><a href="https://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment">Create Your First Workspace</a></li>
 <li><a href="https://wiki.ros.org/ROS/Tutorials/CreatingPackage">Create Your First Package</a></li>

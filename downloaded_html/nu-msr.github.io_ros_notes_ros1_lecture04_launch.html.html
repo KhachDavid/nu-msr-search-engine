@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-12-04 Wed 21:56 -->
+<!-- 2025-09-16 Tue 13:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Launchfiles</title>
@@ -21,20 +21,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org4fae7a2">Launchfiles and ROS</a></li>
-<li><a href="#org956aa6c">Using roslaunch</a>
+<li><a href="#launchfiles-and-ros-1-P-2">Launchfiles and ROS</a></li>
+<li><a href="#using-roslaunch-1-P-1">Using roslaunch</a>
 <ul>
-<li><a href="#orgcf265f8">Roslaunch options</a></li>
+<li><a href="#roslaunch-options-2-P-1">Roslaunch options</a></li>
 </ul>
 </li>
-<li><a href="#org9625c97">Writing a Launchfile</a></li>
-<li><a href="#orge9db084">References</a></li>
+<li><a href="#writing-a-launchfile-1-P-1">Writing a Launchfile</a></li>
+<li><a href="#references-1-P-3">References</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org4fae7a2" class="outline-2">
-<h2 id="org4fae7a2">Launchfiles and ROS</h2>
-<div class="outline-text-2" id="text-org4fae7a2">
+<div id="outline-container-launchfiles-and-ros-1-P-2" class="outline-2">
+<h2 id="launchfiles-and-ros-1-P-2">Launchfiles and ROS</h2>
+<div class="outline-text-2" id="text-orgd12c16f">
 <ul class="org-ul">
 <li>ROS programs consist of many nodes communicating over topics and services</li>
 <li>For non-trivial programs, manually running nodes using <code>rosrun</code> becomes tedious
@@ -50,9 +50,9 @@ and hard to reproduce</li>
 </div>
 </div>
 
-<div id="outline-container-org956aa6c" class="outline-2">
-<h2 id="org956aa6c">Using roslaunch</h2>
-<div class="outline-text-2" id="text-org956aa6c">
+<div id="outline-container-using-roslaunch-1-P-1" class="outline-2">
+<h2 id="using-roslaunch-1-P-1">Using roslaunch</h2>
+<div class="outline-text-2" id="text-orgec29c33">
 <ul class="org-ul">
 <li>The command-line tool for using launch files is <a href="https://wiki.ros.org/roslaunch">roslaunch</a>.</li>
 <li>There are two ways of invoking a launchfile:
@@ -69,9 +69,9 @@ which is shared with the remapping arguments syntax.</li>
 <li><code>roslaunch</code> automatically starts <code>roscore</code>, if it is not already running.</li>
 </ul>
 </div>
-<div id="outline-container-orgcf265f8" class="outline-3">
-<h3 id="orgcf265f8">Roslaunch options</h3>
-<div class="outline-text-3" id="text-orgcf265f8">
+<div id="outline-container-roslaunch-options-2-P-1" class="outline-3">
+<h3 id="roslaunch-options-2-P-1">Roslaunch options</h3>
+<div class="outline-text-3" id="text-org410e8f3">
 <p>
 Note: - <code>roslaunch --help</code> provides more options
 </p>
@@ -86,9 +86,9 @@ the behavior of the launchfile.  This flag shows all the possible arguments and 
 </div>
 </div>
 </div>
-<div id="outline-container-org9625c97" class="outline-2">
-<h2 id="org9625c97">Writing a Launchfile</h2>
-<div class="outline-text-2" id="text-org9625c97">
+<div id="outline-container-writing-a-launchfile-1-P-1" class="outline-2">
+<h2 id="writing-a-launchfile-1-P-1">Writing a Launchfile</h2>
+<div class="outline-text-2" id="text-org5e55840">
 <ol class="org-ol">
 <li>The <a href="http://wiki.ros.org/roslaunch/XML">Launchfile format</a> relies on XML
 along with a special enhanced substitution argument syntax.</li>
@@ -143,9 +143,9 @@ passed in on the call to <code>roslaunch</code></li>
 </div>
 </div>
 
-<div id="outline-container-orge9db084" class="outline-2">
-<h2 id="orge9db084">References</h2>
-<div class="outline-text-2" id="text-orge9db084">
+<div id="outline-container-references-1-P-3" class="outline-2">
+<h2 id="references-1-P-3">References</h2>
+<div class="outline-text-2" id="text-orgba4c2fc">
 <ul class="org-ul">
 <li><a href="http://wiki.ros.org/roslaunch">Roslaunch</a></li>
 <li><a href="http://wiki.ros.org/roslaunch/XML">Roslaunch XML format</a></li>

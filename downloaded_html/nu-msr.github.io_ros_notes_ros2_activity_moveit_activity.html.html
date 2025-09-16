@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-12-04 Wed 21:56 -->
+<!-- 2025-09-16 Tue 13:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MoveWhat? Activity</title>
@@ -21,34 +21,34 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org5fe08cd">Introduction</a></li>
-<li><a href="#org914e9eb">Preliminaries</a></li>
-<li><a href="#org1e02346">First Steps</a>
+<li><a href="#introduction-1-P-2">Introduction</a></li>
+<li><a href="#preliminaries-1-P-1">Preliminaries</a></li>
+<li><a href="#first-steps-1-P-1">First Steps</a>
 <ul>
-<li><a href="#org4e24ea9">Rviz2</a></li>
-<li><a href="#orgddb8dc2">Motion Plan</a>
+<li><a href="#rviz2-2-P-1">Rviz2</a></li>
+<li><a href="#motion-plan-2-P-1">Motion Plan</a>
 <ul>
-<li><a href="#org88233cf">Joints</a></li>
+<li><a href="#joints-3-P-1">Joints</a></li>
 </ul>
 </li>
-<li><a href="#orgacfa5bb">Planning Scene</a></li>
+<li><a href="#planning-scene-2-P-1">Planning Scene</a></li>
 </ul>
 </li>
-<li><a href="#org078af8e">How It Works</a>
+<li><a href="#how-it-works-1-P-1">How It Works</a>
 <ul>
-<li><a href="#org59ef7de">The Plan</a></li>
-<li><a href="#orgc87053a">Basic Action Inspection</a></li>
-<li><a href="#org0b85d08">Documentation</a></li>
-<li><a href="#org9561ffd">Answers</a></li>
+<li><a href="#the-plan-2-P-1">The Plan</a></li>
+<li><a href="#basic-action-inspection-2-P-1">Basic Action Inspection</a></li>
+<li><a href="#documentation-2-P-1">Documentation</a></li>
+<li><a href="#answers-2-P-1">Answers</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-org5fe08cd" class="outline-2">
-<h2 id="org5fe08cd">Introduction</h2>
-<div class="outline-text-2" id="text-org5fe08cd">
+<div id="outline-container-introduction-1-P-2" class="outline-2">
+<h2 id="introduction-1-P-2">Introduction</h2>
+<div class="outline-text-2" id="text-org1839515">
 <ol class="org-ol">
 <li>MoveIt 2 is a massive package, with many features, but it is still under development and is under-documented.</li>
 <li>To make our robot move, without using C++, we will need to do some detective work</li>
@@ -57,18 +57,18 @@
 </div>
 </div>
 
-<div id="outline-container-org914e9eb" class="outline-2">
-<h2 id="org914e9eb">Preliminaries</h2>
-<div class="outline-text-2" id="text-org914e9eb">
+<div id="outline-container-preliminaries-1-P-1" class="outline-2">
+<h2 id="preliminaries-1-P-1">Preliminaries</h2>
+<div class="outline-text-2" id="text-org1006c0e">
 <ol class="org-ol">
 <li>Setup the <a href="..//franka.html#franka_setup">franka workspace</a> on your computer.</li>
 </ol>
 </div>
 </div>
 
-<div id="outline-container-org1e02346" class="outline-2">
-<h2 id="org1e02346">First Steps</h2>
-<div class="outline-text-2" id="text-org1e02346">
+<div id="outline-container-first-steps-1-P-1" class="outline-2">
+<h2 id="first-steps-1-P-1">First Steps</h2>
+<div class="outline-text-2" id="text-org54f2d8d">
 <ol class="org-ol">
 <li>To start the franka robot <code>ros2 launch franka_fer_moveit_config demo.launch.py</code>
 <ul class="org-ul">
@@ -79,9 +79,9 @@ joint positions as inputs and returns fake joint states as sensor data.</li>
 </ol>
 </div>
 
-<div id="outline-container-org4e24ea9" class="outline-3">
-<h3 id="org4e24ea9">Rviz2</h3>
-<div class="outline-text-3" id="text-org4e24ea9">
+<div id="outline-container-rviz2-2-P-1" class="outline-3">
+<h3 id="rviz2-2-P-1">Rviz2</h3>
+<div class="outline-text-3" id="text-org5e4eeb5">
 <ol class="org-ol">
 <li>There are two new Rviz widgets (which show up in the left-pane) that have been added by the setup when you run these launch files
 <ul class="org-ul">
@@ -93,9 +93,9 @@ joint positions as inputs and returns fake joint states as sensor data.</li>
 </div>
 </div>
 
-<div id="outline-container-orgddb8dc2" class="outline-3">
-<h3 id="orgddb8dc2">Motion Plan</h3>
-<div class="outline-text-3" id="text-orgddb8dc2">
+<div id="outline-container-motion-plan-2-P-1" class="outline-3">
+<h3 id="motion-plan-2-P-1">Motion Plan</h3>
+<div class="outline-text-3" id="text-org44f66bc">
 <ol class="org-ol">
 <li>You should see an orange overlay on the robot.
 <ul class="org-ul">
@@ -131,9 +131,9 @@ joint positions as inputs and returns fake joint states as sensor data.</li>
 </ul></li>
 </ol>
 </div>
-<div id="outline-container-org88233cf" class="outline-4">
-<h4 id="org88233cf">Joints</h4>
-<div class="outline-text-4" id="text-org88233cf">
+<div id="outline-container-joints-3-P-1" class="outline-4">
+<h4 id="joints-3-P-1">Joints</h4>
+<div class="outline-text-4" id="text-org8964285">
 <ol class="org-ol">
 <li>The Joints tab allows you to plan to a specific joint configuration rather than an end-effector configuration</li>
 <li>Notice that if you move the marker at the end-effector, the joint states move as well indicating that inverse kinematics is happening here!
@@ -144,9 +144,9 @@ joint positions as inputs and returns fake joint states as sensor data.</li>
 </div>
 </div>
 </div>
-<div id="outline-container-orgacfa5bb" class="outline-3">
-<h3 id="orgacfa5bb">Planning Scene</h3>
-<div class="outline-text-3" id="text-orgacfa5bb">
+<div id="outline-container-planning-scene-2-P-1" class="outline-3">
+<h3 id="planning-scene-2-P-1">Planning Scene</h3>
+<div class="outline-text-3" id="text-org1200f29">
 <ol class="org-ol">
 <li>Under the <i>Scene Objects</i> tab, you can manipulate obstacles in the environment
 <ol class="org-ol">
@@ -179,9 +179,9 @@ joint positions as inputs and returns fake joint states as sensor data.</li>
 </div>
 </div>
 
-<div id="outline-container-org078af8e" class="outline-2">
-<h2 id="org078af8e">How It Works</h2>
-<div class="outline-text-2" id="text-org078af8e">
+<div id="outline-container-how-it-works-1-P-1" class="outline-2">
+<h2 id="how-it-works-1-P-1">How It Works</h2>
+<div class="outline-text-2" id="text-orged41b5f">
 <ol class="org-ol">
 <li>The <a href="https://moveit.picknik.ai/main/index.html">Moveit Documentation</a> provides an overview, particularly the <a href="https://moveit.picknik.ai/main/doc/concepts/move_group.html">Move Group</a> diagram.</li>
 <li>The <a href="http://docs.ros.org/en/jazzy/p/moveit_msgs/">moveit_msgs</a> documentation explains how to use the ROS API for the <code>/move_group</code> node.</li>
@@ -206,9 +206,9 @@ joint positions as inputs and returns fake joint states as sensor data.</li>
 </ul></li>
 </ol>
 </div>
-<div id="outline-container-org59ef7de" class="outline-3">
-<h3 id="org59ef7de">The Plan</h3>
-<div class="outline-text-3" id="text-org59ef7de">
+<div id="outline-container-the-plan-2-P-1" class="outline-3">
+<h3 id="the-plan-2-P-1">The Plan</h3>
+<div class="outline-text-3" id="text-org49bfa3c">
 <ol class="org-ol">
 <li>Let's use our working interface to the move-group node (that is, Rviz) to help us better understand how the ROS API for the <code>/move_group</code> node works
 <ul class="org-ul">
@@ -228,9 +228,9 @@ joint positions as inputs and returns fake joint states as sensor data.</li>
 </div>
 </div>
 
-<div id="outline-container-orgc87053a" class="outline-3">
-<h3 id="orgc87053a">Basic Action Inspection</h3>
-<div class="outline-text-3" id="text-orgc87053a">
+<div id="outline-container-basic-action-inspection-2-P-1" class="outline-3">
+<h3 id="basic-action-inspection-2-P-1">Basic Action Inspection</h3>
+<div class="outline-text-3" id="text-org30a3b98">
 <ol class="org-ol">
 <li>Make a new package to inspect actions</li>
 <li>Create a node and an action Server for <code>/viz/move_action</code>:
@@ -262,9 +262,9 @@ Write a launchfile that
             output<span class="org-operator">=</span><span class="org-string">"log"</span>,
             arguments<span class="org-operator">=</span>[<span class="org-string">"-d"</span>, PathJoinSubstitution([FindPackageShare(<span class="org-string">"franka_fer_moveit_config"</span>), <span class="org-string">"config"</span>, <span class="org-string">"moveit.rviz"</span>])],
             parameters <span class="org-operator">=</span> [ moveit_config.planning_pipelines, moveit_config.robot_description_kinematics],
-            <span class="org-comment-delimiter"># </span><span class="org-comment">Remapping actions not implemented, must remap individual topics/services</span>
-            <span class="org-comment-delimiter"># </span><span class="org-comment">https://github.com/ros2/ros2/issues/1312 Accessed on 10/30/2024</span>
-            remappings <span class="org-operator">=</span> [(<span class="org-string">"/move_action/_action/feedback"</span>, <span class="org-string">"/viz/move_action/_action/feedback"</span>),
+            <span class="org-comment-delimiter"># </span><span class="org-comment">Remapping actions not implemented, must remap individual topics/services
+</span>            <span class="org-comment-delimiter"># </span><span class="org-comment">https://github.com/ros2/ros2/issues/1312 Accessed on 10/30/2024
+</span>            remappings <span class="org-operator">=</span> [(<span class="org-string">"/move_action/_action/feedback"</span>, <span class="org-string">"/viz/move_action/_action/feedback"</span>),
                         (<span class="org-string">"/move_action/_action/status"</span>, <span class="org-string">"/viz/move_action/_action/status"</span>),
                         (<span class="org-string">"/move_action/_action/cancel_goal"</span>, <span class="org-string">"/viz/move_action/_action/cancel_goal"</span>),
                         (<span class="org-string">"/move_action/_action/get_result"</span>, <span class="org-string">"/viz/move_action/_action/get_result"</span>),
@@ -303,9 +303,9 @@ responses back. This can get complicated for actions because there are several m
 </div>
 </div>
 
-<div id="outline-container-org0b85d08" class="outline-3">
-<h3 id="org0b85d08">Documentation</h3>
-<div class="outline-text-3" id="text-org0b85d08">
+<div id="outline-container-documentation-2-P-1" class="outline-3">
+<h3 id="documentation-2-P-1">Documentation</h3>
+<div class="outline-text-3" id="text-org45e617c">
 <ul class="org-ul">
 <li>It is not necessary to fully reverse engineer the action service. Though it can be helpful because <code>rviz</code> provides a working example of using the ROS API.</li>
 <li>The API documentation for <code>moveit_msgs</code> (available on <a href="https://index.ros.org">https://index.ros.org</a>) is very helpful for understanding the capabilities of the <code>/move_action</code></li>
@@ -314,8 +314,8 @@ responses back. This can get complicated for actions because there are several m
 </div>
 </div>
 
-<details id="org9561ffd"><summary class="header-3">Answers</summary>
-<div class="outline-text-3" id="text-org9561ffd">
+<details id="org0ac73ac"><summary class="header-3">Answers</summary>
+<div class="outline-text-3" id="text-org0ac73ac">
 <ol class="org-ol">
 <li>Here is a repository (<a href="https://github.com/m-elwin/me495_inspector">https://github.com/m-elwin/me495_inspector</a>) that intercepts and forwards actions from <code>rviz</code> to the move_group node.
 <ul class="org-ul">

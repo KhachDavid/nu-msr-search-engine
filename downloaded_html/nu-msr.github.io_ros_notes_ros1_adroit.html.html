@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-12-04 Wed 21:56 -->
+<!-- 2025-09-16 Tue 13:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>HDT Adroit 6DOF Manipulator</title>
@@ -21,18 +21,18 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgba7a96e">Introduction</a></li>
-<li><a href="#orgde1fb13">Setup</a></li>
-<li><a href="#org9d7ea2d">Control</a></li>
-<li><a href="#org333e47d">Usage</a></li>
-<li><a href="#org254813d">Resources</a></li>
+<li><a href="#introduction-1-P-5">Introduction</a></li>
+<li><a href="#setup-1-P-2">Setup</a></li>
+<li><a href="#control-1-P-1">Control</a></li>
+<li><a href="#usage-1-P-1">Usage</a></li>
+<li><a href="#resources-1-P-7">Resources</a></li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-orgba7a96e" class="outline-2">
-<h2 id="orgba7a96e">Introduction</h2>
-<div class="outline-text-2" id="text-orgba7a96e">
+<div id="outline-container-introduction-1-P-5" class="outline-2">
+<h2 id="introduction-1-P-5">Introduction</h2>
+<div class="outline-text-2" id="text-orgd019ea2">
 <p>
 The Adroit robot arm is light-weight yet very strong 6-DOF robot manipulator arm.
 No Joint Limits!
@@ -40,9 +40,9 @@ No Joint Limits!
 </div>
 </div>
 
-<div id="outline-container-orgde1fb13" class="outline-2">
-<h2 id="orgde1fb13">Setup</h2>
-<div class="outline-text-2" id="text-orgde1fb13">
+<div id="outline-container-setup-1-P-2" class="outline-2">
+<h2 id="setup-1-P-2">Setup</h2>
+<div class="outline-text-2" id="text-orgc8b6c4a">
 <ol class="org-ol">
 <li>The adroit arm has a power switch and an estop.  The e-stop cuts off power to the arm</li>
 <li>You connect to the adroit arm via ethernet. 
@@ -78,9 +78,9 @@ git clone git@github.com:NU-MSR/hdt_6dof_a24_pincer.git
 </div>
 </div>
 
-<div id="outline-container-org9d7ea2d" class="outline-2">
-<h2 id="org9d7ea2d">Control</h2>
-<div class="outline-text-2" id="text-org9d7ea2d">
+<div id="outline-container-control-1-P-1" class="outline-2">
+<h2 id="control-1-P-1">Control</h2>
+<div class="outline-text-2" id="text-org1b00e64">
 <ol class="org-ol">
 <li>The adroit arm is primarily controlled via moveit.  The arm relies on moveit to prevent self-collisions</li>
 <li>The arm has a very high gear ratio and you should not attempt to backdrive it.</li>
@@ -89,9 +89,9 @@ git clone git@github.com:NU-MSR/hdt_6dof_a24_pincer.git
 </div>
 </div>
 
-<div id="outline-container-org333e47d" class="outline-2">
-<h2 id="org333e47d">Usage</h2>
-<div class="outline-text-2" id="text-org333e47d">
+<div id="outline-container-usage-1-P-1" class="outline-2">
+<h2 id="usage-1-P-1">Usage</h2>
+<div class="outline-text-2" id="text-orgb4d198b">
 <ol class="org-ol">
 <li><code>roslaunch hdt_6dof_a24_pincer_bringup hdt_arm_bringup_1.launch controller_type:=xbox</code> to launch the robot with the xbox controller.</li>
 <li>Note: you cannot use moveit and the xbox controller at the same time (at least I have not yet figured out how to with the existing source code). 
@@ -101,9 +101,9 @@ git clone git@github.com:NU-MSR/hdt_6dof_a24_pincer.git
 </ol>
 </div>
 </div>
-<div id="outline-container-org254813d" class="outline-2">
-<h2 id="org254813d">Resources</h2>
-<div class="outline-text-2" id="text-org254813d">
+<div id="outline-container-resources-1-P-7" class="outline-2">
+<h2 id="resources-1-P-7">Resources</h2>
+<div class="outline-text-2" id="text-org73d75b7">
 <ul class="org-ul">
 <li><a href="http://www.hdtglobal.com/product/build-your-own/">HDT Adroit Arm</a></li>
 </ul>

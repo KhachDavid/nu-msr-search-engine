@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-12-04 Wed 21:56 -->
+<!-- 2025-09-16 Tue 13:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Packages and Workspaces</title>
@@ -23,7 +23,7 @@
 <ul>
 <li><a href="#packages">Packages</a>
 <ul>
-<li><a href="#org820efd0">Package Structure</a></li>
+<li><a href="#package-structure-2-P-1">Package Structure</a></li>
 <li><a href="#package_xml">package.xml</a></li>
 <li><a href="#ament_python">Ament Python Packages</a></li>
 <li><a href="#ament_cmake">Ament CMake Packages</a></li>
@@ -31,30 +31,30 @@
 </li>
 <li><a href="#custom_interfaces">Custom Interfaces</a>
 <ul>
-<li><a href="#org61449f8">Defining Custom Interfaces</a></li>
-<li><a href="#org5df5152">Using Interfaces</a></li>
+<li><a href="#defining-custom-interfaces-2-P-1">Defining Custom Interfaces</a></li>
+<li><a href="#using-interfaces-2-P-1">Using Interfaces</a></li>
 </ul>
 </li>
 <li><a href="#workspace">Workspace</a>
 <ul>
-<li><a href="#orga35c62c">Structure</a></li>
-<li><a href="#orgc02e5c1">Building a Workspace</a></li>
-<li><a href="#org44ac58d">Using a Workspace</a></li>
+<li><a href="#structure-2-P-1">Structure</a></li>
+<li><a href="#building-a-workspace-2-P-1">Building a Workspace</a></li>
+<li><a href="#using-a-workspace-2-P-1">Using a Workspace</a></li>
 </ul>
 </li>
-<li><a href="#orge3b0ab7">Colcon</a>
+<li><a href="#colcon-1-P-1">Colcon</a>
 <ul>
-<li><a href="#orgb9ee732">colcon_cd</a></li>
-<li><a href="#org9e85314">colcon_clean</a></li>
+<li><a href="#colcon-cd-2-P-1">colcon_cd</a></li>
+<li><a href="#colcon-clean-2-P-1">colcon_clean</a></li>
 <li><a href="#colcon-pkg">colcon.pkg</a></li>
 </ul>
 </li>
-<li><a href="#orga2bfa86">ROS Environment</a>
+<li><a href="#ros-environment-1-P-1">ROS Environment</a>
 <ul>
-<li><a href="#org4730529">Overlays</a></li>
+<li><a href="#overlays-2-P-1">Overlays</a></li>
 </ul>
 </li>
-<li><a href="#orgab5d0f1">Python Virtual Environments</a>
+<li><a href="#python-virtual-environments-1-P-1">Python Virtual Environments</a>
 <ul>
 <li><a href="#pip_ros">Using Pip Packages with ROS 2</a></li>
 </ul>
@@ -66,22 +66,22 @@
 <h2 id="packages">Packages</h2>
 <div class="outline-text-2" id="text-packages">
 <p>
-A ROS <a href="https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html">Package</a> is a collection of source code and
+A ROS <a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html">Package</a> is a collection of source code and
 other resources that is distributed as a single unit.
 </p>
 <ul class="org-ul">
 <li>Binary versions of ROS packages are distributed on ROS's package server and can be downloaded via <code>apt</code> (as done when you installed ROS).
 <ul class="org-ul">
-<li>The naming convention when using apt is to do <code>ros-jazzy-package-name</code> where <code>package-name</code> is the name of the package, with underscores <code>_</code> converted to dashes <code>-</code>.</li>
+<li>The naming convention when using apt is to do <code>ros-kilted-package-name</code> where <code>package-name</code> is the name of the package, with underscores <code>_</code> converted to dashes <code>-</code>.</li>
 </ul></li>
 <li>The source code for ROS packages can be easily downloaded and compiled.</li>
 <li>It is easier and less time consuming to download a package, but to create ROS code you need to create a package.</li>
 </ul>
 </div>
 
-<div id="outline-container-org820efd0" class="outline-3">
-<h3 id="org820efd0">Package Structure</h3>
-<div class="outline-text-3" id="text-org820efd0">
+<div id="outline-container-package-structure-2-P-1" class="outline-3">
+<h3 id="package-structure-2-P-1">Package Structure</h3>
+<div class="outline-text-3" id="text-orgebbaa66">
 <ol class="org-ol">
 <li>All ROS packages have a base directory containing a manifest file called <code>package.xml</code>.
 <ul class="org-ul">
@@ -91,9 +91,9 @@ other resources that is distributed as a single unit.
 </ul></li>
 <li>An important element of <code>package.xml</code> is the <code>&lt;export&gt;&lt;build_type&gt;</code>, which determines the type of package
 <ul class="org-ul">
-<li><a href="https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html">ament python</a> is used for pure python packages.</li>
-<li><a href="https://docs.ros.org/en/jazzy/How-To-Guides/Ament-CMake-Documentation.html">ament_cmake</a> is used for C++ packages and packages that define custom Messages, Services, or Actions (i.e., Interfaces)</li>
-<li><a href="https://docs.ros.org/en/jazzy/How-To-Guides/Ament-CMake-Python-Documentation.html">ament_cmake_python</a> is for packages with mixed python/C++ code.</li>
+<li><a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html">ament python</a> is used for pure python packages.</li>
+<li><a href="https://docs.ros.org/en/kilted/How-To-Guides/Ament-CMake-Documentation.html">ament_cmake</a> is used for C++ packages and packages that define custom Messages, Services, or Actions (i.e., Interfaces)</li>
+<li><a href="https://docs.ros.org/en/kilted/How-To-Guides/Ament-CMake-Python-Documentation.html">ament_cmake_python</a> is for packages with mixed python/C++ code.</li>
 </ul></li>
 </ol>
 </div>
@@ -103,9 +103,9 @@ other resources that is distributed as a single unit.
 <h3 id="package_xml">package.xml</h3>
 <div class="outline-text-3" id="text-package_xml">
 </div>
-<div id="outline-container-orgbb7c503" class="outline-4">
-<h4 id="orgbb7c503">Required Elements</h4>
-<div class="outline-text-4" id="text-orgbb7c503">
+<div id="outline-container-required-elements-3-P-1" class="outline-4">
+<h4 id="required-elements-3-P-1">Required Elements</h4>
+<div class="outline-text-4" id="text-org46b0a9f">
 <ul class="org-ul">
 <li><code>&lt;name&gt;</code> The package name</li>
 <li><code>&lt;version&gt;</code> The package Version</li>
@@ -116,9 +116,9 @@ other resources that is distributed as a single unit.
 </div>
 </div>
 
-<div id="outline-container-orgea81c6a" class="outline-4">
-<h4 id="orgea81c6a">Specifying Dependencies</h4>
-<div class="outline-text-4" id="text-orgea81c6a">
+<div id="outline-container-specifying-dependencies-3-P-1" class="outline-4">
+<h4 id="specifying-dependencies-3-P-1">Specifying Dependencies</h4>
+<div class="outline-text-4" id="text-org53e25b1">
 <p>
 There are multiple types of dependencies.  The most important are:
 </p>
@@ -139,11 +139,11 @@ In python especially, whenever you have a <code>&lt;build_depend&gt;</code> you 
 use <code>&lt;depend&gt;</code>.</li>
 <li>The tool <a href="https://docs.ros.org/en/independent/api/rosdep/html/">rosdep</a> analyzes the dependencies in <code>package.xml</code> and can
 automatically install missing dependencies.</li>
-<li>The <a href="https://docs.ros.org/en/jazzy/Tutorials/Intermediate/Rosdep.html">rosdep tutorial</a> explains these dependency types.</li>
+<li>The <a href="https://docs.ros.org/en/kilted/Tutorials/Intermediate/Rosdep.html">rosdep tutorial</a> explains these dependency types.</li>
 </ul>
 </div>
-<details id="orga5ee2a5"><summary class="header-5">Advanced Dependencies</summary>
-<div class="outline-text-5" id="text-orga5ee2a5">
+<details id="orgb33ad3e"><summary class="header-5">Advanced Dependencies</summary>
+<div class="outline-text-5" id="text-orgb33ad3e">
 <p>
 While it is important to get the dependencies correct, you will notice that (especially with python), your project will still work even if <code>package.xml</code> does not have all dependencies.
 There are a few reasons why this can happen
@@ -162,9 +162,9 @@ It is also possible that (due to parallel builds) <code>B</code> happens to fini
 </div>
 
 
-<div id="outline-container-org6f0ddb9" class="outline-4">
-<h4 id="org6f0ddb9">Groups</h4>
-<div class="outline-text-4" id="text-org6f0ddb9">
+<div id="outline-container-groups-3-P-1" class="outline-4">
+<h4 id="groups-3-P-1">Groups</h4>
+<div class="outline-text-4" id="text-org8d72ef0">
 <ul class="org-ul">
 <li><code>&lt;member_of_group&gt;</code> In ROS 2 (but not ROS 1) packages can be placed in a group, which is a collection of packages that share something in common.
 <ul class="org-ul">
@@ -184,7 +184,7 @@ These packages would depend on <code>rosidl_interface_packages</code> so that if
 <h3 id="ament_python">Ament Python Packages</h3>
 <div class="outline-text-3" id="text-ament_python">
 <ul class="org-ul">
-<li><a href="https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html">Ament Python</a> is the preferred package type for pure python ROS 2 packages</li>
+<li><a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html">Ament Python</a> is the preferred package type for pure python ROS 2 packages</li>
 <li>Boilerplate for this package can be created using <code>ros2 pkg create --build-type ament_python</code></li>
 <li><p>
 The directory structure is:
@@ -215,9 +215,9 @@ pkg_name/
 </div>
 
 
-<div id="outline-container-orgfe7bfc2" class="outline-4">
-<h4 id="orgfe7bfc2">setup.py</h4>
-<div class="outline-text-4" id="text-orgfe7bfc2">
+<div id="outline-container-setup-py-3-P-1" class="outline-4">
+<h4 id="setup-py-3-P-1">setup.py</h4>
+<div class="outline-text-4" id="text-orgd2dcd36">
 <ul class="org-ul">
 <li>It is based on <a href="https://setuptools.pypa.io/en/latest/">setuptools</a>, a commonly used python packaging system created by <code>pypa</code>, the organization behind <code>pip</code>.</li>
 <li>Contains meta-information (which must be manually synchronized with <code>package.xml</code>).</li>
@@ -238,9 +238,9 @@ pkg_name/
 </ul>
 </div>
 </div>
-<div id="outline-container-org31b780a" class="outline-4">
-<h4 id="org31b780a">setup.cfg</h4>
-<div class="outline-text-4" id="text-org31b780a">
+<div id="outline-container-setup-cfg-3-P-1" class="outline-4">
+<h4 id="setup-cfg-3-P-1">setup.cfg</h4>
+<div class="outline-text-4" id="text-orgc96ffbd">
 <ul class="org-ul">
 <li>Provides base install directories for <code>setup.py</code>. Usually can be left as-is.</li>
 </ul>
@@ -252,7 +252,7 @@ pkg_name/
 <h3 id="ament_cmake">Ament CMake Packages</h3>
 <div class="outline-text-3" id="text-ament_cmake">
 <ul class="org-ul">
-<li><a href="https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html">Ament Cmake</a> packages are primarily used for C++ ROS projects</li>
+<li><a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html">Ament Cmake</a> packages are primarily used for C++ ROS projects</li>
 <li>Boilerplate for this package can be created using <code>ros2 pkg create --build-type ament_cmake</code></li>
 <li>Currently, custom interfaces (e.g., messages, services, or actions) need to be in their own Ament CMake package</li>
 <li><p>
@@ -277,40 +277,40 @@ pkg_name/
 <h2 id="custom_interfaces">Custom Interfaces</h2>
 <div class="outline-text-2" id="text-custom_interfaces">
 </div>
-<div id="outline-container-org61449f8" class="outline-3">
-<h3 id="org61449f8">Defining Custom Interfaces</h3>
-<div class="outline-text-3" id="text-org61449f8">
+<div id="outline-container-defining-custom-interfaces-2-P-1" class="outline-3">
+<h3 id="defining-custom-interfaces-2-P-1">Defining Custom Interfaces</h3>
+<div class="outline-text-3" id="text-org51171c7">
 <ol class="org-ol">
 <li>Custom interfaces are created in <code>ament_cmake</code> type packages</li>
-<li>To create a custom interface file, first write an interface file using the <a href="https://docs.ros.org/en/jazzy/Concepts/About-ROS-Interfaces.html">ROS IDL</a>
+<li>To create a custom interface file, first write an interface file using the <a href="https://docs.ros.org/en/kilted/Concepts/About-ROS-Interfaces.html">ROS IDL</a>
 <ul class="org-ul">
 <li>Message files end with <code>.msg</code> and go in <code>&lt;package_name&gt;/msg</code></li>
 <li>Service files end with <code>.srv</code> and go in <code>&lt;package_name&gt;/srv</code></li>
 <li>Action files end with <code>.action</code> and go in <code>&lt;package_name&gt;/action</code></li>
-<li>See the <a href="https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Custom-ROS2-Interfaces.html">Custom ROS Interface Tutorial</a></li>
+<li>See the <a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-Client-Libraries/Custom-ROS2-Interfaces.html">Custom ROS Interface Tutorial</a></li>
 </ul></li>
 
 <li><p>
 Edit <code>CMakeLists.txt</code> and add
 </p>
 <div class="org-src-container">
-<pre class="src src-cmake"><span class="org-comment-delimiter"># </span><span class="org-comment">Add in the CMake code that generates ROS interfaces</span>
-<span class="org-function-name">find_package</span>(rosidl_default_generators REQUIRED)
+<pre class="src src-cmake"><span class="org-comment-delimiter"># </span><span class="org-comment">Add in the CMake code that generates ROS interfaces
+</span><span class="org-function-name">find_package</span>(rosidl_default_generators REQUIRED)
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">If any of your interfaces depend on another interface file</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">(For example assume you are using a geometry_msgs/msg/Twist)</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Then you must first find the dependency with find_package (e.g.)</span>
-<span class="org-function-name">find_package</span>(geometry_msgs REQUIRED)
+<span class="org-comment-delimiter"># </span><span class="org-comment">If any of your interfaces depend on another interface file
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">(For example assume you are using a geometry_msgs/msg/Twist)
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">Then you must first find the dependency with find_package (e.g.)
+</span><span class="org-function-name">find_package</span>(geometry_msgs REQUIRED)
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Tell Cmake what files to generate interface definitions for</span>
-<span class="org-function-name">rosidl_generate_interfaces</span>(${<span class="org-variable-name">PROJECT_NAME</span>}
-     <span class="org-string">"msg/MessageType.msg"</span> <span class="org-comment-delimiter"># </span><span class="org-comment">Whatever message file you've defined</span>
-     <span class="org-string">"srv/ServiceType.srv"</span> <span class="org-comment-delimiter"># </span><span class="org-comment">Whatever service file you've defined</span>
-     ...    <span class="org-comment-delimiter"># </span><span class="org-comment">and continue for all the interface files</span>
-     DEPENDENCIES geometry_msgs <span class="org-comment-delimiter"># </span><span class="org-comment">in this example we depend on geometry_msgs</span>
-     )
-<span class="org-comment-delimiter"># </span><span class="org-comment">Export a dependency on the ros_idl_runtime</span>
-<span class="org-function-name">ament_export_dependencies</span>(rosidl_default_runtime)
+<span class="org-comment-delimiter"># </span><span class="org-comment">Tell Cmake what files to generate interface definitions for
+</span><span class="org-function-name">rosidl_generate_interfaces</span>(${<span class="org-variable-name">PROJECT_NAME</span>}
+     <span class="org-string">"msg/MessageType.msg"</span> <span class="org-comment-delimiter"># </span><span class="org-comment">Whatever message file you've defined
+</span>     <span class="org-string">"srv/ServiceType.srv"</span> <span class="org-comment-delimiter"># </span><span class="org-comment">Whatever service file you've defined
+</span>     ...    <span class="org-comment-delimiter"># </span><span class="org-comment">and continue for all the interface files
+</span>     DEPENDENCIES geometry_msgs <span class="org-comment-delimiter"># </span><span class="org-comment">in this example we depend on geometry_msgs
+</span>     )
+<span class="org-comment-delimiter"># </span><span class="org-comment">Export a dependency on the ros_idl_runtime
+</span><span class="org-function-name">ament_export_dependencies</span>(rosidl_default_runtime)
 </pre>
 </div></li>
 <li>Edit <code>package.xml</code>
@@ -321,7 +321,7 @@ Edit <code>CMakeLists.txt</code> and add
 <li>You should also <code>&lt;depend&gt;</code> on any packages whose types were used within your custom types (in this example <code>geometry_msgs</code>)</li>
 </ul></li>
 <li>All custom interface must start with a capital letter, and the names can contain only letters and numbers</li>
-<li>More information at <a href="https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Single-Package-Define-And-Use-Interface.html">Implementing Custom Interfaces Tutorial</a></li>
+<li>More information at <a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-Client-Libraries/Single-Package-Define-And-Use-Interface.html">Implementing Custom Interfaces Tutorial</a></li>
 <li>It is generally good ROS practice to make interfaces is separate packages so that they can be more easily used
 <ul class="org-ul">
 <li>It is also generally good ROS practice to use existing interfaces when possible, to make your code as compatible as possible with the rest of the ROS ecosystem.</li>
@@ -330,9 +330,9 @@ Edit <code>CMakeLists.txt</code> and add
 </ol>
 </div>
 </div>
-<div id="outline-container-org5df5152" class="outline-3">
-<h3 id="org5df5152">Using Interfaces</h3>
-<div class="outline-text-3" id="text-org5df5152">
+<div id="outline-container-using-interfaces-2-P-1" class="outline-3">
+<h3 id="using-interfaces-2-P-1">Using Interfaces</h3>
+<div class="outline-text-3" id="text-orga8da67a">
 <ol class="org-ol">
 <li>You must add an <code>&lt;exec_depend&gt;</code> on the package that defines the interface</li>
 <li>In python use <code>from &lt;interface_package_name&gt;.&lt;msg|srv|action&gt; import TypeName</code>
@@ -349,9 +349,9 @@ Edit <code>CMakeLists.txt</code> and add
 <h2 id="workspace">Workspace</h2>
 <div class="outline-text-2" id="text-workspace">
 </div>
-<div id="outline-container-orga35c62c" class="outline-3">
-<h3 id="orga35c62c">Structure</h3>
-<div class="outline-text-3" id="text-orga35c62c">
+<div id="outline-container-structure-2-P-1" class="outline-3">
+<h3 id="structure-2-P-1">Structure</h3>
+<div class="outline-text-3" id="text-org4ef4d10">
 <p>
 A ROS <a href="https://colcon.readthedocs.io/en/released/user/what-is-a-workspace.html">Workspace</a> is a directory (called <code>ws</code> here) containing:
 </p>
@@ -366,15 +366,15 @@ A ROS <a href="https://colcon.readthedocs.io/en/released/user/what-is-a-workspac
 <li>A directory where the packages are installed: <code>ws/install</code></li>
 <li>ROS workspaces enable you to build collections of related packages</li>
 <li>Use a new workspace for each project, that way issues in packages you aren't currently developing won't effect you.</li>
-<li>For a practical guide see the <a href="https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html">Creating a Workspace Tutorial</a>.</li>
+<li>For a practical guide see the <a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html">Creating a Workspace Tutorial</a>.</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-orgc02e5c1" class="outline-3">
-<h3 id="orgc02e5c1">Building a Workspace</h3>
-<div class="outline-text-3" id="text-orgc02e5c1">
+<div id="outline-container-building-a-workspace-2-P-1" class="outline-3">
+<h3 id="building-a-workspace-2-P-1">Building a Workspace</h3>
+<div class="outline-text-3" id="text-orgb5b12a0">
 <ul class="org-ul">
-<li>Workspaces must be <a href="https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html#build-the-workspace-with-colcon">built</a> before they can be used.</li>
+<li>Workspaces must be <a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html#build-the-workspace-with-colcon">built</a> before they can be used.</li>
 <li>Run <code>colcon build</code> from the workspace directory (<code>ws</code>) to build all the packages in the <code>ws/src</code> directory
 <ul class="org-ul">
 <li>Build artifacts are stored in <code>ws/build</code></li>
@@ -393,9 +393,9 @@ all package files of a given type (e.g., libraries and executables) in common di
 </ul>
 </div>
 
-<div id="outline-container-org1c3c91f" class="outline-4">
-<h4 id="org1c3c91f">Warnings</h4>
-<div class="outline-text-4" id="text-org1c3c91f">
+<div id="outline-container-warnings-3-P-1" class="outline-4">
+<h4 id="warnings-3-P-1">Warnings</h4>
+<div class="outline-text-4" id="text-orgcf031d4">
 <ul class="org-ul">
 <li>Currently, many ROS 2 packages have deprecation warnings related to their use of setuptools</li>
 <li>To avoid seeing these warnings, add <code>export PYTHONWARNINGS="ignore:easy_install command is deprecated"</code></li>
@@ -409,15 +409,15 @@ all package files of a given type (e.g., libraries and executables) in common di
 </div>
 </div>
 </div>
-<div id="outline-container-org44ac58d" class="outline-3">
-<h3 id="org44ac58d">Using a Workspace</h3>
-<div class="outline-text-3" id="text-org44ac58d">
+<div id="outline-container-using-a-workspace-2-P-1" class="outline-3">
+<h3 id="using-a-workspace-2-P-1">Using a Workspace</h3>
+<div class="outline-text-3" id="text-org335e104">
 <ul class="org-ul">
 <li>After building the <code>ws/install</code> directory (called the <i>install space</i>) is created
 <ul class="org-ul">
 <li>This contains your python files and other files (as long as you properly installed them in <code>setup.py</code>)</li>
 </ul></li>
-<li>After building you must <a href="https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html#source-the-overlay">source</a> it
+<li>After building you must <a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html#source-the-overlay">source</a> it
 to make the files in it available to ROS</li>
 <li>To source the workspace run <code>source &lt;path_to_install_space&gt;/setup.bash</code>
 <ul class="org-ul">
@@ -429,9 +429,9 @@ to make the files in it available to ROS</li>
 </div>
 </div>
 </div>
-<div id="outline-container-orge3b0ab7" class="outline-2">
-<h2 id="orge3b0ab7">Colcon</h2>
-<div class="outline-text-2" id="text-orge3b0ab7">
+<div id="outline-container-colcon-1-P-1" class="outline-2">
+<h2 id="colcon-1-P-1">Colcon</h2>
+<div class="outline-text-2" id="text-org967febb">
 <ul class="org-ul">
 <li><a href="https://colcon.readthedocs.io/en/released/"><code>colcon</code></a> is the ROS 2 build-tool, which is used to build the workspace.
 <ul class="org-ul">
@@ -456,12 +456,12 @@ are hosted on the <a href="https://github.com/colcon">Colcon Github Organization
 is not specified, <code>colcon</code> may try to build both at the same time. If <code>&lt;package B&gt;</code> finishes before the <code>&lt;package A&gt;</code> process needs it the build will succeed</li>
 <li>To test that your dependencies will always build, build each package in series by specifying <code>colcon build --executor sequential</code></li>
 </ul></li>
-<li><a href="https://docs.ros.org/en/jazzy/Concepts/About-Build-System.html">More information about the ROS 2 build system</a></li>
+<li><a href="https://docs.ros.org/en/kilted/Concepts/About-Build-System.html">More information about the ROS 2 build system</a></li>
 </ul>
 </div>
-<div id="outline-container-orgb9ee732" class="outline-3">
-<h3 id="orgb9ee732">colcon_cd</h3>
-<div class="outline-text-3" id="text-orgb9ee732">
+<div id="outline-container-colcon-cd-2-P-1" class="outline-3">
+<h3 id="colcon-cd-2-P-1">colcon_cd</h3>
+<div class="outline-text-3" id="text-org2825144">
 <ul class="org-ul">
 <li><a href="https://colcon.readthedocs.io/en/released/user/installation.html#quick-directory-changes">colcon_cd</a> allows you to quickly switch between the workspace directory and that of a package</li>
 <li>Install with <code>sudo apt install python3-colcon-cd</code></li>
@@ -472,9 +472,9 @@ is not specified, <code>colcon</code> may try to build both at the same time. If
 </div>
 </div>
 
-<div id="outline-container-org9e85314" class="outline-3">
-<h3 id="org9e85314">colcon_clean</h3>
-<div class="outline-text-3" id="text-org9e85314">
+<div id="outline-container-colcon-clean-2-P-1" class="outline-3">
+<h3 id="colcon-clean-2-P-1">colcon_clean</h3>
+<div class="outline-text-3" id="text-orgac3c2b0">
 <ul class="org-ul">
 <li><a href="https://github.com/colcon/colcon-clean">colcon-clean</a> allows you to easily remove the build results from a workspace</li>
 <li>Install with <code>sudo apt install python3-colcon-clean</code></li>
@@ -511,17 +511,17 @@ Add the hook in <code>colcon.pkg</code>:
 </div>
 </div>
 
-<div id="outline-container-orga2bfa86" class="outline-2">
-<h2 id="orga2bfa86">ROS Environment</h2>
-<div class="outline-text-2" id="text-orga2bfa86">
+<div id="outline-container-ros-environment-1-P-1" class="outline-2">
+<h2 id="ros-environment-1-P-1">ROS Environment</h2>
+<div class="outline-text-2" id="text-orga40e100">
 <ul class="org-ul">
-<li>ROS relies on <a href="https://docs.ros.org/en/jazzy/Tutorials/Beginner-CLI-Tools/Configuring-ROS2-Environment.html">environment variables</a> to control settings and find nodes and libraries
+<li>ROS relies on <a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-CLI-Tools/Configuring-ROS2-Environment.html">environment variables</a> to control settings and find nodes and libraries
 <ul class="org-ul">
-<li>See <a href="../../hackathon/linux_interactive.html#orgc51c559">Environment Varaibles</a> for more information on environment variables generally</li>
+<li>See <a href="../../hackathon/linux_interactive.html#orgb3e9591">Environment Varaibles</a> for more information on environment variables generally</li>
 </ul></li>
 <li>ROS environment variables are set when <i>underlay</i> is sourced.
 <ul class="org-ul">
-<li>To source the <code>underlay</code> run <code>source /opt/ros/jazzy/setup.bash</code></li>
+<li>To source the <code>underlay</code> run <code>source /opt/ros/kilted/setup.bash</code></li>
 <li>When you installed <code>ROS</code> you added the above command to the <code>~/.bashrc</code> so that it runs automatically whenever <code>bash</code> is opened</li>
 <li>The underlay must be sourced to have access to the ROS command-line tools and system-installed packages</li>
 </ul></li>
@@ -540,9 +540,9 @@ Add the hook in <code>colcon.pkg</code>:
 </ul></li>
 </ul>
 </div>
-<div id="outline-container-org4730529" class="outline-3">
-<h3 id="org4730529">Overlays</h3>
-<div class="outline-text-3" id="text-org4730529">
+<div id="outline-container-overlays-2-P-1" class="outline-3">
+<h3 id="overlays-2-P-1">Overlays</h3>
+<div class="outline-text-3" id="text-orgd2e280b">
 <ul class="org-ul">
 <li>Technically, you should not have the overlay <code>sourced</code> when using <code>colcon build</code>, which means you need a separate window for building and running ROS commands
 <ul class="org-ul">
@@ -570,9 +570,9 @@ Add the hook in <code>colcon.pkg</code>:
 </div>
 </div>
 
-<div id="outline-container-orgab5d0f1" class="outline-2">
-<h2 id="orgab5d0f1">Python Virtual Environments</h2>
-<div class="outline-text-2" id="text-orgab5d0f1">
+<div id="outline-container-python-virtual-environments-1-P-1" class="outline-2">
+<h2 id="python-virtual-environments-1-P-1">Python Virtual Environments</h2>
+<div class="outline-text-2" id="text-orgdf151f7">
 <ol class="org-ol">
 <li>Virtual environments allow you to isolate python projects from each other and the system, enabling every project to have its own version of dependencies
 <ul class="org-ul">
@@ -584,7 +584,7 @@ Add the hook in <code>colcon.pkg</code>:
 <ul class="org-ul">
 <li>ROS views itself as an extension of a given Ubuntu distribution and therefore expects all dependencies to be available via <code>apt</code></li>
 <li>ROS expects the version of any given python package to be the version packaged by Ubuntu and distributed via <code>apt</code>.</li>
-<li>As of <code>jazzy</code>: because of the way <code>ament_python</code> packages currently work, they will not use a virtual environment even if it is activated (see <a href="https://github.com/ros2/ros2/issues/1094">this issue</a>).</li>
+<li>As of <code>kilted</code>: because of the way <code>ament_python</code> packages currently work, they will not use a virtual environment even if it is activated (see <a href="https://github.com/ros2/ros2/issues/1094">this issue</a>).</li>
 </ul></li>
 <li>Whenever possible, your ROS project should depend on the version of python packages that are part of the target Ubuntu distribution</li>
 <li>In some cases (especially with machine learning), a desired package is not available via <code>apt</code> and is most easily available via <code>pip</code></li>

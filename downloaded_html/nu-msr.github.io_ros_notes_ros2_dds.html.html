@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-12-04 Wed 21:56 -->
+<!-- 2025-09-16 Tue 13:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Data Distribution Service (DDS)</title>
@@ -21,30 +21,30 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org4c716d3">Data Distribution Service</a>
+<li><a href="#data-distribution-service-1-P-1">Data Distribution Service</a>
 <ul>
-<li><a href="#org898814d">Quality of Service (QoS)</a></li>
+<li><a href="#quality-of-service-qos--2-P-1">Quality of Service (QoS)</a></li>
 </ul>
 </li>
-<li><a href="#org2768744">Real-Time Publish Subscribe</a></li>
-<li><a href="#org7931deb">DDS And ROS</a>
+<li><a href="#real-time-publish-subscribe-1-P-1">Real-Time Publish Subscribe</a></li>
+<li><a href="#dds-and-ros-1-P-1">DDS And ROS</a>
 <ul>
-<li><a href="#org61b704a">Quality of Service</a></li>
-<li><a href="#org3a13cad">Profiles</a></li>
-<li><a href="#org6fcff4d">Compatibility</a></li>
-<li><a href="#org2e727e3">Events</a></li>
-<li><a href="#org8ba8fdd">Changing the DDS Provider</a></li>
+<li><a href="#quality-of-service-2-P-1">Quality of Service</a></li>
+<li><a href="#profiles-2-P-1">Profiles</a></li>
+<li><a href="#compatibility-2-P-1">Compatibility</a></li>
+<li><a href="#events-2-P-1">Events</a></li>
+<li><a href="#changing-the-dds-provider-2-P-1">Changing the DDS Provider</a></li>
 </ul>
 </li>
-<li><a href="#org1ca92be">OMG!</a></li>
-<li><a href="#org88a8f0e">Resources</a></li>
+<li><a href="#omg--1-P-1">OMG!</a></li>
+<li><a href="#resources-1-P-3">Resources</a></li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-org4c716d3" class="outline-2">
-<h2 id="org4c716d3">Data Distribution Service</h2>
-<div class="outline-text-2" id="text-org4c716d3">
+<div id="outline-container-data-distribution-service-1-P-1" class="outline-2">
+<h2 id="data-distribution-service-1-P-1">Data Distribution Service</h2>
+<div class="outline-text-2" id="text-org1880894">
 <ul class="org-ul">
 <li>Communication protocol describing how <i>data providers</i> and <i>data consumers</i> interact</li>
 <li>Publisher: An entity that manages <i>DataWriters</i>, which are responsible for sending data over the system</li>
@@ -59,18 +59,18 @@ in the same domain can communicate</li>
 </ul>
 </div>
 
-<div id="outline-container-org898814d" class="outline-3">
-<h3 id="org898814d">Quality of Service (QoS)</h3>
-<div class="outline-text-3" id="text-org898814d">
+<div id="outline-container-quality-of-service-qos--2-P-1" class="outline-3">
+<h3 id="quality-of-service-qos--2-P-1">Quality of Service (QoS)</h3>
+<div class="outline-text-3" id="text-org7560e4c">
 <ul class="org-ul">
 <li>Describes the behavior of communication in a DDS system</li>
 </ul>
 </div>
 </div>
 </div>
-<div id="outline-container-org2768744" class="outline-2">
-<h2 id="org2768744">Real-Time Publish Subscribe</h2>
-<div class="outline-text-2" id="text-org2768744">
+<div id="outline-container-real-time-publish-subscribe-1-P-1" class="outline-2">
+<h2 id="real-time-publish-subscribe-1-P-1">Real-Time Publish Subscribe</h2>
+<div class="outline-text-2" id="text-orgc8a4506">
 <ul class="org-ul">
 <li>RTPS is a protocol that can be (and often is) used by DDS when the DDS entities need to communicate over a network</li>
 <li>RTPS can be thought of as the "nuts and bolts" that are used to actually implement a DDS system</li>
@@ -79,9 +79,9 @@ in the same domain can communicate</li>
 </div>
 </div>
 
-<div id="outline-container-org7931deb" class="outline-2">
-<h2 id="org7931deb">DDS And ROS</h2>
-<div class="outline-text-2" id="text-org7931deb">
+<div id="outline-container-dds-and-ros-1-P-1" class="outline-2">
+<h2 id="dds-and-ros-1-P-1">DDS And ROS</h2>
+<div class="outline-text-2" id="text-org828535a">
 <ol class="org-ol">
 <li>DDS is a complicated industrial standard maintained by <a href="https://www.omg.org">Object Management Group</a></li>
 <li>Many companies and other entities have implemented this standard and provide code (either free or proprietary)</li>
@@ -91,9 +91,9 @@ that can then be used to implement ROS Publishers, Subscribers, Services, etc</l
 </ol>
 </div>
 
-<div id="outline-container-org61b704a" class="outline-3">
-<h3 id="org61b704a">Quality of Service</h3>
-<div class="outline-text-3" id="text-org61b704a">
+<div id="outline-container-quality-of-service-2-P-1" class="outline-3">
+<h3 id="quality-of-service-2-P-1">Quality of Service</h3>
+<div class="outline-text-3" id="text-orgc66ab38">
 <ul class="org-ul">
 <li>How does data get delivered and what happens when it can't be delivered?</li>
 <li>Similar to being able to choose between:
@@ -108,9 +108,9 @@ that can then be used to implement ROS Publishers, Subscribers, Services, etc</l
 </ul>
 </div>
 </div>
-<div id="outline-container-org3a13cad" class="outline-3">
-<h3 id="org3a13cad">Profiles</h3>
-<div class="outline-text-3" id="text-org3a13cad">
+<div id="outline-container-profiles-2-P-1" class="outline-3">
+<h3 id="profiles-2-P-1">Profiles</h3>
+<div class="outline-text-3" id="text-orge5a338e">
 <ul class="org-ul">
 <li>By default it is "keep last" with a queue size of 10, "reliable" and "volatile"</li>
 <li>Services are reliable and volatile</li>
@@ -120,9 +120,9 @@ that can then be used to implement ROS Publishers, Subscribers, Services, etc</l
 </div>
 </div>
 
-<div id="outline-container-org6fcff4d" class="outline-3">
-<h3 id="org6fcff4d">Compatibility</h3>
-<div class="outline-text-3" id="text-org6fcff4d">
+<div id="outline-container-compatibility-2-P-1" class="outline-3">
+<h3 id="compatibility-2-P-1">Compatibility</h3>
+<div class="outline-text-3" id="text-org54ca0a8">
 <p>
 If both ends of the communication channel (e.g. publisher/subscriber) don't have the same QoS settings, they may be unable to communicate.
 </p>
@@ -132,9 +132,9 @@ If both ends of the communication channel (e.g. publisher/subscriber) don't have
 </div>
 </div>
 
-<div id="outline-container-org2e727e3" class="outline-3">
-<h3 id="org2e727e3">Events</h3>
-<div class="outline-text-3" id="text-org2e727e3">
+<div id="outline-container-events-2-P-1" class="outline-3">
+<h3 id="events-2-P-1">Events</h3>
+<div class="outline-text-3" id="text-org462a4fc">
 <ul class="org-ul">
 <li>User-code can subscribe to various events that occur in the QoS system</li>
 <li>This includes detecting if publishing deadlines  are missed or if there are problems matching publishers and subscribers</li>
@@ -142,9 +142,9 @@ If both ends of the communication channel (e.g. publisher/subscriber) don't have
 </div>
 </div>
 
-<div id="outline-container-org8ba8fdd" class="outline-3">
-<h3 id="org8ba8fdd">Changing the DDS Provider</h3>
-<div class="outline-text-3" id="text-org8ba8fdd">
+<div id="outline-container-changing-the-dds-provider-2-P-1" class="outline-3">
+<h3 id="changing-the-dds-provider-2-P-1">Changing the DDS Provider</h3>
+<div class="outline-text-3" id="text-org898d3f3">
 <ul class="org-ul">
 <li>The <code>RMW_IMPLEMENTATION</code> allows you to change the DDS provider if desired</li>
 <li>Different DDS providers have different capabilities and are not completely compatible</li>
@@ -153,9 +153,9 @@ If both ends of the communication channel (e.g. publisher/subscriber) don't have
 </div>
 </div>
 </div>
-<div id="outline-container-org1ca92be" class="outline-2">
-<h2 id="org1ca92be">OMG!</h2>
-<div class="outline-text-2" id="text-org1ca92be">
+<div id="outline-container-omg--1-P-1" class="outline-2">
+<h2 id="omg--1-P-1">OMG!</h2>
+<div class="outline-text-2" id="text-org13f8655">
 <p>
 Object Management Group. An Software Industry Standards group that developed DDS
 </p>
@@ -164,9 +164,9 @@ Object Management Group. An Software Industry Standards group that developed DDS
 </ul>
 </div>
 </div>
-<div id="outline-container-org88a8f0e" class="outline-2">
-<h2 id="org88a8f0e">Resources</h2>
-<div class="outline-text-2" id="text-org88a8f0e">
+<div id="outline-container-resources-1-P-3" class="outline-2">
+<h2 id="resources-1-P-3">Resources</h2>
+<div class="outline-text-2" id="text-org7f29540">
 <ul class="org-ul">
 <li><a href="https://fast-dds.docs.eprosima.com/en/latest/fastdds/getting_started/definitions.html">Eprosima Fast DDS</a></li>
 <li><a href="https://docs.ros.org/en/iron/Concepts/About-Different-Middleware-Vendors.html">ROS 2 DDS Vendors</a></li>

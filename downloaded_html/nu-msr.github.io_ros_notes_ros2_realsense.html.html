@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-12-04 Wed 21:56 -->
+<!-- 2025-09-16 Tue 13:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Intel Realsense D435i</title>
@@ -21,26 +21,26 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org7127f41">Description</a></li>
-<li><a href="#org15ee962">Setup</a>
+<li><a href="#description-1-P-2">Description</a></li>
+<li><a href="#setup-1-P-1">Setup</a>
 <ul>
-<li><a href="#org6672bfd">Installation</a></li>
-<li><a href="#orga967da6">Testing</a></li>
+<li><a href="#installation-2-P-1">Installation</a></li>
+<li><a href="#testing-2-P-1">Testing</a></li>
 </ul>
 </li>
-<li><a href="#orgb9fdb21">Using</a>
+<li><a href="#using-1-P-1">Using</a>
 <ul>
-<li><a href="#org0c8f574">ROS Driver</a></li>
-<li><a href="#org2cf57e2">SDK</a></li>
+<li><a href="#ros-driver-2-P-1">ROS Driver</a></li>
+<li><a href="#sdk-2-P-1">SDK</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-org7127f41" class="outline-2">
-<h2 id="org7127f41">Description</h2>
-<div class="outline-text-2" id="text-org7127f41">
+<div id="outline-container-description-1-P-2" class="outline-2">
+<h2 id="description-1-P-2">Description</h2>
+<div class="outline-text-2" id="text-orgf20b68b">
 <p>
 The <a href="https://www.intelrealsense.com/depth-camera-d435i">Intel RealSense D435i</a> is an RGB-D depth camera
 with an integrated inertial measurement unit (IMU).
@@ -50,13 +50,13 @@ reason about 3D structures.  The addition of an IMU helps the system orient itse
 </div>
 </div>
 
-<div id="outline-container-org15ee962" class="outline-2">
-<h2 id="org15ee962">Setup</h2>
-<div class="outline-text-2" id="text-org15ee962">
+<div id="outline-container-setup-1-P-1" class="outline-2">
+<h2 id="setup-1-P-1">Setup</h2>
+<div class="outline-text-2" id="text-setup-1-P-1">
 </div>
-<div id="outline-container-org6672bfd" class="outline-3">
-<h3 id="org6672bfd">Installation</h3>
-<div class="outline-text-3" id="text-org6672bfd">
+<div id="outline-container-installation-2-P-1" class="outline-3">
+<h3 id="installation-2-P-1">Installation</h3>
+<div class="outline-text-3" id="text-orga47e2dd">
 <p>
 There are two components required to use the RealSense from ROS: the library (<a href="https://index.ros.org/p/librealsense2/">https://index.ros.org/p/librealsense2/</a>)
 and the ROS wrapper (<a href="https://index.ros.org/p/realsense2_camera/">realsense2_camera</a>).
@@ -69,9 +69,9 @@ This class uses a customized version of the realsense library, as explained in <
 </div>
 </div>
 
-<div id="outline-container-orga967da6" class="outline-3">
-<h3 id="orga967da6">Testing</h3>
-<div class="outline-text-3" id="text-orga967da6">
+<div id="outline-container-testing-2-P-1" class="outline-3">
+<h3 id="testing-2-P-1">Testing</h3>
+<div class="outline-text-3" id="text-org9ed67fb">
 <ol class="org-ol">
 <li>Plug in the RealSense</li>
 <li>Run <code>realsense-viewer</code>.  If prompted to update the firmware, do it.
@@ -85,9 +85,9 @@ This class uses a customized version of the realsense library, as explained in <
 </div>
 </div>
 
-<div id="outline-container-orgb9fdb21" class="outline-2">
-<h2 id="orgb9fdb21">Using</h2>
-<div class="outline-text-2" id="text-orgb9fdb21">
+<div id="outline-container-using-1-P-1" class="outline-2">
+<h2 id="using-1-P-1">Using</h2>
+<div class="outline-text-2" id="text-orgaa4c84d">
 <ol class="org-ol">
 <li>There are 4 ways of using the realsense in ROS: the ROS driver, regular USB camera drivers, the C++ SDK, or the python SDK</li>
 <li>The ROS driver provides the most flexibility for several reasons:
@@ -100,9 +100,9 @@ This class uses a customized version of the realsense library, as explained in <
 and it will be treated as a regular camera.</li>
 </ol>
 </div>
-<div id="outline-container-org0c8f574" class="outline-3">
-<h3 id="org0c8f574">ROS Driver</h3>
-<div class="outline-text-3" id="text-org0c8f574">
+<div id="outline-container-ros-driver-2-P-1" class="outline-3">
+<h3 id="ros-driver-2-P-1">ROS Driver</h3>
+<div class="outline-text-3" id="text-orgf6ffdaa">
 <ul class="org-ul">
 <li>Instructions for use and an explanation of the topics that are published are posted <a href="https://github.com/IntelRealSense/realsense-ros#usage-instructions">on the realsense-ros github page.</a>
 <ul class="org-ul">
@@ -127,9 +127,9 @@ and it will be treated as a regular camera.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org2cf57e2" class="outline-3">
-<h3 id="org2cf57e2">SDK</h3>
-<div class="outline-text-3" id="text-org2cf57e2">
+<div id="outline-container-sdk-2-P-1" class="outline-3">
+<h3 id="sdk-2-P-1">SDK</h3>
+<div class="outline-text-3" id="text-org5870707">
 <ul class="org-ul">
 <li>Official documentation is here for using SDK 2.0: <a href="https://dev.intelrealsense.com/docs/docs-get-started">https://dev.intelrealsense.com/docs/docs-get-started</a></li>
 <li>Use <code>librealsense</code> python wrappers: wrappers around librealsense for more advanced usage in python</li>

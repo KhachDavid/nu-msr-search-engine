@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-12-04 Wed 21:56 -->
+<!-- 2025-09-16 Tue 13:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Simulation</title>
@@ -21,61 +21,61 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org5651901">Overview</a></li>
-<li><a href="#org812e3be">Advantages of Simulation</a></li>
-<li><a href="#orgb1fd2ec">Disadvantages of Simulation</a></li>
-<li><a href="#org3ab48ea">Choosing a simulator</a>
+<li><a href="#overview-1-P-9">Overview</a></li>
+<li><a href="#advantages-of-simulation-1-P-1">Advantages of Simulation</a></li>
+<li><a href="#disadvantages-of-simulation-1-P-1">Disadvantages of Simulation</a></li>
+<li><a href="#choosing-a-simulator-1-P-1">Choosing a simulator</a>
 <ul>
-<li><a href="#org847fe4d">Identifying What Must Be Modeled</a></li>
-<li><a href="#orgbb988ec">Differences Between Simulation Engines</a></li>
-<li><a href="#org0bc2b1e">Custom Simulators</a></li>
+<li><a href="#identifying-what-must-be-modeled-2-P-1">Identifying What Must Be Modeled</a></li>
+<li><a href="#differences-between-simulation-engines-2-P-1">Differences Between Simulation Engines</a></li>
+<li><a href="#custom-simulators-2-P-1">Custom Simulators</a></li>
 </ul>
 </li>
-<li><a href="#orgba913a4">Gazebo Classic</a></li>
-<li><a href="#org00514fc">Gazebo</a>
+<li><a href="#gazebo-classic-1-P-1">Gazebo Classic</a></li>
+<li><a href="#gazebo-1-P-1">Gazebo</a>
 <ul>
-<li><a href="#orgb6f9998">Gazebo Features</a></li>
+<li><a href="#gazebo-features-2-P-1">Gazebo Features</a></li>
 </ul>
 </li>
-<li><a href="#org69f6418">Gazebo and ROS</a>
+<li><a href="#gazebo-and-ros-1-P-1">Gazebo and ROS</a>
 <ul>
-<li><a href="#org2c713ec">Installation</a></li>
-<li><a href="#org503b5c5">Running</a></li>
-<li><a href="#orge6cbaf0">Package Layout</a></li>
-<li><a href="#orgd91a4bd">SDF Files</a>
+<li><a href="#installation-2-P-3">Installation</a></li>
+<li><a href="#running-2-P-1">Running</a></li>
+<li><a href="#package-layout-2-P-1">Package Layout</a></li>
+<li><a href="#sdf-files-2-P-1">SDF Files</a>
 <ul>
 <li><a href="#resource_spawner">Resource Spawner</a></li>
 </ul>
 </li>
-<li><a href="#org72f6d26">Loading URDF/SDF files</a>
+<li><a href="#loading-urdf-sdf-files-2-P-1">Loading URDF/SDF files</a>
 <ul>
-<li><a href="#orgb09d5a5">Debugging</a></li>
+<li><a href="#debugging-3-P-1">Debugging</a></li>
 </ul>
 </li>
-<li><a href="#org576c102">Plugins</a></li>
-<li><a href="#org4ecdd84">Bridging</a></li>
-<li><a href="#org7a90789">Simulation Time</a></li>
+<li><a href="#plugins-2-P-1">Plugins</a></li>
+<li><a href="#bridging-2-P-1">Bridging</a></li>
+<li><a href="#simulation-time-2-P-1">Simulation Time</a></li>
 <li><a href="#transition">Software in Transition</a></li>
-<li><a href="#org117ad1f">Documentation</a></li>
+<li><a href="#documentation-2-P-2">Documentation</a></li>
 </ul>
 </li>
-<li><a href="#org3bb7663">Some Other Simulators (for reference, we will not use these)</a>
+<li><a href="#some-other-simulators-for-reference-we-will-not-use-these--1-P-1">Some Other Simulators (for reference, we will not use these)</a>
 <ul>
-<li><a href="#org0909b87">Open Source Simulators</a>
+<li><a href="#open-source-simulators-2-P-1">Open Source Simulators</a>
 <ul>
-<li><a href="#org0197c96">Current Simulators</a></li>
-<li><a href="#orgd6f6943">Less Maintained</a></li>
+<li><a href="#current-simulators-3-P-1">Current Simulators</a></li>
+<li><a href="#less-maintained-3-P-1">Less Maintained</a></li>
 </ul>
 </li>
-<li><a href="#org0228a86">Closed Source Simulators</a></li>
+<li><a href="#closed-source-simulators-2-P-1">Closed Source Simulators</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org5651901" class="outline-2">
-<h2 id="org5651901">Overview</h2>
-<div class="outline-text-2" id="text-org5651901">
+<div id="outline-container-overview-1-P-9" class="outline-2">
+<h2 id="overview-1-P-9">Overview</h2>
+<div class="outline-text-2" id="text-org6d7d92b">
 <p>
 Computer simulations represent the physical world as a set of state variables
 and perform computations to advance this state forward (or backward) in time.
@@ -89,9 +89,9 @@ and its environment is used to approximate the behavior of a real robot.
 </div>
 </div>
 
-<div id="outline-container-org812e3be" class="outline-2">
-<h2 id="org812e3be">Advantages of Simulation</h2>
-<div class="outline-text-2" id="text-org812e3be">
+<div id="outline-container-advantages-of-simulation-1-P-1" class="outline-2">
+<h2 id="advantages-of-simulation-1-P-1">Advantages of Simulation</h2>
+<div class="outline-text-2" id="text-orga15622f">
 <ul class="org-ul">
 <li>You control all variables and can replay identical scenarios</li>
 <li>You can inspect and set the full state of the system accurately</li>
@@ -100,9 +100,9 @@ and its environment is used to approximate the behavior of a real robot.
 </ul>
 </div>
 </div>
-<div id="outline-container-orgb1fd2ec" class="outline-2">
-<h2 id="orgb1fd2ec">Disadvantages of Simulation</h2>
-<div class="outline-text-2" id="text-orgb1fd2ec">
+<div id="outline-container-disadvantages-of-simulation-1-P-1" class="outline-2">
+<h2 id="disadvantages-of-simulation-1-P-1">Disadvantages of Simulation</h2>
+<div class="outline-text-2" id="text-org07bda82">
 <ul class="org-ul">
 <li>Behavior differs from the real world</li>
 <li>Only effects that are already modeled and known can be examined</li>
@@ -112,13 +112,13 @@ and its environment is used to approximate the behavior of a real robot.
 </div>
 </div>
 
-<div id="outline-container-org3ab48ea" class="outline-2">
-<h2 id="org3ab48ea">Choosing a simulator</h2>
-<div class="outline-text-2" id="text-org3ab48ea">
+<div id="outline-container-choosing-a-simulator-1-P-1" class="outline-2">
+<h2 id="choosing-a-simulator-1-P-1">Choosing a simulator</h2>
+<div class="outline-text-2" id="text-choosing-a-simulator-1-P-1">
 </div>
-<div id="outline-container-org847fe4d" class="outline-3">
-<h3 id="org847fe4d">Identifying What Must Be Modeled</h3>
-<div class="outline-text-3" id="text-org847fe4d">
+<div id="outline-container-identifying-what-must-be-modeled-2-P-1" class="outline-3">
+<h3 id="identifying-what-must-be-modeled-2-P-1">Identifying What Must Be Modeled</h3>
+<div class="outline-text-3" id="text-org017e9c9">
 <p>
 The needs of your robotic application dictate the complexity of your
 model and the requirements for your simulation engine.
@@ -157,9 +157,9 @@ Here are some types of simulations used in robotics:
 </div>
 </div>
 
-<div id="outline-container-orgbb988ec" class="outline-3">
-<h3 id="orgbb988ec">Differences Between Simulation Engines</h3>
-<div class="outline-text-3" id="text-orgbb988ec">
+<div id="outline-container-differences-between-simulation-engines-2-P-1" class="outline-3">
+<h3 id="differences-between-simulation-engines-2-P-1">Differences Between Simulation Engines</h3>
+<div class="outline-text-3" id="text-org84a4db3">
 <ol class="org-ol">
 <li>What integration scheme do they use?
 <ul class="org-ul">
@@ -191,9 +191,9 @@ Here are some types of simulations used in robotics:
 </ol>
 </div>
 </div>
-<div id="outline-container-org0bc2b1e" class="outline-3">
-<h3 id="org0bc2b1e">Custom Simulators</h3>
-<div class="outline-text-3" id="text-org0bc2b1e">
+<div id="outline-container-custom-simulators-2-P-1" class="outline-3">
+<h3 id="custom-simulators-2-P-1">Custom Simulators</h3>
+<div class="outline-text-3" id="text-org97243e4">
 <ul class="org-ul">
 <li>Sometimes, you have a simple model for your robot</li>
 <li>Using a simple model, you can usually write your own simulator</li>
@@ -204,9 +204,9 @@ general purpose simulator like gazebo.</li>
 </div>
 </div>
 </div>
-<div id="outline-container-orgba913a4" class="outline-2">
-<h2 id="orgba913a4">Gazebo Classic</h2>
-<div class="outline-text-2" id="text-orgba913a4">
+<div id="outline-container-gazebo-classic-1-P-1" class="outline-2">
+<h2 id="gazebo-classic-1-P-1">Gazebo Classic</h2>
+<div class="outline-text-2" id="text-org0152047">
 <ul class="org-ul">
 <li>The <a href="http://classic.gazebosim.org">Gazebo Classic</a> (or the simulator formerly known as Gazebo) is the main simulator for ROS 1</li>
 <li>Like ROS, it is maintained by the Open Source Robotics Foundation, but it is a
@@ -218,16 +218,16 @@ a Gazebo simulation and a real robot.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org00514fc" class="outline-2">
-<h2 id="org00514fc">Gazebo</h2>
-<div class="outline-text-2" id="text-org00514fc">
+<div id="outline-container-gazebo-1-P-1" class="outline-2">
+<h2 id="gazebo-1-P-1">Gazebo</h2>
+<div class="outline-text-2" id="text-orgc40b3d9">
 <ul class="org-ul">
 <li><a href="https://gazebosim.org">Gazebo</a> (Formerly called Ignition Gazebo) is the latest simulator developed by Open Robotics</li>
 </ul>
 </div>
-<div id="outline-container-orgb6f9998" class="outline-3">
-<h3 id="orgb6f9998">Gazebo Features</h3>
-<div class="outline-text-3" id="text-orgb6f9998">
+<div id="outline-container-gazebo-features-2-P-1" class="outline-3">
+<h3 id="gazebo-features-2-P-1">Gazebo Features</h3>
+<div class="outline-text-3" id="text-orgc10d05d">
 <ul class="org-ul">
 <li>Choice of physics engines:
 <ul class="org-ul">
@@ -257,13 +257,13 @@ other using.  There are counterparts to ROS mesages and services,but these are e
 </div>
 </div>
 
-<div id="outline-container-org69f6418" class="outline-2">
-<h2 id="org69f6418">Gazebo and ROS</h2>
-<div class="outline-text-2" id="text-org69f6418">
+<div id="outline-container-gazebo-and-ros-1-P-1" class="outline-2">
+<h2 id="gazebo-and-ros-1-P-1">Gazebo and ROS</h2>
+<div class="outline-text-2" id="text-gazebo-and-ros-1-P-1">
 </div>
-<div id="outline-container-org2c713ec" class="outline-3">
-<h3 id="org2c713ec">Installation</h3>
-<div class="outline-text-3" id="text-org2c713ec">
+<div id="outline-container-installation-2-P-3" class="outline-3">
+<h3 id="installation-2-P-3">Installation</h3>
+<div class="outline-text-3" id="text-orgdf16996">
 <ol class="org-ol">
 <li>Install gazebo and its ROS components with <code>sudo apt install ros-jazzy-simulation</code></li>
 <li><a href="https://gazebosim.org/docs/harmonic">Tutorials for Gazebo Harmonic</a> (Harmonic is the version name)
@@ -274,9 +274,9 @@ other using.  There are counterparts to ROS mesages and services,but these are e
 </ol>
 </div>
 </div>
-<div id="outline-container-org503b5c5" class="outline-3">
-<h3 id="org503b5c5">Running</h3>
-<div class="outline-text-3" id="text-org503b5c5">
+<div id="outline-container-running-2-P-1" class="outline-3">
+<h3 id="running-2-P-1">Running</h3>
+<div class="outline-text-3" id="text-org66d97dd">
 <ol class="org-ol">
 <li>Run gazebo with <code>ros2 launch ros_gz_sim gz_sim.launch.py</code>
 <ul class="org-ul">
@@ -288,9 +288,9 @@ other using.  There are counterparts to ROS mesages and services,but these are e
 </div>
 </div>
 
-<div id="outline-container-orge6cbaf0" class="outline-3">
-<h3 id="orge6cbaf0">Package Layout</h3>
-<div class="outline-text-3" id="text-orge6cbaf0">
+<div id="outline-container-package-layout-2-P-1" class="outline-3">
+<h3 id="package-layout-2-P-1">Package Layout</h3>
+<div class="outline-text-3" id="text-orgdefff62">
 <ol class="org-ol">
 <li>Typically, <code>xacro</code> files go under the <code>urdf</code> directory in the package</li>
 <li>SDF files for <code>worlds</code> go in a <code>worlds/</code> directory and are installed to <code>share/&lt;pkg_name&gt;/worlds</code></li>
@@ -325,9 +325,9 @@ we are not currently adopting this practice: see <a href="#transition">Transitio
 </div>
 </div>
 
-<div id="outline-container-orgd91a4bd" class="outline-3">
-<h3 id="orgd91a4bd">SDF Files</h3>
-<div class="outline-text-3" id="text-orgd91a4bd">
+<div id="outline-container-sdf-files-2-P-1" class="outline-3">
+<h3 id="sdf-files-2-P-1">SDF Files</h3>
+<div class="outline-text-3" id="text-org9e41ca8">
 <ul class="org-ul">
 <li>Gazebo uses <a href="https://sdformat.org">SDF</a> files to represent robots, worlds, and everything that appears in the simulation.</li>
 <li><a href="http://sdformat.org/tutorials?">SDF Tutorials</a> provides help with writing SDF files, including building worlds</li>
@@ -356,9 +356,9 @@ with <code>model://</code></li>
 </div>
 </div>
 
-<div id="outline-container-org72f6d26" class="outline-3">
-<h3 id="org72f6d26">Loading URDF/SDF files</h3>
-<div class="outline-text-3" id="text-org72f6d26">
+<div id="outline-container-loading-urdf-sdf-files-2-P-1" class="outline-3">
+<h3 id="loading-urdf-sdf-files-2-P-1">Loading URDF/SDF files</h3>
+<div class="outline-text-3" id="text-org52cb478">
 <ul class="org-ul">
 <li>ROS can be used to load both URDF and SDF models into the simulator.
 <ul class="org-ul">
@@ -368,17 +368,17 @@ with <code>model://</code></li>
 Additional <code>sdf</code> tags can be added to a URDF by using the <code>&lt;gazebo&gt;</code> tag, which provide additional flexibility when converting a URDF to an SDF
 </p>
 <div class="org-src-container">
-<pre class="src src-xml"><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">robot</span> <span class="org-nxml-namespace-attribute-xmlns">xmlns</span><span class="org-nxml-namespace-attribute-colon">:</span><span class="org-nxml-namespace-attribute-prefix">xacro</span>=<span class="org-string">"http://www.ros.org/wiki/xacro</span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span>
-<span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span>
-<span class="org-string">&lt;!-- Resulting SDF file will have all the SDF tags here and will be associated with the full robot model at the top-level--&gt;</span>
-<span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-tag-slash">/</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span>
-<span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"> </span><span class="org-string"><span class="org-nxml-attribute-local-name">reference</span></span><span class="org-string">="</span>link_name<span class="org-string">"</span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span>
-<span class="org-string">&lt;!-- resulting SDF file will have these SDF tags under the link named "</span>link_name<span class="org-string">" --&gt;</span>
-<span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-tag-slash">/</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span>
-<span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"> </span><span class="org-string"><span class="org-nxml-attribute-local-name">reference</span></span><span class="org-string">="</span>joint_name<span class="org-string">"</span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span>
-<span class="org-string">&lt;!-- resulting SDF file will have these SDF tags under the joint named "</span>joint_name<span class="org-string">" --&gt;</span>
-<span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-tag-slash">/</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span>
-<span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-tag-slash">/</span></span><span class="org-string"><span class="org-nxml-element-local-name">robot</span></span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span>
+<pre class="src src-xml"><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">robot</span> <span class="org-nxml-namespace-attribute-xmlns">xmlns</span><span class="org-nxml-namespace-attribute-colon">:</span><span class="org-nxml-namespace-attribute-prefix">xacro</span>=<span class="org-string">"http://www.ros.org/wiki/xacro</span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span><span class="org-string">
+</span><span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span><span class="org-string">
+&lt;!-- Resulting SDF file will have all the SDF tags here and will be associated with the full robot model at the top-level--&gt;
+</span><span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-tag-slash">/</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span><span class="org-string">
+</span><span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"> </span><span class="org-string"><span class="org-nxml-attribute-local-name">reference</span></span><span class="org-string">="</span>link_name<span class="org-string">"</span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span><span class="org-string">
+&lt;!-- resulting SDF file will have these SDF tags under the link named "</span>link_name<span class="org-string">" --&gt;
+</span><span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-tag-slash">/</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span><span class="org-string">
+</span><span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"> </span><span class="org-string"><span class="org-nxml-attribute-local-name">reference</span></span><span class="org-string">="</span>joint_name<span class="org-string">"</span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span><span class="org-string">
+&lt;!-- resulting SDF file will have these SDF tags under the joint named "</span>joint_name<span class="org-string">" --&gt;
+</span><span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-tag-slash">/</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span><span class="org-string">
+</span><span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-tag-slash">/</span></span><span class="org-string"><span class="org-nxml-element-local-name">robot</span></span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span>
 </pre>
 </div></li>
 <li>A typical project structure is for a robot to provide:
@@ -406,9 +406,9 @@ Additional <code>sdf</code> tags can be added to a URDF by using the <code>&lt;g
 </ul></li>
 </ul>
 </div>
-<div id="outline-container-orgb09d5a5" class="outline-4">
-<h4 id="orgb09d5a5">Debugging</h4>
-<div class="outline-text-4" id="text-orgb09d5a5">
+<div id="outline-container-debugging-3-P-1" class="outline-4">
+<h4 id="debugging-3-P-1">Debugging</h4>
+<div class="outline-text-4" id="text-org721a708">
 <p>
 It can be helpful to inspect <code>urdf</code> files at different stages of conversion, especially if there are errors
 when trying to load your model.
@@ -424,9 +424,9 @@ when trying to load your model.
 </div>
 </div>
 
-<div id="outline-container-org576c102" class="outline-3">
-<h3 id="org576c102">Plugins</h3>
-<div class="outline-text-3" id="text-org576c102">
+<div id="outline-container-plugins-2-P-1" class="outline-3">
+<h3 id="plugins-2-P-1">Plugins</h3>
+<div class="outline-text-3" id="text-org342f57d">
 <ol class="org-ol">
 <li>Gazebo uses plugins to enhance/modify functionality</li>
 <li>Some plugins can be associated with specific models and used to control them</li>
@@ -449,9 +449,9 @@ when trying to load your model.
 </div>
 </div>
 
-<div id="outline-container-org4ecdd84" class="outline-3">
-<h3 id="org4ecdd84">Bridging</h3>
-<div class="outline-text-3" id="text-org4ecdd84">
+<div id="outline-container-bridging-2-P-1" class="outline-3">
+<h3 id="bridging-2-P-1">Bridging</h3>
+<div class="outline-text-3" id="text-org265ea11">
 <ol class="org-ol">
 <li>The <a href="https://index.ros.org/p/ros_gz_bridge/github-gazebosim-ros_gz/#jazzy">ROS GZ Bridge</a>  is used to connect ROS topics and services to Gazebo topics and services
 <ul class="org-ul">
@@ -474,9 +474,9 @@ when trying to load your model.
 </div>
 </div>
 
-<div id="outline-container-org7a90789" class="outline-3">
-<h3 id="org7a90789">Simulation Time</h3>
-<div class="outline-text-3" id="text-org7a90789">
+<div id="outline-container-simulation-time-2-P-1" class="outline-3">
+<h3 id="simulation-time-2-P-1">Simulation Time</h3>
+<div class="outline-text-3" id="text-org7660a77">
 <ol class="org-ol">
 <li>Time in simulation can run at a different speed than time in the real world</li>
 <li>ROS 2 Nodes can use time from a simulator by setting the <code>use_sim_time</code> parameter to <code>true</code></li>
@@ -543,9 +543,9 @@ and am hesitant to adopt this practice given that SDF files are more general tha
 </div>
 </div>
 
-<div id="outline-container-org117ad1f" class="outline-3">
-<h3 id="org117ad1f">Documentation</h3>
-<div class="outline-text-3" id="text-org117ad1f">
+<div id="outline-container-documentation-2-P-2" class="outline-3">
+<h3 id="documentation-2-P-2">Documentation</h3>
+<div class="outline-text-3" id="text-org97932c9">
 <ol class="org-ol">
 <li><a href="https://gazebosim.org/docs/fortress/tutorials">Gazebo Tutorials</a></li>
 <li><a href="https://sdformat.org">SDF Format</a></li>
@@ -556,17 +556,17 @@ and am hesitant to adopt this practice given that SDF files are more general tha
 </div>
 </div>
 
-<div id="outline-container-org3bb7663" class="outline-2">
-<h2 id="org3bb7663">Some Other Simulators (for reference, we will not use these)</h2>
-<div class="outline-text-2" id="text-org3bb7663">
+<div id="outline-container-some-other-simulators-for-reference-we-will-not-use-these--1-P-1" class="outline-2">
+<h2 id="some-other-simulators-for-reference-we-will-not-use-these--1-P-1">Some Other Simulators (for reference, we will not use these)</h2>
+<div class="outline-text-2" id="text-some-other-simulators-for-reference-we-will-not-use-these--1-P-1">
 </div>
-<div id="outline-container-org0909b87" class="outline-3">
-<h3 id="org0909b87">Open Source Simulators</h3>
-<div class="outline-text-3" id="text-org0909b87">
+<div id="outline-container-open-source-simulators-2-P-1" class="outline-3">
+<h3 id="open-source-simulators-2-P-1">Open Source Simulators</h3>
+<div class="outline-text-3" id="text-open-source-simulators-2-P-1">
 </div>
-<div id="outline-container-org0197c96" class="outline-4">
-<h4 id="org0197c96">Current Simulators</h4>
-<div class="outline-text-4" id="text-org0197c96">
+<div id="outline-container-current-simulators-3-P-1" class="outline-4">
+<h4 id="current-simulators-3-P-1">Current Simulators</h4>
+<div class="outline-text-4" id="text-org12e0d6c">
 <ul class="org-ul">
 <li><a href="http://www.mujoco.org/">MuJoCo</a> - A dynamics simulator specifically built for robotics tasks. This is likely one of the more state-of-the-art simulators.
 <ul class="org-ul">
@@ -587,9 +587,9 @@ and am hesitant to adopt this practice given that SDF files are more general tha
 </ul>
 </div>
 </div>
-<div id="outline-container-orgd6f6943" class="outline-4">
-<h4 id="orgd6f6943">Less Maintained</h4>
-<div class="outline-text-4" id="text-orgd6f6943">
+<div id="outline-container-less-maintained-3-P-1" class="outline-4">
+<h4 id="less-maintained-3-P-1">Less Maintained</h4>
+<div class="outline-text-4" id="text-org4db51fb">
 <ul class="org-ul">
 <li><a href="https://pybullet.org">pybullet</a> - A pythons simulator based on Bullet.
 <ul class="org-ul">
@@ -602,9 +602,9 @@ algorithms and transparency in how the dynamics are actually solved. Does not su
 </div>
 </div>
 </div>
-<div id="outline-container-org0228a86" class="outline-3">
-<h3 id="org0228a86">Closed Source Simulators</h3>
-<div class="outline-text-3" id="text-org0228a86">
+<div id="outline-container-closed-source-simulators-2-P-1" class="outline-3">
+<h3 id="closed-source-simulators-2-P-1">Closed Source Simulators</h3>
+<div class="outline-text-3" id="text-org455c28e">
 <ul class="org-ul">
 <li><a href="https://www.coppeliarobotics.com">CoppeliaSim</a> (formerly V-Rep)
 <ul class="org-ul">

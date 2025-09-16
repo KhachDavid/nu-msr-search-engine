@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2024-12-04 Wed 21:56 -->
+<!-- 2025-09-16 Tue 13:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Visualization in ROS</title>
@@ -21,29 +21,29 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org0f05152">Overview</a></li>
-<li><a href="#org7737223">RViz</a>
+<li><a href="#overview-1-P-16">Overview</a></li>
+<li><a href="#rviz-1-P-2">RViz</a>
 <ul>
-<li><a href="#orgfc7b399">Paths</a></li>
-<li><a href="#org5c2c898">Visualization Messages</a></li>
-<li><a href="#org1666020">Markers</a></li>
-<li><a href="#org285f627">MarkerArray</a></li>
-<li><a href="#orga19d35d">InteractiveMarkers</a></li>
-<li><a href="#orgca4f1bc">Plugins</a></li>
+<li><a href="#paths-2-P-2">Paths</a></li>
+<li><a href="#visualization-messages-2-P-2">Visualization Messages</a></li>
+<li><a href="#markers-2-P-2">Markers</a></li>
+<li><a href="#markerarray-2-P-2">MarkerArray</a></li>
+<li><a href="#interactivemarkers-2-P-2">InteractiveMarkers</a></li>
+<li><a href="#plugins-2-P-3">Plugins</a></li>
 </ul>
 </li>
-<li><a href="#orge17bd4e">rqt</a>
+<li><a href="#rqt-1-P-2">rqt</a>
 <ul>
-<li><a href="#orgf8cd184">rqt_plot</a></li>
+<li><a href="#rqt-plot-2-P-2">rqt_plot</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-org0f05152" class="outline-2">
-<h2 id="org0f05152">Overview</h2>
-<div class="outline-text-2" id="text-org0f05152">
+<div id="outline-container-overview-1-P-16" class="outline-2">
+<h2 id="overview-1-P-16">Overview</h2>
+<div class="outline-text-2" id="text-org5e7f79b">
 <ul class="org-ul">
 <li>ROS has several tools for interacting graphically with robotic systems.
 <ul class="org-ul">
@@ -54,9 +54,9 @@
 </div>
 </div>
 
-<div id="outline-container-org7737223" class="outline-2">
-<h2 id="org7737223">RViz</h2>
-<div class="outline-text-2" id="text-org7737223">
+<div id="outline-container-rviz-1-P-2" class="outline-2">
+<h2 id="rviz-1-P-2">RViz</h2>
+<div class="outline-text-2" id="text-orga32fb5f">
 <ul class="org-ul">
 <li><code>rviz</code> is used to visualize data in ROS in a 3D environment</li>
 <li>In <code>rviz</code> you add <i>Display Types</i> to the display and connect them 
@@ -66,18 +66,18 @@ to information that <code>rviz</code> receives via ROS messages and parameters.
 </ul></li>
 </ul>
 </div>
-<div id="outline-container-orgfc7b399" class="outline-3">
-<h3 id="orgfc7b399">Paths</h3>
-<div class="outline-text-3" id="text-orgfc7b399">
+<div id="outline-container-paths-2-P-2" class="outline-3">
+<h3 id="paths-2-P-2">Paths</h3>
+<div class="outline-text-3" id="text-orgcde1ebd">
 <ul class="org-ul">
 <li>Paths allow you to visualize a series of points that have been visited over time</li>
 <li>These are visualized with the <a href="http://wiki.ros.org/rviz/DisplayTypes/Path">Path</a> datatype using <a href="http://docs.ros.org/api/nav_msgs/html/msg/Path.html">nav_msgs/Path</a> messages</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org5c2c898" class="outline-3">
-<h3 id="org5c2c898">Visualization Messages</h3>
-<div class="outline-text-3" id="text-org5c2c898">
+<div id="outline-container-visualization-messages-2-P-2" class="outline-3">
+<h3 id="visualization-messages-2-P-2">Visualization Messages</h3>
+<div class="outline-text-3" id="text-org31bdf94">
 <ul class="org-ul">
 <li>The <a href="https://wiki.ros.org/visualization_msgs">visualization_msgs</a> package contains
 messages for displaying visual primitives in <code>rviz</code> using some Display Types in Rviz</li>
@@ -85,9 +85,9 @@ messages for displaying visual primitives in <code>rviz</code> using some Displa
 </div>
 </div>
 
-<div id="outline-container-org1666020" class="outline-3">
-<h3 id="org1666020">Markers</h3>
-<div class="outline-text-3" id="text-org1666020">
+<div id="outline-container-markers-2-P-2" class="outline-3">
+<h3 id="markers-2-P-2">Markers</h3>
+<div class="outline-text-3" id="text-orgda2a871">
 <ul class="org-ul">
 <li>Markers are the simplest visualization message</li>
 <li>They let you draw basic shapes at specified locations
@@ -128,9 +128,9 @@ relative to its parent frame, even if that frame moves after the marker is drawn
 </ul>
 </div>
 </div>
-<div id="outline-container-org285f627" class="outline-3">
-<h3 id="org285f627">MarkerArray</h3>
-<div class="outline-text-3" id="text-org285f627">
+<div id="outline-container-markerarray-2-P-2" class="outline-3">
+<h3 id="markerarray-2-P-2">MarkerArray</h3>
+<div class="outline-text-3" id="text-orgd08fc88">
 <ul class="org-ul">
 <li>The <a href="http://docs.ros.org/melodic/api/visualization_msgs/html/msg/MarkerArray.html">MarkerArray</a> message consists of an array of Marker messages</li>
 <li>This message type lets you publish multiple markers with a single message</li>
@@ -140,9 +140,9 @@ relative to its parent frame, even if that frame moves after the marker is drawn
 </div>
 </div>
 
-<div id="outline-container-orga19d35d" class="outline-3">
-<h3 id="orga19d35d">InteractiveMarkers</h3>
-<div class="outline-text-3" id="text-orga19d35d">
+<div id="outline-container-interactivemarkers-2-P-2" class="outline-3">
+<h3 id="interactivemarkers-2-P-2">InteractiveMarkers</h3>
+<div class="outline-text-3" id="text-org305d797">
 <ul class="org-ul">
 <li><a href="http://wiki.ros.org/interactive_markers">Interactive Markers</a> lets users manipulate markers
 inside RViz.  Your nodes can then respond to the actions of the user.</li>
@@ -162,9 +162,9 @@ inside RViz.  Your nodes can then respond to the actions of the user.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgca4f1bc" class="outline-3">
-<h3 id="orgca4f1bc">Plugins</h3>
-<div class="outline-text-3" id="text-orgca4f1bc">
+<div id="outline-container-plugins-2-P-3" class="outline-3">
+<h3 id="plugins-2-P-3">Plugins</h3>
+<div class="outline-text-3" id="text-org1ad6099">
 <ul class="org-ul">
 <li>Using markers enables you to create complex visualizations by building ROS messages</li>
 <li>However, marker messages are quite large and using many of them can become slow</li>
@@ -180,9 +180,9 @@ inside RViz.  Your nodes can then respond to the actions of the user.</li>
 </div>
 </div>
 
-<div id="outline-container-orge17bd4e" class="outline-2">
-<h2 id="orge17bd4e">rqt</h2>
-<div class="outline-text-2" id="text-orge17bd4e">
+<div id="outline-container-rqt-1-P-2" class="outline-2">
+<h2 id="rqt-1-P-2">rqt</h2>
+<div class="outline-text-2" id="text-orgc4a5807">
 <ul class="org-ul">
 <li><a href="https://www.qt.io">Qt</a> is a library for creating graphical user interfaces</li>
 <li><a href="https://wiki.ros.org/rqt">rqt</a> is a ROS package that enables you to create GUIs using ROS nodes</li>
@@ -211,9 +211,9 @@ so that others can reproduce your view</li>
 <li>There are <a href="http://wiki.ros.org/rqt/Tutorials">Tutorials</a> for creating your own plugins</li>
 </ul>
 </div>
-<div id="outline-container-orgf8cd184" class="outline-3">
-<h3 id="orgf8cd184">rqt_plot</h3>
-<div class="outline-text-3" id="text-orgf8cd184">
+<div id="outline-container-rqt-plot-2-P-2" class="outline-3">
+<h3 id="rqt-plot-2-P-2">rqt_plot</h3>
+<div class="outline-text-3" id="text-org82884b1">
 <ul class="org-ul">
 <li><a href="http://wiki.ros.org/rqt_plot">rqt_plot</a> is the simplest way to draw real-time time-plots of data from ROS topics</li>
 <li>You can specify what fields of which topics to plot in the gui or</li>
