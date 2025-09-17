@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-09-16 Tue 13:16 -->
+<!-- 2025-09-16 Tue 15:44 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>The ROS API and Python</title>
@@ -77,17 +77,21 @@ There are three primarily supported client libraries:
 <li>The <code>Node</code> class has methods that enable
 <ul class="org-ul">
 <li>Creating service servers: <a href="https://docs.ros.org/en/kilted/p/rclpy/rclpy.node.html#rclpy.node.Node.create_service">create_service</a></li>
-<li>Creating service clients: <a href="https://docs.ros2.org/foxy/api/rclpy/api/node.html#rclpy.node.Node.create_client">create_client</a></li>
-<li>Creating publishers: <a href="https://docs.ros2.org/foxy/api/rclpy/api/node.html#rclpy.node.Node.create_publisher">create_publisher</a></li>
-<li>Creating subscribers: <a href="https://docs.ros2.org/foxy/api/rclpy/api/node.html#rclpy.node.Node.create_subscription">create_subscription</a></li>
-<li>Creating timers: <a href="https://docs.ros2.org/foxy/api/rclpy/api/node.html#rclpy.node.Node.create_timer">create_timer</a></li>
-<li>Declaring and using parameters: <a href="https://docs.ros2.org/foxy/api/rclpy/api/node.html#rclpy.node.Node.declare_parameters">declare_parameters</a>, <a href="https://docs.ros2.org/foxy/api/rclpy/api/node.html#rclpy.node.Node.get_parameter">get_parameter</a>
+<li>Creating service clients: <a href="https://docs.ros.org/en/kilted/p/rclpy/rclpy.node.html#rclpy.node.Node.create_client">create_client</a></li>
+<li>Creating publishers: <a href="https://docs.ros.org/en/kilted/p/rclpy/rclpy.node.html#rclpy.node.Node.create_publisher">create_publisher</a></li>
+<li>Creating subscribers: <a href="https://docs.ros.org/en/kilted/p/rclpy/rclpy.node.html#rclpy.node.Node.create_subscription">create_subscription</a></li>
+<li>Creating timers: <a href="https://docs.ros.org/en/kilted/p/rclpy/rclpy.node.html#rclpy.node.Node.create_timer">create_timer</a></li>
+<li>Declaring and using parameters: <a href="https://docs.ros.org/en/kilted/p/rclpy/rclpy.node.html#rclpy.node.Node.declare_parameters">declare_parameters</a>, <a href="https://docs.ros2.org/foxy/api/rclpy/api/node.html#rclpy.node.Node.get_parameter">get_parameter</a>
 <ul class="org-ul">
 <li>The <a href="http://docs.ros.org/en/kilted/p/rcl_interfaces/">rcl_interfaces</a> package defines some types that are useful for describing and interacting with parameters.</li>
-<li>For example, there are a few basic data types for parameters, outlined in the <a href="http://docs.ros.org/en/kilted/p/rcl_interfaces/interfaces/msg/ParameterType.html">ParameterType</a> message</li>
-<li>The <a href="http://docs.ros.org/en/kilted/p/rcl_interfaces/interfaces/msg/ParameterDescriptor.html">ParameterDescriptor</a> message allows setting metadata for parameters</li>
+<li>For example, there are a few basic data types for parameters, outlined in the <a href="http://docs.ros.org/en/kilted/p/rcl_interfaces/msg/ParameterType.html">ParameterType</a> message</li>
+<li>The <a href="http://docs.ros.org/en/kilted/p/rcl_interfaces/msg/ParameterDescriptor.html">ParameterDescriptor</a> message allows setting metadata for parameters</li>
 </ul></li>
-<li>Logging: <a href="https://docs.ros2.org/foxy/api/rclpy/api/logging.html">Logging</a></li>
+<li>Logging:
+<ul class="org-ul">
+<li>Obtain the logger associated with a node using <a href="https://docs.ros.org/en/kilted/p/rclpy/rclpy.node.html#rclpy.node.Node.get_logger">Node.get_logger</a></li>
+<li>The <a href="https://docs.ros.org/en/kilted/p/rclpy/rclpy.impl.rcutils_logger.html#rclpy.impl.rcutils_logger.RcutilsLogger">Logger API</a></li>
+</ul></li>
 </ul></li>
 <li>There are many other ROS functions and classes available in <code>rclpy</code>, look at the documentation.</li>
 <li>An example of some ROS API functions is available at <a href="https://github.com/m-elwin/me495_demo">https://github.com/m-elwin/me495_demo</a></li>
