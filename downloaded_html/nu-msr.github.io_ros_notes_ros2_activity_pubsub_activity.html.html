@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-09-18 Thu 11:42 -->
+<!-- 2025-09-22 Mon 14:14 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Publishers and Subscriber Activity</title>
@@ -116,7 +116,7 @@
 </div>
 <div id="outline-container-basic-node-2-P-1" class="outline-3">
 <h3 id="basic-node-2-P-1">Basic Node</h3>
-<div class="outline-text-3" id="text-org88f37a2">
+<div class="outline-text-3" id="text-org21a19fa">
 <p>
 Create a node that accomplishes the following:
 </p>
@@ -134,7 +134,7 @@ Here is an approximate step-by-step guide.
 </p>
 <ol class="org-ol">
 <li>Create a new ROS <a href="../colcon.html#workspace">workspace</a></li>
-<li>Create a new <a href="../colcon.html#ament_python"><code>ament_python</code> package</a>
+<li>Create a new <a href="../colcon.html#ament_python"><code>ament_python</code> package</a> called <code>pubsub</code>
 <ul class="org-ul">
 <li>After calling <code>ros2 pkg create ...</code> is a good time to init the <code>git</code> repository and make the first commit</li>
 <li>After editing <code>package.xml</code>, <code>setup.py</code> and creating the <code>README.md</code> is a good time for the second commit.</li>
@@ -169,17 +169,28 @@ Here is an approximate step-by-step guide.
 <ul class="org-ul">
 <li>Make sure to <code>remap</code> the <code>cmd_vel</code> argument to <code>turtle1/cmd_vel</code> when you run your node</li>
 <li>See <a href="../ros_api.html#names">Naming in ROS</a> for more information</li>
-<li>Adjust code as needed until this step works, and commit to <code>git</code> (at least once when the task is complete).</li>
+<li>Adjust code as needed until this step works</li>
+<li>Commit to <code>git</code> (at least once when the task is complete).</li>
 </ul></li>
-<li>Write an XML launchfile called <code>two_pubsub.launch.xml</code> to start the <code>turtlesim</code> node and your node. Once it works, commit it to git.
+<li>Write an XML launchfile called <code>pubsub.launch.xml</code> to start the <code>turtlesim</code> node and your node. Once it works, commit it to git.
 <ul class="org-ul">
-<li>Don't forget to add turtlesim as an <code>exec_depend</code>, since your launchfile depends on it.</li>
+<li>The <a href="https://docs.ros.org/en/kilted/Tutorials/Intermediate/Launch/Creating-Launch-Files.html">Creating Launchfiles</a> tutorial shows you how to create the launchfile</li>
+<li>The launchfile should be placed in the directory <code>launch/</code></li>
+<li>Edit <code>setup.py</code> to install the launchfile, by adding it to the <code>data_files</code> argument of the <code>setup()</code> function call.
+<ul class="org-ul">
+<li>Each element of the <code>data_files</code> list is a tuple.</li>
+<li>The first item in the tuple an installation directory, in this case <code>'share/' + package_name + 'launch'</code></li>
+<li>The second item is a list of files to install, relative to the source directory. In this case <code>'launch/pubsub.launch.xml'</code></li>
+<li>For an example see <a href="https://docs.ros.org/en/kilted/Tutorials/Intermediate/Launch/Launch-system.html">Integrating launch files into ROS 2 packages.</a></li>
+</ul></li>
+<li>Don't forget to add <code>turtlesim</code> and <code>turtlesim_msgs</code> as <code>exec_depends</code>, since your launchfile depends on it.</li>
 <li>There are multiple ways to write this launchfile. For this task use the <code>remap</code> tag to <code>remap</code> the topics in your node to the <code>turtlesim</code> topics.</li>
+<li>Commit to <code>git</code></li>
 </ul></li>
-<li>Now add the subscriber to the node:
+<li>Now add the subscriber (to the <code>pose</code> topic) to the node:
 <ul class="org-ul">
-<li>Update the launchfile to ensure this topic is mapped properly (subscribe to a relative topic name)</li>
-<li>At first do nothing in the subscriber other than log a message</li>
+<li>Update the launchfile to ensure that the <code>pose</code> topic is mapped properly so it receives the turtle's pose (in the node, subscribe to a relative topic name)</li>
+<li>At first just log a message in the subscriber to make sure it is receiving messages</li>
 <li>Run your node and the <code>turtlesim</code> and make sure the subscriber can be called</li>
 <li>Once the subscriber is called, commit to <code>git</code></li>
 </ul></li>
@@ -197,7 +208,7 @@ Here is an approximate step-by-step guide.
 </div>
 <div id="outline-container-custom-parameters-2-P-1" class="outline-3">
 <h3 id="custom-parameters-2-P-1">Custom Parameters</h3>
-<div class="outline-text-3" id="text-org30ae79c">
+<div class="outline-text-3" id="text-orgda861d1">
 <ol class="org-ol">
 <li>Control the minimum and maximum \(x\) values using parameters called <code>xmin</code> and <code>xmax</code>.</li>
 <li>Make sure the parameters have meaningful default values and have the node log the parameter values to the DEBUG log when it starts.</li>
@@ -213,7 +224,7 @@ Here is an approximate step-by-step guide.
 
 <div id="outline-container-namespaces-2-P-1" class="outline-3">
 <h3 id="namespaces-2-P-1">Namespaces</h3>
-<div class="outline-text-3" id="text-org3f3f631">
+<div class="outline-text-3" id="text-org54ab046">
 <ol class="org-ol">
 <li>Run two instances of your node and the <code>turtlesim</code> in two separate namespaces with two separate <code>xmin</code> and <code>xmax</code> values.
 <ul class="org-ul">
@@ -253,7 +264,7 @@ verify your work after completing the task.
 </p>
 </div>
 
-<details id="org4ae6c9e"><summary class="header-3">Basic Node</summary>
+<details id="orgfb70678"><summary class="header-3">Basic Node</summary>
 <details id="orgd51b811"><summary class="header-4">Creating The Workspace</summary>
 <div class="outline-text-4" id="text-orgd51b811">
 <div class="org-src-container">
@@ -282,6 +293,8 @@ git commit
   <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">maintainer</span> <span class="org-nxml-attribute-local-name">email</span>=<span class="org-string">"youremail@domain.edu"</span><span class="org-nxml-tag-delimiter">&gt;</span><span class="org-nxml-text">Your Name</span><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-element-local-name">maintainer</span><span class="org-nxml-tag-delimiter">&gt;</span>
   <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">license</span><span class="org-nxml-tag-delimiter">&gt;</span><span class="org-nxml-text">GPLv3</span><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-element-local-name">license</span><span class="org-nxml-tag-delimiter">&gt;</span>
   <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">exec_depend</span><span class="org-nxml-tag-delimiter">&gt;</span><span class="org-nxml-text">rclpy</span><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-element-local-name">exec_depend</span><span class="org-nxml-tag-delimiter">&gt;</span>
+  <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">exec_depend</span><span class="org-nxml-tag-delimiter">&gt;</span><span class="org-nxml-text">turtlesim</span><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-element-local-name">exec_depend</span><span class="org-nxml-tag-delimiter">&gt;</span>
+  <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">exec_depend</span><span class="org-nxml-tag-delimiter">&gt;</span><span class="org-nxml-text">turtlesim_msgs</span><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-element-local-name">exec_depend</span><span class="org-nxml-tag-delimiter">&gt;</span>
   <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">test_depend</span><span class="org-nxml-tag-delimiter">&gt;</span><span class="org-nxml-text">ament_copyright</span><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-element-local-name">test_depend</span><span class="org-nxml-tag-delimiter">&gt;</span>
   <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">test_depend</span><span class="org-nxml-tag-delimiter">&gt;</span><span class="org-nxml-text">ament_flake8</span><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-element-local-name">test_depend</span><span class="org-nxml-tag-delimiter">&gt;</span>
   <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">test_depend</span><span class="org-nxml-tag-delimiter">&gt;</span><span class="org-nxml-text">ament_pep257</span><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-element-local-name">test_depend</span><span class="org-nxml-tag-delimiter">&gt;</span>
@@ -460,7 +473,7 @@ To find out about the turtlesim pose:
 <div class="org-src-container">
 <pre class="src src-bash">ros2 topic list
 ros2 topic info /turtle1/pose
-ros2 interface show turtlesim/msg/Pose
+ros2 interface show turtlesim_msgs/msg/Pose
 </pre>
 </div>
 
@@ -470,7 +483,7 @@ ros2 interface show turtlesim/msg/Pose
 </ul>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 10: </span>pubsub/pubsub.py</label><pre class="src src-python"><span class="org-keyword">from</span> turtlesim.msg <span class="org-keyword">import</span> Pose
+<label class="org-src-name"><span class="listing-number">Listing 10: </span>pubsub/pubsub.py</label><pre class="src src-python"><span class="org-keyword">from</span> turtlesim_msgs.msg <span class="org-keyword">import</span> Pose
 
 <span class="org-comment-delimiter"># </span><span class="org-comment">in PubsubNode.__init__:
 </span><span class="org-keyword">self</span>.<span class="org-variable-name">_sub</span> <span class="org-operator">=</span> <span class="org-keyword">self</span>.create_subscription(Pose, <span class="org-string">"pose"</span>, <span class="org-keyword">self</span>.pose_callback, 10)
@@ -489,8 +502,8 @@ ros2 interface show turtlesim/msg/Pose
 </details>
 
 <details id="orgc8dc0cf"><summary class="header-3">Parameters</summary>
-<details id="org0400ce5"><summary class="header-4">Custom Parameters</summary>
-<div class="outline-text-4" id="text-org0400ce5">
+<details id="org5f87490"><summary class="header-4">Custom Parameters</summary>
+<div class="outline-text-4" id="text-org5f87490">
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-comment-delimiter"># </span><span class="org-comment">In PubsubNode.__init__
 </span><span class="org-keyword">self</span>.declare_parameter(<span class="org-string">"xmin"</span>, 2.0)
@@ -529,7 +542,7 @@ To test the node: <code>ros2 run pubsub pubsub --ros-args -p xmin:=3.1 -p xmax:=
 </details>
 </details>
 
-<details id="org26fa966"><summary class="header-3">Namespaces</summary>
+<details id="org4130c75"><summary class="header-3">Namespaces</summary>
 <div id="outline-container-changing-the-namespace-3-P-1" class="outline-4">
 <h4 id="changing-the-namespace-3-P-1">Changing the Namespace</h4>
 <div class="outline-text-4" id="text-orga1f084e">
