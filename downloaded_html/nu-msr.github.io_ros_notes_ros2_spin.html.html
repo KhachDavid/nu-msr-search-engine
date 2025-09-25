@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-09-22 Mon 14:14 -->
+<!-- 2025-09-25 Thu 09:03 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Threads, Spinning, and Async in ROS 2</title>
@@ -134,7 +134,7 @@ If the node cares about the response, it needs some way to process the response 
 </ul></li>
 <li>If you do want to block, wait for the result until it is ready
 <ul class="org-ul">
-<li>The <a href="https://docs.ros.org/en/iron/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Service-And-Client.html#write-the-client-node">Service Tutorial</a> uses <code>rclpy.spin_until_future_complete</code> to accomplish this task</li>
+<li>The <a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Service-And-Client.html#write-the-client-node">Service Tutorial</a> uses <code>rclpy.spin_until_future_complete</code> to accomplish this task</li>
 <li>But the code in the tutorial <b>WILL NOT WORK</b> if used from within another callback function!</li>
 <li>What is a future anyway? And why is it spinning?</li>
 </ul></li>
@@ -206,7 +206,7 @@ required to make it happen. For quick instruction see <a href="#patterns">Patter
 <li>This behavior means that spinning from within a callback will not allow other callback functions to be called (via <code>rclpy.spin_once</code>).</li>
 <li>In other words, the callbacks cannot be nested by default.</li>
 </ul></li>
-<li>The behavior of what callbacks can be called by <code>rclpy.spin_once</code> is controlled using <a href="https://docs.ros.org/en/iron/How-To-Guides/Using-callback-groups.html">Callback Groups</a></li>
+<li>The behavior of what callbacks can be called by <code>rclpy.spin_once</code> is controlled using <a href="https://docs.ros.org/en/kilted/How-To-Guides/Using-callback-groups.html">Callback Groups</a></li>
 <li>There are two primary callback groups types: <code>MutuallyExclusiveCallbackGroup</code> and <code>ReentrantCallbackGroup</code>.</li>
 </ul>
 </div>
@@ -380,6 +380,11 @@ can help reduce the decisions that the programmer needs to make while also simpl
 some calculations or decisions to take place over multiple timer ticks without needing to pause.</li>
 <li>If you have a timer running at <code>X hz</code>, it's easy to subdivide that into <code>X/N hz</code>. Multiple timers could also be used,
 but doing a subdivision can be a good choice because it gives more deterministic performance and control in terms of when the various tasks occur relative to each other.</li>
+</ul></li>
+<li>It is also possible to publish directly from a subscriber:
+<ul class="org-ul">
+<li>This pattern may be appropriate when you want published output to happen as close to the frequency/timing of the incoming messages as possible</li>
+<li>This pattern provides the least amount of flexibility for, example, handling a flood of messages in an organized manner, and couples the timing of the node to the timing of the publishers it subscribes to</li>
 </ul></li>
 </ol>
 </div>
@@ -716,10 +721,10 @@ Thread 2 stores 1 in i
 <h2 id="resources-1-P-1">Resources</h2>
 <div class="outline-text-2" id="text-org6b78382">
 <ul class="org-ul">
-<li><a href="https://docs.ros.org/en/iron/How-To-Guides/Sync-Vs-Async.html">Async vs Synchronous Service Clients</a></li>
-<li><a href="https://docs.ros.org/en/iron/How-To-Guides/Using-callback-groups.html">Callback Groups</a></li>
+<li><a href="https://docs.ros.org/en/kilted/How-To-Guides/Sync-Vs-Async.html">Async vs Synchronous Service Clients</a></li>
+<li><a href="https://docs.ros.org/en/kilted/How-To-Guides/Using-callback-groups.html">Callback Groups</a></li>
 <li><a href="https://docs.ros2.org/foxy/api/rclpy/api/init_shutdown.html">Spinning</a></li>
-<li><a href="https://docs.ros.org/en/iron/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Service-And-Client.html">Writing A Service</a></li>
+<li><a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Service-And-Client.html">Writing A Service</a></li>
 <li><a href="https://github.com/m-elwin/async_experiments">Examples</a></li>
 <li><a href="https://github.com/ros2/examples/tree/rolling/rclpy/services/minimal_client">rclpy Service client Examples</a></li>
 <li><a href="https://docs.python.org/3/library/asyncio.html">Python Async IO</a></li>
