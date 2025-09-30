@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-09-25 Thu 09:03 -->
+<!-- 2025-09-29 Mon 16:33 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ROS Tf Activity</title>
@@ -55,9 +55,6 @@ colcon build --symlink-install
 <span class="org-comment-delimiter"># </span><span class="org-comment">use tf_echo to see translation between frames. C-c to quit
 </span>ros2 run tf2_ros tf2_echo right left
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">run in rviz, set everything up correctly
-</span>rviz2
-
 <span class="org-comment-delimiter"># </span><span class="org-comment">run in rviz, using my rviz config
 </span>rviz2 -d src/me495_tf/config/view.rviz
 
@@ -72,7 +69,11 @@ colcon build --symlink-install
 <h2 id="exercises-1-P-1">Exercises</h2>
 <div class="outline-text-2" id="text-orgc4f08ba">
 <ol class="org-ol">
-<li>Walk through the demonstration above, manually setting up rviz to display the transformations</li>
+<li>Walk through the demonstration above, manually setting up rviz to display the transformations rather than
+loading it through my config file.
+<ul class="org-ul">
+<li>Run rviz without arguments, then set it up)</li>
+</ul></li>
 <li>Modify <code>in_out</code> so that the base frame is dynamic, that is, it is broadcast from the regular broadcaster and
 not the static broadcaster.</li>
 <li>Make the base frame rotate about it's own z axis at a fixed rate, and visualize in rviz</li>
