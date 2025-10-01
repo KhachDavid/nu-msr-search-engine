@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-09-29 Mon 16:33 -->
+<!-- 2025-10-01 Wed 09:33 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Publishers and Subscriber Activity</title>
@@ -116,7 +116,7 @@
 </div>
 <div id="outline-container-basic-node-2-P-1" class="outline-3">
 <h3 id="basic-node-2-P-1">Basic Node</h3>
-<div class="outline-text-3" id="text-org882334e">
+<div class="outline-text-3" id="text-org9de2962">
 <p>
 Create a node that accomplishes the following:
 </p>
@@ -208,7 +208,7 @@ Here is an approximate step-by-step guide.
 </div>
 <div id="outline-container-custom-parameters-2-P-1" class="outline-3">
 <h3 id="custom-parameters-2-P-1">Custom Parameters</h3>
-<div class="outline-text-3" id="text-orgb914624">
+<div class="outline-text-3" id="text-orgecf7acf">
 <ol class="org-ol">
 <li>Control the minimum and maximum \(x\) values using parameters called <code>xmin</code> and <code>xmax</code>.</li>
 <li>Make sure the parameters have meaningful default values and have the node log the parameter values to the DEBUG log when it starts.</li>
@@ -224,7 +224,7 @@ Here is an approximate step-by-step guide.
 
 <div id="outline-container-namespaces-2-P-1" class="outline-3">
 <h3 id="namespaces-2-P-1">Namespaces</h3>
-<div class="outline-text-3" id="text-org532b759">
+<div class="outline-text-3" id="text-orge9abc9a">
 <ol class="org-ol">
 <li>Run two instances of your node and the <code>turtlesim</code> in two separate namespaces with two separate <code>xmin</code> and <code>xmax</code> values.
 <ul class="org-ul">
@@ -264,7 +264,7 @@ verify your work after completing the task.
 </p>
 </div>
 
-<details id="org1458f45"><summary class="header-3">Basic Node</summary>
+<details id="org69b5841"><summary class="header-3">Basic Node</summary>
 <details id="orgd51b811"><summary class="header-4">Creating The Workspace</summary>
 <div class="outline-text-4" id="text-orgd51b811">
 <div class="org-src-container">
@@ -502,8 +502,8 @@ ros2 interface show turtlesim_msgs/msg/Pose
 </details>
 
 <details id="orgc8dc0cf"><summary class="header-3">Parameters</summary>
-<details id="org437ed4a"><summary class="header-4">Custom Parameters</summary>
-<div class="outline-text-4" id="text-org437ed4a">
+<details id="orgd9e6900"><summary class="header-4">Custom Parameters</summary>
+<div class="outline-text-4" id="text-orgd9e6900">
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-comment-delimiter"># </span><span class="org-comment">In PubsubNode.__init__
 </span><span class="org-keyword">self</span>.declare_parameter(<span class="org-string">"xmin"</span>, 2.0)
@@ -542,7 +542,7 @@ To test the node: <code>ros2 run pubsub pubsub --ros-args -p xmin:=3.1 -p xmax:=
 </details>
 </details>
 
-<details id="org4d09e67"><summary class="header-3">Namespaces</summary>
+<details id="org060f65c"><summary class="header-3">Namespaces</summary>
 <div id="outline-container-changing-the-namespace-3-P-1" class="outline-4">
 <h4 id="changing-the-namespace-3-P-1">Changing the Namespace</h4>
 <div class="outline-text-4" id="text-orga1f084e">

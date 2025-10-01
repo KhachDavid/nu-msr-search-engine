@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-09-29 Mon 16:33 -->
+<!-- 2025-10-01 Wed 09:33 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>URDF Activity</title>
@@ -21,37 +21,79 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#activity-1-P-1">Activity</a></li>
+<li><a href="#activity-1-P-1">Activity</a>
+<ul>
+<li><a href="#urdf-2-P-1">URDF</a></li>
+<li><a href="#xacro-2-P-1">Xacro</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </nav>
 
 <div id="outline-container-activity-1-P-1" class="outline-2">
 <h2 id="activity-1-P-1">Activity</h2>
-<div class="outline-text-2" id="text-org3153f1b">
-<ul class="org-ul">
+<div class="outline-text-2" id="text-activity-1-P-1">
+</div>
+<div id="outline-container-urdf-2-P-1" class="outline-3">
+<h3 id="urdf-2-P-1">URDF</h3>
+<div class="outline-text-3" id="text-org99452a2">
+<ol class="org-ol">
 <li>Clone <code>https://github.com/m-elwin/me495_urdf.git</code>
 <ul class="org-ul">
 <li>In addition to being used for this activity, the file contains a few examples of xacro files and launch files.</li>
 </ul></li>
-<li>See how the robot moves in rviz.</li>
-<li>Change the launchfile so it no longer loads the <code>rviz</code> configuration.
+<li>Use the <code>see_robot.launch.xml</code> launchfile to run the demonstration.
 <ul class="org-ul">
-<li>Then, when rviz loads, set it up to see the robot.</li>
+<li>This launchfile should start <code>rviz2</code> and the <code>joint_state_publisher_gui</code></li>
 </ul></li>
-<li>There is also another robot that can be loaded from the launchfile try to load that as well</li>
+<li>In a new terminal window <code>ros2 topic echo</code> the <code>/joint_states</code></li>
+<li>Slide the sliders for the <code>linear</code> and <code>rotational</code> joints in the gui
+<ul class="org-ul">
+<li>What happens in <code>rviz</code>?</li>
+<li>What happens to the <code>joint_states</code> messages?</li>
+</ul></li>
+<li>Pass arguments to <code>see_robot.launch.xml</code> so that it loads a different robot.</li>
+<li>Change <code>see_robot.launch.xml</code> so it no longer loads the <code>rviz</code> configuration
+<ul class="org-ul">
+<li>When <code>rviz</code> loads, set it up to see the robot
+<ul class="org-ul">
+<li>Set the fixed frame</li>
+<li>Add a "Robot Model" object</li>
+<li>Set the "Robot Model" object's "Description Source" to "topic"</li>
+<li>Set the "Robot Model" object's "Description topic" to "/robot_description"</li>
+</ul></li>
+</ul></li>
 <li>Rename <code>slidebot.urdf</code> to <code>slidebot.urdf.xacro</code> (<code>mv slidebot.urdf slidebot.urdf.xacro</code>)</li>
-<li>Modify it so that it is a valid xacro file (adding <code>xmlns:xacro="http://wiki.ros.org/wiki/xacro"</code> to the robot tag)</li>
+<li>Add a rotational joint and another cylindrical link to the end of the slidebot's blue cylindrical link
+<ul class="org-ul">
+<li>The link should be green</li>
+<li>The link should rotate in the same plane as the blue cylindrical link</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-xacro-2-P-1" class="outline-3">
+<h3 id="xacro-2-P-1">Xacro</h3>
+<div class="outline-text-3" id="text-org800740a">
+<ol class="org-ol">
+<li>Modify <code>slidebot.urdf.xacro</code> so that it is a valid xacro file
+<ul class="org-ul">
+<li>Add <code>xmlns:xacro="http://wiki.ros.org/wiki/xacro"</code> to the robot tag</li>
+</ul></li>
 <li>Create a parameter called <code>base_radius</code> and use it as the radius of the <code>base</code> sphere
 <ul class="org-ul">
 <li>Declare this parameter directly as a <code>xacro:property</code></li>
 </ul></li>
 <li>Make the length of the arm 10 times the radius of the <code>base</code> sphere using a formula in xacro</li>
-<li>Using the information here <a href="http://wiki.ros.org/xacro#YAML_support">xacro YAML</a>
-load the <code>base_radius</code> from a <code>yaml</code> file instead of declaring it directly in the <code>xacro</code> file.</li>
-<li>Use a <code>xacro:macro</code> to add a link to the arm that is the same as the
-current <code>arm</code> link but on the opposite side of the body</li>
-</ul>
+<li>Using the information in <a href="http://wiki.ros.org/xacro#YAML_support">xacro YAML</a>
+<ul class="org-ul">
+<li>load the <code>base_radius</code> from a <code>yaml</code> file instead of declaring it directly in the <code>xacro</code> file.</li>
+<li>Use a <code>xacro:macro</code> to add a link to the arm that is the same as the current <code>arm</code> link but on the opposite side of the body</li>
+</ul></li>
+</ol>
+</div>
 </div>
 </div>
 </div>

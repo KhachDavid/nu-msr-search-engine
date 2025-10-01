@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-09-29 Mon 16:33 -->
+<!-- 2025-10-01 Wed 09:33 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ROS Tf Activity</title>
@@ -21,6 +21,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
+<li><a href="#introduction-1-P-3">Introduction</a></li>
 <li><a href="#demo">Demonstration</a></li>
 <li><a href="#exercises-1-P-1">Exercises</a></li>
 <li><a href="#resources-1-P-4">Resources</a></li>
@@ -28,11 +29,26 @@
 </div>
 </nav>
 
+<div id="outline-container-introduction-1-P-3" class="outline-2">
+<h2 id="introduction-1-P-3">Introduction</h2>
+<div class="outline-text-2" id="text-org486c634">
+<ul class="org-ul">
+<li>This activity is designed to help provide experience with the ROS 2 tf trees and it's associated <code>tf2_ros</code> API.</li>
+<li>It is meant to compliment the <a href="https://docs.ros.org/en/kilted/Tutorials/Intermediate/Tf2/Tf2-Main.html">ROS 2 tf2 Tutorials</a></li>
+</ul>
+</div>
+</div>
+
 <div id="outline-container-demo" class="outline-2">
 <h2 id="demo">Demonstration</h2>
 <div class="outline-text-2" id="text-demo">
+<p>
+The following demonstration is based on code in <a href="https://github.com/m-elwin/me495_tf">https://github.com/m-elwin/me495_tf</a>
+</p>
+
 <div class="org-src-container">
-<pre class="src src-bash"><span class="org-comment-delimiter"># </span><span class="org-comment">create the workspace and clone the repository and get set up
+<pre class="src src-bash"><span class="org-comment-delimiter"># </span><span class="org-comment">create the workspace and clone the repository and get set up.
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">Substitute your own workspace directory for ws
 </span>mkdir -p ws/src
 <span class="org-builtin">cd</span> ws/src
 git clone https://github.com/m-elwin/me495_tf.git -b ros2
@@ -40,22 +56,30 @@ git clone https://github.com/m-elwin/me495_tf.git -b ros2
 colcon build --symlink-install
 <span class="org-builtin">source</span> install/setup.bash
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">run the broadcaster
+<span class="org-comment-delimiter"># </span><span class="org-comment">run the broadcaster, in the background (the &amp;)
 </span>ros2 run me495_tf in_out &amp;
 
 <span class="org-comment-delimiter"># </span><span class="org-comment">list the topics, notice the /tf and /tf_static
 </span>ros2 topic list
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">use rqt_tf_tree to see the tf_tree
+<span class="org-comment-delimiter"># </span><span class="org-comment">use tf2_tools to generate a pdf view of the frames
 </span>ros2 run tf2_tools view_frames
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Also can use rqt_tf_tree. Need to install the rqt_tf_tree package
+<span class="org-comment-delimiter"># </span><span class="org-comment">Also can use rqt_tf_tree.
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">Need to install the rqt_tf_tree package if it is not installed
+</span>sudo apt install ros-kilted-rqt-tf-tree
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Due to what appears to be a bug, need to first discover the plugin
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">(Just once it seems, maybe once per rebooot?)
+</span>rqt --list-plugins --force-discover
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Actually run the rqt_tf_tree to view the tree
 </span>ros2 run rqt_tf_tree rqt_tf_tree
 
 <span class="org-comment-delimiter"># </span><span class="org-comment">use tf_echo to see translation between frames. C-c to quit
 </span>ros2 run tf2_ros tf2_echo right left
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">run in rviz, using my rviz config
+<span class="org-comment-delimiter"># </span><span class="org-comment">run in rviz, using the rviz config provided by the package
 </span>rviz2 -d src/me495_tf/config/view.rviz
 
 <span class="org-comment-delimiter"># </span><span class="org-comment">run the tracker node
@@ -69,26 +93,35 @@ colcon build --symlink-install
 <h2 id="exercises-1-P-1">Exercises</h2>
 <div class="outline-text-2" id="text-orgc4f08ba">
 <ol class="org-ol">
-<li>Walk through the demonstration above, manually setting up rviz to display the transformations rather than
-loading it through my config file.
+<li>Walk through the demonstration above to gain familiarity with the tf tools.
 <ul class="org-ul">
-<li>Run rviz without arguments, then set it up)</li>
+<li>If you get stuck refer to the <a href="https://docs.ros.org/en/kilted/Tutorials/Intermediate/Tf2/Tf2-Main.html">ROS 2 tf2 Tutorials</a></li>
 </ul></li>
-<li>Modify <code>in_out</code> so that the base frame is dynamic, that is, it is broadcast from the regular broadcaster and
-not the static broadcaster.</li>
-<li>Make the base frame rotate about it's own z axis at a fixed rate, and visualize in rviz</li>
-<li>Add another frame called <code>up</code> that is a child of base.  Have this frame move in sync with left and right but perpendicular to them</li>
+<li>Instead of loading the provided config, run <code>rviz2</code> without any arguments and duplicate the setup
+<ul class="org-ul">
+<li>Set the fixed frame to the <code>world</code> frame</li>
+<li>Add a <code>tf</code> tree to the view</li>
+<li>Change the fixed frame. What happens?</li>
+</ul></li>
+<li>Modify <code>in_out</code> so that the transform from <code>world</code> to <code>base</code> is dynamic
+<ul class="org-ul">
+<li>The transform now needs to be broadcast from the timer even though it is not changing.</li>
+<li>Make sure that the frame is still visible in <code>rviz2</code></li>
+</ul></li>
+<li>Make the <code>base</code> frame rotate about it's own <code>z</code> axis at a fixed rate, and visualize in <code>rviz2</code></li>
+<li>Add another frame called <code>up</code> that is a child of <code>world</code>.  Have this frame move in sync with <code>left</code> and <code>right</code> but perpendicular to them</li>
 <li>Modify tracker so that when the distance between <code>up</code> and <code>left</code> is above a threshold, it prints a message</li>
+<li>Add another frame called <code>turn</code> that is a child of <code>base</code>. Have this frame move with half the speed of <code>left</code>, and <code>right</code> but along the <code>base</code> frame's <code>-x</code> axis</li>
 </ol>
 </div>
 </div>
-
 <div id="outline-container-resources-1-P-4" class="outline-2">
 <h2 id="resources-1-P-4">Resources</h2>
 <div class="outline-text-2" id="text-orgb3a1cca">
-<p>
-<a href="../tf.html">TF Notes</a>
-</p>
+<ul class="org-ul">
+<li><a href="../tf.html">TF Notes</a></li>
+<li><a href="https://docs.ros.org/en/kilted/Tutorials/Intermediate/Tf2/Tf2-Main.html">ROS 2 tf2 Tutorials</a></li>
+</ul>
 </div>
 </div>
 </div>

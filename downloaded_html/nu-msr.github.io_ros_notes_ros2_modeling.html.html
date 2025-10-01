@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-09-29 Mon 16:33 -->
+<!-- 2025-10-01 Wed 09:33 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Robot Modeling</title>
@@ -56,7 +56,7 @@
 <li><code>urdf</code> is the main description format for robots in ROS</li>
 <li>It is an XML format with special tags for defining a robot</li>
 <li>The <a href="https://wiki.ros.org/urdf">urdf</a> ROS package that enables the file to be parsed from C++</li>
-<li>The <a href="https://docs.ros.org/en/jazzy/Tutorials/Intermediate/URDF/URDF-Main.html">URDF Tutorials</a> introduce this file format interactively.</li>
+<li>The <a href="https://docs.ros.org/en/kilted/Tutorials/Intermediate/URDF/URDF-Main.html">URDF Tutorials</a> introduce this file format interactively.</li>
 </ul>
 </div>
 
@@ -120,7 +120,7 @@ There are other formats used in robotics (not just ROS) that relate to URDF file
 <ul class="org-ul">
 <li><a href="https://wiki.ros.org/orocos_kdl">Kinematics and Dynamics Library (KDL)</a>
 <ul class="org-ul">
-<li>The <a href="https://index.ros.org/p/kdl_parser/github-ros-kdl_parser/#jazzy">kdl_parser</a> converts <code>urdf</code> to a format used by KDL</li>
+<li>The <a href="https://index.ros.org/p/kdl_parser/github-ros-kdl_parser/#kilted">kdl_parser</a> converts <code>urdf</code> to a format used by KDL</li>
 </ul></li>
 <li>Gazebo (the primary ROS simulation tool) uses <code>SDF</code> files, but can convert <code>URDF</code> files to <code>SDF</code> automatically
 <ul class="org-ul">
@@ -140,7 +140,7 @@ There are other formats used in robotics (not just ROS) that relate to URDF file
 <h2 id="robot-state-publisher-1-P-1">robot_state_publisher</h2>
 <div class="outline-text-2" id="text-org94889a9">
 <p>
-The <a href="https://index.ros.org/p/robot_state_publisher/github-ros-robot_state_publisher/#jazzy">robot_state_publisher</a> is used to publish the transforms that compose your <code>urdf</code> file on <code>/tf</code> and
+The <a href="https://index.ros.org/p/robot_state_publisher/github-ros-robot_state_publisher/#kilted">robot_state_publisher</a> is used to publish the transforms that compose your <code>urdf</code> file on <code>/tf</code> and
 integrate it with the transform tree.
 </p>
 <ul class="org-ul">
@@ -150,10 +150,10 @@ integrate it with the transform tree.
 <ul class="org-ul">
 <li>Changes to the <code>robot_description</code> parameter will be published on the <code>robot_description</code> topic</li>
 </ul></li>
-<li>It listens on the <code>joint_states</code> topic to get (<a href="https://github.com/ros2/common_interfaces/blob/jazzy/sensor_msgs/msg/JointState.msg">sensor_msgs/msg/JointState) </a>
+<li>It listens on the <code>joint_states</code> topic to get (<a href="https://github.com/ros2/common_interfaces/blob/kilted/sensor_msgs/msg/JointState.msg">sensor_msgs/msg/JointState) </a>
 <ul class="org-ul">
 <li>Each message describes the position, velocity and <i>effort</i> (torque/force) of the joints</li>
-<li>See documentation about the <a href="https://index.ros.org/p/sensor_msgs/github-ros2-common_interfaces/#jazzy">sensor_msgs</a> packages</li>
+<li>See documentation about the <a href="https://index.ros.org/p/sensor_msgs/github-ros2-common_interfaces/#kilted">sensor_msgs</a> packages</li>
 </ul></li>
 <li>It uses the <code>sensor_msgs/JointState</code> data to publish transforms on <code>/tf</code> that describe the positions of the robot's links.</li>
 <li>It publishes the <code>urdf</code> to the <code>/robot_description</code> topic</li>
@@ -170,7 +170,7 @@ which is useful for testing the robot model without needing the physical robot.<
 <h2 id="joint-state-publisher-1-P-1">joint_state_publisher</h2>
 <div class="outline-text-2" id="text-org0d9d48c">
 <p>
-The <a href="https://index.ros.org/p/joint_state_publisher/github-ros-joint_state_publisher/#jazzy">joint_state_publisher</a> publishes <code>sensor_msgs/JointState</code> messages on the <code>joint_states</code> topic.
+The <a href="https://index.ros.org/p/joint_state_publisher/github-ros-joint_state_publisher/#kilted">joint_state_publisher</a> publishes <code>sensor_msgs/JointState</code> messages on the <code>joint_states</code> topic.
 </p>
 
 <p>
@@ -297,7 +297,7 @@ An example package that creates a URDF file and launches rviz to display it can 
 <div class="outline-text-2" id="text-xacro">
 <ul class="org-ul">
 <li><a href="https://github.com/ros/xacro/wiki">xacro</a> is a macro language for XML, designed to make creating URDF files easier.</li>
-<li><a href="https://docs.ros.org/en/jazzy/Tutorials/Intermediate/URDF/Using-Xacro-to-Clean-Up-a-URDF-File.html">Xacro Tutorial</a></li>
+<li><a href="https://docs.ros.org/en/kilted/Tutorials/Intermediate/URDF/Using-Xacro-to-Clean-Up-a-URDF-File.html">Xacro Tutorial</a></li>
 
 <li>Variables can store values and basic math can be performed</li>
 <li>Blocks of <code>xml</code> code can be given names and used multiple times</li>

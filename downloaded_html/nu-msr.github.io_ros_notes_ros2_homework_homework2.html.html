@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-09-29 Mon 16:33 -->
+<!-- 2025-10-01 Wed 09:33 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Homework 2</title>
@@ -59,9 +59,14 @@ you should turn-in, including information about your <code>README.md</code> file
 <li>In general, you should refer to <code>ROS</code> entities using relative names from within your nodes (i.e., no leading "/")</li>
 <li>All python launchfiles written for this assignment should use a <a href="../launch.html#declarative">declarative style</a>:</li>
 <li>When a launch file is listed as <code>filename.launch.{py,xml}</code> you should implement both an XML and python version of that launchfile.</li>
+<li>All data files that are installed should be installed to the appropriate sub-directory of the package's share directory
+<ul class="org-ul">
+<li>e.g., <code>config/myfile.yaml</code> should be installed to <code>$(find-pkg-share mypackage)/config/myfile.yaml</code></li>
+</ul></li>
 </ol>
 </div>
 </div>
+
 <div id="outline-container-overview-1-P-11" class="outline-2">
 <h2 id="overview-1-P-11">Overview</h2>
 <div class="outline-text-2" id="text-org14fa961">
@@ -151,7 +156,7 @@ The following coordinate frames will be used:
 </ol>
 
 
-<figure id="org6005f62">
+<figure id="org42ad95f">
 <img src="../../images/hw2_robot.png" alt="hw2_robot.png">
 
 <figcaption><span class="figure-number">Figure 1: </span>A picture of the robot. Your robot should use different colors and sizes</figcaption>
@@ -184,7 +189,7 @@ The following coordinate frames will be used:
 <li>The <code>gravity_accel</code>, the acceleration due to gravity</li>
 <li>The default values of these configuration items can be chosen by you.</li>
 </ul></li>
-<li>Anything that relies on these parameters should read the appropriate parameters from the configuration file
+<li>Anything that relies on these parameters should read the appropriate parameters
 <ul class="org-ul">
 <li>In other words, changing <code>config/turtle.yaml</code> should be the only change required to work with a different <code>platform_height</code> or <code>wheel_radius</code>
 and have the robot appear correctly</li>
