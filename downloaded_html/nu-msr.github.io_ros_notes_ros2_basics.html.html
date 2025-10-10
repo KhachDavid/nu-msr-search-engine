@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-10-07 Tue 09:22 -->
+<!-- 2025-10-09 Thu 11:31 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ROS Basics</title>
@@ -220,7 +220,7 @@ There are a few ways to install and use packages in ROS:
 <li>You can view the package manifest for any ROS package using <code>ros2 pkg xml &lt;package&gt;</code>, where <code>&lt;package&gt;</code> is the package's name.
 <ul class="org-ul">
 <li><code>ros2 pkg --help</code> provides a list of other useful <code>pkg</code> commands.</li>
-<li><code>ros2 pkg</code> is part of the <a href="https://index.ros.org/p/ros2cli/github-ros2-ros2cli/#kilted">ros2cli</a> package, the ROS 2 Command Line Interface.</li>
+<li><code>ros2 pkg</code> is part of the <a href="https://index.ros.org/p/ros2cli/">ros2cli</a> package, the ROS 2 Command Line Interface.</li>
 </ul></li>
 <li>The format for <code>package.xml</code> is specified in <a href="https://ros.org/reps/rep-0149.html">REP 0149</a>.</li>
 <li>In ROS 2, meta information about packages is stored in the location <code>&lt;prefix&gt;/share/ament_index</code>
@@ -444,7 +444,7 @@ being exchanged (whether via topics or services):
 
 <div id="outline-container-differences-from-ros-1-2-P-1" class="outline-3">
 <h3 id="differences-from-ros-1-2-P-1">Differences from ROS 1</h3>
-<div class="outline-text-3" id="text-org4cdd893">
+<div class="outline-text-3" id="text-orgc3be6ac">
 <ul class="org-ul">
 <li>In ROS 1, all nodes register themselves with a central server called <a href="https://wiki.ros.org/roscore">roscore</a>, which must be running at all times</li>
 <li>ROS 1 uses a custom IPC protocol based on XML, and there is no concept of Quality of Service.</li>
@@ -481,7 +481,7 @@ values for a node.
 
 <div id="outline-container-differences-from-ros-1-2-P-2" class="outline-3">
 <h3 id="differences-from-ros-1-2-P-2">Differences from ROS 1</h3>
-<div class="outline-text-3" id="text-orgc3be6ac">
+<div class="outline-text-3" id="text-org888a4c3">
 <ul class="org-ul">
 <li>In ROS 1 parameters are stored in a central server called the ROS parameter server.</li>
 <li>The behavior of a central parameter server can be emulated by creating a node that is only used to store parameters.</li>

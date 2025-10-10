@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-10-07 Tue 09:22 -->
+<!-- 2025-10-09 Thu 11:31 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Visualization in ROS</title>
@@ -85,7 +85,7 @@ to information that <code>rviz2</code> receives via ROS messages and parameters.
 <h3 id="visualization-messages-2-P-1">Visualization Messages</h3>
 <div class="outline-text-3" id="text-org4c78228">
 <ul class="org-ul">
-<li>The <a href="https://index.ros.org/p/visualization_msgs/github-ros2-common_interfaces/#jazzy">visualization_msgs</a> package contains
+<li>The <a href="https://index.ros.org/p/visualization_msgs/">visualization_msgs</a> package contains
 messages for displaying visual primitives in <code>rviz2</code> using some Display Types in Rviz2</li>
 </ul>
 </div>
@@ -100,7 +100,7 @@ messages for displaying visual primitives in <code>rviz2</code> using some Displ
 <ul class="org-ul">
 <li>For example, spheres, cubes, cylinders, lines</li>
 </ul></li>
-<li>Markers are drawn by publishing <a href="http://docs.ros.org/en/jazzy/p/visualization_msgs/interfaces/msg/Marker.html">visualization_msgs/msg/Marker</a> messages.
+<li>Markers are drawn by publishing <a href="http://docs.ros.org/en/kilted/p/visualization_msgs/msg/Marker.html">Marker</a> messages and subscribing to the topic in rviz.
 <ul class="org-ul">
 <li>By default, the Marker display type listens on the <code>visualization_marker</code> topic, but this can be changed in the rviz2 gui or with remapping.</li>
 <li>Markers have a <code>header</code> field that requires the time.  Using <code>node.get_clock().now()</code> for this ensures the Marker will be drawn</li>
@@ -131,12 +131,11 @@ relative to its parent frame, even if that frame moves after the marker is drawn
 </div>
 </div>
 
-
 <div id="outline-container-markerarray-2-P-1" class="outline-3">
 <h3 id="markerarray-2-P-1">MarkerArray</h3>
 <div class="outline-text-3" id="text-org9d43143">
 <ul class="org-ul">
-<li>The <a href="http://docs.ros.org/melodic/api/visualization_msgs/html/msg/MarkerArray.html">MarkerArray</a> message consists of an array of Marker messages</li>
+<li>The <a href="http://docs.ros.org/en/kilted/p/visualization_msgs/msg/MarkerArray.html">MarkerArray</a> message consists of an array of Marker messages</li>
 <li>This message type lets you publish multiple markers with a single message</li>
 <li><code>rviz2</code> has a DisplayType that can subscribe to a <code>MarkerArray</code> message and visualize all markers in the array</li>
 <li>If you are sending many markers, it is more efficient to send them as an array</li>
@@ -161,7 +160,7 @@ relative to its parent frame, even if that frame moves after the marker is drawn
 <li>When a new subscriber connects, that message is sent to the new subscriber</li>
 <li>For example, if <code>rviz</code> launched after the message is published, it would still receive the message due to the latching</li>
 </ul></li>
-<li>In ROS 2 the <a href="https://docs.ros.org/en/jazzy/Concepts/Intermediate/About-Quality-of-Service-Settings.html">Quality of Service</a> (QoS) settings enable emulating the behavior similar to ROS 1
+<li>In ROS 2 the <a href="https://docs.ros.org/en/kilted/Concepts/Intermediate/About-Quality-of-Service-Settings.html">Quality of Service</a> (QoS) settings enable emulating the behavior similar to ROS 1
 <ul class="org-ul">
 <li>The publisher on the topic should have it's "Durability" set to <code>TRANSIENT_LOCAL</code></li>
 <li>The subscriber (e.g., the Marker Display in <code>rviz</code>) should also have it's "Durability" set to <code>TRANSIENT_LOCAL</code></li>
@@ -262,7 +261,7 @@ so that others can reproduce your view</li>
 <div class="outline-text-3" id="text-org1657dc5">
 <ol class="org-ol">
 <li><a href="https://plotjuggler.io/">Plot Juggler</a> is an advanced tool for plotting time-series data</li>
-<li>With the <a href="https://index.ros.org/p/plotjuggler_ros/github-PlotJuggler-plotjuggler-ros-plugins/#jazzy">plotjuggler-ros</a> package, it is capable of plotting topics in realtime from ROS 2</li>
+<li>Install using the <a href="https://index.ros.org/p/plotjuggler_ros/">plotjuggler-ros</a> package, it is capable of plotting topics in realtime from ROS 2</li>
 <li>Plot Juggler has significantly more capability than <code>rqt_plot</code></li>
 <li><code>ros2 run plotjuggler plotjuggler</code></li>
 <li>Click "Start" on the "ROS 2 Topic Subscriber" window to add ROS 2 topics to plot juggler
