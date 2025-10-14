@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-10-09 Thu 11:31 -->
+<!-- 2025-10-14 Tue 09:27 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Testing, Documentation, and Design</title>
@@ -83,6 +83,7 @@
 </li>
 <li><a href="#integration-testing-in-ros-and-python-2-P-1">Integration Testing in ROS and Python</a></li>
 <li><a href="#running-tests-2-P-1">Running Tests</a></li>
+<li><a href="#warnings-2-P-1">Warnings</a></li>
 </ul>
 </li>
 <li><a href="#quality-1-P-1">Quality</a></li>
@@ -137,7 +138,7 @@ and can serve their purpose to catch errors</li>
 <h2 id="testing-in-ros-1-P-1">Testing in ROS</h2>
 <div class="outline-text-2" id="text-org4e4acef">
 <ul class="org-ul">
-<li>The <a href="https://docs.ros.org/en/jazzy/The-ROS2-Project/Contributing/Developer-Guide.html#testing">ROS 2 testing philosophy</a> discusses three types of tests: unit, integration, and systems</li>
+<li>The <a href="https://docs.ros.org/en/kilted/The-ROS2-Project/Contributing/Developer-Guide.html#testing">ROS 2 testing philosophy</a> discusses three types of tests: unit, integration, and systems</li>
 <li>These terms are standard terms, but when applied to ROS packages they take on more concrete meaning</li>
 </ul>
 </div>
@@ -306,12 +307,24 @@ special <code>unittest</code> assertion functions (e.g., <code>self.assertTrue</
 <ol class="org-ol">
 <li>There are three components to integration testing:
 <ul class="org-ul">
-<li><a href="https://index.ros.org/p/launch_pytest/github-ros2-launch/#jazzy">launch_pytest</a>: ROS agnostic testing, based on =pytest=<a href="https://index.ros.org/p/launch_testing_ros/github-ros2-launch_ros/#jazzy">https://index.ros.org/p/launch_testing_ros/github-ros2-launch_ros/#jazzy</a>
+<li><a href="https://index.ros.org/p/launch_testing/">launch_testing</a>: ROS agnostic testing, based on <code>unittest</code>
 <ul class="org-ul">
-<li>This package seems to be a work-in-progress.</li>
+<li>This package is now enshrined as an <a href="https://docs.ros.org/en/kilted/Tutorials/Intermediate/Testing/Integration.html">official ROS integration testing tutorial</a></li>
+<li>The tutorial focuses on adding tests via <code>CMakeLists.txt</code>. The notes here use <code>pytest</code>.
+<ul class="org-ul">
+<li>There are currently reasons (namely isolation of the nodes) to use the <code>CMakeLists.txt</code> method; however, doing this would require creating a separate package for integration tests</li>
+<li>An area for contribution would be to allow these tests to be detected with <code>pytest</code> and run in an isolated manner.</li>
 </ul></li>
-<li><a href="https://index.ros.org/p/launch_testing/github-ros2-launch/#jazzy">launch_testing</a>: ROS agnostic testing, based on <code>unittest</code></li>
-<li><a href="https://index.ros.org/p/launch_testing_ros/github-ros2-launch_ros/#jazzy">launch_testing_ros</a>: ROS-specific testing, based on <code>unittest</code></li>
+</ul></li>
+<li><a href="https://index.ros.org/p/launch_testing_ros/">launch_testing_ros</a> ROS-specific testing, based on <code>launch_testing</code>
+<ul class="org-ul">
+<li>Essentially, this package adds some additional features/functions to call</li>
+<li>As of 10/2025, you should clone the repository and build the documentation locally</li>
+</ul></li>
+<li><a href="https://index.ros.org/p/launch_pytest/">launch_pytest</a>: ROS agnostic testing, based on <code>pytest</code>
+<ul class="org-ul">
+<li>This package seems to be a work-in-progress, or maybe no longer worked on.</li>
+</ul></li>
 </ul></li>
 <li>The integration testing is powerful, letting you:
 <ul class="org-ul">
@@ -341,19 +354,17 @@ and a test launch file and explains how it works
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">But it still returns a LaunchDescription
 </span><span class="org-type">@pytest.mark.rostest</span>
 <span class="org-keyword">def</span> <span class="org-function-name">generate_test_description</span>():
-    <span class="org-comment-delimiter"># </span><span class="org-comment">Create a node, as usual. But it's useful to keep it around
-</span>    <span class="org-variable-name">node</span> <span class="org-operator">=</span> Node(executable<span class="org-operator">=</span>, arguments<span class="org-operator">=</span>)...
-    <span class="org-comment-delimiter"># </span><span class="org-comment">return a tuple (LaunchDescription, extra_dict)
-</span>    <span class="org-comment-delimiter"># </span><span class="org-comment">extra_dict is a dictionary of parameter names -&gt; values that get passed to
-</span>    <span class="org-comment-delimiter"># </span><span class="org-comment">test cases.
-</span>    <span class="org-keyword">return</span> (
+    <span class="org-keyword">return</span> (
         LaunchDescription([
-            node, <span class="org-comment-delimiter"># </span><span class="org-comment">here is where you put all launch actions you want to run during the test
-</span>                  <span class="org-comment-delimiter"># </span><span class="org-comment">To test a particular launch file, include it
+            Node(...), <span class="org-comment-delimiter"># </span><span class="org-comment">here is where you put all launch actions you want to run during the test
+</span>                  <span class="org-comment-delimiter"># </span><span class="org-comment">To test a particular launch file, IncludeLaunchDescription()
 </span>            ReadyToTest() <span class="org-comment-delimiter"># </span><span class="org-comment">this is the last action. Can be used elsewhere somehow
 </span>            ]),
-            {<span class="org-string">'myaction'</span>: node } <span class="org-comment-delimiter"># </span><span class="org-comment">this is a way to pass the node action to the test case
-</span>            )
+            <span class="org-comment-delimiter"># </span><span class="org-comment">Here is a dictionary of additional arguments to pass to test functions
+</span>            <span class="org-comment-delimiter"># </span><span class="org-comment">You could, for example, store the Node Action in a variable and pass it to the test
+</span>            <span class="org-comment-delimiter"># </span><span class="org-comment">functions. 
+</span>            {<span class="org-string">'my_argument'</span>:  additional_argument} 
+            )
 <span class="org-comment-delimiter"># </span><span class="org-comment">The above returns the launch description. Now it's time for the test
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">The goal is essentially to create a node that can then be used in all tests to
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">call services and subscribe/publish messages
@@ -382,16 +393,16 @@ and a test launch file and explains how it works
 </span>        <span class="org-comment-delimiter"># </span><span class="org-comment">create the nodes when we setupClass?
 </span>        <span class="org-keyword">self</span>.node.destroy_node()
 
-    <span class="org-keyword">def</span> <span class="org-function-name">test_my_test1</span>(<span class="org-keyword">self</span>, launch_service, myaction, proc_output):
+    <span class="org-keyword">def</span> <span class="org-function-name">test_my_test1</span>(<span class="org-keyword">self</span>, launch_service, proc_output, my_argument):
        <span class="org-doc">"""In UnitTest, any function starting with "test" is run as a test
 
           Args:
              launch_service - information about the launch
-             myaction - this was passed in when we created the description
              proc_output - this object streams the output (if any) from the running process
+             my_argument - this was passed in when we created the description
        """</span>
        <span class="org-comment-delimiter"># </span><span class="org-comment">Here you can use self.node to publish and subscribe
-</span>       <span class="org-comment-delimiter"># </span><span class="org-comment">launch_testing.WaitForTopics waits for something to be published on a topic
+</span>       <span class="org-comment-delimiter"># </span><span class="org-comment">launch_testing_ros.WaitForTopics waits for something to be published on a topic
 </span>       <span class="org-comment-delimiter"># </span><span class="org-comment">spin with rclpy.spin_once()
 </span>       <span class="org-comment-delimiter"># </span><span class="org-comment">You can check and verify output with proc_output. launch/launch_testing has more information
 </span>       <span class="org-comment-delimiter"># </span><span class="org-comment">You should specify a timeout for rclpy.spin_once() because if no ROS events happen it will
@@ -417,10 +428,49 @@ unless you work with events and explicitly do things to order them</li>
 <li>To see test results run <code>colcon test-result</code></li>
 <li>Often you may wish to see more details (especially when a test fails). Use <code>colcon test-result --verbose</code></li>
 <li>Sometimes you want to see the exact output of tests for a specific package. Use <code>cat log/latest_test/package/stdout_stderr.log</code></li>
+<li>You can also run <code>colcon test --event-handlers console_direct+</code> to see all the information when you run the tests.</li>
+<li>Add <code>--pytest-args -s</code> to the <code>colcon test</code> command to be able to view full output from the tests (e.g., the result of print statements).</li>
 </ol>
 </div>
 </div>
+
+<div id="outline-container-warnings-2-P-1" class="outline-3">
+<h3 id="warnings-2-P-1">Warnings</h3>
+<div class="outline-text-3" id="text-org1ae89ad">
+<p>
+As of Ubuntu 24.04 and ROS kilted, running some tests with pytests results in a warning:
+</p>
+<pre class="example">
+test/test_flake8.py: 22 warnings
+  Warning: This process (pid=&lt;PID&gt;) is multi-threaded, use of fork() may lead to deadlocks in the child.
+</pre>
+
+<p>
+This warning is <a href="https://github.com/python/cpython/issues/100228?">from the python interpreter itself</a>, and is related to deadlocks when
+<code>os.fork()</code> is called from multi-threaded processes.
+</p>
+
+<p>
+As pytest is setup, it uses the python <code>multiprocessing</code> package, which default uses <code>os.fork()</code> to spawn new processes.
+</p>
+
+<p>
+The warning can be fixed by adding the following code into your tests directory as <code>conftest.py</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">import</span> multiprocessing
+multiprocessing.set_start_method(<span class="org-string">'spawn'</span>, force<span class="org-operator">=</span><span class="org-constant">True</span>)
+</pre>
 </div>
+
+<p>
+This code runs before all tests are run and configures the <code>multiprocessing</code> module to use <code>spawn</code> rather than <code>fork</code> to start new <code>python</code> interpreters.
+This will be slower, but does not run into the issues. Hopefully this workaround will eventually no longer be needed in newer versions.
+</p>
+</div>
+</div>
+</div>
+
 
 <div id="outline-container-quality-1-P-1" class="outline-2">
 <h2 id="quality-1-P-1">Quality</h2>
