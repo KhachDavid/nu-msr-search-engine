@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-10-16 Thu 12:05 -->
+<!-- 2025-10-23 Thu 11:05 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Simulation</title>
@@ -21,45 +21,23 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#overview-1-P-9">Overview</a></li>
+<li><a href="#overview-1-P-10">Overview</a></li>
 <li><a href="#advantages-of-simulation-1-P-1">Advantages of Simulation</a></li>
 <li><a href="#disadvantages-of-simulation-1-P-1">Disadvantages of Simulation</a></li>
 <li><a href="#choosing-a-simulator-1-P-1">Choosing a simulator</a>
 <ul>
+<li><a href="#why-is-simulation-needed--2-P-1">Why is simulation needed?</a></li>
 <li><a href="#identifying-what-must-be-modeled-2-P-1">Identifying What Must Be Modeled</a></li>
 <li><a href="#differences-between-simulation-engines-2-P-1">Differences Between Simulation Engines</a></li>
 <li><a href="#custom-simulators-2-P-1">Custom Simulators</a></li>
 </ul>
 </li>
-<li><a href="#gazebo-classic-1-P-1">Gazebo Classic</a></li>
 <li><a href="#gazebo-1-P-1">Gazebo</a>
 <ul>
 <li><a href="#gazebo-features-2-P-1">Gazebo Features</a></li>
 </ul>
 </li>
-<li><a href="#gazebo-and-ros-1-P-1">Gazebo and ROS</a>
-<ul>
-<li><a href="#installation-2-P-3">Installation</a></li>
-<li><a href="#running-2-P-1">Running</a></li>
-<li><a href="#package-layout-2-P-1">Package Layout</a></li>
-<li><a href="#sdf-files-2-P-1">SDF Files</a>
-<ul>
-<li><a href="#resource_spawner">Resource Spawner</a></li>
-</ul>
-</li>
-<li><a href="#loading-urdf-sdf-files-2-P-1">Loading URDF/SDF files</a>
-<ul>
-<li><a href="#debugging-3-P-1">Debugging</a></li>
-</ul>
-</li>
-<li><a href="#plugins-2-P-1">Plugins</a></li>
-<li><a href="#bridging-2-P-1">Bridging</a></li>
-<li><a href="#simulation-time-2-P-1">Simulation Time</a></li>
-<li><a href="#transition">Software in Transition</a></li>
-<li><a href="#documentation-2-P-2">Documentation</a></li>
-</ul>
-</li>
-<li><a href="#some-other-simulators-for-reference-we-will-not-use-these--1-P-1">Some Other Simulators (for reference, we will not use these)</a>
+<li><a href="#other-simulators-1-P-1">Other Simulators</a>
 <ul>
 <li><a href="#open-source-simulators-2-P-1">Open Source Simulators</a>
 <ul>
@@ -73,8 +51,8 @@
 </ul>
 </div>
 </nav>
-<div id="outline-container-overview-1-P-9" class="outline-2">
-<h2 id="overview-1-P-9">Overview</h2>
+<div id="outline-container-overview-1-P-10" class="outline-2">
+<h2 id="overview-1-P-10">Overview</h2>
 <div class="outline-text-2" id="text-org6d7d92b">
 <p>
 Computer simulations represent the physical world as a set of state variables
@@ -115,6 +93,35 @@ and its environment is used to approximate the behavior of a real robot.
 <div id="outline-container-choosing-a-simulator-1-P-1" class="outline-2">
 <h2 id="choosing-a-simulator-1-P-1">Choosing a simulator</h2>
 <div class="outline-text-2" id="text-choosing-a-simulator-1-P-1">
+</div>
+<div id="outline-container-why-is-simulation-needed--2-P-1" class="outline-3">
+<h3 id="why-is-simulation-needed--2-P-1">Why is simulation needed?</h3>
+<div class="outline-text-3" id="text-orgd6f6d45">
+<p>
+The purpose of your simulation is a major factor in choosing a simulator:
+</p>
+
+<p>
+Here are a few examples:
+</p>
+<ul class="org-ul">
+<li>Run ROS code without the robot present:
+<ul class="org-ul">
+<li>The actual physics may not matter very much</li>
+<li>The speed of the simulation may not matter much</li>
+<li>The point is just to run code and see some movement</li>
+<li>ROS integration is very important</li>
+</ul></li>
+<li>Train machine learning models:
+<ul class="org-ul">
+<li>Here trade-offs between speed and accuracy must be weighed</li>
+<li>What simulator is chosen depends on the method</li>
+<li>ROS integration may be un-important: the implementation of the algorithm
+(particularly the part that connects the policy to robot actions) may not
+need to be the same between simulation and the real robot</li>
+</ul></li>
+</ul>
+</div>
 </div>
 <div id="outline-container-identifying-what-must-be-modeled-2-P-1" class="outline-3">
 <h3 id="identifying-what-must-be-modeled-2-P-1">Identifying What Must Be Modeled</h3>
@@ -204,27 +211,17 @@ general purpose simulator like gazebo.</li>
 </div>
 </div>
 </div>
-<div id="outline-container-gazebo-classic-1-P-1" class="outline-2">
-<h2 id="gazebo-classic-1-P-1">Gazebo Classic</h2>
-<div class="outline-text-2" id="text-org0152047">
-<ul class="org-ul">
-<li>The <a href="http://classic.gazebosim.org">Gazebo Classic</a> (or the simulator formerly known as Gazebo) is the main simulator for ROS 1</li>
-<li>Like ROS, it is maintained by the Open Source Robotics Foundation, but it is a
-standalone program</li>
-<li>Many concepts in Gazebo are similar to ROS but slightly different</li>
-<li>We will focus on how to use Gazebo from ROS</li>
-<li>Carefully designed ROS programs can seamlessly switch between controlling
-a Gazebo simulation and a real robot.</li>
-</ul>
-</div>
-</div>
 <div id="outline-container-gazebo-1-P-1" class="outline-2">
 <h2 id="gazebo-1-P-1">Gazebo</h2>
 <div class="outline-text-2" id="text-orgc40b3d9">
 <ul class="org-ul">
 <li><a href="https://gazebosim.org">Gazebo</a> (Formerly called Ignition Gazebo) is the latest simulator developed by Open Robotics</li>
+<li>This is the simulator with the best ROS 2 integration, because it is developed under the same umbrella organization as ROS</li>
+<li>It is a good simulator for testing ROS code: that is it is easy to use the same ROS nodes to control a real robot and a robot simulated in Gazebo.</li>
+<li><a href="./gazebo.html">Notes on using Gazebo</a></li>
 </ul>
 </div>
+
 <div id="outline-container-gazebo-features-2-P-1" class="outline-3">
 <h3 id="gazebo-features-2-P-1">Gazebo Features</h3>
 <div class="outline-text-3" id="text-orgc10d05d">
@@ -257,308 +254,13 @@ other using.  There are counterparts to ROS mesages and services,but these are e
 </div>
 </div>
 
-<div id="outline-container-gazebo-and-ros-1-P-1" class="outline-2">
-<h2 id="gazebo-and-ros-1-P-1">Gazebo and ROS</h2>
-<div class="outline-text-2" id="text-gazebo-and-ros-1-P-1">
-</div>
-<div id="outline-container-installation-2-P-3" class="outline-3">
-<h3 id="installation-2-P-3">Installation</h3>
-<div class="outline-text-3" id="text-orgdf16996">
-<ol class="org-ol">
-<li>Install gazebo and its ROS components with <code>sudo apt install ros-kilted-ros-gz-sim</code></li>
-<li><a href="https://gazebosim.org/docs/ionic">Tutorials for Gazebo Ionic</a> (Ionic is the version name)
-<ul class="org-ul">
-<li>Each version of ROS 2 has a corresponding <a href="https://gazebosim.org/docs/latest/ros_installation/">recommended Gazebo version</a></li>
-<li>As of ROS 2 Jazzy, specific Gazebo <a href="https://gazebosim.org/docs/latest/ros2_gz_vendor_pkgs/">vendor packages</a> are provided with ROS</li>
-</ul></li>
-</ol>
-</div>
-</div>
-<div id="outline-container-running-2-P-1" class="outline-3">
-<h3 id="running-2-P-1">Running</h3>
-<div class="outline-text-3" id="text-org66d97dd">
-<ol class="org-ol">
-<li>Run gazebo with <code>ros2 launch ros_gz_sim gz_sim.launch.py</code>
-<ul class="org-ul">
-<li>This launchfile provides a method to pass options to gazebo by specifying <code>gz_args:=&lt;args to gazebo&gt;</code></li>
-<li>The <code>gz</code> command can also launch <code>gazebo</code> directly (this is the non-ros method of starting gazebo).</li>
-</ul></li>
-<li><a href="https://index.ros.org/p/ros_gz/">ros_gz</a> provides the primary method for interacting with Gazebo via ROS 2</li>
-</ol>
-</div>
-</div>
 
-<div id="outline-container-package-layout-2-P-1" class="outline-3">
-<h3 id="package-layout-2-P-1">Package Layout</h3>
-<div class="outline-text-3" id="text-orgdefff62">
-<ol class="org-ol">
-<li>Typically, <code>xacro</code> files go under the <code>urdf</code> directory in the package</li>
-<li>SDF files for <code>worlds</code> go in a <code>worlds/</code> directory and are installed to <code>share/&lt;pkg_name&gt;/worlds</code></li>
-<li>SDF files for <code>models</code> go in a <code>models/</code> directory and are installed to <code>share/&lt;pkg_name&gt;/models</code>
-<ul class="org-ul">
-<li>Each model has all of its assets under a subdirectory of models (e.g., <code>models/mymodel</code>)</li>
-<li>Each model has a <code>model.sdf</code> file that specifies the model name. To find the model, the name of the subdirectory must match the model name.</li>
-</ul></li>
-<li><p>
-The <code>GZ_SIM_&lt;SOMETHING&gt;_PATH</code> environment variables tells <code>gazebo</code> where to find SDF files and other resources
-</p>
-<ul class="org-ul">
-<li>A ROS package that provides gazebo resources needs to set these variables appropriately.</li>
-<li><p>
-Create a <code>.dsv</code> file in the <code>env-hooks</code> directory of your package with the following content (be sure to update the <code>&lt;pkg_name&gt;</code> to be the name of the package):
-</p>
-<pre class="example">
-prepend-non-duplicate;GZ_SIM_RESOURCE_PATH;share/&lt;pkg_name&gt;/models
-prepend-non-duplicate;GZ_SIM_RESOURCE_PATH;share/&lt;pkg_name&gt;/worlds
-</pre></li>
-</ul>
-<ul class="org-ul">
-<li>Follow the <a href="./colcon.html#colcon-pkg">colcon.pkg</a> instructions to install the hook and have it update the environment whenever you source <code>install/setup.bash</code>
-<ul class="org-ul">
-<li>When the hook is installed properly, after <code>source install/setup.bash</code>, <code>echo $GZ_SIM_RESOURCE_PATH</code> should contain the paths to the <code>gazebo</code> resources</li>
-</ul></li>
-</ul></li>
-<li>An example of this package layout can be found at <a href="https://github.com/m-elwin/me495_gazebo">https://github.com/m-elwin/me495_gazebo</a>.</li>
-<li>In ROS 1, these paths were handled in the <code>package.xml</code> with special Gazebo tags. It seems like similar functionality is being introduced into ROS 2, though
-we are not currently adopting this practice: see <a href="#transition">Transitional Documentation</a> for more information.</li>
-</ol>
-</div>
-</div>
-
-<div id="outline-container-sdf-files-2-P-1" class="outline-3">
-<h3 id="sdf-files-2-P-1">SDF Files</h3>
-<div class="outline-text-3" id="text-org9e41ca8">
-<ul class="org-ul">
-<li>Gazebo uses <a href="https://sdformat.org">SDF</a> files to represent robots, worlds, and everything that appears in the simulation.</li>
-<li><a href="http://sdformat.org/tutorials?">SDF Tutorials</a> provides help with writing SDF files, including building worlds</li>
-<li><a href="https://app.gazebosim.org/fuel">Fuel</a> is a library where people share SDF models and worlds. The website contains functionality to preview, download, and link-to assets for simulation
-<ul class="org-ul">
-<li>There are two ways of including models from Fuel: downloading them and distributing them with your package, or referring to them via URI.</li>
-<li>Fuel allows you to copy a snippet of SDF to your clipboard that can be added to a world to link to the asset via URI, it is the <code>&lt;&gt;</code> simple.</li>
-<li>You can also download the model as a zip file and include it in your package</li>
-</ul></li>
-</ul>
-</div>
-<div id="outline-container-resource_spawner" class="outline-4">
-<h4 id="resource_spawner">Resource Spawner</h4>
-<div class="outline-text-4" id="text-resource_spawner">
-<ul class="org-ul">
-<li>Technically the resource spawner should allow you to directly add models from Fuel into the world, but that is not working as of 10/15/2024.
-<ul class="org-ul">
-<li>If you want to include a file by URI at a spawned location, put a built-in model at the desired location, then edit the SDF file manually:
-use the pose of the built-in model, but replace it with the URI of the desired model</li>
-</ul></li>
-<li>Resources added from the local machine seem to be saved with absolute paths in the <code>SDF</code> file. You should edit the SDF file to remove these
-absolute paths and replace them with <code>model://</code> URI's.  You replace the path up to and including the location of your package's <code>models</code> directory
-with <code>model://</code></li>
-</ul>
-</div>
-</div>
-</div>
-
-<div id="outline-container-loading-urdf-sdf-files-2-P-1" class="outline-3">
-<h3 id="loading-urdf-sdf-files-2-P-1">Loading URDF/SDF files</h3>
-<div class="outline-text-3" id="text-org52cb478">
-<ul class="org-ul">
-<li>ROS can be used to load both URDF and SDF models into the simulator.
-<ul class="org-ul">
-<li>URDF files are automatically converted to SDF prior to being loaded.</li>
-</ul></li>
-<li><p>
-Additional <code>sdf</code> tags can be added to a URDF by using the <code>&lt;gazebo&gt;</code> tag, which provide additional flexibility when converting a URDF to an SDF
-</p>
-<div class="org-src-container">
-<pre class="src src-xml"><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">robot</span> <span class="org-nxml-namespace-attribute-xmlns">xmlns</span><span class="org-nxml-namespace-attribute-colon">:</span><span class="org-nxml-namespace-attribute-prefix">xacro</span>=<span class="org-string">"http://www.ros.org/wiki/xacro</span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span><span class="org-string">
-</span><span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span><span class="org-string">
-&lt;!-- Resulting SDF file will have all the SDF tags here and will be associated with the full robot model at the top-level--&gt;
-</span><span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-tag-slash">/</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span><span class="org-string">
-</span><span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"> </span><span class="org-string"><span class="org-nxml-attribute-local-name">reference</span></span><span class="org-string">="</span>link_name<span class="org-string">"</span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span><span class="org-string">
-&lt;!-- resulting SDF file will have these SDF tags under the link named "</span>link_name<span class="org-string">" --&gt;
-</span><span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-tag-slash">/</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span><span class="org-string">
-</span><span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"> </span><span class="org-string"><span class="org-nxml-attribute-local-name">reference</span></span><span class="org-string">="</span>joint_name<span class="org-string">"</span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span><span class="org-string">
-&lt;!-- resulting SDF file will have these SDF tags under the joint named "</span>joint_name<span class="org-string">" --&gt;
-</span><span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-tag-slash">/</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span><span class="org-string">
-</span><span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-tag-slash">/</span></span><span class="org-string"><span class="org-nxml-element-local-name">robot</span></span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span>
-</pre>
-</div></li>
-<li>A typical project structure is for a robot to provide:
-<ol class="org-ol">
-<li>A <code>robot.urdf.xacro</code> file that contains robot definition without any gazebo tags.</li>
-<li>A <code>robot.gazebo.xacro</code> file that includes only the tags necessary for gazebo</li>
-<li><code>robot.urdf.xacro</code> takes an argument (e.g., <code>gazebo</code> that conditionally includes <code>robot.gazebo.xacro</code>.
-<ul class="org-ul">
-<li>If the argument is true, the <code>robot.gazebo.xacro</code> file is included</li>
-<li>If the argument is false, the <code>robot.gazebo.xacro</code> file is NOT included, and the resulting URDF file is free of any gazebo dependencies</li>
-</ul></li>
-</ol></li>
-
-<li>For a URDF model to be loaded in gazebo successfully, it is required that all links have visual, collision and inertia specified.</li>
-<li>The SDF Format specifies how the <a href="http://sdformat.org/tutorials?tut=sdformat_urdf_extensions&amp;cat=specification&amp;">Gazebo extension to URDF</a> works.</li>
-</ul>
-
-
-<ul class="org-ul">
-<li><code>ros2 run ros_gz_sim create</code> is a ROS node that can load urdf/sdf data into gazebo
-<ul class="org-ul">
-<li>The data can come from a file, a parameter, a topic, or a string</li>
-<li>Typically, you will load the data from the <code>/robot_description</code> topic</li>
-<li><code>ros2 run ros_gz_sim create --help</code> for all the options</li>
-</ul></li>
-</ul>
-</div>
-<div id="outline-container-debugging-3-P-1" class="outline-4">
-<h4 id="debugging-3-P-1">Debugging</h4>
-<div class="outline-text-4" id="text-org721a708">
+<div id="outline-container-other-simulators-1-P-1" class="outline-2">
+<h2 id="other-simulators-1-P-1">Other Simulators</h2>
+<div class="outline-text-2" id="text-org49a46c5">
 <p>
-It can be helpful to inspect <code>urdf</code> files at different stages of conversion, especially if there are errors
-when trying to load your model.
+Here is a list of other robotics simulators. You may encounter them, and some are quite popular, particularly for machine learning
 </p>
-
-<ol class="org-ol">
-<li>Make sure the files are installed via <code>setup.py</code></li>
-<li>Source the workspace</li>
-<li>Run <code>xacro ./install/path_to_xacro_file &gt; robot.urdf</code> to produce the <code>URDF</code> file</li>
-<li>Run <code>gz sdf -p robot.urdf &gt; robot.sdf</code> to produce the <code>SDF</code> file</li>
-</ol>
-</div>
-</div>
-</div>
-
-<div id="outline-container-plugins-2-P-1" class="outline-3">
-<h3 id="plugins-2-P-1">Plugins</h3>
-<div class="outline-text-3" id="text-org342f57d">
-<ol class="org-ol">
-<li>Gazebo uses plugins to enhance/modify functionality</li>
-<li>Some plugins can be associated with specific models and used to control them</li>
-<li><a href="https://gazebosim.org/api/sim/8/">Useful Plugins</a> can be found in the API documentation, especially the Systems.
-<ul class="org-ul">
-<li>The documentation includes what tags can be used in the <code>SDF</code> to include the plugin</li>
-<li>Assume the C++ namespace of the plugin is given as <code>xx::yy::zz::systems::PluginName</code> etc. Then in the SDF file the plugin is included as</li>
-<li>Use <code>&lt;plugin name="xx::yy::zz::systems::PluginName" filename="xx-yy-zz-plugin-name-system"&gt;</code>
-<ul class="org-ul">
-<li>For example, to use the <code>gz::sim::systems::DiffDrive</code> plugin:
-<ul class="org-ul">
-<li>Set <code>name</code> to <code>gz::sim::systems::DiffDrive</code></li>
-<li>set <code>filename</code> to <code>gz-sim-diff-drive-system</code></li>
-<li>Options for this plugin go inside the <code>&lt;plugin&gt;&lt;/plugin&gt;</code> tag (see <a href="https://gazebosim.org/api/sim/8/classgz_1_1sim_1_1systems_1_1DiffDrive.html">API Documentation</a>)</li>
-</ul></li>
-</ul></li>
-</ul></li>
-<li>The <a href="https://gazebosim.org/api/sim/8/classgz_1_1sim_1_1systems_1_1JointStatePublisher.html">JointStatePublisher</a> plugin publishes joint states</li>
-</ol>
-</div>
-</div>
-
-<div id="outline-container-bridging-2-P-1" class="outline-3">
-<h3 id="bridging-2-P-1">Bridging</h3>
-<div class="outline-text-3" id="text-org265ea11">
-<ol class="org-ol">
-<li>The <a href="https://index.ros.org/p/ros_gz_bridge/github-gazebosim-ros_gz/#jazzy">ROS GZ Bridge</a>  is used to connect ROS topics and services to Gazebo topics and services
-<ul class="org-ul">
-<li><code>ros2 run ros_gz_bridge parameter_bridge topic@ros_type@gz_type</code>
-<ul class="org-ul">
-<li>Provide the topic name, the ROS type, and the corresponding gazebo type</li>
-<li>Use <code>--help</code> for options/syntax</li>
-<li>The second <code>@</code> in the above syntax starts a bi-directional bridge (e.g. topics from gazebo are published to ROS and topics from ROS are published to Gazebo)
-<ul class="org-ul">
-<li>Replacing the second <code>@</code> with a <code>[</code> creates a bridge from Gazebo to ROS and using a <code>]</code> creates a bridge from ROS to Gazebo</li>
-</ul></li>
-<li>Sometimes uni-directional bridges are necessary. For example, we may want to receive <code>tf</code> frames from Gazebo without having all of ROS's Tf frames existing in the simulator.</li>
-<li>Be careful about topic types: for example the ROS type of the <code>/tf</code> topic is <code>TFMessage</code> not <code>TransformStamped</code></li>
-</ul></li>
-</ul></li>
-<li>You should generally run one <code>ros_gz_bridge</code> and specify all topics/services that must be bridged</li>
-<li>Once the bridge is running you can publish/subscribe to the topics like any other ROS topic</li>
-<li>The <a href="https://gazebosim.org/docs/harmonic/ros2_integration/">Gazebo ROS 2 Bridge Documentation</a> provides more information.</li>
-</ol>
-</div>
-</div>
-
-<div id="outline-container-simulation-time-2-P-1" class="outline-3">
-<h3 id="simulation-time-2-P-1">Simulation Time</h3>
-<div class="outline-text-3" id="text-org7660a77">
-<ol class="org-ol">
-<li>Time in simulation can run at a different speed than time in the real world</li>
-<li>ROS 2 Nodes can use time from a simulator by setting the <code>use_sim_time</code> parameter to <code>true</code></li>
-<li>When <code>use_sim_time</code> is <code>true</code> the node will get it's time from the <code>/clock</code> topic rather than the system clock.
-<ul class="org-ul">
-<li>For example, if the simulation is running at <code>50%</code> real time, then a <code>100Hz</code> timer in a ROS 2 node using simulation time
-will have that timer go off at <code>100Hz</code> in simulation time, which corresponds to <code>50Hz</code> in realtime.</li>
-</ul></li>
-<li>To get <code>Gazebo</code> to generate <code>clock</code> topic, it must be bridged to <code>ros</code> using the <code>parameter_bridge</code>: by passing <code>/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock</code></li>
-<li>For many simulation applications, nodes do not need to use simulation time. However, if code is checking timestamps (such as the Nav2 stack), then
-ensuring that all nodes are using simulated time becomes important.</li>
-</ol>
-</div>
-</div>
-<div id="outline-container-transition" class="outline-3">
-<h3 id="transition">Software in Transition</h3>
-<div class="outline-text-3" id="text-transition">
-<p>
-As of 10/2024: There are three simultaneous transitions happening that have resulted in rapid churn in how ROS 2 and Gazebo works,
-which can make navigating online sources difficult:
-</p>
-<ol class="org-ol">
-<li>Transition from ROS to ROS 2
-<ul class="org-ul">
-<li>Although the transition is mostly complete there are still many references to "using Gazebo" which refer to ROS 1 and Gazebo Classic.</li>
-</ul></li>
-<li>Transition from Gazebo Classic (i.e., the original Gazebo Simulator ) to Gazebo (e.g., the new Gazebo Simulator)
-<ul class="org-ul">
-<li>This transition also seems to be mostly complete: to make sure you are reading information on Gazebo (and not Gazebo Classic), ensure that
-the url does not contain <code>classic.gazebosim.org</code></li>
-</ul></li>
-<li>The renaming of Ignition Gazebo to Gazebo and the renaming of Gazebo to Gazebo Classic
-<ul class="org-ul">
-<li>There are still many references to <code>ignition</code>, <code>ign</code></li>
-<li>Here is a guide: <a href="https://gazebosim.org/docs/harmonic/migration_from_ignition/">Ignition to Gazebo</a>.</li>
-</ul></li>
-<li>ROS 2 now distributes it's own "vendored" version of Gazebo with each ROS 2 release (before this was separate)
-<ul class="org-ul">
-<li>These packages appear to be installed under <code>/opt/ros/jazzy/opt</code> which is strange, maybe it's to avoid name conflicts but it ends up polluting the path quite a bit.</li>
-</ul></li>
-<li>A new method of <a href="https://gazebosim.org/docs/harmonic/ros2_overview/">Gazebo ROS 2 Integration</a>, which looks promising but does not seem
-to be fully implemented or feature complete.
-<ul class="org-ul">
-<li>It allows starting the <code>gazebo_server</code> using a <code>&lt;gz_server&gt;</code> tag in a Launchfile (excellent!)</li>
-<li>The server can run in a container as a composable node (great!)</li>
-<li>The ROS 2 Gazebo Bridge can also run in the composable Node and has it's own <code>xml</code> launchfile tag (wonderful!)</li>
-<li>The <code>create_own_container</code> attribute does not seem to be implemented in the currently released Jazzy version of <code>ros_gz_sim</code> package (though it is in the code&#x2026;??)</li>
-<li>There does not seem to be a straightforward way (or at least I have not found one) to start the Gazebo Gui client for use with the <code>&lt;gz_server&gt;</code>
-<ul class="org-ul">
-<li><code>gz sim -g</code> sometimes connects to the server and sometimes does not: simply starting and restarting it a few times seems to work but it is unreliable on my system (might need to just do a bit more debugging here).
-<ul class="org-ul">
-<li>It would be, in my opinion, a useful contribution to add the capability to run the Gazebo Gui as a component node and launch it with a <code>&lt;gz_client&gt;</code> tag from a launchfile.</li>
-</ul></li>
-</ul></li>
-<li>The migration to the ROS 1 way of handling Gazebo Paths (custom tags in <code>package.xml</code>) versus the ROS 2 way (using colcon <code>env-hooks</code>) may be better long-term,
-but it's implementation relies on using certain launchfiles which we cannot fully use currently.</li>
-<li>The demonstrations for <code>ros_gz_sim</code> do not seem updated for the new method.</li>
-<li>Overall, I would like to adopt the new methods, but their still seems to be a mix of documentation promoting the new methods, examples with the old methods. Hopefully by next year this
-will be a bit more mature.</li>
-</ul></li>
-<li>There is also <a href="https://gazebosim.org/docs/harmonic/ros2_interop/#maintaining-a-single-robot-description-format">talk of maintaining robots as SDF files rather than URDF files</a>. I have not yet seen this in practice,
-and am hesitant to adopt this practice given that SDF files are more general than URDF files (so URDF can always be converted to SDF but not vice-versa).</li>
-</ol>
-</div>
-</div>
-
-<div id="outline-container-documentation-2-P-2" class="outline-3">
-<h3 id="documentation-2-P-2">Documentation</h3>
-<div class="outline-text-3" id="text-org97932c9">
-<ol class="org-ol">
-<li><a href="https://gazebosim.org/docs/fortress/tutorials">Gazebo Tutorials</a></li>
-<li><a href="https://sdformat.org">SDF Format</a></li>
-<li><a href="https://github.com/gazebosim/ros_gz">ROS 2 Gazebo Interface</a> (See the <code>README.md</code> files in each package in the repository</li>
-<li><a href="https://apps.gazebosim.org/fuel">Fuel Model Library</a></li>
-</ol>
-</div>
-</div>
-</div>
-
-<div id="outline-container-some-other-simulators-for-reference-we-will-not-use-these--1-P-1" class="outline-2">
-<h2 id="some-other-simulators-for-reference-we-will-not-use-these--1-P-1">Some Other Simulators (for reference, we will not use these)</h2>
-<div class="outline-text-2" id="text-some-other-simulators-for-reference-we-will-not-use-these--1-P-1">
 </div>
 <div id="outline-container-open-source-simulators-2-P-1" class="outline-3">
 <h3 id="open-source-simulators-2-P-1">Open Source Simulators</h3>
@@ -598,6 +300,18 @@ and am hesitant to adopt this practice given that SDF files are more general tha
 </ul></li>
 <li><a href="http://nxr.northwestern.edu/trep">trep</a> - Developed in Todd Murphey's lab. Good numerical
 algorithms and transparency in how the dynamics are actually solved. Does not support contact/friction.</li>
+<li><p>
+The <a href="http://classic.gazebosim.org">Gazebo Classic</a> (or the simulator formerly known as Gazebo) is the main simulator for ROS 1
+</p>
+<ul class="org-ul">
+<li>Like ROS, it is maintained by the Open Source Robotics Foundation, but it is a standalone program</li>
+<li>Many concepts in Gazebo are similar to ROS but slightly different</li>
+<li>We will focus on how to use Gazebo from ROS</li>
+<li>Carefully designed ROS programs can seamlessly switch between controlling</li>
+</ul>
+<p>
+a Gazebo simulation and a real robot.
+</p></li>
 </ul>
 </div>
 </div>
@@ -614,6 +328,7 @@ algorithms and transparency in how the dynamics are actually solved. Does not su
 <ul class="org-ul">
 <li>Popular due to its speed (for RL training) and good rendering (can learn from objects rendered in simulation and transfer to real world).</li>
 <li>Ubuntu 24.04 and ROS 2 Jazzy are not yet supported (as of 10/2024).</li>
+<li>Technically, Isaac Sim is Open-Source, but it is built on top of NVIDIA Omniverse, which is not</li>
 </ul></li>
 </ul>
 </div>

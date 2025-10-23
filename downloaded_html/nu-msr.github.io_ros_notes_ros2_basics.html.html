@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-10-16 Thu 12:05 -->
+<!-- 2025-10-23 Thu 11:05 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ROS Basics</title>
@@ -30,7 +30,7 @@
 <li><a href="#workspaces-1-P-1">Workspaces</a></li>
 <li><a href="#packages-1-P-1">Packages</a>
 <ul>
-<li><a href="#installation-2-P-2">Installation</a></li>
+<li><a href="#installation-2-P-3">Installation</a></li>
 <li><a href="#metadata-2-P-1">Metadata</a></li>
 <li><a href="#rosdep-2-P-1">rosdep</a></li>
 </ul>
@@ -175,8 +175,8 @@ Sometimes there is a lot of overlap between ROS 1 and ROS 2 packages but the ROS
 </ul>
 </div>
 
-<div id="outline-container-installation-2-P-2" class="outline-3">
-<h3 id="installation-2-P-2">Installation</h3>
+<div id="outline-container-installation-2-P-3" class="outline-3">
+<h3 id="installation-2-P-3">Installation</h3>
 <div class="outline-text-3" id="text-org10d3491">
 <p>
 There are a few ways to install and use packages in ROS:
@@ -444,7 +444,7 @@ being exchanged (whether via topics or services):
 
 <div id="outline-container-differences-from-ros-1-2-P-1" class="outline-3">
 <h3 id="differences-from-ros-1-2-P-1">Differences from ROS 1</h3>
-<div class="outline-text-3" id="text-org5990471">
+<div class="outline-text-3" id="text-org2d051c7">
 <ul class="org-ul">
 <li>In ROS 1, all nodes register themselves with a central server called <a href="https://wiki.ros.org/roscore">roscore</a>, which must be running at all times</li>
 <li>ROS 1 uses a custom IPC protocol based on XML, and there is no concept of Quality of Service.</li>
@@ -481,7 +481,7 @@ values for a node.
 
 <div id="outline-container-differences-from-ros-1-2-P-2" class="outline-3">
 <h3 id="differences-from-ros-1-2-P-2">Differences from ROS 1</h3>
-<div class="outline-text-3" id="text-orgf195ec6">
+<div class="outline-text-3" id="text-orgbecea85">
 <ul class="org-ul">
 <li>In ROS 1 parameters are stored in a central server called the ROS parameter server.</li>
 <li>The behavior of a central parameter server can be emulated by creating a node that is only used to store parameters.</li>
