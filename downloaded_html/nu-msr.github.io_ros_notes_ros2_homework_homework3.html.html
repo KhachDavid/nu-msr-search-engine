@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-10-23 Thu 11:05 -->
+<!-- 2025-10-24 Fri 13:56 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Homework 3</title>
@@ -82,7 +82,7 @@ you should turn-in, including information about your <code>README.md</code> file
 The challenge is to create a differential-drive robot that can be simulated in Gazebo and controlled by ROS.
 </p>
 <ul class="org-ul">
-<li>The robot will be able to flip over and continue driving.</li>
+<li>The robot will be able to flip over it's own <code>y</code> axis and continue driving.</li>
 <li>The robot will move through a world filled with Jersey Barriers and trash.</li>
 </ul>
 </div>
@@ -102,7 +102,7 @@ In addition to the standard ROS directories, the package should be structured as
 </ul>
 
 <p>
-There is a hints section at the bottom of each section.
+There is a hints section at the bottom of each task.
 </p>
 </div>
 </div>
@@ -111,26 +111,29 @@ There is a hints section at the bottom of each section.
 <h3 id="creating-the-world-2-P-1">Creating the World</h3>
 <div class="outline-text-3" id="text-orgd4cec40">
 <ol class="org-ol">
-<li>Using models from <a href="https://app.gazebosim.org/fuel/models">Gazebo Fuel</a> (and optionally the resource spawner) create a world called <code>worlds/ddrive.world.sdf</code> with the following features
+<li>Using models from <a href="https://app.gazebosim.org/fuel/models">Gazebo Fuel</a> (and the resource spawner) create a world called <code>worlds/ddrive.world.sdf</code> with the following features
 <ul class="org-ul">
 <li>An <a href="https://app.gazebosim.org/OpenRobotics/fuel/models/Asphalt%20Plane">asphalt ground plane</a></li>
 <li>At least two <a href="https://app.gazebosim.org/OpenRobotics/fuel/models/Jersey%20Barrier">Jersey Barriers</a></li>
 <li>At least two <a href="https://app.gazebosim.org/OpenRobotics/fuel/models/Cardboard%20box">Cardboard Boxes</a></li>
 <li>At least two other models of your choosing</li>
-<li>All models should be stored under the <code>models/</code> directory (rather than being references via <code>uri</code>).</li>
 </ul></li>
 
-<li>Write a launchfile called <code>launch/ddrive.launch.{py,xml}</code> (python or xml your choice).
+<li>After saving the world file, the URI's should be updated so that they do not reference paths on your specific computer and can be shared with others
+<ul class="org-ul">
+<li>The Jersey Barrier should be downloaded and stored in your <code>models/</code> directory</li>
+<li>All other models should be referenced by URL</li>
+<li>The above instructions are to ensure that you are able to do both methods: in a real scenario you would likely choose one or the other.</li>
+</ul></li>
+
+<li>Write a launchfile called <code>launch/ddrive.launch.xml</code>
 <ul class="org-ul">
 <li>For now, it should launch gazebo and load the world you just created.</li>
 </ul></li>
-
-<li><b>IMPORTANT</b> Make sure that the world <code>sdf</code> file does not contain any absolute paths. It seems that the resource spawner will use <code>absolute</code> paths on
-your local machine. You will likely need to manually edit the <code>sdf</code> file and replace <code>file://</code> absolute paths with <code>model://</code> relative paths.
-See <a href="../simulation.html#resource_spawner">Resource Spawner Notes</a> for more details.</li>
 </ol>
 </div>
 </div>
+
 <div id="outline-container-the-xacro-urdf-2-P-1" class="outline-3">
 <h3 id="the-xacro-urdf-2-P-1">The Xacro URDF</h3>
 <div class="outline-text-3" id="text-the-xacro-urdf-2-P-1">
@@ -147,14 +150,15 @@ See <a href="../simulation.html#resource_spawner">Resource Spawner Notes</a> for
 </ul></li>
 <li>Create a <code>ddrive.urdf.xacro</code> file to describe the differential-drive robot.
 <ul class="org-ul">
-<li>The dimensional parameters of the robot should be stored in a <code>.yaml</code> file and referenced in the <code>xacro file</code></li>
-<li>Each link you add must have the proper collision bounding box and inertia.</li>
-<li>Place <code>gazebo</code> specific tags in a separate <code>ddrive.gazebo.xacro</code> file and include it in <code>urdf</code> <code>xacro</code> file.</li>
+<li>The dimensional parameters of the robot should be stored in a <code>physical.yaml</code> file and referenced in the <code>xacro file</code></li>
+<li>Each link you add must have the proper visual, collision, and inertia elements.</li>
+<li>Place <code>gazebo</code> specific tags in a separate <code>ddrive.gazebo.xacro</code> file and include it in <code>urdf</code> <code>xacro</code> file, if the <code>gazebo</code> argument is <code>True</code></li>
 </ul></li>
-<li>Create a launchfile called <code>ddrive_rviz.launch.{py,xml}</code> that launches the <code>urdf</code> in RViz, along with a <code>robot_state_publisher</code>
+<li>Create a launchfile called <code>ddrive_rviz.launch.xml</code> that launches the <code>urdf</code> in RViz, along with a <code>robot_state_publisher</code>
 <ul class="org-ul">
 <li>If argument <code>view_only</code> is true, then a <code>joint_state_publisher_gui</code> is also launched</li>
 <li>This launchfile will be useful for debugging.</li>
+<li>Rviz should load it's configuration from <code>config/ddrive_rviz.rviz</code></li>
 </ul></li>
 </ol>
 </div>
@@ -165,19 +169,21 @@ See <a href="../simulation.html#resource_spawner">Resource Spawner Notes</a> for
 <div class="outline-text-4" id="text-org2a0eb30">
 <ol class="org-ol">
 <li>Add the "Differential Drive" plugin to your robot, as appropriate (in the <code>ddrive.gazebo.xacro</code> file).</li>
-<li>Add a new <code>rviz</code> configuration that also shows the <code>odom</code> message in <code>rviz</code>.
-<ul class="org-ul">
-<li>Load this configuration when <code>view_only</code> is false in <code>ddrive_rviz.launch.{py,xml}</code></li>
-</ul></li>
-<li>Modify <code>ddrive.launch.{py,xml}</code> so that it
+<li>Update <code>config/ddrive_rviz.rviz</code> so that it also shows the <code>odom</code> message in <code>rviz</code>.</li>
+<li>Modify <code>ddrive.launch.xml</code> so that it
 <ol class="org-ol">
 <li>Spawns the URDF model in the gazebo world and starts the simulation.</li>
 <li>Runs <code>ros2_gz_bridge</code> so that odometry and joint states are published from the robot to ROS on the appropriate topics</li>
-<li>Includes <code>ddrive_rviz.launch.{py,xml}</code>  to launch rviz.</li>
+<li>Includes <code>ddrive_rviz.launch.xml</code>  to launch rviz.
+<ul class="org-ul">
+<li>In this way, the <code>joint_states</code> and <code>odometry</code> are published by the <code>bridge</code>, whereas the other <code>tf</code> are broadcast by the <code>robot_state_publisher</code></li>
+</ul></li>
 </ol></li>
+<li>The <code>bridge</code> and the <code>gzserver</code> must run in the same container</li>
 </ol>
 </div>
 </div>
+
 <div id="outline-container-control-3-P-1" class="outline-4">
 <h4 id="control-3-P-1">Control</h4>
 <div class="outline-text-4" id="text-org5088161">
@@ -187,9 +193,8 @@ See <a href="../simulation.html#resource_spawner">Resource Spawner Notes</a> for
 <li>Both wheels move with the same velocity at all times</li>
 <li>You will need to use the dynamics of the robot to accomplish this task.</li>
 <li>You may find that the <code>teleop_twist_keyboard</code> package is useful for letting you get a feel for the dynamics.</li>
-<li>Precise control is great but not necessary, just have fun doing some flips.</li>
 </ul></li>
-<li>Make sure that <code>ddrive.launch.{py,xml}</code> starts the <code>flip</code> node</li>
+<li>Make sure that <code>ddrive.launch.xml</code> starts the <code>flip</code> node</li>
 </ol>
 </div>
 </div>
@@ -209,13 +214,12 @@ outputting the urdf file from the xacro file.</li>
 
 <li>Just like with ROS nodes, an old gazebo simulation running in the background can be trouble.
 <ul class="org-ul">
-<li>Use <code>ps aux | grep gazebo</code> to find old gazebo instances</li>
+<li>Use <code>ps aux | grep gz</code> to find old gazebo instances</li>
 </ul></li>
 </ol>
 </div>
 </div>
 </div>
-
 
 <div id="outline-container-part-ii-motion-planning-interface-group--1-P-1" class="outline-2">
 <h2 id="part-ii-motion-planning-interface-group--1-P-1">Part II: Motion Planning Interface (Group)</h2>
