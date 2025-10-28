@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-10-24 Fri 13:56 -->
+<!-- 2025-10-28 Tue 09:31 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MoveWhat? Activity</title>
@@ -184,7 +184,7 @@ joint positions as inputs and returns fake joint states as sensor data.</li>
 <div class="outline-text-2" id="text-orged41b5f">
 <ol class="org-ol">
 <li>The <a href="https://moveit.picknik.ai/main/index.html">Moveit Documentation</a> provides an overview, particularly the <a href="https://moveit.picknik.ai/main/doc/concepts/move_group.html">Move Group</a> diagram.</li>
-<li>The <a href="http://docs.ros.org/en/jazzy/p/moveit_msgs/">moveit_msgs</a> documentation explains how to use the ROS API for the <code>/move_group</code> node.</li>
+<li>The <a href="http://docs.ros.org/en/kilted/p/moveit_msgs/">moveit_msgs</a> documentation explains how to use the ROS API for the <code>/move_group</code> node.</li>
 <li>Take a look at the <code>rqt_graph</code> (be sure to refresh)
 <ul class="org-ul">
 <li>The key node for planning is the <code>/move_group</code> node</li>
@@ -262,14 +262,7 @@ Write a launchfile that
             output<span class="org-operator">=</span><span class="org-string">"log"</span>,
             arguments<span class="org-operator">=</span>[<span class="org-string">"-d"</span>, PathJoinSubstitution([FindPackageShare(<span class="org-string">"franka_fer_moveit_config"</span>), <span class="org-string">"config"</span>, <span class="org-string">"moveit.rviz"</span>])],
             parameters <span class="org-operator">=</span> [ moveit_config.planning_pipelines, moveit_config.robot_description_kinematics],
-            <span class="org-comment-delimiter"># </span><span class="org-comment">Remapping actions not implemented, must remap individual topics/services
-</span>            <span class="org-comment-delimiter"># </span><span class="org-comment">https://github.com/ros2/ros2/issues/1312 Accessed on 10/30/2024
-</span>            remappings <span class="org-operator">=</span> [(<span class="org-string">"/move_action/_action/feedback"</span>, <span class="org-string">"/viz/move_action/_action/feedback"</span>),
-                        (<span class="org-string">"/move_action/_action/status"</span>, <span class="org-string">"/viz/move_action/_action/status"</span>),
-                        (<span class="org-string">"/move_action/_action/cancel_goal"</span>, <span class="org-string">"/viz/move_action/_action/cancel_goal"</span>),
-                        (<span class="org-string">"/move_action/_action/get_result"</span>, <span class="org-string">"/viz/move_action/_action/get_result"</span>),
-                        (<span class="org-string">"/move_action/_action/send_goal"</span>, <span class="org-string">"/viz/move_action/_action/send_goal"</span>)
-                        ]
+            remappings <span class="org-operator">=</span> [(<span class="org-string">"/move_action"</span>, <span class="org-string">"/viz/move_action"</span>)]
             ),
         Node(package<span class="org-operator">=</span><span class="org-string">"inspector"</span>,
             executable<span class="org-operator">=</span><span class="org-string">"inspector"</span>
@@ -280,18 +273,20 @@ Write a launchfile that
 <li>If you want more visibility, you can have your action forward the request to the actual <code>/move_action</code>, and forward the
 responses back. This can get complicated for actions because there are several methods of feedback, but it is relatively straightforward for services.</li>
 
-<li>You can now run <code>demo.launch.py</code> for the franka, kill <code>rviz</code> and launch your own <code>rviz</code>
+<li>You can now <code>ros2 launch franka_fer_moveit_config demo.launch.py</code> kill <code>rviz</code> and launch your inspector launch file with the remappings
 <ul class="org-ul">
 <li>Now planning requests from <code>rviz</code> can be printed.</li>
 </ul></li>
-<li>Other actions to try are <code>/execute_trajectory</code></li>
 
-<li>The same can be done with services:
+<li>Another action you can try is <code>/execute_trajectory</code></li>
+
+<li>Introspection can also be done with services:
 <ul class="org-ul">
-<li>Some services to try are <code>/compute_ik</code>.</li>
+<li>Another service to try is <code>/compute_ik</code>.</li>
 </ul></li>
 
-<li>The planning scene is published on a topic, so subscribing and printing out that topic can help</li>
+<li>The planning scene is published on a topic, so subscribing and printing out that topic can help understand the planning scene</li>
+
 <li>By doing these exercises you will learn how the <code>move_it</code> rviz plugin uses the <code>move_group</code>
 <ul class="org-ul">
 <li>Try to discover what sequence of events happens to plan a motion and then execute it</li>
