@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-10-28 Tue 09:31 -->
+<!-- 2025-10-29 Wed 09:07 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MoveIt 2 Introduction</title>
@@ -187,7 +187,7 @@ MoveIt is highly configurable, but I describe the default expected interface her
 <li>MoveIt can perform forward and inverse kinematics, as well as computing Jacobians</li>
 <li>It actually relies on external libraries and plugins to perform these calculations,
 hence it is highly flexible</li>
-<li>The <code>move_group</code> node provides the <code>/compute_ik</code>  (of type <a href="http://docs.ros.org/en/jazzy/p/moveit_msgs/interfaces/srv/GetPositionIK.html">moveit_srvs/srv/GetPositionIK</a> and the <code>/compute_fk</code> (of type <a href="http://docs.ros.org/en/jazzy/p/moveit_msgs/interfaces/srv/GetPositionFK.html">GetPositionFK</a>) services
+<li>The <code>move_group</code> node provides the <code>/compute_ik</code>  (of type <a href="http://docs.ros.org/en/kilted/p/moveit_msgs/srv/GetPositionIK.html">moveit_msgs/srv/GetPositionIK</a> and the <code>/compute_fk</code> (of type <a href="http://docs.ros.org/en/kilted/p/moveit_msgs/srv/GetPositionFK.html">moveit_msgs/srv/GetPositionFK</a>) services
 <ul class="org-ul">
 <li>Note that the current state of the robot is always known via the <code>/joint_states</code> topic
 and the <code>tf</code> location of the end-effector</li>
