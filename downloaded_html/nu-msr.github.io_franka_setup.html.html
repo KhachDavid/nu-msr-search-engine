@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-09-02 Tue 08:10 -->
+<!-- 2025-11-06 Thu 08:57 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Franka Setup</title>
@@ -21,7 +21,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#overview-1-P-3">Overview</a></li>
+<li><a href="#overview-1-P-1">Overview</a></li>
 <li><a href="#workstation-computer-1-P-1">Workstation Computer</a>
 <ul>
 <li><a href="#operating-system-2-P-1">Operating System</a></li>
@@ -32,6 +32,7 @@
 <li><a href="#ssh-3-P-1">SSH</a></li>
 <li><a href="#ntp-3-P-1">NTP</a></li>
 <li><a href="#internet-3-P-1">Internet</a></li>
+<li><a href="#reverse-proxy-3-P-1">Reverse Proxy</a></li>
 </ul>
 </li>
 <li><a href="#ros-2-iron-2-P-1">ROS 2 Iron</a>
@@ -45,9 +46,9 @@
 </ul>
 </div>
 </nav>
-<div id="outline-container-overview-1-P-3" class="outline-2">
-<h2 id="overview-1-P-3">Overview</h2>
-<div class="outline-text-2" id="text-org34f0b9c">
+<div id="outline-container-overview-1-P-1" class="outline-2">
+<h2 id="overview-1-P-1">Overview</h2>
+<div class="outline-text-2" id="text-orga606d83">
 <ul class="org-ul">
 <li>Describes the setup for the <a href="https://www.mccormick.northwestern.edu/robotics/">Northwestern MS in Robotics</a> program's Franka Emika Panda robots (since renamed to FER).</li>
 <li>These setup instructions are for to configure the robots themselves: most students will want to follow <a href="./ros_notes/ros2/franka.html">Franka Notes</a></li>
@@ -57,7 +58,7 @@
 
 <div id="outline-container-workstation-computer-1-P-1" class="outline-2">
 <h2 id="workstation-computer-1-P-1">Workstation Computer</h2>
-<div class="outline-text-2" id="text-org62da2aa">
+<div class="outline-text-2" id="text-org3f12b9e">
 <ul class="org-ul">
 <li>These instructions are for how our Franka workstation computers are setup.</li>
 <li>Do NOT run these instructions on your personal computer, unless you want to turn it into a Realtime Linux system capable of directly plugging in
@@ -67,7 +68,7 @@ to the Franka Robot (likely not what you want).</li>
 
 <div id="outline-container-operating-system-2-P-1" class="outline-3">
 <h3 id="operating-system-2-P-1">Operating System</h3>
-<div class="outline-text-3" id="text-org8bb9342">
+<div class="outline-text-3" id="text-org574c1fb">
 <ol class="org-ol">
 <li>Install Ubuntu according to the <a href="https://nu-msr.github.io/hackathon/computer_setup.html">Computer Setup</a> (skipping over System76-specific instructions and most desktop customization)
 <ul class="org-ul">
@@ -86,10 +87,10 @@ to the Franka Robot (likely not what you want).</li>
 Permissions must be set for the user to start processes with realtime priority, as per <a href="https://frankaemika.github.io/docs/installation_linux.html#allow-a-user-to-set-real-time-permissions-for-its-processes">Franka Installation Instructions</a>:
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span class="org-comment-delimiter"># </span><span class="org-comment">Create a realtime group</span>
-sudo addgroup realtime
-<span class="org-comment-delimiter"># </span><span class="org-comment">Add users to the realtime group</span>
-sudo usermod -a -G realtime $(whoami)
+<pre class="src src-bash"><span class="org-comment-delimiter"># </span><span class="org-comment">Create a realtime group
+</span>sudo addgroup realtime
+<span class="org-comment-delimiter"># </span><span class="org-comment">Add users to the realtime group
+</span>sudo usermod -a -G realtime $(<span class="org-sh-quoted-exec">whoami</span>)
 sudo usermod -a -G realtime student
 </pre>
 </div></li>
@@ -116,8 +117,8 @@ Create a new ROS 2 workspace:
 </p>
 <div class="org-src-container">
 <pre class="src src-bash">sudo mkdir -p /opt/ros/franka/src
-sudo chown -R $(whoami):$(whoami) <span class="org-comment-delimiter"># </span><span class="org-comment">We will build everything as the current user</span>
-<span class="org-builtin">cd</span> /opt/ros/franka
+sudo chown -R $(<span class="org-sh-quoted-exec">whoami</span>):$(<span class="org-sh-quoted-exec">whoami</span>) <span class="org-comment-delimiter"># </span><span class="org-comment">We will build everything as the current user
+</span><span class="org-builtin">cd</span> /opt/ros/franka
 vcs import --input https://nu-msr.github.io/images/franka.repos src
 rosdep install --from-paths src -y --ignore-src -r
 colcon build --merge-install --cmake-args -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF
@@ -149,7 +150,7 @@ Add the following content to the <code>.bashrc</code> of user accounts
 </div>
 <div id="outline-container-ethernet-connections-3-P-1" class="outline-4">
 <h4 id="ethernet-connections-3-P-1">Ethernet Connections</h4>
-<div class="outline-text-4" id="text-orgdf5f7b6">
+<div class="outline-text-4" id="text-org9f58d5f">
 <ul class="org-ul">
 <li><code>enp109s0</code>: This is the 1Gb/s ethernet port built into the motherboard. It is used to connect to the laptop.
 <ul class="org-ul">
@@ -171,7 +172,7 @@ Add the following content to the <code>.bashrc</code> of user accounts
 
 <ul class="org-ul">
 <li><a id="bridge-4-P-1"></a>Bridge<br>
-<div class="outline-text-5" id="text-org9dd874e">
+<div class="outline-text-5" id="text-org6dbf8cc">
 <ul class="org-ul">
 <li>All connections are bridged on <code>br0</code>, which is given ip address <code>192.168.18.1</code>.
 <ul class="org-ul">
@@ -199,7 +200,7 @@ nmcli con add type ethernet con-name br-pandaY ifname ens24f1 master br0
 
 <div id="outline-container-dns-3-P-1" class="outline-4">
 <h4 id="dns-3-P-1">DNS</h4>
-<div class="outline-text-4" id="text-org87b7fd5">
+<div class="outline-text-4" id="text-org435d4d3">
 <ol class="org-ol">
 <li>Install dnsmasq: <code>sudo apt install dnsmasq</code>
 <ul class="org-ul">
@@ -260,7 +261,7 @@ is how both pandas can get an IP address</li>
 </div>
 <div id="outline-container-ssh-3-P-1" class="outline-4">
 <h4 id="ssh-3-P-1">SSH</h4>
-<div class="outline-text-4" id="text-org52fe586">
+<div class="outline-text-4" id="text-org6c44025">
 <p>
 The <code>station</code> should have an <code>ssh</code> server:
 </p>
@@ -272,7 +273,7 @@ The <code>station</code> should have an <code>ssh</code> server:
 
 <div id="outline-container-ntp-3-P-1" class="outline-4">
 <h4 id="ntp-3-P-1">NTP</h4>
-<div class="outline-text-4" id="text-org9646d50">
+<div class="outline-text-4" id="text-orgadff065">
 <ul class="org-ul">
 <li>The <code>station</code> computer is not usually connected to the internet.</li>
 <li>It needs to be synchronized with the user's laptop time.</li>
@@ -290,7 +291,7 @@ The <code>station</code> should have an <code>ssh</code> server:
 </div>
 <div id="outline-container-internet-3-P-1" class="outline-4">
 <h4 id="internet-3-P-1">Internet</h4>
-<div class="outline-text-4" id="text-org64e3d53">
+<div class="outline-text-4" id="text-org696e9df">
 <ol class="org-ol">
 <li>The Franka robots are, by default, intentionally disconnected from the internet</li>
 <li>To get internet on the Franka, it is easiest to route through the user's laptop:
@@ -310,11 +311,36 @@ The <code>station</code> should have an <code>ssh</code> server:
 </ol>
 </div>
 </div>
+<div id="outline-container-reverse-proxy-3-P-1" class="outline-4">
+<h4 id="reverse-proxy-3-P-1">Reverse Proxy</h4>
+<div class="outline-text-4" id="text-orgbc99acb">
+<ol class="org-ol">
+<li>The Franka Panda's SSH certificate has expired, making it difficult to access the web UI from Firefox (because Firefox will not let users add exceptions
+for expired certificates through the UI).</li>
+<li>Install <code>nginx</code> and setup a proxy: this allows users to navigate to <code>https://station.robot</code> in their browser to access the Franka Web Interface:
+<ul class="org-ul">
+<li>Copy <a href="./images/http-proxy">./images/http-proxy</a> to <code>/etc/nginx/sites-available/http-proxy</code></li>
+<li>Remove <code>/etc/nginx/sites-enabled/default</code></li>
+<li>Link <code>/etc/nginx/sites-enabled/http-proxy</code> in <code>/etc/nginx/sites-available/http-proxy</code></li>
+<li><p>
+Create the <code>ssl</code> certificate:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">openssl req -x509 -nodes -newkey rsa:4096 -keyout station.key -out station.crt -days 36500 -subj <span class="org-string">"/CN=station.robot"</span>
+sudo mkdir -p /etc/nginx/ssl
+sudo mv station.key /etc/nginx/ssl
+sudo mv station.crt /etc/nginx/ssl
+</pre>
+</div></li>
+<li><code>systemctl reload nginx</code></li>
+</ul></li>
+</ol>
 </div>
-
+</div>
+</div>
 <div id="outline-container-ros-2-iron-2-P-1" class="outline-3">
 <h3 id="ros-2-iron-2-P-1">ROS 2 Iron</h3>
-<div class="outline-text-3" id="text-orgbf6691b">
+<div class="outline-text-3" id="text-orgfc38f1e">
 <ol class="org-ol">
 <li>A ROS 2 Iron docker container is available on dockerhub at <a href="https://hub.docker.com/repository/docker/reem17/franka_iron/general">https://hub.docker.com/repository/docker/reem17/franka_iron/general</a></li>
 <li>Install docker on station: <code>sudo apt install --no-install-recommends docker.io</code></li>
@@ -349,8 +375,8 @@ Docker messes up network settings with network bridges. To fix, create <code>/et
 </ul></li>
 </ol>
 </div>
-<details id="orgcf4612a"><summary class="header-4">Building The Container</summary>
-<div class="outline-text-4" id="text-orgcf4612a">
+<details id="orgbb8e211"><summary class="header-4">Building The Container</summary>
+<div class="outline-text-4" id="text-orgbb8e211">
 <ul class="org-ul">
 <li>The docker file context is available here: <a href="./images/franka_docker/Dockerfile">Dockerfile</a>.</li>
 <li>The <a href="./images/franka_docker/limits.conf">limits.conf</a> file must be in the build context folder.</li>
@@ -363,7 +389,7 @@ Docker messes up network settings with network bridges. To fix, create <code>/et
 
 <div id="outline-container-final-touches-2-P-1" class="outline-3">
 <h3 id="final-touches-2-P-1">Final Touches</h3>
-<div class="outline-text-3" id="text-org8264422">
+<div class="outline-text-3" id="text-orgea55669">
 <ol class="org-ol">
 <li>Make sure that in the bios setup, the option to need to "press F1 on boot failure" is disabled. Otherwise if power is cut the user
 will need a keyboard.</li>

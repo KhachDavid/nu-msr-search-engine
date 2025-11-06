@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-10-29 Wed 09:07 -->
+<!-- 2025-11-06 Thu 08:58 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MoveWhat? Activity</title>
@@ -39,6 +39,7 @@
 <li><a href="#the-plan-2-P-1">The Plan</a></li>
 <li><a href="#basic-action-inspection-2-P-1">Basic Action Inspection</a></li>
 <li><a href="#documentation-2-P-1">Documentation</a></li>
+<li><a href="#alternative-methods-2-P-1">Alternative Methods</a></li>
 <li><a href="#answers-2-P-1">Answers</a></li>
 </ul>
 </li>
@@ -228,6 +229,7 @@ joint positions as inputs and returns fake joint states as sensor data.</li>
 </div>
 </div>
 
+
 <div id="outline-container-basic-action-inspection-2-P-1" class="outline-3">
 <h3 id="basic-action-inspection-2-P-1">Basic Action Inspection</h3>
 <div class="outline-text-3" id="text-org30a3b98">
@@ -306,6 +308,17 @@ responses back. This can get complicated for actions because there are several m
 <li>The API documentation for <code>moveit_msgs</code> (available on <a href="https://index.ros.org">https://index.ros.org</a>) is very helpful for understanding the capabilities of the <code>/move_action</code></li>
 <li>It is also possible to read the source code for <code>moveit</code> though it can be quite complicated.</li>
 </ul>
+</div>
+</div>
+
+<div id="outline-container-alternative-methods-2-P-1" class="outline-3">
+<h3 id="alternative-methods-2-P-1">Alternative Methods</h3>
+<div class="outline-text-3" id="text-org2acdd75">
+<ol class="org-ol">
+<li>In ROS 2 it is possible to allow users to <a href="https://docs.ros.org/en/kilted/Tutorials/Demos/Service-Introspection.html">introspect services</a> and <a href="https://docs.ros.org/en/kilted/Tutorials/Demos/Action-Introspection.html">actions</a></li>
+<li>This functionality, however, must be enabled in code, and it is not currently for <code>moveit</code></li>
+<li>An alternative method would be to re-compile moveit with introspection enabled</li>
+</ol>
 </div>
 </div>
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-10-29 Wed 09:07 -->
+<!-- 2025-11-06 Thu 08:58 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Emika Franka Panda Robot</title>
@@ -29,7 +29,11 @@
 <ul>
 <li><a href="#rules-2-P-1">Rules</a></li>
 <li><a href="#power-on-2-P-1">Power On</a></li>
-<li><a href="#the-web-interface-2-P-1">The Web Interface</a></li>
+<li><a href="#the-web-interface-2-P-1">The Web Interface</a>
+<ul>
+<li><a href="#ssl-certificates-3-P-1">SSL Certificates</a></li>
+</ul>
+</li>
 <li><a href="#enabling-ros-2-P-1">Enabling ROS</a></li>
 <li><a href="#using-ros-2-P-1">Using ROS</a></li>
 <li><a href="#enabling-device-2-P-1">Enabling Device</a></li>
@@ -204,11 +208,11 @@ If the robot is off, you will need to turn it on (obviously!).
 <li>Your computer should obtain an ip address automatically, but it may take a little while.</li>
 </ul></li>
 <li>Make sure the enabling device is within reach and pressed down (robot is disabled).</li>
-<li>Navigate in your web browser to <code>https://panda0.robot</code>
+<li>Navigate in your web browser to <code>https://station.robot</code>
 <ul class="org-ul">
 <li>This is the graphical, non-programmer interface to the robot</li>
-<li>You will get an SSL warning. It is okay to accept the risk and continue (you are not on the internet here this is just the robot and I can't change its SSL certificate).</li>
-<li>Login with the information I have provided</li>
+<li>You will get an SSL warning. It is okay, in this circumstance, to accept the risk and continue</li>
+<li>Login with the information I have provided.</li>
 </ul></li>
 <li>If somebody has already been using the robot, you will be prompted to request control
 <ul class="org-ul">
@@ -227,6 +231,49 @@ If the robot is off, you will need to turn it on (obviously!).
 </ul></li>
 </ol>
 </div>
+<details id="org83b9851"><summary class="header-4">SSL Certificates</summary>
+<div class="outline-text-4" id="text-org83b9851">
+<ol class="org-ol">
+<li>The Franka Panda Web Interface has an expired SSL certificate that cannot be updated</li>
+<li>Firefox blocks all pages with expired SSL certificates and does not provide a way in it's user interface for the user to overrid</li>
+<li>Chrome still allows the user to override the expired certificate</li>
+<li>I have setup a proxy on <code>https://station.robot</code> for the webserver at <code>https://panda0.robot</code>
+<ul class="org-ul">
+<li>The proxy connects to <code>https://panda0.robot</code> and ignores the expired certificate</li>
+<li>It passes traffic between that server and your laptop</li>
+<li>When your computer communicates with the proxy, it receives the SSL certificate of the proxy, not the webserver
+<ul class="org-ul">
+<li>This certificate was signed by me so is not trusted by your browser by default, but it is also not expired.</li>
+</ul></li>
+</ul></li>
+<li>In a pinch, it is possible to access the webserver directly in firefox
+<ol class="org-ol">
+<li><p>
+Download the certificate from the server:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">openssl s_client -showcerts -connect panda0.robot:443 &lt;/dev/null 2&gt;/dev/null | <span class="org-sh-escaped-newline">\</span>
+openssl x509 -outform PEM &gt; franka.crt
+</pre>
+</div>
+<ul class="org-ul">
+<li>Alternatively, <a href="../../nu-msr.github.io/images/franka.crt">download the certificate</a> (I downloaded this from the franka)</li>
+</ul>
+<ol class="org-ol">
+<li>Locate the default firefox profile:
+<ul class="org-ul">
+<li><code>ls ~/.mozilla/firefox/*.default-release</code></li>
+<li>The path is referred to as <code>&lt;profile&gt;</code> below</li>
+</ul></li>
+<li>Add the certificate to the profile:
+<code>certutil -A -n "Franka Robot" -t "TC,," -i franka.crt -d sql:&lt;profile&gt;</code></li>
+<li>Restart firefox</li>
+<li>You should now be able to override the expired certificate</li>
+</ol></li>
+</ol></li>
+</ol>
+</div>
+</details>
 </div>
 
 <div id="outline-container-enabling-ros-2-P-1" class="outline-3">
