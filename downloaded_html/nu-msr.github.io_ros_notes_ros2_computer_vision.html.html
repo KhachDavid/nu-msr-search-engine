@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-11-06 Thu 08:58 -->
+<!-- 2025-11-12 Wed 14:03 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Image Processing with ROS</title>
@@ -21,12 +21,12 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#overview-1-P-6">Overview</a></li>
+<li><a href="#overview-1-P-7">Overview</a></li>
 <li><a href="#cameras-on-linux-1-P-1">Cameras On Linux</a></li>
 <li><a href="#ros-camera-drivers--1-P-1">ROS Camera "Drivers"</a>
 <ul>
-<li><a href="#using-usb-cam-2-P-1">Using usb_cam</a></li>
 <li><a href="#using-v4l2-camera-2-P-1">Using v4l2_camera</a></li>
+<li><a href="#using-usb-cam-2-P-1">Using usb_cam</a></li>
 </ul>
 </li>
 <li><a href="#the-image-pipeline-1-P-1">The Image Pipeline</a>
@@ -64,8 +64,8 @@
 </div>
 </nav>
 
-<div id="outline-container-overview-1-P-6" class="outline-2">
-<h2 id="overview-1-P-6">Overview</h2>
+<div id="outline-container-overview-1-P-7" class="outline-2">
+<h2 id="overview-1-P-7">Overview</h2>
 <div class="outline-text-2" id="text-orge729cf7">
 <p>
 This lecture is about how to interface ROS with cameras and vision processing libraries.
@@ -86,7 +86,7 @@ This lecture is about how to interface ROS with cameras and vision processing li
 </ul></li>
 <li>USB cameras on Linux are usually called <code>/dev/videoX</code>, where <code>X</code> is a number
 <ul class="org-ul">
-<li>Some cameras create two video devices, the lower numbered one is usually the one to use</li>
+<li>Some cameras create multiple two video devices, the lower numbered one is usually the one to use, whereas the other video device is for camera control purposes</li>
 </ul></li>
 <li><code>v4l2-ctl</code> is a command line tool for interfacing with cameras. See <code>man v4l2-ctl</code></li>
 <li><code>v4l2-ctl --list-formats-ext</code> prints useful information about the formats supported by cameras connected to your computer
@@ -125,11 +125,25 @@ the proper permissions and a persistent name.
 </ul>
 </div>
 
+
+<div id="outline-container-using-v4l2-camera-2-P-1" class="outline-3">
+<h3 id="using-v4l2-camera-2-P-1">Using v4l2_camera</h3>
+<div class="outline-text-3" id="text-orgeb77d50">
+<ul class="org-ul">
+<li>The <a href="https://index.ros.org/p/v4l2_camera">v4l2_camera</a> package is designed to expose many v4l2 camera options to ROS via parameters
+<ul class="org-ul">
+<li>It automatically enumerates all available v4l2 options (which vary by camera model) and exposes them</li>
+</ul></li>
+<li>It can be used with <code>ros2 run v4l2_camera v4l2_camera_node</code></li>
+</ul>
+</div>
+</div>
+
 <div id="outline-container-using-usb-cam-2-P-1" class="outline-3">
 <h3 id="using-usb-cam-2-P-1">Using usb_cam</h3>
 <div class="outline-text-3" id="text-org79b36b6">
 <ol class="org-ol">
-<li>The <a href="https://index.ros.org/p/usb_cam/github-ros-drivers-usb_cam/#jazzy">usb_cam</a> package can be used with many cameras</li>
+<li>The <a href="https://index.ros.org/p/usb_cam/">usb_cam</a> package can be used with many cameras</li>
 <li>The camera is one of the <code>/dev/videoX</code> devices, and can be specified with the <code>video_device</code> parameter</li>
 <li>Run the <code>usb_cam</code> node.  A command with parameters that work well with the webcam on the System76 laptops are
 <ul class="org-ul">
@@ -142,25 +156,12 @@ the proper permissions and a persistent name.
 </ul></li>
 <li>After running you can view the image in several ways
 <ol class="org-ol">
-<li>Use <code>rviz2</code> and add an Image view</li>
+<li>Use <code>rviz2</code> and add an Image view. This is the most performant option</li>
 <li><code>ros2 run usb_cam show_image.py</code> (Image might be laggy at high resolutions)</li>
-<li><code>ros2 run rqt_image_view rqt_image_view</code></li>
+<li><code>ros2 run rqt_image_view rqt_image_view</code>: This has had poor performance on non-compressed images in my experience</li>
 <li><code>ros2 run image_view image_view --ros-args -r image:=/topic_image_is_published_on</code> to view the image</li>
 </ol></li>
 </ol>
-</div>
-</div>
-
-<div id="outline-container-using-v4l2-camera-2-P-1" class="outline-3">
-<h3 id="using-v4l2-camera-2-P-1">Using v4l2_camera</h3>
-<div class="outline-text-3" id="text-orgeb77d50">
-<ul class="org-ul">
-<li>The <a href="https://index.ros.org/p/v4l2_camera/gitlab-boldhearts-ros2_v4l2_camera/#jazzy">v4l2_camera</a> package is designed to expose many v4l2 camera options to ROS via parameters
-<ul class="org-ul">
-<li>It automatically enumerates all available v4l2 options (which vary by camera model) and exposes them</li>
-</ul></li>
-<li>It can be used with <code>ros2 run v4l2_camera v4l2_camera_node</code></li>
-</ul>
 </div>
 </div>
 </div>
@@ -173,7 +174,7 @@ the proper permissions and a persistent name.
 <h3 id="image-pipeline-2-P-1">Image Pipeline</h3>
 <div class="outline-text-3" id="text-org78fe17f">
 <p>
-The <a href="http://docs.ros.org/en/jazzy/p/image_pipeline/">image_pipeline</a> contains several packages relating to image manipulation in ROS.
+The <a href="http://docs.ros.org/en/kilted/p/image_pipeline/">image_pipeline</a> contains several packages relating to image manipulation in ROS.
 </p>
 <ul class="org-ul">
 <li>The idea is to chain various calibration and image processing steps together to complete computer vision tasks.</li>
@@ -186,20 +187,20 @@ The <a href="http://docs.ros.org/en/jazzy/p/image_pipeline/">image_pipeline</a> 
 <h3 id="camera-calibration-2-P-1">Camera Calibration</h3>
 <div class="outline-text-3" id="text-org7cbb7b5">
 <p>
-<a href="http://docs.ros.org/en/jazzy/p/camera_calibration/index.html">camera_calibration</a> finds the intrinsic parameters of a camera using a checkerboard pattern and OpenCV.
+<a href="http://docs.ros.org/en/kilted/p/camera_calibration/index.html">camera_calibration</a> finds the intrinsic parameters of a camera using a checkerboard pattern and OpenCV.
 </p>
 <ul class="org-ul">
-<li>See this <a href="http://docs.ros.org/en/jazzy/p/camera_calibration/doc/tutorial_mono.html">tutorial</a> for information on how to calibrate a monocular camera in ROS 2.
+<li>See this <a href="http://docs.ros.org/en/kilted/p/camera_calibration/doc/tutorial_mono.html">tutorial</a> for information on how to calibrate a monocular camera in ROS 2.
 
 <ul class="org-ul">
-<li>More information about camera calibration <a href="http://docs.ros.org/en/jazzy/p/image_pipeline/camera_info.html">CameraInfo</a></li>
+<li>More information about camera calibration <a href="http://docs.ros.org/en/kilted/p/image_pipeline/camera_info.html">CameraInfo</a></li>
 <li>Some more information on calibration matrices for the <a href="http://ksimek.github.io/2012/08/13/introduction/#toc">pinhole camera model</a></li>
 <li><a href="https://www.mathworks.com/help/vision/ug/camera-calibration.html">Matlab tutorial on camera calibration</a></li>
 </ul></li>
 <li>The calibration can be stored and used to provide a <code>camera_info</code> topic so that the calibration
 can be used by other nodes.
 <ul class="org-ul">
-<li>The <a href="http://docs.ros.org/en/jazzy/p/sensor_msgs/interfaces/msg/CameraInfo.html">CameraInfo</a> has
+<li>The <a href="http://docs.ros.org/en/kilted/p/sensor_msgs/interfaces/msg/CameraInfo.html">CameraInfo</a> has
 useful information about camera calibration</li>
 </ul></li>
 <li>Calibrations can be loaded by setting the <code>camera_info_url</code> parameter
@@ -243,7 +244,7 @@ ros2 launch image_proc image_proc.launch.py
 <h3 id="image-proc-2-P-1">Image Proc</h3>
 <div class="outline-text-3" id="text-org2ff8747">
 <ul class="org-ul">
-<li>The <a href="http://docs.ros.org/en/jazzy/p/image_proc/">image_proc</a> package handles rectifying and debayering images.</li>
+<li>The <a href="http://docs.ros.org/en/kilted/p/image_proc/">image_proc</a> package handles rectifying and debayering images.</li>
 <li>Rectification is a method to compensate for camera lens distortion (which can make parallel lines appear curved in an image)</li>
 <li>Debayering is a compensation that accounts for the individual color pixel layout on color cameras <a href="https://www.altairastro.help/why_debayer_before_stacking/">More Info</a></li>
 <li>Run <code>image_proc</code> with <code>ros2 launch image_proc image_proc.launch.py</code>
@@ -270,7 +271,7 @@ ros2 launch image_proc image_proc.launch.py
 <h3 id="depth-images-2-P-1">Depth Images</h3>
 <div class="outline-text-3" id="text-orgc0aeb16">
 <p>
-<a href="http://docs.ros.org/en/jazzy/p/depth_image_proc/">depth_image_proc</a> Processes depth image
+<a href="http://docs.ros.org/en/kilted/p/depth_image_proc/">depth_image_proc</a> Processes depth image
 </p>
 <ul class="org-ul">
 <li>In a depth image, each pixel corresponds to the depth (i.e., how far light has to travel before hitting something)
@@ -286,7 +287,7 @@ in the scene.</li>
 <h2 id="other-image-tools-1-P-1">Other Image Tools</h2>
 <div class="outline-text-2" id="text-orge2b6b60">
 <ol class="org-ol">
-<li><a href="http://docs.ros.org/en/jazzy/p/image_transport/">image_transport</a> determines how image data is sent across the system.</li>
+<li><a href="http://docs.ros.org/en/kilted/p/image_transport/">image_transport</a> determines how image data is sent across the system.</li>
 </ol>
 <p>
 Rather than raw camera data, the image data can be compressed to use less bandwidth.
@@ -298,7 +299,7 @@ Rather than raw camera data, the image data can be compressed to use less bandwi
 <li>Thus, you can publish a compressed image on a remote computer on the network, subscribe to it with the <code>republish</code> node,
 and have it republish the uncompressed image, allowing easier access from python.</li>
 </ul></li>
-<li><a href="https://index.ros.org/p/web_video_server/github-RobotWebTools-web_video_server/#jazzy">web_video_server</a> is used to create an http stream of video,
+<li><a href="https://index.ros.org/p/web_video_server/github-RobotWebTools-web_video_server/#kilted">web_video_server</a> is used to create an http stream of video,
 useful if interfacing your robot to a website.</li>
 </ul>
 </div>
@@ -370,11 +371,11 @@ often an identifier (thus Tags are like QR codes but they also contain geometric
 <h3 id="april-tags-in-ros-2-P-1">April Tags in ROS</h3>
 <div class="outline-text-3" id="text-org7d620a0">
 <ol class="org-ol">
-<li>The <a href="https://index.ros.org/p/apriltag_ros/github-christianrauch-apriltag_ros/#jazzy">apriltag_ros</a> provides april-tag related functionality for ROS
+<li>The <a href="https://index.ros.org/p/apriltag_ros/github-christianrauch-apriltag_ros/#kilted">apriltag_ros</a> provides april-tag related functionality for ROS
 <ul class="org-ul">
-<li>This is a meta-package that also installs the ROS-independent apriltag library (<code>ros-jazzy-apriltag</code>) and messages for apriltags (<code>ros-jazzy-apriltag-msgs</code>).</li>
+<li>This is a meta-package that also installs the ROS-independent apriltag library (<code>ros-kilted-apriltag</code>) and messages for apriltags (<code>ros-kilted-apriltag-msgs</code>).</li>
 </ul></li>
-<li><a href="https://index.ros.org/p/apriltag/github-AprilRobotics-apriltag/#jazzy">apriltag</a> has documentation for apriltags.</li>
+<li><a href="https://index.ros.org/p/apriltag/github-AprilRobotics-apriltag/#kilted">apriltag</a> has documentation for apriltags.</li>
 <li>Choose a <a href="https://github.com/AprilRobotics/apriltag/wiki/AprilTag-User-Guide#choosing-a-tag-family">Tag Family</a>
 <ul class="org-ul">
 <li>Download images here: <a href="https://github.com/AprilRobotics/apriltag-imgs">https://github.com/AprilRobotics/apriltag-imgs</a></li>
@@ -388,7 +389,7 @@ often an identifier (thus Tags are like QR codes but they also contain geometric
 <li>April tags must have a boarder around them. There are some tag families that have a white border and others that have a black border</li>
 </ul></li>
 </ul></li>
-<li>See <a href="http://docs.ros.org/en/jazzy/p/apriltag/">apriltag documentation</a> for more instructions on how to use them.</li>
+<li>See <a href="http://docs.ros.org/en/kilted/p/apriltag/">apriltag documentation</a> for more instructions on how to use them.</li>
 </ol>
 </div>
 </div>

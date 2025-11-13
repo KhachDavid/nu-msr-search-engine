@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-11-06 Thu 08:58 -->
+<!-- 2025-11-12 Wed 14:03 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Packages and Workspaces</title>
@@ -604,11 +604,12 @@ Create a new workspace and create a dummy package in it:
 <pre class="src src-bash">mkdir venv_ws
 <span class="org-builtin">cd</span> venv_ws
 ros2 pkg create --build-type ament_python venv_pkg
+colcon build
 <span class="org-builtin">source</span> ven_ws/install/setup.bash
 </pre>
 </div></li>
 <li>Install the packages you want with pip into the install directory of this workspace by setting the <code>PYTHONUSERBASE</code> variable:
-<code>PYTHONUSERBASE=$(ros pkg prefix venv_pkg) pip3 install --user --break-system-packages pip_package_to_install</code>
+<code>PYTHONUSERBASE=$(ros2 pkg prefix venv_pkg) pip3 install --user --break-system-packages pip_package_to_install</code>
 <ul class="org-ul">
 <li>By setting <code>PYTHONUSERBASE</code> you are telling <code>pip</code> that your system's root directory is actually the path to the <code>venv_pkg</code></li>
 <li>The <code>--user</code> flag tells pip to install to the "python user directory"</li>
