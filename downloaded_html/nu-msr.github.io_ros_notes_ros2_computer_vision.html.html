@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-11-12 Wed 14:03 -->
+<!-- 2025-11-14 Fri 11:41 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Image Processing with ROS</title>
@@ -401,9 +401,10 @@ often an identifier (thus Tags are like QR codes but they also contain geometric
 <ul class="org-ul">
 <li>YOLO "You Only Look Once" is a family of machine-learning vision algorithms</li>
 <li>The <a href="https://github.com/ultralytics/ultralytics">Ultralytics YOLO Models</a> are a convenient implementation of various pre-trained YOLO models implemented in <a href="https://pytorch.org">pytorch</a></li>
-<li>To most easily use this package from ROS follow the instructions <a href="./colcon.html#pip_ros">to use pip with ROS</a> and use <code>pip</code> to install <code>ultralytics</code>
+<li>To most easily use this package from ROS follow the instructions to <a href="./howto/pip.html">Use Pip With ROS</a> to setup a workspace for your pip packages
 <ul class="org-ul">
-<li>These instructions have you <code>pip install</code> packages inside a ROS workspace that then <i>underlays</i> your project</li>
+<li>Use <code>pip</code> to install <code>ultralytics</code></li>
+<li>Then use <code>pip</code> to uninstall <code>numpy</code>, so the system <code>numpy</code> will be used.</li>
 </ul></li>
 <li>The <a href="https://docs.ultralytics.com">Ultralytics Documentation</a> describes how you can use and customize the provided YOLO models
 <ul class="org-ul">

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-11-12 Wed 14:03 -->
+<!-- 2025-11-14 Fri 11:41 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Packages and Workspaces</title>
@@ -54,11 +54,7 @@
 <li><a href="#overlays-2-P-1">Overlays</a></li>
 </ul>
 </li>
-<li><a href="#python-virtual-environments-1-P-1">Python Virtual Environments</a>
-<ul>
-<li><a href="#pip_ros">Using Pip Packages with ROS 2</a></li>
-</ul>
-</li>
+<li><a href="#python-system-packages-1-P-1">Python System Packages</a></li>
 </ul>
 </div>
 </nav>
@@ -570,65 +566,22 @@ Add the hook in <code>colcon.pkg</code>:
 </div>
 </div>
 
-<div id="outline-container-python-virtual-environments-1-P-1" class="outline-2">
-<h2 id="python-virtual-environments-1-P-1">Python Virtual Environments</h2>
-<div class="outline-text-2" id="text-orgdf151f7">
+<div id="outline-container-python-system-packages-1-P-1" class="outline-2">
+<h2 id="python-system-packages-1-P-1">Python System Packages</h2>
+<div class="outline-text-2" id="text-orga7fcbd7">
 <ol class="org-ol">
-<li>Virtual environments allow you to isolate python projects from each other and the system, enabling every project to have its own version of dependencies
+<li>ROS 2 is based on a specific operating system distribution (e.g., of Ubuntu) and therefore expects that the python packages are those installed via <code>apt</code></li>
+<li>Not all python packages are distributed with the operating system. For example, many packages are available via pip.
 <ul class="org-ul">
-<li>Use <code>python -m venv myvenv</code> to create a directory called <code>myvenv</code>, containing the virtual environment (any valid directory name is valid)</li>
-<li>Activate the virtual environment with <code>source myvenv/bin/activate</code></li>
-<li>Now your python will use the interpreter and files in the virtual environment rather than your system's python</li>
+<li>These packages may depend on versions of python packages that differ from those that come with the operating system</li>
 </ul></li>
-<li>ROS workspaces do not support the use of virtual environments by default
+<li>The usual way to handle different packages requiring different python versions for different packages is to use <a href="https://docs.python.org/3/library/venv.html">Virtual Environments</a>
 <ul class="org-ul">
-<li>ROS views itself as an extension of a given Ubuntu distribution and therefore expects all dependencies to be available via <code>apt</code></li>
-<li>ROS expects the version of any given python package to be the version packaged by Ubuntu and distributed via <code>apt</code>.</li>
-<li>As of <code>kilted</code>: because of the way <code>ament_python</code> packages currently work, they will not use a virtual environment even if it is activated (see <a href="https://github.com/ros2/ros2/issues/1094">this issue</a>).</li>
+<li>These environments allow users to isolate groups of python packages from each other and the system, enabling every project to have its own version of dependencies</li>
 </ul></li>
-<li>Whenever possible, your ROS project should depend on the version of python packages that are part of the target Ubuntu distribution</li>
-<li>In some cases (especially with machine learning), a desired package is not available via <code>apt</code> and is most easily available via <code>pip</code></li>
+<li>It is also possible to directly install python packages into a workspace</li>
+<li>See the <a href="./howto/pip.html">Guide for Using Pip with ROS 2</a> for instructions on how to use pip packages with ROS 2.</li>
 </ol>
-</div>
-<div id="outline-container-pip_ros" class="outline-3">
-<h3 id="pip_ros">Using Pip Packages with ROS 2</h3>
-<div class="outline-text-3" id="text-pip_ros">
-<p>
-Here is my current suggested workaround (based in part off of <a href="https://github.com/ros2/ros2/issues/1094#issuecomment-2505164504">this issue suggestion</a>) to use <code>pip</code> packages with ROS 2 workspaces
-</p>
-<ol class="org-ol">
-<li><p>
-Create a new workspace and create a dummy package in it:
-</p>
-<div class="org-src-container">
-<pre class="src src-bash">mkdir venv_ws
-<span class="org-builtin">cd</span> venv_ws
-ros2 pkg create --build-type ament_python venv_pkg
-colcon build
-<span class="org-builtin">source</span> ven_ws/install/setup.bash
-</pre>
-</div></li>
-<li>Install the packages you want with pip into the install directory of this workspace by setting the <code>PYTHONUSERBASE</code> variable:
-<code>PYTHONUSERBASE=$(ros2 pkg prefix venv_pkg) pip3 install --user --break-system-packages pip_package_to_install</code>
-<ul class="org-ul">
-<li>By setting <code>PYTHONUSERBASE</code> you are telling <code>pip</code> that your system's root directory is actually the path to the <code>venv_pkg</code></li>
-<li>The <code>--user</code> flag tells pip to install to the "python user directory"</li>
-<li>The <code>--break-system-packages</code> flag overrides <code>pips</code> admonition to only use it in virtual environments. However,
-because of <code>PYTHONUSERBASE</code>, the packages are only getting installed into the ROS workspace not the sysem, so this should be safe.</li>
-</ul></li>
-<li>Now create a new workspace (<code>proj_ws</code>) for your project, and run <code>colcon build</code>
-<ul class="org-ul">
-<li>The <code>proj_ws</code> overlays the <code>venv_ws</code> and therefore will have <code>venv_pkg</code> on its python path</li>
-<li>The <code>pip</code> installed packages will therefore be visible in the new workspace.</li>
-</ul></li>
-<li>This method mixes existing system packages with new <code>pip</code> installed packages, when the ROS workspace is sourced
-<ul class="org-ul">
-<li>From a ROS point-of-view this situation is desirable because ROS packages are designed to work with system python packages so using as many of those as possible is beneficial</li>
-<li>From the point-of-view of the pip package, some system packages may be incompatible: in that case you will need to install the correct version with pip</li>
-</ul></li>
-<li>This method should work with <code>-r requirements.txt</code> as well as individual pip packages</li>
-</ol>
-</div>
 </div>
 </div>
 </div>

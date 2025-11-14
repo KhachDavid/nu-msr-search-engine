@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2025-11-14 Fri 11:41 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Using Pip With ROS 2</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">Using Pip With ROS 2</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#overview-1-P-4">Overview</a></li>
+<li><a href="#direct-into-a-workspace-1-P-1">Direct Into A Workspace</a>
+<ul>
+<li><a href="#steps-2-P-1">Steps</a></li>
+</ul>
+</li>
+<li><a href="#virtual-environment-1-P-1">Virtual Environment</a>
+<ul>
+<li><a href="#steps-2-P-2">Steps</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-overview-1-P-4" class="outline-2">
+<h2 id="overview-1-P-4">Overview</h2>
+<div class="outline-text-2" id="text-org4149349">
+<p>
+This guide explains two methods for installing pip packages directly into a ROS <code>colcon</code> workspace.
+One method uses pip and the ROS 2 workspace method directly, while the other uses virtual environments.
+</p>
+</div>
+</div>
+
+<div id="outline-container-direct-into-a-workspace-1-P-1" class="outline-2">
+<h2 id="direct-into-a-workspace-1-P-1">Direct Into A Workspace</h2>
+<div class="outline-text-2" id="text-orgec2e1f2">
+<ol class="org-ol">
+<li>With this method, you install pip packages directly into a ROS 2 workspace</li>
+<li>Whenever that workspace is sourced (either directly or as an underlay), the python packages installed will be used by all ROS 2 nodes.</li>
+<li>Packages installed via this manner will override any packages installed on the system.</li>
+</ol>
+</div>
+
+<div id="outline-container-steps-2-P-1" class="outline-3">
+<h3 id="steps-2-P-1">Steps</h3>
+<div class="outline-text-3" id="text-org73493ac">
+<ol class="org-ol">
+<li><p>
+Create a new ROS workspace and <code>ament_python</code> package
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">mkdir -p ws/src
+<span class="org-builtin">cd</span> ws/src
+ros2 pkg create --build-type ament_python py_venv
+<span class="org-builtin">cd</span> ..
+</pre>
+</div></li>
+<li><p>
+Build and source the workspace:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">colcon build
+<span class="org-builtin">source</span> install/setup.bash
+</pre>
+</div></li>
+<li>Rather than calling <code>pip</code> directly, use the following invocation:
+<code>PYTHONUSERBASE=$(ros2 pkg prefix py_venv) pip3 install --user --break-system-packages &lt;OTHER ARGS HERE&gt;</code></li>
+<li>The above command will override system packages, which could cause some ROS 2 packages to break. You may need to:
+<ol class="org-ol">
+<li>Use the <code>--no-deps</code> flags and add needed dependencies manually: this is a good way to go
+if you want to ensure most packages are from the system (e.g., ROS 2 compatible) and only unavailable ones
+are from <code>pip</code>.</li>
+<li>Specifically uninstall packages that conflict with <code>PYTHONUSERBASE=$(ros2 pkg prefix pyvenv) pip3 uninstall --break-system-packages &lt;UNINSTALL&gt;</code>
+<ul class="org-ul">
+<li>The goal is to find package versions that work with both ROS 2 and whatever package you are installing.</li>
+<li>For example, many pip packages use <code>numpy &gt; 2.0</code> by default, but ROS packages require <code>numpy &lt; 2</code></li>
+</ul></li>
+</ol></li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-virtual-environment-1-P-1" class="outline-2">
+<h2 id="virtual-environment-1-P-1">Virtual Environment</h2>
+<div class="outline-text-2" id="text-orgef24ba3">
+<ol class="org-ol">
+<li>With this method a virtual environment is created and sourced separately.</li>
+<li>Individual packages must opt-in to use the virtual environment in their <code>setup.cfg</code></li>
+<li>The virtual environment must be activated in addition to sourcing the workspace</li>
+</ol>
+</div>
+
+<div id="outline-container-steps-2-P-2" class="outline-3">
+<h3 id="steps-2-P-2">Steps</h3>
+<div class="outline-text-3" id="text-org58e87c5">
+<ol class="org-ol">
+<li><p>
+Any python package that uses virtual environments must have the following adding to the <code>setup.cfg</code>
+</p>
+<pre class="example">
+[build_scripts]
+executable = /usr/bin/env python3
+</pre></li>
+<li>Create the virtual environment: <code>python3 -m venv myvenv</code></li>
+<li>If the virtual environment is in a ROS 2 workspace: <code>touch myvenv/COLCON_IGNORE</code></li>
+<li>Activate the virtual environment: <code>source myvenv/bin/activate</code></li>
+<li>The packages that have had their <code>setup.cfg</code> modified will now use the virtual environment</li>
+<li>You will need to activate the virtual environment every time you want to use it, in addition to sourcing the <code>ros2 workspace</code></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>
