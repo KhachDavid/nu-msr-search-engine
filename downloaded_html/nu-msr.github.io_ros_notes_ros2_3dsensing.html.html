@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-11-14 Fri 11:41 -->
+<!-- 2025-11-17 Mon 10:19 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>3-D Sensing</title>
@@ -38,8 +38,12 @@
 <li><a href="#manipulating-point-clouds-1-P-1">Manipulating Point Clouds</a>
 <ul>
 <li><a href="#ros-2-P-1">ROS</a></li>
+<li><a href="#python-2-P-1">Python</a>
+<ul>
+<li><a href="#example-3-P-2">Example</a></li>
+</ul>
+</li>
 <li><a href="#c--2-P-1">C++</a></li>
-<li><a href="#python-2-P-1">Python</a></li>
 </ul>
 </li>
 <li><a href="#resources-1-P-2">Resources</a></li>
@@ -90,6 +94,7 @@ There are several methods for generating a depth image.
 </ol>
 </div>
 </div>
+
 <div id="outline-container-time-of-flight-2-P-1" class="outline-3">
 <h3 id="time-of-flight-2-P-1">Time of Flight</h3>
 <div class="outline-text-3" id="text-org4054f89">
@@ -109,9 +114,10 @@ There are several methods for generating a depth image.
 <ul class="org-ul">
 <li>A Point Cloud is a group of 3 dimensional coordinates (points) that
 constitute a discrete description of 3-dimensional objects.</li>
-<li>The <a href="https://pointclouds.org">point cloud library</a> contains routines for manipulating point clouds, from C++</li>
+<li>The <a href="https://www.open3d.org">Open3D</a> library enables processing pointclouds in both C++ and python.</li>
+<li>The <a href="https://pointclouds.org">point cloud library</a> contains routines for manipulating point clouds from C++</li>
 <li><a href="https://index.ros.org/p/perception_pcl/">perception_pcl</a> is a ros meta-package for point clouds.</li>
-<li><a href="https://index.ros.org/p/pcl_ros/">pcl_ros</a> Is used to convert between the point cloud library and ROS 2 data types</li>
+<li><a href="https://index.ros.org/p/pcl_ros/">pcl_ros</a> Is used to convert between the point cloud library and ROS 2 data types in C++</li>
 </ul>
 </div>
 
@@ -141,7 +147,7 @@ constitute a discrete description of 3-dimensional objects.</li>
 </ul></li>
 <li>Depth Cameras
 <ul class="org-ul">
-<li><a href="./realsense.html">Intel RealSense</a></li>
+<li><a href="./realsense.html">RealSense</a></li>
 </ul></li>
 </ul>
 </div>
@@ -162,7 +168,7 @@ There are several ways of manipulating point clouds in ROS.
 <ul class="org-ul">
 <li>You can access the message fields directly but the format is not the most intuitive</li>
 </ul></li>
-<li>The <a href="http://wiki.ros.org/pcl_ros">pcl_ros</a> package (Not fully in ROS 2) is the primary ROS package for manipulating pointclouds
+<li>The <a href="http://wiki.ros.org/pcl_ros">pcl_ros</a> package (Not fully in ROS 2) is a ROS package for manipulating pointclouds by setting up a pipeline of nodes
 <ul class="org-ul">
 <li>It includes several stand-alone filters that can be loaded as nodelets to perform common operations</li>
 </ul></li>
@@ -170,38 +176,40 @@ There are several ways of manipulating point clouds in ROS.
 </div>
 </div>
 
-<div id="outline-container-c--2-P-1" class="outline-3">
-<h3 id="c--2-P-1">C++</h3>
-<div class="outline-text-3" id="text-orgbd16cc9">
-<ul class="org-ul">
-<li><a href="https://github.com/ros-perception/perception_pcl/tree/ros2/pcl_conversions">pcl_conversions</a> package also lets you convert point cloud messages into C++ data types for use with the <a href="https://pointclouds.org">Point Cloud Library</a>
-<ul class="org-ul">
-<li>While this is the most common way of handling point clouds in ROS, it is also a C++ only way</li>
-</ul></li>
-<li>Unfortunately, the <a href="https://github.com/strawlab/python-pcl">python bindings</a> to the PointCloud Library are no longer maintained</li>
-</ul>
-</div>
-</div>
-
-
 <div id="outline-container-python-2-P-1" class="outline-3">
 <h3 id="python-2-P-1">Python</h3>
 <div class="outline-text-3" id="text-orgf03cb81">
 <ul class="org-ul">
-<li>The <a href="https://index.ros.org/p/sensor_msgs_py">sensor_msgs_py</a> package contains utilities for converting from PointCloud2 datatypes to numpy arrays</li>
-<li><p>
-For details:
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span class="org-keyword">from</span> sensor_msgs_py <span class="org-keyword">import</span> point_cloud2
-<span class="org-builtin">help</span>(point_cloud2)
-</pre>
-</div></li>
-<li>More details at <a href="https://pointclouds.org/">https://pointclouds.org/</a></li>
+<li>The <a href="https://index.ros.org/p/sensor_msgs_py">sensor_msgs_py</a> package contains utilities for converting from PointCloud2 messages to and from numpy arrays</li>
+<li>Once in a <code>numpy</code> array, <a href="https://www.open3d.org/docs/release/">Open3D</a> can be used to process the point clouds</li>
+<li>Follow the <a href="./howto/pip.html">Pip ROS 2 guide</a> To install Open3D for use with ROS workspaces: the package to install is called <code>open3d</code>.</li>
+</ul>
+</div>
+
+<div id="outline-container-example-3-P-2" class="outline-4">
+<h4 id="example-3-P-2">Example</h4>
+<div class="outline-text-4" id="text-orgf8af014">
+<ul class="org-ul">
+<li>The <a href="https://github.com/m-elwin/o3d_pointclouds">o3d_pointclouds</a> example provides sample code for processing pointclouds using ROS 2 and Open3D</li>
+<li>The launchfile assumes that the pointcloud is generated by the <a href="./realsense.html">RealSense</a> camera</li>
 </ul>
 </div>
 </div>
 </div>
+
+
+<div id="outline-container-c--2-P-1" class="outline-3">
+<h3 id="c--2-P-1">C++</h3>
+<div class="outline-text-3" id="text-orgbd16cc9">
+<ul class="org-ul">
+<li><a href="https://github.com/ros-perception/perception_pcl/tree/ros2/pcl_conversions">pcl_conversions</a> package converts point cloud messages into C++ data types for use with the <a href="https://pointclouds.org">Point Cloud Library</a></li>
+<li>The <a href="https://github.com/strawlab/python-pcl">python bindings</a> to the PointCloud Library are no longer maintained</li>
+<li>The <a href="https://www.open3d.org/docs/latest/cpp_api/">Open3D C++ API</a> can be used to manipulate point clouds in C++</li>
+</ul>
+</div>
+</div>
+</div>
+
 <div id="outline-container-resources-1-P-2" class="outline-2">
 <h2 id="resources-1-P-2">Resources</h2>
 <div class="outline-text-2" id="text-org37095dd">
