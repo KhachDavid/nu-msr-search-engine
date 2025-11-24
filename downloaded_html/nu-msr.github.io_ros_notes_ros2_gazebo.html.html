@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-11-17 Mon 10:19 -->
+<!-- 2025-11-24 Mon 12:06 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Simulation</title>
@@ -112,7 +112,7 @@ when the <code>install/setup.bash</code> is sourced.</li>
 </div>
 <div id="outline-container-from-the-command-line-2-P-1" class="outline-3">
 <h3 id="from-the-command-line-2-P-1">From the Command Line</h3>
-<div class="outline-text-3" id="text-org7babc25">
+<div class="outline-text-3" id="text-orga7c70e4">
 <ol class="org-ol">
 <li>Run gazebo with <code>ros2 launch ros_gz_sim gz_sim.launch.py</code>
 <ul class="org-ul">
@@ -133,9 +133,9 @@ when the <code>install/setup.bash</code> is sourced.</li>
 </div>
 <div id="outline-container-from-a-launch-file-2-P-1" class="outline-3">
 <h3 id="from-a-launch-file-2-P-1">From a Launch File</h3>
-<div class="outline-text-3" id="text-orgb0e8e04">
+<div class="outline-text-3" id="text-org542098c">
 <ol class="org-ol">
-<li>The server can be started with the <code>&lt;gz_server&gt;</code> action in an XML launchfile</li>
+<li>The server can be started with the <a href="https://gazebosim.org/docs/ionic/ros2_launch_gazebo/#using-a-custom-launch-file"><code>&lt;gz_server&gt;</code></a> action in an XML launchfile</li>
 <li>The <a href="https://github.com/gazebosim/ros_gz/blob/kilted/ros_gz_sim/ros_gz_sim/actions/gzserver.py">GzServer</a> action is used in a Python launchfile
 <ul class="org-ul">
 <li>The python <code>GzServer</code> class (the python Action) provides the code that parses the <code>&lt;gz_server&gt;</code> xml tag, so these two actions are equivalent</li>
@@ -144,11 +144,11 @@ when the <code>install/setup.bash</code> is sourced.</li>
 <ul class="org-ul">
 <li>This old method is no longer recommended.</li>
 </ul></li>
+<li>The <code>&lt;gz_server&gt;</code> only starts the server. To start the client execute <code>gz sim -g</code>.</li>
 </ol>
 </div>
 </div>
 </div>
-
 <div id="outline-container-package-layout-1-P-1" class="outline-2">
 <h2 id="package-layout-1-P-1">Package Layout</h2>
 <div class="outline-text-2" id="text-orga859b2a">
@@ -373,9 +373,9 @@ or from a <code>model_string</code> by using command substitution: <code>$(xacro
 
 <div id="outline-container-from-a-launch-file-2-P-2" class="outline-3">
 <h3 id="from-a-launch-file-2-P-2">From a Launch File</h3>
-<div class="outline-text-3" id="text-orga2cb522">
+<div class="outline-text-3" id="text-org1602be3">
 <ol class="org-ol">
-<li>The <code>&lt;gz_spawn_model&gt;</code> tag is used to spawn a robot from an XML launch file</li>
+<li>The <a href="https://gazebosim.org/docs/latest/ros2_spawn_model/#spawn-a-model-from-a-custom-launch-file"><code>&lt;gz_spawn_model&gt;</code></a> tag is used to spawn a robot from an XML launch file</li>
 <li>There is also <a href="https://github.com/gazebosim/ros_gz/blob/kilted/ros_gz_sim/ros_gz_sim/actions/gz_spawn_model.py">GzSpawnModel</a> for python launchfiles
 <ul class="org-ul">
 <li>If you inspect the above file, you can see that the Launch Action (coded in Python) is responsible for parsing the <code>XML</code> action, so the options and capabilities should be the same.</li>
@@ -405,7 +405,7 @@ or from a <code>model_string</code> by using command substitution: <code>$(xacro
 </div>
 <div id="outline-container-from-the-command-line-2-P-2" class="outline-3">
 <h3 id="from-the-command-line-2-P-2">From the Command Line</h3>
-<div class="outline-text-3" id="text-orgdb6ee43">
+<div class="outline-text-3" id="text-orgcd5b0d5">
 <ul class="org-ul">
 <li><code>ros2 run ros_gz_bridge parameter_bridge topic@ros_type@gz_type</code>
 <ul class="org-ul">
@@ -426,9 +426,9 @@ or from a <code>model_string</code> by using command substitution: <code>$(xacro
 </div>
 <div id="outline-container-from-a-launch-file-2-P-3" class="outline-3">
 <h3 id="from-a-launch-file-2-P-3">From a Launch File</h3>
-<div class="outline-text-3" id="text-org265dbf8">
+<div class="outline-text-3" id="text-orgeede183">
 <ol class="org-ol">
-<li>The <code>&lt;ros_gz_bridge&gt;</code> tag is used to spawn a robot from an XML launch file
+<li>The <a href="https://gazebosim.org/docs/latest/ros2_integration/#launching-the-bridge-using-the-launch-files-included-in-ros-gz-bridge-package"><code>&lt;ros_gz_bridge&gt;</code></a> tag is used to spawn a robot from an XML launch file
 <ul class="org-ul">
 <li>Using this tag is the preferred method. It also provides options to <code>use_composition</code>, enabling it to be automatically run in the same container as <code>gazebo</code>, which reduces communication overhead.</li>
 </ul></li>

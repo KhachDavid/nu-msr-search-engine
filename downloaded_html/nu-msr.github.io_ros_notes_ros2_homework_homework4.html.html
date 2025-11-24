@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-11-17 Mon 10:19 -->
+<!-- 2025-11-24 Mon 12:06 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Homework 4</title>
@@ -26,10 +26,15 @@
 <li><a href="#the-environment-1-P-1">The Environment</a></li>
 <li><a href="#navigation-stack-setup-1-P-1">Navigation Stack Setup</a>
 <ul>
-<li><a href="#a-launch-file-2-P-1">A Launch File</a></li>
+<li><a href="#a-launch-file-2-P-1">A Launch File</a>
+<ul>
+<li><a href="#important-3-P-1">Important</a></li>
+</ul>
+</li>
 <li><a href="#autonomous-exploration-2-P-1">Autonomous Exploration</a>
 <ul>
 <li><a href="#exploration-algorithm-3-P-1">Exploration Algorithm</a></li>
+<li><a href="#hints-3-P-3">Hints</a></li>
 </ul>
 </li>
 <li><a href="#readme-2-P-2">README</a></li>
@@ -65,8 +70,8 @@ you should turn-in, including information about your <code>README.md</code> file
 <div class="outline-text-2" id="text-org749586b">
 <ul class="org-ul">
 <li>Clone the package <a href="https://github.com/m-elwin/nubot">nubot</a>, which is a package that simulates a mobile robot with a lidar in Gazebo.</li>
-<li>Your repository will be next to <code>nubot</code> in the source space as well: e.g.(<code>ws/src/nubot</code> and <code>ws/src/homework4</code>).</li>
-<li>I purposely did not put a README.md in this package, so you will need to explore it to find out how it works.</li>
+<li>Your repository will be next to <code>nubot</code> in the source space: e.g.(<code>ws/src/nubot</code> and <code>ws/src/homework4</code>).</li>
+<li>I purposely did not put a README.md in <code>nubot</code>, so you will need to explore it to find out how it works.</li>
 <li>HINT: There is one launchfile that runs the simulation and visualizes it in rviz.</li>
 <li>HINT: There are two worlds to use, either will be accepted for the assignment but one is significantly smaller (and hence easier to explore).</li>
 </ul>
@@ -77,19 +82,21 @@ you should turn-in, including information about your <code>README.md</code> file
 <h2 id="navigation-stack-setup-1-P-1">Navigation Stack Setup</h2>
 <div class="outline-text-2" id="text-org4a6f70d">
 <ul class="org-ul">
-<li>Going through the <a href="https://docs.nav2.org/setup_guides/index.html">First Time Setup Guide</a> (through setting up the robot's footpring) will help you understand how the
-Nav2 stack works, and be helpful for this homework.</li>
+<li>Going through the <a href="https://docs.nav2.org/setup_guides/index.html">First Time Setup Guide</a> (through setting up the robot's footprint) will help you understand how the
+Nav2 stack works, and may be a helpful reference while completing this assignment.</li>
 <li>Much of the setup, however, is already done for you in <code>nubot</code>.</li>
 <li>By running the launch file in the <code>nubot</code> package you will be able to see what features required by the <code>nav_stack</code> are already implemented.</li>
 </ul>
 </div>
+
+
 
 <div id="outline-container-a-launch-file-2-P-1" class="outline-3">
 <h3 id="a-launch-file-2-P-1">A Launch File</h3>
 <div class="outline-text-3" id="text-org3207532">
 <ul class="org-ul">
 <li>Your package will be called <code>nubot_nav</code></li>
-<li>In <code>nubot_nav</code>, write a launch file called <code>manual_explore.launch.xml</code> (or you can use a <code>python</code> launch file).
+<li>In <code>nubot_nav</code>, write a launch file called <code>manual_explore.launch.xml</code> that:
 <ul class="org-ul">
 <li>Starts the <code>nubot</code> simulation.</li>
 <li>Starts <code>slam_toolbox</code> in <code>async</code> mode.</li>
@@ -98,7 +105,7 @@ Nav2 stack works, and be helpful for this homework.</li>
 <li>Make sure to set a parameter to increase the footprint of the robot so that it encompasses the whole robot</li>
 <li>You may use a circular approximation of the robot</li>
 </ul></li>
-<li>Starts <code>rviz</code> and displays
+<li>Starts <code>rviz</code> and displays:
 <ul class="org-ul">
 <li>The robot relative to the <code>/map</code> frame</li>
 <li>The global costmap</li>
@@ -113,6 +120,18 @@ Nav2 stack works, and be helpful for this homework.</li>
 <li>HINT: You must enable simulation time when using the launchfiles to start navigation and SLAM</li>
 </ul>
 </div>
+
+<div id="outline-container-important-3-P-1" class="outline-4">
+<h4 id="important-3-P-1">Important</h4>
+<div class="outline-text-4" id="text-org2caff04">
+<ul class="org-ul">
+<li>In ROS 2 kilted as of v1.4.2, the <code>nav2_bringup</code> package's default <code>nav2_params.yaml</code> file has invalid parameters.</li>
+<li>Use <code>ros2 launch nav2_bringup navigation_launch.py --show-args</code> to find the location of this launchfile,
+copy it into your own package, and modify all values that end in <code>_ZONE_ENABLED</code> to be false.</li>
+<li>When using <code>nav2_bringup navigation_launch.py</code> in your own launchfiles, make sure to set the argument so it uses your custom configuration.</li>
+</ul>
+</div>
+</div>
 </div>
 
 <div id="outline-container-autonomous-exploration-2-P-1" class="outline-3">
@@ -120,7 +139,7 @@ Nav2 stack works, and be helpful for this homework.</li>
 <div class="outline-text-3" id="text-org6827124">
 <ul class="org-ul">
 <li>Write a node called <code>explore</code> that causes the robot to explore the environment autonomously while mapping the world.</li>
-<li>The launchfile called <code>explore.launch.py</code> (or <code>.xml</code>) should start all the nodes necessary to allow the robot to explore and map its environment
+<li>The launchfile called <code>explore.launch.xml</code> should start all the nodes necessary to allow the robot to explore and map its environment
 <ul class="org-ul">
 <li>This launchfile should include <code>manual_explore.launch.xml</code> and then start the <code>explore</code> node.</li>
 </ul></li>
@@ -133,21 +152,39 @@ Nav2 stack works, and be helpful for this homework.</li>
 <h4 id="exploration-algorithm-3-P-1">Exploration Algorithm</h4>
 <div class="outline-text-4" id="text-org1ba84ad">
 <p>
-You can use any algorithm you want, but it should be described or cited in your <code>README.md</code>.
+There are two choices for exploration algorithm:
 </p>
+<ol class="org-ol">
+<li><a href="https://ieeexplore.ieee.org/document/613851">Frontier Exploration.</a>
+<ul class="org-ul">
+<li>See <a href="http://web.archive.org/robotfrontier.com/frontier/index.html">Robot Frontier</a> for a friendly description, in particular <a href="http://web.archive.org/robotfrontier.com/frontier/detect.html">Detecting Frontiers</a></li>
+<li>This is the most established method and most difficult to implement.</li>
+<li>Students who successfully complete this method will receive extra credit</li>
+</ul></li>
+
+<li>Random exploration: some variation of the following algorithm:
+<ul class="org-ul">
+<li>Choose a random waypoint</li>
+<li>Travel to the waypoint</li>
+<li>Repeat</li>
+</ul></li>
+
+<li>An algorithm of your choice:
 <ul class="org-ul">
 <li>The exploration does not need to be complete, perfect, or optimal, but it should be generic (so no hardcoding locations that work for this particular room).</li>
-<li><p>
-The algorithm will ideally enable the robot to explore at least two "rooms" in the environment
-</p>
-<ul class="org-ul">
-<li>A well-known strategy is called <a href="https://ieeexplore.ieee.org/document/613851">Frontier Exploration.</a></li>
-<li>See <a href="http://web.archive.org/robotfrontier.com/frontier/index.html">Robot Frontier</a> for a friendly description, in particular <a href="http://web.archive.org/robotfrontier.com/frontier/detect.html">Detecting Frontiers</a></li>
-</ul>
-<ul class="org-ul">
-<li>You can subscribe to the <code>/map</code> topic output by slam_toolbox to get information about the map</li>
+<li>The algorithm should be described or cited in the <code>README.md</code></li>
+<li>Extra credit may be received (at my sole discretion) based on whether it is qualitatively closer (in terms of effectiveness) to Frontier Exploration or Random Exploration.</li>
 </ul></li>
-</ul>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-hints-3-P-3" class="outline-4">
+<h4 id="hints-3-P-3">Hints</h4>
+<div class="outline-text-4" id="text-orgf61cd96">
+<ol class="org-ol">
+<li>Subscribe to the <code>/map</code> topic to get information about the map</li>
+</ol>
 </div>
 </div>
 </div>
@@ -157,9 +194,10 @@ The algorithm will ideally enable the robot to explore at least two "rooms" in t
 <h3 id="readme-2-P-2">README</h3>
 <div class="outline-text-3" id="text-org731e2f1">
 <ul class="org-ul">
-<li>The <code>README.md</code> should contain your name, and a description or reference to the exploration algorithm used (the reference should be properly cited in <code>citations.txt</code>.</li>
-<li>It should also have the <code>ros2 launch</code> commands needed to run the manual and autonomous exploration</li>
+<li>The <code>README.md</code> should contain your name, and a brief project description.</li>
+<li>It should also describe the <code>ros2 launch</code> commands needed to run the manual and autonomous exploration</li>
 <li>It should embed both of the required videos directly in the README so that they can viewed on <code>github</code></li>
+<li>It should clearly indicate which exploration algorithm you chose to implement and (if applicable) a high-level description of the algorithm.</li>
 </ul>
 </div>
 </div>
