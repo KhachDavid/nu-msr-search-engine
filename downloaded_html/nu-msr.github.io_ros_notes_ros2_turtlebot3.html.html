@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2025-11-24 Mon 12:06 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TurtleBot3</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">TurtleBot3</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#overview-1-P-8">Overview</a></li>
+<li><a href="#powering-the-turtlebot-1-P-1">Powering the Turtlebot</a></li>
+<li><a href="#connecting-to-the-turtlebot-1-P-1">Connecting to the TurtleBot</a></li>
+<li><a href="#running-nodes-1-P-1">Running Nodes</a></li>
+<li><a href="#cross-compilation-1-P-1">Cross Compilation</a>
+<ul>
+<li><a href="#cross-compilation">Cross-Compilation Docker Container</a></li>
+</ul>
+</li>
+<li><a href="#deployment-1-P-1">Deployment</a></li>
+<li><a href="#remote-debugging-1-P-1">Remote Debugging</a></li>
+<li><a href="#resources-1-P-5">Resources</a></li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-overview-1-P-8" class="outline-2">
+<h2 id="overview-1-P-8">Overview</h2>
+<div class="outline-text-2" id="text-org79ad35e">
+<p>
+The <a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/">turtlebot3</a> is a small mobile robot with a 2-D Lidar Sensor.
+These instructions describe Northwestern's variant of the software, which has been modified for easy deployment on our networks
+and to allow low-level access to the motors through ROS 2.
+</p>
+
+<p>
+However, most of the content of the reference manual still applies.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-powering-the-turtlebot-1-P-1" class="outline-2">
+<h2 id="powering-the-turtlebot-1-P-1">Powering the Turtlebot</h2>
+<div class="outline-text-2" id="text-org0b1e238">
+<ol class="org-ol">
+<li>The Turtlebot can be powered from a battery, or directly from the wall charger, which gets plugged into the OpenCR board
+<ul class="org-ul">
+<li><b>IMPORTANT</b> Always make sure the battery is unplugged prior to powering from the wall charger</li>
+<li><b>IMPORTANT</b> Never have the battery and wall charger powering the robot simultaneously</li>
+</ul></li>
+<li>When the battery voltage drops below a threshold, the turtlebot will issue a low-battery warning sound
+<ul class="org-ul">
+<li><b>IMPORTANT</b> When the battery voltage is low, stop using the turtlebot and charge the battery.  Otherwise
+you can permanently damage the battery.</li>
+</ul></li>
+<li>Do not use the PincherX 100 power brick with the turtlebot3!
+<ul class="org-ul">
+<li>It has the same plug but is rated for significantly less power.</li>
+</ul></li>
+<li>I like to test most of the software with the turtlebot3 powered from the wall and up on a block so that the wheels don't touch the ground.
+<ul class="org-ul">
+<li>This method increases development speed because charging the batteries or chasing the turtlebot3 around the room both take time.</li>
+<li>However, the odometry of the <code>stock</code> turtlebot3 depends solely on the IMU, therefore if it is up on blocks and you
+turn, the odometry will be incorrect.
+<ul class="org-ul">
+<li>In my opinion this is an odd choice but I have not done experiments comparing its accuracy with wheel odometry</li>
+<li>If using the <code>nuturtlebot</code> firmware (e.g., those in ME495 Sensing Navigation and Machine Learning for Robotics) then odometry relies on encoders.</li>
+</ul></li>
+</ul></li>
+<li>sudo access
+<ul class="org-ul">
+<li>You have <code>sudo</code> access just in case, but nothing you are doing should require it.</li>
+<li>Please do not use sudo unless explicitly instructed.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-connecting-to-the-turtlebot-1-P-1" class="outline-2">
+<h2 id="connecting-to-the-turtlebot-1-P-1">Connecting to the TurtleBot</h2>
+<div class="outline-text-2" id="text-orgc16b69d">
+<ol class="org-ol">
+<li>Connect to the NUMSR wifi network</li>
+<li>Set your <code>ROS_DOMAIN_ID</code> as assigned so you don't see everybody else's nodes.</li>
+<li><code>ssh -oSendEnv=ROS_DOMAIN_ID msr@turtlebot</code></li>
+<li>You can use <code>ssh-copy-id msr@turtlebot</code> to load your ssh key so you don't need a password.</li>
+<li>You should hear the MSR jingle when turning on the turtlebot: if not run <code>opencr_install_firmware</code></li>
+</ol>
+</div>
+</div>
+
+
+
+
+
+<div id="outline-container-running-nodes-1-P-1" class="outline-2">
+<h2 id="running-nodes-1-P-1">Running Nodes</h2>
+<div class="outline-text-2" id="text-org2cb639a">
+<ol class="org-ol">
+<li>To run the MSR-specific code, providing low-level access to the turtlebot, run the following command while ssh'd into the turtlebot:
+<code>ros2 run numsr_turtlebot numsr_turtlebot</code></li>
+<li>The code for this package is at <a href="https://github.com/NU-MSR/numsr_turtlebot">https://github.com/NU-MSR/numsr_turtlebot</a></li>
+<li>It relies on messages in <a href="https://github.com/NU-MSR/numsr_msgs">https://github.com/NU-MSR/numsr_msgs</a></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-cross-compilation-1-P-1" class="outline-2">
+<h2 id="cross-compilation-1-P-1">Cross Compilation</h2>
+<div class="outline-text-2" id="text-org1579ff8">
+<ol class="org-ol">
+<li>Technically you could develop all your code on the Raspberry Pi 3, but doing this would be extremely slow and frustrating.
+<ul class="org-ul">
+<li>It is easy to run out of RAM during compilation, for example.</li>
+</ul></li>
+<li>Instead we will adopt a workflow whereby all development (including compilation) is performed on your computer and then
+transferred to the <code>turtlebot3</code>.</li>
+<li>Using a compiler on one system to generate code for another system is called <i>cross compilation</i>.
+<ul class="org-ul">
+<li>In our case we are running on <code>amd64</code> (sometimes called <code>x64) to =aarch64</code> (<code>64 bit arm, sometimes referred to as =arm64</code>).
+<ul class="org-ul">
+<li>These processors have completely different machine language instructions and are incompatible: therefore they require different compilers.</li>
+</ul></li>
+<li>Not only must our own code be compiled for <code>aarch64</code>, but also any libraries that our code uses must also be compiled for the target platform.
+<ul class="org-ul">
+<li>Libraries greatly complicate cross-compilation, as our host systems usually only have libraries for our own architecture and
+it can be difficult to obtain and link against non-native libraries.</li>
+<li>Despite some support from <code>Ubuntu</code>, there are inevitable conflicts and problems.</li>
+</ul></li>
+</ul></li>
+</ol>
+</div>
+<div id="outline-container-cross-compilation" class="outline-3">
+<h3 id="cross-compilation">Cross-Compilation Docker Container</h3>
+<div class="outline-text-3" id="text-cross-compilation">
+<ol class="org-ol">
+<li>I've created a <a href="https://docker.com">docker container</a> with the necessary libraries and setup for cross compilation.</li>
+<li>The container is derived from the container I use to build the custom Raspberry Pi disk image and therefore has
+all the libraries that are available on the turtlebot</li>
+<li>To use, install docker <code>sudo apt install docker.io</code>.</li>
+<li>Next, in your ROS workspace, run <code>sudo docker run reem17/rosberrypi-xcompile:iron &gt; aarch64  &amp;&amp; chmod 755 aarch64</code>
+<ul class="org-ul">
+<li>This command downloads the docker image, runs the docker container, and outputs a script (<code>aarch64</code>) that makes future uses easier.</li>
+</ul></li>
+</ol>
+<p>
+3 In your ROS workspace run <code>./aarch64 colcon_aarch64</code> to cross-compile the workspace for <code>aarch64</code>.
+</p>
+<ul class="org-ul">
+<li>The build and install spaces are all called <code>aarch64_build</code> and <code>aarch64_install</code></li>
+<li><code>./aarch64</code> essentially just calls a command inside the docker container.</li>
+<li>Use <code>./aarch64 bash</code> to get a bash prompt and explore the container, for example</li>
+<li><code>colcon_aarch64</code> is a script that runs <code>colcon build</code> but prefixes the <code>build</code> and <code>install</code> spaces with <code>aarch64</code> and uses the cross-compiler.</li>
+</ul>
+<ol class="org-ol">
+<li>If you are curious, all the docker images and code used to generate this environment is <a href="https://github.com/m-elwin/rosberrypi">available</a>.</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-deployment-1-P-1" class="outline-2">
+<h2 id="deployment-1-P-1">Deployment</h2>
+<div class="outline-text-2" id="text-orgfc11430">
+<ul class="org-ul">
+<li>To run the nodes they must be present on the remote computer</li>
+<li>Use <code>rsync</code> to copy the <code>install</code> space to the turtlebot:  <code>rsync -av --delete aarch64_install/ msr@leonardo:/home/msr/install</code>
+<ul class="org-ul">
+<li>This command makes <code>turtlebot:/home/msr/install</code> contain the same exact files as <code>yourcomputer:/path/to/ros/ws/arm_install</code></li>
+<li>BE CAREFUL! The trailing <code>/</code> and (lack thereof) are both crucial.</li>
+</ul></li>
+<li>Cross-compilation only applies to compiled programs (like C++). Python nodes can be run directly on the raspberry pi, for example (as long as you copy the code).</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-remote-debugging-1-P-1" class="outline-2">
+<h2 id="remote-debugging-1-P-1">Remote Debugging</h2>
+<div class="outline-text-2" id="text-org0e6c53d">
+<p>
+Because we are only copying the install space to the <code>raspberry pi</code> and because the <code>raspberry pi</code> is so slow, it makes sense, for debugging,
+to run the debugger on our host computer.  To do this, the following commands work (after installing <code>gdb-multiarch</code> on your host machine)
+</p>
+<ol class="org-ol">
+<li>Mount the <code>raspberry pi</code>'s disk image to <code>/mnt/raspberrypi/</code>
+<ul class="org-ul">
+<li><code>sudo losetup -Pf turtle_img</code></li>
+<li>This will  output the name of a loop device <code>loopX</code></li>
+<li><code>sudo mount /dev/loopXp2 /mnt/raspberrypi</code></li>
+<li>The <code>/mnt/raspberrypi</code> directory must exist for this to work.  You can use any directory that you want</li>
+</ul></li>
+<li>On raspberry pi
+<code>gdbserver host:2345 &lt;executable&gt;</code>,
+ where &lt;executable&gt; is the name of the file you wish to run</li>
+<li>On your pc:
+<code>gdb-multiarch file</code>
+<code>set debug-file-directory /mnt/raspberrypi/usr/lib/debug</code>
+<code>set sysroot=/mnt/raspberrypi</code>
+<code>target extended-remote turtlebotX:2345</code>
+To kill the remote server:
+<code>monitor exit</code></li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-resources-1-P-5" class="outline-2">
+<h2 id="resources-1-P-5">Resources</h2>
+<div class="outline-text-2" id="text-orgce884bf">
+<ul class="org-ul">
+<li><a href="http://emanual.robotis.com/docs/en/platform/turtlebot3/overview/">Main turtlebot documentation</a></li>
+<li><a href="http://github.com/m-elwin/rosberrypi">rosberrypi</a>
+<ul class="org-ul">
+<li>Contains the scripts used to create the full turtlebot image and also the cross-compilation docker container</li>
+</ul></li>
+<li>Code for the numsr node is at <a href="https://github.com/NU-MSR/numsr_turtlebot">https://github.com/NU-MSR/numsr_turtlebot</a></li>
+<li>Custom numsr ROS messages: <a href="https://github.com/NU-MSR/numsr_msgs">https://github.com/NU-MSR/numsr_msgs</a> (TODO, put numsr_turtlebot and numsr_msgs in same git repository).</li>
+<li>Custom numsr firmware: <a href="https://github.com/NU-MSR/opencr">OpenCr</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>
