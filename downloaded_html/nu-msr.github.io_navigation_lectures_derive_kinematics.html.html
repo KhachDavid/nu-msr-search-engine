@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-12-18 Thu 11:29 -->
+<!-- 2026-01-05 Mon 23:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Kinematics for Wheeled Mobile Robots</title>
@@ -53,7 +53,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#overview-1-P-6">Overview</a></li>
+<li><a href="#overview-1-P-8">Overview</a></li>
 <li><a href="#wheeled-mobile-robots-1-P-1">Wheeled Mobile Robots</a>
 <ul>
 <li><a href="#kinematics-derivation-summary-2-P-1">Kinematics Derivation Summary</a></li>
@@ -105,18 +105,17 @@
 </ul>
 </div>
 </nav>
-<div id="outline-container-overview-1-P-6" class="outline-2">
-<h2 id="overview-1-P-6">Overview</h2>
-<div class="outline-text-2" id="text-orgaec5a84">
+<div id="outline-container-overview-1-P-8" class="outline-2">
+<h2 id="overview-1-P-8">Overview</h2>
+<div class="outline-text-2" id="text-orge3de636">
 <p>
 A practical approach to deriving kinematics for wheeled robots.
 </p>
 </div>
 </div>
-
 <div id="outline-container-wheeled-mobile-robots-1-P-1" class="outline-2">
 <h2 id="wheeled-mobile-robots-1-P-1">Wheeled Mobile Robots</h2>
-<div class="outline-text-2" id="text-orgc3ba046">
+<div class="outline-text-2" id="text-org30e5897">
 <p>
 The kinematics of wheeled mobile robots describes the relationship between how the wheels move
 and how the robot moves, under some simplifying assumptions. Here, we assume:
@@ -144,10 +143,9 @@ By dividing the problem into these two steps, we can create a procedure for deri
 regardless of the types or configurations of the wheels.
 </p>
 </div>
-
 <div id="outline-container-kinematics-derivation-summary-2-P-1" class="outline-3">
 <h3 id="kinematics-derivation-summary-2-P-1">Kinematics Derivation Summary</h3>
-<div class="outline-text-3" id="text-org46b4b56">
+<div class="outline-text-3" id="text-org7683e51">
 <p>
 Overall, the procedure has the following steps:
 </p>
@@ -163,7 +161,7 @@ Overall, the procedure has the following steps:
 </div>
 <div id="outline-container-notation-3-P-1" class="outline-4">
 <h4 id="notation-3-P-1">Notation</h4>
-<div class="outline-text-4" id="text-org2b6d515">
+<div class="outline-text-4" id="text-orga8a7deb">
 <ol class="org-ol">
 <li>A transformation matrix converting vectors in frame \(\{j\}\) to vectors in frame \(\{i\}\) is written as \(T_{ij}(\theta, x, y)\)
 <ul class="org-ul">
@@ -177,8 +175,8 @@ Overall, the procedure has the following steps:
 </div>
 </div>
 </div>
-<details id="org76a7ad5"><summary class="header-3">Review of Transforms and Adjoints in 2D</summary>
-<div class="outline-text-3" id="text-org76a7ad5">
+<details id="orgbce7602"><summary class="header-3">Review of Transforms and Adjoints in 2D</summary>
+<div class="outline-text-3" id="text-orgbce7602">
 <p>
 A 2D transformation matrix, which can perform rotations and translations
 </p>
@@ -236,10 +234,9 @@ x\cos\theta+y\sin\theta & -\sin\theta & \cos\theta
 </div>
 </details>
 </div>
-
 <div id="outline-container-transforms-between-body-and-wheels-1-P-1" class="outline-2">
 <h2 id="transforms-between-body-and-wheels-1-P-1">Transforms Between Body and Wheels</h2>
-<div class="outline-text-2" id="text-org74586f0">
+<div class="outline-text-2" id="text-org58d7272">
 <p>
 The first step in the process is to find all the transforms and adjoints between
 the body frame and frames located at each wheel.
@@ -247,9 +244,9 @@ the body frame and frames located at each wheel.
 </div>
 <div id="outline-container-example-four-wheel-car-2-P-1" class="outline-3">
 <h3 id="example-four-wheel-car-2-P-1">Example: Four Wheel Car</h3>
-<div class="outline-text-3" id="text-orgc7de12d">
+<div class="outline-text-3" id="text-org9529d2d">
 
-<figure id="org5ad6320">
+<figure id="org3ff1c7b">
 <img src="../images/four_wheel_car.svg" alt="four_wheel_car.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 1: </span>A Car With Four Wheels</figcaption>
@@ -335,11 +332,9 @@ A_{4b} &=
 </div>
 </div>
 </div>
-
-
 <div id="outline-container-body-twist-in-the-wheel-frames-1-P-1" class="outline-2">
 <h2 id="body-twist-in-the-wheel-frames-1-P-1">Body Twist in the Wheel Frames</h2>
-<div class="outline-text-2" id="text-org45ede73">
+<div class="outline-text-2" id="text-org4beb042">
 <p>
 Let \(V_b = \begin{bmatrix}\dot{\theta} \\ v_x \\ v_y \end{bmatrix}\)  be the body frame twist.
 Let \(V_i = \begin{bmatrix}\dot{\theta} \\ v_{xi} \\ v_{yi}\end{bmatrix}\) be the twist in the frame at wheel \(i\).
@@ -354,14 +349,13 @@ These equations map the body twist to the velocities at each wheel,
 and thus tell you how the wheels must move in order to achieve a desired body twist.
 </p>
 </div>
-
 <div id="outline-container-example-four-wheel-car-2-P-2" class="outline-3">
 <h3 id="example-four-wheel-car-2-P-2">Example: Four Wheel Car</h3>
 <div class="outline-text-3" id="text-example-four-wheel-car-2-P-2">
 </div>
 <div id="outline-container-wheel-1-3-P-1" class="outline-4">
 <h4 id="wheel-1-3-P-1">Wheel 1</h4>
-<div class="outline-text-4" id="text-orgf113765">
+<div class="outline-text-4" id="text-org42d2f8c">
 \begin{align}
 V_1 &= A_{1b}V_b \\
 \begin{bmatrix}
@@ -389,10 +383,9 @@ L\dot{\theta} + v_y
 \end{align}
 </div>
 </div>
-
 <div id="outline-container-wheel-2-3-P-1" class="outline-4">
 <h4 id="wheel-2-3-P-1">Wheel 2</h4>
-<div class="outline-text-4" id="text-org72daec8">
+<div class="outline-text-4" id="text-org1c821f4">
 \begin{align}
 V_2 &= A_{2b}V_b \\
 \begin{bmatrix}
@@ -420,10 +413,9 @@ L\dot{\theta}+v_y
 \end{align}
 </div>
 </div>
-
 <div id="outline-container-wheel-3-3-P-1" class="outline-4">
 <h4 id="wheel-3-3-P-1">Wheel 3</h4>
-<div class="outline-text-4" id="text-org8d40198">
+<div class="outline-text-4" id="text-orgdee425b">
 \begin{align}
 V_3 &= A_{3b}V_b \\
 \begin{bmatrix}
@@ -451,10 +443,9 @@ D\dot{\theta}+v_x\\
 \end{align}
 </div>
 </div>
-
 <div id="outline-container-wheel-4-3-P-1" class="outline-4">
 <h4 id="wheel-4-3-P-1">Wheel 4</h4>
-<div class="outline-text-4" id="text-orgd080a04">
+<div class="outline-text-4" id="text-orge268e30">
 \begin{align}
 V_4 &= A_{4b}V_b \\
 \begin{bmatrix}
@@ -484,11 +475,9 @@ v_y
 </div>
 </div>
 </div>
-
-
 <div id="outline-container-types-of-wheels-1-P-1" class="outline-2">
 <h2 id="types-of-wheels-1-P-1">Types of Wheels</h2>
-<div class="outline-text-2" id="text-orgadd98d5">
+<div class="outline-text-2" id="text-orgde6a00d">
 <p>
 Wheels determine how the robot interacts with the ground.
 Each wheel type has controls and constraints.
@@ -506,10 +495,9 @@ the wheel variables we determine
 <li>What twists are achievable and what are unobtainable</li>
 </ol>
 </div>
-
 <div id="outline-container-conventional-wheel-2-P-1" class="outline-3">
 <h3 id="conventional-wheel-2-P-1">Conventional Wheel</h3>
-<div class="outline-text-3" id="text-org4b78fcb">
+<div class="outline-text-3" id="text-org047e9f8">
 <p>
 A conventional wheel rotates about an axle, which causes it to move along the ground.
 </p>
@@ -537,17 +525,16 @@ reveals that the \(x\) distance traveled over this period is equivalent to the w
 </ul>
 </div>
 </div>
-
 <div id="outline-container-mecanum-and-omni-wheels-2-P-1" class="outline-3">
 <h3 id="mecanum-and-omni-wheels-2-P-1">Mecanum and Omni Wheels</h3>
-<div class="outline-text-3" id="text-orge94bfe7">
+<div class="outline-text-3" id="text-orgfb7b3c1">
 <p>
 A mecanum wheel is driven via rotation along its \(y\) axis and it slides along a vector
 offset from its \(y\) axis by some angle \(\gamma\) (see figure below)
 </p>
 
 
-<figure id="orge51d92d">
+<figure id="org12ef262">
 <img src="../images/mecanum.svg" alt="mecanum.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 2: </span>Top-Down view of a Mecanum/Omni Wheel (it is omni when \(\gamma = 0\)).</figcaption>
@@ -581,9 +568,8 @@ v_{si}\cos\gamma
 </ul>
 </div>
 </div>
-
-<details id="orgd6200bf"><summary class="header-3">Steered Wheel</summary>
-<div class="outline-text-3" id="text-orgd6200bf">
+<details id="org04734d5"><summary class="header-3">Steered Wheel</summary>
+<div class="outline-text-3" id="text-org04734d5">
 <p>
 A steered wheel is a conventional wheel whose angle relative to the chassis, \(\psi_i\), can change. 
 The wheel rolls without slipping along a vector in the \(\psi_i\) direction.
@@ -607,10 +593,9 @@ in a car with two front wheels being steered, the angle of the left and right wh
 is related by a constraint (often implemented as a mechanical linkage).
 </p>
 </div>
-
 <div id="outline-container-additional-constraints-3-P-1" class="outline-4">
 <h4 id="additional-constraints-3-P-1">Additional Constraints</h4>
-<div class="outline-text-4" id="text-org3e83d61">
+<div class="outline-text-4" id="text-org74dec1f">
 <ul class="org-ul">
 <li>Additional constraints can be added, for example we can necessitate that two wheels  have some relationship to each other</li>
 </ul>
@@ -618,10 +603,9 @@ is related by a constraint (often implemented as a mechanical linkage).
 </div>
 </details>
 </div>
-
 <div id="outline-container-car-with-four-mecanum-wheels-1-P-1" class="outline-2">
 <h2 id="car-with-four-mecanum-wheels-1-P-1">Car with Four Mecanum Wheels</h2>
-<div class="outline-text-2" id="text-orgfab51a1">
+<div class="outline-text-2" id="text-org3db419f">
 <p>
 After solving for the body twist in the wheel frames, the next steps are to substitute the wheel equations into the equations relating
 the body twist to the wheel-frame twist and then solve for the inverse kinematics.
@@ -636,14 +620,13 @@ The next step is to substitute the mecanum wheel equations into the equations fo
 and solve for \(\dot{\phi}_i\) and \(v_{si}\) in terms of the body twist \(\begin{bmatrix}\dot{\theta}\\ v_x \\ v_y\end{bmatrix}\), 
 </p>
 </div>
-
 <div id="outline-container-body-twist-to-wheel-motion-2-P-1" class="outline-3">
 <h3 id="body-twist-to-wheel-motion-2-P-1">Body Twist to Wheel Motion</h3>
 <div class="outline-text-3" id="text-body-twist-to-wheel-motion-2-P-1">
 </div>
 <div id="outline-container-wheel-1-3-P-2" class="outline-4">
 <h4 id="wheel-1-3-P-2">Wheel 1</h4>
-<div class="outline-text-4" id="text-org3a4ce77">
+<div class="outline-text-4" id="text-org7ba8182">
 <p>
 This wheel has a roller angle of \(\gamma = -\frac{\pi}{4}\)
 </p>
@@ -678,10 +661,9 @@ v_y
 \end{align}
 </div>
 </div>
-
 <div id="outline-container-wheel-2-3-P-2" class="outline-4">
 <h4 id="wheel-2-3-P-2">Wheel 2</h4>
-<div class="outline-text-4" id="text-org06fef75">
+<div class="outline-text-4" id="text-orgccd362b">
 <p>
 This wheel has a roller angle of \(\gamma = \frac{\pi}{4}\)
 </p>
@@ -716,10 +698,9 @@ v_y
 \end{align}
 </div>
 </div>
-
 <div id="outline-container-wheel-3-3-P-2" class="outline-4">
 <h4 id="wheel-3-3-P-2">Wheel 3</h4>
-<div class="outline-text-4" id="text-org549fd0d">
+<div class="outline-text-4" id="text-org296192b">
 <p>
 This wheel has a roller angle of \(\gamma = \frac{-\pi}{4}\)
 </p>
@@ -753,10 +734,9 @@ v_y
 \end{align}
 </div>
 </div>
-
 <div id="outline-container-wheel-4-3-P-2" class="outline-4">
 <h4 id="wheel-4-3-P-2">Wheel 4</h4>
-<div class="outline-text-4" id="text-orgdb418ed">
+<div class="outline-text-4" id="text-org47e8f16">
 <p>
 This wheel has a roller angle of \(\gamma = \frac{\pi}{4}\)
 </p>
@@ -791,10 +771,9 @@ v_y
 </div>
 </div>
 </div>
-
 <div id="outline-container-inverse-kinematics-2-P-1" class="outline-3">
 <h3 id="inverse-kinematics-2-P-1">Inverse Kinematics</h3>
-<div class="outline-text-3" id="text-org3e7cde4">
+<div class="outline-text-3" id="text-org70d07b9">
 <p>
 Now that we have the relationship between the body twist and the velocity of the body in each wheel frame, we can now gather everything
 into a single equation:
@@ -830,10 +809,9 @@ applied to the body of the robot.
 </p>
 </div>
 </div>
-
 <div id="outline-container-controls-2-P-1" class="outline-3">
 <h3 id="controls-2-P-1">Controls</h3>
-<div class="outline-text-3" id="text-orgd3c079a">
+<div class="outline-text-3" id="text-orga4f9183">
 <p>
 Assume we control the rotation but not the sliding of each wheel, by letting \(\dot{\phi}_i = u_i\).
 We can then partition the motion equation into two parts: one for control the other for sliding:
@@ -908,7 +886,6 @@ would be unachievable by setting the wheel velocities.</li>
 </div>
 </div>
 </div>
-
 <div id="outline-container-car-with-four-conventional-wheels-1-P-1" class="outline-2">
 <h2 id="car-with-four-conventional-wheels-1-P-1">Car with Four Conventional Wheels</h2>
 <div class="outline-text-2" id="text-car-with-four-conventional-wheels-1-P-1">
@@ -919,7 +896,7 @@ would be unachievable by setting the wheel velocities.</li>
 </div>
 <div id="outline-container-wheel-1-3-P-3" class="outline-4">
 <h4 id="wheel-1-3-P-3">Wheel 1</h4>
-<div class="outline-text-4" id="text-org01bb715">
+<div class="outline-text-4" id="text-orgea4362c">
 \begin{align}
 \begin{bmatrix}
 \dot{\theta} \\
@@ -960,10 +937,9 @@ The other wheels are similar.
 </div>
 </div>
 </div>
-
 <div id="outline-container-inverse-kinematics-2-P-2" class="outline-3">
 <h3 id="inverse-kinematics-2-P-2">Inverse Kinematics</h3>
-<div class="outline-text-3" id="text-orgc1bfdde">
+<div class="outline-text-3" id="text-org1d820e4">
 <p>
 The kinematic equations are now 
 </p>
@@ -1024,11 +1000,9 @@ In other words, it is not possible for this vehicle to rotate or move in the \(y
 </div>
 </div>
 </div>
-
-
 <div id="outline-container-forward-kinematics-1-P-1" class="outline-2">
 <h2 id="forward-kinematics-1-P-1">Forward Kinematics</h2>
-<div class="outline-text-2" id="text-org02448d5">
+<div class="outline-text-2" id="text-org62824cb">
 <p>
 The forward kinematics relates the controls applied to the wheels to the body twist of the robot.
 </p>
@@ -1042,10 +1016,9 @@ The control to twist relationship is found by solving
 \(V_b = H^{\dagger}u\), where \(H^{\dagger}\) is the Moore-Penrose Pseudoinverse.</li>
 </ul>
 </div>
-
 <div id="outline-container-example-four-omni-directional-wheels-2-P-1" class="outline-3">
 <h3 id="example-four-omni-directional-wheels-2-P-1">Example: Four Omni-Directional Wheels</h3>
-<div class="outline-text-3" id="text-orgfaaca0d">
+<div class="outline-text-3" id="text-org3cbb7c4">
 \begin{align}
 V_b = H^{\dagger}u &=
 \frac{r}{4}
@@ -1059,10 +1032,9 @@ u_1 \\ u_2 \\ u_3 \\ u_4
 \end{bmatrix}
 \end{align}
 </div>
-
 <div id="outline-container-analysis-3-P-1" class="outline-4">
 <h4 id="analysis-3-P-1">Analysis</h4>
-<div class="outline-text-4" id="text-org8ac494f">
+<div class="outline-text-4" id="text-org2debc24">
 <ol class="org-ol">
 <li>The rank of \(H^{\dagger}\) is 3, which means its its Null space dimension is 1.</li>
 <li>\(\mathrm{Null}(H^{\dagger})\) is spanned by \(\begin{bmatrix}-1 \\ -1 \\ 1 \\1\end{bmatrix}\)</li>
@@ -1094,7 +1066,7 @@ To see how the controls affect slipping, we write \(v_s = RH^{\dagger}u\):
 </div>
 <div id="outline-container-world-frame-velocity-1-P-1" class="outline-2">
 <h2 id="world-frame-velocity-1-P-1">World Frame Velocity</h2>
-<div class="outline-text-2" id="text-org6bff1c4">
+<div class="outline-text-2" id="text-orgc41af76">
 <p>
 So far, we have solved for the body twist in terms of the wheel rotational velocities and vice versa. To be truly useful, we need to find
 the relationship between the wheel velocities and \(\dot{q}\).
@@ -1106,10 +1078,9 @@ we can use the relationship
 \(\dot{q} = A(\theta, 0, 0)V_b\) to relate the equations above to this velocity.
 </p>
 </div>
-
 <div id="outline-container-example-four-wheel-robot-2-P-1" class="outline-3">
 <h3 id="example-four-wheel-robot-2-P-1">Example: Four wheel Robot</h3>
-<div class="outline-text-3" id="text-orgf03df9a">
+<div class="outline-text-3" id="text-org5a8595a">
 \begin{align}
 \begin{bmatrix}
 \dot{\theta}\\
@@ -1144,10 +1115,9 @@ u_1\\u_2\\u_3\\u_4
 </div>
 </div>
 </div>
-
 <div id="outline-container-the-unicycle-robot-1-P-1" class="outline-2">
 <h2 id="the-unicycle-robot-1-P-1">The Unicycle Robot</h2>
-<div class="outline-text-2" id="text-org1f695da">
+<div class="outline-text-2" id="text-org619eaf0">
 <ul class="org-ul">
 <li>A simple model for a mobile robot is a single wheel, rolling on the plane</li>
 <li>Its steering angle and rotational velocity can be controlled.</li>
@@ -1325,11 +1295,9 @@ leads to different minimum and maximum values for \(w\) and \(v\).</li>
 </ul>
 </div>
 </div>
-
-
 <div id="outline-container-references--1-P-1" class="outline-2">
 <h2 id="references--1-P-1">References:</h2>
-<div class="outline-text-2" id="text-org9ade12d">
+<div class="outline-text-2" id="text-orgd30c4df">
 <p>
 <i>Modern Robotics: Mechanics, Planning and Control</i>, Kevin Lynch and Frank Park, Cambridge University Press, 2017
 </p>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-12-18 Thu 11:29 -->
+<!-- 2026-01-05 Mon 23:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CMake Basics</title>
@@ -21,14 +21,14 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#overview-1-P-13">Overview</a></li>
+<li><a href="#overview-1-P-3">Overview</a></li>
 <li><a href="#compilation-process-overview-1-P-1">Compilation Process Overview</a></li>
 <li><a href="#what-is-cmake--1-P-1">What is CMake?</a>
 <ul>
 <li><a href="#why-do-we-need-build-tools--2-P-1">Why do we need build tools?</a></li>
 </ul>
 </li>
-<li><a href="#basics-1-P-2">Basics</a>
+<li><a href="#basics-1-P-1">Basics</a>
 <ul>
 <li><a href="#file-layout-2-P-1">File Layout</a></li>
 <li><a href="#basic-cmakelists-txt-2-P-1">Basic CMakeLists.txt</a></li>
@@ -79,13 +79,13 @@
 <li><a href="#a-deep-dive-into-a-catkin-cmakelists-txt-2-P-1">A Deep Dive into a Catkin CMakeLists.txt</a></li>
 </ul>
 </li>
-<li><a href="#resources-1-P-6">Resources</a></li>
+<li><a href="#resources-1-P-3">Resources</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-overview-1-P-13" class="outline-2">
-<h2 id="overview-1-P-13">Overview</h2>
-<div class="outline-text-2" id="text-orgca53100">
+<div id="outline-container-overview-1-P-3" class="outline-2">
+<h2 id="overview-1-P-3">Overview</h2>
+<div class="outline-text-2" id="text-org277e0d4">
 <p>
 This document explains the C++ build process, CMake, and colcon.
 It is meant as a practical and somewhat minimal guide targeted at users of ROS who
@@ -93,36 +93,35 @@ have some experience with C++. For a broader overview of ROS packages/colcon see
 </p>
 </div>
 </div>
-
 <div id="outline-container-compilation-process-overview-1-P-1" class="outline-2">
 <h2 id="compilation-process-overview-1-P-1">Compilation Process Overview</h2>
-<div class="outline-text-2" id="text-orgfca5888">
+<div class="outline-text-2" id="text-orgcd59f2f">
 <ol class="org-ol">
 <li>The C++ compilation process follows the same model as the C compilation process
 <code>preprocess -&gt; compile -&gt; assemble -&gt; link</code></li>
 <li>Compilation lets you do the hard work of translating human-readable source code into
 machine code once upfront.</li>
-<li>We will use the GNU C++ compiler gcc. Another popular choice on Linux is clang
+<li>We will use the GNU C++ compiler <code>g++</code>. Another popular choice on Linux is <code>clang++</code>
 <ul class="org-ul">
 <li>You can install <code>clang</code> on Ubuntu as well</li>
-<li>clang generally takes the same command line arguments as gcc. Compile-time errors are explained using different
-language than with gcc so sometimes compiling with both compilers can help you track down an error more easily.</li>
-<li>The output of <code>gcc</code> is generally considered to be faster, although <code>clang</code> is closing the gap</li>
+<li><code>clang++</code> generally takes the same command line arguments as <code>g++</code>. Compile-time errors are explained using different
+language than with <code>g++</code> so sometimes compiling with both compilers helps with understanding errors.</li>
 </ul></li>
-<li>Basic command-line: <code>g++ -o output_file -Wall -Wext -Wpedantic -std=c++17 file1.cpp file2.cpp</code>
+<li>Basic command-line: <code>g++ -o output_file -Wall -Wext -Wpedantic -std=c++23 file1.cpp file2.cpp</code>
 <ul class="org-ul">
 <li><code>-Wall</code> turns on all warnings.  These help you avoid errors so always use them.</li>
 <li><code>-Wext</code> turns on extra warnings. These help you avoid errors so always use them.</li>
 <li><code>-Wpedantic</code> turns on warnings related to conformance with the standard. This helps ensure your code will work with multiple compilers.</li>
-<li><code>-std=c++17</code> lets you use C++17 features, which are great.</li>
+<li><code>-std=c++23</code> lets you use C++23 features.</li>
+<li>You will not often invoke the compiler directly, because this quickly becomes too tedious for most projects, but it is good to know how to,
+particularly if you want to quickly test a small piece of C++ code.</li>
 </ul></li>
 </ol>
 </div>
 </div>
-
 <div id="outline-container-what-is-cmake--1-P-1" class="outline-2">
 <h2 id="what-is-cmake--1-P-1">What is CMake?</h2>
-<div class="outline-text-2" id="text-orgf76d775">
+<div class="outline-text-2" id="text-orgb222877">
 <ul class="org-ul">
 <li><a href="https://cmake.org">CMake</a> is a cross-platform scripting language primarily used to <i>generate</i> instructions that other build tools
 (such as Make, Ninja, Xcode, or Microsoft Visual Studio) can use to compile your program.</li>
@@ -131,14 +130,13 @@ managing compile flags, and determining which files go where upon installation.<
 <li>Although other tools exist, CMake is a popular choice for building C++ projects and is almost becoming a defacto <a href="https://xkcd.com/927">standard</a>.</li>
 </ul>
 </div>
-
 <div id="outline-container-why-do-we-need-build-tools--2-P-1" class="outline-3">
 <h3 id="why-do-we-need-build-tools--2-P-1">Why do we need build tools?</h3>
-<div class="outline-text-3" id="text-orgdf7a544">
+<div class="outline-text-3" id="text-orgc8f8a82">
 <ol class="org-ol">
 <li>Non-trivial C++ projects require the use of multiple source files and libraries that all must be combined together
 <ul class="org-ul">
-<li>Libraries may be located in different locations on different people's computers</li>
+<li>Libraries may be located in different locations on different computers</li>
 <li>People may want to use different compilers with different types of compiler options</li>
 <li>People may want to customize your program by selecting different options at compile time</li>
 <li>You may want someone to be able to run their code on a different operating system (not us) or even a computer with a different system architecture system (definitely us)</li>
@@ -148,35 +146,32 @@ managing compile flags, and determining which files go where upon installation.<
 <ul class="org-ul">
 <li>And not just you, everyone who wants to use your code</li>
 </ul></li>
-</ol>
-<p>
-4.The ideal of a working project is to have your code be able to compile and do all setup related steps in a single command
-</p>
+<li>The ideal of a working project is to have your code be able to compile and do all setup related steps in a single command
 <ul class="org-ul">
 <li>Computers are good at automating repetitive and tedious tasks!</li>
-</ul>
+</ul></li>
+</ol>
 </div>
 </div>
 </div>
-
-<div id="outline-container-basics-1-P-2" class="outline-2">
-<h2 id="basics-1-P-2">Basics</h2>
-<div class="outline-text-2" id="text-basics-1-P-2">
+<div id="outline-container-basics-1-P-1" class="outline-2">
+<h2 id="basics-1-P-1">Basics</h2>
+<div class="outline-text-2" id="text-basics-1-P-1">
 </div>
 <div id="outline-container-file-layout-2-P-1" class="outline-3">
 <h3 id="file-layout-2-P-1">File Layout</h3>
-<div class="outline-text-3" id="text-org4fa26f2">
+<div class="outline-text-3" id="text-org025f100">
 <ul class="org-ul">
 <li>While there is no mandated file layout, there are common best practices.</li>
-<li>the below structure is an example for a project called <code>project_name</code>.</li>
+<li>The directory structure below provides an example for a project called <code>project_name</code>.</li>
 <li>The project creates a library called <code>mylibrary</code> and an executable called <code>Name</code>.</li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-bash">project_name
 &#9500;&#9472;&#9472; CMakeLists.txt
 &#9500;&#9472;&#9472; include
-&#9474;&#160;&#160; &#9492;&#9472;&#9472; mylibrary
-&#9474;&#160;&#160;     &#9492;&#9472;&#9472; header.hpp
+&#9474;   &#9492;&#9472;&#9472; mylibrary
+&#9474;       &#9492;&#9472;&#9472; header.hpp
 &#9500;&#9472;&#9472; src
 &#9474;   &#9500;&#9472;&#9472; libfile1.cpp
 &#9474;   &#9500;&#9472;&#9472; libfile2.cpp
@@ -188,7 +183,7 @@ managing compile flags, and determining which files go where upon installation.<
 <ol class="org-ol">
 <li>All <code>CMake</code> projects have a <code>CMakeLists.txt</code> in the base directory.
 <ul class="org-ul">
-<li>This file is the primary file used to setup the build system.</li>
+<li>This file is the primary file used to configure the build system.</li>
 </ul></li>
 <li><code>CMakeLists.txt</code> is responsible for:
 <ul class="org-ul">
@@ -197,99 +192,105 @@ managing compile flags, and determining which files go where upon installation.<
 <li>Determining what files must be compiled to create the libraries and executables produced by the project.</li>
 <li>Providing instructions for how to install the libraries and executables.</li>
 </ul></li>
-<li>The <code>include/mylibrary</code> directory is there so that every project using the library can include headers by doing <code>#include"mylibrary/header.hpp"</code>
+<li>The <code>include/mylibrary</code> directory is there so that every project using the library can include headers using <code>#include"mylibrary/header.hpp"</code>
 <ul class="org-ul">
-<li>The project is setup to search for include files in <code>include/</code>. The directory structure means that the files themselves are under <code>mylibrary/header.hpp</code></li>
+<li>The project is configured to search for include files in <code>include/</code>.</li>
+<li>The directory structure means that the files themselves are under <code>mylibrary/header.hpp</code>.</li>
+<li>This convention avoids issues that could arise if two libraries had header files with the same name.</li>
 </ul></li>
 <li>The <code>tests</code> directory holds the unit tests</li>
-<li>Overall, as the project becomes more complex you may add more directories
+<li>Overall, as the project becomes more complex you may add more directories under <code>src</code>, <code>include</code>, and <code>include/mylibrary</code>
 <ul class="org-ul">
-<li>In this example, we keep all <code>.cpp</code> files under <code>src</code> but other projects could do it differently by, for example, splitting the locations of library <code>.cpp</code> files and executable <code>.cpp</code> files</li>
+<li>For example, we could split the locations of library <code>.cpp</code> files and executable <code>.cpp</code> files</li>
 </ul></li>
+<li>The directory structure is merely convention: the <code>CMakeLists.txt</code> can be written to accommodate any file layout</li>
 </ol>
 </div>
 </div>
-
 <div id="outline-container-basic-cmakelists-txt-2-P-1" class="outline-3">
 <h3 id="basic-cmakelists-txt-2-P-1">Basic CMakeLists.txt</h3>
-<div class="outline-text-3" id="text-orgb0140b9">
+<div class="outline-text-3" id="text-org509a9a8">
 <ol class="org-ol">
 <li><p>
 Below is a template for <code>CMakeLists.txt</code> as well as comments describing each aspect
 </p>
 <div class="org-src-container">
-<pre class="src src-cmake" id="org8613d45"><span class="org-comment-delimiter"># </span><span class="org-comment">Lines that begin with a # are comments
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">set the minimum required version of cmake, usually the first line
-</span><span class="org-function-name">cmake_minimum_required</span>(VERSION 3.22)
+<pre class="src src-cmake" id="org2c5d774"><span class="org-comment-delimiter"># </span><span class="org-comment">Lines that begin with a # are comments</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">set the minimum required version of cmake, usually the first line</span>
+<span class="org-function-name">cmake_minimum_required</span>(VERSION 3.22)
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">project_name sets the name of the project and causes cmake to
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">find the c and c++ compilers
-</span><span class="org-function-name">project</span>(project_name)
+<span class="org-comment-delimiter"># </span><span class="org-comment">project_name sets the name of the project and causes cmake to</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">find the c and c++ compilers</span>
+<span class="org-function-name">project</span>(project_name)
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Find your dependencies.
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">Many libraries ship with files that allow CMake to find them
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">Then general behavior is to call "find_package" but the options
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">provided are package specific.  Usually there is then a CMAKE variable
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">That is defined to reference the library
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">here: we find the eigen library as per the instruction
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">https://eigen.tuxfamily.org/dox/TopicCMakeGuide.html
-</span><span class="org-function-name">find_package</span>(Eigen3 3.3 REQUIRED NO_MODULE)
+<span class="org-comment-delimiter"># </span><span class="org-comment">Find dependencies.</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Many libraries ship with files that allow CMake to find them</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Then general behavior is to call "find_package" but the options</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">provided are package specific.  Usually there is then a CMAKE variable</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">That is defined to reference the library</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">here: we find the eigen library as per the instruction</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">https://eigen.tuxfamily.org/dox/TopicCMakeGuide.html</span>
+<span class="org-function-name">find_package</span>(Eigen3 3.3 REQUIRED NO_MODULE)
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Create a library.  Can specify if it is shared or static but usually
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">you don't need or want to.
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">name is the name of the library without the extension or lib prefix
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">name creates a cmake "target"
-</span><span class="org-function-name">add_library</span>(libname src/libfile1.cpp src/libfile2.cpp)
+<span class="org-comment-delimiter"># </span><span class="org-comment">Create a library.  Can specify if it is shared or static but usually</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">you don't need or want to.</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">name is the name of the library without the extension or lib prefix</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">name creates a cmake "target" (in this case the target is called "libname"</span>
+<span class="org-function-name">add_library</span>(libname src/libfile1.cpp src/libfile2.cpp)
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Use target_include_directories so that #include"mylibrary/header.hpp" works
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">The use of the &lt;BUILD_INTERFACE&gt; and &lt;INSTALL_INTERFACE&gt; is because when
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">Using the library from the build directory or after installation
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">During build, the headers are read from the source code directory
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">When used from the installed location, headers are in the
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">system include/ directory
-</span><span class="org-function-name">target_include_directories</span>(libname
+<span class="org-comment-delimiter"># </span><span class="org-comment">Use target_include_directories so that #include"mylibrary/header.hpp" works</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">The use of the &lt;BUILD_INTERFACE&gt; and &lt;INSTALL_INTERFACE&gt; is because when</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">using the library from the build directory or after installation the header</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">files are actually in different locations.</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">During the build, the headers are read from the source code directory</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">When used from the installed location, headers are in the</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">system include/ directory</span>
+<span class="org-function-name">target_include_directories</span>(libname
     PUBLIC
     $&lt;BUILD_INTERFACE:${<span class="org-variable-name">CMAKE_CURRENT_SOURCE_DIR</span>}/include/&gt;
     $&lt;INSTALL_INTERFACE:include/&gt;)
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">specify additional compilation flags for the library
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">Public causes the flags to propagate to anything
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">that links against this library
-</span><span class="org-function-name">target_compile_options</span>(libname PUBLIC -Wall -Wextra -pedantic)
+<span class="org-comment-delimiter"># </span><span class="org-comment">specify additional compilation flags for the library</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Public causes the flags to propagate to anything</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">that links against this library</span>
+<span class="org-function-name">target_compile_options</span>(libname PUBLIC -Wall -Wextra -pedantic)
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Enable c++17 support.
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">Public causes the features to propagate to anything
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">that links against this library
-</span><span class="org-function-name">target_compile_features</span>(libname PUBLIC cxx_std_17)
+<span class="org-comment-delimiter"># </span><span class="org-comment">Enable c++23 support.</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">PUBLIC causes the features to propagate to anything</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">that links against this library</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">whereas PRIVATE would make it apply only to the library itself</span>
+<span class="org-function-name">target_compile_features</span>(libname PUBLIC cxx_std_23)
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Create an executable from the following source code files
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">The Name of the executable creates a cmake "target"
-</span><span class="org-function-name">add_executable</span>(Name src/Name_main.cpp)
+<span class="org-comment-delimiter"># </span><span class="org-comment">Create an executable from the following source code files</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">The Name of the executable creates a cmake "target"</span>
+<span class="org-function-name">add_executable</span>(Name src/Name_main.cpp)
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Use target_link_libraries to add dependencies to a "target"
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">(e.g., a library or executable)
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">This will automatically add all required library files
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">that need to be linked
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">and paths to th locations of header files
-</span><span class="org-function-name">target_link_libraries</span>(Name Eigen3::Eigen libname)
+<span class="org-comment-delimiter"># </span><span class="org-comment">Use target_link_libraries to add dependencies to a "target"</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">(e.g., a library or executable)</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">This will automatically add all required library files</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">that need to be linked</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">and paths to th locations of header files.</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Because libname has PUBLIC cxx_std_23 as a compile feature</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Name will also be compiled with c++23 as the standard.</span>
+<span class="org-function-name">target_link_libraries</span>(Name Eigen3::Eigen libname)
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">install the include files by copying the whole include directory
-</span><span class="org-function-name">install</span>(DIRECTORY include/mylibrary DESTINATION include)
+<span class="org-comment-delimiter"># </span><span class="org-comment">install the include files by copying the whole include directory</span>
+<span class="org-function-name">install</span>(DIRECTORY include/mylibrary DESTINATION include)
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Create a CMake Exported Target containing the lib and exe.
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">Also create CMake Export called projet_name-targets
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">The CMake Export contains files that allow other CMake projects
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">to find this project. It must be installed separately.
-</span><span class="org-function-name">install</span>(TARGETS Name libname EXPORT project_name-targets)
+<span class="org-comment-delimiter"># </span><span class="org-comment">Create a CMake Exported Target containing the lib and exe.</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Also create CMake Export called project_name-targets</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">The CMake Export contains files that allow other CMake projects</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">to find this project. It must be installed separately.</span>
+<span class="org-function-name">install</span>(TARGETS Name libname EXPORT project_name-targets)
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">The project_name-targets created by install(TARGETS) needs to be installed.
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">install(EXPORT ...) will generate a file called project_name-config.cmake
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">that contains the exported targets.
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">After installation this file will then be found when calling
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">find_package(project_name) from another cmake project
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">A user can then target_link_libraries(target project_name::library)
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">to use the libraries installed here
-</span><span class="org-function-name">install</span>(EXPORT project_name-targets
+<span class="org-comment-delimiter"># </span><span class="org-comment">The project_name-targets created by install(TARGETS) needs to be installed.</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">install(EXPORT ...) will generate a file called project_name-config.cmake</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">that contains the exported targets.</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">After installation this file will then be found when calling</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">find_package(project_name) from another cmake project</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">A user can then target_link_libraries(target project_name::library)</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">to use the libraries installed here</span>
+<span class="org-function-name">install</span>(EXPORT project_name-targets
         FILE project_name-config.cmake
         NAMESPACE project_name::
         DESTINATION lib/cmake/${<span class="org-variable-name">PROJECT_NAME</span>})
@@ -303,7 +304,10 @@ After writing a <code>CMakeLists.txt</code> configure the project and build it.
 <pre class="src src-bash">cmake -B build .
 cmake --build build
 </pre>
-</div></li>
+</div>
+<ul class="org-ul">
+<li>This creates an "out-of-source" build. That is, all generated files are stored under the <code>build/</code> directory</li>
+</ul></li>
 
 <li><p>
 The above commands are equivalent to the following:
@@ -318,10 +322,9 @@ make
 </ol>
 </div>
 </div>
-
 <div id="outline-container-doxygen-2-P-1" class="outline-3">
 <h3 id="doxygen-2-P-1">Doxygen</h3>
-<div class="outline-text-3" id="text-org4b2bfed">
+<div class="outline-text-3" id="text-orgcadab04">
 <p>
 CMake has the ability to generate doxygen documentation automatically during the build
 </p>
@@ -329,29 +332,28 @@ CMake has the ability to generate doxygen documentation automatically during the
 <div class="org-src-container">
 <pre class="src src-cmake"><span class="org-function-name">find_package</span>(Doxygen)
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Building documentation should be optional.
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">To build documentation pass -DBUILD_DOCS=ON when generating the build system
-</span><span class="org-function-name">option</span>(BUILD_DOCS <span class="org-string">"Build the documentation"</span> OFF)
+<span class="org-comment-delimiter"># </span><span class="org-comment">Building documentation should be optional.</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">To build documentation pass -DBUILD_DOCS=ON when generating the build system</span>
+<span class="org-function-name">option</span>(BUILD_DOCS <span class="org-string">"Build the documentation"</span> OFF)
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">build just because Doxygen is missing
-</span><span class="org-keyword">if</span>(${<span class="org-variable-name">DOXYGEN_FOUND</span>} AND ${<span class="org-variable-name">BUILD_DOCS</span>})
-    <span class="org-comment-delimiter"># </span><span class="org-comment">Turn the README.md into the homepage of the doxygen docs
-</span>    <span class="org-function-name">set</span>(DOXYGEN_USE_MDFILE_AS_MAINPAGE README.md)
+<span class="org-comment-delimiter"># </span><span class="org-comment">build the documentation</span>
+<span class="org-keyword">if</span>(${<span class="org-variable-name">DOXYGEN_FOUND</span>} AND ${<span class="org-variable-name">BUILD_DOCS</span>})
+    <span class="org-comment-delimiter"># </span><span class="org-comment">Turn the README.md into the homepage of the doxygen docs</span>
+    <span class="org-function-name">set</span>(DOXYGEN_USE_MDFILE_AS_MAINPAGE README.md)
 
-    <span class="org-comment-delimiter"># </span><span class="org-comment">Tell Doxygen where to find the documentation
-</span>    <span class="org-function-name">doxygen_add_docs</span>(doxygen include/ src/ README.md ALL)
+    <span class="org-comment-delimiter"># </span><span class="org-comment">Tell Doxygen where to find the documentation</span>
+    <span class="org-function-name">doxygen_add_docs</span>(doxygen include/ src/ README.md ALL)
 
-    <span class="org-comment-delimiter"># </span><span class="org-comment">The documentation will be in the build/html directory
-</span>    <span class="org-comment-delimiter"># </span><span class="org-comment">The main page is build/html/index.html
-</span><span class="org-keyword">endif</span>()
+    <span class="org-comment-delimiter"># </span><span class="org-comment">The documentation will be in the build/html directory</span>
+    <span class="org-comment-delimiter"># </span><span class="org-comment">The main page is build/html/index.html</span>
+<span class="org-keyword">endif</span>()
 </pre>
 </div>
 </div>
 </div>
-
 <div id="outline-container-unit-testing-2-P-1" class="outline-3">
 <h3 id="unit-testing-2-P-1">Unit Testing</h3>
-<div class="outline-text-3" id="text-orgbbbc50b">
+<div class="outline-text-3" id="text-org5d8b453">
 <p>
 CMake provides a framework for calling unit tests called <a href="https://cmake.org/cmake/help/latest/module/CTest.html">CTest</a> that enables coordinating tests with
 the build system in a testing-framework agnostic manner
@@ -360,17 +362,17 @@ the build system in a testing-framework agnostic manner
 <div class="org-src-container">
 <pre class="src src-cmake"><span class="org-function-name">include</span>(CTest)
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">CTest sets BUILD_TESTING to on. To disable tests add -DBUILD_TESTING=OFF when invoking cmake
-</span><span class="org-keyword">if</span>(BUILD_TESTING)
-    <span class="org-comment-delimiter"># </span><span class="org-comment">Find the Unit testing framework. In this example, Catch2
-</span>    <span class="org-function-name">find_package</span>(Catch2 3 REQUIRED)
+<span class="org-comment-delimiter"># </span><span class="org-comment">CTest sets BUILD_TESTING to on. To disable tests add -DBUILD_TESTING=OFF when invoking cmake</span>
+<span class="org-keyword">if</span>(BUILD_TESTING)
+    <span class="org-comment-delimiter"># </span><span class="org-comment">Find the Unit testing framework. In this example, Catch2</span>
+    <span class="org-function-name">find_package</span>(Catch2 3 REQUIRED)
 
-    <span class="org-comment-delimiter"># </span><span class="org-comment">A test is just an executable that is linked against the unit testing library
-</span>    <span class="org-function-name">add_executable</span>(my_test_exe tests/mytest.cpp)
+    <span class="org-comment-delimiter"># </span><span class="org-comment">A test is just an executable that is linked against the unit testing library</span>
+    <span class="org-function-name">add_executable</span>(my_test_exe tests/mytest.cpp)
     <span class="org-function-name">target_link_libraries</span>(my_test_exe Catch2::Catch2WithMain AnyOtherLibrariesAsNeeded)
 
-    <span class="org-comment-delimiter"># </span><span class="org-comment">register the test with CTest, telling it what executable to run
-</span>    <span class="org-function-name">add_test</span>(NAME the_test_name COMMAND my_test_exe)
+    <span class="org-comment-delimiter"># </span><span class="org-comment">register the test with CTest, telling it what executable to run</span>
+    <span class="org-function-name">add_test</span>(NAME the_test_name COMMAND my_test_exe)
 <span class="org-keyword">endif</span>()
 </pre>
 </div>
@@ -382,7 +384,7 @@ To run the tests, enter the <code>build/</code> directory and run <code>ctest --
 </div>
 <div id="outline-container-advanced-installation-2-P-1" class="outline-3">
 <h3 id="advanced-installation-2-P-1">Advanced Installation</h3>
-<div class="outline-text-3" id="text-org479f0fc">
+<div class="outline-text-3" id="text-orgb1bacbe">
 <ul class="org-ul">
 <li>If a library that you write had dependencies, sometimes the users of your library
 will also need these dependencies.</li>
@@ -390,7 +392,7 @@ will also need these dependencies.</li>
 automatically finds the required dependencies when <code>find_package</code> is called.</li>
 <li>Rather than making the exports file the <code>project_name-config.cmake</code> that is run when <code>find_package</code> is called,
 We instead install the exports file as <code>project_name-targets.cmake</code>.  We then create and install a custom file
-that finds the dependencies and then includes the exports file.</li>
+that finds the dependencies and then includes <code>project_name-targets.cmake</code>.</li>
 
 <li><p>
 Here is an example <code>CMakeLists.txt</code> snippet.
@@ -398,72 +400,65 @@ Here is an example <code>CMakeLists.txt</code> snippet.
 <div class="org-src-container">
 <pre class="src src-cmake"><span class="org-function-name">install</span>(DIRECTORY include/mylibrary DESTINATION include)
 
+<span class="org-comment-delimiter"># </span><span class="org-comment">Create the targets</span>
 <span class="org-function-name">install</span>(TARGETS Name libname EXPORT project_name-targets)
 
+<span class="org-comment-delimiter"># </span><span class="org-comment">Create the exports file</span>
 <span class="org-function-name">install</span>(EXPORT project_name-targets
          FILE project_name-targets.cmake
          NAMESPACE project_name::
          DESTINATION lib/cmake/${<span class="org-variable-name">PROJECT_NAME</span>})
-
 <span class="org-function-name">configure_file</span>(project_name-config.cmake.in project_name-config.cmake @ONLY)
 <span class="org-function-name">install</span>(FILES ${<span class="org-variable-name">CMAKE_CURRENT_BINARY_DIR</span>}/project_name-config.cmake
         DESTINATION lib/cmake/${<span class="org-variable-name">PROJECT_NAME</span>})
 </pre>
 </div></li>
-<li>The <code>install(EXPORT)</code> now creates a file called <code>project_name-targets.cmake</code>
-which contains the <code>exported</code> targets</li>
+
 <li><p>
-You now provide a file called <code>project_name-config.cmake.in</code> with the following contents
+The above example requires a custom <code>project_name-config.cmake.in</code>:
 </p>
 <div class="org-src-container">
-<pre class="src src-cmake"><span class="org-comment-delimiter"># </span><span class="org-comment">You can access variables from CMake by using the
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">@var_name@ syntax. These variables will be replaced with there value
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">from the current CMake session (useful for configuration)
-</span><span class="org-function-name">include</span>(CMakeFindDependencyMacro)
+<pre class="src src-cmake"><span class="org-function-name">include</span>(CMakeFindDependencyMacro)
 <span class="org-function-name">find_dependency</span>(a_dep_your_library_needs REQUIRED)
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Once all dependencies are found, include the exported targets
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">We expect that the project_name-targets.cmake file is installed
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">next to project_name-config.cmake (this file)
-</span><span class="org-function-name">include</span>(${<span class="org-variable-name">CMAKE_CURRENT_LIST_DIR</span>}/project_name-targets.cmake)
+<span class="org-comment-delimiter"># </span><span class="org-comment">Once all dependencies are found, include the exported targets</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">We expect that the project_name-targets.cmake file is installed</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">next to project_name-config.cmake (this file).</span>
+<span class="org-function-name">include</span>(${<span class="org-variable-name">CMAKE_CURRENT_LIST_DIR</span>}/project_name-targets.cmake)
 </pre>
 </div></li>
+<li>The <code>install(EXPORT)</code> now creates a file called <code>project_name-targets.cmake</code>
+which contains the <code>exported</code> targets</li>
+
+<li>There are even more advanced cases (such as when creating CMake configuration files for non-CMake projects) that
+can make use of the <a href="https://cmake.org/cmake/help/latest/module/CMakePackageConfigHelpers.html">CMakePackageConfigHelpers</a> package.</li>
 </ul>
 </div>
 </div>
-
-
-
 <div id="outline-container-out-of-source-builds-2-P-1" class="outline-3">
 <h3 id="out-of-source-builds-2-P-1">Out-Of-Source Builds</h3>
-<div class="outline-text-3" id="text-org01950ff">
+<div class="outline-text-3" id="text-org25bd4f0">
 <ul class="org-ul">
-<li>Notice that we created a build directory outside our source directory
-<ul class="org-ul">
-<li>This is known as an out-of-source build.</li>
-<li>It is recommended to do out-of-source builds to avoid scattering
-a bunch of files generated by CMake everywhere in your source tree
-(a <code>.gitignore</code> nightmare!)</li>
-<li>It is possible to invoke cmake in the same directory as the source code, which makes a mess</li>
+<li>The preferred method in CMake is to do an "out-of-source" build</li>
+<li>It is possible to accidentally do an "in-source" build, which will scatter generated
+files all over your source repository (which is a nightmare).</li>
 <li><p>
-I use the following code to prevent me from accidently doing that
+The following custom code prevents mistakenly doing an "in-source" build.
 </p>
 <div class="org-src-container">
 <pre class="src src-cmake"><span class="org-keyword">if</span>(${<span class="org-variable-name">CMAKE_SOURCE_DIR</span>} STREQUAL ${<span class="org-variable-name">CMAKE_BINARY_DIR</span>})
-    <span class="org-function-name">message</span>(FATAL_ERROR
-    <span class="org-string">"No in source builds allowed. Create a separate build directory.
-    SOURCE_DIR=${</span><span class="org-variable-name">CMAKE_SOURCE_DIR</span><span class="org-string">}  BINARY_DIR=${</span><span class="org-variable-name">CMAKE_BINARY_DIR</span><span class="org-string">} "</span>)
+  <span class="org-function-name">message</span>(FATAL_ERROR
+  <span class="org-string">"No in source builds allowed. Create a separate build directory.</span>
+<span class="org-string">  SOURCE_DIR=${</span><span class="org-variable-name">CMAKE_SOURCE_DIR</span><span class="org-string">}  BINARY_DIR=${</span><span class="org-variable-name">CMAKE_BINARY_DIR</span><span class="org-string">} "</span>)
 <span class="org-keyword">endif</span>()
 </pre>
 </div></li>
-</ul></li>
 </ul>
 </div>
 </div>
-
 <div id="outline-container-cmake-variables-2-P-1" class="outline-3">
 <h3 id="cmake-variables-2-P-1">CMake Variables</h3>
-<div class="outline-text-3" id="text-org3dde388">
+<div class="outline-text-3" id="text-orgbf6c23f">
 <ul class="org-ul">
 <li>You can set <code>cmake</code> variables when invoking cmake.
 <ul class="org-ul">
@@ -478,48 +473,47 @@ I use the following code to prevent me from accidently doing that
 I typically use the following code to have the build type default to <code>Debug</code> if not otherwise specified
 </p>
 <div class="org-src-container">
-<pre class="src src-cmake"><span class="org-keyword">if</span>(NOT CMAKE_BUILD_TYPE)        <span class="org-comment-delimiter"># </span><span class="org-comment">If no build type is set, set one
-</span>  <span class="org-function-name">set</span>(CMAKE_BUILD_TYPE <span class="org-string">"Debug"</span> CACHE STRING <span class="org-string">"Type of build."</span> FORCE)
+<pre class="src src-cmake"><span class="org-keyword">if</span>(NOT CMAKE_BUILD_TYPE)        <span class="org-comment-delimiter"># </span><span class="org-comment">If no build type is set, set one</span>
+  <span class="org-function-name">set</span>(CMAKE_BUILD_TYPE <span class="org-string">"Debug"</span> CACHE STRING <span class="org-string">"Type of build."</span> FORCE)
 <span class="org-keyword">endif</span>()
 </pre>
 </div></li>
 </ul></li>
 <li>Since <code>cmake</code> generates Makefiles, you do not typically need to rerun <code>cmake</code>.
 <ul class="org-ul">
-<li>Even if you modify CMakeLists.txt, the Makefiles will invoke CMake automatically</li>
+<li>Even if you modify <code>CMakeLists.txt</code>, the Makefiles will invoke CMake automatically</li>
 </ul></li>
-<li>When debugging CMake problems, it can sometimes be helpful to completely delete the contents of the build directory and
+<li>When debugging CMake problems, it can sometimes be helpful to completely delete the contents of the <code>build/</code> directory and
 regenerate everything from scratch</li>
 </ul>
 </div>
 </div>
-
 <div id="outline-container-important-cmake-concepts-2-P-1" class="outline-3">
 <h3 id="important-cmake-concepts-2-P-1">Important CMake Concepts</h3>
-<div class="outline-text-3" id="text-orgc8394b4">
+<div class="outline-text-3" id="text-org8b19e96">
 <dl class="org-dl">
 <dt>generation</dt><dd>Since CMake is a build-system generator (we are using <code>make</code> as the build system), it
 is generating build files.
 <ul class="org-ul">
-<li>This means that you are actually using CMake Code to Generate Makefile Code to Compile C++ Code</li>
+<li>You are actually using CMake Code to Generate Makefile Code to Compile C++ Code</li>
 </ul></dd>
-<dt>target</dt><dd>This is anything that will ultimately be created by the build system
+<dt>target</dt><dd>Anything that will ultimately be created by the build system is considered a cmake <i>target</i>
 <ul class="org-ul">
 <li>For example: executables and libraries</li>
-<li>When generating Makefiles, targets correspond to makefile targets
+<li>When generating Makefiles, targets correspond to makefile targets and can be built by running <code>make &lt;target_name&gt;</code> in the <code>build/</code> directory
 <ul class="org-ul">
 <li>For example if you <code>add_executable(hello myworld.cpp)</code> then <code>hello</code> is a target and it can be built specifically by using <code>make hello</code></li>
 </ul></li>
 </ul></dd>
 <dt>properties</dt><dd>various entities in CMake have properties that can be set
 <ul class="org-ul">
-<li>For targets, you can set properties using functions that begin with <code>target_set</code>
+<li>For targets, properties are set using functions prefixed with <code>target_set</code>
 <ul class="org-ul">
 <li><code>target_set_include_directories(targetname list_of_directories_where_include_files_are_found)</code></li>
 <li><code>target_set_compile_options()</code></li>
-<li><code>target_link_libraries(target lib1target lib2target)</code> a bit of a misnomer (it should really be called <code>target_link_target</code>) this
-will not only link libraries lib1target and lib2target into <code>target</code> but also add their include paths and some other options
-to target 
+<li><code>target_link_libraries(target lib1target lib2target)</code> a bit of a misnomer (it should really be called <code>target_link_target</code>). This
+function will not only link libraries lib1target and lib2target into <code>target</code> but also add their include paths and some other options
+to target
 For example, if lib1target has include files in <code>/home/user/include</code>, <code>targetname</code> will be able to include those files as well.
 <ol class="org-ol">
 <li>Directory vs Local
@@ -547,7 +541,7 @@ depends on library_Z, <code>target_a</code> is compiled with all the necessary i
 </div>
 <div id="outline-container-basic-cmake-syntax-2-P-1" class="outline-3">
 <h3 id="basic-cmake-syntax-2-P-1">Basic CMake Syntax</h3>
-<div class="outline-text-3" id="text-org2c86bb4">
+<div class="outline-text-3" id="text-org8fbe82b">
 <ol class="org-ol">
 <li><code>${VARIABLE}</code> gets the value of a variable. This is a direct-string replacement
 <ul class="org-ul">
@@ -560,11 +554,9 @@ message(WARNING "The value of VARIABLE is ${VARIABLE}")~  will just print a warn
 </ol>
 </div>
 </div>
-
-
 <div id="outline-container-dependencies-2-P-1" class="outline-3">
 <h3 id="dependencies-2-P-1">Dependencies</h3>
-<div class="outline-text-3" id="text-org360b08b">
+<div class="outline-text-3" id="text-org8708fb7">
 <ul class="org-ul">
 <li>If you ever get an error about <code>find_package</code> could not find <code>X</code> then this likely means you are missing a dependency
 <ul class="org-ul">
@@ -584,15 +576,13 @@ without needing root privileges or affecting the rest of your system</li>
 </div>
 </div>
 </div>
-
-
 <div id="outline-container-useful-compile-options-1-P-1" class="outline-2">
 <h2 id="useful-compile-options-1-P-1">Useful compile options</h2>
 <div class="outline-text-2" id="text-useful-compile-options-1-P-1">
 </div>
 <div id="outline-container-local-vs-global-2-P-1" class="outline-3">
 <h3 id="local-vs-global-2-P-1">Local vs Global</h3>
-<div class="outline-text-3" id="text-org04fc806">
+<div class="outline-text-3" id="text-org86e31b8">
 <p>
 In <code>CMake</code> you can set options for the compilation both globally and on a per-target level.
 </p>
@@ -605,8 +595,8 @@ the options can be passed on to targets that depend on the existing target.</li>
 favors the local approach, whereas ROS favors the global approach.</li>
 </ul>
 </div>
-<details id="org2746d19"><summary class="header-4">A Compromise Approach</summary>
-<div class="outline-text-4" id="text-org2746d19">
+<details id="orgc5db408"><summary class="header-4">A Compromise Approach</summary>
+<div class="outline-text-4" id="text-orgc5db408">
 <ul class="org-ul">
 <li>One compromise is to create a CMake target (call it <code>options_target</code>) with no source files, that just carries the compiler options.
 <ul class="org-ul">
@@ -618,10 +608,9 @@ commonly used are defined in the same place.</li>
 </div>
 </details>
 </div>
-
 <div id="outline-container-c-standard-2-P-1" class="outline-3">
 <h3 id="c-standard-2-P-1">C++ Standard</h3>
-<div class="outline-text-3" id="text-org2cdd03d">
+<div class="outline-text-3" id="text-orgf04e030">
 <p>
 Setting the C++ standard has its own syntax in CMake. This is because every compiler has different options, but CMake is cross-platform
 and provides a common standard-setting method across all compilers.
@@ -633,16 +622,16 @@ language features that are desired.</li>
 </div>
 <div id="outline-container-locally-per-target--3-P-1" class="outline-4">
 <h4 id="locally-per-target--3-P-1">Locally (Per-Target)</h4>
-<div class="outline-text-4" id="text-org2630cf8">
+<div class="outline-text-4" id="text-orgbc29697">
 <ul class="org-ul">
 <li><p>
 To set the standard for a given target
 </p>
 <div class="org-src-container">
-<pre class="src src-cmake"><span class="org-comment-delimiter"># </span><span class="org-comment">use c++17 when compiling targetName
-</span><span class="org-function-name">target_compile_features</span>(targetName PUBLIC cxx_std_17)
-<span class="org-comment-delimiter"># </span><span class="org-comment">don't use gnu extensions
-</span><span class="org-function-name">set_target_properties</span>(targetName PROPERTIES CXX_EXTENSIONS OFF) 
+<pre class="src src-cmake"><span class="org-comment-delimiter"># </span><span class="org-comment">use c++23 when compiling targetName</span>
+<span class="org-function-name">target_compile_features</span>(targetName PUBLIC cxx_std_23)
+<span class="org-comment-delimiter"># </span><span class="org-comment">don't use gnu extensions</span>
+<span class="org-function-name">set_target_properties</span>(targetName PROPERTIES CXX_EXTENSIONS OFF)
 </pre>
 </div>
 <ul class="org-ul">
@@ -656,13 +645,13 @@ and <code>INTERFACE</code> which means just used by dependencies but not the tar
 </div>
 <div id="outline-container-globally-all-targets--3-P-1" class="outline-4">
 <h4 id="globally-all-targets--3-P-1">Globally (all targets)</h4>
-<div class="outline-text-4" id="text-orgb67cd57">
+<div class="outline-text-4" id="text-org39298a8">
 <ul class="org-ul">
 <li><p>
 These settings can also be done globally.
 </p>
 <div class="org-src-container">
-<pre class="src src-cmake"><span class="org-function-name">set</span>(CMAKE_CXX_STANDARD 17)
+<pre class="src src-cmake"><span class="org-function-name">set</span>(CMAKE_CXX_STANDARD 23)
 <span class="org-function-name">set</span>(CMAKE_CXX_STANDARD_REQUIRED ON)
 <span class="org-function-name">set</span>(CMAKE_CXX_EXTENSIONS OFF)
 </pre>
@@ -670,36 +659,33 @@ These settings can also be done globally.
 </ul>
 </div>
 </div>
-
 <div id="outline-container-standards-and-ros-3-P-1" class="outline-4">
 <h4 id="standards-and-ros-3-P-1">Standards And ROS</h4>
-<div class="outline-text-4" id="text-orgfba2ca2">
+<div class="outline-text-4" id="text-org1e89f9e">
 <ul class="org-ul">
 <li>Technically ROS 2 only supports C++17</li>
-<li>However, the compiler that ships with <code>Ubuntu 22.04</code> mostly supports <code>C++20</code> fully and ROS humble is officially supported on Ubuntu 22.04</li>
-<li>C++ standards are very backwards compatible (as in older C++ code will usually compile with a newer standard enabled)</li>
-<li>We will use C++17 in this class</li>
-<li>C++20 came out in 2020, and you may experiment with it if you would like to.
+<li>However, the compiler that ships with <code>Ubuntu 24.04</code> fully supports <code>C++23</code> and ROS kilted is officially supported on Ubuntu 24.04</li>
+<li>C++ standards are very backwards compatible (as in older C++ code almost always compiles with a newer standard enabled)</li>
+<li>We will use C++23 in this class
 <ul class="org-ul">
 <li>Some key features of C++20 are:
 <ul class="org-ul">
 <li>Concepts (which will benefit you without even needing to know what they are!)</li>
-<li>Modules (which is not enabled with just C++20 as it is still not fully implemented/tested in <code>gcc</code>)</li>
 <li>Ranges (this standard makes working with <code>vectors</code> and <code>algorithms</code> much easier and more intuitive)</li>
+<li>Modules (which is not enabled with just C++23 as it is still not fully supported or accepted)</li>
 </ul></li>
 </ul></li>
 </ul>
 </div>
 </div>
 </div>
-
 <div id="outline-container-compile-options-2-P-1" class="outline-3">
 <h3 id="compile-options-2-P-1">Compile Options</h3>
 <div class="outline-text-3" id="text-compile-options-2-P-1">
 </div>
 <div id="outline-container-locally-per-target--3-P-2" class="outline-4">
 <h4 id="locally-per-target--3-P-2">Locally (Per-Target)</h4>
-<div class="outline-text-4" id="text-org5873bdd">
+<div class="outline-text-4" id="text-orga0efc0e">
 <ul class="org-ul">
 <li>Use <code>target_compile_options(target -Wall -Wextra)</code> to add flags (in this case <code>-Wall -Wextra</code>) to the build</li>
 </ul>
@@ -707,7 +693,7 @@ These settings can also be done globally.
 </div>
 <div id="outline-container-globally-all-targets--3-P-2" class="outline-4">
 <h4 id="globally-all-targets--3-P-2">Globally (all targets)</h4>
-<div class="outline-text-4" id="text-org3c46b63">
+<div class="outline-text-4" id="text-orge7e429f">
 <ul class="org-ul">
 <li>Global compile options are added with <code>add_compile_options(-Wall -Wextra)</code> (<code>-Wall -Wextra</code> in this case).</li>
 </ul>
@@ -715,10 +701,9 @@ These settings can also be done globally.
 </div>
 </div>
 </div>
-
 <div id="outline-container-relationship-with-ament-and-colcon-1-P-1" class="outline-2">
 <h2 id="relationship-with-ament-and-colcon-1-P-1">Relationship with ament and colcon</h2>
-<div class="outline-text-2" id="text-org99e0c8a">
+<div class="outline-text-2" id="text-orgd77e4a0">
 <ul class="org-ul">
 <li><code>colcon</code> is a build tool and can compile projects written with multiple build systems</li>
 <li><code>colcon</code> can automatically detect and compile plain CMake projects based on the presence of a <code>CMakeLists.txt</code>
@@ -757,7 +742,7 @@ Ament provides convenience functions for library installation:
 </div>
 <div id="outline-container-installation-of-ament-libraries-2-P-1" class="outline-3">
 <h3 id="installation-of-ament-libraries-2-P-1">Installation of ament_libraries</h3>
-<div class="outline-text-3" id="text-orgc592e56">
+<div class="outline-text-3" id="text-org75ea03c">
 <ul class="org-ul">
 <li><code>ament</code> makes it easier to install libraries than standard cmake</li>
 <li><p>
@@ -777,7 +762,7 @@ After creating the libraries call
 </div>
 <div id="outline-container-ros-idl-generation-1-P-1" class="outline-2">
 <h2 id="ros-idl-generation-1-P-1">ROS IDL Generation</h2>
-<div class="outline-text-2" id="text-orgcedc622">
+<div class="outline-text-2" id="text-org8f7e310">
 <ul class="org-ul">
 <li>ROS provides custom cmake functions for generating messages, services, and actions.</li>
 <li>Everything related to IDL in ROS is in the <a href="https://github.com/ros2/rosidl">rosidl</a> repository
@@ -828,7 +813,7 @@ Here is a complete example:
 </div>
 <div id="outline-container-types-of-build-1-P-1" class="outline-2">
 <h2 id="types-of-build-1-P-1">Types of build</h2>
-<div class="outline-text-2" id="text-org4e6189e">
+<div class="outline-text-2" id="text-orgc16122f">
 <ul class="org-ul">
 <li>With <code>colcon</code> you can create three types of installation:
 <ul class="org-ul">
@@ -848,10 +833,9 @@ and have the changes take effect immediately in the install space without re-run
 </ul>
 </div>
 </div>
-
 <div id="outline-container-cmake-practices-1-P-1" class="outline-2">
 <h2 id="cmake-practices-1-P-1">CMake Practices</h2>
-<div class="outline-text-2" id="text-org3a305e3">
+<div class="outline-text-2" id="text-org7937cef">
 <ol class="org-ol">
 <li>All projects should include, at a minimum, the following compile flags:
 <ul class="org-ul">
@@ -864,18 +848,6 @@ and have the changes take effect immediately in the install space without re-run
 <li>When not using <code>colcon</code> create a build directory and use <code>cmake</code> from that directory (out of source build).
 <ul class="org-ul">
 <li>Don't run <code>cmake</code> in a directory that contains code, it will make a mess</li>
-</ul></li>
-
-<li><p>
-To set C++ version options globally
-</p>
-<pre class="example">
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
-</pre>
-<ul class="org-ul">
-<li>Setting using <code>set(CMAKE_CXX_STANDARD 17)</code> is still globally applied but it also is compiler independent</li>
 </ul></li>
 
 <li>Don't use <code>GLOB</code> to find files (I didn't discuss this but you will find it on many websites).
@@ -901,7 +873,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 </div>
 <div id="outline-container-build-process-as-directed-acyclic-graph-1-P-1" class="outline-2">
 <h2 id="build-process-as-directed-acyclic-graph-1-P-1">Build Process as Directed Acyclic Graph</h2>
-<div class="outline-text-2" id="text-org8bb6664">
+<div class="outline-text-2" id="text-org74e88d3">
 <ol class="org-ol">
 <li>When compiling code, there are often items that depend on other items:
 <ul class="org-ul">
@@ -931,10 +903,9 @@ at all costs.
 </ol>
 </div>
 </div>
-
 <div id="outline-container-cross-compilation-1-P-1" class="outline-2">
 <h2 id="cross-compilation-1-P-1">Cross Compilation</h2>
-<div class="outline-text-2" id="text-org0475f79">
+<div class="outline-text-2" id="text-orgad8c780">
 <ul class="org-ul">
 <li>Cross-compilation is the process of compiling code for one system on a different (and incompatible) system
 <ul class="org-ul">
@@ -951,10 +922,8 @@ when calling <code>cmake</code>: it will not have the desired effect if set from
 </ul>
 </div>
 </div>
-
-<div id="outline-container-ros-1-and-catkin-1-P-1" class="outline-2">
-<h2 id="ros-1-and-catkin-1-P-1">ROS 1 and Catkin</h2>
-<div class="outline-text-2" id="text-orgbca1d12">
+<details id="org1591a2a"><summary class="header-2">ROS 1 and Catkin</summary>
+<div class="outline-text-2" id="text-org1591a2a">
 <ul class="org-ul">
 <li>These notes are left for reference in case you encounter a ROS 1 project.</li>
 <li><code>catkin_make</code>, <code>catkin_make_isolated</code>, and <code>catkin tools</code> are the ROS 1 build tools</li>
@@ -966,17 +935,17 @@ closely to standard <code>CMake</code> files than <code>ROS 1</code> did.</li>
 </div>
 <div id="outline-container-a-deep-dive-into-a-catkin-cmakelists-txt-2-P-1" class="outline-3">
 <h3 id="a-deep-dive-into-a-catkin-cmakelists-txt-2-P-1">A Deep Dive into a Catkin CMakeLists.txt</h3>
-<div class="outline-text-3" id="text-org9bbbec2">
+<div class="outline-text-3" id="text-orgc3e3d26">
 <ul class="org-ul">
 <li><p>
 Preamble, same as a normal
 </p>
 <div class="org-src-container">
-<pre class="src src-cmake"><span class="org-comment-delimiter"># </span><span class="org-comment">minimum cmake Version 3.9, rather outdated
-</span><span class="org-function-name">cmake_minimum_required</span>(VERSION 3.9)
+<pre class="src src-cmake"><span class="org-comment-delimiter"># </span><span class="org-comment">minimum cmake Version 3.9, rather outdated</span>
+<span class="org-function-name">cmake_minimum_required</span>(VERSION 3.9)
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">name of project, must match package.xml
-</span><span class="org-function-name">project</span>(my_project)
+<span class="org-comment-delimiter"># </span><span class="org-comment">name of project, must match package.xml</span>
+<span class="org-function-name">project</span>(my_project)
 </pre>
 </div></li>
 
@@ -1016,16 +985,16 @@ to build the messages files into python and C++ code. This part
 catkin_package is used to let other packages know how to use your package as a dependency
 </p>
 <div class="org-src-container">
-<pre class="src src-cmake"><span class="org-comment-delimiter">## </span><span class="org-comment">INCLUDE_DIRS: use if package contains header files
-</span><span class="org-comment-delimiter">## </span><span class="org-comment">LIBRARIES: libraries created here that dependent projects need
-</span><span class="org-comment-delimiter">## </span><span class="org-comment">CATKIN_DEPENDS: catkin_packages dependent projects need
-</span><span class="org-comment-delimiter">## </span><span class="org-comment">DEPENDS: system dependencies of this project that dependent projects also need
-</span><span class="org-function-name">catkin_package</span>(
-<span class="org-comment-delimiter">#  </span><span class="org-comment">INCLUDE_DIRS include
-</span><span class="org-comment-delimiter">#  </span><span class="org-comment">LIBRARIES tmp
-</span><span class="org-comment-delimiter">#  </span><span class="org-comment">CATKIN_DEPENDS other_catkin_pkg
-</span><span class="org-comment-delimiter">#  </span><span class="org-comment">DEPENDS system_lib
-</span>)
+<pre class="src src-cmake"><span class="org-comment-delimiter">## </span><span class="org-comment">INCLUDE_DIRS: use if package contains header files</span>
+<span class="org-comment-delimiter">## </span><span class="org-comment">LIBRARIES: libraries created here that dependent projects need</span>
+<span class="org-comment-delimiter">## </span><span class="org-comment">CATKIN_DEPENDS: catkin_packages dependent projects need</span>
+<span class="org-comment-delimiter">## </span><span class="org-comment">DEPENDS: system dependencies of this project that dependent projects also need</span>
+<span class="org-function-name">catkin_package</span>(
+<span class="org-comment-delimiter">#  </span><span class="org-comment">INCLUDE_DIRS include</span>
+<span class="org-comment-delimiter">#  </span><span class="org-comment">LIBRARIES tmp</span>
+<span class="org-comment-delimiter">#  </span><span class="org-comment">CATKIN_DEPENDS other_catkin_pkg</span>
+<span class="org-comment-delimiter">#  </span><span class="org-comment">DEPENDS system_lib</span>
+)
 </pre>
 </div>
 <ul class="org-ul">
@@ -1041,12 +1010,13 @@ Rather than using <code>target_include_directories</code> on individual targets,
 by all targets in your package globally. The <code>${catkin_INCLUDE_DIRS}</code> variable is populated with directories set in <code>catkin_package</code>
 in all of the packages found by <code>find_package(catkin REQUIRED COMPONENTS)</code>
 </p>
-<pre class="example">
-include_directories(
+<div class="org-src-container">
+<pre class="src src-nil">include_directories(
 include
  ${catkin_INCLUDE_DIRS}
 )
-</pre></li>
+</pre>
+</div></li>
 
 <li>Targets (i.e., libraries and executables) are added as usual</li>
 <li>Target names are always prefixed by ${PROJECT_NAME} to avoid name conflicts.
@@ -1137,19 +1107,19 @@ To install libraries list them below
 The version in <code>catkin_pkg</code> only copies files with a <code>.h</code> extension.
 I remove this restriction as its unnecessary and I end <code>C++</code> headers with <code>.hpp</code> 
 </p>
-<pre class="example">
-install(DIRECTORY include/${PROJECT_NAME}/
+<div class="org-src-container">
+<pre class="src src-nil">install(DIRECTORY include/${PROJECT_NAME}/
   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
-</pre></li>
+</pre>
+</div></li>
 </ul>
 </div>
 </div>
-</div>
-
-<div id="outline-container-resources-1-P-6" class="outline-2">
-<h2 id="resources-1-P-6">Resources</h2>
-<div class="outline-text-2" id="text-orge9e8abb">
+</details>
+<div id="outline-container-resources-1-P-3" class="outline-2">
+<h2 id="resources-1-P-3">Resources</h2>
+<div class="outline-text-2" id="text-orge7c20ae">
 <ul class="org-ul">
 <li><a href="https://cmake.org/documentation/">Official Documentation</a>
 <ul class="org-ul">

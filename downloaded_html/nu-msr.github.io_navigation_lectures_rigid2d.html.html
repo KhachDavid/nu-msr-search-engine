@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-12-18 Thu 11:29 -->
+<!-- 2026-01-05 Mon 23:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Rigid Body Transformations in 2D</title>
@@ -53,7 +53,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#overview-1-P-5">Overview</a></li>
+<li><a href="#overview-1-P-17">Overview</a></li>
 <li><a href="#coordinate-frames-1-P-1">Coordinate Frames</a></li>
 <li><a href="#rotation-matrix-1-P-1">Rotation Matrix</a></li>
 <li><a href="#transformation-matrix-1-P-1">Transformation Matrix</a></li>
@@ -81,10 +81,9 @@
 </ul>
 </div>
 </nav>
-
-<div id="outline-container-overview-1-P-5" class="outline-2">
-<h2 id="overview-1-P-5">Overview</h2>
-<div class="outline-text-2" id="text-orgbdd7d23">
+<div id="outline-container-overview-1-P-17" class="outline-2">
+<h2 id="overview-1-P-17">Overview</h2>
+<div class="outline-text-2" id="text-orgaad7d12">
 <p>
 Provides a brief review of 2D rigid body transformations, from the perspective
 of a programmer who just wants to use them.  See (Lynch, Park <i>Modern Robotics</i> Chapter 3)
@@ -92,10 +91,9 @@ for more details.
 </p>
 </div>
 </div>
-
 <div id="outline-container-coordinate-frames-1-P-1" class="outline-2">
 <h2 id="coordinate-frames-1-P-1">Coordinate Frames</h2>
-<div class="outline-text-2" id="text-orgfa31aa8">
+<div class="outline-text-2" id="text-org49f4000">
 <p>
 A 2D coordinate frame consists of 2 orthogonal unit vectors located 
 somewhere in space
@@ -109,7 +107,7 @@ instantaneously fixed to the location of the robot at any given time.</li>
 </div>
 <div id="outline-container-rotation-matrix-1-P-1" class="outline-2">
 <h2 id="rotation-matrix-1-P-1">Rotation Matrix</h2>
-<div class="outline-text-2" id="text-org5dac3fa">
+<div class="outline-text-2" id="text-orgafdb807">
 <p>
 A rotation matrix describes the rotation between two coordinate frames.
 If there is a pure rotation (i.e., no translation) between frames \(\{a\}\) (with coordinate vectors \(\hat{x}_a\) and \(\hat{y}_a\)) and
@@ -143,10 +141,9 @@ R_{ba} = R_{ab}^{-1} =
 \end{equation}
 </div>
 </div>
-
 <div id="outline-container-transformation-matrix-1-P-1" class="outline-2">
 <h2 id="transformation-matrix-1-P-1">Transformation Matrix</h2>
-<div class="outline-text-2" id="text-org9644e7f">
+<div class="outline-text-2" id="text-org92bb3ea">
 <p>
 If the origin of frame \(\{j\}\) is displaced from frame \(\{i\}\) by \(x \hat{x}_i + y \hat{y}_i\) and the angle between the frames is \(\theta\),
 then to convert a point \(p_j\) in frame \(j\) to frame \(i\) coordinates:
@@ -190,10 +187,9 @@ only the first two elements of the result</li>
 </ul>
 </div>
 </div>
-
 <div id="outline-container-twist-1-P-1" class="outline-2">
 <h2 id="twist-1-P-1">Twist</h2>
-<div class="outline-text-2" id="text-orge18a87d">
+<div class="outline-text-2" id="text-orgb304959">
 <p>
 A 2D twist consists of an angular velocity and two translational velocities:
 </p>
@@ -210,7 +206,7 @@ V = \begin{bmatrix} \dot{\theta} \\ \dot{x} \\ \dot{y} \end{bmatrix}
 </div>
 <div id="outline-container-adjoint-1-P-1" class="outline-2">
 <h2 id="adjoint-1-P-1">Adjoint</h2>
-<div class="outline-text-2" id="text-orgfb818f0">
+<div class="outline-text-2" id="text-org252d5ad">
 <p>
 The 2D adjoint converts a twist in one frame to a twist in another frame. 
 </p>
@@ -238,10 +234,9 @@ V_i = \mathrm{Ad}_{ij} V_j
 \end{equation}
 </div>
 </div>
-
 <div id="outline-container-thought-experiments-1-P-1" class="outline-2">
 <h2 id="thought-experiments-1-P-1">Thought Experiments</h2>
-<div class="outline-text-2" id="text-org8b6f447">
+<div class="outline-text-2" id="text-org34abbd8">
 <ul class="org-ul">
 <li>These are some thought exercises designed to help build intuition about frames</li>
 <li>They are designed as a guide for thinking about these concepts</li>
@@ -250,14 +245,13 @@ V_i = \mathrm{Ad}_{ij} V_j
 how I think about these concepts. I'm not sure how helpful it will be to others: let me know!</li>
 </ul>
 </div>
-
 <div id="outline-container-homogeneous-coordinates-and-transformations-2-P-1" class="outline-3">
 <h3 id="homogeneous-coordinates-and-transformations-2-P-1">Homogeneous Coordinates and Transformations</h3>
 <div class="outline-text-3" id="text-homogeneous-coordinates-and-transformations-2-P-1">
 </div>
 <div id="outline-container-1-d-homogeneous-coordinates-3-P-1" class="outline-4">
 <h4 id="1-d-homogeneous-coordinates-3-P-1">1-D Homogeneous coordinates</h4>
-<div class="outline-text-4" id="text-org2dbe1c0">
+<div class="outline-text-4" id="text-org20a4e0d">
 <ol class="org-ol">
 <li>Imagine a blank wall.</li>
 <li>Horizontally on that wall, there is a numberline stretching horizontally.
@@ -291,10 +285,9 @@ homogeneous coordinate system.</li>
 </ol>
 </div>
 </div>
-
 <div id="outline-container-2-d-homogeneous-coordinates-3-P-1" class="outline-4">
 <h4 id="2-d-homogeneous-coordinates-3-P-1">2-D Homogeneous coordinates</h4>
-<div class="outline-text-4" id="text-org1716c2d">
+<div class="outline-text-4" id="text-org6e12a03">
 <ol class="org-ol">
 <li>Think about the 1D homogeneous coordinates. They are flat, on the wall.</li>
 <li>Now, imagine of these walls, intersecting each other.
@@ -322,7 +315,7 @@ can be placed at a height of \(w\).</li>
 </div>
 <div id="outline-container-transformation-matrix-3-P-1" class="outline-4">
 <h4 id="transformation-matrix-3-P-1">Transformation Matrix</h4>
-<div class="outline-text-4" id="text-org8421061">
+<div class="outline-text-4" id="text-orga4e35ea">
 <ol class="org-ol">
 <li>The goal is to be able to translate a point a fixed distance regardless of where the point is with a single matrix multiplication
 <ul class="org-ul">
@@ -369,7 +362,7 @@ can be placed at a height of \(w\).</li>
 </div>
 <div id="outline-container-pure-translations-3-P-1" class="outline-4">
 <h4 id="pure-translations-3-P-1">Pure Translations</h4>
-<div class="outline-text-4" id="text-org4c0597b">
+<div class="outline-text-4" id="text-org560e474">
 <ol class="org-ol">
 <li>A twist combines angular and translational velocity and describes
 how a reference frame is moving: \((\dot{\theta}, \dot{x}, \dot{y})\)</li>
@@ -389,7 +382,7 @@ for a few seconds?</li>
 </div>
 <div id="outline-container-pure-rotations-3-P-1" class="outline-4">
 <h4 id="pure-rotations-3-P-1">Pure Rotations</h4>
-<div class="outline-text-4" id="text-org302e235">
+<div class="outline-text-4" id="text-org2305c6a">
 <ol class="org-ol">
 <li>Imagine that you are holding onto an infinitely large object by a handle.
 <ul class="org-ul">
@@ -417,7 +410,7 @@ What is the orientation of these arrows?</li>
 </div>
 <div id="outline-container-everything-is-rotation-3-P-1" class="outline-4">
 <h4 id="everything-is-rotation-3-P-1">Everything is Rotation</h4>
-<div class="outline-text-4" id="text-org6c1b21d">
+<div class="outline-text-4" id="text-org530dfdb">
 <ol class="org-ol">
 <li>Center of Rotation - a point in space where the twist has only an angular component
 <ul class="org-ul">
@@ -438,7 +431,7 @@ What is the orientation of these arrows?</li>
 </div>
 <div id="outline-container-body-twist-vs-velocity-2-P-1" class="outline-3">
 <h3 id="body-twist-vs-velocity-2-P-1">Body Twist vs Velocity</h3>
-<div class="outline-text-3" id="text-org8b2cc3b">
+<div class="outline-text-3" id="text-orgc0e5f97">
 <ol class="org-ol">
 <li>Typically, for a robot at position \(q = (x, y, \theta)\), we represent its velocity \(\dot{q}\).</li>
 <li>The velocity of the robot \(\dot{q}\) is NOT the same as its body twist in the world frame

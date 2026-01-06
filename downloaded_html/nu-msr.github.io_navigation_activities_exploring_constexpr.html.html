@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2026-01-05 Mon 23:16 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Exploring Constexpr</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">Exploring Constexpr</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#constexpr-in-c--1-P-1">Constexpr In C++</a>
+<ul>
+<li><a href="#what--2-P-1">What?</a></li>
+<li><a href="#why--2-P-1">Why?</a></li>
+<li><a href="#why-not--2-P-2">Why Not?</a></li>
+</ul>
+</li>
+<li><a href="#activity-1-P-1">Activity</a>
+<ul>
+<li><a href="#the-code-2-P-1">The Code</a></li>
+<li><a href="#live-inspection-2-P-1">Live Inspection</a></li>
+<li><a href="#generating-the-assembly-2-P-1">Generating the Assembly</a></li>
+<li><a href="#compiler-explorer-2-P-1">Compiler Explorer</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-constexpr-in-c--1-P-1" class="outline-2">
+<h2 id="constexpr-in-c--1-P-1">Constexpr In C++</h2>
+<div class="outline-text-2" id="text-constexpr-in-c--1-P-1">
+</div>
+<div id="outline-container-what--2-P-1" class="outline-3">
+<h3 id="what--2-P-1">What?</h3>
+<div class="outline-text-3" id="text-org3498903">
+<p>
+In <code>C++</code>, the <a href="https://en.cppreference.com/w/cpp/language/constexpr.html"><code>constexpr</code></a> specifier tells the compiler that the affected declaration (e.g., function)
+may be evaluated at compile-time or at run-time.
+</p>
+
+<ol class="org-ol">
+<li>Compile-time evaluation is only possible if all inputs are <a href="https://en.cppreference.com/w/cpp/language/constant_expression.html">constant expressions</a>.
+<ul class="org-ul">
+<li>Essentially, the inputs must are known to the compiler and are constant.</li>
+<li>The definition of the phrase <i>constant expression</i> and the keyword <i>constexpr</i> are related but distinct.</li>
+</ul></li>
+<li>The compiler need not evaluate <i>constexpr</i> code, even if it is possible.
+<ul class="org-ul">
+<li>In this sense, <code>constexpr</code> is a recommendation to the compiler.</li>
+<li>If the compiler does not evaluate the <i>constexpr</i> code then it will be executed at run-time.</li>
+</ul></li>
+<li>If the <i>constexpr</i> code is used in the context of a <i>constant expression</i> then the code must be evaluated at compile-time
+<ul class="org-ul">
+<li>For example, calling a <code>constexpr</code> function from within a <code>static_assert</code> will force it to be evaluated at compile-time
+at that particular call site.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-why--2-P-1" class="outline-3">
+<h3 id="why--2-P-1">Why?</h3>
+<div class="outline-text-3" id="text-org7cef8f6">
+<p>
+Using <code>constexpr</code> is useful in several ways:
+</p>
+<ol class="org-ol">
+<li>Increases the applicability of the code by allowing it to be used in compile-time contexts.</li>
+<li>Speed-up run-time code because the value can be computed once when you compile</li>
+<li>Allow testing at compile-time using <code>static_assert</code></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-why-not--2-P-2" class="outline-3">
+<h3 id="why-not--2-P-2">Why Not?</h3>
+<div class="outline-text-3" id="text-org381701d">
+<ol class="org-ol">
+<li>Not everything that can be done in C++ can be done in <code>constexpr</code> code
+<ul class="org-ul">
+<li>The list of allowable items and constructs has expanded with each new standard</li>
+</ul></li>
+<li>It can increase compilation time
+<ul class="org-ul">
+<li>The compiler is now evaluating code that otherwise would be evaluated when the program runs</li>
+</ul></li>
+<li>It is a promise to future users:
+<ul class="org-ul">
+<li>If users rely on your code being <code>constexpr</code> (e.g., by using it in <i>constant expression</i> contexts) and you
+ever need to remove the <code>constexpr</code>, their code will break.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-activity-1-P-1" class="outline-2">
+<h2 id="activity-1-P-1">Activity</h2>
+<div class="outline-text-2" id="text-activity-1-P-1">
+</div>
+<div id="outline-container-the-code-2-P-1" class="outline-3">
+<h3 id="the-code-2-P-1">The Code</h3>
+<div class="outline-text-3" id="text-org01c7d1a">
+<p>
+Here is some code to compute the volume of a rectangular prism:
+</p>
+<div class="org-src-container">
+<pre class="src src-cpp"><span class="org-comment-delimiter">// </span><span class="org-comment">This code uses iostreams instead of print because it results in</span>
+<span class="org-comment-delimiter">// </span><span class="org-comment">generated asm code that is easier to follow.</span>
+<span class="org-preprocessor">#include</span><span class="org-string">&lt;iostream&gt;</span>
+<span class="org-keyword">using</span> <span class="org-constant">std</span>::cout;
+<span class="org-keyword">using</span> <span class="org-constant">std</span>::endl;
+
+<span class="org-keyword">constexpr</span> <span class="org-type">int</span> <span class="org-function-name">const_rect_volume</span>(<span class="org-type">int</span> <span class="org-variable-name">length</span>,
+                              <span class="org-type">int</span> <span class="org-variable-name">width</span>,
+                              <span class="org-type">int</span> <span class="org-variable-name">height</span>)
+{
+    <span class="org-keyword">return</span> length * width * height;
+}
+
+<span class="org-type">int</span> <span class="org-function-name">rect_volume</span>(<span class="org-type">int</span> <span class="org-variable-name">length</span>, <span class="org-type">int</span> <span class="org-variable-name">width</span>, <span class="org-type">int</span> <span class="org-variable-name">height</span>)
+{
+    <span class="org-keyword">return</span> length * width * height;
+}
+
+<span class="org-type">int</span> <span class="org-function-name">main</span>()
+{
+    <span class="org-keyword">auto</span> <span class="org-variable-name">const_vol</span> = const_rect_volume(10, 20, 30);
+    <span class="org-keyword">auto</span> <span class="org-variable-name">vol</span> = rect_volume(10, 20, 30);
+    cout &lt;&lt; <span class="org-string">"const_vol: "</span> &lt;&lt; const_vol
+         &lt;&lt; <span class="org-string">" vol: "</span> &lt;&lt; vol &lt;&lt; endl;
+    <span class="org-keyword">return</span> 0;
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-live-inspection-2-P-1" class="outline-3">
+<h3 id="live-inspection-2-P-1">Live Inspection</h3>
+<div class="outline-text-3" id="text-org76cc2f3">
+<ol class="org-ol">
+<li><p>
+Compile the code, run it, and verify that it works:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">g++ -std=c++23 -g -o cexpr_demo constexpr_demo.cpp
+./cexpr_demo
+<span class="org-comment-delimiter"># </span><span class="org-comment">const_vol: 6000 vol: 6000</span>
+</pre>
+</div></li>
+<li>We will now run the code in the debugger and interactively set it up:
+<ol class="org-ol">
+<li><code>gdb cexpr_demo</code> (Load the executable into the debugger)</li>
+<li><code>set disassembly-flavor intel</code> (Use intel assembly syntax)</li>
+<li><code>layout split</code> (Interactively see C++ code and the Dissassembly)</li>
+<li><code>b main</code> (Set a breakpoint on the <code>main()</code> function
+<ul class="org-ul">
+<li>You should see <code>b+</code> next to the first line in the <code>main()</code> function</li>
+</ul></li>
+<li><code>r</code> (Run the program, you can say [n] to <code>debuginfod</code> if asked</li>
+</ol></li>
+<li>The program runs until the breakpoint, with the current <code>C++</code> and <code>asm</code> lines highlighted</li>
+<li><code>p const_vol</code> to see the value of <code>const_vol</code> and <code>p vol</code> to see the value of <code>vol</code>.</li>
+<li>The code to initialize these variables has not run, so right now their values can be anything and even differ between runs</li>
+<li>The current assembly instruction is <code>mov DWORD PTR [rbp-0x8], 0x1770</code>
+<ul class="org-ul">
+<li>This instruction corresponds to <code>auto const_vol = const_rect_volume(10, 20, 30)</code></li>
+<li>This instruction moves the second operand <code>0x1770</code> into the address pointed to by <code>rbp-0x8</code>.
+<ul class="org-ul">
+<li>The hexadecimal number <code>0x1770</code> is <code>6000</code> in decimal, which is the result of <code>const_rect_volume(10, 20, 30)</code></li>
+</ul></li>
+<li>We can verify that <code>rbp-0x8 =</code> &amp;const_vol= by printing both: <code>p $rbp-0x8</code> and <code>p &amp;const_vol</code></li>
+<li>The value <code>0x1770</code> is hard-coded in the assembly, which means that it was computed by the compiler!</li>
+</ul></li>
+<li>Use the command <code>si</code> to step into the next assembly instruction
+<ul class="org-ul">
+<li>Each <code>si</code> command advances by one assembly instruction</li>
+<li>When all the instructions corresponding to a line of <code>C++</code> code are executed, the active <code>C++</code> code line advances</li>
+</ul></li>
+<li>Notice that a single <code>si</code> command advances the <code>C++</code> line, indicating that <code>auto const_vol = const_rect_volume(10, 20, 30)</code>
+was reduced to a single assembly instruction by the compiler!</li>
+<li>The next assignment is <code>auto vol = rect_volume(10, 20, 30)</code>, which is not <code>constexpr</code>
+<ul class="org-ul">
+<li>The number of times you must run <code>si</code> to advance the <code>C++</code> line is the number of instructions it takes</li>
+<li>Run <code>si</code> until you advance to the next <code>C++</code> line in <code>main()</code> and count the instructions.</li>
+<li>Verify the result with <code>p vol</code></li>
+</ul></li>
+<li>Use <code>c</code> to continue running the program and see it's output</li>
+<li>Use <code>q</code> to quit <code>gdb</code></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-generating-the-assembly-2-P-1" class="outline-3">
+<h3 id="generating-the-assembly-2-P-1">Generating the Assembly</h3>
+<div class="outline-text-3" id="text-org9ff2283">
+<ol class="org-ol">
+<li>You can also view the generated assembly language code, annotated by the compiler:</li>
+<li>Use  <code>g++ -S -masm=intel -fverbose-asm -g -std=c++23  constexpr_demo.cpp</code> to generate assembly code in <code>constexpr_demo.s</code>
+<ul class="org-ul">
+<li><code>-S</code>:  Generate assembly code</li>
+<li><code>-masm=intel</code>: Use intel syntax</li>
+<li><code>-fverbose-asm</code>: Interleave C++ code with the assembly</li>
+<li><code>-g</code> Include debugging information</li>
+</ul></li>
+
+<li>Open <code>constexpr_demo.s</code>
+<ul class="org-ul">
+<li>This is a complete assembly listing of the code, along with the corresponding C++ lines</li>
+</ul></li>
+<li>Do a text search for <code>auto const_vol</code>
+<ul class="org-ul">
+<li>Notice the assembly corresponding to this assignment is a single instruction
+(the <code>.loc</code> is an assembler directive, not code).</li>
+</ul></li>
+<li>Immediately below is the assembly code for <code>auto vol = rect_volume(10, 20, 30)</code>
+<ul class="org-ul">
+<li>Notice how there are many instructions corresponding to this line</li>
+<li>Notice that one of the instructions is a function call (<code>call _Z11rect_volumeiii</code>)</li>
+</ul></li>
+<li>To find the code for <code>_Z11rect_volumeiii</code> search for <code>_Z11rect_volumeiii:</code>
+<ul class="org-ul">
+<li>Notice that the function consists of a lot of assembly instructions</li>
+</ul></li>
+<li>Search the code for <code>return length * width * height</code>
+<ul class="org-ul">
+<li>Notice that all references refer to the <code>return</code> statement in <code>rect_volume</code></li>
+<li>There is no corresponding code for <code>const_rect_volume</code> because the compiler is evaluating it at compile-time and therefore
+it does not need to even emit runtime code.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-compiler-explorer-2-P-1" class="outline-3">
+<h3 id="compiler-explorer-2-P-1">Compiler Explorer</h3>
+<div class="outline-text-3" id="text-org0e23e0e">
+<p>
+The <a href="https://godbolt.org">Compiler Explorer</a> is an online tool that lets you easily compile your code with many different compilers and for many different architectures in order
+to view the generated assembly.
+</p>
+
+<ol class="org-ol">
+<li>The <code>C++</code> code and <code>asm</code> code are shown side by side.</li>
+<li>The <code>C++</code> code and <code>asm</code> code are color coded to show the correspondence between <code>C++</code> and <code>asm</code> instructions</li>
+<li>Selecting a line and pressing <code>Ctrl F10</code> (or right clicking) allows you to jump to the appropriate assembly code.</li>
+<li>The <a href="https://godbolt.org/z/zfrG9r7P9">original code</a> is available. Take a look and note the following:
+<ul class="org-ul">
+<li>The <code>const_vol</code> assignment corresponds to one line of assembly</li>
+<li>The <code>vol</code> assignment consists of many lines, including a function call</li>
+<li>The <code>const_rect_volume</code> function is not highlighted in any color: this is because the code
+does not exist in the assembly because it was evaluated at compile time and not needed at run time.</li>
+</ul></li>
+<li>Let's modify the code so the call to <code>const_rect_volume</code> takes a parameter that is not a <code>constexpr</code>
+<ul class="org-ul">
+<li>For example, instead of specifying all the parameters as integer literals, store one of them in a variable first.</li>
+<li>Notice that <code>const_rect_volume</code> now does have corresponding assembly code and it
+is available at runtime (and therefore included in the assembly output)</li>
+</ul></li>
+<li>Add -O2 to the compiler flags:
+<ul class="org-ul">
+<li>Notice that optimizations have resulted in the compiler doing all the calculations
+for both functions at compile time.</li>
+<li>However, there is still an implementation of <code>rect_volume</code> included in the code (but not <code>const_rect_volume</code>)</li>
+</ul></li>
+<li>If optimization can do what <code>constexpr</code> can then why <code>constexpr</code>?
+<ol class="org-ol">
+<li>The optimizer can not always turn all functions with compile-time arguments into a single result:
+<ul class="org-ul">
+<li>We got lucky because the function is simpler</li>
+</ul></li>
+<li>It is much easier to debug programs that do not have optimizations enabled, so it's useful to get the
+compile-time evaluation even without compiler optimizations</li>
+<li>Non <code>constexpr</code> functions cannot be used in <code>constant expression</code> contexts, regardless of the optimization level</li>
+</ol></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

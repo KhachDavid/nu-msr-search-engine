@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-12-18 Thu 11:29 -->
+<!-- 2026-01-05 Mon 23:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Jointly Gaussian Distributions</title>
@@ -53,7 +53,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#overview-1-P-2">Overview</a></li>
+<li><a href="#overview-1-P-15">Overview</a></li>
 <li><a href="#linear-transform-1-P-1">Linear Transform</a>
 <ul>
 <li><a href="#sketch-of-a-proof-2-P-1">Sketch of a Proof</a></li>
@@ -73,10 +73,9 @@
 </ul>
 </div>
 </nav>
-
-<div id="outline-container-overview-1-P-2" class="outline-2">
-<h2 id="overview-1-P-2">Overview</h2>
-<div class="outline-text-2" id="text-org2c894da">
+<div id="outline-container-overview-1-P-15" class="outline-2">
+<h2 id="overview-1-P-15">Overview</h2>
+<div class="outline-text-2" id="text-org256998c">
 <ul class="org-ul">
 <li>Also called Multivariate Normal Distrubtions (or Multi-Normal)</li>
 <li>\(X(\xi) \sim \mathcal{N}(\mu, \Sigma)\),
@@ -94,17 +93,16 @@ f_X(x) = (2\pi)^{-\frac{k}{2}}(\det{\Sigma})^{-\frac{1}{2}}e^{-\frac{1}{2}(x-\mu
 </ul>
 </div>
 </div>
-
 <div id="outline-container-linear-transform-1-P-1" class="outline-2">
 <h2 id="linear-transform-1-P-1">Linear Transform</h2>
-<div class="outline-text-2" id="text-orge0c1b3c">
+<div class="outline-text-2" id="text-org8907fcf">
 <ul class="org-ul">
 <li>Let \(Y = A X + b\), \(X \sim \mathcal{N}(\mu, \Sigma)\), where \(A \in \mathbb{R}^{n \times n}\) is invertable</li>
 <li>Then \(Y \sim \mathcal{N}(A \mu + b, A \Sigma A^T)\)</li>
 </ul>
 </div>
-<details id="orga6db8b9"><summary class="header-3">Sketch of a Proof</summary>
-<div class="outline-text-3" id="text-orga6db8b9">
+<details id="orgb30e02d"><summary class="header-3">Sketch of a Proof</summary>
+<div class="outline-text-3" id="text-orgb30e02d">
 <ol class="org-ol">
 <li><p>
 Use the multi-variable change of variables formula to find the new density:
@@ -118,11 +116,9 @@ f_Y(y) = \frac{f_x(x)}{\det A}
 </div>
 </details>
 </div>
-
-
 <div id="outline-container-conditional-distribution-1-P-1" class="outline-2">
 <h2 id="conditional-distribution-1-P-1">Conditional Distribution</h2>
-<div class="outline-text-2" id="text-orgf51000a">
+<div class="outline-text-2" id="text-orgc788c12">
 <ul class="org-ul">
 <li>Let \(X \sim \mathcal{N}(\mu, \Sigma)\).</li>
 <li><p>
@@ -144,17 +140,16 @@ the conditional probability of \(X_1\) given \(X_2 = a\)):
 </ul>
 </div>
 </div>
-
 <div id="outline-container-random-number-generation-in-c--1-P-1" class="outline-2">
 <h2 id="random-number-generation-in-c--1-P-1">Random Number Generation in C++</h2>
-<div class="outline-text-2" id="text-orgf452cc3">
+<div class="outline-text-2" id="text-org19237b2">
 <ul class="org-ul">
 <li><p>
 If you intend to use the <code>C++</code> standard library for generating random numbers, you can use the following <code>singleton</code> pattern to ensure that
 you are only seeding the random number generator once in your process.
 </p>
-<pre class="example">
-#include&lt;random&gt;
+<div class="org-src-container">
+<pre class="src src-nil">#include&lt;random&gt;
  std::mt19937 &amp; get_random()
  {
      // static variables inside a function are created once and persist for the remainder of the program
@@ -169,7 +164,8 @@ you are only seeding the random number generator once in your process.
  std::normal_distribution&lt;&gt; d(mean, variance);
  d(get_random());
 
-</pre></li>
+</pre>
+</div></li>
 <li>Armadillo also has random number generation functions
 <ul class="org-ul">
 <li>See, for example, <a href="http://arma.sourceforge.net/docs.html#randu_randn_standalone">http://arma.sourceforge.net/docs.html#randu_randn_standalone</a></li>
@@ -179,7 +175,7 @@ you are only seeding the random number generator once in your process.
 </div>
 <div id="outline-container-multivariate-gaussian-2-P-1" class="outline-3">
 <h3 id="multivariate-gaussian-2-P-1">Multivariate Gaussian</h3>
-<div class="outline-text-3" id="text-org88b8795">
+<div class="outline-text-3" id="text-orgd368b7f">
 <ul class="org-ul">
 <li>An algorithm for generating multivariate Gaussian noise, given mean \(m \in \mathbb{R}^n\) and variance \(Q \in \mathbb{R}^{n \times n}\) is as follows:
 <ol class="org-ol">
@@ -196,11 +192,9 @@ is independently drawn from a Gaussian distribution with mean 0 and variance 1.<
 </div>
 </div>
 </div>
-
-
 <div id="outline-container-plotting-contours-1-P-1" class="outline-2">
 <h2 id="plotting-contours-1-P-1">Plotting Contours</h2>
-<div class="outline-text-2" id="text-org5203bd6">
+<div class="outline-text-2" id="text-org350824d">
 <ul class="org-ul">
 <li>The level-sets of a Gaussian distribution (\(f_X(x) = c\)) form ellipsoids.</li>
 <li>Plotting the ellipsoid of a Gaussian is an excellent method of visualizing it
@@ -212,10 +206,9 @@ is independently drawn from a Gaussian distribution with mean 0 and variance 1.<
 <li>The major axes are rotated by \(P^T\)</li>
 </ul>
 </div>
-
 <div id="outline-container-derivation-2-P-1" class="outline-3">
 <h3 id="derivation-2-P-1">Derivation</h3>
-<div class="outline-text-3" id="text-orge147a88">
+<div class="outline-text-3" id="text-orgaf461a5">
 \begin{align}
   c &= (2\pi)^{-\frac{k}{2}}\det{\Sigma}^{-\frac{1}{2}}e^{-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu)} \\
   c' &= e^{-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu)} \\

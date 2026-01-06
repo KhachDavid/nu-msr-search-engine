@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-12-18 Thu 11:29 -->
+<!-- 2026-01-05 Mon 23:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Testing and Debugging in ROS and C++</title>
@@ -35,26 +35,25 @@
 <li><a href="#google-test-gtest--2-P-1">Google Test (GTest)</a></li>
 </ul>
 </li>
-<li><a href="#debugging-1-P-1">Debugging</a></li>
+<li><a href="#debugging-1-P-2">Debugging</a></li>
 </ul>
 </div>
 </nav>
 <div id="outline-container-overview-1-P-14" class="outline-2">
 <h2 id="overview-1-P-14">Overview</h2>
-<div class="outline-text-2" id="text-org40ff9ad">
+<div class="outline-text-2" id="text-orgf1386b6">
 <ul class="org-ul">
 <li><a href="https://docs.ros.org/en/iron/Tutorials/Intermediate/Testing/Testing-Main.html">ROS 2 Testing Overview</a></li>
 </ul>
 </div>
 </div>
-
 <div id="outline-container-levels-of-ros-testing-1-P-1" class="outline-2">
 <h2 id="levels-of-ros-testing-1-P-1">Levels of ROS testing</h2>
 <div class="outline-text-2" id="text-levels-of-ros-testing-1-P-1">
 </div>
 <div id="outline-container-library-level-unit-tests-2-P-1" class="outline-3">
 <h3 id="library-level-unit-tests-2-P-1">Library-level unit tests</h3>
-<div class="outline-text-3" id="text-orgb273dad">
+<div class="outline-text-3" id="text-org3565e48">
 <ul class="org-ul">
 <li>These tests are independent of ROS and are used for testing individual functions and libraries.</li>
 <li>Each test should be small and (ideally) run quickly</li>
@@ -65,7 +64,7 @@ every time immediately prior to merging your code into the master)</li>
 </div>
 <div id="outline-container-single-node-unit-tests-2-P-1" class="outline-3">
 <h3 id="single-node-unit-tests-2-P-1">Single Node Unit Tests</h3>
-<div class="outline-text-3" id="text-orga5e56db">
+<div class="outline-text-3" id="text-org6d67151">
 <ul class="org-ul">
 <li>The goal is to validate the functionality of a single Node</li>
 <li>Test its publishers, subscribers, and servers, and parameter usage</li>
@@ -76,7 +75,7 @@ every time immediately prior to merging your code into the master)</li>
 </div>
 <div id="outline-container-integration-test-2-P-1" class="outline-3">
 <h3 id="integration-test-2-P-1">Integration Test</h3>
-<div class="outline-text-3" id="text-org39bfc11">
+<div class="outline-text-3" id="text-org8b1ffff">
 <p>
 These tests start multiple nodes and test how the whole system works together
 </p>
@@ -88,10 +87,9 @@ These tests start multiple nodes and test how the whole system works together
 </div>
 </div>
 </div>
-
 <div id="outline-container-c-unit-testing-framework-1-P-1" class="outline-2">
 <h2 id="c-unit-testing-framework-1-P-1">C++ Unit Testing Framework</h2>
-<div class="outline-text-2" id="text-orgc774cf6">
+<div class="outline-text-2" id="text-org6a4fe8d">
 <p>
 There is no standard unit-testing framework for C++. We will use
 <a href="https://github.com/catchorg/Catch2">Catch2 (version 2)</a> in this class, but these
@@ -104,7 +102,7 @@ notes also discuss <code>gtest</code>.
 </div>
 <div id="outline-container-overview-3-P-1" class="outline-4">
 <h4 id="overview-3-P-1">Overview</h4>
-<div class="outline-text-4" id="text-orgddec164">
+<div class="outline-text-4" id="text-org8ad49d5">
 <ul class="org-ul">
 <li>Catch2 is a light-weight unit-testing framework for C++</li>
 <li>The <a href="https://github.com/catchorg/Catch2/blob/devel/docs/tutorial.md#top">Tutorial</a></li>
@@ -116,10 +114,9 @@ notes also discuss <code>gtest</code>.
 </ul>
 </div>
 </div>
-
 <div id="outline-container-how-to-use-with-ros-3-P-1" class="outline-4">
 <h4 id="how-to-use-with-ros-3-P-1">How To Use With ROS</h4>
-<div class="outline-text-4" id="text-orgc66f771">
+<div class="outline-text-4" id="text-org4f56ac4">
 <ol class="org-ol">
 <li>Make sure the <a href="http://wiki.ros.org/catch_ros">catch_ros</a> package is installed
 <ul class="org-ul">
@@ -132,10 +129,10 @@ notes also discuss <code>gtest</code>.
 </div>
 </div>
 </div>
-<details id="orgb6c78e1"><summary class="header-3">Google Test (GTest)</summary>
+<details id="org525cd9d"><summary class="header-3">Google Test (GTest)</summary>
 <div id="outline-container-overview-3-P-2" class="outline-4">
 <h4 id="overview-3-P-2">Overview</h4>
-<div class="outline-text-4" id="text-org5f2db14">
+<div class="outline-text-4" id="text-org39bfa8c">
 <ul class="org-ul">
 <li>The most common C++ unit testing framework in ROS is Google Test.</li>
 <li><a href="https://github.com/google/googletest/blob/master/googletest/docs/primer.md">Google Test Primer</a></li>
@@ -146,10 +143,9 @@ notes also discuss <code>gtest</code>.
 </div>
 </details>
 </div>
-
-<div id="outline-container-debugging-1-P-1" class="outline-2">
-<h2 id="debugging-1-P-1">Debugging</h2>
-<div class="outline-text-2" id="text-org4a39631">
+<div id="outline-container-debugging-1-P-2" class="outline-2">
+<h2 id="debugging-1-P-2">Debugging</h2>
+<div class="outline-text-2" id="text-org0133688">
 <ul class="org-ul">
 <li>Using <code>gdb</code> can greatly help you track down issues in your program
 <ul class="org-ul">

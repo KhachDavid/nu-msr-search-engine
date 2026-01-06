@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-12-18 Thu 11:29 -->
+<!-- 2026-01-05 Mon 23:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Remote Nodes</title>
@@ -21,7 +21,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#overview-1-P-7">Overview</a></li>
+<li><a href="#overview-1-P-11">Overview</a></li>
 <li><a href="#the-network-1-P-1">The Network</a></li>
 <li><a href="#environment-variables-1-P-1">Environment variables</a></li>
 <li><a href="#networking-setup-1-P-1">Networking setup</a></li>
@@ -34,9 +34,9 @@
 </ul>
 </div>
 </nav>
-<div id="outline-container-overview-1-P-7" class="outline-2">
-<h2 id="overview-1-P-7">Overview</h2>
-<div class="outline-text-2" id="text-org3549e39">
+<div id="outline-container-overview-1-P-11" class="outline-2">
+<h2 id="overview-1-P-11">Overview</h2>
+<div class="outline-text-2" id="text-org201a448">
 <p>
 Nodes in ROS communicate (via topics and services) over a network.
 Thus ROS nodes need not run on the same computer.
@@ -53,10 +53,9 @@ computer typically runs visualization and diagnostics.
 </p>
 </div>
 </div>
-
 <div id="outline-container-the-network-1-P-1" class="outline-2">
 <h2 id="the-network-1-P-1">The Network</h2>
-<div class="outline-text-2" id="text-org5c1b292">
+<div class="outline-text-2" id="text-org7e1682e">
 <ul class="org-ul">
 <li>Computers running ROS nodes must be able to communicate with each other over a network</li>
 <li>Typically, all computers are on a single local area network (LAN)</li>
@@ -73,10 +72,9 @@ computer typically runs visualization and diagnostics.
 </ul>
 </div>
 </div>
-
 <div id="outline-container-environment-variables-1-P-1" class="outline-2">
 <h2 id="environment-variables-1-P-1">Environment variables</h2>
-<div class="outline-text-2" id="text-org313d9ba">
+<div class="outline-text-2" id="text-orgcf11772">
 <ul class="org-ul">
 <li>The <code>ROS_MASTER_URI</code> environment variable tells a node where to find the <code>rosmaster</code>
 <ul class="org-ul">
@@ -97,10 +95,9 @@ other nodes how to contact <code>node A</code>.</li>
 </ul>
 </div>
 </div>
-
 <div id="outline-container-networking-setup-1-P-1" class="outline-2">
 <h2 id="networking-setup-1-P-1">Networking setup</h2>
-<div class="outline-text-2" id="text-org40c6f70">
+<div class="outline-text-2" id="text-orged979c1">
 <ul class="org-ul">
 <li>ROS networking is easiest if each computer in the network can connect to the other computers via <code>hostname</code> resolution.
 <ul class="org-ul">
@@ -126,10 +123,9 @@ do not support <code>hostname</code> resolution</li>
 </ul>
 </div>
 </div>
-
 <div id="outline-container-remote-nodes-1-P-1" class="outline-2">
 <h2 id="remote-nodes-1-P-1">Remote Nodes</h2>
-<div class="outline-text-2" id="text-orgd5b8dae">
+<div class="outline-text-2" id="text-org1fd0501">
 <ol class="org-ol">
 <li>To run a remote node, that node and all its runtime dependencies must be on the computer it runs on</li>
 <li>Therefore, you need to copy your nodes to the remote machine before you can run them</li>
@@ -142,7 +138,7 @@ do not support <code>hostname</code> resolution</li>
 </div>
 <div id="outline-container-launchfiles-2-P-1" class="outline-3">
 <h3 id="launchfiles-2-P-1">Launchfiles</h3>
-<div class="outline-text-3" id="text-orgf2ada9b">
+<div class="outline-text-3" id="text-org0a946ce">
 <ol class="org-ol">
 <li>Launchfiles can be used to run nodes on remote machine=</li>
 <li>The <code>&lt;node&gt;</code> tag in a launchfile has a <code>machine</code> attribute that lets you specify a <code>&lt;machine&gt;</code> on which to run the node</li>
@@ -157,10 +153,9 @@ do not support <code>hostname</code> resolution</li>
 </ol>
 </div>
 </div>
-
 <div id="outline-container-time-synchronization-2-P-1" class="outline-3">
 <h3 id="time-synchronization-2-P-1">Time Synchronization</h3>
-<div class="outline-text-3" id="text-org27cb118">
+<div class="outline-text-3" id="text-orgcfa498f">
 <ul class="org-ul">
 <li>Many ROS packages rely on timestamps indexed to the actual wall-clock time</li>
 <li>Thus, computers on the network must have their clocks synchronized</li>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-12-18 Thu 11:29 -->
+<!-- 2026-01-06 Tue 13:14 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Homework 1</title>
@@ -73,13 +73,15 @@
 </li>
 <li><a href="#task-b-c-and-2d-transforms--1-P-1">Task B (C++ and 2D Transforms)</a>
 <ul>
-<li><a href="#task-b-1-geometry-primitives--2-P-1">Task B.1 (geometry primitives)</a></li>
-<li><a href="#task-b-2-unit-testing-geometry--2-P-1">Task B.2 (unit testing geometry)</a></li>
-<li><a href="#task-b-3-se-2-geometry--2-P-1">Task B.3 (SE(2) geometry)</a></li>
+<li><a href="#task-b-1-the-package--2-P-1">Task B.1 (The Package)</a></li>
+<li><a href="#task-b-2-angles--2-P-1">Task B.2 (angles)</a></li>
+<li><a href="#B.3">Task B.3 (geometry primitives)</a></li>
+<li><a href="#B.4">Task B.4 (unit testing geometry)</a></li>
+<li><a href="#task-b-5-se-2-geometry--2-P-1">Task B.5 (SE(2) geometry)</a></li>
 <li><a href="#task-b-4-unit-testing-se-2--2-P-1">Task B.4 (unit testing SE(2))</a></li>
 <li><a href="#task-b-5-visualization--2-P-1">Task B.5 (visualization)</a></li>
 <li><a href="#task-b-6-executable-implementation--2-P-1">Task B.6 (executable implementation)</a></li>
-<li><a href="#task-b-7-conceptual-questions--2-P-1">Task B.7 (conceptual questions)</a></li>
+<li><a href="#task-b-7-readme-md--2-P-1">Task B.7 (README.md)</a></li>
 </ul>
 </li>
 <li><a href="#task-c-the-simulator--1-P-2">Task C (The Simulator)</a>
@@ -88,12 +90,12 @@
 <li><a href="#task-c-2-simulation-node--2-P-1">Task C.2 (simulation node)</a></li>
 <li><a href="#task-c-3-simulated-turtle--2-P-1">Task C.3 (simulated turtle)</a></li>
 <li><a href="#task-c-4-walls--2-P-1">Task C.4 (walls)</a></li>
-<li><a href="#task-c-5-cylindrical-obstacles--2-P-1">Task C.5 (cylindrical obstacles)</a></li>
+<li><a href="#C.5">Task C.5 (cylindrical obstacles)</a></li>
 <li><a href="#task-c-6-nusim-launch--2-P-1">Task C.6 (nusim launch)</a></li>
 <li><a href="#task-c-7-readme-md--2-P-1">Task C.7 (README.md)</a></li>
 </ul>
 </li>
-<li><a href="#resources-1-P-9">Resources</a></li>
+<li><a href="#resources-1-P-2">Resources</a></li>
 </ul>
 </div>
 </nav>
@@ -104,7 +106,7 @@
 </div>
 <div id="outline-container-task-0-1-reading-the-guidelines--2-P-1" class="outline-3">
 <h3 id="task-0-1-reading-the-guidelines--2-P-1">Task 0.1 (Reading the Guidelines)</h3>
-<div class="outline-text-3" id="text-org66b8db5">
+<div class="outline-text-3" id="text-orgae84f58">
 <ol class="org-ol">
 <li>Carefully read the homework submission <a href="./guidelines.html">guidelines</a>.</li>
 <li>Be sure to follow these guidelines for every assignment.</li>
@@ -114,7 +116,7 @@
 
 <div id="outline-container-task-0-2-making-a-git-repository--2-P-1" class="outline-3">
 <h3 id="task-0-2-making-a-git-repository--2-P-1">Task 0.2 (Making a Git Repository)</h3>
-<div class="outline-text-3" id="text-org6b2b8e2">
+<div class="outline-text-3" id="text-org8a9d77f">
 <ol class="org-ol">
 <li>Create a git repository using the github classroom link (sent separately).</li>
 <li>All packages made for this class should be a subdirectory in this git repository.</li>
@@ -125,7 +127,7 @@
 
 <div id="outline-container-task-0-3-making-a-readme--2-P-1" class="outline-3">
 <h3 id="task-0-3-making-a-readme--2-P-1">Task 0.3 (Making a README)</h3>
-<div class="outline-text-3" id="text-org5c71eb4">
+<div class="outline-text-3" id="text-orgf0af6b8">
 <ol class="org-ol">
 <li><p>
 Add a file called <code>README.md</code> to the base directory of the repository, based on the following template:
@@ -133,7 +135,7 @@ Add a file called <code>README.md</code> to the base directory of the repository
 <pre class="example">
 # ME495 Sensing, Navigation and Machine Learning For Robotics
 * &lt;First Name&gt; &lt;Last Name&gt;
-* Winter 2022
+* Winter 2025
 # Package List
 This repository consists of several ROS packages
 - &lt;PACKAGE1&gt; - &lt;one sentence description&gt;
@@ -145,12 +147,24 @@ This repository consists of several ROS packages
 </ol>
 </div>
 </div>
+
 <div id="outline-container-task-0-4-making-a-tasks-md--2-P-1" class="outline-3">
 <h3 id="task-0-4-making-a-tasks-md--2-P-1">Task 0.4 (Making a Tasks.md)</h3>
-<div class="outline-text-3" id="text-org91b0aeb">
+<div class="outline-text-3" id="text-orgf2f1059">
 <ol class="org-ol">
 <li>Add a file called <code>Tasks.md</code> to the repository</li>
 <li>Whenever a task is complete, list it in this file on its own line.</li>
+<li><p>
+After completing all the tasks (including this one) your <code>Tasks.md</code> will look like
+</p>
+<pre class="example">
+Task 0.1
+Task 0.2
+Task 0.3
+Task 0.4
+</pre></li>
+<li>If, when you submit an assignment, a task is only partially complete, you can add a description about
+what is working and what is not in the <code>Tasks.md</code></li>
 </ol>
 </div>
 </div>
@@ -158,11 +172,12 @@ This repository consists of several ROS packages
 
 <div id="outline-container-task-a-robot-description--1-P-1" class="outline-2">
 <h2 id="task-a-robot-description--1-P-1">Task A (Robot Description)</h2>
-<div class="outline-text-2" id="text-orgcc3ee51">
+<div class="outline-text-2" id="text-org16a6a40">
 <p>
-The goal of this task is to adapt the model in the <code>turtlebot3_description</code> for our needs.
+The goal of this task is to copy and modify the turtlebot3 model in the <code>turtlebot3_description</code> for our needs.
 Throughout this project, we may have reason to visualize multiple turtlebots in rviz simultaneously:
 for example we may want to see the estimated turtlebot location and the actual turtlebot location.
+We will use a custom version of the provided package.
 </p>
 
 <p>
@@ -174,25 +189,23 @@ editing a <code>yaml</code> file.
 
 <div id="outline-container-task-a-1-nuturtle-description-package--2-P-1" class="outline-3">
 <h3 id="task-a-1-nuturtle-description-package--2-P-1">Task A.1 (nuturtle_description package)</h3>
-<div class="outline-text-3" id="text-org9b74e0c">
+<div class="outline-text-3" id="text-org9cdff32">
 <ol class="org-ol">
-<li>Create an <code>ament_cmake</code> ROS package called <code>nuturtle_description</code>. 
+<li>Create an <code>ament_cmake</code> ROS package called <code>nuturtle_description</code>.
 <ul class="org-ul">
 <li>This should be a directory within your repository (i.e., <code>&lt;repo&gt;/nuturtle_description</code>)</li>
 <li>The package will contain urdf files and basic debugging, testing,
-and visualization code for the robots you will be using in this class</li>
+and visualization code for the robots you will be using in this class.</li>
 </ul></li>
 <li>Update the <code>package.xml</code> as follows:
 <ul class="org-ul">
-<li>Give it version number of <code>0.1.1</code></li>
+<li>Give it version number of <code>0.2.6</code></li>
 <li>Provide a descriptive description.</li>
-<li>Fill in your name and email address as the maintainer and as an author</li>
-<li>Set the License to APLv2 (the Apache License 2.0). You could use a different one but this is what turtlebot3 code is released under)</li>
+<li>Fill in your name and email address as the maintainer and as an author.</li>
+<li>Set the License to APLv2 (the Apache License 2.0). You could use a different one but this is what turtlebot3 code is released under).</li>
 <li>The package has an <code>exec_depend</code> for the packages used in its launchfiles, so these should be updated appropriately.</li>
-<li>It also has an <code>exec_depend</code> on <code>ros2launch</code></li>
+<li>It also has an <code>exec_depend</code> on <code>ros2launch</code>.</li>
 </ul></li>
-<li>If you modify files from the <a href="https://github.com/ROBOTIS-GIT/turtlebot3">turtlebot3</a> repository,
-include a comment at the top of that file stating that it has been modified from the original version (as per APLv2).</li>
 <li>The package (like all packages you write) must pass <code>colcon test</code> with no warnings or problems.</li>
 <li>HINT: It is a good idea to commit after creating the initial package but before it actually does anything.</li>
 </ol>
@@ -201,117 +214,100 @@ include a comment at the top of that file stating that it has been modified from
 
 <div id="outline-container-task-a-2-visualization--2-P-1" class="outline-3">
 <h3 id="task-a-2-visualization--2-P-1">Task A.2 (visualization)</h3>
-<div class="outline-text-3" id="text-org2aec5ae">
+<div class="outline-text-3" id="text-org165986f">
 <ol class="org-ol">
-<li>Write a launchfile called <code>load_one.launch.py</code> (in <code>&lt;repo&gt;/nuturtle_description/launch</code>) that loads the <code>turtlebot3_burger</code> URDF into a <code>robot_state_publisher</code> 
+<li>Write a launchfile called <code>load_one.launch.xml</code> (in <code>&lt;repo&gt;/nuturtle_description/launch</code>) that loads the <code>turtlebot3_burger</code> URDF into a <code>robot_state_publisher</code>
 and optionally allows viewing it in rviz.
 <ul class="org-ul">
-<li>The argument <code>use_rviz</code> (<code>true</code> or <code>false</code>, default <code>true</code>) controls whether rviz is launched.</li>
-<li>The argument <code>use_jsp</code> (<code>true</code> or <code>false</code>, default <code>true</code>) controls whether the <code>joint_state_publisher</code> is used to publish default joint states.</li>
-<li><code>ros2 launch nuturtle_description load_one.launch --show-args</code> should print documentation for the launchfile arguments.
-<ul class="org-ul">
-<li>This is the last reminder that all launchfile arguments must be documented: see the <a href="./guidelines.html">guidelines</a></li>
+<li>The argument <code>use_rviz</code> (boolean, default <code>true</code>) controls whether rviz is launched.</li>
+<li>The argument <code>use_jsp</code> (boolean, default <code>true</code>) controls whether the <code>joint_state_publisher</code> is used to publish default joint states.</li>
+<li>The appropriate <code>rviz</code> configuration should be stored in <code>nuturtle_description/config/load_one.rviz</code>.</li>
+<li>If <code>rviz</code> is launched, the launchfile should terminate when <code>rviz</code> is closed.</li>
 </ul></li>
-<li>The appropriate <code>rviz</code> configuration should be stored in <code>nuturtle_description/config/basic_purple.rviz</code></li>
-<li>If <code>rviz</code> is launched, the launchfile should terminate when <code>rviz</code> is closed
-<ul class="org-ul">
-<li>Hint: Read <a href="https://ubuntu.com/blog/ros2-launch-required-nodes">required nodes</a> in its entirety.</li>
-</ul></li>
-<li>See <a href="../../ros_notes/ros2/launch.html">Launch Notes</a></li>
-</ul></li>
-<li>Copy the minimal set of <code>mesh</code> (e.g., <code>.stl</code>) and <code>urdf/xacro</code> files from the <code>humble-devel</code> branch of the <code>turtlebot3_description</code> package
-required to display the turtlebot
+<li>Copy the minimal set of <code>mesh</code> (e.g., <code>.stl</code>) and <code>urdf/xacro</code> files from the branch of the <code>turtlebot3_description</code> package
+required to display the turtlebot.
 <ul class="org-ul">
 <li>Do not include any files that are not necessary.</li>
-<li>Include all the necessary <code>.stl</code> files in the base <code>meshes/</code> subdirectory and do not keep the <code>bases/</code>, <code>sensors</code>, and <code>wheels/</code> sub-directories.</li>
-<li>Make sure that when copied to your repository the <code>.stl</code> files have the proper permissions (e.g. are not executable). 
+<li>Include all the necessary <code>.stl</code> files in the base <code>meshes/</code> directory (e.g., do not keep the <code>meshes/bases</code>, <code>meshes/sensors</code>, and <code>meshes/wheels</code> sub-directories.</li>
+<li>Make sure that when copied to your repository the <code>.stl</code> files have the proper permissions (e.g. are not executable).</li>
+<li>If you use any <code>.urdf</code> files (as opposed to <code>.urdf.xacro</code> files) rename them to <code>.urdf.xacro</code> and set them up to use xacro.
 <ul class="org-ul">
-<li>Be careful as they are executable in the <code>turtlebot3</code> repository.</li>
+<li>We will be modifying them later and need xacro.</li>
 </ul></li>
-<li>If you use <code>.urdf</code> files (as opposed to <code>.urdf.xacro</code> files) rename them to <code>.urdf.xacro</code> and set them up to use xacro, as we will be modifying them later and need xacro.</li>
 </ul></li>
-<li>Modify the <code>urdf/xacro</code> files so that the <code>meshes</code> are able to be loaded from their new location, as installed into the install space of your repository
+<li>Modify the <code>urdf/xacro</code> files so that the <code>meshes</code> are able to be loaded from the <code>nuturtle_description</code> package.</li>
+<li>No <code>turtlebot3</code> should need to be installed on your system for <code>ros2 launch nuturtle_description load_one.launch.xml</code> to work.
 <ul class="org-ul">
-<li>Remember, all files that you want to use must be <a href="https://docs.ros.org/en/iron/How-To-Guides/Developing-a-ROS-2-Package.html#c-packages">installed</a> via the <code>CMakeLists.txt</code></li>
+<li>In other words, your package does not have any dependencies on any <code>turtlebot3</code> packages.</li>
+<li>Be careful: the <code>urdf</code> files, by default, load assets from the <code>turtlebot3_description</code> package, so you need to modify this behavior.</li>
+<li>If you temporarily remove the <code>meshes/</code> in your package and everything still works, the assets are likely being loaded from the <code>turtlebot3_description</code> package</li>
+<li>If you remove all <code>turtlebot3_*</code> packages from your system, your package should still work.</li>
 </ul></li>
-<li>No <code>turtlebot3_packages</code> should need to be installed for <code>ros2 launch nuturtle_description load_one.launch</code> to work.
-<ul class="org-ul">
-<li>Be careful here. The <code>urdf</code> files, by default, load assets from the <code>turtlebot3_description</code> package, so you need to modify this behavior.</li>
-<li>If you temporarily move the <code>meshes</code> in your package and everything still works, the assets are likely being loaded from the <code>turtlebot3_description</code> package</li>
-</ul></li>
-<li>Your launchfile should be written in a declarative style, which means that it
-<ul class="org-ul">
-<li>Should not use any variables</li>
-<li>The entire launch description should be returned from a single return statement</li>
-<li>Hint: See <a href="../../ros_notes/ros2/modeling.html#rviz_xacro_launch">this example</a> for how to load a xacro URDF into the <code>robot_state_publisher</code></li>
-</ul></li>
+<li>Every file from <code>turtlebot3_description</code> that you modify should have a comment at the top stating that it was modified and why.</li>
 </ol>
 </div>
 </div>
 
 <div id="outline-container-task-a-3-yaml-file--2-P-1" class="outline-3">
 <h3 id="task-a-3-yaml-file--2-P-1">Task A.3 (yaml File)</h3>
-<div class="outline-text-3" id="text-org8bac58e">
+<div class="outline-text-3" id="text-orgea68ab1">
 <ol class="org-ol">
 <li>Create <code>&lt;repo&gt;/nuturtle_description/config/diff_params.yaml</code> file to provide a complete parametric description of a differential drive robot.
 <ul class="org-ul">
-<li>Not all these parameters will be used in this assignment, but they will be useful later</li>
+<li>Not all these parameters will be used in this assignment, but they will be useful later.</li>
 </ul></li>
-<li>You should have the following parameters:
+<li>The <code>diff_params.yaml</code> has the following parameters:
 <ul class="org-ul">
 <li><code>wheel_radius</code>: The radius of the wheels (see: <a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/features/">Turtlebot3 Specifications</a>)</li>
 <li><code>track_width</code>: The distance between the wheels (see: <a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/features/">Turtlebot3 Specifications</a>)</li>
 <li><code>motor_cmd_max</code>: 265. The motors are provided commands in the interval <code>[-motor_cmd_max, motor_cmd_max]</code></li>
 <li><code>motor_cmd_per_rad_sec</code>: Each motor command unit (mcu) is <code>0.024 rad/sec</code> (i.e., <code>1 mcu = 0.024 rad/sec</code>)</li>
 <li><code>encoder_ticks_per_rad</code>: The number of encoder ticks per radian. One revolution of the wheel is \(2^{12}\) ticks because it is a 12-bit encoder. (i.e. \(2^{12} \mathrm{ticks} = 2 \pi \mathrm{rad}\))</li>
-<li><code>collision_radius</code>: Set this to be <code>0.11</code>. This is some simplified geometry used for collision detection</li>
+<li><code>collision_radius</code>: Set this value to be <code>0.11</code>: we will use a cylinder as simplified geometry used for collision detection.</li>
 </ul></li>
-<li>Modify the <code>turtlebot3</code> URDF so that it uses the parameters from <code>diff_params.yaml</code> such that
+<li>Modify the <code>turtlebot3</code> URDF so that it uses the parameters from <code>diff_params.yaml</code> such that:
 <ul class="org-ul">
-<li>Changing <code>wheel_radius</code> changes the collision geometry of the wheels</li>
-<li>Changing <code>track_width</code> changes the distance between the wheels</li>
+<li>Changing <code>wheel_radius</code> changes the collision geometry of the wheels.</li>
+<li>Changing <code>track_width</code> changes the distance between the wheels.</li>
 <li>The <code>base_link</code> of the robot uses the <code>collision_radius</code> as follows:
 <ul class="org-ul">
-<li>The cylinder should be the same height as the box it is replacing</li>
-<li>If <code>collision-radius</code> is negative, the original box collision geometry is used</li>
+<li>It's collision box should be cylinder the same height as the box it is replacing that fully encloses the turtlebot3.</li>
 </ul></li>
-<li>Hint: in XML, '&lt;' and '&gt;' are special characters reserved for tags. Use <code>&amp;lt;</code> and <code>&amp;gt;</code> to represent them when they are used as attributes</li>
 </ul></li>
-<li>See <a href="../../ros_notes/ros2/modeling.html#xacro">Xacro Notes</a></li>
+<li>Hint: See <a href="../../ros_notes/ros2/modeling.html#xacro">Xacro Notes</a></li>
 </ol>
 </div>
 </div>
+
 <div id="outline-container-task-a-4-prefix--2-P-1" class="outline-3">
 <h3 id="task-a-4-prefix--2-P-1">Task A.4 (prefix)</h3>
-<div class="outline-text-3" id="text-org9ba1ad6">
+<div class="outline-text-3" id="text-org52999ae">
 <p>
 Throughout this project we will need to track and display multiple robots.
-Toward this end, we will add an argument called <code>color</code> to the robot's xacro file, which will change the color of the robot
+We will add an argument called <code>color</code> to the turtlebot3 xacro file, which will change the color of the robot
 and launch nodes corresponding to each robot in their own respective namespaces.
 </p>
 
 <ol class="org-ol">
-<li>Modify the xacro URDF files to take an argument called <code>color</code>: possible values are <code>red</code>, <code>green</code>, <code>blue</code>, and <code>purple</code>.
+<li>Modify the xacro URDF files to take an argument called <code>color</code>: possible values are <code>red</code>, <code>green</code>, <code>blue</code>, <code>purple</code>.
 <ul class="org-ul">
 <li>The RGB values for Purple are Northwestern Purple: Red: 0.3, Green: 0.16, Blue: 0.52</li>
 </ul></li>
 <li>Based on the value of <code>color</code>, the resulting URDF file should set the color of the <code>base_link</code> appropriately</li>
-<li>Modify <code>load_one.launch.py</code> to accept an argument called <code>color</code> (defaulting to <code>purple</code>) that
+<li>Modify <code>load_one.launch.xml</code> to accept an argument called <code>color</code> (defaulting to <code>purple</code>) that
 <ul class="org-ul">
-<li>Determines the <code>color</code> that is passed to the <code>xacro</code> file as an argument (be sure to document it).
+<li>Determines the <code>color</code> that is passed to the <code>xacro</code> file as an argument.</li>
+<li>Determines the namespace in which all nodes (including <code>rviz</code>) are launched.
 <ul class="org-ul">
-<li>Use the <code>choices</code> keyword argument to <code>DeclareLaunchArgument</code> to automatically document and restrict the value to valid colors</li>
+<li>All nodes will be launched in a namespace given by <code>$(var color)</code></li>
 </ul></li>
-<li>Determines the namespace in which all nodes (including <code>rviz</code>) are launched (namespace used is the value of <code>color</code>)</li>
-<li>Sets the <code>frame_prefix</code> parameter of the <code>robot_state_publisher</code> such that all <code>tf</code> frames published are prefixed with <code>color/</code></li>
-<li>Set the appropriate Tf-prefix in the Robot View in rviz
+<li>Sets the <code>frame_prefix</code> parameter of the <code>robot_state_publisher</code> such that all <code>tf</code> frames published are prefixed with <code>$(var color)/</code></li>
+<li>Set the appropriate <code>tf</code>-prefix in the Robot View in rviz.
 <ul class="org-ul">
-<li>HINT: you may need to create a separate rviz configuration file for each color (<code>basic_&lt;color&gt;.rviz</code>)</li>
-<li>HINT: The <code>launch.action</code> <code>SetLaunchConfiguration</code> let's you create a <code>LaunchConfiguration</code> from substitution rules, which can be concatenated
-using a list. So you can build the name of the file using <code>SetLaunchConfiguration</code> and access it later.</li>
+<li>A different <code>rviz</code> configuration file will be needed for each <code>tf</code> prefix.</li>
 </ul></li>
-<li>Sets the appropriate <code>fixed_frame</code> in <code>rviz</code>, without changing the <code>.rviz</code> configuration file (hint: see <code>rviz2 --help</code>).</li>
-<li>Using the <code>choices</code> argument to <code>DeclareLaunchDescription</code>, restrict the value of <code>color</code> to be only the valid values (supported colors and empty "").</li>
+<li>Sets the appropriate <code>fixed_frame</code> in <code>rviz</code>.</li>
+<li>Use the <code>choices</code> attribute to automatically document and restrict the value of the argument to valid colors</li>
 </ul></li>
 </ol>
 </div>
@@ -319,7 +315,7 @@ using a list. So you can build the name of the file using <code>SetLaunchConfigu
 
 <div id="outline-container-task-a-5-multi-robot--2-P-1" class="outline-3">
 <h3 id="task-a-5-multi-robot--2-P-1">Task A.5 (multi robot)</h3>
-<div class="outline-text-3" id="text-org4b988d7">
+<div class="outline-text-3" id="text-org7b3957d">
 <p>
 In this task we will test the ability to load multiple independent robots in <code>rviz</code>.
 </p>
@@ -329,36 +325,33 @@ In this task we will test the ability to load multiple independent robots in <co
 <ul class="org-ul">
 <li>Create and save the configuration in <code>config/basic_all.rviz</code></li>
 </ul></li>
-<li>This launchfile should include <code>load_one.launch.py</code> several times to accomplish its task.</li>
-<li>This launchfile should start rviz in the global namespace and terminate the launchfile when rviz closes
-<ul class="org-ul">
-<li>This is accomplished with the "required" attribute to the node tag in ROS 1. It is not implemented yet in ROS2, so just leave it off for now.</li>
-<li>As of 1/2024 there is a <a href="https://github.com/ros2/launch/pull/751">pull request</a> to enable this feature in XML launch files, but it is not released for <code>iron</code>.</li>
-</ul></li>
+<li>This launchfile should include <code>load_one.launch.xml</code> several times to accomplish its task.</li>
+<li>This launchfile should start rviz in the global namespace and terminate the launchfile when rviz closes</li>
 <li>Each robot should have it's own <code>joint_state_publisher</code> and <code>robot_state_publisher</code> in the appropriate <code>&lt;color&gt;</code> namespace (i.e., <code>red/</code>, <code>green/</code>, <code>blue/</code>, or <code>purple/</code>)</li>
 <li>The locations of the robots should be as follows:
 <ul class="org-ul">
-<li><code>red</code> is at (0.3,0,0) in the <code>nusim/world</code> frame</li>
-<li><code>green</code>  is at (0,0.6,0) in the <code>nusim/world</code> frame</li>
-<li><code>blue</code> is at (-0.71,0,0) in the <code>nusim/world</code> frame</li>
-<li><code>purple</code> is at (0,-0.9,0) in the <code>nusim/world</code> frame</li>
+<li><code>red</code> is at (0.25, 0, 0) in the <code>nusim/world</code> frame</li>
+<li><code>green</code>  is at (0, 0.5, 0) in the <code>nusim/world</code> frame</li>
+<li><code>blue</code> is at (-0.5, 0, 0) in the <code>nusim/world</code> frame</li>
+<li><code>purple</code> is at (0, -1.0, 0) in the <code>nusim/world</code> frame</li>
 </ul></li>
 <li>A <code>tf</code> view should be added to <code>rviz</code> and the <code>nusim/world</code> frame should be the only frame visible.</li>
 <li>In the rviz model tree, rename each model to it's appropriate color
 <ul class="org-ul">
 <li>Instead of four items name "RobotModel", have a "BlueRobot" and a "RedRobot" etc.</li>
 </ul></li>
-<li>Hint: use <code>ros2 run tf2_ros static_transform_publisher --help</code> for information on a node that the launchfile can run to publish static transforms</li>
+<li>Hint: use <code>ros2 run tf2_ros static_transform_publisher --help</code> for information on a node that the launchfile can run to publish static transforms in order
+to publish <code>nusim/world</code></li>
 </ol>
 </div>
 </div>
 
 <div id="outline-container-task-a-6-readme--2-P-1" class="outline-3">
 <h3 id="task-a-6-readme--2-P-1">Task A.6 (README)</h3>
-<div class="outline-text-3" id="text-orgb9128af">
+<div class="outline-text-3" id="text-org398ec5f">
 <ol class="org-ol">
 <li><p>
-Write a README.md for your package based on the following template (fill in the <code>&lt;X Here&gt;</code> with the appropriate command. Remember to remove the <code>&lt;&gt;</code>:
+Write a <code>README.md</code> for your package based on the following template (fill in the <code>&lt;X Here&gt;</code> with the appropriate command. Remember to remove the <code>&lt;&gt;</code>:
 </p>
 <pre class="example">
 # Nuturtle  Description
@@ -368,6 +361,7 @@ URDF files for Nuturtle &lt;Name Your Robot&gt;
 ![](images/rviz.png)
 * The rqt_graph when all four robots are visualized (Nodes Only, Hide Debug) is:
 ![](images/rqt_graph.svg)
+
 # Launch File Details
 * `&lt;Command To Show Arguments of load_one.launch.py&gt;`
   `&lt;Output of the Above Command&gt;`
@@ -375,8 +369,8 @@ URDF files for Nuturtle &lt;Name Your Robot&gt;
   `&lt;Output of the Above Command&gt;`
 </pre></li>
 <li>The <code>rqt_graph</code> should be saved as an <code>.svg</code> from the <code>rqt_graph</code> program and stored as <code>images/rqt_graph.svg</code>.</li>
-<li>A screenshot from rviz showing the robots should be saved as <code>images/rviz.png</code></li>
-<li>The images must display properly when viewing the README on GitHub</li>
+<li>A screenshot from rviz showing all four robots should be saved as <code>images/rviz.png</code></li>
+<li>The images must display properly when viewing the <code>README.md</code> on GitHub</li>
 </ol>
 </div>
 </div>
@@ -384,10 +378,10 @@ URDF files for Nuturtle &lt;Name Your Robot&gt;
 
 <div id="outline-container-task-b-c-and-2d-transforms--1-P-1" class="outline-2">
 <h2 id="task-b-c-and-2d-transforms--1-P-1">Task B (C++ and 2D Transforms)</h2>
-<div class="outline-text-2" id="text-orgda2d82f">
+<div class="outline-text-2" id="text-org5dadd11">
 <p>
 Here you will begin to write a library called <code>turtlelib</code> for performing 2D rigid body transformations and other
-functionality.
+functionality that will be needed for the project.
 </p>
 
 <p>
@@ -395,35 +389,78 @@ You are not permitted to use any libraries other than the C++ standard library t
 </p>
 
 <p>
-The first steps in this assignment take you through the process of building a non-ros C++ project, first from scratch, then with <code>CMake</code>.
+The first steps in this assignment take you through the process of building a non-ros C++ project.
 </p>
 
 <p>
 The tasks here are grouped according to what needs to be done, but it is likely not a good idea to simply implement the whole library
-and then test it. Instead you should read through the tasks and work on them concurrently so you can examine and test your implementation as you
-go along.
+and then test it. Instead you should read through the tasks, establish the problem and framework, and then implement each feature
+and test one by one.
 </p>
 </div>
 
-<div id="outline-container-task-b-1-geometry-primitives--2-P-1" class="outline-3">
-<h3 id="task-b-1-geometry-primitives--2-P-1">Task B.1 (geometry primitives)</h3>
-<div class="outline-text-3" id="text-orgcc38686">
+<div id="outline-container-task-b-1-the-package--2-P-1" class="outline-3">
+<h3 id="task-b-1-the-package--2-P-1">Task B.1 (The Package)</h3>
+<div class="outline-text-3" id="text-orge94e175">
 <ol class="org-ol">
 <li>Create a new directory called <code>turtlelib</code> in your base repository.
 <ul class="org-ul">
-<li>Set this up as a <code>CMake</code> project.  Include the ability to generate documentation with <code>doxygen</code> and run unit tests.</li>
-<li>You may use the example in <a href="../lectures/cmake_basics.html">CMake Basics</a> to get started, but make sure you read through it and do not have any unnecessary code.</li>
+<li>Create a <code>CMakeLists.txt</code>  that includes the ability to generate <code>doxygen</code> documentation.</li>
+<li>You should create and install a library called <code>turtlelib</code> that can be referenced as <code>turtlelib::turtlelib</code> from other packages</li>
+<li>The <a href="../lectures/cmake_basics.html">CMake Basics</a> page should help get you started.</li>
 </ul></li>
-<li>This directory will hold the <code>turtlelib</code> library and associated executables and will be a ROS-Independent CMake Project
+<li>This package will be independent from ROS and not use any ROS libraries or functionality
 <ul class="org-ul">
-<li>Follow the directory structure specified in <a href="../lectures/cmake_basics.html">CMake Basics</a> and be sure to put files in the appropriate locations.</li>
-<li>I will provide file names but not the full path to each file, they should be placed in the correct location based on what they are for.</li>
+<li>However, colcon will still be able to build the package</li>
 </ul></li>
-<li>Download <a href="../images/geometry2d.hpp">geometry2d.hpp</a>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-task-b-2-angles--2-P-1" class="outline-3">
+<h3 id="task-b-2-angles--2-P-1">Task B.2 (angles)</h3>
+<div class="outline-text-3" id="text-org7588883">
+<ol class="org-ol">
+<li>Download <a href="../code/hw1/angle.hpp">angle.hpp</a>
 <ul class="org-ul">
 <li>This file will be a header that is part of a library called <code>turtlelib</code></li>
+<li>You are responsible for filling in the function definitions, but are not permitted to change any function prototypes or otherwise
+modify the public API of <code>angle.hpp</code>.</li>
+</ul></li>
+<li>Write a program called <code>converter</code> that:
+<ol class="org-ol">
+<li>Prompts the user for input with the following string <code>"Enter an angle: &lt;angle&gt; &lt;deg|rad&gt;, (CTRL-D to exit)\n"</code></li>
+<li>Reads in the angle (as a double) and the unit (a string either <code>"deg"</code> or <code>"rad"</code>).
+<ul class="org-ul">
+<li>The <code>angle</code> and the <code>unit</code> are separated by whitespace.</li>
+</ul></li>
+<li>Outputs ="{angle} {unit} is {converted_normal_angle} {other_unit}.\n", where
+<ul class="org-ul">
+<li><code>{angle}</code>  is the angle entered by the user, but normalized to <code>(-180, 180]</code> or <code>(-pi, pi)</code> (depending on the unit)</li>
+<li><code>{unit}</code> is the unit entered by the user</li>
+<li><code>{converted_normal_angle}</code> is <code>{angle}</code> converted to degrees (if <code>{unit}</code> is <code>rad</code>) or radians (if unit is <code>deg</code>).
+<ul class="org-ul">
+<li>The <code>converted_normal_angle</code> angle should be normalized.</li>
+</ul></li>
+<li><code>{other_unit}</code> is <code>"deg"</code> if <code>{unit}</code> is <code>"rad"</code> or <code>"rad"</code> if <code>{unit}</code> is <code>"deg"</code></li>
+</ul></li>
+<li>The program should loop and prompt again, until the user enters the EOF character (<code>CTRL-D</code>)</li>
+<li>If the input is malformed, the user should be prompted with
+<code>"Invalid input: please enter &lt;angle&gt; &lt;deg|rad&gt;, (CTRL-D to exit)\n"</code></li>
+</ol></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-B.3" class="outline-3">
+<h3 id="B.3">Task B.3 (geometry primitives)</h3>
+<div class="outline-text-3" id="text-B.3">
+<ol class="org-ol">
+<li>Download <a href="../code/hw1/geometry2d.hpp">geometry2d.hpp</a>
+<ul class="org-ul">
 <li>You are responsible for implementing this file in <code>geometry2d.cpp</code> and filling in any blank implementations (indicated by <code>{}</code> in <code>geometry2d.hpp</code>).</li>
-<li>You may add <code>private</code> members to any class but do not add or modify any <code>public</code> members or any function prototypes or otherwise add to or modify the <code>turtlelib</code> or global namespaces.</li>
+<li>You may add <code>private</code> members to any class.</li>
+<li>Do not add or modify any <code>public</code> members, function prototypes or add any names or variables to the global or <code>turtlelib</code> namespaces (or add any new namespaces).</li>
 <li>The <a href="http://www.doxygen.nl">doxygen</a> style comments in the header files should not be repeated in the implementation files
 <ul class="org-ul">
 <li>It is a matter of style whether to put these detailed comments in the <code>.cpp</code> or <code>.hpp</code> file</li>
@@ -434,92 +471,73 @@ go along.
 </div>
 <div id="outline-container-hints-3-P-1" class="outline-4">
 <h4 id="hints-3-P-1">Hints</h4>
-<div class="outline-text-4" id="text-orga0cc6ad">
+<div class="outline-text-4" id="text-org56840ef">
 <ol class="org-ol">
 <li>For more information about the operator overloading going on in this example see
 <a href="https://stackoverflow.com/questions/4421706/what-are-the-basic-rules-and-idioms-for-operator-overloading/4421715">(a good Stack Overflow post)</a></li>
 <li>For more information about transforms, see <a href="../lectures/rigid2d.html">Rigid Body Transformations in 2D</a></li>
-<li>Implementing the stream extraction operators <code>&gt;&gt;</code> can successfully be done in only a few lines of code.
+<li>Implementing the stream extraction operators <code>&gt;&gt;</code> and <code>&lt;&lt;</code> can successfully be done in only a few lines of code.
 <ul class="org-ul">
 <li>Simplifications can be made by looking at the specification for <a href="https://en.cppreference.com/w/cpp/io/basic_istream/operator_gtgt">operator&gt;&gt;</a>
 and the hint in <code>geometry2d.hpp</code></li>
 </ul></li>
-<li>A good strategy for implementation is:
-<ul class="org-ul">
-<li>Write minimal stub functionality that does not work but does compile.</li>
-<li>Move on to task B.2 to write some tests (which initially fail).</li>
-<li>Iterate between writing tests and implementing the functionality until both B.1 and B.2 are complete.</li>
-</ul></li>
+<li>It makes sense to iterate with <a href="#B.4">B.4</a>, implementing some functionality and then testing.</li>
 </ol>
 </div>
 </div>
 </div>
 
-<div id="outline-container-task-b-2-unit-testing-geometry--2-P-1" class="outline-3">
-<h3 id="task-b-2-unit-testing-geometry--2-P-1">Task B.2 (unit testing geometry)</h3>
-<div class="outline-text-3" id="text-orga1a069c">
+<div id="outline-container-B.4" class="outline-3">
+<h3 id="B.4">Task B.4 (unit testing geometry)</h3>
+<div class="outline-text-3" id="text-B.4">
 <ol class="org-ol">
-<li>In <code>test_geometry2d.cpp</code>, test all non-constexpr functions in <code>geometry2d.hpp</code>
+<li>In <code>test_geometry2d.cpp</code>, test all non-constexpr functions in <code>geometry2d.hpp</code> using Catch2
 <ul class="org-ul">
 <li>See <a href="https://github.com/catchorg/Catch2/blob/devel/docs/tutorial.md#top">The Catch2 Tutorial</a></li>
-<li>Be sure to use approximate comparisons: see <a href="https://github.com/catchorg/Catch2/blob/devel/docs/comparing-floating-point-numbers.md#top">Floating Point Comparisons</a>
-<ul class="org-ul">
-<li>Do NOT use your <code>almost_equal</code> implementation for testing purposes. This function is not designed to provide testing diagnostics, it is for use in an actual system that will require approximate comparisons.</li>
+<li>Be sure to use <a href="https://github.com/catchorg/Catch2/blob/devel/docs/comparing-floating-point-numbers.md#top">Approximate Floating Point Comparisons</a> where needed</li>
+<li>Do NOT use your <code>almost_equal</code> implementation for testing purposes because it does not provide test diagnostics: it is for an actual system that requires
+approximate comparison.</li>
 </ul></li>
-</ul></li>
-<li>Every function should have at least one test, including <code>operator&lt;&lt;</code> and <code>operator&gt;&gt;</code>.</li>
-<li>The <code>normalize_angle</code> function is crucial and traditionally a major source of bugs.
-<ul class="org-ul">
-<li>Including at least the following cases: \(\pi\), \(-\pi\), \(0\), \(-\frac{\pi}{4}\), \(\frac{3\pi}{2}\), \(-\frac{5\pi}{2}\).</li>
-</ul></li>
+<li>Every function should have at least one test.</li>
 <li>Make sure the tests all pass!  You will be using this library in future assignments so you need your implementation to be correct.</li>
-
-<li><p>
-Catch2 v3 is not shipped with Ubuntu 22.04. Here is how to install it from source:
-</p>
-<div class="org-src-container">
-<pre class="src src-bash">git clone https://github.com/catchorg/Catch2.git
-<span class="org-builtin">cd</span> catch2
-cmake -Bbuild . -DBUILD_TESTING=OFF
-cmake --build build/
-sudo cmake --build build/ --target install
-</pre>
-</div>
-<ul class="org-ul">
-<li><a href="https://github.com/catchorg/Catch2/blob/devel/docs/cmake-integration.md#installing-catch2-from-git-repository">Install from source instructions</a>.</li>
-</ul></li>
 </ol>
 </div>
+
 <div id="outline-container-hints-3-P-2" class="outline-4">
 <h4 id="hints-3-P-2">Hints</h4>
-<div class="outline-text-4" id="text-orgcfacda4">
+<div class="outline-text-4" id="text-org20ed41e">
 <ol class="org-ol">
-<li>It makes sense to iterate with B.1 so that you can use the tests to help you implement functionality</li>
-<li>The <code>std::stringstream</code> class will be helpful for testing <code>operator&lt;&lt;</code> and <code>operator&gt;&gt;</code>. It lets you use an <code>std::string</code> as a stream instead of a file.</li>
-<li><a href="https://github.com/catchorg/Catch2/blob/devel/docs/tutorial.md#top">Catch2 Tutorial</a></li>
+<li>It makes sense to iterate with <a href="#B.3">B.3</a> so that you can use the tests to help you implement functionality</li>
+<li>The <code>std::stringstream</code> class will be helpful for testing <code>operator&lt;&lt;</code> and <code>operator&gt;&gt;</code>.
+<ul class="org-ul">
+<li>It lets you use an <code>std::string</code> as a stream instead of a file.</li>
+</ul></li>
 </ol>
 </div>
 </div>
 </div>
 
-<div id="outline-container-task-b-3-se-2-geometry--2-P-1" class="outline-3">
-<h3 id="task-b-3-se-2-geometry--2-P-1">Task B.3 (SE(2) geometry)</h3>
-<div class="outline-text-3" id="text-orgfd6a908">
+<div id="outline-container-task-b-5-se-2-geometry--2-P-1" class="outline-3">
+<h3 id="task-b-5-se-2-geometry--2-P-1">Task B.5 (SE(2) geometry)</h3>
+<div class="outline-text-3" id="text-orge7c14ce">
 <ol class="org-ol">
-<li>Download <a href="../images/se2d.hpp">se2d.hpp</a>, a <code>turtlelib</code> header file that lets you work with SE(2) geometry.
+<li>Download <a href="../code/hw1/se2d.hpp">se2d.hpp</a>, a <code>turtlelib</code> header file that lets you work with <code>SE(2)</code> geometry.
 <ul class="org-ul">
 <li>This file will be a header that is part of the <code>turtlelib</code> library</li>
 <li>Implement the specified functionality in a file called  <code>se2d.cpp</code></li>
-<li>You may add <code>private members to any class but do not add or modify any =public</code> members or any function prototypes or otherwise add to or modify the <code>turtlelib</code> or global namespaces.</li>
+<li>You may add <code>private</code> members to any class but do not add or modify any <code>public</code> members or any function prototypes or otherwise add to or modify the <code>turtlelib</code> or global namespaces.</li>
+<li>Do not use any external libraries</li>
 </ul></li>
 </ol>
 </div>
 
 <div id="outline-container-hints-3-P-3" class="outline-4">
 <h4 id="hints-3-P-3">Hints</h4>
-<div class="outline-text-4" id="text-org75d015d">
+<div class="outline-text-4" id="text-org75274f1">
 <ol class="org-ol">
-<li>It will be helpful to iterate by working on B.4, B.5, and B.6 as you implement the required functionality so you can test it as you go.</li>
+<li>It will be helpful to iterate with writing unit tests so you can test as you go</li>
+<li>This task is significantly more difficult to implement, debug, and optimize if you take the approach of doing
+everything in <code>SE(3)</code> and specializing to <code>SE(2)</code>, rather than immediately assuming that the world is 2 dimensional</li>
 </ol>
 </div>
 </div>
@@ -527,13 +545,14 @@ sudo cmake --build build/ --target install
 
 <div id="outline-container-task-b-4-unit-testing-se-2--2-P-1" class="outline-3">
 <h3 id="task-b-4-unit-testing-se-2--2-P-1">Task B.4 (unit testing SE(2))</h3>
-<div class="outline-text-3" id="text-org12ad633">
+<div class="outline-text-3" id="text-orgc541314">
 <ol class="org-ol">
 <li>In <code>test_se2d.cpp</code> test every function and method in <code>se2d.hpp</code></li>
 <li>You may directly combine your tests with the work of your classmates to achieve this coverage, as long as the following conditions are met:
 <ul class="org-ul">
 <li>You personally must develop and write at least six test cases.</li>
 <li>You may only share or receive test cases directly from the person who wrote them.</li>
+<li>You do not work with more than three other students</li>
 <li><p>
 Each test is annotated with the author's name as follows:
 </p>
@@ -543,14 +562,13 @@ TEST_CASE("inverse", "[transform]") // First Name, Last Name
 <li>The author name and test name are listed on their own line in <code>citations.txt</code></li>
 <li>Each <code>TEST_CASE</code> can have multiple assertions (e.g. <code>CHECK</code>, <code>REQUIRE</code>) but only one author</li>
 </ul></li>
-<li>We will use the Catch2 v3 framework which is not yet released for Ubuntu</li>
 </ol>
 </div>
 </div>
 
 <div id="outline-container-task-b-5-visualization--2-P-1" class="outline-3">
 <h3 id="task-b-5-visualization--2-P-1">Task B.5 (visualization)</h3>
-<div class="outline-text-3" id="text-orgc763625">
+<div class="outline-text-3" id="text-org732f15f">
 <p>
 It can be difficult to know if your geometry-related code is working without being able to visualize it.
 Unfortunately there is no generally agreed upon good plotting library for C++.
@@ -560,17 +578,23 @@ Although the SVG specification is complicated, the subset that we need is small 
 
 <p>
 Examine this <a href="../images/svg_lib_example.svg">example svg</a> file in a text editor to understand how SVG (for our purposes) works and what content you will need to produce.
-I have commented the file with XML comments (<code>&lt;!-- --&gt;</code>): these do not need to be included in your version.
+I have commented the file with XML comments (<code>&lt;!-- --&gt;</code>): these do not need to be included in your version but rather are meant to explain the format.
 </p>
 
 <ol class="org-ol">
 <li>Create a new header file <code>svg.hpp</code> and implementation file <code>svg.cpp</code> in <code>turtlelib</code>.</li>
-<li>Design and implement a class called <code>Svg</code> in the <code>turtlelib</code> namespace that lets you "Draw" points, vectors, and coordinate frames (as specified in the example)</li>
-<li>You will need some provision to write the SVG to a file, or get the file contents as a string.</li>
-
-<li>Write at least unit test for the SVG library in a file called <code>test_svg.cpp</code>. Here's how:
+<li>Design and implement a class called <code>Svg</code> in the <code>turtlelib</code> namespace that lets you "Draw" points, vectors, and coordinate frames
+<ul class="org-ul">
+<li>The specifics of each of these primitives is specified in the example svg.</li>
+</ul></li>
+<li>You will need some provision to write the SVG to a file, or get the file contents as a string that can then be written to a file.</li>
+<li>Your <code>Svg</code> class must be safe to use, even in the face of exceptions.
+<ul class="org-ul">
+<li>An invalid SVG file should never be written to disk: either the file is a valid Svg or it is not written</li>
+</ul></li>
+<li>Write at least one unit test for the SVG library in a file called <code>test_svg.cpp</code>. Here's how:
 <ol class="org-ol">
-<li>Get the Svg class working and verify it manually</li>
+<li>Get the Svg class working and verify it manually, making sure that all object types are present</li>
 <li>Use the output from your manually verified example in a test case</li>
 <li>This way, if you ever make a change that breaks the test example the test will fail.</li>
 </ol></li>
@@ -579,10 +603,10 @@ I have commented the file with XML comments (<code>&lt;!-- --&gt;</code>): these
 
 <div id="outline-container-hint-3-P-1" class="outline-4">
 <h4 id="hint-3-P-1">Hint</h4>
-<div class="outline-text-4" id="text-org2687ec4">
+<div class="outline-text-4" id="text-orgf163e46">
 <ol class="org-ol">
 <li>Modify some values of the sample svg by hand and view the image to get a feel for what they do.</li>
-<li>You may wish to maintain a separate "testing" program to help.</li>
+<li>You may wish to maintain a separate "testing" program that you manually use to call your <code>class</code> to help.</li>
 <li>You will need a way to convert between <code>turtlelib</code> coordinate frames and the SVG ViewBox coordinate frame</li>
 <li>The location of a point can be determined by a <code>Transform2D</code> relative to the midpoint of the page</li>
 <li>Drawing a vector depends on not just the vector's length and direction, but also the position of the vector's tail.</li>
@@ -593,12 +617,12 @@ I have commented the file with XML comments (<code>&lt;!-- --&gt;</code>): these
 
 <div id="outline-container-task-b-6-executable-implementation--2-P-1" class="outline-3">
 <h3 id="task-b-6-executable-implementation--2-P-1">Task B.6 (executable implementation)</h3>
-<div class="outline-text-3" id="text-orgf027a4d">
+<div class="outline-text-3" id="text-orgf26aa64">
 <ol class="org-ol">
 <li>Create a file called <code>frame_main.cpp</code>, which will compile into an executable called <code>frame_main</code>. Here is what the program should do:
 <ol class="org-ol">
 <li>Prompt the user to enter two transforms: \(T_{ab}\) and \(T_{bc}\).</li>
-<li>Compute and output \(T_{ab}\), \(T_{ba}\), \(T_{bc}\), \(T_{cb}\), \(T_{ac}\), and \(T_{ca}\) and draw each frame in the <code>svg</code> file (with frame A located at (0, 0)).</li>
+<li>Compute and output \(T_{ab}\), \(T_{ba}\), \(T_{bc}\), \(T_{cb}\), \(T_{ac}\), and \(T_{ca}\) and draw each frame in the <code>svg</code> file (with frame \({a}\) located at \((0, 0)\)).</li>
 <li>Prompt the user to enter a point \(p_a\) in Frame <code>{a}</code></li>
 <li>Compute \(p_a\)'s location in frames \({b}\) and \({c}\) and output the locations of all 3 points
 <ul class="org-ul">
@@ -608,7 +632,7 @@ I have commented the file with XML comments (<code>&lt;!-- --&gt;</code>): these
 <ul class="org-ul">
 <li>Normalize the vector to form \(\hat{v}_b\).</li>
 <li>Draw \(\hat{v}_b\) with the tail located at \((0, 0)\) in frame \({b}\), in brown.</li>
-<li>Draw \(v_b\) with tail located at \((0,0)\) in frame \({b}\), in brown.</li>
+<li>Draw \(v_b\) with tail located at \((0,0)\) in frame \({b}\), in black.</li>
 </ul></li>
 <li>Output \(v_b\) expressed in frame \({a}\) and frame \({c}\) coordinates
 <ul class="org-ul">
@@ -616,46 +640,9 @@ I have commented the file with XML comments (<code>&lt;!-- --&gt;</code>): these
 <li>Draw \(v_c\) with the tail at \((0, 0)\) in frame$ \({c}\), in orange</li>
 </ul></li>
 <li>Output the drawing to <code>/tmp/frames.svg</code>.</li>
+<li>All outputs that are there to prompt the user should be written to <code>stderr</code></li>
+<li>All outputs that are in response to a calculation should be written to <code>stdout</code></li>
 </ol></li>
-</ol>
-
-
-<ol class="org-ol">
-<li><p>
-An example transcript from a running program is presented below.
-</p>
-<ul class="org-ul">
-<li>Lines that start with <code>&gt;</code> are entered by the user, but the <code>&gt;</code> symbol is not actually printed to the screen</li>
-<li>It is important that your output format matches the format below precisely, as this output will be read by a computer program</li>
-</ul>
-<pre class="example">
-Enter transform T_{a,b}:
-&gt;90 0 1
-Enter transform T_{b,c}:
-&gt;90 1 0
-T_{a,b}: deg: 90 x: 0 y: 1
-T_{b,a}: deg: -90 x: -1 y: -6.12323e-17
-T_{b,c}: deg: 90 x: 1 y: 0
-T_{c,b}: deg: -90 x: -6.12323e-17 y: 1
-T_{a,c}: deg: 180 x: 6.12323e-17 y: 2
-T_{c,a}: deg: -180 x: -1.83697e-16 y: 2
-Enter point p_a:
-&gt;1 1
-p_a: [1 1]
-p_b: [0 -1]
-p_c: [-1 1]
-Enter vector v_b:
-&gt;1 1
-v_bhat: [0.707107 0.707107]
-v_a: [-1 1]
-v_b: [1 1]
-v_c: [1 -1]
-Enter twist V_b:
-&gt;1 1 1
-V_a: [1 0 1]
-V_b: [1 1 1]
-V_c: [1 2 -1]
-</pre></li>
 
 <li>Run your program using numbers that differ from the ones in my example.
 <ul class="org-ul">
@@ -666,6 +653,7 @@ V_c: [1 2 -1]
 <li>Save and commit the output to <code>turtlelib/exercises/B6_frame_output.txt</code>
 <ul class="org-ul">
 <li>After creating <code>B6_frame_input.txt</code> you can create this file with <code>frame_main &lt; B6_frame_input.txt &gt; B6_frame_output.txt</code></li>
+<li>The <code>stderr</code> and <code>stdout</code> is separated so the output you capture is only the results of computations, not your prompts.</li>
 </ul></li>
 <li>Save and commit <code>/tmp/frames.svg</code> to <code>turtlelib/exercises/B6_frames.svg</code></li>
 </ul></li>
@@ -674,113 +662,53 @@ V_c: [1 2 -1]
 
 <div id="outline-container-hint-3-P-2" class="outline-4">
 <h4 id="hint-3-P-2">Hint</h4>
-<div class="outline-text-4" id="text-org52b4e0f">
+<div class="outline-text-4" id="text-org03a125a">
 <ol class="org-ol">
 <li>Think about how the transforms should work and what should be displayed, then open the image in inkscape.</li>
 <li>Sometimes, objects will be drawn on top of each other (e.g., points show up in the same location regardless of what frame they are expressed in)
 <ul class="org-ul">
 <li>In inkscape you can select objects and move them around to see what is stacked.</li>
+<li>In some cases above, the correct answer may involve objects being drawn on top of one another.</li>
 </ul></li>
 </ol>
 </div>
 </div>
 </div>
-<div id="outline-container-task-b-7-conceptual-questions--2-P-1" class="outline-3">
-<h3 id="task-b-7-conceptual-questions--2-P-1">Task B.7 (conceptual questions)</h3>
-<div class="outline-text-3" id="text-task-b-7-conceptual-questions--2-P-1">
-</div>
-<div id="outline-container-readme-md-template-3-P-1" class="outline-4">
-<h4 id="readme-md-template-3-P-1">README.md Template</h4>
-<div class="outline-text-4" id="text-org1f30eb5">
-<p>
-Answer the questions below in the template for <code>turtlelib/README.md</code>. Copy and paste into your own <code>README.md</code> and then answer the questions inline.
-</p>
 
-<p>
-There are also other sections of the <code>README.md</code> that you should fill in as you complete the assignment
-</p>
-
-<pre class="example">
-# Turtlelib Library
-A library for handling transformations in SE(2) and other turtlebot-related math.
-
-# Components
-- geometry2d - Handles 2D geometry primitives
-- se2d - Handles 2D rigid body transformations
-- frame_main - Perform some rigid body computations based on user input
-
-# Conceptual Questions
-1. If you needed to be able to ~normalize~ Vector2D objects (i.e., find the unit vector in the direction of a given Vector2D):
-   - Propose three different designs for implementing the ~normalize~ functionality
-
-   - Discuss the pros and cons of each proposed method, in light of the C++ Core Guidelines.
-
-   - Which of the methods would you implement and why?
-
-2. What is the difference between a class and a struct in C++?
-
-
-3. Why is Vector2D a struct and Transform2D a Class (refer to at least 2 specific C++ core guidelines in your answer)?
-
-
-4. Why are some of the constructors in Transform2D explicit (refer to a specific C++ core guideline in your answer)?
-
-
-5. Why is Transform2D::inv() declared const while Transform2D::operator*=() is not?
-   - Refer to [[https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#con-constants-and-immutability][C++ Core Guidelines (Constants and Immutability)]] in your answer
-
-</pre>
-</div>
-</div>
-
-<div id="outline-container-normalize-vector-3-P-1" class="outline-4">
-<h4 id="normalize-vector-3-P-1">Normalize Vector</h4>
-<div class="outline-text-4" id="text-org1ef8ff6">
-<ul class="org-ul">
-<li>Implement the normalize vector functionality (in the <code>geometry2d</code> module) using the method you decided upon in the conceptual questions.</li>
-<li>Include at least one unit test for the normalize functionality.</li>
-</ul>
-</div>
-</div>
-
-<div id="outline-container-hints-3-P-4" class="outline-4">
-<h4 id="hints-3-P-4">Hints</h4>
-<div class="outline-text-4" id="text-org247a62b">
+<div id="outline-container-task-b-7-readme-md--2-P-1" class="outline-3">
+<h3 id="task-b-7-readme-md--2-P-1">Task B.7 (README.md)</h3>
+<div class="outline-text-3" id="text-org235df18">
 <ol class="org-ol">
-<li><a href="https://en.cppreference.com/w/cpp/language/classes">Information About Classes</a></li>
-<li>The <a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-class">C++ Core guidelines (Classes and Class Hierarchies)</a> section has the answers.</li>
-<li>The <a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-ctor">C++ Core guidelines (Constructors, Assignments, and Destructors)</a> section has the answers.</li>
-<li>You may find guidelines in <a href="http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-class">The C++ Core guidelines (Classes and Class Hierarchies)</a> section helpful.</li>
-<li>The <a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#con-constants-and-immutability">C++ Core Guidelines (Constants and Immutability)</a> will be helpful.</li>
+<li>Provide a  README.md for the turtlelib library</li>
+<li>It should offer a brief description of each of the three header files you implemented.</li>
 </ol>
-</div>
 </div>
 </div>
 </div>
 
 <div id="outline-container-task-c-the-simulator--1-P-2" class="outline-2">
 <h2 id="task-c-the-simulator--1-P-2">Task C (The Simulator)</h2>
-<div class="outline-text-2" id="text-orgc40a723">
+<div class="outline-text-2" id="text-orgb12d1ae">
 <p>
-We will now create a package that can be used as a simulator and visualizer.
+We will now create a package called <code>nusim</code> that can be used as a simulator and visualizer.
 </p>
 
 <p>
-This node, called <code>nusim</code> will  provide a simulated robot environment that we will build upon throughout the course.
-The simulator node uses <code>rviz2</code> for visualization. To start, it will be capable of creating some stationary walls and tracking the position
+The <code>nusimulator</code> node will  provide a simulated robot environment that we will build upon throughout the course.
+The <code>nusimulator</code> node uses <code>rviz2</code> for visualization. Initially, it will be capable of creating some stationary walls and tracking the position
 of a robot.
 </p>
 
 <p>
-The basic overall structure of the simulation is as follows:
+The overall structure of the simulation is as follows:
 </p>
 <ol class="org-ol">
 <li>Initialization</li>
 <li>Loop at a fixed frequency until terminated.</li>
 <li>On each loop iteration:
 <ul class="org-ul">
-<li>Update the state of the world (integrate time forward by some timestep)</li>
-<li>Publish messages that provide state information as if it were coming from a real robot, and updates the <code>rviz</code> visualization</li>
+<li>Update the state of the world (integrate time forward by a timestep)</li>
+<li>Publish messages that provide state information as if it were coming from a real robot, and update the <code>rviz</code> visualization</li>
 <li>Process service/subscriber callbacks to get commands for the next time step</li>
 </ul></li>
 </ol>
@@ -796,21 +724,21 @@ should not be accessed by nodes not in that namespace.
 </p>
 
 <p>
-It may be useful to start writing the launchfile C.5 prior to finishing some of the other tasks so that you may easily run your code as
+It may be useful to start writing the launchfile <a href="#C.5">C.5</a> prior to finishing some of the other tasks so that you may easily run your code as
 you work on it.
 </p>
 </div>
 
 <div id="outline-container-task-c-1-nusim-package--2-P-1" class="outline-3">
 <h3 id="task-c-1-nusim-package--2-P-1">Task C.1 (nusim package)</h3>
-<div class="outline-text-3" id="text-org68ef39a">
+<div class="outline-text-3" id="text-org5dece3e">
 <ol class="org-ol">
 <li>Create an <code>ament_cmake</code> ros package called <code>nusim</code>.
 <ul class="org-ul">
 <li>This should be a directory within your repository (i.e., <code>&lt;reponame&gt;/nusim</code>)</li>
 <li>Update the <code>package.xml</code> as follows
 <ul class="org-ul">
-<li>Give it a version number of 0.1.2</li>
+<li>Give it a version number of 0.2.6</li>
 <li>Provide a description other than the default.</li>
 <li>Fill in your name and email address as the maintainer and as an author</li>
 <li>Choose a license other than TODO</li>
@@ -826,31 +754,31 @@ are created when running <code>ros2 pkg create</code></li>
 
 <div id="outline-container-task-c-2-simulation-node--2-P-1" class="outline-3">
 <h3 id="task-c-2-simulation-node--2-P-1">Task C.2 (simulation node)</h3>
-<div class="outline-text-3" id="text-orgf3aa447">
+<div class="outline-text-3" id="text-org7dbcf08">
 <ol class="org-ol">
-<li>Create the node <code>nusim</code>, the main simulation node, and implement it in <code>src/nusim.cpp</code></li>
-<li>It should run a main loop at a frequency of <code>rate</code> (<code>rate</code> is a parameter to the node)
+<li>Create the node <code>nusimulator</code> (the main simulation node) and implement it in <code>src/nusim.cpp</code></li>
+<li>It should run a main loop at a frequency specified by the parameter <code>rate</code>.
 <ul class="org-ul">
-<li>If <code>rate</code> is not specified, default to 200 Hz</li>
+<li>If <code>rate</code> is not specified, default to 100 Hz</li>
 </ul></li>
 <li>In the main timer publish an <code>std_msgs/msg/UInt64</code> <code>~/timestep</code> value, which tracks the current timestep of the simulation
 <ul class="org-ul">
 <li>Each time the main timer executes, another timestep of the simulation occurs.</li>
 </ul></li>
-<li>Implement a <code>~/reset</code> service that restores the initial state of the simulation.
+<li>Implement a <code>~/reset</code> service of type <code>std_srvs/srv/Empty</code> that restores the initial state of the simulation.
 <ul class="org-ul">
 <li>For now, the only state is the <code>~/timestep</code> value, which should be reset to zero.</li>
 <li>As more functionality is added to the simulation, the <code>~reset</code> service will need to do more.</li>
 </ul></li>
 <li>Note the <code>~</code> before the topic names. This symbol makes the topic "private" to the node, meaning that
-if the node is called, for example, <code>nusim</code> than <code>~/timestep</code> will resolve to <code>nusim/timestep</code></li>
+if the node is called, for example, <code>nusimulator</code> than <code>~/timestep</code> will resolve to <code>nusimulator/timestep</code></li>
 </ol>
 </div>
 </div>
 
 <div id="outline-container-task-c-3-simulated-turtle--2-P-1" class="outline-3">
 <h3 id="task-c-3-simulated-turtle--2-P-1">Task C.3 (simulated turtle)</h3>
-<div class="outline-text-3" id="text-org8039df8">
+<div class="outline-text-3" id="text-orgc860fe5">
 <p>
 We will next add the turtlebot3 robot to the simulation.  The simulation must track, control, and publish information about this robot.
 </p>
@@ -860,29 +788,28 @@ We will next add the turtlebot3 robot to the simulation.  The simulation must tr
 <ul class="org-ul">
 <li>The ground truth is known only by the simulator</li>
 </ul></li>
-<li>The <code>nusim</code> should broadcast a transform between the <code>nusim/world</code> frame and <code>red/base_footprint</code> frame.
+<li>The <code>nusimulator</code> should broadcast a transform between the <code>nusim/world</code> frame and <code>red/base_footprint</code> frame.
 <ul class="org-ul">
 <li>This transform represents the actual pose of the robot.</li>
 <li>Your control algorithms are never allowed to lookup frames starting with <code>nusim</code> as that is ground-truth data known only to the simulator.</li>
-</ul></li>
-<li>The <code>nusim</code> should offer a <code>~/teleport</code> service that enables moving the robot to a desired \((x, y, \theta)\) pose.
-<ul class="org-ul">
-<li>Create a custom service type called <code>Teleport.srv</code> and give it 3 double-precision floating point values: <code>x</code>, <code>y</code>, <code>theta</code></li>
-<li>Calling this service is the simulated equivalent of picking the robot up and moving it somewhere.</li>
+<li>Your control algorithms are also never allowed to lookup frames starting with <code>red</code>, since these are part of the "ground truth" robot.</li>
 </ul></li>
 <li>The initial pose of the robot should be specified by the parameters <code>x0</code>, <code>y0</code>, and <code>theta0</code> provided to the <code>nusim</code> node
 <ul class="org-ul">
 <li>When the <code>nusim</code> starts, the robot should be at the position specified by these parameters relative to the <code>nusim/world</code> frame</li>
-<li>These values default to 0 if not specified</li>
+<li>These values default to <code>0.0</code> if not specified</li>
 </ul></li>
-<li>When the <code>~/reset</code> service is called, the robot should be restored to its initial location.</li>
+<li>When the <code>~/reset</code> service is called, the robot should be restored to the location specified by the <code>x0</code>, <code>y0</code>, and <code>theta0</code> parameters
+<ul class="org-ul">
+<li>The <code>~/reset</code> service should read the current values of the <code>x0</code>, <code>y0</code>, and <code>theta0</code> parameters, even if they were set after startup</li>
+</ul></li>
 </ol>
 </div>
 </div>
 
 <div id="outline-container-task-c-4-walls--2-P-1" class="outline-3">
 <h3 id="task-c-4-walls--2-P-1">Task C.4 (walls)</h3>
-<div class="outline-text-3" id="text-org25a6725">
+<div class="outline-text-3" id="text-orgc3f8a83">
 <ol class="org-ol">
 <li>The arena where the robot drives will be rectangular, with walls on the boundary.</li>
 <li>Allow the user to specify the size of the arena using parameters:
@@ -891,10 +818,10 @@ We will next add the turtlebot3 robot to the simulation.  The simulation must tr
 <li><code>arena_y_length</code> is the length of the arena in the world \(y\) direction</li>
 <li>The arena is centered at \((0,0)\),</li>
 <li>The walls are <code>0.25m</code> tall</li>
-<li>You can use whatever thickness you would like, but remember that the arena is sized in terms of the free space inside.</li>
+<li>You can use whatever thickness you would like, but the arena is sized in terms of the free space inside the walls.</li>
 </ul></li>
-<li>The walls should be red to signify that their location is known only to the simulator.</li>
-<li>Publish the walls as a <code>visualization_msgs/MarkerArray</code> message on the <code>~/walls</code> topic once when the simulator starts.
+<li>The walls should be <code>red</code> to signify that their location is known only to the simulator.</li>
+<li>Publish the walls as a <code>visualization_msgs/MarkerArray</code> message on the <code>~/real_walls</code> topic once when the simulator starts.
 <ul class="org-ul">
 <li>Use the appropriate QoS settings so that the walls will show up even if rviz subscribes after they are published.</li>
 </ul></li>
@@ -902,22 +829,23 @@ We will next add the turtlebot3 robot to the simulation.  The simulation must tr
 </div>
 </div>
 
-<div id="outline-container-task-c-5-cylindrical-obstacles--2-P-1" class="outline-3">
-<h3 id="task-c-5-cylindrical-obstacles--2-P-1">Task C.5 (cylindrical obstacles)</h3>
-<div class="outline-text-3" id="text-org6016095">
+<div id="outline-container-C.5" class="outline-3">
+<h3 id="C.5">Task C.5 (cylindrical obstacles)</h3>
+<div class="outline-text-3" id="text-C.5">
 <ol class="org-ol">
 <li>Add the ability to add cylindrical obstacles to the environment</li>
-<li>The cylinders should be 0.25m tall, but can have a variable radius (as specified by the user)</li>
-<li>The cylinders should be red (locations of the cylinders are ground-truth).</li>
+<li>The cylinders should be <code>0.25m</code> tall, but can have a variable radius (as specified by the user)</li>
+<li>The cylinders should be red (locations of the cylinders are ground-truth) and published in the <code>red</code> namespace of the Marker message.</li>
 <li>All obstacles will be specified as parameters to the <code>nusim</code> node:
 <ul class="org-ul">
-<li><code>obstacles/x</code> is a list of the obstacles' x coordinates (float64)</li>
-<li><code>obstacles/y</code> is a list of the obstacles' y coordinates (float64)</li>
-<li><code>obstacles/x</code> and <code>obstacles/y</code> should always be the same length or the node should log an error message and exit.</li>
-<li><code>obstacles/r</code> is the radius of the obstacles ( float65). We will assume that all obstacles are the same radius.</li>
+<li><code>obstacles.x</code> is a list of the obstacles' x coordinates (float64)</li>
+<li><code>obstacles.y</code> is a list of the obstacles' y coordinates (float64)</li>
+<li><code>obstacles.x</code> and <code>obstacles.y</code> should always be the same length or the node should log an error message and exit.</li>
+<li><code>obstacles.r</code> is the radius of the obstacles ( float65). We will assume that all obstacles are the same radius.</li>
+<li>The node reads these parameters once and never updates them</li>
 </ul></li>
-<li>You should be able to specify an arbitrary number of obstacles.</li>
-<li>The <code>nusim</code> should publish a <code>visualization_msgs/MarkerArray</code> message on the <code>~/obstacles</code> topic once on startup
+<li>You should be able to specify an arbitrary number of obstacles using this method.</li>
+<li>The <code>nusim</code> should publish a <code>visualization_msgs/MarkerArray</code> message on the <code>~/real_obstacles</code> topic once on startup
 <ul class="org-ul">
 <li>Use the appropriate QoS settings so that the walls will show up even if rviz subscribes after they are published.</li>
 </ul></li>
@@ -927,7 +855,7 @@ We will next add the turtlebot3 robot to the simulation.  The simulation must tr
 
 <div id="outline-container-task-c-6-nusim-launch--2-P-1" class="outline-3">
 <h3 id="task-c-6-nusim-launch--2-P-1">Task C.6 (nusim launch)</h3>
-<div class="outline-text-3" id="text-org3b3f111">
+<div class="outline-text-3" id="text-orge15d8aa">
 <ol class="org-ol">
 <li>Write an xml launchfile called <code>nusim.launch.xml</code> that starts the simulator
 <ul class="org-ul">
@@ -938,13 +866,14 @@ We will next add the turtlebot3 robot to the simulation.  The simulation must tr
 </ul></li>
 <li>The default parameters to run the simulation should be stored in <code>config/basic_world.yaml</code>
 <ul class="org-ul">
-<li>The basic_world should have three cylindrical obstacles of radius <code>0.038m</code>, placed at <code>(-0.5, -0.7)</code>, <code>(0.8, -0.8)</code>, and <code>(0.4, 0.8)</code>.</li>
-<li>Start the robot at <code>(-0.5, 0.7, 1.28)</code></li>
-<li>We will add to this file as more parameters are required</li>
+<li>The basic_world should have three cylindrical obstacles of radius <code>0.038m</code>, placed at <code>(-0.4, -0.7)</code>, <code>(0.7, -0.8)</code>, and <code>(0.5, 0.8)</code>.</li>
+<li>Start the robot at <code>(-0.6, 0.3, 1.28)</code></li>
+<li>We will add to this configuration file as more parameters are required</li>
 </ul></li>
 <li>The launchfile takes an argument called <code>config_file</code> to the <code>nusim.launch</code> launchfile.
 <ul class="org-ul">
-<li>This argument should let a user specify a <code>.yaml</code> file to configure the simulator. If blank, use the default <code>config/basic_world.yaml</code> configuration file.</li>
+<li>This argument should let a user specify a <code>.yaml</code> file to configure the simulator.</li>
+<li>If blank, use the default <code>config/basic_world.yaml</code> configuration file.</li>
 </ul></li>
 </ol>
 </div>
@@ -952,7 +881,7 @@ We will next add the turtlebot3 robot to the simulation.  The simulation must tr
 
 <div id="outline-container-task-c-7-readme-md--2-P-1" class="outline-3">
 <h3 id="task-c-7-readme-md--2-P-1">Task C.7 (README.md)</h3>
-<div class="outline-text-3" id="text-org5043b22">
+<div class="outline-text-3" id="text-org31f4111">
 <p>
 Create a <code>README.md</code> for this package. It should provide
 </p>
@@ -969,9 +898,9 @@ Create a <code>README.md</code> for this package. It should provide
 </div>
 </div>
 
-<div id="outline-container-resources-1-P-9" class="outline-2">
-<h2 id="resources-1-P-9">Resources</h2>
-<div class="outline-text-2" id="text-orge7ebf1d">
+<div id="outline-container-resources-1-P-2" class="outline-2">
+<h2 id="resources-1-P-2">Resources</h2>
+<div class="outline-text-2" id="text-org9fea594">
 <ol class="org-ol">
 <li><a href="https://docs.ros2.org/foxy/api/rclcpp/index.html">Ros C++ API</a></li>
 <li><a href="https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries.html">ROS tutorials</a></li>

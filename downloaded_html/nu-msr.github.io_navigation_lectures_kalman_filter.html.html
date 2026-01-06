@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-12-18 Thu 11:29 -->
+<!-- 2026-01-05 Mon 23:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Kalman Filters</title>
@@ -73,7 +73,7 @@
 </nav>
 <div id="outline-container-setup-1-P-1" class="outline-2">
 <h2 id="setup-1-P-1">Setup</h2>
-<div class="outline-text-2" id="text-org1c61f39">
+<div class="outline-text-2" id="text-org56e68aa">
 <ol class="org-ol">
 <li>Linear state space system:</li>
 </ol>
@@ -102,24 +102,22 @@ z_k &= Hx_k + v_k \tag{2}
 </ol>
 </div>
 </div>
-
 <div id="outline-container-the-results-1-P-1" class="outline-2">
 <h2 id="the-results-1-P-1">The Results</h2>
 <div class="outline-text-2" id="text-the-results-1-P-1">
 </div>
 <div id="outline-container-initialize-2-P-1" class="outline-3">
 <h3 id="initialize-2-P-1">Initialize</h3>
-<div class="outline-text-3" id="text-orge9db342">
+<div class="outline-text-3" id="text-org88f6152">
 <p>
 An initial Gaussian distribution representing your knowledge of the initial state.
 The Gaussian is \(\mathcal{N}(\hat{x}_0, \Sigma_0)\).
 </p>
 </div>
 </div>
-
 <div id="outline-container-predict-2-P-1" class="outline-3">
 <h3 id="predict-2-P-1">Predict</h3>
-<div class="outline-text-3" id="text-org7dfdd3c">
+<div class="outline-text-3" id="text-org59e988d">
 <p>
 Propagate the state and uncertainty forward:
 </p>
@@ -132,9 +130,8 @@ Propagate the state and uncertainty forward:
 <li>The prediction random variable is Gaussian: \(X_k^- \sim \mathcal{N}(A\hat{x}_{k-1} + Bu_{k-1}, A\Sigma_{k-1}A^T + Q)\)</li>
 </ul>
 </div>
-
-<details id="orgd130d3a"><summary class="header-4">Derivation</summary>
-<div class="outline-text-4" id="text-orgd130d3a">
+<details id="orgba2df04"><summary class="header-4">Derivation</summary>
+<div class="outline-text-4" id="text-orgba2df04">
 <ol class="org-ol">
 <li>For \(X \sim \mathcal{N}(\mu, \Sigma)\), and \(Y = AX + b\), \(Y \sim \mathcal{N}(A\mu +b, A \Sigma A^T)\) (See <a href="./gaussian.html">Lecture on Gaussians</a>)</li>
 <li><p>
@@ -177,7 +174,7 @@ Applying the formula for a linear transformation of Gaussian random variables re
 </div>
 <div id="outline-container-correct-2-P-1" class="outline-3">
 <h3 id="correct-2-P-1">Correct</h3>
-<div class="outline-text-3" id="text-org985906a">
+<div class="outline-text-3" id="text-org8f98bbc">
 <p>
 Update the estimate based on the sensor measurement.
 The Kalman gain \(K\) controls the relative importance of the estimate
@@ -195,9 +192,8 @@ K_k &= \Sigma_k^{-}H^T(H \Sigma_k^{-} H^T + R)^{-1}\\
 is also a Gaussian distribution.</li>
 </ul>
 </div>
-
-<details id="org7726b74"><summary class="header-4">Derivation</summary>
-<div class="outline-text-4" id="text-org7726b74">
+<details id="orgc78f647"><summary class="header-4">Derivation</summary>
+<div class="outline-text-4" id="text-orgc78f647">
 <ol class="org-ol">
 <li>Let \(Y \sim X_1 | X_2\) = a, where \(\begin{bmatrix}X_1 \\ X_2\end{bmatrix} \sim \mathcal{N}(\begin{bmatrix}\mu_1 \\ \mu_2\end{bmatrix}, \begin{bmatrix}\Sigma_{11} & \Sigma_{12} \\ \Sigma_{21} & \Sigma_{22}\end{bmatrix})\) are Jointly Gaussian.
 Then
@@ -244,7 +240,7 @@ Next, apply the formula for a linear transformation of a Jointly Gaussian random
      \hat{x}_k^- \\
      0
     \end{bmatrix},
-
+    
    \begin{bmatrix}
     I & 0 \\
     H & I
@@ -274,7 +270,7 @@ reveals that it is distributed with a mean given by equation \eqref{eq:mean_upda
 </div>
 <div id="outline-container-repeat-2-P-1" class="outline-3">
 <h3 id="repeat-2-P-1">Repeat</h3>
-<div class="outline-text-3" id="text-orgefed2cb">
+<div class="outline-text-3" id="text-org4287d1e">
 <ul class="org-ul">
 <li>The results from the correction step (\(\hat{x}_{k-1}, \Sigma_{k-1}\)) are used for the prediction at time \(k\)</li>
 <li>Thus, Kalman filtering consists of a repeated cycle of prediction and correction steps</li>
@@ -284,7 +280,7 @@ reveals that it is distributed with a mean given by equation \eqref{eq:mean_upda
 </div>
 <div id="outline-container-extended-kalman-filter-1-P-1" class="outline-2">
 <h2 id="extended-kalman-filter-1-P-1">Extended Kalman Filter</h2>
-<div class="outline-text-2" id="text-org21e4602">
+<div class="outline-text-2" id="text-org34b0c84">
 <ol class="org-ol">
 <li><p>
 Start with non-linear system, whose state \(x_k\) needs to be estimated from measurements \(z_k\)
@@ -412,10 +408,9 @@ Uncertainty is propagated using the linearized model.
 </p></li>
 </ol>
 </div>
-
 <div id="outline-container-ekf-filtering-equations-2-P-1" class="outline-3">
 <h3 id="ekf-filtering-equations-2-P-1">EKF Filtering Equations</h3>
-<div class="outline-text-3" id="text-orgae3cb87">
+<div class="outline-text-3" id="text-org88f2c8f">
 <ul class="org-ul">
 <li>I am using \(A_k\), \(H_k\), \(W_k\) and \(V_k\) as the linearized matrices.</li>
 </ul>
@@ -439,12 +434,9 @@ K &=\Sigma_k^-H_k^T(H_k\Sigma_k^-H_k^T + V_k R_k V_k^T)^{-1}\\
 </div>
 </div>
 </div>
-
-
-
 <div id="outline-container-further-reading-1-P-1" class="outline-2">
 <h2 id="further-reading-1-P-1">Further Reading</h2>
-<div class="outline-text-2" id="text-org93ca21d">
+<div class="outline-text-2" id="text-org717c74c">
 <p>
 <a href="https://www.cs.unc.edu/~welch/media/pdf/kalman_intro.pdf">An Introduction to the Kalman Filter (Welch, Bishop 2005, UNC_Chapel Hill TR 95-041)</a>
 </p>

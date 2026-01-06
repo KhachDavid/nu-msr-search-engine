@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2026-01-05 Mon 23:16 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Input and Output in C++</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">Input and Output in C++</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#overview-1-P-6">Overview</a></li>
+<li><a href="#format-1-P-1">Format</a>
+<ul>
+<li><a href="#what-2-P-1">What</a></li>
+<li><a href="#how-2-P-1">How</a>
+<ul>
+<li><a href="#file-i-o-3-P-1">File I/O</a></li>
+</ul>
+</li>
+<li><a href="#why-2-P-1">Why</a></li>
+</ul>
+</li>
+<li><a href="#iostreams-1-P-1">Iostreams</a>
+<ul>
+<li><a href="#what-2-P-2">What</a></li>
+<li><a href="#how-2-P-2">How</a>
+<ul>
+<li><a href="#output-3-P-1">Output</a></li>
+<li><a href="#input-3-P-1">Input</a></li>
+</ul>
+</li>
+<li><a href="#why-2-P-2">Why</a></li>
+</ul>
+</li>
+<li><a href="#c-style-1-P-1">C-Style</a>
+<ul>
+<li><a href="#what-2-P-3">What</a></li>
+<li><a href="#how-2-P-3">How</a></li>
+<li><a href="#why-2-P-3">Why</a></li>
+<li><a href="#why-not--2-P-1">Why Not?</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-overview-1-P-6" class="outline-2">
+<h2 id="overview-1-P-6">Overview</h2>
+<div class="outline-text-2" id="text-org98c548d">
+<p>
+These notes provide an overview for how to perform input and output in <code>C++</code>,
+focused on best practices (as of <code>C++23</code>).
+</p>
+</div>
+</div>
+<div id="outline-container-format-1-P-1" class="outline-2">
+<h2 id="format-1-P-1">Format</h2>
+<div class="outline-text-2" id="text-format-1-P-1">
+</div>
+<div id="outline-container-what-2-P-1" class="outline-3">
+<h3 id="what-2-P-1">What</h3>
+<div class="outline-text-3" id="text-org6e36f47">
+<ol class="org-ol">
+<li>Create strings and output them using a syntax similar to the <a href="https://docs.python.org/3/library/string.html#formatspec=f-string">Python Format Specification</a>.</li>
+<li>The preferred method for string formatting and output as of <code>C++23</code>.</li>
+<li>Handles output but does not handle input.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-how-2-P-1" class="outline-3">
+<h3 id="how-2-P-1">How</h3>
+<div class="outline-text-3" id="text-org4bd7576">
+<ol class="org-ol">
+<li><code>#include&lt;print&gt;</code> (use <code>#include&lt;format&gt;</code> if only formatting strings but not outputting them).</li>
+<li>Uses the <a href="https://en.cppreference.com/w/cpp/utility/format.html">Formatting Library</a>, available since <code>C++20</code></li>
+<li><code>std::format("Var1 = {} and var2 = {}", var1, var2)</code>
+<ul class="org-ul">
+<li>Returns a <code>string</code> where each <code>{}</code> is replaced with a string representation of the corresponding argument</li>
+<li>The <code>{}</code> can have <code>{arg-id (optional) : format-spec}</code>
+<ul class="org-ul">
+<li><code>arg-id</code> is an optional index specifying which argument to <code>std::format</code> is substituted.
+<ul class="org-ul">
+<li><code>std::format("var2 = {1} var1 = {0}", var1, var2)</code></li>
+<li>You must either not use <code>arg-id</code> for any <code>{}</code> or use it for all <code>{}</code>.</li>
+</ul></li>
+<li><code>format-spec</code> provides options for formatting, such as printing in <code>hex</code> format or how many decimal digits to include.
+<ul class="org-ul">
+<li>The <a href="https://en.cppreference.com/w/cpp/utility/format/spec.html">Standard Format Specifiation</a> has the details for basic types, but other types can implement custom format options</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>In <code>C++23</code> <code>std::print</code> and <code>std::println</code> allow printing with format strings directly
+<ul class="org-ul">
+<li>In <code>C++20</code> you can format strings with <code>std::format</code> and then output those strings</li>
+<li>In <code>C++11</code> the third-party <code>fmt</code> library (upon which <code>std::format</code> is based) can be used if desired</li>
+<li>It is possible to use <code>std::print</code> and <code>std::println</code> to output to files by</li>
+</ul></li>
+</ol>
+</div>
+<div id="outline-container-file-i-o-3-P-1" class="outline-4">
+<h4 id="file-i-o-3-P-1">File I/O</h4>
+<div class="outline-text-4" id="text-orgde98147">
+<ol class="org-ol">
+<li><code>std::print</code> and <code>std::println</code> can output to both <code>C++</code> <code>std::ostream</code> objects or <code>C</code> <code>FILE*</code> pointers.
+<ul class="org-ul">
+<li>= <code>#include&lt;ostream&gt;</code> to use the <code>std::ostream</code> version.</li>
+</ul></li>
+<li>The advantage of using <code>FILE*</code> is efficiency, however, you need to explicitly close the <code>FILE*</code> when done.
+<ul class="org-ul">
+<li>It can be wrapped using a <code>unique_ptr</code> with a custom deallocator: <code>std::unique_ptr&lt;std::FILE, int(*)(FILE*)&gt;(fopen("filename", "w"), &amp;std::fclose)</code></li>
+</ul></li>
+<li>The advantage of using an <code>ofstream</code> is that it will close automatically due to it's destructor</li>
+<li>Explicitly closing the file is needed if you want to be able respond to errors that may occur when closing the file,
+regardless of whether you use a <code>FILE*</code>, a <code>unique_ptr&lt;FILE, int(*)(FILE*)&gt;</code> or <code>std::ostream</code>
+<ul class="org-ul">
+<li>The behavior of <code>std::ostream</code> is to fail silently if the file closure fails in the destructor</li>
+<li>Of course there is not much that can be done on a file-close error.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-why-2-P-1" class="outline-3">
+<h3 id="why-2-P-1">Why</h3>
+<div class="outline-text-3" id="text-org56e4a50">
+<ol class="org-ol">
+<li>Safety: if the format string is specified incorrectly or the type is not <code>std::formattable</code> the compiler will catch the error</li>
+<li>Extensibility: it is possible to enable custom types to work with <code>std::format</code> and provide custom formatting options</li>
+<li>Readability: the <code>std::format</code> is based on syntax similar to Python f-strings and remains local to each variable you wish to output</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-iostreams-1-P-1" class="outline-2">
+<h2 id="iostreams-1-P-1">Iostreams</h2>
+<div class="outline-text-2" id="text-iostreams-1-P-1">
+</div>
+<div id="outline-container-what-2-P-2" class="outline-3">
+<h3 id="what-2-P-2">What</h3>
+<div class="outline-text-3" id="text-org6313ee6">
+<ol class="org-ol">
+<li>The original method for input and output in <code>C++</code></li>
+<li>Handles both input and output, so it is what you should use for input</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-how-2-P-2" class="outline-3">
+<h3 id="how-2-P-2">How</h3>
+<div class="outline-text-3" id="text-how-2-P-2">
+</div>
+<div id="outline-container-output-3-P-1" class="outline-4">
+<h4 id="output-3-P-1">Output</h4>
+<div class="outline-text-4" id="text-org7201276">
+<ol class="org-ol">
+<li><code>#include&lt;iostream&gt;</code></li>
+<li>To output <code>cout &lt;&lt; "Stuff" &lt;&lt; myvar &lt;&lt; " stuff" &lt;&lt; endl</code>
+<ul class="org-ul">
+<li><code>endl</code> outputs a newline and flushes the output buffer (ensuring all text is displayed on the screen)</li>
+<li>To output a <code>newline</code> without flushing the buffer use <code>"\n"</code> in the string</li>
+<li>Flushing the buffer takes time, so it's best to use <code>"\n"</code> until you want to ensure that all the output is written to the screen.</li>
+<li>Variables and strings can all be output together by separating with <code>&lt;&lt;</code></li>
+</ul></li>
+<li>Formatting is accomplished using <code>#include&lt;iomanip&gt;</code>
+<ul class="org-ul">
+<li>This header contains <a href="https://en.cppreference.com/w/cpp/io/manip.html">input/output</a> manipulators that change properties of the stream</li>
+<li>Using these are notoriously tricky because they change the state of the stream</li>
+<li>For example <code>cout &lt;&lt; "Int a in hex: 0x" &lt;&lt; std::hex &lt;&lt; myint &lt;&lt; endl</code>.
+<ul class="org-ul">
+<li>After executing this line, <code>cout</code> will output integers in <code>hex</code> until <code>std::dec</code> is inserted into the stream</li>
+</ul></li>
+</ul></li>
+<li><code>std::cout</code> is the standard output stream. There is also <code>std::cerr</code> for the standard error stream, and files can
+be opened as an <code>std::ofstream</code> and used the same way.</li>
+</ol>
+</div>
+<ul class="org-ul">
+<li><a id="file-output-4-P-1"></a>File Output<br>
+<div class="outline-text-5" id="text-org0e6497a">
+<ol class="org-ol">
+<li>Create an <code>std::ofstream</code> object, and use it like <code>cout</code></li>
+<li><code>ostreams</code> can be open in <code>binary</code> mode and raw bytes writtend directly with the <code>write</code> member function.</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+<div id="outline-container-input-3-P-1" class="outline-4">
+<h4 id="input-3-P-1">Input</h4>
+<div class="outline-text-4" id="text-org0dc9b39">
+<ol class="org-ol">
+<li>The global <code>istream</code> <a href="https://en.cppreference.com/w/cpp/io/cin.html">std::cin</a> is automatically connected to the standard input stream, allowing you to read buffered keyboard input</li>
+<li><code>std::cin &gt;&gt; var</code> reads data from the standard input into a variable
+<ul class="org-ul">
+<li>The type of <code>var</code> determines how the text is parsed</li>
+<li>Spaces separate values, and <code>\n</code> (the user typing <code>Enter</code>) causes the buffer to be read and parsed</li>
+<li>Parsing errors set error flags on <code>std::cin</code> which need to be checked manually</li>
+<li>It is possible to call <code>std::cin.exceptions()</code> to make errors throw exceptions, but likely not a good idea because running into an error when parsing user input is not exceptional behavior.</li>
+</ul></li>
+<li>Use <code>std::string line; std::getline(std::cin, line)</code> to read a whole line of text and parse it yourself.</li>
+</ol>
+</div>
+<ul class="org-ul">
+<li><a id="file-input-4-P-1"></a>File Input<br>
+<div class="outline-text-5" id="text-org1165eee">
+<ol class="org-ol">
+<li>Create an <code>std::ifstream</code> to read from a file</li>
+<li>In text mode, can use the same functions as with <code>cin</code></li>
+<li>Can also open in <code>binary</code> mode and use <code>read</code> to read bytes</li>
+<li><p>
+The <code>eof</code> flag on an <code>ifstream</code> is not set until <i>after</i> a read fails, therefore the following code is incorrect
+</p>
+<div class="org-src-container">
+<pre class="src src-cpp"><span class="org-type">ifstream</span> <span class="org-variable-name">mystream</span>(<span class="org-string">"hello.txt"</span>)
+<span class="org-type">int</span> <span class="org-variable-name">x</span> = 0;
+<span class="org-keyword">while</span>(mystream)
+{
+    mystream &gt;&gt; x; <span class="org-comment-delimiter">// </span><span class="org-comment">this read could result in the end of file</span>
+    print(<span class="org-string">"X is {}"</span>, x)
+}
+</pre>
+</div></li>
+<li><p>
+The correct pattern is
+</p>
+<div class="org-src-container">
+<pre class="src src-cpp"><span class="org-type">ifstream</span> <span class="org-variable-name">mystream</span>(<span class="org-string">"hello.txt"</span>)
+<span class="org-type">int</span> <span class="org-variable-name">x</span> = 0;
+<span class="org-keyword">while</span>(mystream &gt;&gt; x)
+{
+    print(<span class="org-string">"X is {}"</span>, x)
+}
+</pre>
+</div>
+<ul class="org-ul">
+<li>The key point here is the read is in the loop condition, so if the read fails (e.g., due to reaching the end-of-file) the loop is not entered.</li>
+<li>Also works with <code>std::getline</code></li>
+</ul></li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-why-2-P-2" class="outline-3">
+<h3 id="why-2-P-2">Why</h3>
+<div class="outline-text-3" id="text-org6b19f96">
+<ol class="org-ol">
+<li>Safety: only types that have <code>operator&gt;&gt;</code> implemented can be used without creating a compiler error</li>
+<li>Extensibility: it is possible to enable custom types to work with <code>input streams</code> and create custom stream manipulators for formatting options</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-c-style-1-P-1" class="outline-2">
+<h2 id="c-style-1-P-1">C-Style</h2>
+<div class="outline-text-2" id="text-c-style-1-P-1">
+</div>
+<div id="outline-container-what-2-P-3" class="outline-3">
+<h3 id="what-2-P-3">What</h3>
+<div class="outline-text-3" id="text-orge6d226c">
+<p>
+Using the input/output facilities that are available in the C standard library. These are here for completeness but should not be used in this class.
+</p>
+</div>
+</div>
+<div id="outline-container-how-2-P-3" class="outline-3">
+<h3 id="how-2-P-3">How</h3>
+<div class="outline-text-3" id="text-org9e26c45">
+<ol class="org-ol">
+<li><code>#include&lt;cstdio&gt;</code> (<code>C++</code> standard library equivalent of <code>&lt;stdio.h&gt;</code>)</li>
+<li>For output: <code>printf</code> and <code>fprintf</code>
+<ul class="org-ul">
+<li><code>printf("The output is %d\n" 12)</code></li>
+<li><code>printf</code> takes a <a href="https://en.cppreference.com/w/cpp/io/c/printf.html">Format String</a> that tells it how to format it's arguments</li>
+</ul></li>
+<li>For input <code>scanf</code> and <code>fgets</code> can be used
+<ul class="org-ul">
+<li><code>scanf</code> has many dangerous pitfalls</li>
+<li><code>fgets</code></li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-why-2-P-3" class="outline-3">
+<h3 id="why-2-P-3">Why</h3>
+<div class="outline-text-3" id="text-org878db6b">
+<ol class="org-ol">
+<li>Faster</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-why-not--2-P-1" class="outline-3">
+<h3 id="why-not--2-P-1">Why Not?</h3>
+<div class="outline-text-3" id="text-org8528a29">
+<ol class="org-ol">
+<li>Dangerous: incorrect format strings can still compile and cause bugs
+<ul class="org-ul">
+<li>Modern compilers allow warning about the format strings and can catch many errors</li>
+</ul></li>
+<li>Dangerous: it is possible to get buffer overflows with <code>scanf</code> if proper precautions are not taken
+<ul class="org-ul">
+<li>Even most basic usages such as <code>scanf("%s", mystring)</code> can cause a buffer overflow.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>
