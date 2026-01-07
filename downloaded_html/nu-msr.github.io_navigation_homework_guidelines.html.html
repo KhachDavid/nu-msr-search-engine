@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-06 Tue 13:14 -->
+<!-- 2026-01-07 Wed 10:10 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Homework Guidelines</title>
@@ -21,7 +21,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#overview-1-P-2">Overview</a>
+<li><a href="#overview-1-P-1">Overview</a>
 <ul>
 <li><a href="#important-notice-2-P-1">Important Notice</a></li>
 </ul>
@@ -32,7 +32,7 @@
 <ul>
 <li><a href="#git-2-P-1">Git</a></li>
 <li><a href="#ros-2-P-1">ROS</a></li>
-<li><a href="#c--2-P-2">C++</a>
+<li><a href="#c--2-P-1">C++</a>
 <ul>
 <li><a href="#general-3-P-1">General</a></li>
 <li><a href="#comments-3-P-1">Comments</a></li>
@@ -52,8 +52,8 @@
 </div>
 </nav>
 
-<div id="outline-container-overview-1-P-2" class="outline-2">
-<h2 id="overview-1-P-2">Overview</h2>
+<div id="outline-container-overview-1-P-1" class="outline-2">
+<h2 id="overview-1-P-1">Overview</h2>
 <div class="outline-text-2" id="text-org6486703">
 <p>
 These guidelines apply to all homework assignments in ME495 Sensing, Navigation, and Machine Learing for Robotics.
@@ -189,9 +189,9 @@ The list may grow as the quarter progresses so check back for each assignment.
 </div>
 </div>
 
-<div id="outline-container-c--2-P-2" class="outline-3">
-<h3 id="c--2-P-2">C++</h3>
-<div class="outline-text-3" id="text-c--2-P-2">
+<div id="outline-container-c--2-P-1" class="outline-3">
+<h3 id="c--2-P-1">C++</h3>
+<div class="outline-text-3" id="text-c--2-P-1">
 </div>
 <div id="outline-container-general-3-P-1" class="outline-4">
 <h4 id="general-3-P-1">General</h4>
@@ -217,41 +217,70 @@ The list may grow as the quarter progresses so check back for each assignment.
 <h4 id="comments-3-P-1">Comments</h4>
 <div class="outline-text-4" id="text-org3fc8893">
 <ol class="org-ol">
+<li>Prefer <code>C++</code> style comments (<code>//</code>) to C style comments <code>/*</code>
+<ul class="org-ul">
+<li>There are some subtle "gotchas" with C style comments</li>
+<li>Adhering to this rule makes it easier to temporarily comment out large blocks
+of code when debugging using <code>/*</code></li>
+</ul></li>
+<li>Submitted versions of assignments should not have any commented out code unless
+the commented-out code also includes a descriptive reason as to why it is commented
+out. And it's generally better to have it completely removed.</li>
 <li><p>
 All <code>.cpp</code> files that are ROS nodes should start with the following comment block:
 </p>
-<pre class="example">
-/// \file
-/// \brief A brief description of what the file does
-///
-/// PARAMETERS:
-///     parameter_name (parameter_type): description of the parameter
-/// PUBLISHES:
-///     topic_name (topic_type): description of topic
-/// SUBSCRIBES:
-///     topic_name (topic_type): description of the topic
-/// SERVERS:
-///     service_name (service_type): description of the service
-/// CLIENTS:
-///     service_name (service_type): description of the service
-</pre></li>
+<div class="org-src-container">
+<pre class="src src-cpp"><span class="org-comment-delimiter">/// </span><span class="org-comment">\file
+</span><span class="org-comment-delimiter">/// </span><span class="org-comment">\brief A brief description of what the file does
+</span><span class="org-comment-delimiter">///</span><span class="org-comment">
+</span><span class="org-comment-delimiter">/// </span><span class="org-comment">PARAMETERS:
+</span><span class="org-comment-delimiter">///     </span><span class="org-comment">parameter_name (parameter_type): description of the parameter
+</span><span class="org-comment-delimiter">/// </span><span class="org-comment">PUBLISHES:
+</span><span class="org-comment-delimiter">///     </span><span class="org-comment">topic_name (topic_type): description of topic
+</span><span class="org-comment-delimiter">/// </span><span class="org-comment">SUBSCRIBES:
+</span><span class="org-comment-delimiter">///     </span><span class="org-comment">topic_name (topic_type): description of the topic
+</span><span class="org-comment-delimiter">/// </span><span class="org-comment">SERVERS:
+</span><span class="org-comment-delimiter">///     </span><span class="org-comment">service_name (service_type): description of the service
+</span><span class="org-comment-delimiter">/// </span><span class="org-comment">CLIENTS:
+</span><span class="org-comment-delimiter">///     </span><span class="org-comment">service_name (service_type): description of the service</span>
+</pre>
+</div></li>
 <li><p>
 All functions/methods should be commented using <code>doxygen</code> style comments
 </p>
-<pre class="example">
-/// \brief Computes the factorial
-///
-/// \tparam T - An integral type
-/// \param F - the factorial to compute
-/// \returns F! (F Factorial)
-/// &lt;template typename T&gt;
-/// T factorial (T F);
-</pre></li>
-<li>Classes should have a <code>doxygen</code> comment block describing what the class does.
-<ul class="org-ul">
-<li>You should also provide comments for private members (but not doxygen comments), where appropriate</li>
-<li>Private members are an implementation detail and documentation should not be visible to readers of the main documentation.</li>
-</ul></li>
+<div class="org-src-container">
+<pre class="src src-cpp"><span class="org-comment-delimiter">/// </span><span class="org-comment">\brief Computes the factorial
+</span><span class="org-comment-delimiter">///</span><span class="org-comment">
+</span><span class="org-comment-delimiter">/// </span><span class="org-comment">\tparam T - An integral type
+</span><span class="org-comment-delimiter">/// </span><span class="org-comment">\param F - the factorial to compute
+</span><span class="org-comment-delimiter">/// </span><span class="org-comment">\returns F! (F Factorial)
+</span><span class="org-comment-delimiter">/// </span><span class="org-comment">&lt;template typename T&gt;
+</span><span class="org-comment-delimiter">/// </span><span class="org-comment">T factorial (T F);</span>
+</pre>
+</div></li>
+<li><p>
+Classes should have a <code>doxygen</code> comment block describing what the class does and all public members should
+have descriptions.
+</p>
+<div class="org-src-container">
+<pre class="src src-cpp"><span class="org-comment-delimiter">/// </span><span class="org-comment">\brief A class to model a Classroom
+</span><span class="org-keyword">class</span> <span class="org-type">Classroom</span>
+{
+<span class="org-keyword">public</span>:
+    <span class="org-comment-delimiter">/// </span><span class="org-comment">\brief Create an empty classroom
+</span>    <span class="org-function-name">Classroom</span>();
+
+    <span class="org-comment-delimiter">/// </span><span class="org-comment">\brief Give a lecture
+</span>    <span class="org-comment-delimiter">/// </span><span class="org-comment">\param topic Description of the lecture's subject
+</span>    <span class="org-type">void</span> <span class="org-function-name">lecture</span>(<span class="org-keyword">const</span> <span class="org-constant">std</span>::<span class="org-type">string</span> &amp; <span class="org-variable-name">topic</span>);
+<span class="org-keyword">private</span>:
+    <span class="org-comment-delimiter">// </span><span class="org-comment">Comment is okay but private members are implementation
+</span>    <span class="org-comment-delimiter">// </span><span class="org-comment">details and not part of the public API so should not get
+</span>    <span class="org-comment-delimiter">// </span><span class="org-comment">doxygen comments
+</span>    <span class="org-type">int</span> <span class="org-variable-name">num_students</span>;
+}
+</pre>
+</div></li>
 <li>Lack of <code>doxygen</code> style comments before functions, classes, or ROS nodes may result in me deleting the uncommented code
 and trying to compile your project.</li>
 </ol>
@@ -261,10 +290,10 @@ and trying to compile your project.</li>
 <h4 id="include-files-3-P-1">Include Files</h4>
 <div class="outline-text-4" id="text-orgf907ee9">
 <ol class="org-ol">
+<li><code>#pragma once</code> is not standard C++ and should not be used.</li>
 <li>Use include guards in all header files</li>
 <li>All include files that you write should be included with  <code>#include "package/headerfile.hpp"</code>.</li>
-<li>Minimize the amount of header files you place in each header file by using forward declarations where possible</li>
-<li><code>#pragma once</code> is not standard C++ and should not be used.</li>
+<li>Minimize the number of header files you include in each header file by using forward declarations where possible</li>
 </ol>
 </div>
 </div>
@@ -280,7 +309,7 @@ and trying to compile your project.</li>
 </ul></li>
 <li>In most cases it is preferable to explicitly do a <code>using</code> for each function that you need rather than polluting the namespace by doing <code>using namespace std</code>
 <ul class="org-ul">
-<li>One exception to this rule is when using literal suffixes (e.g., the units from <code>std::chrono</code>)</li>
+<li>One exception to this rule is when using literal suffixes (e.g., the units from <code>std::chrono</code>), then <code>using namespace</code> is preferred (but still not in headers!)</li>
 </ul></li>
 </ol>
 </div>
@@ -290,7 +319,10 @@ and trying to compile your project.</li>
 <h4 id="math-3-P-1">Math</h4>
 <div class="outline-text-4" id="text-org4084f0b">
 <ol class="org-ol">
-<li>Double precision literals should always include the decimal point (e.g., <code>1.0</code> rather than <code>1</code>)</li>
+<li>Double precision literals should always include the decimal point (e.g., <code>1.0</code> rather than <code>1</code>)
+<ul class="org-ul">
+<li>This enables you to avoid ever thinking about integer/double conversion rules</li>
+</ul></li>
 <li>Complicated math expressions should be commented, referencing the derivation or source of the equation.</li>
 <li>Break up long math expressions. It is okay to store intermediate values as <code>const</code> or <code>constexpr</code> variables</li>
 <li>Use <code>double</code> not <code>float</code> to minimize numerical issues as potential sources of error.</li>
@@ -302,12 +334,12 @@ and trying to compile your project.</li>
 <h4 id="classes-3-P-1">Classes</h4>
 <div class="outline-text-4" id="text-orga1d90cc">
 <ol class="org-ol">
-<li>Constructors should use initializer lists to initialize member variables</li>
-<li>Member variables should be initialized in the constructor initailizer list in the same order in which they are declared</li>
+<li>Constructors should use initializer lists to initialize member variables.</li>
+<li>Member variables must be initialized in the constructor initailizer list in the same order in which they are declared</li>
 <li>Usually, single-argument constructors should be declared <code>explicit</code> (so there will not be an implicit conversion)</li>
 <li>Do not use <code>this-&gt;</code> unnecessarily.
 <ul class="org-ul">
-<li>In C++ <code>this</code> is usually implied when working within a member function.</li>
+<li>In C++ <code>this</code> is implied when working within a member function.</li>
 </ul></li>
 </ol>
 </div>
@@ -326,7 +358,7 @@ and trying to compile your project.</li>
 <ul class="org-ul">
 <li>There are rare cases where using an <code>extern</code> global variable might make sense, but not in this class, so don't use <code>extern</code></li>
 </ul></li>
-<li>Use <code>auto</code> a lot (see <a href="https://www.fluentcpp.com/2020/12/04/auto-for-types-but-not-for-concepts/">almost always auto</a>)</li>
+<li>Use <code>auto</code> a lot (see <a href="https://herbsutter.com/2013/08/12/gotw-94-solution-aaa-style-almost-always-auto/">almost always auto</a>, Question 3).</li>
 <li>Do not inherit from a class unless it has a <code>virtual</code> or <code>protected</code> destructor.</li>
 </ol>
 </div>
@@ -361,12 +393,12 @@ and trying to compile your project.</li>
 <li>Don't use raw arrays (e.g., <code>int myarra[20]</code>).</li>
 <li>The default data structure of choice is <code>std::vector</code>
 <ul class="org-ul">
-<li>Other data structures may have this or that property, but <code>std::vector</code> almost always can get the job done in the most straightforward way.</li>
+<li>Other data structures have their place, but usually <code>std::vector</code> is a good first choice</li>
 </ul></li>
 <li>Use algorithms in <code>std::algorithm</code> and <code>std::ranges</code></li>
 <li>When indexing, use <code>.at()</code> to get runtime bounds checking (at the expense of performance)
 <ul class="org-ul">
-<li>Do not ever use <code>[]</code> to index in a C++ program.</li>
+<li>Do not use <code>[]</code> to index in a C++ program.</li>
 <li>At some point you may want to use <code>[]</code> for efficiency reasons, but that point is very far down the road and not likely to be
 needed in this class.</li>
 </ul></li>
