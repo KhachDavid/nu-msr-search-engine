@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2026-01-07 Wed 16:17 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Exploring CMake</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">Exploring CMake</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#overview-1-P-1">Overview</a></li>
+<li><a href="#the-program-1-P-1">The Program</a>
+<ul>
+<li><a href="#game-description-2-P-1">Game Description</a>
+<ul>
+<li><a href="#extra-challenge-optional--3-P-1">Extra Challenge (optional)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#compiling-1-P-1">Compiling</a></li>
+<li><a href="#cmake-1-P-1">CMake</a></li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-overview-1-P-1" class="outline-2">
+<h2 id="overview-1-P-1">Overview</h2>
+<div class="outline-text-2" id="text-orgea089d2">
+<ul class="org-ul">
+<li>This activity provides an interactive introduction to <a href="https://www.cmake.org">CMake</a></li>
+<li>The <a href="../lectures/cmake_basics.html">CMake Basics</a> provides a conceptual overview and more information</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-the-program-1-P-1" class="outline-2">
+<h2 id="the-program-1-P-1">The Program</h2>
+<div class="outline-text-2" id="text-orge827790">
+<p>
+We will implement the classic <a href="https://en.wikipedia.org/wiki/Fizz_buzz">FizzBuzz</a> challenge to provide code for our CMake project to compile.
+</p>
+</div>
+
+<div id="outline-container-game-description-2-P-1" class="outline-3">
+<h3 id="game-description-2-P-1">Game Description</h3>
+<div class="outline-text-3" id="text-orga76f98e">
+<ol class="org-ol">
+<li>In a new directory, write a <code>C++</code> program <code>fizzbuzz.cpp</code> that implements <code>FizzBuzz</code></li>
+<li>The program should prompt the user to enter an integer <code>N</code></li>
+<li>The program then prints out the integers from <code>1</code> to <code>N</code> inclusive
+<ul class="org-ul">
+<li>If the number is divisible by 3, print <code>Fizz</code></li>
+<li>If the number is divisible by 5, print <code>Buzz</code></li>
+<li>If the number is divisible by both 3 and 5 print <code>FizzBuzz</code></li>
+<li>Otherwise, print the number</li>
+</ul></li>
+</ol>
+</div>
+
+<div id="outline-container-extra-challenge-optional--3-P-1" class="outline-4">
+<h4 id="extra-challenge-optional--3-P-1">Extra Challenge (optional)</h4>
+<div class="outline-text-4" id="text-org4455a45">
+<ol class="org-ol">
+<li>Instead of 3 and 5, let the user enter the quotient for <code>Fizz</code> and the quotient for <code>Buzz</code></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-compiling-1-P-1" class="outline-2">
+<h2 id="compiling-1-P-1">Compiling</h2>
+<div class="outline-text-2" id="text-org13898d1">
+<ol class="org-ol">
+<li>Use <code>g++</code> to compile your program</li>
+<li>Run it and make sure it works.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-cmake-1-P-1" class="outline-2">
+<h2 id="cmake-1-P-1">CMake</h2>
+<div class="outline-text-2" id="text-orgc93584b">
+<ol class="org-ol">
+<li>Create a file called <code>CMakeLists.txt</code></li>
+<li>Using the example provided in <a href="../lectures/cmake_basics.html">CMake Basics</a>
+<ul class="org-ul">
+<li>Make changes needed to get it to compile your <code>fizzbuzz.cpp</code> program</li>
+<li>Remove lines that are unnecessary for this task.</li>
+</ul></li>
+<li>Build a <code>Release</code> version by specifying <code>-DCMAKE_BUILD_TYPE=Release</code> on the command line
+<ul class="org-ul">
+<li>Do you notice any difference when running the program?</li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>
