@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2026-01-08 Thu 17:12 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Basic C++ Practices</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../../pubme.css" type="text/css"/>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">Basic C++ Practices</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#overview-1-P-1">Overview</a></li>
+<li><a href="#variable-declaration-and-initialization-1-P-1">Variable Declaration and Initialization</a>
+<ul>
+<li><a href="#what--2-P-1">What?</a></li>
+<li><a href="#why--2-P-1">Why?</a>
+<ul>
+<li><a href="#why-not--3-P-1">Why Not?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#use-std-vector--1-P-1">Use std::vector&lt;&gt;</a>
+<ul>
+<li><a href="#what--2-P-2">What?</a></li>
+<li><a href="#how--2-P-1">How?</a></li>
+<li><a href="#why--2-P-2">Why?</a></li>
+<li><a href="#caveats-2-P-1">Caveats</a></li>
+<li><a href="#alternatives--2-P-1">Alternatives?</a>
+<ul>
+<li><a href="#std-array-3-P-1">std::array</a></li>
+<li><a href="#built-in-array-3-P-1">built-in array</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#use-range-based-for-loops-1-P-1">Use Range-based for loops</a></li>
+<li><a href="#memory-1-P-1">Memory</a>
+<ul>
+<li><a href="#overview-2-P-1">Overview</a></li>
+<li><a href="#the-stack-2-P-1">The Stack</a></li>
+<li><a href="#the-heap-2-P-1">The Heap</a></li>
+<li><a href="#pointers-2-P-1">Pointers</a></li>
+<li><a href="#ptr_references">References</a></li>
+<li><a href="#smart-pointers-2-P-1">Smart Pointers</a>
+<ul>
+<li><a href="#shared-ptr-3-P-1">shared Ptr</a></li>
+<li><a href="#unique-ptr-3-P-1">unique_ptr</a></li>
+</ul>
+</li>
+<li><a href="#recommendations-2-P-1">Recommendations</a></li>
+</ul>
+</li>
+<li><a href="#parameter-passing-1-P-1">Parameter Passing</a>
+<ul>
+<li><a href="#pass-by-value-2-P-1">Pass By Value</a></li>
+<li><a href="#pass-by-reference-to-const-2-P-1">Pass By Reference to Const</a></li>
+<li><a href="#pass-by-shared-ptr-2-P-1">Pass by shared_ptr</a></li>
+<li><a href="#pass-by-unique-ptr-2-P-1">Pass by unique_ptr</a></li>
+<li><a href="#other-methods-2-P-1">Other Methods</a></li>
+</ul>
+</li>
+<li><a href="#return_by_value">Returning Objects</a></li>
+<li><a href="#const">Logical <code>const</code></a></li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-overview-1-P-1" class="outline-2">
+<h2 id="overview-1-P-1">Overview</h2>
+<div class="outline-text-2" id="text-org3d9a8a1">
+<ul class="org-ul">
+<li>This document some basic and generally applicable practices toward writing better <code>C++</code> code</li>
+<li>The practices apply to <code>C++23</code> and beyond</li>
+<li>This is not meant to be comprehensive but rather to highlight key ideas from elsewhere.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-variable-declaration-and-initialization-1-P-1" class="outline-2">
+<h2 id="variable-declaration-and-initialization-1-P-1">Variable Declaration and Initialization</h2>
+<div class="outline-text-2" id="text-variable-declaration-and-initialization-1-P-1">
+</div>
+<div id="outline-container-what--2-P-1" class="outline-3">
+<h3 id="what--2-P-1">What?</h3>
+<div class="outline-text-3" id="text-org8243405">
+<ol class="org-ol">
+<li>The rule of thumb here is <a href="https://herbsutter.com/2013/08/12/gotw-94-solution-aaa-style-almost-always-auto/">Almost Always Auto</a>
+<ul class="org-ul">
+<li>In most cases, when declaring local variables, it makes sense to use <code>auto</code></li>
+</ul></li>
+<li>Below are some examples:</li>
+</ol>
+<div class="org-src-container">
+<pre class="src src-cpp"><span class="org-keyword">auto</span> <span class="org-variable-name">x</span> = y; <span class="org-comment-delimiter">// </span><span class="org-comment">inferred as int
+</span><span class="org-keyword">auto</span> <span class="org-variable-name">y</span> = 2.0; <span class="org-comment-delimiter">// </span><span class="org-comment">inferred as double
+</span><span class="org-keyword">auto</span> <span class="org-variable-name">z</span> = 2u;  <span class="org-comment-delimiter">// </span><span class="org-comment">inferred as unsigned int
+</span><span class="org-keyword">auto</span> <span class="org-variable-name">q</span> = uint16_t{45}; <span class="org-comment-delimiter">// </span><span class="org-comment">explicit type</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-why--2-P-1" class="outline-3">
+<h3 id="why--2-P-1">Why?</h3>
+<div class="outline-text-3" id="text-org31d7649">
+<ul class="org-ul">
+<li><code>auto</code> declarations require an initialization
+<ul class="org-ul">
+<li>In other words, <code>auto x;</code> results in a compilation error</li>
+</ul></li>
+<li><code>auto</code> selects the best general-purpose integer type for the machine</li>
+<li><code>auto</code> does not prevent you from explicitly specifying types</li>
+</ul>
+</div>
+
+<div id="outline-container-why-not--3-P-1" class="outline-4">
+<h4 id="why-not--3-P-1">Why Not?</h4>
+<div class="outline-text-4" id="text-org2b9fc0b">
+<ul class="org-ul">
+<li>Some objects (e.g., in linear algebra libraries) rely on proxy objects to, for example, implement lazy evaluation</li>
+<li>You usually do not want a varaible that refers to these proxy objects</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-use-std-vector--1-P-1" class="outline-2">
+<h2 id="use-std-vector--1-P-1">Use std::vector&lt;&gt;</h2>
+<div class="outline-text-2" id="text-use-std-vector--1-P-1">
+</div>
+<div id="outline-container-what--2-P-2" class="outline-3">
+<h3 id="what--2-P-2">What?</h3>
+<div class="outline-text-3" id="text-orga240a04">
+<ol class="org-ol">
+<li>A safe, dynamically re-sizable, array
+<ul class="org-ul">
+<li>Like a python List</li>
+</ul></li>
+<li>A most versatile data-structure of first resort</li>
+</ol>
+
+<div class="org-src-container">
+<pre class="src src-cpp"><span class="org-keyword">auto</span> <span class="org-variable-name">v</span> = <span class="org-constant">std</span>::<span class="org-type">vector</span>&lt;<span class="org-type">int</span>&gt;{2, 3, 4};
+<span class="org-keyword">auto</span> <span class="org-variable-name">x</span> = v.at(2); <span class="org-comment-delimiter">// </span><span class="org-comment">4
+</span>v.at(0) = 1; <span class="org-comment-delimiter">// </span><span class="org-comment">v == {1, 3, 4}</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-how--2-P-1" class="outline-3">
+<h3 id="how--2-P-1">How?</h3>
+<div class="outline-text-3" id="text-orga2d692c">
+<ol class="org-ol">
+<li>Always use <code>v.at(index)</code> to into the vector
+<ul class="org-ul">
+<li>Ensures run-time check of the index, will throw an exception if out-of-bounds</li>
+</ul></li>
+<li>(Almost) Never use <code>v[index]</code>
+<ul class="org-ul">
+<li>No run-time check of the bounds</li>
+<li>Boosts performance, but if your code has bugs can cause major problems</li>
+<li>Only use if you have determined, through measurements, that you cannot afford the run-time check.</li>
+</ul></li>
+<li>Avoid indexing and use a <a href="https://en.cppreference.com/w/cpp/language/range-for.html">range-based for loop</a>, with <a href="https://en.cppreference.com/w/cpp/algorithm/ranges.html">Constrained Algorithms</a> or <a href="https://en.cppreference.com/w/cpp/algorithm.html">std::algorithms</a>
+<ul class="org-ul">
+<li>Usually it's a good idea, but when doing mathematical code indexes can be useful.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-why--2-P-2" class="outline-3">
+<h3 id="why--2-P-2">Why?</h3>
+<div class="outline-text-3" id="text-org8d206d0">
+<ol class="org-ol">
+<li><code>std::vector</code> is a relatively straightforward data-structure with a known performance profile</li>
+<li><code>std::vector</code> is usually good enough</li>
+<li>Modern computers favor linear algorithms with minimal branching, which fits well with <code>std::vector</code></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-caveats-2-P-1" class="outline-3">
+<h3 id="caveats-2-P-1">Caveats</h3>
+<div class="outline-text-3" id="text-org093b756">
+<ol class="org-ol">
+<li>Don't use <code>std::vector&lt;bool&gt;</code> because it does not conform to the proper container interface</li>
+<li>Use <code>std::vector&lt;uint8_t&gt;</code>, <code>std::deque&lt;bool&gt;</code> or <code>std::bitset</code>.
+<ul class="org-ul">
+<li>All have various trade-offs, <code>std:"vector&lt;uint8_t&gt;</code> at least behaves like a normal vector</li>
+</ul></li>
+<li>See <a href="https://search.library.northwestern.edu/permalink/01NWU_INST/h04e76/alma9981882400002441">Meyers, Scott <i>Effective STL</i>, Chapter 2, Item 18</a></li>
+<li><a href="https://isocpp.org/blog/2012/11/on-vectorbool">It's a fine data structure</a>, just named incorrectly</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-alternatives--2-P-1" class="outline-3">
+<h3 id="alternatives--2-P-1">Alternatives?</h3>
+<div class="outline-text-3" id="text-alternatives--2-P-1">
+</div>
+<div id="outline-container-std-array-3-P-1" class="outline-4">
+<h4 id="std-array-3-P-1">std::array</h4>
+<div class="outline-text-4" id="text-orgf1e396b">
+<p>
+For fixed-size arrays, you can use <code>std::array</code>
+</p>
+<ul class="org-ul">
+<li>Need to know the size at compile time</li>
+<li>Can enhance performance of <code>std::vector</code>, but that performance boost is likely unnecessary unless measured to be</li>
+<li>Still provide <code>.at()</code> for bounds-checked access</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-built-in-array-3-P-1" class="outline-4">
+<h4 id="built-in-array-3-P-1">built-in array</h4>
+<div class="outline-text-4" id="text-orgf0daf12">
+<p>
+There is usually no need to use built-in arrays, especially in this class
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-use-range-based-for-loops-1-P-1" class="outline-2">
+<h2 id="use-range-based-for-loops-1-P-1">Use Range-based for loops</h2>
+<div class="outline-text-2" id="text-org41ee960">
+<ol class="org-ol">
+<li>In C++ you can iterate over ranges of items using a <a href="https://en.cppreference.com/w/cpp/language/range-for.html">range-based for loop</a>
+<ul class="org-ul">
+<li>Basically anything with a <code>.begin()</code> and <code>.end()</code> <a href="https://en.cppreference.com/w/cpp/iterator/iterator.html">iterator</a> can be iterated over with such a loop</li>
+<li><code>std::vector</code> is one such container that satisfies this requirement</li>
+</ul></li>
+<li>There are three primary forms to use. Which to use essentially follows the same rules as parameter passing.
+<ol class="org-ol">
+<li><code>for(auto v : myvector)</code>
+<ul class="org-ul">
+<li>Here, each element in <code>myvector</code> is copied into <code>v</code></li>
+<li>This mode is appropriate when the type held by myvector is small (e.g., <code>int</code>, <code>double</code>, etc.)</li>
+</ul></li>
+<li><code>for(const auto &amp; v : myvector)</code>
+<ul class="org-ul">
+<li>Here each \(v\) is presented as a reference to a const element of the <code>myvector</code></li>
+<li>The for loop may inspect but may not call non-const methods on the object</li>
+<li>This mode is appropriate if the type held by myvector is large/custom (e.g., a class you wrote)</li>
+</ul></li>
+<li><code>for(auto &amp; v : myvector)</code>
+<ul class="org-ul">
+<li>Here, each element is presented as a reference to a mutable element to <code>myvector</code></li>
+<li>This mode is appropriate only if you wish to modify the elements in <code>myvector</code> in the loop</li>
+</ul></li>
+</ol></li>
+<li>Don't force yourself into using <code>range-based</code> for: sometimes indexes are useful, so if you need them, use them</li>
+<li>The appropriate type for iterating over the elements of the vector is <code>std::size_t</code>.
+<code>for(std::size_t i = 0; i &lt; myvector.size(); ++i)</code></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-memory-1-P-1" class="outline-2">
+<h2 id="memory-1-P-1">Memory</h2>
+<div class="outline-text-2" id="text-memory-1-P-1">
+</div>
+<div id="outline-container-overview-2-P-1" class="outline-3">
+<h3 id="overview-2-P-1">Overview</h3>
+<div class="outline-text-3" id="text-org5348fd2">
+<ul class="org-ul">
+<li>C++ provides programmers with direct access to the memory where variables and objects are stored</li>
+<li>This provides absolute control over the program, but also creates the chance to introduce bugs</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-the-stack-2-P-1" class="outline-3">
+<h3 id="the-stack-2-P-1">The Stack</h3>
+<div class="outline-text-3" id="text-org25e5199">
+<ol class="org-ol">
+<li>The stack is a part of memory where local variables are stored
+<ul class="org-ul">
+<li>Local variables also include the parameters to the function</li>
+</ul></li>
+<li>When a function is called, it's local variables are placed on the stack</li>
+<li>When a function returns, it's local variables are removed from the stack</li>
+<li>Thus, the memory used for storing local variables
+<ul class="org-ul">
+<li>Is automatically allocated upon entering a function</li>
+<li>Is automatically de-allocated upon leaving a function</li>
+</ul></li>
+<li>Local variables do not persist beyond a function call</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-the-heap-2-P-1" class="outline-3">
+<h3 id="the-heap-2-P-1">The Heap</h3>
+<div class="outline-text-3" id="text-org26d17bb">
+<ol class="org-ol">
+<li>The heap is an area of memory managed by the programmer</li>
+<li>Objects can be allocated on the heap with the <code>new</code> operator
+<ul class="org-ul">
+<li>Calling <code>new</code> allocates memory and calls the Object's constructor</li>
+</ul></li>
+<li>Objects can be de-allocated from the heap with the <code>delete</code> operator
+<ul class="org-ul">
+<li>Calling <code>delete</code> calls the object's destructor and de-allocates it's memory</li>
+</ul></li>
+<li><code>new []</code> and <code>delete []</code> can allocate and de-allocate arrays of objects</li>
+<li>If your program forgets to de-allocate memory (e.g., does not call <code>delete</code>) it can leak memory</li>
+<li>If your program accidentally de-allocates memory twice it can crash and create a security bug</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-pointers-2-P-1" class="outline-3">
+<h3 id="pointers-2-P-1">Pointers</h3>
+<div class="outline-text-3" id="text-org2da977e">
+<ul class="org-ul">
+<li>Every variable has a memory address.</li>
+<li>Pointers store the memory address of a variable</li>
+<li>In Modern C++ pointers should <a href="#ptr_references">almost never be used</a>.
+<ul class="org-ul">
+<li>However, a basic understanding of pointers is useful</li>
+</ul></li>
+</ul>
+
+<p>
+Consider the following code:
+</p>
+<div class="org-src-container">
+<pre class="src src-cpp"><span class="org-keyword">auto</span> <span class="org-variable-name">var</span> = 20;
+<span class="org-comment-delimiter">//</span><span class="org-comment">int * pvar = &amp;var;
+</span><span class="org-keyword">auto</span> <span class="org-variable-name">pvar</span> = &amp;var;
+<span class="org-comment-delimiter">//</span><span class="org-comment">int ** ppvar = &amp;pvar
+</span><span class="org-keyword">auto</span> <span class="org-variable-name">ppvar</span> = &amp;pvar;
+</pre>
+</div>
+<p>
+Memory might be laid out as below:
+</p>
+<table>
+
+
+<colgroup>
+<col  class="org-right">
+
+<col  class="org-right">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Address</th>
+<th scope="col" class="org-right">Value</th>
+<th scope="col" class="org-left">Variable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">0x1000</td>
+<td class="org-right">20</td>
+<td class="org-left">var</td>
+</tr>
+
+<tr>
+<td class="org-right">0x1004</td>
+<td class="org-right">0x00001000</td>
+<td class="org-left">pvar</td>
+</tr>
+
+<tr>
+<td class="org-right">0x1008</td>
+<td class="org-right">0x00001004</td>
+<td class="org-left">ppvar</td>
+</tr>
+</tbody>
+</table>
+
+
+<ul class="org-ul">
+<li>The variable <code>var</code> holds <code>20</code>.</li>
+<li>The address of <code>var</code> is <code>&amp;var</code> and it is <code>0x1000</code> (in reality the address would be 64 bits on an x86_64 machine).</li>
+<li>The pointer <code>pvar == &amp;var</code>.
+<ul class="org-ul">
+<li>To access var through <code>pvar</code> it can be de-referenced.</li>
+<li>For example <code>*pvar == 20</code> and <code>*pvar = 40; var == 40</code></li>
+</ul></li>
+<li>Pointers are in-and-of-themselves variables and are stored at memory locations
+<ul class="org-ul">
+<li><code>&amp;pvar == = 0x1004</code> in this case</li>
+</ul></li>
+<li><code>nullptr</code> indicates that a pointer is invalid and does not point to anything
+<ul class="org-ul">
+<li><code>nullptr</code> pointers should never be dereferenced</li>
+</ul></li>
+<li>Pointers allow passing the address of data, rather than copying the data itself
+<ul class="org-ul">
+<li>Only the address needs to be copied, not the whole data structure</li>
+</ul></li>
+<li>Pointers can be re-assigned to point to new objects</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-ptr_references" class="outline-3">
+<h3 id="ptr_references">References</h3>
+<div class="outline-text-3" id="text-ptr_references">
+<ol class="org-ol">
+<li>References are like pointers that are:
+<ul class="org-ul">
+<li>Never <code>nullptr</code></li>
+<li>Cannot be re-asssigned</li>
+<li>Are always dereferenced</li>
+</ul></li>
+<li>Taking the address of a reference returns the address of the underlying variable</li>
+<li>References are primarily used for two purposes
+<ol class="org-ol">
+<li>Passing objects to functions</li>
+<li>Referring to the current element in range-based for loops</li>
+</ol></li>
+<li><p>
+Here is an example of how they work (illustrative only)
+</p>
+<div class="org-src-container">
+<pre class="src src-cpp"><span class="org-keyword">auto</span> <span class="org-variable-name">x</span> = 2;
+<span class="org-keyword">auto</span> &amp; <span class="org-variable-name">y</span> = x;
+y = 3;
+<span class="org-comment-delimiter">// </span><span class="org-comment">now x == 3</span>
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-smart-pointers-2-P-1" class="outline-3">
+<h3 id="smart-pointers-2-P-1">Smart Pointers</h3>
+<div class="outline-text-3" id="text-smart-pointers-2-P-1">
+</div>
+<div id="outline-container-shared-ptr-3-P-1" class="outline-4">
+<h4 id="shared-ptr-3-P-1">shared Ptr</h4>
+<div class="outline-text-4" id="text-orge688b58">
+<ol class="org-ol">
+<li><code>shared_ptr&lt;T&gt;</code> creates a reference-counted smart pointer</li>
+<li>It refers to an object <code>obj</code> of type <code>T</code></li>
+<li>Models the pattern of <i>shared ownership</i></li>
+<li>When all <code>shared_ptr</code> to <code>obj</code> are destroyed, <code>obj</code> is destroyed
+<ul class="org-ul">
+<li>As long as you hold a <code>shared_ptr</code> to <code>obj</code> you know that it will not be destroyed</li>
+</ul></li>
+<li>Does not handle circular references
+<ul class="org-ul">
+<li>Object <code>obj1</code> holds a <code>shared_ptr</code> <code>obj2</code></li>
+<li>Object <code>obj2</code> holds a <code>shared_ptr</code> to <code>obj1</code>
+<ul class="org-ul">
+<li>Now <code>obj1</code> can't be destroyed unless <code>obj2</code> is destroyed</li>
+<li>But <code>obj2</code> can't be destroyed unless <code>obj1 is destroyed</code></li>
+</ul></li>
+</ul></li>
+<li>Create with <code>std::make_shared</code></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-unique-ptr-3-P-1" class="outline-4">
+<h4 id="unique-ptr-3-P-1">unique_ptr</h4>
+<div class="outline-text-4" id="text-org540c9fd">
+<ol class="org-ol">
+<li><code>unique_ptr&lt;T&gt;</code> creates a smart pointer with single ownership</li>
+<li>Only one <code>unique_ptr</code> at a time can reference <code>obj</code></li>
+<li>When the <code>unique_ptr</code> goes out of scope, <code>obj</code> is destroyed</li>
+<li>Cannot be copied</li>
+<li>Ownership can be transferred to a new <code>unique_ptr</code>  by <a href="https://en.cppreference.com/w/cpp/utility/move.html">moving</a> from it</li>
+<li>Create with <code>std::make_unique</code></li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-recommendations-2-P-1" class="outline-3">
+<h3 id="recommendations-2-P-1">Recommendations</h3>
+<div class="outline-text-3" id="text-org2e3e89c">
+<ol class="org-ol">
+<li>In general, pointers should be avoided. They can be used in a few situation
+<ul class="org-ul">
+<li>Interfacing with C code that uses pointers</li>
+<li>Non-owning use in contexts when references don't make sense.
+<ul class="org-ul">
+<li>Someone else is responsible for managing memory lifetime</li>
+<li>The value pointed at may be <code>nullptr</code></li>
+<li>The context is not a parameter passing context</li>
+</ul></li>
+</ul></li>
+<li>References should be used only for <a href="https://herbsutter.com/2020/02/23/references-simply/">parameter passing and range-based for loops</a>
+<ul class="org-ul">
+<li>Don't use references as member variables (they prevent copying your object)</li>
+</ul></li>
+<li>In most cases you don't need to allocate your own memory
+<ol class="org-ol">
+<li>Containers like <code>std::vector</code> instead</li>
+<li><code>std::shared_ptr&lt;&gt;</code>, created with <code>std::make_shared</code></li>
+<li><code>std::unique_ptr&lt;&gt;</code>, created with <code>std::make_unique</code></li>
+<li>There is no need to use <code>new</code> or <code>delete</code> in this class</li>
+</ol></li>
+<li>If you must allocate memory (e.g., to make your own data structures)
+<ul class="org-ul">
+<li>Use Objects: Memory is allocated in constructors and deallocated in destructors</li>
+<li>See: <a href="https://search.library.northwestern.edu/permalink/01NWU_INST/h04e76/alma9981881596602441">Scott Meyers <i>Effective C++</i>, Chapter 3, Item 13</a></li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-parameter-passing-1-P-1" class="outline-2">
+<h2 id="parameter-passing-1-P-1">Parameter Passing</h2>
+<div class="outline-text-2" id="text-parameter-passing-1-P-1">
+</div>
+<div id="outline-container-pass-by-value-2-P-1" class="outline-3">
+<h3 id="pass-by-value-2-P-1">Pass By Value</h3>
+<div class="outline-text-3" id="text-org28c7d09">
+<ol class="org-ol">
+<li>Pass by value is the preferred method for passing small objects to functions</li>
+<li>Consider <code>void func(MyObject obj)</code>
+<ul class="org-ul">
+<li>In this example, <code>obj</code> is passed by value</li>
+<li>This means that the <a href="https://en.cppreference.com/w/cpp/language/copy_constructor.html">copy constructor</a> of <code>obj</code> is called
+<ul class="org-ul">
+<li>If <code>obj</code> has no copy constructor, pass by value cannot be used</li>
+</ul></li>
+<li>Copying large objects can be time consuming, but is trivial for small objects</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-pass-by-reference-to-const-2-P-1" class="outline-3">
+<h3 id="pass-by-reference-to-const-2-P-1">Pass By Reference to Const</h3>
+<div class="outline-text-3" id="text-orgac6c057">
+<ol class="org-ol">
+<li>Pass by reference to const is a method for passing objects without requiring copying</li>
+<li>Consider <code>void func(const MyClass &amp; obj)</code> and <code>void func(MyClass const &amp; obj)</code>
+<ul class="org-ul">
+<li>Both examples are exactly the same semantically</li>
+<li>The first is more common, the second is more consistent with other uses of <code>const</code></li>
+<li>No copy is made when passing by reference to <code>const</code></li>
+<li><code>func</code> can cannot modify <code>obj</code> (see <a href="#const">for precisely how/why</a>)</li>
+<li><code>func</code> <i>borrows</i> <code>obj</code>
+<ul class="org-ul">
+<li>The usage of <code>obj</code> must end when <code>func</code> returns</li>
+<li>This means that <code>func</code> should not store a pointer/reference to <code>obj</code> anywhere
+<ul class="org-ul">
+<li>Some other part of the code <i>owns</i> <code>obj</code> and could destroy obj, which would lead to a dangling reference (very bad)</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-pass-by-shared-ptr-2-P-1" class="outline-3">
+<h3 id="pass-by-shared-ptr-2-P-1">Pass by shared_ptr</h3>
+<div class="outline-text-3" id="text-org2c1bb86">
+<ol class="org-ol">
+<li>Pass the <code>shared_ptr</code> object by value: <code>void myfunc(shared_ptr&lt;MyClass&gt; obj)</code></li>
+<li>Shared ownership means that <code>myfunc</code> can retain a <code>shared_ptr</code> to <code>obj</code></li>
+<li><code>obj</code> is destroyed when there are no more <code>shared_ptr</code> pointing to <code>obj</code>
+<ul class="org-ul">
+<li>In other words, all the shared owners can use the object</li>
+<li>When the shared owners are done, the object is destroyed</li>
+</ul></li>
+<li>Edge Case: Does not work if their are circular references:</li>
+<li>Just because you have a <code>shared_ptr</code> to an object, does not mean you should pass by <code>shared_ptr</code>
+<ul class="org-ul">
+<li>In most cases it is appropriate to de-reference the pointer and pass by <code>const reference</code></li>
+<li>Only if the method that is called must retain the object after it is finished do you need to share ownership</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-pass-by-unique-ptr-2-P-1" class="outline-3">
+<h3 id="pass-by-unique-ptr-2-P-1">Pass by unique_ptr</h3>
+<div class="outline-text-3" id="text-org98531ec">
+<ol class="org-ol">
+<li>Pass the <code>unique_ptr</code> by value: <code>void func(unique_ptr&lt;MyClass&gt; obj)</code></li>
+<li>The caller must transfer ownership to <code>func</code> using <code>std::move</code>:</li>
+<li><code>func</code> now becomes responsible for managing the lifetime of <code>obj</code></li>
+<li><p>
+Here is an example
+</p>
+<div class="org-src-container">
+<pre class="src src-cpp"><span class="org-keyword">auto</span> <span class="org-variable-name">obj</span> = <span class="org-constant">std</span>::make_unique&lt;MyClass&gt;(MyClass constructor arguments);
+func(<span class="org-constant">std</span>::move(obj));
+<span class="org-comment-delimiter">// </span><span class="org-comment">x cannot be used</span>
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-other-methods-2-P-1" class="outline-3">
+<h3 id="other-methods-2-P-1">Other Methods</h3>
+<div class="outline-text-3" id="text-orgba9921d">
+<p>
+These notes don't explain these methods, but they are here for completeness
+</p>
+<ol class="org-ol">
+<li>Mutable reference: <code>void myfunc(MyClass &amp; out)</code>
+<ul class="org-ul">
+<li>Like Python pass-by-reference</li>
+<li>An implementation of "Output Parameters"</li>
+<li><code>out</code> can be modified in <code>myfunc</code> and those changes are seen outside the function</li>
+<li>Not usually needed because in C++ it is okay to <a href="#return_by_value">Return By Value</a></li>
+</ul></li>
+<li><code>lvalue</code> reference: <code>void myfunc(MyClass &amp;&amp; lvalue)</code></li>
+<li>forwarding reference: <code>template&lt;class T&gt; myfunc(T &amp;&amp; myval)</code></li>
+<li>Pointer: <code>void myfunc(MyClass * p)</code>
+<ul class="org-ul">
+<li>Useful for interfacing with C</li>
+<li>The pointer can also be <code>const</code></li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-return_by_value" class="outline-2">
+<h2 id="return_by_value">Returning Objects</h2>
+<div class="outline-text-2" id="text-return_by_value">
+<ul class="org-ul">
+<li>In modern C++, there are powerful guarantees of <a href="https://en.cppreference.com/w/cpp/language/copy_elision.html">Copy Elission</a></li>
+<li>In many cases, returning an object by value will not incur additional costs</li>
+<li>As for all performance-related questions: if you are concerned that returning
+by value is too costly, measure.</li>
+<li><p>
+To return multiple objects by value use <code>std::pair</code> or <code>std::tuple</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-cpp"><span class="org-constant">std</span>::<span class="org-type">tuple</span>&lt;<span class="org-type">int</span>, <span class="org-type">char</span>, <span class="org-type">double</span>&gt; <span class="org-function-name">stuff</span>()
+{
+    <span class="org-comment-delimiter">// </span><span class="org-comment">The return type is known so we can
+</span>    <span class="org-comment-delimiter">// </span><span class="org-comment">call the constructor directly with braces
+</span>    <span class="org-keyword">return</span> {1, <span class="org-string">'b'</span>, 2.0};
+}
+
+<span class="org-comment-delimiter">// </span><span class="org-comment">structured bindings let us get separate variables
+</span><span class="org-comment-delimiter">// </span><span class="org-comment">for each item in the tuple easily
+</span><span class="org-keyword">auto</span> [x, y, z] = stuff();
+<span class="org-comment-delimiter">// </span><span class="org-comment">x == 1
+</span><span class="org-comment-delimiter">// </span><span class="org-comment">y == 'b'
+</span><span class="org-comment-delimiter">// </span><span class="org-comment">z == 2.0</span>
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-const" class="outline-2">
+<h2 id="const">Logical <code>const</code></h2>
+<div class="outline-text-2" id="text-const">
+<ol class="org-ol">
+<li>In C++ <code>const</code> means <i>logically constant</i>, meaning that outside observers cannot see that the object has changed</li>
+<li><i>logical const</i> is conceptually different than <code>bitwise-const</code>: the internal state of an object is allowed to change</li>
+<li>The status of <i>const</i> is enforced by the compiler
+<ul class="org-ul">
+<li><code>const auto x = 2</code> means that the value of <code>x</code> will not change</li>
+<li><code>void myfunc(const MyClass &amp; obj)</code> means that
+<ul class="org-ul">
+<li>Only <code>const</code> member functions of <code>obj</code> can be called</li>
+<li><code>public</code> member variables of <code>obj</code> are treated as if declared <code>const</code></li>
+</ul></li>
+<li><code>void MyClass::member() const</code>
+<ul class="org-ul">
+<li>Within this method, the member variables are treated as if declared <code>const</code></li>
+</ul></li>
+</ul></li>
+<li>Effectively:
+<ul class="org-ul">
+<li>Only <code>const</code> methods can be called on <code>const objects</code></li>
+<li><code>const</code> methods can't modify the <code>object</code></li>
+<li>Therefore the compiler enforces <code>const</code></li>
+</ul></li>
+<li>In practice:
+<ul class="org-ul">
+<li>It is possible to circumvent <code>const</code></li>
+<li>The <code>mutable</code> keyword allows a member variable to be changed by a <code>const</code> function
+<ul class="org-ul">
+<li>This is okay only if the change is not observable outside the class and is <code>thread safe</code></li>
+<li>There are sometimes reasons to do this (e.g., caching computations), but it's much easier if you avoid</li>
+</ul></li>
+<li>The <code>const_cast&lt;&gt;</code> can be used to cast constness away
+<ul class="org-ul">
+<li>Basically never do this, it is not always possible anyway (because some data can be stored in read-only memory for example)</li>
+</ul></li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>
