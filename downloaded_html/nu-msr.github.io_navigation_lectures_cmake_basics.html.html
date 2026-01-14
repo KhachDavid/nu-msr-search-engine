@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-08 Thu 09:09 -->
+<!-- 2026-01-13 Tue 09:15 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CMake Basics</title>
@@ -21,7 +21,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#overview-1-P-1">Overview</a></li>
+<li><a href="#overview-1-P-2">Overview</a></li>
 <li><a href="#compilation-process-overview-1-P-1">Compilation Process Overview</a></li>
 <li><a href="#what-is-cmake--1-P-1">What is CMake?</a>
 <ul>
@@ -64,9 +64,11 @@
 </li>
 </ul>
 </li>
-<li><a href="#relationship-with-ament-and-colcon-1-P-1">Relationship with ament and colcon</a>
+<li><a href="#ament-cmake-1-P-1">Ament CMake</a>
 <ul>
+<li><a href="#relationship-between-ament-colcon-cmake-2-P-1">Relationship between Ament, Colcon, CMake</a></li>
 <li><a href="#installation-of-ament-libraries-2-P-1">Installation of ament_libraries</a></li>
+<li><a href="#when-to-use-ament-cmake--2-P-1">When to use <code>ament_cmake</code></a></li>
 </ul>
 </li>
 <li><a href="#ros-idl-generation-1-P-1">ROS IDL Generation</a></li>
@@ -83,8 +85,8 @@
 </ul>
 </div>
 </nav>
-<div id="outline-container-overview-1-P-1" class="outline-2">
-<h2 id="overview-1-P-1">Overview</h2>
+<div id="outline-container-overview-1-P-2" class="outline-2">
+<h2 id="overview-1-P-2">Overview</h2>
 <div class="outline-text-2" id="text-orge198707">
 <p>
 This document explains the C++ build process, CMake, and colcon.
@@ -573,7 +575,7 @@ message(WARNING "The value of VARIABLE is ${VARIABLE}")~  will just print a warn
 <li>If you ever get an error about <code>find_package</code> could not find <code>X</code> then this likely means you are missing a dependency
 <ul class="org-ul">
 <li>If you are lucky, that package might be available for <code>Ubuntu</code> and you can install it</li>
-<li>If using ROS2, you can use <code>rosdep install --from-paths src --ignore-src -r -y</code> to install all dependencies of all packages in the source space</li>
+<li>If using ROS 2, you can use <code>rosdep install --from-paths src --ignore-src -r -y</code> to install all dependencies of all packages in the source space</li>
 </ul></li>
 <li>You may occasionally encounter C++ packages that are not ROS packages and are not distributed with Ubuntu, meaning that you will need to compile them yourself</li>
 <li>Due to the popularity of CMake, there is a good chance that this project will be using CMake as it's build system</li>
@@ -636,7 +638,7 @@ language features that are desired.</li>
 </div>
 <div id="outline-container-locally-per-target--3-P-1" class="outline-4">
 <h4 id="locally-per-target--3-P-1">Locally (Per-Target)</h4>
-<div class="outline-text-4" id="text-orgede8141">
+<div class="outline-text-4" id="text-org39df4c1">
 <ul class="org-ul">
 <li><p>
 To set the standard for a given target
@@ -659,7 +661,7 @@ and <code>INTERFACE</code> which means just used by dependencies but not the tar
 </div>
 <div id="outline-container-globally-all-targets--3-P-1" class="outline-4">
 <h4 id="globally-all-targets--3-P-1">Globally (all targets)</h4>
-<div class="outline-text-4" id="text-org5d94159">
+<div class="outline-text-4" id="text-org79428b7">
 <ul class="org-ul">
 <li><p>
 These settings can also be done globally.
@@ -701,7 +703,7 @@ These settings can also be done globally.
 </div>
 <div id="outline-container-locally-per-target--3-P-2" class="outline-4">
 <h4 id="locally-per-target--3-P-2">Locally (Per-Target)</h4>
-<div class="outline-text-4" id="text-org39df4c1">
+<div class="outline-text-4" id="text-orgc60d4b4">
 <ul class="org-ul">
 <li>Use <code>target_compile_options(target -Wall -Wextra)</code> to add flags (in this case <code>-Wall -Wextra</code>) to the build</li>
 </ul>
@@ -709,7 +711,7 @@ These settings can also be done globally.
 </div>
 <div id="outline-container-globally-all-targets--3-P-2" class="outline-4">
 <h4 id="globally-all-targets--3-P-2">Globally (all targets)</h4>
-<div class="outline-text-4" id="text-org79428b7">
+<div class="outline-text-4" id="text-org76deffb">
 <ul class="org-ul">
 <li>Global compile options are added with <code>add_compile_options(-Wall -Wextra)</code> (<code>-Wall -Wextra</code> in this case).</li>
 </ul>
@@ -718,25 +720,32 @@ These settings can also be done globally.
 </div>
 </div>
 
-<div id="outline-container-relationship-with-ament-and-colcon-1-P-1" class="outline-2">
-<h2 id="relationship-with-ament-and-colcon-1-P-1">Relationship with ament and colcon</h2>
-<div class="outline-text-2" id="text-orgbd8abef">
+<div id="outline-container-ament-cmake-1-P-1" class="outline-2">
+<h2 id="ament-cmake-1-P-1">Ament CMake</h2>
+<div class="outline-text-2" id="text-ament-cmake-1-P-1">
+</div>
+<div id="outline-container-relationship-between-ament-colcon-cmake-2-P-1" class="outline-3">
+<h3 id="relationship-between-ament-colcon-cmake-2-P-1">Relationship between Ament, Colcon, CMake</h3>
+<div class="outline-text-3" id="text-org1329b5f">
 <ul class="org-ul">
+<li><a href="https://docs.ros.org/en/kilted/How-To-Guides/Ament-CMake-Documentation.html"><code>ament_cmake</code></a> is ROS 2 <code>cmake</code> code that can be useful when building ROS 2 packages with <code>cmake</code></li>
 <li><code>colcon</code> is a build tool and can compile projects written with multiple build systems</li>
-<li><code>colcon</code> can automatically detect and compile plain CMake projects based on the presence of a <code>CMakeLists.txt</code>
+<li>So, <code>colcon</code> calls <code>cmake</code> and <code>ament_cmake</code> is additional <code>cmake</code> functions/macros that can be used in your <code>cmake</code> files
 <ul class="org-ul">
-<li>A <code>package.xml</code> is optional, but can be included to provide dependency information to <code>colcon</code> to ensure the packages in the
-workspace are compiled in the correct order</li>
-<li>such a package should specify <code>cmake</code> as the <code>&lt;export&gt;&lt;build_type&gt;</code>, rather than <code>ament_cmake</code></li>
-</ul></li>
-<li>An <a href="https://docs.ros.org/en/humble/How-To-Guides/Ament-CMake-Documentation.html">ament_cmake</a> package is actually just a <code>CMakeLists.txt</code> file that happens to call <code>ament_cmake</code> functions</li>
 <li>It is possible to invoke <code>cmake</code> directly on an <code>ament_cmake_ package rather than using =colcon</code></li>
-<li><p>
-The <code>ament</code> functions make it easy to generate custom interface types and also simplifies handling of <code>ROS 2</code> packages
-</p>
+</ul></li>
+<li><code>colcon</code> automatically detects and compiles <code>CMake</code> projects based on the presence of a <code>CMakeLists.txt</code>
 <ul class="org-ul">
-<li>Lets try it!</li>
-</ul>
+<li>This feature allows using ROS 2 agnostic C++ libraries directly in the workspace without configuration</li>
+<li>A <code>package.xml</code> is optional when not using <code>amnet_cmake</code> but can be used to provide dependency information to <code>colcon</code>, ensuring that items in
+the workspace are compiled in the correct order</li>
+<li>Such a package should specify <code>&lt;export&gt;&lt;build_type&gt;cmake&lt;/build_type&gt;&lt;/export&gt;</code>, rather than <code>&lt;export&gt;&lt;build_type&gt;ament_cmake&lt;/build_type&gt;&lt;/export&gt;</code></li>
+</ul></li>
+<li>The <code>ament</code> functions provide methods to generate custom interface types and simplify handling of <code>ROS 2</code> packages</li>
+<li>They also assume a certain directory structure</li>
+<li><p>
+<code>ros2 pkg create</code> can create a template for an <code>ament_cmake</code> package:
+</p>
 <div class="org-src-container">
 <pre class="src src-bash">mkdir -p ws/src
 <span class="org-builtin">cd</span> ws/src
@@ -748,37 +757,43 @@ cmake ../src/testpkg
 make <span class="org-comment-delimiter"># </span><span class="org-comment">nothing will happen since we didn't add any files</span>
 </pre>
 </div></li>
-<li><p>
-Ament provides convenience functions for library installation:
-</p>
-<div class="org-src-container">
-<pre class="src src-cmake">
-</pre>
-</div></li>
 </ul>
+</div>
 </div>
 
 <div id="outline-container-installation-of-ament-libraries-2-P-1" class="outline-3">
 <h3 id="installation-of-ament-libraries-2-P-1">Installation of ament_libraries</h3>
 <div class="outline-text-3" id="text-orgeccd3c3">
 <ul class="org-ul">
-<li><code>ament</code> makes it easier to install libraries than standard cmake</li>
+<li><code>ament</code> provides it's own method to install libraries</li>
 <li><p>
 After creating the libraries call
 </p>
 <div class="org-src-container">
-<pre class="src src-cmake"><span class="org-function-name">ament_export_targets</span>(my_library-targets HAS_LIBRARY_TARGET)
-<span class="org-function-name">ament_export_dependencies</span>(dependency_of_library)
-<span class="org-function-name">install</span>(DIRECTORY include/ DESTINATION include)
-<span class="org-function-name">install</span>(TARGETS my_library EXPORT my_library-targets)
+<pre class="src src-cmake"><span class="org-function-name">install</span>(TARGETS my_library
+  EXPORT my_library-targets
+  LIBRARY DESTINATION lib
+  ARCHIVE DESTINATION lib
+  RUNTIME DESTINATION bin)
+<span class="org-function-name">ament_export_targets</span>(my_library-targets HAS_LIBRARY_TARGET)
+<span class="org-function-name">ament_export_dependencies</span>(each dependency of my_library)
 </pre>
 </div></li>
 <li>See <a href="https://docs.ros.org/en/humble/How-To-Guides/Ament-CMake-Documentation.html">Ament Guide</a> for more information</li>
 </ul>
 </div>
 </div>
-</div>
 
+<div id="outline-container-when-to-use-ament-cmake--2-P-1" class="outline-3">
+<h3 id="when-to-use-ament-cmake--2-P-1">When to use <code>ament_cmake</code></h3>
+<div class="outline-text-3" id="text-org9f48028">
+<ol class="org-ol">
+<li>It is good practice to separate general-purpose C++ code from <code>ROS 2</code> related code</li>
+<li>It makes sense for general-purpose C++ code to use plain <code>cmake</code>, whereas <code>ROS 2</code> code should use <code>ament_cmake</code>.</li>
+</ol>
+</div>
+</div>
+</div>
 <div id="outline-container-ros-idl-generation-1-P-1" class="outline-2">
 <h2 id="ros-idl-generation-1-P-1">ROS IDL Generation</h2>
 <div class="outline-text-2" id="text-orga8e990c">
@@ -1147,6 +1162,7 @@ install(DIRECTORY include/${PROJECT_NAME}/
 <ul class="org-ul">
 <li>Often the latest version has better documentation than earlier versions but is still applicable</li>
 </ul></li>
+<li><a href="https://docs.ros.org/en/kilted/How-To-Guides/Ament-CMake-Documentation.html">ROS 2 Ament CMake How To</a></li>
 <li><a href="https://cliutils.gitlab.io/modern-cmake/">Introduction to Modern CMake</a></li>
 <li><a href="https://rix0r.nl/blog/2015/08/13/cmake-guide/">https://rix0r.nl/blog/2015/08/13/cmake-guide/</a></li>
 <li><a href="https://pabloariasal.github.io/2018/02/19/its-time-to-do-cmake-right/">https://pabloariasal.github.io/2018/02/19/its-time-to-do-cmake-right/</a></li>
