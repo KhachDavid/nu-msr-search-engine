@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-12 Mon 08:36 -->
+<!-- 2026-01-20 Tue 09:23 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Homework 1</title>
@@ -65,7 +65,7 @@
 <ul>
 <li><a href="#task-a-1-nuturtle-description-package--2-P-1">Task A.1 (nuturtle_description package)</a></li>
 <li><a href="#task-a-2-visualization--2-P-1">Task A.2 (visualization)</a></li>
-<li><a href="#task-a-3-yaml-file--2-P-1">Task A.3 (yaml File)</a></li>
+<li><a href="#nuturtle_description_yaml">Task A.3 (yaml File)</a></li>
 <li><a href="#task-a-4-prefix--2-P-1">Task A.4 (prefix)</a></li>
 <li><a href="#task-a-5-multi-robot--2-P-1">Task A.5 (multi robot)</a></li>
 <li><a href="#task-a-6-readme--2-P-1">Task A.6 (README)</a></li>
@@ -78,13 +78,13 @@
 <li><a href="#B.3">Task B.3 (geometry primitives)</a></li>
 <li><a href="#B.4">Task B.4 (unit testing geometry)</a></li>
 <li><a href="#task-b-5-se-2-geometry--2-P-1">Task B.5 (SE(2) geometry)</a></li>
-<li><a href="#task-b-6-unit-testing-se-2--2-P-1">Task B.6 (unit testing SE(2))</a></li>
-<li><a href="#task-b-7-visualization--2-P-1">Task B.7 (visualization)</a></li>
-<li><a href="#task-b-8-executable-implementation--2-P-1">Task B.8 (executable implementation)</a></li>
-<li><a href="#task-b-9-readme-md--2-P-1">Task B.9 (README.md)</a></li>
+<li><a href="#task-b-4-unit-testing-se-2--2-P-1">Task B.4 (unit testing SE(2))</a></li>
+<li><a href="#task-b-5-visualization--2-P-1">Task B.5 (visualization)</a></li>
+<li><a href="#task-b-6-executable-implementation--2-P-1">Task B.6 (executable implementation)</a></li>
+<li><a href="#task-b-7-readme-md--2-P-1">Task B.7 (README.md)</a></li>
 </ul>
 </li>
-<li><a href="#task-c-the-simulator--1-P-1">Task C (The Simulator)</a>
+<li><a href="#task-c-the-simulator--1-P-2">Task C (The Simulator)</a>
 <ul>
 <li><a href="#task-c-1-nusim-package--2-P-1">Task C.1 (nusim package)</a></li>
 <li><a href="#task-c-2-simulation-node--2-P-1">Task C.2 (simulation node)</a></li>
@@ -248,9 +248,9 @@ required to display the turtlebot.
 </div>
 </div>
 
-<div id="outline-container-task-a-3-yaml-file--2-P-1" class="outline-3">
-<h3 id="task-a-3-yaml-file--2-P-1">Task A.3 (yaml File)</h3>
-<div class="outline-text-3" id="text-orgea68ab1">
+<div id="outline-container-nuturtle_description_yaml" class="outline-3">
+<h3 id="nuturtle_description_yaml">Task A.3 (yaml File)</h3>
+<div class="outline-text-3" id="text-nuturtle_description_yaml">
 <ol class="org-ol">
 <li>Create <code>&lt;repo&gt;/nuturtle_description/config/diff_params.yaml</code> file to provide a complete parametric description of a differential drive robot.
 <ul class="org-ul">
@@ -471,7 +471,7 @@ modify the public API of <code>angle.hpp</code>.</li>
 </div>
 <div id="outline-container-hints-3-P-1" class="outline-4">
 <h4 id="hints-3-P-1">Hints</h4>
-<div class="outline-text-4" id="text-org75274f1">
+<div class="outline-text-4" id="text-orga2c9af8">
 <ol class="org-ol">
 <li>For more information about the operator overloading going on in this example see
 <a href="https://stackoverflow.com/questions/4421706/what-are-the-basic-rules-and-idioms-for-operator-overloading/4421715">(a good Stack Overflow post)</a></li>
@@ -505,7 +505,7 @@ approximate comparison.</li>
 
 <div id="outline-container-hints-3-P-2" class="outline-4">
 <h4 id="hints-3-P-2">Hints</h4>
-<div class="outline-text-4" id="text-orge03638d">
+<div class="outline-text-4" id="text-org7ac8f50">
 <ol class="org-ol">
 <li>It makes sense to iterate with <a href="#B.3">B.3</a> so that you can use the tests to help you implement functionality</li>
 <li>The <code>std::stringstream</code> class will be helpful for testing <code>operator&lt;&lt;</code> and <code>operator&gt;&gt;</code>.
@@ -533,7 +533,7 @@ approximate comparison.</li>
 
 <div id="outline-container-hints-3-P-3" class="outline-4">
 <h4 id="hints-3-P-3">Hints</h4>
-<div class="outline-text-4" id="text-orga2c9af8">
+<div class="outline-text-4" id="text-org6009683">
 <ol class="org-ol">
 <li>It will be helpful to iterate with writing unit tests so you can test as you go</li>
 <li>This task is significantly more difficult to implement, debug, and optimize if you take the approach of doing
@@ -543,9 +543,9 @@ everything in <code>SE(3)</code> and specializing to <code>SE(2)</code>, rather 
 </div>
 </div>
 
-<div id="outline-container-task-b-6-unit-testing-se-2--2-P-1" class="outline-3">
-<h3 id="task-b-6-unit-testing-se-2--2-P-1">Task B.6 (unit testing SE(2))</h3>
-<div class="outline-text-3" id="text-org934d2f8">
+<div id="outline-container-task-b-4-unit-testing-se-2--2-P-1" class="outline-3">
+<h3 id="task-b-4-unit-testing-se-2--2-P-1">Task B.4 (unit testing SE(2))</h3>
+<div class="outline-text-3" id="text-orgd86d76c">
 <ol class="org-ol">
 <li>In <code>test_se2d.cpp</code> test every function and method in <code>se2d.hpp</code></li>
 <li>You may directly combine your tests with the work of your classmates to achieve this coverage, as long as the following conditions are met:
@@ -566,9 +566,9 @@ TEST_CASE("inverse", "[transform]") // First Name, Last Name
 </div>
 </div>
 
-<div id="outline-container-task-b-7-visualization--2-P-1" class="outline-3">
-<h3 id="task-b-7-visualization--2-P-1">Task B.7 (visualization)</h3>
-<div class="outline-text-3" id="text-org5e80f43">
+<div id="outline-container-task-b-5-visualization--2-P-1" class="outline-3">
+<h3 id="task-b-5-visualization--2-P-1">Task B.5 (visualization)</h3>
+<div class="outline-text-3" id="text-orgbda2495">
 <p>
 It can be difficult to know if your geometry-related code is working without being able to visualize it.
 Unfortunately there is no generally agreed upon good plotting library for C++.
@@ -603,7 +603,7 @@ I have commented the file with XML comments (<code>&lt;!-- --&gt;</code>): these
 
 <div id="outline-container-hint-3-P-1" class="outline-4">
 <h4 id="hint-3-P-1">Hint</h4>
-<div class="outline-text-4" id="text-org03a125a">
+<div class="outline-text-4" id="text-org8c4eb78">
 <ol class="org-ol">
 <li>Modify some values of the sample svg by hand and view the image to get a feel for what they do.</li>
 <li>You may wish to maintain a separate "testing" program that you manually use to call your <code>class</code> to help.</li>
@@ -615,9 +615,9 @@ I have commented the file with XML comments (<code>&lt;!-- --&gt;</code>): these
 </div>
 </div>
 
-<div id="outline-container-task-b-8-executable-implementation--2-P-1" class="outline-3">
-<h3 id="task-b-8-executable-implementation--2-P-1">Task B.8 (executable implementation)</h3>
-<div class="outline-text-3" id="text-org4f3ee55">
+<div id="outline-container-task-b-6-executable-implementation--2-P-1" class="outline-3">
+<h3 id="task-b-6-executable-implementation--2-P-1">Task B.6 (executable implementation)</h3>
+<div class="outline-text-3" id="text-orgc46dc29">
 <ol class="org-ol">
 <li>Create a file called <code>frame_main.cpp</code>, which will compile into an executable called <code>frame_main</code>. Here is what the program should do:
 <ol class="org-ol">
@@ -662,7 +662,7 @@ I have commented the file with XML comments (<code>&lt;!-- --&gt;</code>): these
 
 <div id="outline-container-hint-3-P-2" class="outline-4">
 <h4 id="hint-3-P-2">Hint</h4>
-<div class="outline-text-4" id="text-org8c4eb78">
+<div class="outline-text-4" id="text-org7ca3b13">
 <ol class="org-ol">
 <li>Think about how the transforms should work and what should be displayed, then open the image in inkscape.</li>
 <li>Sometimes, objects will be drawn on top of each other (e.g., points show up in the same location regardless of what frame they are expressed in)
@@ -675,9 +675,9 @@ I have commented the file with XML comments (<code>&lt;!-- --&gt;</code>): these
 </div>
 </div>
 
-<div id="outline-container-task-b-9-readme-md--2-P-1" class="outline-3">
-<h3 id="task-b-9-readme-md--2-P-1">Task B.9 (README.md)</h3>
-<div class="outline-text-3" id="text-org3b73626">
+<div id="outline-container-task-b-7-readme-md--2-P-1" class="outline-3">
+<h3 id="task-b-7-readme-md--2-P-1">Task B.7 (README.md)</h3>
+<div class="outline-text-3" id="text-org4c141d9">
 <ol class="org-ol">
 <li>Provide a  README.md for the turtlelib library</li>
 <li>It should offer a brief description of each of the three header files you implemented.</li>
@@ -686,8 +686,8 @@ I have commented the file with XML comments (<code>&lt;!-- --&gt;</code>): these
 </div>
 </div>
 
-<div id="outline-container-task-c-the-simulator--1-P-1" class="outline-2">
-<h2 id="task-c-the-simulator--1-P-1">Task C (The Simulator)</h2>
+<div id="outline-container-task-c-the-simulator--1-P-2" class="outline-2">
+<h2 id="task-c-the-simulator--1-P-2">Task C (The Simulator)</h2>
 <div class="outline-text-2" id="text-orgb12d1ae">
 <p>
 We will now create a package called <code>nusim</code> that can be used as a simulator and visualizer.

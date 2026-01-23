@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-06 Tue 13:14 -->
+<!-- 2026-01-20 Tue 09:23 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Homework 2</title>
@@ -78,19 +78,18 @@
 <li><a href="#hint--3-P-1">Hint:</a></li>
 </ul>
 </li>
-<li><a href="#task-e-6-remote-launch--2-P-1">Task E.6 (Remote Launch)</a></li>
 </ul>
 </li>
 <li><a href="#task-c-the-simulator--1-P-1">Task C (The Simulator)</a>
 <ul>
-<li><a href="#task-c-7-turtle-drive--2-P-1">Task C.7 (Turtle Drive)</a></li>
+<li><a href="#task-c-8-turtle-drive--2-P-1">Task C.8 (Turtle Drive)</a></li>
 </ul>
 </li>
 <li><a href="#task-group-f-the-real-robot--1-P-1">Task Group F (The Real Robot)</a>
 <ul>
 <li><a href="#task-f-1-turtlebot-setup--2-P-1">Task F.1 (Turtlebot Setup)</a></li>
 <li><a href="#task-f-2-cross-compilation--2-P-1">Task F.2 (Cross-compilation)</a></li>
-<li><a href="#task-f-5-physical-testing--2-P-1">Task F.5 (Physical Testing)</a></li>
+<li><a href="#task-f-3-physical-testing--2-P-1">Task F.3 (Physical Testing)</a></li>
 </ul>
 </li>
 </ul>
@@ -129,8 +128,8 @@ start writing the launchfile as you begin making your nodes so you can use them 
 <li>The scalar can be to either the right or the left of the vector</li>
 </ul></li>
 <li><code>double dot(Vector2D, Vector2D)</code> (The dot product of two vectors)</li>
-<li><code>double magnitude(Vector2D)</code> (computer the magnitude of the vector)</li>
-<li><code>double angle(Vector2D,Vector2D)</code> (compute the angle between two vectors)</li>
+<li><code>double magnitude(Vector2D)</code> (compute the magnitude of the vector)</li>
+<li><code>double angle(Vector2D,Vector2D)</code> (compute the shortest angle between two vectors)</li>
 </ul></li>
 <li>Write unit tests for these functions to make sure that they work as expected.</li>
 </ol>
@@ -141,6 +140,10 @@ start writing the launchfile as you begin making your nodes so you can use them 
 <h3 id="task-b-9-integrate-a-twist--2-P-1">Task B.9 (Integrate a Twist)</h3>
 <div class="outline-text-3" id="text-org962e1ce">
 <ol class="org-ol">
+<li>Add the following operations to Twist2D
+<ul class="org-ul">
+<li><code>operator*=</code> and <code>operator*</code> to multiply a <code>Twist2D</code> by a scalar</li>
+</ul></li>
 <li>Add a function <code>Transform2D integrate_twist(Twist2D)</code> to <code>turtlelib</code>.
 <ul class="org-ul">
 <li>It should compute the transformation corresponding to a rigid body following a constant twist (in its original body frame) for one time-unit</li>
@@ -235,7 +238,7 @@ You will likely not be able to complete these tasks until all of Task B is compl
 <div class="outline-text-2" id="text-org05044e7">
 <p>
 Here we develop some nodes that are useful in both simulation and on the real robot.
-The nodes will be created in a new package called <code>nuturtle_control</code>
+The nodes will be created in a new ROS package called <code>nuturtle_control</code>
 </p>
 </div>
 
@@ -252,17 +255,17 @@ Write a node called <code>turtle_control</code> that enables control of the turt
 <li>If any of the needed parameters are not defined, it is an error and the node should print an error message and terminate.</li>
 <li>To print messages that are logged by ROS, use <code>ROS_ERROR_STREAM</code>, <code>ROS_INFO_STREAM</code>, <code>ROS_DEBUG_STREAM</code>, etc. (See <a href="https://docs.ros.org/en/humble/Tutorials/Demos/Logging-and-logger-configuration.html">Logging</a>).</li>
 </ul></li>
-<li>It also relies on messages defined in <code>nuturtlebot_msgs</code> (<a href="https://github.com/ME495-Navigation/nuturtlebot_msgs.git">https://github.com/ME495-Navigation/nuturtlebot_msgs.git</a>).
+<li>It also relies on messages defined in <code>nuturtlebot_msgs</code> ([[<a href="https://github.com/NU-MSR/nuturtlebot_msgs.git">https://github.com/NU-MSR/nuturtlebot_msgs.git</a>]]).
 <ul class="org-ul">
-<li>Clone this repository into your source space <code>ws/src</code>, and checkout the <code>humble</code> branch</li>
+<li>Clone this repository into your source space <code>ws/src</code>, and checkout the <code>ros2</code> branch</li>
 <li>This code resides in the <code>ws/src/nuturtlebot_msgs</code> directory and contains message definitions for low-level turtlebot control</li>
-<li>Use <a href="https://github.com/dirk-thomas/vcstool">vcstool</a> (install via apt as <code>python3-vcstool</code>) to export a <code>.repos</code> file from <code>ws/src</code>.</li>
+<li>Use <a href="https://github.com/dirk-thomas/vcstool">vcstool</a> to export a <code>.repos</code> file from <code>ws/src</code>.</li>
 <li><code>vcs export &gt; turtle.repos</code>.  Save the <code>turtle.repos</code> in the base directory of your git repository.</li>
 <li>Other people can then download the <code>turtle.repos</code> and use it to duplicate the contents of your <code>ws/src</code> directory.</li>
 </ul></li>
 <li>The node subscribes to <code>cmd_vel (geometry_msgs/msg/Twist)</code> and publishes <code>wheel_cmd (nuturtlebot_msgs/msg/WheelCommands)</code> that will make the turtlebot3 follow the specified twist</li>
 <li>The node subscribes to <code>sensor_data (nuturtlebot_msgs/msg/SensorData)</code> and publishes <code>joint_states (sensor_msgs/msg/JointState)</code> to provide the angle (in radians) and velocity (in rad/sec)</li>
-<li>Use the <code>DiffDrive</code> class from <code>turtlelib</code> to implement this node</li>
+<li>Use the <code>DiffDrive</code> class from <code>turtlelib</code> to implement this node (i.e., all calculations should be implemented as part of <code>DiffDrive</code>.</li>
 </ol>
 </div>
 </div>
@@ -277,10 +280,10 @@ In this task, you will write a node called <code>odometry</code> that publishes 
 <ol class="org-ol">
 <li>The node reads the following parameters
 <ul class="org-ul">
-<li><code>body_id</code>: The name of the body frame of the robot (e.g. <code>"base_footprint"</code>). If not specified, print an error and exit.</li>
-<li><code>odom_id</code>: The name of the odometry frame. Defaults to <code>odom</code> if not specified.</li>
-<li><code>wheel_left</code>: The name of the left wheel joint. If not specified, print an error and exit.</li>
-<li><code>wheel_right</code>: The name of the right wheel joint. If not specified, print an error and exit.</li>
+<li><code>body_id</code>: The name of the body frame of the robot. Defaults to <code>base_footprint</code>.</li>
+<li><code>odom_id</code>: The name of the odometry frame. Defaults to <code>odom</code>.</li>
+<li><code>wheel_left</code>: The name of the left wheel joint. If not specified, log an error and exit.</li>
+<li><code>wheel_right</code>: The name of the right wheel joint. If not specified, log an error and exit.</li>
 </ul></li>
 
 <li>Every time the node receives a <code>JointState</code> message it should update its internal odometry state.</li>
@@ -315,9 +318,9 @@ In this task, you will write a node called <code>odometry</code> that publishes 
 </ul></li>
 <li>The node offers a <code>reverse</code> service (<code>std_srvs/Empty</code>) that reverses the direction of the robot along the arc.</li>
 <li>The node offers a <code>stop</code> service (<code>std_srvs/Empty)</code> that stops the robot</li>
-<li>When not <code>stopped</code>, The <code>cmd_vel</code> commands should be published at a fixed rate, determined by the <code>frequency</code> parameter, which defaults to <code>100Hz</code>.
+<li>The node should always publish <code>cmd_vel</code> commands at a fixed rate, determined by the <code>frequency</code> parameter (defaults to <code>100Hz</code>).
 <ul class="org-ul">
-<li>When <code>stopped</code>, Publish a single <code>cmd_vel</code> command of zero, then stop publishing</li>
+<li>Even when <code>stopped</code>, publish <code>cmd_vel</code> commands corresponding to zero velocity.</li>
 </ul></li>
 </ol>
 </div>
@@ -343,7 +346,7 @@ In this task, we will test the ROS API of the <code>turtle_control</code> and od
 <li>Write one test case for the <code>initial_pose</code> service</li>
 <li>Write one test case that uses a <code>tf2_listener</code> to verify that a transform from <code>odom</code> to a <code>base_footprint</code> is being published
 <ul class="org-ul">
-<li>The transform should be the identity transformation, the joint states will not change throughout the test</li>
+<li>The transform should be the identity transformation: the joint states will not change throughout the test</li>
 </ul></li>
 <li>Write a test launch file called <code>test/turtle_odom_test.launch.xml</code> that runs a <code>joint_state_publisher</code> as well as the <code>turtle_odom_test_node</code></li>
 <li>Because the <code>odometry</code> node was implemented in terms of <code>DiffDrive</code> we will not test the the actual odometry calculations here</li>
@@ -357,7 +360,7 @@ In this task, we will test the ROS API of the <code>turtle_control</code> and od
 <h3 id="task-e-5-launchfile--2-P-1">Task E.5 (Launchfile)</h3>
 <div class="outline-text-3" id="text-org1c77f56">
 <p>
-Write a launchfile called <code>start_robot.launch.xml</code> that allows the user to <code>cmd_vel</code> commands to the turtlebot (real or simulated, remote or local), receive odometry,
+Write a launchfile called <code>start_robot.launch.xml</code> that allows the user to send <code>cmd_vel</code> commands to the turtlebot (real or simulated, remote or local), receive odometry,
 and visualize everything in <code>rviz</code>. The details are specified below. It is a good strategy to write pieces of this in parallel with your development
 of the nodes it needs to launch (some of which are done in later tasks). For example, work on the simulator-specific tasks first, and add real robot functionality
 later.
@@ -366,12 +369,12 @@ later.
 <ol class="org-ol">
 <li>Write a launchfile that can be called like <code>ros2 launch nuturtle_control start_robot.launch.xml cmd_src:=X robot:=Y use_rviz:=Z</code>
 <ul class="org-ul">
-<li>The launchfile does different actios depending on its arguments</li>
+<li>The launchfile does different actions depending on its arguments</li>
 <li>The argument <code>cmd_src</code> can be
 <ul class="org-ul">
 <li><code>circle</code> to start the <code>circle</code> node</li>
 <li><code>teleop</code> to start the <code>turtlebot3_teleop teleop_twist_keyboard</code></li>
-<li><code>none</code> start nothing, another node not started by this launchfile will publish the <code>cmd_vel</code> commands</li>
+<li><code>none</code> to start nothing, another node not started by this launchfile will publish the <code>cmd_vel</code> commands</li>
 </ul></li>
 <li>The argument <code>robot</code> can be
 <ul class="org-ul">
@@ -399,8 +402,7 @@ later.
 <div class="outline-text-4" id="text-orgea0f9de">
 <ul class="org-ul">
 <li>The syntax for checking conditions in <code>ros2</code> xml launch files is very particular</li>
-<li>Although the <a href="https://docs.ros.org/en/humble/How-To-Guides/Launch-files-migration-guide.html#substitutions">documentation</a> states that it works the same as in ROS 1, it actually does not</li>
-<li>The syntax for <code>$(eval)</code>, which evaluates a python expression, seems to be as follows:
+<li>The <a href="https://docs.ros.org/en/kilted/How-To-Guides/Migrating-from-ROS1/Migrating-Launch-Files.html#substitutions">syntax</a> for <code>$(eval)</code>, which evaluates a python expression, seems to be as follows:
 <ul class="org-ul">
 <li><code>$(eval '&lt;python_expr&gt;')</code>, where there must not be a space between the end <code>'</code> and <code>)</code>.</li>
 <li>To access an argument from the launchfile in the python expression use <code>$(var argname)</code>
@@ -416,33 +418,15 @@ to be surrounded by <code>'</code></li>
 </div>
 </div>
 </div>
-<div id="outline-container-task-e-6-remote-launch--2-P-1" class="outline-3">
-<h3 id="task-e-6-remote-launch--2-P-1">Task E.6 (Remote Launch)</h3>
-<div class="outline-text-3" id="text-org64671d7">
-<ol class="org-ol">
-<li>This task is optional</li>
-<li>Unlike ROS 1, ROS 2 does not yet have a direct ability to launch nodes on remote machines using launchfiles</li>
-<li>Use <a href="https://github.com/NU-MSR/launch_remote/tree/main">launch_remote</a> to write a launchfile called <code>remote_start.launch.xml</code>.
-<ul class="org-ul">
-<li>It takes an argument <code>host</code> to specify the remote machine</li>
-<li>It then launches all nodes needed on both your computer and on the remote machine</li>
-</ul></li>
-<li>Feel free to submit pull requests to <a href="https://github.com/NU-MSR/launch_remote/tree/main">https://github.com/NU-MSR/launch_remote/tree/main</a>
-<ul class="org-ul">
-<li>You may submit pull requests relating to documentation or functionality.</li>
-<li>The best way of doing remote nodes in ROS 2 is unclear</li>
-</ul></li>
-</ol>
 </div>
-</div>
-</div>
+
 <div id="outline-container-task-c-the-simulator--1-P-1" class="outline-2">
 <h2 id="task-c-the-simulator--1-P-1">Task C (The Simulator)</h2>
 <div class="outline-text-2" id="text-task-c-the-simulator--1-P-1">
 </div>
-<div id="outline-container-task-c-7-turtle-drive--2-P-1" class="outline-3">
-<h3 id="task-c-7-turtle-drive--2-P-1">Task C.7 (Turtle Drive)</h3>
-<div class="outline-text-3" id="text-org5b52f54">
+<div id="outline-container-task-c-8-turtle-drive--2-P-1" class="outline-3">
+<h3 id="task-c-8-turtle-drive--2-P-1">Task C.8 (Turtle Drive)</h3>
+<div class="outline-text-3" id="text-orgb84ea4d">
 <p>
 The <code>nusim</code> node already loads and displays a robot in <code>rviz</code>. The goal of this task is to allow that robot to move, according to simulated kinematics,
 but through the same publisher/subscriber interface that an actual turtlebot uses.
@@ -450,9 +434,10 @@ but through the same publisher/subscriber interface that an actual turtlebot use
 
 <ol class="org-ol">
 <li>The <code>nusim</code> node subscribes to <code>red/wheel_cmd</code> (<code>nuturtlebot_msgs/msg/WheelCommands</code>) to receive motion commands for the turtlebot</li>
-<li>Each received <code>wheel_cmd</code> command sets the wheel velocities of the robot, until the next <code>wheel_cmd</code> command is received.
+<li>Each received <code>wheel_cmd</code> command sets the wheel velocities of the robot until the next <code>wheel_cmd</code> command is received.
 <ul class="org-ul">
-<li>The <code>wheel_cmd</code> messages are integer values between -265 and 265 and are proportional to the maximum rotational velocity of the motor (see <a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/features/#specifications">Specifications</a> and A.8).</li>
+<li>The <code>wheel_cmd</code> messages are integer values between -265 and 265 and are proportional to the maximum rotational velocity of the motor (see <a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/features/#specifications">Specifications</a> and
+<a href="./homework1.html#nuturtle_description_yaml">A.8</a>).</li>
 </ul></li>
 <li>On each simulation run, the <code>nusim</code> should (in addition to what it already does)
 <ol class="org-ol">
@@ -462,7 +447,7 @@ but through the same publisher/subscriber interface that an actual turtlebot use
 </ul></li>
 <li>Use the forward kinematics from the <code>DiffDrive</code> class to update the position of the actual (red) robot and publish the appropriate frame (assume no slipping)</li>
 </ol></li>
-<li>After this functionality is implemented in the simulator, you should be able to drive the robot around using the teleop twist keyboard.
+<li>After this functionality is implemented in the simulator, you should be able to drive the robot around using the <code>turtlebot3_teleop</code> twist keyboard.
 <ul class="org-ul">
 <li>The Blue and Red robots will be overlayed, because we have not yet added noise or slipping to our simulation model and therefore the odometry is perfect.</li>
 </ul></li>
@@ -526,9 +511,9 @@ for compiling <code>aarch64</code> binaries for the turtlebot on the host system
 </div>
 </div>
 
-<div id="outline-container-task-f-5-physical-testing--2-P-1" class="outline-3">
-<h3 id="task-f-5-physical-testing--2-P-1">Task F.5 (Physical Testing)</h3>
-<div class="outline-text-3" id="text-orgac3d659">
+<div id="outline-container-task-f-3-physical-testing--2-P-1" class="outline-3">
+<h3 id="task-f-3-physical-testing--2-P-1">Task F.3 (Physical Testing)</h3>
+<div class="outline-text-3" id="text-orgea26185">
 <ol class="org-ol">
 <li>Take a video and screencast of the following experiment and embed it in the github <code>README.md</code>
 <ul class="org-ul">
