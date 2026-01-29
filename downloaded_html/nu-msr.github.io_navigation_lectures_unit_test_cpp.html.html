@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-05 Mon 23:16 -->
+<!-- 2026-01-29 Thu 11:26 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Testing and Debugging in ROS and C++</title>
@@ -21,7 +21,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#overview-1-P-14">Overview</a></li>
+<li><a href="#overview-1-P-9">Overview</a></li>
 <li><a href="#levels-of-ros-testing-1-P-1">Levels of ROS testing</a>
 <ul>
 <li><a href="#library-level-unit-tests-2-P-1">Library-level unit tests</a></li>
@@ -32,28 +32,30 @@
 <li><a href="#c-unit-testing-framework-1-P-1">C++ Unit Testing Framework</a>
 <ul>
 <li><a href="#catch2-2-P-1">Catch2</a></li>
+<li><a href="#quick-guide-2-P-1">Quick Guide</a></li>
 <li><a href="#google-test-gtest--2-P-1">Google Test (GTest)</a></li>
 </ul>
 </li>
-<li><a href="#debugging-1-P-2">Debugging</a></li>
+<li><a href="#debugging-1-P-1">Debugging</a>
+<ul>
+<li><a href="#from-launchfiles-2-P-1">From Launchfiles</a></li>
+</ul>
+</li>
+<li><a href="#references-1-P-2">References</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-overview-1-P-14" class="outline-2">
-<h2 id="overview-1-P-14">Overview</h2>
-<div class="outline-text-2" id="text-orgf1386b6">
-<ul class="org-ul">
-<li><a href="https://docs.ros.org/en/iron/Tutorials/Intermediate/Testing/Testing-Main.html">ROS 2 Testing Overview</a></li>
-</ul>
+<div id="outline-container-overview-1-P-9" class="outline-2">
+<h2 id="overview-1-P-9">Overview</h2>
 </div>
-</div>
+
 <div id="outline-container-levels-of-ros-testing-1-P-1" class="outline-2">
 <h2 id="levels-of-ros-testing-1-P-1">Levels of ROS testing</h2>
 <div class="outline-text-2" id="text-levels-of-ros-testing-1-P-1">
 </div>
 <div id="outline-container-library-level-unit-tests-2-P-1" class="outline-3">
 <h3 id="library-level-unit-tests-2-P-1">Library-level unit tests</h3>
-<div class="outline-text-3" id="text-org3565e48">
+<div class="outline-text-3" id="text-org1616af1">
 <ul class="org-ul">
 <li>These tests are independent of ROS and are used for testing individual functions and libraries.</li>
 <li>Each test should be small and (ideally) run quickly</li>
@@ -64,7 +66,7 @@ every time immediately prior to merging your code into the master)</li>
 </div>
 <div id="outline-container-single-node-unit-tests-2-P-1" class="outline-3">
 <h3 id="single-node-unit-tests-2-P-1">Single Node Unit Tests</h3>
-<div class="outline-text-3" id="text-org6d67151">
+<div class="outline-text-3" id="text-orga236e13">
 <ul class="org-ul">
 <li>The goal is to validate the functionality of a single Node</li>
 <li>Test its publishers, subscribers, and servers, and parameter usage</li>
@@ -75,7 +77,7 @@ every time immediately prior to merging your code into the master)</li>
 </div>
 <div id="outline-container-integration-test-2-P-1" class="outline-3">
 <h3 id="integration-test-2-P-1">Integration Test</h3>
-<div class="outline-text-3" id="text-org8b1ffff">
+<div class="outline-text-3" id="text-org2811e59">
 <p>
 These tests start multiple nodes and test how the whole system works together
 </p>
@@ -87,12 +89,13 @@ These tests start multiple nodes and test how the whole system works together
 </div>
 </div>
 </div>
+
 <div id="outline-container-c-unit-testing-framework-1-P-1" class="outline-2">
 <h2 id="c-unit-testing-framework-1-P-1">C++ Unit Testing Framework</h2>
-<div class="outline-text-2" id="text-org6a4fe8d">
+<div class="outline-text-2" id="text-orgebf026d">
 <p>
 There is no standard unit-testing framework for C++. We will use
-<a href="https://github.com/catchorg/Catch2">Catch2 (version 2)</a> in this class, but these
+<a href="https://github.com/catchorg/Catch2">Catch2 (version 3)</a> in this class, but these
 notes also discuss <code>gtest</code>.
 </p>
 </div>
@@ -102,37 +105,50 @@ notes also discuss <code>gtest</code>.
 </div>
 <div id="outline-container-overview-3-P-1" class="outline-4">
 <h4 id="overview-3-P-1">Overview</h4>
-<div class="outline-text-4" id="text-org8ad49d5">
+<div class="outline-text-4" id="text-org7802a84">
 <ul class="org-ul">
 <li>Catch2 is a light-weight unit-testing framework for C++</li>
 <li>The <a href="https://github.com/catchorg/Catch2/blob/devel/docs/tutorial.md#top">Tutorial</a></li>
 <li>The <a href="https://github.com/catchorg/Catch2/blob/devel/docs/Readme.md#top">Reference Documentation</a></li>
-<li>The <a href="https://index.ros.org/p/catch_ros2/github-ngmor-catch_ros2/#iron">catch_ros2</a> package enables the use of Catch2 with ROS 2
-<ul class="org-ul">
-<li><a href="https://github.com/ngmor/catch_ros2/tree/iron/">See Documentation here</a></li>
-</ul></li>
+<li>The <a href="https://index.ros.org/p/catch_ros2/">catch_ros2</a> package enables the use of Catch2 with ROS 2</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-how-to-use-with-ros-3-P-1" class="outline-4">
-<h4 id="how-to-use-with-ros-3-P-1">How To Use With ROS</h4>
-<div class="outline-text-4" id="text-org4f56ac4">
-<ol class="org-ol">
-<li>Make sure the <a href="http://wiki.ros.org/catch_ros">catch_ros</a> package is installed
+</div>
+<div id="outline-container-quick-guide-2-P-1" class="outline-3">
+<h3 id="quick-guide-2-P-1">Quick Guide</h3>
+<div class="outline-text-3" id="text-org0e45ab9">
 <ul class="org-ul">
-<li>Details about its usage are on its <a href="https://github.com/AIS-Bonn/catch_ros">github</a> page.</li>
+<li>The <a href="https://github.com/ngmor/catch_ros2/tree/main/">catch_ros2 documentation</a> provides full usage instructions.</li>
+<li>To do regular unit tests, right the Catch tests as usual, then link the executable with
+<code>target_link_libraries(mytests catch_ros2::catch_ros2_with_main)</code>
+<ul class="org-ul">
+<li>This automatically provides a main for the test, but there are other options</li>
 </ul></li>
-<li>Create a <code>test</code> directory in your package</li>
-<li><code>&lt;depend&gt;</code> on <code>catch_ros</code> in <code>package.xml</code></li>
-<li>Add <code>catch_ros</code> to the <code>catkin REQUIRED COMPONENTS</code></li>
-</ol>
+<li>To do integration testing requires
+<ol class="org-ol">
+<li>The nodes you want to test</li>
+<li>A <a href="https://github.com/ngmor/catch_ros2/blob/main/examples/integration_test/integration_test_node.cpp">Integration Testing Node</a>
+<ul class="org-ul">
+<li>This node uses Catch2 to run test the node</li>
+</ul></li>
+<li>A <a href="https://github.com/ngmor/catch_ros2/blob/main/examples/integration_test/example_integration_test.launch.xml">Launch File</a>
+<ul class="org-ul">
+<li>This node launches the nodes the node that should be tested and the test node itself</li>
+</ul></li>
+<li>Add <code>catch_ros2_add_integration_test(MyTest LAUNCH_FILE my_launchfile TIMEOUT 60)</code> to CMake if you want the test to run with <code>colcon test</code>.
+<ul class="org-ul">
+<li><code>TIMEOUT</code> defaults to 60 and can be ommited, but it is useful to increase the timeout if running the test node in gdb</li>
+<li>The test can also be run by running the test launch file</li>
+</ul></li>
+</ol></li>
+</ul>
 </div>
 </div>
-</div>
-<details id="org525cd9d"><summary class="header-3">Google Test (GTest)</summary>
+<details id="orgd4268ba"><summary class="header-3">Google Test (GTest)</summary>
 <div id="outline-container-overview-3-P-2" class="outline-4">
 <h4 id="overview-3-P-2">Overview</h4>
-<div class="outline-text-4" id="text-org39bfa8c">
+<div class="outline-text-4" id="text-org4d9f712">
 <ul class="org-ul">
 <li>The most common C++ unit testing framework in ROS is Google Test.</li>
 <li><a href="https://github.com/google/googletest/blob/master/googletest/docs/primer.md">Google Test Primer</a></li>
@@ -143,9 +159,10 @@ notes also discuss <code>gtest</code>.
 </div>
 </details>
 </div>
-<div id="outline-container-debugging-1-P-2" class="outline-2">
-<h2 id="debugging-1-P-2">Debugging</h2>
-<div class="outline-text-2" id="text-org0133688">
+
+<div id="outline-container-debugging-1-P-1" class="outline-2">
+<h2 id="debugging-1-P-1">Debugging</h2>
+<div class="outline-text-2" id="text-orgb6f994f">
 <ul class="org-ul">
 <li>Using <code>gdb</code> can greatly help you track down issues in your program
 <ul class="org-ul">
@@ -166,7 +183,48 @@ notes also discuss <code>gtest</code>.
 <ul class="org-ul">
 <li>Use the <code>Debug</code> build type in <code>CMake</code>. See <a href="./cmake_basics.html">CMake Notes</a> for how to set debugging mode</li>
 </ul></li>
-<li>This <a href="http://wiki.ros.org/roslaunch/Tutorials/Roslaunch%20Nodes%20in%20Valgrind%20or%20GDB">tutorial</a> helps you launch nodes the debugger</li>
+</ul>
+</div>
+
+<div id="outline-container-from-launchfiles-2-P-1" class="outline-3">
+<h3 id="from-launchfiles-2-P-1">From Launchfiles</h3>
+<div class="outline-text-3" id="text-org35b2424">
+<p>
+Launching a node in GDB from a launchfile requires extra consideration because you do not have access to a terminal for the node by default
+(the <code>ros2 launch</code> command controls input from the terminal). Instead we will use <code>gdbserver</code>, which allows remote debugging
+</p>
+
+<ol class="org-ol">
+<li>Use <code>launch-prefix</code> to start <code>gdbserver</code>:
+<ul class="org-ul">
+<li>XML Launch File: <code>&lt;node ... launch-prefix</code>'gdbserver :3000'&gt;=</li>
+<li>Python Launch File ~Node(&#x2026;, prefix=['gdbserver :3000'])</li>
+<li>The <code>:3000</code> is the port, the number is somewhat arbitrary (as long as it doesn't conflict with other open ports).</li>
+<li>This same argument works when using the <code>&lt;catch_ros2_node&gt;</code> tag</li>
+</ul></li>
+
+<li>Run <code>gdb</code> and connect to the server using <code>remote target :3000</code> (or the port you specified above)
+<ul class="org-ul">
+<li>You can now use <code>gdb</code> as usual.</li>
+</ul></li>
+<li>Alternatively, you can use a prefix command to run <code>gdb</code> in a new terminal window (e.g., <code>xterm</code>).
+<ul class="org-ul">
+<li><code>xterm -e gdb -ex run --args</code></li>
+<li>This method is in some ways more straightforward: it will launch a new <code>xterm</code> window</li>
+<li>However, it is also dependent on the availability of a gui (e.g., will not work over ssh).</li>
+</ul></li>
+<li>In a pinch, you can comment out the start of the node in the launchfile and manually run  it with <code>ros2 run</code></li>
+</ol>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-references-1-P-2" class="outline-2">
+<h2 id="references-1-P-2">References</h2>
+<div class="outline-text-2" id="text-org85f6cb0">
+<ul class="org-ul">
+<li><a href="https://docs.ros.org/en/iron/Tutorials/Intermediate/Testing/Testing-Main.html">ROS 2 Testing Overview</a></li>
 </ul>
 </div>
 </div>

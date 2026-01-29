@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-05 Mon 23:16 -->
+<!-- 2026-01-29 Thu 11:26 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Data Association for SLAM</title>
@@ -53,7 +53,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#overview-1-P-4">Overview</a></li>
+<li><a href="#overview-1-P-1">Overview</a></li>
 <li><a href="#the-simplest-data-association-1-P-1">The Simplest Data Association</a></li>
 <li><a href="#mahalanobis-distance-1-P-1">Mahalanobis Distance</a></li>
 <li><a href="#incorporating-into-slam-1-P-1">Incorporating into SLAM</a>
@@ -63,13 +63,14 @@
 </ul>
 </li>
 <li><a href="#practical-considerations-1-P-1">Practical Considerations</a></li>
-<li><a href="#resources-1-P-4">Resources</a></li>
+<li><a href="#resources-1-P-1">Resources</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-overview-1-P-4" class="outline-2">
-<h2 id="overview-1-P-4">Overview</h2>
-<div class="outline-text-2" id="text-orge14afb0">
+
+<div id="outline-container-overview-1-P-1" class="outline-2">
+<h2 id="overview-1-P-1">Overview</h2>
+<div class="outline-text-2" id="text-orgce70561">
 <ol class="org-ol">
 <li>To perform SLAM effectively, measurements must be associated with
 the proper features in the map.</li>
@@ -90,7 +91,7 @@ given the measurements \(p(x, m, c | z)\).
 </div>
 <div id="outline-container-the-simplest-data-association-1-P-1" class="outline-2">
 <h2 id="the-simplest-data-association-1-P-1">The Simplest Data Association</h2>
-<div class="outline-text-2" id="text-orgaf3916e">
+<div class="outline-text-2" id="text-orga985c04">
 <ol class="org-ol">
 <li>Since \(z = h(x)\), if \(h\) is invertible then \(x = h^{-1}(z)\).
 <ul class="org-ul">
@@ -106,9 +107,10 @@ given the measurements \(p(x, m, c | z)\).
 </ol>
 </div>
 </div>
+
 <div id="outline-container-mahalanobis-distance-1-P-1" class="outline-2">
 <h2 id="mahalanobis-distance-1-P-1">Mahalanobis Distance</h2>
-<div class="outline-text-2" id="text-org638c18a">
+<div class="outline-text-2" id="text-orgb2d87a6">
 <ul class="org-ul">
 <li>A distance metric that accounts for covariance</li>
 <li>"How many standard deviations away", but for multiple dimensions</li>
@@ -124,13 +126,14 @@ given the measurements \(p(x, m, c | z)\).
 </ul>
 </div>
 </div>
+
 <div id="outline-container-incorporating-into-slam-1-P-1" class="outline-2">
 <h2 id="incorporating-into-slam-1-P-1">Incorporating into SLAM</h2>
 <div class="outline-text-2" id="text-incorporating-into-slam-1-P-1">
 </div>
 <div id="outline-container-the-basic-idea-2-P-1" class="outline-3">
 <h3 id="the-basic-idea-2-P-1">The Basic Idea</h3>
-<div class="outline-text-3" id="text-org73f248f">
+<div class="outline-text-3" id="text-org23246ff">
 <ol class="org-ol">
 <li>Find the existing landmark that generates a measurement closest
 to the the current measurement</li>
@@ -141,7 +144,7 @@ the landmark is a new landmark</li>
 </div>
 <div id="outline-container-algorithm-overview-2-P-1" class="outline-3">
 <h3 id="algorithm-overview-2-P-1">Algorithm Overview</h3>
-<div class="outline-text-3" id="text-orga03325c">
+<div class="outline-text-3" id="text-org4c4a399">
 <ol class="org-ol">
 <li>Let \(N\) be the number of landmarks already seen</li>
 <li>The \(j\) -th landmark is at \((\mu_{x,j}, \mu_{y,j})\)</li>
@@ -178,9 +181,10 @@ threshold value</li>
 </div>
 </div>
 </div>
+
 <div id="outline-container-practical-considerations-1-P-1" class="outline-2">
 <h2 id="practical-considerations-1-P-1">Practical Considerations</h2>
-<div class="outline-text-2" id="text-org013f2d2">
+<div class="outline-text-2" id="text-orgae29dc7">
 <p>
 There are several practical considerations to the above algorithm to improve robustness, however, as outlined above, the algorithm should
 work well enough in our examples.
@@ -225,9 +229,9 @@ a simulation</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-resources-1-P-4" class="outline-2">
-<h2 id="resources-1-P-4">Resources</h2>
-<div class="outline-text-2" id="text-org8096d09">
+<div id="outline-container-resources-1-P-1" class="outline-2">
+<h2 id="resources-1-P-1">Resources</h2>
+<div class="outline-text-2" id="text-org8eca328">
 <p>
 <a href="https://mitpress.mit.edu/books/probabilistic-robotics">Probabilistic Robotics</a> (page 322).
 </p>

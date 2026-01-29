@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-08 Thu 17:12 -->
+<!-- 2026-01-29 Thu 11:26 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Basic C++ Practices</title>
@@ -53,7 +53,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#overview-1-P-1">Overview</a></li>
+<li><a href="#overview-1-P-8">Overview</a></li>
 <li><a href="#variable-declaration-and-initialization-1-P-1">Variable Declaration and Initialization</a>
 <ul>
 <li><a href="#what--2-P-1">What?</a></li>
@@ -86,7 +86,7 @@
 <li><a href="#the-heap-2-P-1">The Heap</a></li>
 <li><a href="#pointers-2-P-1">Pointers</a></li>
 <li><a href="#ptr_references">References</a></li>
-<li><a href="#smart-pointers-2-P-1">Smart Pointers</a>
+<li><a href="#smart-pointers-2-P-2">Smart Pointers</a>
 <ul>
 <li><a href="#shared-ptr-3-P-1">shared Ptr</a></li>
 <li><a href="#unique-ptr-3-P-1">unique_ptr</a></li>
@@ -110,9 +110,9 @@
 </div>
 </nav>
 
-<div id="outline-container-overview-1-P-1" class="outline-2">
-<h2 id="overview-1-P-1">Overview</h2>
-<div class="outline-text-2" id="text-org3d9a8a1">
+<div id="outline-container-overview-1-P-8" class="outline-2">
+<h2 id="overview-1-P-8">Overview</h2>
+<div class="outline-text-2" id="text-org5348fd2">
 <ul class="org-ul">
 <li>This document some basic and generally applicable practices toward writing better <code>C++</code> code</li>
 <li>The practices apply to <code>C++23</code> and beyond</li>
@@ -127,7 +127,7 @@
 </div>
 <div id="outline-container-what--2-P-1" class="outline-3">
 <h3 id="what--2-P-1">What?</h3>
-<div class="outline-text-3" id="text-org8243405">
+<div class="outline-text-3" id="text-orga240a04">
 <ol class="org-ol">
 <li>The rule of thumb here is <a href="https://herbsutter.com/2013/08/12/gotw-94-solution-aaa-style-almost-always-auto/">Almost Always Auto</a>
 <ul class="org-ul">
@@ -147,7 +147,7 @@
 
 <div id="outline-container-why--2-P-1" class="outline-3">
 <h3 id="why--2-P-1">Why?</h3>
-<div class="outline-text-3" id="text-org31d7649">
+<div class="outline-text-3" id="text-org8d206d0">
 <ul class="org-ul">
 <li><code>auto</code> declarations require an initialization
 <ul class="org-ul">
@@ -176,7 +176,7 @@
 </div>
 <div id="outline-container-what--2-P-2" class="outline-3">
 <h3 id="what--2-P-2">What?</h3>
-<div class="outline-text-3" id="text-orga240a04">
+<div class="outline-text-3" id="text-orgb34e40b">
 <ol class="org-ol">
 <li>A safe, dynamically re-sizable, array
 <ul class="org-ul">
@@ -218,7 +218,7 @@
 
 <div id="outline-container-why--2-P-2" class="outline-3">
 <h3 id="why--2-P-2">Why?</h3>
-<div class="outline-text-3" id="text-org8d206d0">
+<div class="outline-text-3" id="text-org3cad328">
 <ol class="org-ol">
 <li><code>std::vector</code> is a relatively straightforward data-structure with a known performance profile</li>
 <li><code>std::vector</code> is usually good enough</li>
@@ -310,7 +310,7 @@ There is usually no need to use built-in arrays, especially in this class
 </div>
 <div id="outline-container-overview-2-P-1" class="outline-3">
 <h3 id="overview-2-P-1">Overview</h3>
-<div class="outline-text-3" id="text-org5348fd2">
+<div class="outline-text-3" id="text-org5e287ac">
 <ul class="org-ul">
 <li>C++ provides programmers with direct access to the memory where variables and objects are stored</li>
 <li>This provides absolute control over the program, but also creates the chance to introduce bugs</li>
@@ -478,9 +478,9 @@ y = 3;
 </div>
 </div>
 
-<div id="outline-container-smart-pointers-2-P-1" class="outline-3">
-<h3 id="smart-pointers-2-P-1">Smart Pointers</h3>
-<div class="outline-text-3" id="text-smart-pointers-2-P-1">
+<div id="outline-container-smart-pointers-2-P-2" class="outline-3">
+<h3 id="smart-pointers-2-P-2">Smart Pointers</h3>
+<div class="outline-text-3" id="text-smart-pointers-2-P-2">
 </div>
 <div id="outline-container-shared-ptr-3-P-1" class="outline-4">
 <h4 id="shared-ptr-3-P-1">shared Ptr</h4>

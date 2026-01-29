@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-05 Mon 23:16 -->
+<!-- 2026-01-29 Thu 11:26 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Input and Output in C++</title>
@@ -56,22 +56,24 @@
 </ul>
 </div>
 </nav>
+
 <div id="outline-container-overview-1-P-6" class="outline-2">
 <h2 id="overview-1-P-6">Overview</h2>
-<div class="outline-text-2" id="text-org98c548d">
+<div class="outline-text-2" id="text-orgbdb048a">
 <p>
 These notes provide an overview for how to perform input and output in <code>C++</code>,
 focused on best practices (as of <code>C++23</code>).
 </p>
 </div>
 </div>
+
 <div id="outline-container-format-1-P-1" class="outline-2">
 <h2 id="format-1-P-1">Format</h2>
 <div class="outline-text-2" id="text-format-1-P-1">
 </div>
 <div id="outline-container-what-2-P-1" class="outline-3">
 <h3 id="what-2-P-1">What</h3>
-<div class="outline-text-3" id="text-org6e36f47">
+<div class="outline-text-3" id="text-orge584f5c">
 <ol class="org-ol">
 <li>Create strings and output them using a syntax similar to the <a href="https://docs.python.org/3/library/string.html#formatspec=f-string">Python Format Specification</a>.</li>
 <li>The preferred method for string formatting and output as of <code>C++23</code>.</li>
@@ -79,9 +81,10 @@ focused on best practices (as of <code>C++23</code>).
 </ol>
 </div>
 </div>
+
 <div id="outline-container-how-2-P-1" class="outline-3">
 <h3 id="how-2-P-1">How</h3>
-<div class="outline-text-3" id="text-org4bd7576">
+<div class="outline-text-3" id="text-org60d5f0c">
 <ol class="org-ol">
 <li><code>#include&lt;print&gt;</code> (use <code>#include&lt;format&gt;</code> if only formatting strings but not outputting them).</li>
 <li>Uses the <a href="https://en.cppreference.com/w/cpp/utility/format.html">Formatting Library</a>, available since <code>C++20</code></li>
@@ -111,7 +114,7 @@ focused on best practices (as of <code>C++23</code>).
 </div>
 <div id="outline-container-file-i-o-3-P-1" class="outline-4">
 <h4 id="file-i-o-3-P-1">File I/O</h4>
-<div class="outline-text-4" id="text-orgde98147">
+<div class="outline-text-4" id="text-orgd1428c1">
 <ol class="org-ol">
 <li><code>std::print</code> and <code>std::println</code> can output to both <code>C++</code> <code>std::ostream</code> objects or <code>C</code> <code>FILE*</code> pointers.
 <ul class="org-ul">
@@ -132,9 +135,10 @@ regardless of whether you use a <code>FILE*</code>, a <code>unique_ptr&lt;FILE, 
 </div>
 </div>
 </div>
+
 <div id="outline-container-why-2-P-1" class="outline-3">
 <h3 id="why-2-P-1">Why</h3>
-<div class="outline-text-3" id="text-org56e4a50">
+<div class="outline-text-3" id="text-org1605e31">
 <ol class="org-ol">
 <li>Safety: if the format string is specified incorrectly or the type is not <code>std::formattable</code> the compiler will catch the error</li>
 <li>Extensibility: it is possible to enable custom types to work with <code>std::format</code> and provide custom formatting options</li>
@@ -143,26 +147,28 @@ regardless of whether you use a <code>FILE*</code>, a <code>unique_ptr&lt;FILE, 
 </div>
 </div>
 </div>
+
 <div id="outline-container-iostreams-1-P-1" class="outline-2">
 <h2 id="iostreams-1-P-1">Iostreams</h2>
 <div class="outline-text-2" id="text-iostreams-1-P-1">
 </div>
 <div id="outline-container-what-2-P-2" class="outline-3">
 <h3 id="what-2-P-2">What</h3>
-<div class="outline-text-3" id="text-org6313ee6">
+<div class="outline-text-3" id="text-orgd952c12">
 <ol class="org-ol">
 <li>The original method for input and output in <code>C++</code></li>
 <li>Handles both input and output, so it is what you should use for input</li>
 </ol>
 </div>
 </div>
+
 <div id="outline-container-how-2-P-2" class="outline-3">
 <h3 id="how-2-P-2">How</h3>
 <div class="outline-text-3" id="text-how-2-P-2">
 </div>
 <div id="outline-container-output-3-P-1" class="outline-4">
 <h4 id="output-3-P-1">Output</h4>
-<div class="outline-text-4" id="text-org7201276">
+<div class="outline-text-4" id="text-org504bd03">
 <ol class="org-ol">
 <li><code>#include&lt;iostream&gt;</code></li>
 <li>To output <code>cout &lt;&lt; "Stuff" &lt;&lt; myvar &lt;&lt; " stuff" &lt;&lt; endl</code>
@@ -185,9 +191,10 @@ regardless of whether you use a <code>FILE*</code>, a <code>unique_ptr&lt;FILE, 
 be opened as an <code>std::ofstream</code> and used the same way.</li>
 </ol>
 </div>
+
 <ul class="org-ul">
 <li><a id="file-output-4-P-1"></a>File Output<br>
-<div class="outline-text-5" id="text-org0e6497a">
+<div class="outline-text-5" id="text-org158532f">
 <ol class="org-ol">
 <li>Create an <code>std::ofstream</code> object, and use it like <code>cout</code></li>
 <li><code>ostreams</code> can be open in <code>binary</code> mode and raw bytes writtend directly with the <code>write</code> member function.</li>
@@ -196,9 +203,10 @@ be opened as an <code>std::ofstream</code> and used the same way.</li>
 </li>
 </ul>
 </div>
+
 <div id="outline-container-input-3-P-1" class="outline-4">
 <h4 id="input-3-P-1">Input</h4>
-<div class="outline-text-4" id="text-org0dc9b39">
+<div class="outline-text-4" id="text-orgaccbdf1">
 <ol class="org-ol">
 <li>The global <code>istream</code> <a href="https://en.cppreference.com/w/cpp/io/cin.html">std::cin</a> is automatically connected to the standard input stream, allowing you to read buffered keyboard input</li>
 <li><code>std::cin &gt;&gt; var</code> reads data from the standard input into a variable
@@ -211,9 +219,10 @@ be opened as an <code>std::ofstream</code> and used the same way.</li>
 <li>Use <code>std::string line; std::getline(std::cin, line)</code> to read a whole line of text and parse it yourself.</li>
 </ol>
 </div>
+
 <ul class="org-ul">
 <li><a id="file-input-4-P-1"></a>File Input<br>
-<div class="outline-text-5" id="text-org1165eee">
+<div class="outline-text-5" id="text-org9a14338">
 <ol class="org-ol">
 <li>Create an <code>std::ifstream</code> to read from a file</li>
 <li>In text mode, can use the same functions as with <code>cin</code></li>
@@ -226,8 +235,8 @@ The <code>eof</code> flag on an <code>ifstream</code> is not set until <i>after<
 <span class="org-type">int</span> <span class="org-variable-name">x</span> = 0;
 <span class="org-keyword">while</span>(mystream)
 {
-    mystream &gt;&gt; x; <span class="org-comment-delimiter">// </span><span class="org-comment">this read could result in the end of file</span>
-    print(<span class="org-string">"X is {}"</span>, x)
+    mystream &gt;&gt; x; <span class="org-comment-delimiter">// </span><span class="org-comment">this read could result in the end of file
+</span>    print(<span class="org-string">"X is {}"</span>, x)
 }
 </pre>
 </div></li>
@@ -253,9 +262,10 @@ The correct pattern is
 </ul>
 </div>
 </div>
+
 <div id="outline-container-why-2-P-2" class="outline-3">
 <h3 id="why-2-P-2">Why</h3>
-<div class="outline-text-3" id="text-org6b19f96">
+<div class="outline-text-3" id="text-org4c94a99">
 <ol class="org-ol">
 <li>Safety: only types that have <code>operator&gt;&gt;</code> implemented can be used without creating a compiler error</li>
 <li>Extensibility: it is possible to enable custom types to work with <code>input streams</code> and create custom stream manipulators for formatting options</li>
@@ -269,7 +279,7 @@ The correct pattern is
 </div>
 <div id="outline-container-what-2-P-3" class="outline-3">
 <h3 id="what-2-P-3">What</h3>
-<div class="outline-text-3" id="text-orge6d226c">
+<div class="outline-text-3" id="text-org518d56d">
 <p>
 Using the input/output facilities that are available in the C standard library. These are here for completeness but should not be used in this class.
 </p>
@@ -277,7 +287,7 @@ Using the input/output facilities that are available in the C standard library. 
 </div>
 <div id="outline-container-how-2-P-3" class="outline-3">
 <h3 id="how-2-P-3">How</h3>
-<div class="outline-text-3" id="text-org9e26c45">
+<div class="outline-text-3" id="text-org668a954">
 <ol class="org-ol">
 <li><code>#include&lt;cstdio&gt;</code> (<code>C++</code> standard library equivalent of <code>&lt;stdio.h&gt;</code>)</li>
 <li>For output: <code>printf</code> and <code>fprintf</code>
@@ -293,17 +303,19 @@ Using the input/output facilities that are available in the C standard library. 
 </ol>
 </div>
 </div>
+
 <div id="outline-container-why-2-P-3" class="outline-3">
 <h3 id="why-2-P-3">Why</h3>
-<div class="outline-text-3" id="text-org878db6b">
+<div class="outline-text-3" id="text-orge649586">
 <ol class="org-ol">
 <li>Faster</li>
 </ol>
 </div>
 </div>
+
 <div id="outline-container-why-not--2-P-1" class="outline-3">
 <h3 id="why-not--2-P-1">Why Not?</h3>
-<div class="outline-text-3" id="text-org8528a29">
+<div class="outline-text-3" id="text-org406888c">
 <ol class="org-ol">
 <li>Dangerous: incorrect format strings can still compile and cause bugs
 <ul class="org-ul">

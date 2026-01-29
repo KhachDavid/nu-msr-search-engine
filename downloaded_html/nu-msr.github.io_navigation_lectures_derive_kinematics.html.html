@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-23 Fri 12:45 -->
+<!-- 2026-01-29 Thu 11:26 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Kinematics for Wheeled Mobile Robots</title>
@@ -53,7 +53,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#overview-1-P-1">Overview</a></li>
+<li><a href="#overview-1-P-3">Overview</a></li>
 <li><a href="#wheeled-mobile-robots-1-P-1">Wheeled Mobile Robots</a>
 <ul>
 <li><a href="#kinematics-derivation-summary-2-P-1">Kinematics Derivation Summary</a></li>
@@ -105,8 +105,8 @@
 </ul>
 </div>
 </nav>
-<div id="outline-container-overview-1-P-1" class="outline-2">
-<h2 id="overview-1-P-1">Overview</h2>
+<div id="outline-container-overview-1-P-3" class="outline-2">
+<h2 id="overview-1-P-3">Overview</h2>
 <div class="outline-text-2" id="text-orge9b2e86">
 <p>
 A practical approach to deriving kinematics for wheeled robots.
@@ -249,7 +249,7 @@ the body frame and frames located at each wheel.
 <h3 id="example-four-wheel-car-2-P-1">Example: Four Wheel Car</h3>
 <div class="outline-text-3" id="text-orgade95c5">
 
-<figure id="orga6a555b">
+<figure id="org3b1b385">
 <img src="../images/four_wheel_car.svg" alt="four_wheel_car.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 1: </span>A Car With Four Wheels</figcaption>
@@ -361,7 +361,7 @@ and thus tell you how the wheels must move in order to achieve a desired body tw
 </div>
 <div id="outline-container-wheel-1-3-P-1" class="outline-4">
 <h4 id="wheel-1-3-P-1">Wheel 1</h4>
-<div class="outline-text-4" id="text-orge0a8dcc">
+<div class="outline-text-4" id="text-org29b5b39">
 \begin{align}
 V_1 &= A_{1b}V_b \\
 \begin{bmatrix}
@@ -392,7 +392,7 @@ L\dot{\theta} + v_y
 
 <div id="outline-container-wheel-2-3-P-1" class="outline-4">
 <h4 id="wheel-2-3-P-1">Wheel 2</h4>
-<div class="outline-text-4" id="text-org0617c94">
+<div class="outline-text-4" id="text-orge4234f7">
 \begin{align}
 V_2 &= A_{2b}V_b \\
 \begin{bmatrix}
@@ -423,7 +423,7 @@ L\dot{\theta}+v_y
 
 <div id="outline-container-wheel-3-3-P-1" class="outline-4">
 <h4 id="wheel-3-3-P-1">Wheel 3</h4>
-<div class="outline-text-4" id="text-org8a7fc83">
+<div class="outline-text-4" id="text-org4423a5a">
 \begin{align}
 V_3 &= A_{3b}V_b \\
 \begin{bmatrix}
@@ -454,7 +454,7 @@ D\dot{\theta}+v_x\\
 
 <div id="outline-container-wheel-4-3-P-1" class="outline-4">
 <h4 id="wheel-4-3-P-1">Wheel 4</h4>
-<div class="outline-text-4" id="text-org90be14e">
+<div class="outline-text-4" id="text-orgefaf3fb">
 \begin{align}
 V_4 &= A_{4b}V_b \\
 \begin{bmatrix}
@@ -547,7 +547,7 @@ offset from its \(y\) axis by some angle \(\gamma\) (see figure below)
 </p>
 
 
-<figure id="org1c33f1e">
+<figure id="org00154fc">
 <img src="../images/mecanum.svg" alt="mecanum.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 2: </span>Top-Down view of a Mecanum/Omni Wheel (it is omni when \(\gamma = 0\)).</figcaption>
@@ -643,7 +643,7 @@ and solve for \(\dot{\phi}_i\) and \(v_{si}\) in terms of the body twist \(\begi
 </div>
 <div id="outline-container-wheel-1-3-P-2" class="outline-4">
 <h4 id="wheel-1-3-P-2">Wheel 1</h4>
-<div class="outline-text-4" id="text-org92db268">
+<div class="outline-text-4" id="text-org1876cb0">
 <p>
 This wheel has a roller angle of \(\gamma = -\frac{\pi}{4}\)
 </p>
@@ -681,7 +681,7 @@ v_y
 
 <div id="outline-container-wheel-2-3-P-2" class="outline-4">
 <h4 id="wheel-2-3-P-2">Wheel 2</h4>
-<div class="outline-text-4" id="text-orge4234f7">
+<div class="outline-text-4" id="text-orgd7b13ca">
 <p>
 This wheel has a roller angle of \(\gamma = \frac{\pi}{4}\)
 </p>
@@ -719,7 +719,7 @@ v_y
 
 <div id="outline-container-wheel-3-3-P-2" class="outline-4">
 <h4 id="wheel-3-3-P-2">Wheel 3</h4>
-<div class="outline-text-4" id="text-org4423a5a">
+<div class="outline-text-4" id="text-org0d3df2e">
 <p>
 This wheel has a roller angle of \(\gamma = \frac{-\pi}{4}\)
 </p>
@@ -756,7 +756,7 @@ v_y
 
 <div id="outline-container-wheel-4-3-P-2" class="outline-4">
 <h4 id="wheel-4-3-P-2">Wheel 4</h4>
-<div class="outline-text-4" id="text-orgefaf3fb">
+<div class="outline-text-4" id="text-org51ff8d0">
 <p>
 This wheel has a roller angle of \(\gamma = \frac{\pi}{4}\)
 </p>
@@ -794,7 +794,7 @@ v_y
 
 <div id="outline-container-inverse-kinematics-2-P-1" class="outline-3">
 <h3 id="inverse-kinematics-2-P-1">Inverse Kinematics</h3>
-<div class="outline-text-3" id="text-org4c47c2d">
+<div class="outline-text-3" id="text-org8c7ce2d">
 <p>
 Now that we have the relationship between the body twist and the velocity of the body in each wheel frame, we can now gather everything
 into a single equation:
@@ -919,7 +919,7 @@ would be unachievable by setting the wheel velocities.</li>
 </div>
 <div id="outline-container-wheel-1-3-P-3" class="outline-4">
 <h4 id="wheel-1-3-P-3">Wheel 1</h4>
-<div class="outline-text-4" id="text-org29b5b39">
+<div class="outline-text-4" id="text-org0d937ef">
 \begin{align}
 \begin{bmatrix}
 \dot{\theta} \\
@@ -963,7 +963,7 @@ The other wheels are similar.
 
 <div id="outline-container-inverse-kinematics-2-P-2" class="outline-3">
 <h3 id="inverse-kinematics-2-P-2">Inverse Kinematics</h3>
-<div class="outline-text-3" id="text-org8c7ce2d">
+<div class="outline-text-3" id="text-org832875d">
 <p>
 The kinematic equations are now 
 </p>

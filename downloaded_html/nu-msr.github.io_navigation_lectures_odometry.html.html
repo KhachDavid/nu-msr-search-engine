@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-05 Mon 23:16 -->
+<!-- 2026-01-29 Thu 11:26 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Odometry for Wheeled Mobile Robots</title>
@@ -76,16 +76,17 @@
 </nav>
 <div id="outline-container-what-is-odometry-1-P-1" class="outline-2">
 <h2 id="what-is-odometry-1-P-1">What is Odometry</h2>
-<div class="outline-text-2" id="text-orgc533a33">
+<div class="outline-text-2" id="text-orgc782b4c">
 <p>
 Odometry is an estimate of the robot's configuration based on
 information from motion sensors. In this document we specifically discuss <i>wheel odometry</i>,
 where the estimate is about how the wheels have moved.
 </p>
 </div>
+
 <div id="outline-container-advantages-and-disadvantages-of-odometry-2-P-1" class="outline-3">
 <h3 id="advantages-and-disadvantages-of-odometry-2-P-1">Advantages and Disadvantages of Odometry</h3>
-<div class="outline-text-3" id="text-org0d42398">
+<div class="outline-text-3" id="text-org10724e3">
 <ul class="org-ul">
 <li>Readily available:
 <ul class="org-ul">
@@ -105,13 +106,14 @@ See <a href="https://www.ros.org/reps/rep-0105.html">https://www.ros.org/reps/re
 </div>
 </div>
 </div>
+
 <div id="outline-container-odometry-howto-1-P-1" class="outline-2">
 <h2 id="odometry-howto-1-P-1">Odometry HOWTO</h2>
 <div class="outline-text-2" id="text-odometry-howto-1-P-1">
 </div>
 <div id="outline-container-computing-the-twist-2-P-1" class="outline-3">
 <h3 id="computing-the-twist-2-P-1">Computing the Twist</h3>
-<div class="outline-text-3" id="text-orgc8fb76b">
+<div class="outline-text-3" id="text-orgd6814e0">
 <ol class="org-ol">
 <li>Determine the distance each wheel has traveled over the last \(\Delta t\) time interval.</li>
 <li>Assume that the wheels moved with constant velocity for \(\Delta t\)</li>
@@ -146,7 +148,7 @@ H^{\dagger} \begin{bmatrix}
 </div>
 <div id="outline-container-integrating-the-twist-2-P-1" class="outline-3">
 <h3 id="integrating-the-twist-2-P-1">Integrating the Twist</h3>
-<div class="outline-text-3" id="text-org854d7ba">
+<div class="outline-text-3" id="text-org234b4cb">
 <ol class="org-ol">
 <li>Once the twist \(V_b\) is determined, integrate it to find \(T_{bb'}\), where \(\{b\}\) is the original body frame and \(\{b'\}\) is the body frame after the latest movement</li>
 <li>The twist must be integrated. It cannot be added to the previous location because if there is simultaneous rotation and translation then the
@@ -166,15 +168,16 @@ translational direction is constantly hanging throughout the motion</li>
 </ol>
 
 
-<figure id="org2e75a06">
+<figure id="org465bdaf">
 <img src="../images/center_of_rot.svg" alt="center_of_rot.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 1: </span>Center of rotation of a body that is moving. Notice that the body traces out the arc of a circle</figcaption>
 </figure>
 </div>
+
 <div id="outline-container-2d-geometry-3-P-1" class="outline-4">
 <h4 id="2d-geometry-3-P-1">2D Geometry</h4>
-<div class="outline-text-4" id="text-org86d2647">
+<div class="outline-text-4" id="text-org442c1af">
 <ol class="org-ol">
 <li>If \(V_b\) has zero angular displacement, then \(T_{bb'}\) is a pure translation:  \(T(0, \Delta x, \Delta y)\),</li>
 
@@ -237,16 +240,17 @@ T_{bb'} = T_{bs}T_{ss'}T_{s'b'}.
 </div>
 <div id="outline-container-matrix-exponential-3-P-1" class="outline-4">
 <h4 id="matrix-exponential-3-P-1">Matrix Exponential</h4>
-<div class="outline-text-4" id="text-orga7e9105">
+<div class="outline-text-4" id="text-org8d237f3">
 <ul class="org-ul">
 <li>Augment twist to make it a 3D twist, then \(T_{bb'}=e^{[V_b]}\). See (Lynch, Park Modern Robotics Ch 3).</li>
 </ul>
 </div>
 </div>
 </div>
+
 <div id="outline-container-the-new-configuration-2-P-1" class="outline-3">
 <h3 id="the-new-configuration-2-P-1">The New Configuration</h3>
-<div class="outline-text-3" id="text-orgc6c6437">
+<div class="outline-text-3" id="text-org44e6725">
 <ol class="org-ol">
 <li>We have \(T_{bb'}\), but we still need to compute the location of the robot in the world frame</li>
 <li>Odometry can only provide a relative measurement, therefore we assume we know the previous configuration \(q(k) = \begin{bmatrix}\theta, x, y \end{bmatrix}\).</li>
@@ -286,7 +290,7 @@ may be computationally better than the other</li>
 </div>
 <div id="outline-container-odometry-questions-2-P-1" class="outline-3">
 <h3 id="odometry-questions-2-P-1">Odometry Questions</h3>
-<div class="outline-text-3" id="text-org862d23e">
+<div class="outline-text-3" id="text-org335d357">
 <ol class="org-ol">
 <li>Should odometry be treated as a sensor reading or as part of the robot model
 (i.e., the control signal)?

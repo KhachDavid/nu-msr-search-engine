@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-05 Mon 23:16 -->
+<!-- 2026-01-29 Thu 11:26 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Custom Formatters in C++</title>
@@ -32,9 +32,10 @@
 </ul>
 </div>
 </nav>
+
 <div id="outline-container-overview-1-P-7" class="outline-2">
 <h2 id="overview-1-P-7">Overview</h2>
-<div class="outline-text-2" id="text-orgb69fee1">
+<div class="outline-text-2" id="text-org046bf88">
 <p>
 The <code>std::format</code> function enables users to create formatters for
 their own custom types.  What follows is a guide for writing a custom formatter for a type called <code>MyType</code>,
@@ -42,9 +43,10 @@ in a way that covers most scenarios.
 </p>
 </div>
 </div>
+
 <div id="outline-container-the-partial-template-specialization-1-P-1" class="outline-2">
 <h2 id="the-partial-template-specialization-1-P-1">The Partial Template Specialization</h2>
-<div class="outline-text-2" id="text-orgb357011">
+<div class="outline-text-2" id="text-org8ae4a7e">
 <ol class="org-ol">
 <li>Assert that <code>MyType</code> is formattable: <code>static_assert(std::formattable&lt;MyType&gt;)</code>
 <ul class="org-ul">
@@ -55,36 +57,36 @@ in a way that covers most scenarios.
 Create a partial class specialization of std::formatter for your type in the <code>std</code> namespace:
 </p>
 <div class="org-src-container">
-<pre class="src src-cpp"><span class="org-comment-delimiter">/// </span><span class="org-comment">\brief Enable formatting for MyType objects</span>
-<span class="org-comment-delimiter">/// </span><span class="org-comment">\tparam CharT The character type to use</span>
-<span class="org-keyword">template</span>&lt;<span class="org-keyword">class</span> <span class="org-type">CharT</span> = <span class="org-type">char</span>&gt;
-<span class="org-keyword">struct</span> <span class="org-constant">std</span>::<span class="org-type">formatter</span>&lt;MyType, <span class="org-type">CharT</span>&gt;
-<span class="org-comment-delimiter">// </span><span class="org-comment">(Optional) : std::formatter&lt;AnotherType, CharT&gt; to reuse a parser</span>
-{
+<pre class="src src-cpp"><span class="org-comment-delimiter">/// </span><span class="org-comment">\brief Enable formatting for MyType objects
+</span><span class="org-comment-delimiter">/// </span><span class="org-comment">\tparam CharT The character type to use
+</span><span class="org-keyword">template</span>&lt;<span class="org-keyword">class</span> <span class="org-type">CharT</span> = <span class="org-type">char</span>&gt;
+<span class="org-keyword">struct</span> <span class="org-constant">std</span>::<span class="org-type">formatter</span>&lt;<span class="org-type">MyType</span>, <span class="org-type">CharT</span>&gt;
+<span class="org-comment-delimiter">// </span><span class="org-comment">(Optional) : std::formatter&lt;AnotherType, CharT&gt; to reuse a parser
+</span>{
 
-    <span class="org-comment-delimiter">/// </span><span class="org-comment">\brief Parse the format-spec, storing the results in *this so that</span>
-    <span class="org-comment-delimiter">///   </span><span class="org-comment">they can be used for controlling how MyType is formatted</span>
-    <span class="org-comment-delimiter">/// </span><span class="org-comment">\param parse_ctx An std::basic_format_parse_Context&lt;CharT&gt;</span>
-    <span class="org-comment-delimiter">///   </span><span class="org-comment">This contains .begin() and .end() iterators for all characters after</span>
-    <span class="org-comment-delimiter">///   </span><span class="org-comment">the : in the format-spec (including the "}").  If the</span>
-    <span class="org-comment-delimiter">///   </span><span class="org-comment">format-spec is empty (e.g., "{}") then .begin() == .end()</span>
-    <span class="org-comment-delimiter">/// </span><span class="org-comment">\returns std::basic_format_parse_context&lt;CharT&gt;::iterator</span>
-    <span class="org-comment-delimiter">/// </span><span class="org-comment">The iterator points to the character that is past the end of the</span>
-    <span class="org-comment-delimiter">/// </span><span class="org-comment">last character parsed by the parse function</span>
-    <span class="org-comment-delimiter">/// </span><span class="org-comment">If re-using a parser via inheritance, do not include this function here.</span>
-    <span class="org-keyword">constexpr</span> <span class="org-keyword">auto</span> <span class="org-function-name">parse</span>(<span class="org-keyword">auto</span> &amp; <span class="org-variable-name">parse_ctx</span>);
+    <span class="org-comment-delimiter">/// </span><span class="org-comment">\brief Parse the format-spec, storing the results in *this so that
+</span>    <span class="org-comment-delimiter">///   </span><span class="org-comment">they can be used for controlling how MyType is formatted
+</span>    <span class="org-comment-delimiter">/// </span><span class="org-comment">\param parse_ctx An std::basic_format_parse_Context&lt;CharT&gt;
+</span>    <span class="org-comment-delimiter">///   </span><span class="org-comment">This contains .begin() and .end() iterators for all characters after
+</span>    <span class="org-comment-delimiter">///   </span><span class="org-comment">the : in the format-spec (including the "}").  If the
+</span>    <span class="org-comment-delimiter">///   </span><span class="org-comment">format-spec is empty (e.g., "{}") then .begin() == .end()
+</span>    <span class="org-comment-delimiter">/// </span><span class="org-comment">\returns std::basic_format_parse_context&lt;CharT&gt;::iterator
+</span>    <span class="org-comment-delimiter">/// </span><span class="org-comment">The iterator points to the character that is past the end of the
+</span>    <span class="org-comment-delimiter">/// </span><span class="org-comment">last character parsed by the parse function
+</span>    <span class="org-comment-delimiter">/// </span><span class="org-comment">If re-using a parser via inheritance, do not include this function here.
+</span>    <span class="org-keyword">constexpr</span> <span class="org-keyword">auto</span> <span class="org-function-name">parse</span>(<span class="org-keyword">auto</span> &amp; <span class="org-variable-name">parse_ctx</span>);
 
-    <span class="org-comment-delimiter">/// </span><span class="org-comment">\brief Writes a string representation of t to the fmt_ctx range</span>
-    <span class="org-comment-delimiter">/// </span><span class="org-comment">\param t The type to output.</span>
-    <span class="org-comment-delimiter">///    </span><span class="org-comment">(Note: this can also be taken by value instead of const &amp;, if desired).</span>
-    <span class="org-comment-delimiter">/// </span><span class="org-comment">\param fmt_ctx An std::basic_format_context&lt;LegacyOutputIterator, CharT&gt;</span>
-    <span class="org-comment-delimiter">///    </span><span class="org-comment">Contains an iterator to output characters to. There is no guarantee</span>
-    <span class="org-comment-delimiter">///    </span><span class="org-comment">of what type LegacyOutputIterator is, so your code should not</span>
-    <span class="org-comment-delimiter">///    </span><span class="org-comment">depend it being a particular iterator type</span>
-    <span class="org-comment-delimiter">/// </span><span class="org-comment">\returns std::basic_format_context&lt;&gt;::iterator. The iterator should</span>
-    <span class="org-comment-delimiter">///   </span><span class="org-comment">point to one past the last output character (e.g., where the next</span>
-    <span class="org-comment-delimiter">///   </span><span class="org-comment">character from whatever else is being added to the string should be inserted)</span>
-    <span class="org-keyword">auto</span> <span class="org-function-name">format</span>(<span class="org-keyword">const</span> <span class="org-type">MyType</span> &amp; <span class="org-variable-name">t</span>, <span class="org-keyword">auto</span> &amp; <span class="org-variable-name">fmt_ctx</span>) <span class="org-keyword">const</span>;
+    <span class="org-comment-delimiter">/// </span><span class="org-comment">\brief Writes a string representation of t to the fmt_ctx range
+</span>    <span class="org-comment-delimiter">/// </span><span class="org-comment">\param t The type to output.
+</span>    <span class="org-comment-delimiter">///    </span><span class="org-comment">(Note: this can also be taken by value instead of const &amp;, if desired).
+</span>    <span class="org-comment-delimiter">/// </span><span class="org-comment">\param fmt_ctx An std::basic_format_context&lt;LegacyOutputIterator, CharT&gt;
+</span>    <span class="org-comment-delimiter">///    </span><span class="org-comment">Contains an iterator to output characters to. There is no guarantee
+</span>    <span class="org-comment-delimiter">///    </span><span class="org-comment">of what type LegacyOutputIterator is, so your code should not
+</span>    <span class="org-comment-delimiter">///    </span><span class="org-comment">depend it being a particular iterator type
+</span>    <span class="org-comment-delimiter">/// </span><span class="org-comment">\returns std::basic_format_context&lt;&gt;::iterator. The iterator should
+</span>    <span class="org-comment-delimiter">///   </span><span class="org-comment">point to one past the last output character (e.g., where the next
+</span>    <span class="org-comment-delimiter">///   </span><span class="org-comment">character from whatever else is being added to the string should be inserted)
+</span>    <span class="org-keyword">auto</span> <span class="org-function-name">format</span>(<span class="org-keyword">const</span> <span class="org-type">MyType</span> &amp; <span class="org-variable-name">t</span>, <span class="org-keyword">auto</span> &amp; <span class="org-variable-name">fmt_ctx</span>) <span class="org-keyword">const</span>;
 };
 </pre>
 </div></li>
@@ -99,9 +101,10 @@ Create a partial class specialization of std::formatter for your type in the <co
 </ul></li>
 </ol>
 </div>
+
 <div id="outline-container-implementing-parse-2-P-1" class="outline-3">
 <h3 id="implementing-parse-2-P-1">Implementing Parse</h3>
-<div class="outline-text-3" id="text-org1fdccfe">
+<div class="outline-text-3" id="text-org78b31ce">
 <p>
 There are three main patterns for implementing parse:
 </p>
@@ -113,8 +116,8 @@ There are three main patterns for implementing parse:
 In more complex cases (e.g., your output requires formatting multiple values) it makes sense to use composition and delegate the parsing:
 </p>
 <div class="org-src-container">
-<pre class="src src-cpp"><span class="org-constant">std</span>::<span class="org-type">formatter</span>&lt;T, CharT&gt; <span class="org-variable-name">T_formatter</span>; <span class="org-comment-delimiter">// </span><span class="org-comment">Member variable</span>
-<span class="org-keyword">constexpr</span> <span class="org-keyword">auto</span> <span class="org-function-name">parse</span>(<span class="org-keyword">auto</span> &amp; <span class="org-variable-name">parse_ctx</span>)
+<pre class="src src-cpp"><span class="org-constant">std</span>::<span class="org-type">formatter</span>&lt;T, CharT&gt; <span class="org-variable-name">T_formatter</span>; <span class="org-comment-delimiter">// </span><span class="org-comment">Member variable
+</span><span class="org-keyword">constexpr</span> <span class="org-keyword">auto</span> <span class="org-function-name">parse</span>(<span class="org-keyword">auto</span> &amp; <span class="org-variable-name">parse_ctx</span>)
 {
     <span class="org-keyword">return</span> T_formatter.parse(parse_ctx);
 }
@@ -146,9 +149,10 @@ Don't allow any formatting specifiers (essentially removing any way to control w
 </ol>
 </div>
 </div>
+
 <div id="outline-container-implementing-format-2-P-1" class="outline-3">
 <h3 id="implementing-format-2-P-1">Implementing Format</h3>
-<div class="outline-text-3" id="text-org54edb54">
+<div class="outline-text-3" id="text-orgffcb7b4">
 <ol class="org-ol">
 <li>The <code>format</code> member function is responsible for writing characters to the iterator provided by <code>fmt_ctx</code>.</li>
 <li><p>
@@ -165,8 +169,8 @@ If you inherited from another formatter (e.g., <code>std::formatter&lt;int, Char
 Likewise, if you used composition, you can then use the <code>.format</code> method of the enclosed formatter:
 </p>
 <div class="org-src-container">
-<pre class="src src-cpp"><span class="org-constant">std</span>::<span class="org-type">formatter</span>&lt;T, CharT&gt; <span class="org-variable-name">T_formatter</span>; <span class="org-comment-delimiter">// </span><span class="org-comment">Member variable</span>
-<span class="org-keyword">auto</span> <span class="org-function-name">format</span>(<span class="org-keyword">const</span> <span class="org-type">MyType</span> &amp; <span class="org-variable-name">t</span>, <span class="org-keyword">auto</span> &amp; <span class="org-variable-name">fmt_ctx</span>) <span class="org-keyword">const</span>
+<pre class="src src-cpp"><span class="org-constant">std</span>::<span class="org-type">formatter</span>&lt;T, CharT&gt; <span class="org-variable-name">T_formatter</span>; <span class="org-comment-delimiter">// </span><span class="org-comment">Member variable
+</span><span class="org-keyword">auto</span> <span class="org-function-name">format</span>(<span class="org-keyword">const</span> <span class="org-type">MyType</span> &amp; <span class="org-variable-name">t</span>, <span class="org-keyword">auto</span> &amp; <span class="org-variable-name">fmt_ctx</span>) <span class="org-keyword">const</span>
 {
     <span class="org-keyword">return</span> T_formatter.format(t.my_T, fmt_ctx);
 }
@@ -188,8 +192,8 @@ It is very important that if, after calling functions that take the <code>fmt_ct
 on using the <code>fmt_ctx</code> again. A pattern to ensure the correct behavior is shown below:
 </p>
 <div class="org-src-container">
-<pre class="src src-cpp"><span class="org-constant">std</span>::<span class="org-type">formatter</span>&lt;T, CharT&gt; <span class="org-variable-name">T_formatter</span>; <span class="org-comment-delimiter">// </span><span class="org-comment">Member variable</span>
-<span class="org-keyword">auto</span> <span class="org-function-name">format</span>(<span class="org-keyword">const</span> <span class="org-type">MyType</span> &amp; <span class="org-variable-name">t</span>, <span class="org-keyword">auto</span> &amp; <span class="org-variable-name">fmt_ctx</span>) <span class="org-keyword">const</span>
+<pre class="src src-cpp"><span class="org-constant">std</span>::<span class="org-type">formatter</span>&lt;T, CharT&gt; <span class="org-variable-name">T_formatter</span>; <span class="org-comment-delimiter">// </span><span class="org-comment">Member variable
+</span><span class="org-keyword">auto</span> <span class="org-function-name">format</span>(<span class="org-keyword">const</span> <span class="org-type">MyType</span> &amp; <span class="org-variable-name">t</span>, <span class="org-keyword">auto</span> &amp; <span class="org-variable-name">fmt_ctx</span>) <span class="org-keyword">const</span>
 {
     fmt_ctx.advance_to(format_to(fmt_ctx.out(), <span class="org-string">"some text first"</span>));
     fmt_ctx.advance_to(T_formatter.format(t.my_T, fmt_ctx));
@@ -210,7 +214,7 @@ pointing to the next location where characters should be written.</li>
 </div>
 <div id="outline-container-references-1-P-1" class="outline-2">
 <h2 id="references-1-P-1">References</h2>
-<div class="outline-text-2" id="text-org012fd4b">
+<div class="outline-text-2" id="text-orgf9cd8e6">
 <ol class="org-ol">
 <li><a href="https://en.cppreference.com/w/cpp/named_req/BasicFormatter.html">BasicFormatter requirement</a></li>
 </ol>

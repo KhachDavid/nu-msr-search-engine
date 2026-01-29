@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-05 Mon 23:16 -->
+<!-- 2026-01-29 Thu 11:26 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ROS C++ Details</title>
@@ -21,7 +21,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#overview-1-P-16">Overview</a></li>
+<li><a href="#overview-1-P-4">Overview</a></li>
 <li><a href="#includes-1-P-1">Includes</a>
 <ul>
 <li><a href="#understanding-standard-headers-2-P-1">Understanding Standard Headers</a></li>
@@ -62,7 +62,7 @@
 </li>
 <li><a href="#smart-pointers-1-P-1">Smart Pointers</a>
 <ul>
-<li><a href="#example-2-P-3">Example</a></li>
+<li><a href="#example-2-P-1">Example</a></li>
 </ul>
 </li>
 <li><a href="#argument-passing-semantics-1-P-1">Argument Passing Semantics</a>
@@ -74,17 +74,18 @@
 </ul>
 </div>
 </nav>
-<div id="outline-container-overview-1-P-16" class="outline-2">
-<h2 id="overview-1-P-16">Overview</h2>
-<div class="outline-text-2" id="text-orgceee207">
+
+<div id="outline-container-overview-1-P-4" class="outline-2">
+<h2 id="overview-1-P-4">Overview</h2>
+<div class="outline-text-2" id="text-orgc2f9d0b">
 <p>
 These notes discuss C++, as it appears in the <a href="https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Cpp-Publisher-And-Subscriber.html#write-the-publisher-node">ROS 2 Cpp publisher</a> example below.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-cpp"><span class="org-comment-delimiter">// </span><span class="org-comment">From: https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Cpp-Publisher-And-Subscriber.html#write-the-publisher-node0</span>
-<span class="org-comment-delimiter">// </span><span class="org-comment">Accessed on: 1/17/2023</span>
-<span class="org-preprocessor">#include</span> <span class="org-string">&lt;chrono&gt;</span>
+<pre class="src src-cpp"><span class="org-comment-delimiter">// </span><span class="org-comment">From: https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Cpp-Publisher-And-Subscriber.html#write-the-publisher-node0
+</span><span class="org-comment-delimiter">// </span><span class="org-comment">Accessed on: 1/17/2023
+</span><span class="org-preprocessor">#include</span> <span class="org-string">&lt;chrono&gt;</span>
 <span class="org-preprocessor">#include</span> <span class="org-string">&lt;functional&gt;</span>
 <span class="org-preprocessor">#include</span> <span class="org-string">&lt;memory&gt;</span>
 <span class="org-preprocessor">#include</span> <span class="org-string">&lt;string&gt;</span>
@@ -133,9 +134,11 @@ These notes discuss C++, as it appears in the <a href="https://docs.ros.org/en/h
 </div>
 </div>
 </div>
+
+
 <div id="outline-container-includes-1-P-1" class="outline-2">
 <h2 id="includes-1-P-1">Includes</h2>
-<div class="outline-text-2" id="text-org0ac05e0">
+<div class="outline-text-2" id="text-orgd32928b">
 <ul class="org-ul">
 <li>The <code>.cpp</code> file uses the <i>pre-processor</i> directive to <code>#include</code> several header files.</li>
 <li>The pre-processor searches for these files on the <i>include path</i> and textually replaces them (i.e., copies and pastes the text directly), creating an intermediate file.</li>
@@ -144,10 +147,10 @@ Files that are include with <code>&lt;&gt;</code> are searched for on the standa
 </p>
 
 <div class="org-src-container">
-<pre class="src src-cpp"><span class="org-preprocessor">#include</span> <span class="org-string">&lt;chrono&gt;</span>      <span class="org-comment-delimiter">// </span><span class="org-comment">timing-related functions</span>
-<span class="org-preprocessor">#include</span> <span class="org-string">&lt;functional&gt;</span>  <span class="org-comment-delimiter">// </span><span class="org-comment">functional programming</span>
-<span class="org-preprocessor">#include</span> <span class="org-string">&lt;memory&gt;</span>      <span class="org-comment-delimiter">// </span><span class="org-comment">smart pointers</span>
-<span class="org-preprocessor">#include</span> <span class="org-string">&lt;string&gt;</span>      <span class="org-comment-delimiter">// </span><span class="org-comment">strings</span>
+<pre class="src src-cpp"><span class="org-preprocessor">#include</span> <span class="org-string">&lt;chrono&gt;</span>      <span class="org-comment-delimiter">// </span><span class="org-comment">timing-related functions
+</span><span class="org-preprocessor">#include</span> <span class="org-string">&lt;functional&gt;</span>  <span class="org-comment-delimiter">// </span><span class="org-comment">functional programming
+</span><span class="org-preprocessor">#include</span> <span class="org-string">&lt;memory&gt;</span>      <span class="org-comment-delimiter">// </span><span class="org-comment">smart pointers
+</span><span class="org-preprocessor">#include</span> <span class="org-string">&lt;string&gt;</span>      <span class="org-comment-delimiter">// </span><span class="org-comment">strings</span>
 </pre>
 </div></li>
 <li><p>
@@ -169,17 +172,19 @@ to add a <code>depend</code> in the <code>package.xml</code>
 </ul></li>
 </ul>
 </div>
+
 <div id="outline-container-understanding-standard-headers-2-P-1" class="outline-3">
 <h3 id="understanding-standard-headers-2-P-1">Understanding Standard Headers</h3>
-<div class="outline-text-3" id="text-org9ee0d6f">
+<div class="outline-text-3" id="text-org1b91440">
 <ul class="org-ul">
 <li>The ultimate word on what a header does and how to use it its specification in the <code>C++</code> standard.</li>
 <li>However, <a href="https://cppreference.com">https://cppreference.com</a> tends to have accurate documentation about C++</li>
 <li><a href="https://en.cppreference.com/w/cpp/header/chrono">chrono</a> provides documentation on the <code>&lt;chrono&gt;</code> headerfile, for example.</li>
 </ul>
 </div>
-<details id="org00408df"><summary class="header-5">Preprocessor</summary>
-<div class="outline-text-5" id="text-org00408df">
+
+<details id="orga614dbc"><summary class="header-5">Preprocessor</summary>
+<div class="outline-text-5" id="text-orga614dbc">
 <ul class="org-ul">
 <li><code>colcon build --cmake-args -DCMAKE_CXX_FLAGS=-save-temps</code> will cause all intermediate files
 generated during the compilation process to be saved in the build directory</li>
@@ -190,9 +195,10 @@ generated during the compilation process to be saved in the build directory</li>
 </div>
 </details>
 </div>
+
 <div id="outline-container-macros-2-P-1" class="outline-3">
 <h3 id="macros-2-P-1">Macros</h3>
-<div class="outline-text-3" id="text-org022bf8a">
+<div class="outline-text-3" id="text-org649cfdb">
 <ul class="org-ul">
 <li>RCLCPP_INFO is a macro, which means the preprocessor makes a literal text replacement</li>
 <li>RCLCPP_INFO_STREAM allows the use of <code>C++</code> iostream style output rather than <code>C</code> style printf output
@@ -205,7 +211,7 @@ generated during the compilation process to be saved in the build directory</li>
 </div>
 <div id="outline-container-namespaces-1-P-1" class="outline-2">
 <h2 id="namespaces-1-P-1">Namespaces</h2>
-<div class="outline-text-2" id="text-org579d7ca">
+<div class="outline-text-2" id="text-org4ce95f5">
 <ul class="org-ul">
 <li>The first encounter with a namespace is <code>using namespace std::chrono_literals</code></li>
 <li>Generally the form of <code>using namspace X</code> is discouraged, however, an exception is a <code>namespace</code> containing <i>literal suffixes</i></li>
@@ -236,7 +242,7 @@ anywhere below the <code>using ns::item</code> that is also within the nearest b
 </div>
 <div id="outline-container-argument-dependent-lookup-2-P-1" class="outline-3">
 <h3 id="argument-dependent-lookup-2-P-1">Argument Dependent Lookup</h3>
-<div class="outline-text-3" id="text-org54f596f">
+<div class="outline-text-3" id="text-org44c525f">
 <ul class="org-ul">
 <li><a href="https://en.cppreference.com/w/cpp/language/adl">Argument Dependent Lookup</a> is a set of rules that helps determine what namespaces are searched when calling a function</li>
 <li>The namespaces that are searched are based on the function's arguments (hence Argument Dependent)</li>
@@ -247,9 +253,10 @@ they will be automatically found with ADL</li>
 </ul>
 </div>
 </div>
+
 <div id="outline-container-declaring-and-defining-in-a-namespace-2-P-1" class="outline-3">
 <h3 id="declaring-and-defining-in-a-namespace-2-P-1">Declaring and Defining in a Namespace</h3>
-<div class="outline-text-3" id="text-orgb9f4deb">
+<div class="outline-text-3" id="text-orgc1ebd9d">
 <ul class="org-ul">
 <li>To make an item (e.g., a function or a class) an element of a namespace, it must be declared within that namespace</li>
 <li>With <code>namespace myns { }</code>, anything inside the <code>{}</code> will be within the namespace</li>
@@ -262,9 +269,10 @@ they will be automatically found with ADL</li>
 </div>
 </div>
 </div>
+
 <div id="outline-container-class-definition-1-P-1" class="outline-2">
 <h2 id="class-definition-1-P-1">Class Definition</h2>
-<div class="outline-text-2" id="text-org20b4160">
+<div class="outline-text-2" id="text-org1e79f87">
 <ul class="org-ul">
 <li>The <code>class MinimalPublisher : public rclcpp::Node</code> is declared.</li>
 <li>The <code>MinimalPublisher</code> class is a subclass (or child) of the <code>rclcpp::Node</code> class</li>
@@ -283,7 +291,7 @@ nodes depend upon sub-classing</li>
 </div>
 <div id="outline-container-inheritance-in-c--2-P-1" class="outline-3">
 <h3 id="inheritance-in-c--2-P-1">Inheritance in C++</h3>
-<div class="outline-text-3" id="text-org46d011a">
+<div class="outline-text-3" id="text-org560b66d">
 <ul class="org-ul">
 <li>In C++, a class can inherit from one or more classes</li>
 <li>The derived class takes on the methods and members of the base classes and can access its public and protected members</li>
@@ -316,8 +324,8 @@ nodes depend upon sub-classing</li>
 </ul></li>
 </ul>
 </div>
-<details id="org4f34568"><summary class="header-4">Virtual Methods</summary>
-<div class="outline-text-4" id="text-org4f34568">
+<details id="orgc4c40aa"><summary class="header-4">Virtual Methods</summary>
+<div class="outline-text-4" id="text-orgc4c40aa">
 <ul class="org-ul">
 <li>In C++ derived classes can override members of the base class
 <ul class="org-ul">
@@ -350,13 +358,14 @@ which leads to lots of confusing behavior.</li>
 </details>
 </div>
 </div>
+
 <div id="outline-container-constructor-1-P-1" class="outline-2">
 <h2 id="constructor-1-P-1">Constructor</h2>
 <div class="outline-text-2" id="text-constructor-1-P-1">
 </div>
 <div id="outline-container-constructor-initializer-list-2-P-1" class="outline-3">
 <h3 id="constructor-initializer-list-2-P-1">Constructor Initializer List</h3>
-<div class="outline-text-3" id="text-org36ef6c0">
+<div class="outline-text-3" id="text-org5c79a41">
 <ul class="org-ul">
 <li>Prior to the body of the constructor being called, the class is constructed as follows
 <ol class="org-ol">
@@ -371,7 +380,7 @@ any base class constructors and the members</li>
 </div>
 <div id="outline-container-this-pointer-2-P-1" class="outline-3">
 <h3 id="this-pointer-2-P-1">This pointer</h3>
-<div class="outline-text-3" id="text-org9eef973">
+<div class="outline-text-3" id="text-org5c7bb33">
 <ul class="org-ul">
 <li>Every member function implicitly has a pointer to the current object, which is called <code>this</code></li>
 <li><code>this</code> holds the memory address of the object being called</li>
@@ -385,7 +394,7 @@ the <code>this-&gt;</code> is, in most cases, implied, therefore there is no nee
 </div>
 <div id="outline-container-raii-1-P-1" class="outline-2">
 <h2 id="raii-1-P-1">RAII</h2>
-<div class="outline-text-2" id="text-org9f240c2">
+<div class="outline-text-2" id="text-org0483353">
 <ul class="org-ul">
 <li>RAII stands for "Resource Acquisition is Initialization", and this is the primary tool used for memory and exception safety in C++</li>
 <li>What this means is that constructors acquire resources and destructors release them</li>
@@ -405,7 +414,7 @@ can lead to a lot of error handling code</li>
 </div>
 <div id="outline-container-resources-in-c--2-P-1" class="outline-3">
 <h3 id="resources-in-c--2-P-1">Resources in C++</h3>
-<div class="outline-text-3" id="text-org7f415c5">
+<div class="outline-text-3" id="text-org6a1a80f">
 <p>
 A resource is any entity that needs to be requested by the programmer from the operating system before it can be used.
 Here are some examples
@@ -413,7 +422,7 @@ Here are some examples
 </div>
 <div id="outline-container-memory-3-P-1" class="outline-4">
 <h4 id="memory-3-P-1">Memory</h4>
-<div class="outline-text-4" id="text-org2efda39">
+<div class="outline-text-4" id="text-org8256a00">
 <p>
 In C++ there are two main areas of memory:
 </p>
@@ -435,9 +444,10 @@ In C++ there are two main areas of memory:
 </ol>
 </div>
 </div>
+
 <div id="outline-container-other-resources-3-P-1" class="outline-4">
 <h4 id="other-resources-3-P-1">Other Resources</h4>
-<div class="outline-text-4" id="text-orgc1a6205">
+<div class="outline-text-4" id="text-orgfb91434">
 <ul class="org-ul">
 <li>Files</li>
 <li>Network sockets</li>
@@ -446,9 +456,10 @@ In C++ there are two main areas of memory:
 </div>
 </div>
 </div>
+
 <div id="outline-container-motivating-raii-2-P-1" class="outline-3">
 <h3 id="motivating-raii-2-P-1">Motivating RAII</h3>
-<div class="outline-text-3" id="text-org3443a93">
+<div class="outline-text-3" id="text-orge33f722">
 <p>
 Consider the following code, which allocates some memory, does some "stuff", and frees the memory:
 </p>
@@ -536,9 +547,11 @@ If an object hadn't yet been constructed, its destructor would not be called
 </div>
 </div>
 </div>
+
+
 <div id="outline-container-smart-pointers-1-P-1" class="outline-2">
 <h2 id="smart-pointers-1-P-1">Smart Pointers</h2>
-<div class="outline-text-2" id="text-orge1644b4">
+<div class="outline-text-2" id="text-orga4f8bb0">
 <ul class="org-ul">
 <li>Smart pointers are used to track and automatically free memory</li>
 <li>There are two main smart pointer types in C++
@@ -559,9 +572,9 @@ the memory is freed</li>
 <li>Shared pointers enable automatic memory management and work as long as their are no circular reference (A -&gt; B and B -&gt; A). Circular references can be broken with <code>weak_ptr</code></li>
 </ul>
 </div>
-<div id="outline-container-example-2-P-3" class="outline-3">
-<h3 id="example-2-P-3">Example</h3>
-<div class="outline-text-3" id="text-org10a2e42">
+<div id="outline-container-example-2-P-1" class="outline-3">
+<h3 id="example-2-P-1">Example</h3>
+<div class="outline-text-3" id="text-orgd60d0c3">
 <p>
 Here is one way in which smart pointers can help eliminate redundant error-handling code
 </p>
@@ -583,9 +596,10 @@ there will be no memory leaks or double deallocation.
 </div>
 </div>
 </div>
+
 <div id="outline-container-argument-passing-semantics-1-P-1" class="outline-2">
 <h2 id="argument-passing-semantics-1-P-1">Argument Passing Semantics</h2>
-<div class="outline-text-2" id="text-org24ed53f">
+<div class="outline-text-2" id="text-orgba06e28">
 <ul class="org-ul">
 <li>Pass by value (<code>void dostuff(int x)</code>), when calling <code>dostuff(y)</code> the value of y is copied into <code>x</code>.
 <ul class="org-ul">
@@ -614,7 +628,7 @@ instead of being deallocated, can be reused within <code>dostuff</code></li>
 </div>
 <div id="outline-container-smart-pointers-2-P-1" class="outline-3">
 <h3 id="smart-pointers-2-P-1">Smart Pointers</h3>
-<div class="outline-text-3" id="text-orgd8e7745">
+<div class="outline-text-3" id="text-orga8745fa">
 <ul class="org-ul">
 <li>If you pass something by smart pointer, you are making a statement about ownership
 <ul class="org-ul">
@@ -638,7 +652,7 @@ instead of being deallocated, can be reused within <code>dostuff</code></li>
 </div>
 <div id="outline-container-constness-1-P-1" class="outline-2">
 <h2 id="constness-1-P-1">Constness</h2>
-<div class="outline-text-2" id="text-org517c24e">
+<div class="outline-text-2" id="text-orga7a6317">
 <ul class="org-ul">
 <li>In C++ variables and class methods can be marked <code>const</code></li>
 <li>If a method does not modify any class members then it should generally be marked <code>const</code>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-05 Mon 23:16 -->
+<!-- 2026-01-29 Thu 11:26 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Exploring Constexpr</title>
@@ -23,8 +23,8 @@
 <ul>
 <li><a href="#constexpr-in-c--1-P-1">Constexpr In C++</a>
 <ul>
-<li><a href="#what--2-P-1">What?</a></li>
-<li><a href="#why--2-P-1">Why?</a></li>
+<li><a href="#what--2-P-3">What?</a></li>
+<li><a href="#why--2-P-3">Why?</a></li>
 <li><a href="#why-not--2-P-2">Why Not?</a></li>
 </ul>
 </li>
@@ -39,13 +39,14 @@
 </ul>
 </div>
 </nav>
+
 <div id="outline-container-constexpr-in-c--1-P-1" class="outline-2">
 <h2 id="constexpr-in-c--1-P-1">Constexpr In C++</h2>
 <div class="outline-text-2" id="text-constexpr-in-c--1-P-1">
 </div>
-<div id="outline-container-what--2-P-1" class="outline-3">
-<h3 id="what--2-P-1">What?</h3>
-<div class="outline-text-3" id="text-org3498903">
+<div id="outline-container-what--2-P-3" class="outline-3">
+<h3 id="what--2-P-3">What?</h3>
+<div class="outline-text-3" id="text-orgcc936d5">
 <p>
 In <code>C++</code>, the <a href="https://en.cppreference.com/w/cpp/language/constexpr.html"><code>constexpr</code></a> specifier tells the compiler that the affected declaration (e.g., function)
 may be evaluated at compile-time or at run-time.
@@ -70,9 +71,10 @@ at that particular call site.</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-why--2-P-1" class="outline-3">
-<h3 id="why--2-P-1">Why?</h3>
-<div class="outline-text-3" id="text-org7cef8f6">
+
+<div id="outline-container-why--2-P-3" class="outline-3">
+<h3 id="why--2-P-3">Why?</h3>
+<div class="outline-text-3" id="text-orgfbd37d5">
 <p>
 Using <code>constexpr</code> is useful in several ways:
 </p>
@@ -83,9 +85,10 @@ Using <code>constexpr</code> is useful in several ways:
 </ol>
 </div>
 </div>
+
 <div id="outline-container-why-not--2-P-2" class="outline-3">
 <h3 id="why-not--2-P-2">Why Not?</h3>
-<div class="outline-text-3" id="text-org381701d">
+<div class="outline-text-3" id="text-orgb09a501">
 <ol class="org-ol">
 <li>Not everything that can be done in C++ can be done in <code>constexpr</code> code
 <ul class="org-ul">
@@ -104,22 +107,23 @@ ever need to remove the <code>constexpr</code>, their code will break.</li>
 </div>
 </div>
 </div>
+
 <div id="outline-container-activity-1-P-1" class="outline-2">
 <h2 id="activity-1-P-1">Activity</h2>
 <div class="outline-text-2" id="text-activity-1-P-1">
 </div>
 <div id="outline-container-the-code-2-P-1" class="outline-3">
 <h3 id="the-code-2-P-1">The Code</h3>
-<div class="outline-text-3" id="text-org01c7d1a">
+<div class="outline-text-3" id="text-orge8600f3">
 <p>
 Here is some code to compute the volume of a rectangular prism:
 </p>
 <div class="org-src-container">
-<pre class="src src-cpp"><span class="org-comment-delimiter">// </span><span class="org-comment">This code uses iostreams instead of print because it results in</span>
-<span class="org-comment-delimiter">// </span><span class="org-comment">generated asm code that is easier to follow.</span>
-<span class="org-preprocessor">#include</span><span class="org-string">&lt;iostream&gt;</span>
-<span class="org-keyword">using</span> <span class="org-constant">std</span>::cout;
-<span class="org-keyword">using</span> <span class="org-constant">std</span>::endl;
+<pre class="src src-cpp"><span class="org-comment-delimiter">// </span><span class="org-comment">This code uses iostreams instead of print because it results in
+</span><span class="org-comment-delimiter">// </span><span class="org-comment">generated asm code that is easier to follow.
+</span><span class="org-preprocessor">#include</span><span class="org-string">&lt;iostream&gt;</span>
+<span class="org-keyword">using</span> <span class="org-constant">std</span>::<span class="org-constant">cout</span>;
+<span class="org-keyword">using</span> <span class="org-constant">std</span>::<span class="org-constant">endl</span>;
 
 <span class="org-keyword">constexpr</span> <span class="org-type">int</span> <span class="org-function-name">const_rect_volume</span>(<span class="org-type">int</span> <span class="org-variable-name">length</span>,
                               <span class="org-type">int</span> <span class="org-variable-name">width</span>,
@@ -145,9 +149,10 @@ Here is some code to compute the volume of a rectangular prism:
 </div>
 </div>
 </div>
+
 <div id="outline-container-live-inspection-2-P-1" class="outline-3">
 <h3 id="live-inspection-2-P-1">Live Inspection</h3>
-<div class="outline-text-3" id="text-org76cc2f3">
+<div class="outline-text-3" id="text-orgd34dcab">
 <ol class="org-ol">
 <li><p>
 Compile the code, run it, and verify that it works:
@@ -200,9 +205,10 @@ was reduced to a single assembly instruction by the compiler!</li>
 </ol>
 </div>
 </div>
+
 <div id="outline-container-generating-the-assembly-2-P-1" class="outline-3">
 <h3 id="generating-the-assembly-2-P-1">Generating the Assembly</h3>
-<div class="outline-text-3" id="text-org9ff2283">
+<div class="outline-text-3" id="text-org2ff43af">
 <ol class="org-ol">
 <li>You can also view the generated assembly language code, annotated by the compiler:</li>
 <li>Use  <code>g++ -S -masm=intel -fverbose-asm -g -std=c++23  constexpr_demo.cpp</code> to generate assembly code in <code>constexpr_demo.s</code>
@@ -242,7 +248,7 @@ it does not need to even emit runtime code.</li>
 </div>
 <div id="outline-container-compiler-explorer-2-P-1" class="outline-3">
 <h3 id="compiler-explorer-2-P-1">Compiler Explorer</h3>
-<div class="outline-text-3" id="text-org0e23e0e">
+<div class="outline-text-3" id="text-orga302447">
 <p>
 The <a href="https://godbolt.org">Compiler Explorer</a> is an online tool that lets you easily compile your code with many different compilers and for many different architectures in order
 to view the generated assembly.

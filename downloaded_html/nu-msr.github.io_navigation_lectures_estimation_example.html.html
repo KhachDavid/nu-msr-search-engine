@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-05 Mon 23:16 -->
+<!-- 2026-01-29 Thu 11:26 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>An Estimation Example</title>
@@ -79,7 +79,7 @@
 </nav>
 <div id="outline-container-problem-setup-1-P-1" class="outline-2">
 <h2 id="problem-setup-1-P-1">Problem Setup</h2>
-<div class="outline-text-2" id="text-org583fd18">
+<div class="outline-text-2" id="text-org829c94b">
 <ul class="org-ul">
 <li>Random Experiment: Randomly place a robot some uncertain distance from a wall and take an uncertain distance measurement.</li>
 <li>Sample space is \(S = `\mathbb{R}^2\) (one real number for distance to the wall, one for the sensor measurement).</li>
@@ -88,7 +88,7 @@
 </div>
 <div id="outline-container-sensor-model-1-P-1" class="outline-2">
 <h2 id="sensor-model-1-P-1">Sensor Model</h2>
-<div class="outline-text-2" id="text-org1fbb423">
+<div class="outline-text-2" id="text-org6f97c2d">
 <ul class="org-ul">
 <li><p>
 Measurement is a function of the actual position \(X(\xi)\) and some noise \(W(\xi)\):
@@ -115,7 +115,7 @@ Z = X + W.
 </div>
 <div id="outline-container-posterior-distribution-1-P-1" class="outline-2">
 <h2 id="posterior-distribution-1-P-1">Posterior distribution</h2>
-<div class="outline-text-2" id="text-orgc7ea152">
+<div class="outline-text-2" id="text-orgaabd280">
 <ul class="org-ul">
 <li>We want to find \(f_{X}(x | Z = z)\)</li>
 <li>How? Bayes Rule</li>
@@ -123,7 +123,7 @@ Z = X + W.
 </div>
 <div id="outline-container-bayes-rule-for-probability-densities-2-P-1" class="outline-3">
 <h3 id="bayes-rule-for-probability-densities-2-P-1">Bayes Rule for Probability Densities</h3>
-<div class="outline-text-3" id="text-org7962beb">
+<div class="outline-text-3" id="text-org36c88a9">
 <ul class="org-ul">
 <li><p>
 For probabilities:
@@ -161,23 +161,24 @@ Therefore:
 </p>
 
 \begin{equation}
-\label{orga013e6a}
+\label{org6ddacf9}
  f_X(x | z) = \frac{f_Z(z | x) f_X(x)}{f_Z(z)}.
 \end{equation}</li>
 </ul>
 </div>
 </div>
+
 <div id="outline-container-what-to-actually-compute-2-P-1" class="outline-3">
 <h3 id="what-to-actually-compute-2-P-1">What to Actually Compute</h3>
-<div class="outline-text-3" id="text-org04ceee1">
+<div class="outline-text-3" id="text-org894d49a">
 <ul class="org-ul">
-<li>To compute Equation \eqref{orga013e6a}, we need to compute \(f_Z(z|x)\) and \(f_z(z)\) (we already know \(f_X(x)\) as that is a parameter of the problem).</li>
+<li>To compute Equation \eqref{org6ddacf9}, we need to compute \(f_Z(z|x)\) and \(f_z(z)\) (we already know \(f_X(x)\) as that is a parameter of the problem).</li>
 </ul>
 </div>
 </div>
 <div id="outline-container-computing-f-z-z-x--2-P-1" class="outline-3">
 <h3 id="computing-f-z-z-x--2-P-1">Computing \(f_Z(z|x)\)</h3>
-<div class="outline-text-3" id="text-org06b51f5">
+<div class="outline-text-3" id="text-orgb5943a5">
 <ul class="org-ul">
 <li>This is the sensor measurement model</li>
 <li>We can write the measurement equation as \(Z = x + W\).
@@ -205,7 +206,7 @@ f_z(z | x) &= f_w(z -x | x).
 </div>
 <div id="outline-container-computing-f-z-z--2-P-1" class="outline-3">
 <h3 id="computing-f-z-z--2-P-1">Computing \(f_z(z)\)</h3>
-<div class="outline-text-3" id="text-org297eae5">
+<div class="outline-text-3" id="text-orge958ce9">
 <ul class="org-ul">
 <li>This is the probability distribution of the sensor measurements.</li>
 <li>We know that \(f_{ZX}(z,x) = f_z(z | x) f_x(x)\) is the numerator in Bayes rule.</li>
@@ -219,9 +220,10 @@ We can then marginalize out the \(x\):
 </div>
 </div>
 </div>
+
 <div id="outline-container-an-example-1-P-1" class="outline-2">
 <h2 id="an-example-1-P-1">An Example</h2>
-<div class="outline-text-2" id="text-org65b49ed">
+<div class="outline-text-2" id="text-orga2a37a2">
 <ul class="org-ul">
 <li>Technically, the above steps enclose the complete process for determining the estimator
 <ul class="org-ul">
@@ -247,9 +249,10 @@ f_W(w)=\frac{1}{\sigma_w\sqrt{2\pi}}\exp(\frac{-w^2}{2\sigma_w^2})
 \end{equation}</li>
 </ul>
 </div>
+
 <div id="outline-container-measurement-model-3-P-1" class="outline-4">
 <h4 id="measurement-model-3-P-1">Measurement Model</h4>
-<div class="outline-text-4" id="text-org5fcdd14">
+<div class="outline-text-4" id="text-orgaf8f000">
 <ul class="org-ul">
 <li><p>
 The measurement model is therefore
@@ -274,7 +277,7 @@ averaging the measurements will yield the true location of the robot
 </div>
 <div id="outline-container-joint-distribution-3-P-1" class="outline-4">
 <h4 id="joint-distribution-3-P-1">Joint Distribution</h4>
-<div class="outline-text-4" id="text-org15cb830">
+<div class="outline-text-4" id="text-org5eadc85">
 <ul class="org-ul">
 <li><p>
 Next, let's find the joint distribution \(f_{ZX}(z,x) = f_Z(z|x)f_x(x)\). (Important, note that \(f_x(x)\) is piecewise)
@@ -289,7 +292,7 @@ f_{ZX}(z,x) = \begin{cases} \frac{1}{\sigma_w\sqrt{2\pi}}\exp(\frac{-w^2}{2\sigm
 </div>
 <div id="outline-container-normalization-factor-probability-of-a-measurement--3-P-1" class="outline-4">
 <h4 id="normalization-factor-probability-of-a-measurement--3-P-1">Normalization factor (probability of a measurement)</h4>
-<div class="outline-text-4" id="text-org40b1f22">
+<div class="outline-text-4" id="text-orgbef2809">
 <ul class="org-ul">
 <li><p>
 Finally, compute 

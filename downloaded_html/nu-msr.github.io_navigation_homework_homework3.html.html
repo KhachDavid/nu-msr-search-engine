@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-05 Mon 23:16 -->
+<!-- 2026-01-29 Thu 11:26 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Homework 3</title>
@@ -98,16 +98,17 @@
 <p>
 Remember to follow the <a href="./guidelines.html">Homework Guidelines</a>
 </p>
+
 <div id="outline-container-task-f-1-P-1" class="outline-2">
 <h2 id="task-f-1-P-1">Task F</h2>
-<div class="outline-text-2" id="text-orgc718fed">
+<div class="outline-text-2" id="text-orgb786fd9">
 <p>
 Lasers!
 </p>
 </div>
 <div id="outline-container-task-f-6-laser-scanner--2-P-1" class="outline-3">
 <h3 id="task-f-6-laser-scanner--2-P-1">Task F.6 (Laser Scanner)</h3>
-<div class="outline-text-3" id="text-org5b82710">
+<div class="outline-text-3" id="text-orgf9dac8b">
 <ul class="org-ul">
 <li>In <code>nuturtle_control</code> <code>start_robot.launch</code> start the <code>hlds_laser_publisher</code> node from the <code>hls_lfcd_lds_driver</code>,
 whenever <code>robot</code> is set to <code>localhost</code></li>
@@ -116,9 +117,10 @@ whenever <code>robot</code> is set to <code>localhost</code></li>
 </div>
 </div>
 </div>
+
 <div id="outline-container-task-v-visualization--1-P-1" class="outline-2">
 <h2 id="task-v-visualization--1-P-1">Task V (Visualization)</h2>
-<div class="outline-text-2" id="text-org58eab47">
+<div class="outline-text-2" id="text-org4343dec">
 <ul class="org-ul">
 <li>This task gathers all the visualization requirements for each important mode of running the code in this project.</li>
 <li>Implementing this task depends on having multiple <code>rviz</code> configuration files, one for each situation.</li>
@@ -128,16 +130,17 @@ in a higher-level launchfile that loads it's own <code>rviz</code> setup.</li>
 <li>You may find that publishing additional messages/tfs and modifying existing nodes will help accomplish these tasks.</li>
 </ul>
 </div>
+
 <div id="outline-container-task-v-1-simulation-standalone--2-P-1" class="outline-3">
 <h3 id="task-v-1-simulation-standalone--2-P-1">Task V.1 (Simulation Standalone)</h3>
-<div class="outline-text-3" id="text-orgcbd903d">
+<div class="outline-text-3" id="text-org26cc106">
 <p>
 When the <code>nusim</code> is run in a standalone manner (e.g. <code>ros2 launch nusim nusim</code>, the following should be displayed:
 </p>
 </div>
 <div id="outline-container-from-previous-homeworks-3-P-1" class="outline-4">
 <h4 id="from-previous-homeworks-3-P-1">From Previous Homeworks</h4>
-<div class="outline-text-4" id="text-org9b50da7">
+<div class="outline-text-4" id="text-org4672cb0">
 <ol class="org-ol">
 <li>The walls (in red)</li>
 <li>The obstacles (in red)</li>
@@ -146,9 +149,10 @@ When the <code>nusim</code> is run in a standalone manner (e.g. <code>ros2 launc
 </ol>
 </div>
 </div>
+
 <div id="outline-container-to-add-3-P-1" class="outline-4">
 <h4 id="to-add-3-P-1">To Add</h4>
-<div class="outline-text-4" id="text-org88eae36">
+<div class="outline-text-4" id="text-orgeff279d">
 <ol class="org-ol">
 <li>A <code>nav_msgs/Path</code> (in red) tracing the path of the robot</li>
 <li>A MarkerArray (in yellow) displaying the relative \((x,y)\) measurements of the markers
@@ -163,7 +167,7 @@ When the <code>nusim</code> is run in a standalone manner (e.g. <code>ros2 launc
 </div>
 <div id="outline-container-task-v-2-simulation-with-odometry--2-P-1" class="outline-3">
 <h3 id="task-v-2-simulation-with-odometry--2-P-1">Task V.2 (Simulation with Odometry)</h3>
-<div class="outline-text-3" id="text-org35bce1b">
+<div class="outline-text-3" id="text-org6cf65f6">
 <p>
 When the <code>nusim</code> is run with the odometry node (e.g., <code>ros2 launch nuturtle_control start_robot.launch robot:=nusim</code>
 </p>
@@ -178,7 +182,7 @@ When the <code>nusim</code> is run with the odometry node (e.g., <code>ros2 laun
 </div>
 <div id="outline-container-task-v-3-real-robot-with-odometry--2-P-1" class="outline-3">
 <h3 id="task-v-3-real-robot-with-odometry--2-P-1">Task V.3 (Real robot with Odometry)</h3>
-<div class="outline-text-3" id="text-orgaea85a4">
+<div class="outline-text-3" id="text-orgc9c464b">
 <p>
 When <code>ros2 launch nuturtle_control start_robot.launch robot:=none</code> (on your computer) and
      <code>ros2 launch nuturtle_control start_robot.launch robot:=localhost</code> (on the turtlebot).
@@ -195,9 +199,10 @@ When <code>ros2 launch nuturtle_control start_robot.launch robot:=none</code> (o
 </ol>
 </div>
 </div>
+
 <div id="outline-container-task-v-4-simulated-robot-with-slam--2-P-1" class="outline-3">
 <h3 id="task-v-4-simulated-robot-with-slam--2-P-1">Task V.4 (Simulated Robot With SLAM)</h3>
-<div class="outline-text-3" id="text-orga94118c">
+<div class="outline-text-3" id="text-orgfdf223a">
 <p>
 When <code>ros2 launch nuslam slam.launch.xml robot:=nusim</code> is used
 </p>
@@ -224,7 +229,7 @@ continuously corrected using the sensor measurements</li>
 </div>
 <div id="outline-container-task-c-9-robot-position--2-P-1" class="outline-3">
 <h3 id="task-c-9-robot-position--2-P-1">Task C.9 (Robot Position)</h3>
-<div class="outline-text-3" id="text-org17f0b41">
+<div class="outline-text-3" id="text-orgfb5c2d9">
 <p>
 We will now add error/noise into the <code>nusim</code> robot simulation.
 </p>
@@ -248,9 +253,10 @@ We will now add error/noise into the <code>nusim</code> robot simulation.
 </ol>
 </div>
 </div>
+
 <div id="outline-container-task-c-10-basic-sensor--2-P-1" class="outline-3">
 <h3 id="task-c-10-basic-sensor--2-P-1">Task C.10 (Basic Sensor)</h3>
-<div class="outline-text-3" id="text-org6a11185">
+<div class="outline-text-3" id="text-org8ea90f0">
 <p>
 We will add a sensor that determines the relative \((x,y)\) locations of the obstacles, and assigns each a unique identifier.
 </p>
@@ -269,9 +275,10 @@ We will add a sensor that determines the relative \((x,y)\) locations of the obs
 </ol>
 </div>
 </div>
+
 <div id="outline-container-task-c-11-collision-detection--2-P-1" class="outline-3">
 <h3 id="task-c-11-collision-detection--2-P-1">Task C.11 (Collision Detection)</h3>
-<div class="outline-text-3" id="text-orgc672f17">
+<div class="outline-text-3" id="text-orgadc8278">
 <ol class="org-ol">
 <li>Implement collision detection between the simulated robot and the obstacles
 <ul class="org-ul">
@@ -293,7 +300,7 @@ will be useful during testing.</li>
 </div>
 <div id="outline-container-task-c-12-lidar--2-P-1" class="outline-3">
 <h3 id="task-c-12-lidar--2-P-1">Task C.12 (Lidar)</h3>
-<div class="outline-text-3" id="text-org2ef6940">
+<div class="outline-text-3" id="text-org91162f6">
 <p>
 The goal of this task is to simulate the turtlebot's lidar.
 </p>
@@ -314,9 +321,10 @@ The goal of this task is to simulate the turtlebot's lidar.
 <li>The simulated lidar should also return distances to the border wall in the simulator, if a ray hits that wall</li>
 </ol>
 </div>
+
 <div id="outline-container-hint-3-P-3" class="outline-4">
 <h4 id="hint-3-P-3">Hint</h4>
-<div class="outline-text-4" id="text-org14f0ab3">
+<div class="outline-text-4" id="text-org2b4077c">
 <ol class="org-ol">
 <li>There are many ways of implementing this sensor, but this article on Circle-Line intersection may help <a href="https://mathworld.wolfram.com/Circle-LineIntersection.html">https://mathworld.wolfram.com/Circle-LineIntersection.html</a></li>
 </ol>
@@ -324,9 +332,10 @@ The goal of this task is to simulate the turtlebot's lidar.
 </div>
 </div>
 </div>
+
 <div id="outline-container-task-l-slam--1-P-2" class="outline-2">
 <h2 id="task-l-slam--1-P-2">Task L (SLAM)</h2>
-<div class="outline-text-2" id="text-org9b7a764">
+<div class="outline-text-2" id="text-orgea7ecb1">
 <ul class="org-ul">
 <li>This task is about implementing Feature-Based Kalman Filter SLAM.</li>
 <li>You will do this task in a new package called <code>nuslam</code></li>
@@ -341,7 +350,7 @@ may prove helpful</li>
 </div>
 <div id="outline-container-task-l-1-main-slam-results--2-P-1" class="outline-3">
 <h3 id="task-l-1-main-slam-results--2-P-1">Task L.1 (Main SLAM Results)</h3>
-<div class="outline-text-3" id="text-org9ae0f4d">
+<div class="outline-text-3" id="text-org0283484">
 <ul class="org-ul">
 <li>This task is about the main interface for running and visualizing your algorithms.</li>
 <li>You can write whatever nodes you want, as long as you can run a <code>slam.launch</code> file as specified below and, where appropriate
@@ -357,9 +366,10 @@ view the necessary visualizations.</li>
 </ul>
 </div>
 </div>
+
 <div id="outline-container-task-l-2-slam-in-controlled-environment--2-P-1" class="outline-3">
 <h3 id="task-l-2-slam-in-controlled-environment--2-P-1">Task L.2 (SLAM in controlled environment)</h3>
-<div class="outline-text-3" id="text-org107ffe0">
+<div class="outline-text-3" id="text-org4b9e9fb">
 <ul class="org-ul">
 <li>In this task, you will test the extended Kalman Filter SLAM algorithm in the simulation environment.</li>
 <li>This environment enables you to verify the correctness of the algorithm without worrying about data-association or noise.</li>
@@ -391,7 +401,7 @@ remain good.</li>
 </div>
 <div id="outline-container-suggested-structure-2-P-1" class="outline-3">
 <h3 id="suggested-structure-2-P-1">Suggested Structure</h3>
-<div class="outline-text-3" id="text-org074db32">
+<div class="outline-text-3" id="text-org7b820e0">
 <p>
 The below ideas are my suggestions for how to accomplish this task; however, you may choose to ignore them.
 </p>
@@ -399,7 +409,7 @@ The below ideas are my suggestions for how to accomplish this task; however, you
 </div>
 <div id="outline-container-matrix-library-2-P-1" class="outline-3">
 <h3 id="matrix-library-2-P-1">Matrix Library</h3>
-<div class="outline-text-3" id="text-org7ad7733">
+<div class="outline-text-3" id="text-org5a84530">
 <ol class="org-ol">
 <li>I recommend using the armadillo library <a href="http://arma.sourceforge.net/">http://arma.sourceforge.net/</a> for C++</li>
 <li>Install <code>libarmadillo-dev</code></li>
@@ -407,9 +417,10 @@ The below ideas are my suggestions for how to accomplish this task; however, you
 </ol>
 </div>
 </div>
+
 <div id="outline-container-slam-2-P-1" class="outline-3">
 <h3 id="slam-2-P-1">SLAM</h3>
-<div class="outline-text-3" id="text-org72e1a9a">
+<div class="outline-text-3" id="text-orgeddd142">
 <ol class="org-ol">
 <li>You may choose to use the odometry node as-is, or to copy its source code into the <code>nuslam</code> package and modify it to be a <code>slam</code> and <code>odometry</code> node.
 <ul class="org-ul">

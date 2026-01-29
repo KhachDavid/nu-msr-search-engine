@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-13 Tue 09:15 -->
+<!-- 2026-01-29 Thu 11:26 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CMake Basics</title>
@@ -21,7 +21,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#overview-1-P-2">Overview</a></li>
+<li><a href="#overview-1-P-5">Overview</a></li>
 <li><a href="#compilation-process-overview-1-P-1">Compilation Process Overview</a></li>
 <li><a href="#what-is-cmake--1-P-1">What is CMake?</a>
 <ul>
@@ -81,12 +81,12 @@
 <li><a href="#a-deep-dive-into-a-catkin-cmakelists-txt-2-P-1">A Deep Dive into a Catkin CMakeLists.txt</a></li>
 </ul>
 </li>
-<li><a href="#resources-1-P-1">Resources</a></li>
+<li><a href="#resources-1-P-4">Resources</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-overview-1-P-2" class="outline-2">
-<h2 id="overview-1-P-2">Overview</h2>
+<div id="outline-container-overview-1-P-5" class="outline-2">
+<h2 id="overview-1-P-5">Overview</h2>
 <div class="outline-text-2" id="text-orge198707">
 <p>
 This document explains the C++ build process, CMake, and colcon.
@@ -638,7 +638,7 @@ language features that are desired.</li>
 </div>
 <div id="outline-container-locally-per-target--3-P-1" class="outline-4">
 <h4 id="locally-per-target--3-P-1">Locally (Per-Target)</h4>
-<div class="outline-text-4" id="text-org39df4c1">
+<div class="outline-text-4" id="text-orgc60d4b4">
 <ul class="org-ul">
 <li><p>
 To set the standard for a given target
@@ -661,7 +661,7 @@ and <code>INTERFACE</code> which means just used by dependencies but not the tar
 </div>
 <div id="outline-container-globally-all-targets--3-P-1" class="outline-4">
 <h4 id="globally-all-targets--3-P-1">Globally (all targets)</h4>
-<div class="outline-text-4" id="text-org79428b7">
+<div class="outline-text-4" id="text-org76deffb">
 <ul class="org-ul">
 <li><p>
 These settings can also be done globally.
@@ -703,7 +703,7 @@ These settings can also be done globally.
 </div>
 <div id="outline-container-locally-per-target--3-P-2" class="outline-4">
 <h4 id="locally-per-target--3-P-2">Locally (Per-Target)</h4>
-<div class="outline-text-4" id="text-orgc60d4b4">
+<div class="outline-text-4" id="text-org8678143">
 <ul class="org-ul">
 <li>Use <code>target_compile_options(target -Wall -Wextra)</code> to add flags (in this case <code>-Wall -Wextra</code>) to the build</li>
 </ul>
@@ -711,7 +711,7 @@ These settings can also be done globally.
 </div>
 <div id="outline-container-globally-all-targets--3-P-2" class="outline-4">
 <h4 id="globally-all-targets--3-P-2">Globally (all targets)</h4>
-<div class="outline-text-4" id="text-org76deffb">
+<div class="outline-text-4" id="text-orgbf7b1e5">
 <ul class="org-ul">
 <li>Global compile options are added with <code>add_compile_options(-Wall -Wextra)</code> (<code>-Wall -Wextra</code> in this case).</li>
 </ul>
@@ -1154,8 +1154,8 @@ install(DIRECTORY include/${PROJECT_NAME}/
 </div>
 </details>
 
-<div id="outline-container-resources-1-P-1" class="outline-2">
-<h2 id="resources-1-P-1">Resources</h2>
+<div id="outline-container-resources-1-P-4" class="outline-2">
+<h2 id="resources-1-P-4">Resources</h2>
 <div class="outline-text-2" id="text-org6844241">
 <ul class="org-ul">
 <li><a href="https://cmake.org/documentation/">Official Documentation</a>

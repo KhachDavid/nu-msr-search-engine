@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-05 Mon 23:16 -->
+<!-- 2026-01-29 Thu 11:26 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Regression</title>
@@ -87,13 +87,14 @@
 </ul>
 </li>
 <li><a href="#model-selection-and-hyperparameters-1-P-1">Model Selection and Hyperparameters</a></li>
-<li><a href="#resources-1-P-9">Resources</a></li>
+<li><a href="#resources-1-P-2">Resources</a></li>
 </ul>
 </div>
 </nav>
+
 <div id="outline-container-supervised-learning-1-P-1" class="outline-2">
 <h2 id="supervised-learning-1-P-1">Supervised Learning</h2>
-<div class="outline-text-2" id="text-org59e6310">
+<div class="outline-text-2" id="text-orgd3903d9">
 <p>
 Training set of \(n\) observations: \(\mathcal{D} = \{(x_1, y_1) \dots (x_n, y_n)\}\).
 </p>
@@ -123,9 +124,10 @@ Given a previously unseen input \(x_\ast\) can we predict the output \(y_\ast\)?
 <li>Given \(\mathcal{D}\) find \(y = f(x)\)</li>
 </ul>
 </div>
+
 <div id="outline-container-applications-2-P-1" class="outline-3">
 <h3 id="applications-2-P-1">Applications</h3>
-<div class="outline-text-3" id="text-org0531d7e">
+<div class="outline-text-3" id="text-orgda9dc5c">
 <ul class="org-ul">
 <li>Depth data from monocular images</li>
 <li>Mapping terrain</li>
@@ -135,22 +137,24 @@ Given a previously unseen input \(x_\ast\) can we predict the output \(y_\ast\)?
 </div>
 </div>
 </div>
+
 <div id="outline-container-linear-regression-1-P-1" class="outline-2">
 <h2 id="linear-regression-1-P-1">Linear Regression</h2>
 <div class="outline-text-2" id="text-linear-regression-1-P-1">
 </div>
 <div id="outline-container-the-model-2-P-1" class="outline-3">
 <h3 id="the-model-2-P-1">The Model</h3>
-<div class="outline-text-3" id="text-org5f7b7c6">
+<div class="outline-text-3" id="text-org158a84b">
 <ol class="org-ol">
 <li>\(y = w_0 + w_1 x_1 + \cdots + w_n x_n\).  The goal is to find the weights \(w\).</li>
 <li>By setting \(x_0 = 1\), we can write the model as \(y = w^T x\).</li>
 </ol>
 </div>
 </div>
+
 <div id="outline-container-matrix-form-2-P-1" class="outline-3">
 <h3 id="matrix-form-2-P-1">Matrix Form</h3>
-<div class="outline-text-3" id="text-orga860558">
+<div class="outline-text-3" id="text-orgd877797">
 <ol class="org-ol">
 <li>Stack all the \(x\) vectors: \(X = \begin{bmatrix}x_1 & \dots & x_n\end{bmatrix}\)</li>
 <li>Stack all the measurements \(y = \begin{bmatrix}y_1 & \dots y_n \end{bmatrix}\)</li>
@@ -164,9 +168,10 @@ y = X^T w
 </ol>
 </div>
 </div>
+
 <div id="outline-container-least-squares-2-P-1" class="outline-3">
 <h3 id="least-squares-2-P-1">Least Squares</h3>
-<div class="outline-text-3" id="text-org2da7663">
+<div class="outline-text-3" id="text-org4a7a99d">
 <p>
 The regression equation \(y = X^T w\) cannot be solved precisely because there are more measurements than independent variables.
 Instead we try to minimize the square error:
@@ -180,9 +185,10 @@ w_\ast = \mathrm{arg}\min_w ||X^Tw - y||_2^2
 So \(w_\ast = (X X^T)^{-1} X y\) when \(n > D\) (there are more measurements then the dimension of the data \(x\)).
 </p>
 </div>
+
 <div id="outline-container-minimizing-with-the-svd-3-P-1" class="outline-4">
 <h4 id="minimizing-with-the-svd-3-P-1">Minimizing with the SVD</h4>
-<div class="outline-text-4" id="text-orge72629e">
+<div class="outline-text-4" id="text-org7d70602">
 <ol class="org-ol">
 <li>Take the Singular Value Decomposition (SVD) of \(X^T \in \mathbb{R}^{n \times D}\): 
 <ol class="org-ol">
@@ -219,13 +225,15 @@ In block form the equations are separated
 </div>
 </div>
 </div>
+
+
 <div id="outline-container-linear-regression-gaussian-noise-1-P-1" class="outline-2">
 <h2 id="linear-regression-gaussian-noise-1-P-1">Linear Regression, Gaussian Noise</h2>
 <div class="outline-text-2" id="text-linear-regression-gaussian-noise-1-P-1">
 </div>
 <div id="outline-container-the-model-2-P-2" class="outline-3">
 <h3 id="the-model-2-P-2">The Model</h3>
-<div class="outline-text-3" id="text-org490f3eb">
+<div class="outline-text-3" id="text-orgac176a3">
 <ol class="org-ol">
 <li>The model: \(y_i = f(x_i) + \epsilon_i\), where \(f(x) = x^T w\) and \(\epsilon_i \sim \mathcal{N}(0, \sigma^2)\).
 <ul class="org-ul">
@@ -248,7 +256,7 @@ Without seeing any data, the weights are randomly distributed:
 </div>
 <div id="outline-container-finding-the-weights-2-P-1" class="outline-3">
 <h3 id="finding-the-weights-2-P-1">Finding the Weights</h3>
-<div class="outline-text-3" id="text-org04e08de">
+<div class="outline-text-3" id="text-orge0e0700">
 <ol class="org-ol">
 <li><p>
 Write the posterior distribution of the weights using Bayes rule: 
@@ -331,9 +339,11 @@ where the weights are the most probable weights</li>
 </div>
 </div>
 </div>
+
+
 <div id="outline-container-non-linear-functions--1-P-1" class="outline-2">
 <h2 id="non-linear-functions--1-P-1">Non-linear functions:</h2>
-<div class="outline-text-2" id="text-orgf133091">
+<div class="outline-text-2" id="text-org34c0c0c">
 <ul class="org-ul">
 <li>Instead of using \(x_i\), for each input data point, map to an \(N\) dimensional feature
 space \(\phi(x_i)\). Since \(\phi(x_i)\) does not depend on weights, we can just replace
@@ -345,9 +355,10 @@ p(f_&lowast; | x_&lowast;, X, y) = \mathcal{N}(\frac{1}{\sigma^2}&phi;(x_&lowast
 <li>Here \(A = \frac{1}{\sigma^2}\Phi \Phi^T + \Sigma^{-1}\).</li>
 </ul>
 </div>
+
 <div id="outline-container-some-manipulations-2-P-1" class="outline-3">
 <h3 id="some-manipulations-2-P-1">Some Manipulations</h3>
-<div class="outline-text-3" id="text-orgdcb2b35">
+<div class="outline-text-3" id="text-org571fc25">
 <ul class="org-ul">
 <li>In its original form, \(p(f_\ast | x_\ast, X, y)\) requires inverting an \(N \times N\) matrix
 <ul class="org-ul">
@@ -389,9 +400,10 @@ After applying these transformations, the estimate becomes
 </div>
 </div>
 </div>
+
 <div id="outline-container-summary-1-P-1" class="outline-2">
 <h2 id="summary-1-P-1">Summary</h2>
-<div class="outline-text-2" id="text-orged1e88c">
+<div class="outline-text-2" id="text-org99e906e">
 <ul class="org-ul">
 <li>Given labeled training data</li>
 <li>Map inputs into a feature space</li>
@@ -401,9 +413,10 @@ the distribution of the output given a new input</li>
 </ul>
 </div>
 </div>
+
 <div id="outline-container-random-process-1-P-1" class="outline-2">
 <h2 id="random-process-1-P-1">Random Process</h2>
-<div class="outline-text-2" id="text-org8a17bc1">
+<div class="outline-text-2" id="text-org060fa7c">
 <ol class="org-ol">
 <li>A random vector is a vector of random variables with a joint distribution
 <ul class="org-ul">
@@ -436,9 +449,10 @@ that have an infinite-dimensional basis in a finite manner.</li>
 </ul></li>
 </ol>
 </div>
+
 <div id="outline-container-another-look-at-linear-regression-2-P-1" class="outline-3">
 <h3 id="another-look-at-linear-regression-2-P-1">Another look at linear regression</h3>
-<div class="outline-text-3" id="text-orgb98be32">
+<div class="outline-text-3" id="text-orge9a5e98">
 <p>
 Given the mean and covariance of a Gaussian process (and we'll assume mean 0 here), we can write a distribution for the process,
 partitioning into points we have measured and points at which we want a prediction
@@ -469,9 +483,10 @@ Thus, we can simply apply the formula for a conditional Gaussian to predict ever
 </div>
 </div>
 </div>
+
 <div id="outline-container-model-selection-and-hyperparameters-1-P-1" class="outline-2">
 <h2 id="model-selection-and-hyperparameters-1-P-1">Model Selection and Hyperparameters</h2>
-<div class="outline-text-2" id="text-org4d6cba8">
+<div class="outline-text-2" id="text-org2e49e1f">
 <ul class="org-ul">
 <li>The data can be used to select the covariance model and hyperparameters</li>
 
@@ -505,9 +520,11 @@ p(y | X) = \sum_i p(y | X, H_i) p(H_i)
 \end{equation}
 </div>
 </div>
-<div id="outline-container-resources-1-P-9" class="outline-2">
-<h2 id="resources-1-P-9">Resources</h2>
-<div class="outline-text-2" id="text-org6afff1f">
+
+
+<div id="outline-container-resources-1-P-2" class="outline-2">
+<h2 id="resources-1-P-2">Resources</h2>
+<div class="outline-text-2" id="text-orgf5c77bb">
 <p>
 Much of these notes are derived from <i>Gaussian Processes for Machine Learning</i>, Carl Edward Rasmussen and Chris Williams, The MIT Press, 2006
 Avaiable at <a href="http://gaussianprocess.org/">http://gaussianprocess.org/</a>
