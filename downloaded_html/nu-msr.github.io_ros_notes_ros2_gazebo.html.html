@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-11-24 Mon 12:06 -->
+<!-- 2026-01-30 Fri 13:06 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Simulation</title>
@@ -71,7 +71,7 @@
 
 <div id="outline-container-gazebo-and-ros-1-P-1" class="outline-2">
 <h2 id="gazebo-and-ros-1-P-1">Gazebo and ROS</h2>
-<div class="outline-text-2" id="text-org9a2cfae">
+<div class="outline-text-2" id="text-org103f48c">
 <p>
 These notes discuss practical usage of <a href="https://gazebosim.org/home">(Modern) Gazebo</a> in ROS 2.
 </p>
@@ -80,7 +80,7 @@ These notes discuss practical usage of <a href="https://gazebosim.org/home">(Mod
 
 <div id="outline-container-installation-1-P-2" class="outline-2">
 <h2 id="installation-1-P-2">Installation</h2>
-<div class="outline-text-2" id="text-org850ca0f">
+<div class="outline-text-2" id="text-orgb690d9b">
 <ol class="org-ol">
 <li>Install gazebo and its ROS components with <code>sudo apt install ros-kilted-ros-gz-sim</code></li>
 <li><a href="https://gazebosim.org/docs/ionic">Tutorials for Gazebo Ionic</a> (Ionic is the version name)
@@ -112,7 +112,7 @@ when the <code>install/setup.bash</code> is sourced.</li>
 </div>
 <div id="outline-container-from-the-command-line-2-P-1" class="outline-3">
 <h3 id="from-the-command-line-2-P-1">From the Command Line</h3>
-<div class="outline-text-3" id="text-orga7c70e4">
+<div class="outline-text-3" id="text-orgc010612">
 <ol class="org-ol">
 <li>Run gazebo with <code>ros2 launch ros_gz_sim gz_sim.launch.py</code>
 <ul class="org-ul">
@@ -133,7 +133,7 @@ when the <code>install/setup.bash</code> is sourced.</li>
 </div>
 <div id="outline-container-from-a-launch-file-2-P-1" class="outline-3">
 <h3 id="from-a-launch-file-2-P-1">From a Launch File</h3>
-<div class="outline-text-3" id="text-org542098c">
+<div class="outline-text-3" id="text-orgbb86c73">
 <ol class="org-ol">
 <li>The server can be started with the <a href="https://gazebosim.org/docs/ionic/ros2_launch_gazebo/#using-a-custom-launch-file"><code>&lt;gz_server&gt;</code></a> action in an XML launchfile</li>
 <li>The <a href="https://github.com/gazebosim/ros_gz/blob/kilted/ros_gz_sim/ros_gz_sim/actions/gzserver.py">GzServer</a> action is used in a Python launchfile
@@ -151,7 +151,7 @@ when the <code>install/setup.bash</code> is sourced.</li>
 </div>
 <div id="outline-container-package-layout-1-P-1" class="outline-2">
 <h2 id="package-layout-1-P-1">Package Layout</h2>
-<div class="outline-text-2" id="text-orga859b2a">
+<div class="outline-text-2" id="text-org93df677">
 <ol class="org-ol">
 <li>An example of this package layout can be found at <a href="https://github.com/m-elwin/me495_gazebo">https://github.com/m-elwin/me495_gazebo</a>.</li>
 <li>SDF files for <code>worlds</code> go in a <code>worlds/</code> directory and are installed to <code>share/&lt;pkg_name&gt;/worlds</code>
@@ -199,7 +199,7 @@ we are not currently adopting this practice: see <a href="#transition">Transitio
 </div>
 <div id="outline-container-format-2-P-1" class="outline-3">
 <h3 id="format-2-P-1">Format</h3>
-<div class="outline-text-3" id="text-org8c75b11">
+<div class="outline-text-3" id="text-org82ceb57">
 <ul class="org-ul">
 <li>Gazebo uses <a href="https://sdformat.org">SDF</a> files to represent robots, worlds, and everything that appears in the simulation.
 <ul class="org-ul">
@@ -218,7 +218,7 @@ we are not currently adopting this practice: see <a href="#transition">Transitio
 
 <div id="outline-container-model-management-2-P-1" class="outline-3">
 <h3 id="model-management-2-P-1">Model Management</h3>
-<div class="outline-text-3" id="text-org4086882">
+<div class="outline-text-3" id="text-org3774bf3">
 <ul class="org-ul">
 <li>Gazebo allows anybody to share simulation assets with the world via <a href="https://app.gazebosim.org">Gazebo Fuel</a>
 <ul class="org-ul">
@@ -242,7 +242,7 @@ we are not currently adopting this practice: see <a href="#transition">Transitio
 
 <div id="outline-container-creating-worlds-2-P-1" class="outline-3">
 <h3 id="creating-worlds-2-P-1">Creating Worlds</h3>
-<div class="outline-text-3" id="text-orga51d6dc">
+<div class="outline-text-3" id="text-orgec52073">
 <ul class="org-ul">
 <li>In the Gazebo GUI, you can add the <i>Resource Spawner</i> to add models directly from Gazebo Fuel or your local computer, enabling you to create SDF world files interactively</li>
 <li>When saving the world file, Gazebo will include a URI that contains the absolute local path to each model in the world
@@ -273,7 +273,7 @@ we use installs those models and puts the install directory on the <code>GZ_SIM_
 </div>
 <div id="outline-container-urdf-to-sdf-3-P-1" class="outline-4">
 <h4 id="urdf-to-sdf-3-P-1">URDF to SDF</h4>
-<div class="outline-text-4" id="text-org0c270d9">
+<div class="outline-text-4" id="text-orgc8f1da7">
 <ul class="org-ul">
 <li>ROS can be used to load both URDF and SDF models into the simulator.
 <ul class="org-ul">
@@ -317,7 +317,7 @@ The <a href="http://sdformat.org/tutorials?tut=sdformat_urdf_extensions&amp;cat=
 
 <div id="outline-container-sdf-to-urdf-3-P-1" class="outline-4">
 <h4 id="sdf-to-urdf-3-P-1">SDF to URDF</h4>
-<div class="outline-text-4" id="text-orgf497749">
+<div class="outline-text-4" id="text-org49bd8d8">
 <ol class="org-ol">
 <li>It is also possible to maintain a robot as an SDF file and convert it to a URDF file automatically using the <a href="https://index.ros.org/p/sdformat_urdf/">sdformat_urdf</a> package</li>
 <li>The SDF format is much broader than the URDF format, so maintaining an SDF file that can be reliably converted into a URDF file imposes additional restrictions on the SDF file</li>
@@ -328,7 +328,7 @@ The <a href="http://sdformat.org/tutorials?tut=sdformat_urdf_extensions&amp;cat=
 
 <div id="outline-container-debugging-3-P-1" class="outline-4">
 <h4 id="debugging-3-P-1">Debugging</h4>
-<div class="outline-text-4" id="text-org4f2102c">
+<div class="outline-text-4" id="text-orgb067a06">
 <p>
 It can be helpful to inspect <code>urdf</code> files at different stages of conversion, especially if there are errors
 when trying to load your model.
@@ -347,14 +347,14 @@ when trying to load your model.
 
 <div id="outline-container-spawning-robots-1-P-1" class="outline-2">
 <h2 id="spawning-robots-1-P-1">Spawning Robots</h2>
-<div class="outline-text-2" id="text-orge4ae71d">
+<div class="outline-text-2" id="text-org60aa8e8">
 <p>
 There are several ways to <a href="https://gazebosim.org/docs/latest/ros2_spawn_model/">spawn a URDF model in gazebo</a>, provided by the <code>ros_gz_sim</code> package
 </p>
 </div>
 <div id="outline-container-from-command-line-2-P-1" class="outline-3">
 <h3 id="from-command-line-2-P-1">From Command Line</h3>
-<div class="outline-text-3" id="text-orgc06a22a">
+<div class="outline-text-3" id="text-orgb4ecdf6">
 <ul class="org-ul">
 <li>The <code>ros2 run ros_gz_sim create</code> node is the most straightforward method to spawning a model from the command-line (use <code>--help</code> to see all the options
 <ul class="org-ul">
@@ -373,7 +373,7 @@ or from a <code>model_string</code> by using command substitution: <code>$(xacro
 
 <div id="outline-container-from-a-launch-file-2-P-2" class="outline-3">
 <h3 id="from-a-launch-file-2-P-2">From a Launch File</h3>
-<div class="outline-text-3" id="text-org1602be3">
+<div class="outline-text-3" id="text-org2cdbc19">
 <ol class="org-ol">
 <li>The <a href="https://gazebosim.org/docs/latest/ros2_spawn_model/#spawn-a-model-from-a-custom-launch-file"><code>&lt;gz_spawn_model&gt;</code></a> tag is used to spawn a robot from an XML launch file</li>
 <li>There is also <a href="https://github.com/gazebosim/ros_gz/blob/kilted/ros_gz_sim/ros_gz_sim/actions/gz_spawn_model.py">GzSpawnModel</a> for python launchfiles
@@ -395,7 +395,7 @@ or from a <code>model_string</code> by using command substitution: <code>$(xacro
 
 <div id="outline-container-bridging-1-P-1" class="outline-2">
 <h2 id="bridging-1-P-1">Bridging</h2>
-<div class="outline-text-2" id="text-org948e923">
+<div class="outline-text-2" id="text-org0661159">
 <ul class="org-ul">
 <li>The <a href="https://index.ros.org/p/ros_gz_bridge/">ROS GZ Bridge</a> is a node that is used to connect ROS topics and services to Gazebo topics and services.</li>
 <li>Once the bridge is running you can publish/subscribe to the topics like any other ROS topic</li>
@@ -405,7 +405,7 @@ or from a <code>model_string</code> by using command substitution: <code>$(xacro
 </div>
 <div id="outline-container-from-the-command-line-2-P-2" class="outline-3">
 <h3 id="from-the-command-line-2-P-2">From the Command Line</h3>
-<div class="outline-text-3" id="text-orgcd5b0d5">
+<div class="outline-text-3" id="text-org922732c">
 <ul class="org-ul">
 <li><code>ros2 run ros_gz_bridge parameter_bridge topic@ros_type@gz_type</code>
 <ul class="org-ul">
@@ -426,7 +426,7 @@ or from a <code>model_string</code> by using command substitution: <code>$(xacro
 </div>
 <div id="outline-container-from-a-launch-file-2-P-3" class="outline-3">
 <h3 id="from-a-launch-file-2-P-3">From a Launch File</h3>
-<div class="outline-text-3" id="text-orgeede183">
+<div class="outline-text-3" id="text-org29acaa3">
 <ol class="org-ol">
 <li>The <a href="https://gazebosim.org/docs/latest/ros2_integration/#launching-the-bridge-using-the-launch-files-included-in-ros-gz-bridge-package"><code>&lt;ros_gz_bridge&gt;</code></a> tag is used to spawn a robot from an XML launch file
 <ul class="org-ul">
@@ -444,7 +444,7 @@ or from a <code>model_string</code> by using command substitution: <code>$(xacro
 
 <div id="outline-container-simulation-time-1-P-1" class="outline-2">
 <h2 id="simulation-time-1-P-1">Simulation Time</h2>
-<div class="outline-text-2" id="text-org4980c78">
+<div class="outline-text-2" id="text-org9d92021">
 <ol class="org-ol">
 <li>Time in simulation can run at a different speed than time in the real world</li>
 <li>ROS 2 Nodes can use time from a simulator by setting the <code>use_sim_time</code> parameter to <code>true</code></li>
@@ -463,7 +463,7 @@ ensuring that all nodes are using simulated time becomes important.</li>
 
 <div id="outline-container-plugins-1-P-1" class="outline-2">
 <h2 id="plugins-1-P-1">Plugins</h2>
-<div class="outline-text-2" id="text-org252cf6f">
+<div class="outline-text-2" id="text-org1d6625f">
 <ol class="org-ol">
 <li>Gazebo uses plugins to enhance/modify functionality</li>
 <li>Some plugins can be associated with specific models and used to control them</li>
@@ -493,7 +493,7 @@ ensuring that all nodes are using simulated time becomes important.</li>
 </div>
 <div id="outline-container-general-issues-2-P-1" class="outline-3">
 <h3 id="general-issues-2-P-1">General Issues</h3>
-<div class="outline-text-3" id="text-org2aa6a31">
+<div class="outline-text-3" id="text-org6954ec3">
 <ol class="org-ol">
 <li>Gazebo uses a client-server architecture. Often the server does not exit when the client does and is running in the background
 <ul class="org-ul">
@@ -557,7 +557,7 @@ and am hesitant to adopt this practice given that SDF files are more general tha
 </div>
 <div id="outline-container-documentation-2-P-2" class="outline-3">
 <h3 id="documentation-2-P-2">Documentation</h3>
-<div class="outline-text-3" id="text-org49b47b7">
+<div class="outline-text-3" id="text-orgddb536f">
 <ol class="org-ol">
 <li><a href="https://gazebosim.org/docs/fortress/tutorials">Gazebo Tutorials</a></li>
 <li><a href="https://sdformat.org">SDF Format</a></li>

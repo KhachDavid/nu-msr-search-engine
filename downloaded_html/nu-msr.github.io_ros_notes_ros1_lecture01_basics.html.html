@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-11-24 Mon 12:06 -->
+<!-- 2026-01-30 Fri 13:06 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ROS Basics</title>
@@ -55,7 +55,7 @@
 
 <div id="outline-container-ros-basics-1-P-1" class="outline-2">
 <h2 id="ros-basics-1-P-1">ROS Basics</h2>
-<div class="outline-text-2" id="text-orgde8121e">
+<div class="outline-text-2" id="text-org74a58f1">
 <p>
 The ROS ecosystem consists of a collection of tools, software, and documentation.
 These are used to describe, implement, and inspect a ROS program, which consists of multiple processes (called <i>nodes</i>)
@@ -65,7 +65,7 @@ that run in parallel and communicate with each other using inter-process communi
 
 <div id="outline-container-documentation-2-P-4" class="outline-3">
 <h3 id="documentation-2-P-4">Documentation</h3>
-<div class="outline-text-3" id="text-org4c57bd7">
+<div class="outline-text-3" id="text-org461605a">
 <ul class="org-ul">
 <li><a href="https://wiki.ros.org">https://wiki.ros.org</a> - The ROS wiki should be your first stop for documentation.  Some packages are better documented than others
 <ul class="org-ul">
@@ -85,7 +85,7 @@ that run in parallel and communicate with each other using inter-process communi
 
 <div id="outline-container-packages-2-P-1" class="outline-3">
 <h3 id="packages-2-P-1">Packages</h3>
-<div class="outline-text-3" id="text-orga6550b5">
+<div class="outline-text-3" id="text-orgae974f3">
 <p>
 <a href="https://wiki.ros.org/Packages">Packages</a> are the basic organization unit for ROS components.
 </p>
@@ -106,7 +106,7 @@ that run in parallel and communicate with each other using inter-process communi
 
 <div id="outline-container-installing-packages-3-P-1" class="outline-4">
 <h4 id="installing-packages-3-P-1">Installing Packages</h4>
-<div class="outline-text-4" id="text-org67d5f37">
+<div class="outline-text-4" id="text-org477c133">
 <ul class="org-ul">
 <li>You can install a ROS package called <code>&lt;package&gt;</code> released for <code>noetic</code> using <code>apt</code>: 
 <ol class="org-ol">
@@ -123,7 +123,7 @@ that run in parallel and communicate with each other using inter-process communi
 
 <div id="outline-container-navigating-packages-3-P-1" class="outline-4">
 <h4 id="navigating-packages-3-P-1">Navigating Packages</h4>
-<div class="outline-text-4" id="text-orgb826dd7">
+<div class="outline-text-4" id="text-orga3315d8">
 <ul class="org-ul">
 <li>ROS provides tools for navigating packages, as part of <a href="https://wiki.ros.org/rosbash">rosbash</a>. 
 Below is a non-comprehensive list.</li>
@@ -141,7 +141,7 @@ Below is a non-comprehensive list.</li>
 
 <div id="outline-container-nodes-2-P-1" class="outline-3">
 <h3 id="nodes-2-P-1">Nodes</h3>
-<div class="outline-text-3" id="text-org62b7f1d">
+<div class="outline-text-3" id="text-orgd9af2ed">
 <ul class="org-ul">
 <li><i>Node</i> is ROS's term for a process and is the basic unit of execution in ROS.</li>
 <li>It uses a ROS client library to connect with other nodes
@@ -162,7 +162,7 @@ to adhere to ROS conventions and communicate with other nodes using <a href="htt
 
 <div id="outline-container-messages-2-P-1" class="outline-3">
 <h3 id="messages-2-P-1">Messages</h3>
-<div class="outline-text-3" id="text-orgb46c42e">
+<div class="outline-text-3" id="text-org3584321">
 <ul class="org-ul">
 <li>Nodes communicate with each other using <a href="https://wiki.ros.org/Messages">messages</a>, which define the structure of the data that is passed between nodes.</li>
 <li>Standard <a href="https://wiki.ros.org/msg#Fields">datatypes</a> such as <code>int64</code>, <code>int8</code>, <code>string</code>, <code>time</code>, <code>bool</code>, <code>float32</code>, <code>float64</code>, and arrays thereof are supported</li>
@@ -176,7 +176,7 @@ to adhere to ROS conventions and communicate with other nodes using <a href="htt
 
 <div id="outline-container-topics-2-P-2" class="outline-3">
 <h3 id="topics-2-P-2">Topics</h3>
-<div class="outline-text-3" id="text-org28b0ae7">
+<div class="outline-text-3" id="text-org51ab683">
 <p>
 <a href="https://wiki.ros.org/Topics">Topics</a> are channels for communication between nodes
 </p>
@@ -195,7 +195,7 @@ to adhere to ROS conventions and communicate with other nodes using <a href="htt
 
 <div id="outline-container-services-2-P-3" class="outline-3">
 <h3 id="services-2-P-3">Services</h3>
-<div class="outline-text-3" id="text-org52d14cd">
+<div class="outline-text-3" id="text-orgafbae39">
 <p>
 A <a href="https://wiki.ros.org/Services">Service</a> implements a request/reply mechanism for inter-node communication.
 </p>
@@ -214,7 +214,7 @@ These files are typically stored in <code>&lt;pkg&gt;/srv</code></li>
 
 <div id="outline-container-launchfiles-2-P-1" class="outline-3">
 <h3 id="launchfiles-2-P-1">Launchfiles</h3>
-<div class="outline-text-3" id="text-org8bac3d7">
+<div class="outline-text-3" id="text-org1e1de83">
 <p>
 <a href="https://wiki.ros.org/roslaunch/XML">Launchfiles</a> are used to start groups of nodes and pass parameters to them.
 </p>
@@ -228,7 +228,7 @@ Your projects, however, will require programming nodes!</li>
 </div>
 <div id="outline-container-parameter-server-2-P-1" class="outline-3">
 <h3 id="parameter-server-2-P-1">Parameter Server</h3>
-<div class="outline-text-3" id="text-org12ea485">
+<div class="outline-text-3" id="text-org331439d">
 <p>
 The ROS <a href="http://wiki.ros.org/Parameter%20Server">Parameter Server</a> stores values that can be used by ROS nodesoth
 </p>
@@ -249,7 +249,7 @@ The ROS <a href="http://wiki.ros.org/Parameter%20Server">Parameter Server</a> st
 </div>
 <div id="outline-container-yaml-files-3-P-2" class="outline-4">
 <h4 id="yaml-files-3-P-2">Yaml Files</h4>
-<div class="outline-text-4" id="text-orga03bbfe">
+<div class="outline-text-4" id="text-org43969c3">
 <ul class="org-ul">
 <li>Parameters are specified using the <a href="http://wiki.ros.org/rosparam">YAML</a> format</li>
 <li>YAML files can be stored on disk and loaded by <code>rosparam</code> or a launchfile into the parameter server</li>
@@ -261,7 +261,7 @@ The ROS <a href="http://wiki.ros.org/Parameter%20Server">Parameter Server</a> st
 
 <div id="outline-container-roscore-2-P-1" class="outline-3">
 <h3 id="roscore-2-P-1">roscore</h3>
-<div class="outline-text-3" id="text-org9a7b8ae">
+<div class="outline-text-3" id="text-org3002d79">
 <p>
 Every running ROS system executes <a href="https://wiki.ros.org/roscore">roscore</a>, which consists of the following components
 </p>
@@ -278,7 +278,7 @@ for data that does not change over the course of a run.  Nodes communicate with 
 
 <div id="outline-container-bags-2-P-1" class="outline-3">
 <h3 id="bags-2-P-1">Bags</h3>
-<div class="outline-text-3" id="text-orgee122d2">
+<div class="outline-text-3" id="text-org1bfb647">
 <p>
 <a href="https://wiki.ros.org/Bags">Bags</a> enable you to capture the data broadcast over a topic
 </p>
@@ -293,7 +293,7 @@ testing different algorithms and parameters on it is extremely useful.</li>
 </div>
 <div id="outline-container-the-ros-computation-graph-2-P-1" class="outline-3">
 <h3 id="the-ros-computation-graph-2-P-1">The Ros Computation Graph</h3>
-<div class="outline-text-3" id="text-org56ea925">
+<div class="outline-text-3" id="text-org2dd4a4d">
 <p>
 The collection of nodes and the communication between them is collectively referred to as the ROS Computation Graph.  
 Being able to view what nodes are running, what topics they publish and subscribe to helps with debugging ROS programs.
@@ -311,7 +311,7 @@ The graph can be viewed with
 
 <div id="outline-container-logging-2-P-1" class="outline-3">
 <h3 id="logging-2-P-1">Logging</h3>
-<div class="outline-text-3" id="text-org8eef172">
+<div class="outline-text-3" id="text-org898c8b1">
 <p>
 Nodes can log information at different logger levels, indicating the severity of the message.
 </p>
@@ -325,7 +325,7 @@ Nodes can log information at different logger levels, indicating the severity of
 
 <div id="outline-container-other-tools-2-P-1" class="outline-3">
 <h3 id="other-tools-2-P-1">Other tools</h3>
-<div class="outline-text-3" id="text-org8335921">
+<div class="outline-text-3" id="text-org1394a14">
 <ul class="org-ul">
 <li><a href="https://wiki.ros.org/roswtf">roswtf</a> helps detect failures and diagnose issues.</li>
 </ul>
@@ -333,7 +333,7 @@ Nodes can log information at different logger levels, indicating the severity of
 </div>
 <div id="outline-container-old-terminology-2-P-1" class="outline-3">
 <h3 id="old-terminology-2-P-1">Old Terminology</h3>
-<div class="outline-text-3" id="text-orge8c24ef">
+<div class="outline-text-3" id="text-org9443a17">
 <p>
 This is a collection of deprecated terminology that you may see in the documentations from time to time.
 </p>
@@ -349,7 +349,7 @@ This is a collection of deprecated terminology that you may see in the documenta
 
 <div id="outline-container-references-1-P-2" class="outline-2">
 <h2 id="references-1-P-2">References</h2>
-<div class="outline-text-2" id="text-orga7c87ec">
+<div class="outline-text-2" id="text-orgdd0dd94">
 <ul class="org-ul">
 <li>The official <a href="http://wiki.ros.org/ROS/Tutorials">ROS Tutorials</a>. The beginner tutorials are especially worth doing.</li>
 <li><a href="https://wiki.ros.org/rospy/Overview">Overview of rospy</a> provides details of how rospy functions

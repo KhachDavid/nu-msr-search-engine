@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-11-24 Mon 12:06 -->
+<!-- 2026-01-30 Fri 13:06 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Packages and Workspaces</title>
@@ -77,7 +77,7 @@ other resources that is distributed as a single unit.
 
 <div id="outline-container-package-structure-2-P-1" class="outline-3">
 <h3 id="package-structure-2-P-1">Package Structure</h3>
-<div class="outline-text-3" id="text-orgebbaa66">
+<div class="outline-text-3" id="text-org74c1f9d">
 <ol class="org-ol">
 <li>All ROS packages have a base directory containing a manifest file called <code>package.xml</code>.
 <ul class="org-ul">
@@ -101,7 +101,7 @@ other resources that is distributed as a single unit.
 </div>
 <div id="outline-container-required-elements-3-P-1" class="outline-4">
 <h4 id="required-elements-3-P-1">Required Elements</h4>
-<div class="outline-text-4" id="text-org46b0a9f">
+<div class="outline-text-4" id="text-orge3ddab3">
 <ul class="org-ul">
 <li><code>&lt;name&gt;</code> The package name</li>
 <li><code>&lt;version&gt;</code> The package Version</li>
@@ -114,7 +114,7 @@ other resources that is distributed as a single unit.
 
 <div id="outline-container-specifying-dependencies-3-P-1" class="outline-4">
 <h4 id="specifying-dependencies-3-P-1">Specifying Dependencies</h4>
-<div class="outline-text-4" id="text-org53e25b1">
+<div class="outline-text-4" id="text-org1dd183a">
 <p>
 There are multiple types of dependencies.  The most important are:
 </p>
@@ -138,8 +138,8 @@ automatically install missing dependencies.</li>
 <li>The <a href="https://docs.ros.org/en/kilted/Tutorials/Intermediate/Rosdep.html">rosdep tutorial</a> explains these dependency types.</li>
 </ul>
 </div>
-<details id="orgb33ad3e"><summary class="header-5">Advanced Dependencies</summary>
-<div class="outline-text-5" id="text-orgb33ad3e">
+<details id="org9b67ff9"><summary class="header-5">Advanced Dependencies</summary>
+<div class="outline-text-5" id="text-org9b67ff9">
 <p>
 While it is important to get the dependencies correct, you will notice that (especially with python), your project will still work even if <code>package.xml</code> does not have all dependencies.
 There are a few reasons why this can happen
@@ -160,7 +160,7 @@ It is also possible that (due to parallel builds) <code>B</code> happens to fini
 
 <div id="outline-container-groups-3-P-1" class="outline-4">
 <h4 id="groups-3-P-1">Groups</h4>
-<div class="outline-text-4" id="text-org8d72ef0">
+<div class="outline-text-4" id="text-org7866ef1">
 <ul class="org-ul">
 <li><code>&lt;member_of_group&gt;</code> In ROS 2 (but not ROS 1) packages can be placed in a group, which is a collection of packages that share something in common.
 <ul class="org-ul">
@@ -213,7 +213,7 @@ pkg_name/
 
 <div id="outline-container-setup-py-3-P-1" class="outline-4">
 <h4 id="setup-py-3-P-1">setup.py</h4>
-<div class="outline-text-4" id="text-orgd2dcd36">
+<div class="outline-text-4" id="text-org0ea5b55">
 <ul class="org-ul">
 <li>It is based on <a href="https://setuptools.pypa.io/en/latest/">setuptools</a>, a commonly used python packaging system created by <code>pypa</code>, the organization behind <code>pip</code>.</li>
 <li>Contains meta-information (which must be manually synchronized with <code>package.xml</code>).</li>
@@ -236,7 +236,7 @@ pkg_name/
 </div>
 <div id="outline-container-setup-cfg-3-P-1" class="outline-4">
 <h4 id="setup-cfg-3-P-1">setup.cfg</h4>
-<div class="outline-text-4" id="text-orgc96ffbd">
+<div class="outline-text-4" id="text-orgc3d8f9d">
 <ul class="org-ul">
 <li>Provides base install directories for <code>setup.py</code>. Usually can be left as-is.</li>
 </ul>
@@ -275,7 +275,7 @@ pkg_name/
 </div>
 <div id="outline-container-defining-custom-interfaces-2-P-1" class="outline-3">
 <h3 id="defining-custom-interfaces-2-P-1">Defining Custom Interfaces</h3>
-<div class="outline-text-3" id="text-org51171c7">
+<div class="outline-text-3" id="text-org7c5b7e2">
 <ol class="org-ol">
 <li>Custom interfaces are created in <code>ament_cmake</code> type packages</li>
 <li>To create a custom interface file, first write an interface file using the <a href="https://docs.ros.org/en/kilted/Concepts/About-ROS-Interfaces.html">ROS IDL</a>
@@ -328,7 +328,7 @@ Edit <code>CMakeLists.txt</code> and add
 </div>
 <div id="outline-container-using-interfaces-2-P-1" class="outline-3">
 <h3 id="using-interfaces-2-P-1">Using Interfaces</h3>
-<div class="outline-text-3" id="text-orga8da67a">
+<div class="outline-text-3" id="text-org6056d6a">
 <ol class="org-ol">
 <li>You must add an <code>&lt;exec_depend&gt;</code> on the package that defines the interface</li>
 <li>In python use <code>from &lt;interface_package_name&gt;.&lt;msg|srv|action&gt; import TypeName</code>
@@ -347,7 +347,7 @@ Edit <code>CMakeLists.txt</code> and add
 </div>
 <div id="outline-container-structure-2-P-1" class="outline-3">
 <h3 id="structure-2-P-1">Structure</h3>
-<div class="outline-text-3" id="text-org4ef4d10">
+<div class="outline-text-3" id="text-org42d58fb">
 <p>
 A ROS <a href="https://colcon.readthedocs.io/en/released/user/what-is-a-workspace.html">Workspace</a> is a directory (called <code>ws</code> here) containing:
 </p>
@@ -368,7 +368,7 @@ A ROS <a href="https://colcon.readthedocs.io/en/released/user/what-is-a-workspac
 </div>
 <div id="outline-container-building-a-workspace-2-P-1" class="outline-3">
 <h3 id="building-a-workspace-2-P-1">Building a Workspace</h3>
-<div class="outline-text-3" id="text-orgb5b12a0">
+<div class="outline-text-3" id="text-orge6759d1">
 <ul class="org-ul">
 <li>Workspaces must be <a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html#build-the-workspace-with-colcon">built</a> before they can be used.</li>
 <li>Run <code>colcon build</code> from the workspace directory (<code>ws</code>) to build all the packages in the <code>ws/src</code> directory
@@ -391,7 +391,7 @@ all package files of a given type (e.g., libraries and executables) in common di
 
 <div id="outline-container-warnings-3-P-1" class="outline-4">
 <h4 id="warnings-3-P-1">Warnings</h4>
-<div class="outline-text-4" id="text-orgcf031d4">
+<div class="outline-text-4" id="text-org4c143f3">
 <ul class="org-ul">
 <li>Currently, many ROS 2 packages have deprecation warnings related to their use of setuptools</li>
 <li>To avoid seeing these warnings, add <code>export PYTHONWARNINGS="ignore:easy_install command is deprecated"</code></li>
@@ -407,7 +407,7 @@ all package files of a given type (e.g., libraries and executables) in common di
 </div>
 <div id="outline-container-using-a-workspace-2-P-1" class="outline-3">
 <h3 id="using-a-workspace-2-P-1">Using a Workspace</h3>
-<div class="outline-text-3" id="text-org335e104">
+<div class="outline-text-3" id="text-org4fc675a">
 <ul class="org-ul">
 <li>After building the <code>ws/install</code> directory (called the <i>install space</i>) is created
 <ul class="org-ul">
@@ -427,7 +427,7 @@ to make the files in it available to ROS</li>
 </div>
 <div id="outline-container-colcon-1-P-1" class="outline-2">
 <h2 id="colcon-1-P-1">Colcon</h2>
-<div class="outline-text-2" id="text-org967febb">
+<div class="outline-text-2" id="text-org059cb73">
 <ul class="org-ul">
 <li><a href="https://colcon.readthedocs.io/en/released/"><code>colcon</code></a> is the ROS 2 build-tool, which is used to build the workspace.
 <ul class="org-ul">
@@ -457,7 +457,7 @@ is not specified, <code>colcon</code> may try to build both at the same time. If
 </div>
 <div id="outline-container-colcon-cd-2-P-1" class="outline-3">
 <h3 id="colcon-cd-2-P-1">colcon_cd</h3>
-<div class="outline-text-3" id="text-org2825144">
+<div class="outline-text-3" id="text-orgcb71dcc">
 <ul class="org-ul">
 <li><a href="https://colcon.readthedocs.io/en/released/user/installation.html#quick-directory-changes">colcon_cd</a> allows you to quickly switch between the workspace directory and that of a package</li>
 <li>Install with <code>sudo apt install python3-colcon-cd</code></li>
@@ -470,7 +470,7 @@ is not specified, <code>colcon</code> may try to build both at the same time. If
 
 <div id="outline-container-colcon-clean-2-P-1" class="outline-3">
 <h3 id="colcon-clean-2-P-1">colcon_clean</h3>
-<div class="outline-text-3" id="text-orgac3c2b0">
+<div class="outline-text-3" id="text-org691b9b5">
 <ul class="org-ul">
 <li><a href="https://github.com/colcon/colcon-clean">colcon-clean</a> allows you to easily remove the build results from a workspace</li>
 <li>Install with <code>sudo apt install python3-colcon-clean</code></li>
@@ -509,11 +509,11 @@ Add the hook in <code>colcon.pkg</code>:
 
 <div id="outline-container-ros-environment-1-P-1" class="outline-2">
 <h2 id="ros-environment-1-P-1">ROS Environment</h2>
-<div class="outline-text-2" id="text-orga40e100">
+<div class="outline-text-2" id="text-org20b5f7a">
 <ul class="org-ul">
 <li>ROS relies on <a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-CLI-Tools/Configuring-ROS2-Environment.html">environment variables</a> to control settings and find nodes and libraries
 <ul class="org-ul">
-<li>See <a href="../../hackathon/linux_interactive.html#orgb3e9591">Environment Varaibles</a> for more information on environment variables generally</li>
+<li>See <a href="../../hackathon/linux_interactive.html#org7d50cdd">Environment Varaibles</a> for more information on environment variables generally</li>
 </ul></li>
 <li>ROS environment variables are set when <i>underlay</i> is sourced.
 <ul class="org-ul">
@@ -538,7 +538,7 @@ Add the hook in <code>colcon.pkg</code>:
 </div>
 <div id="outline-container-overlays-2-P-1" class="outline-3">
 <h3 id="overlays-2-P-1">Overlays</h3>
-<div class="outline-text-3" id="text-orgd2e280b">
+<div class="outline-text-3" id="text-orgac71c67">
 <ul class="org-ul">
 <li>Technically, you should not have the overlay <code>sourced</code> when using <code>colcon build</code>, which means you need a separate window for building and running ROS commands
 <ul class="org-ul">
@@ -568,7 +568,7 @@ Add the hook in <code>colcon.pkg</code>:
 
 <div id="outline-container-python-system-packages-1-P-1" class="outline-2">
 <h2 id="python-system-packages-1-P-1">Python System Packages</h2>
-<div class="outline-text-2" id="text-orga7fcbd7">
+<div class="outline-text-2" id="text-org7be2ba9">
 <ol class="org-ol">
 <li>ROS 2 is based on a specific operating system distribution (e.g., of Ubuntu) and therefore expects that the python packages are those installed via <code>apt</code></li>
 <li>Not all python packages are distributed with the operating system. For example, many packages are available via pip.

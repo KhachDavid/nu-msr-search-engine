@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-11-24 Mon 12:06 -->
+<!-- 2026-01-30 Fri 13:06 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Homework 2</title>
@@ -46,7 +46,7 @@
 </nav>
 <div id="outline-container-logistics-1-P-1" class="outline-2">
 <h2 id="logistics-1-P-1">Logistics</h2>
-<div class="outline-text-2" id="text-org6e87617">
+<div class="outline-text-2" id="text-org124f6e6">
 <ol class="org-ol">
 <li>Create a git repository using the link provided in Canvas.</li>
 <li>Your homework will be submitted via this git repository.</li>
@@ -69,7 +69,7 @@ you should turn-in, including information about your <code>README.md</code> file
 
 <div id="outline-container-overview-1-P-12" class="outline-2">
 <h2 id="overview-1-P-12">Overview</h2>
-<div class="outline-text-2" id="text-org14fa961">
+<div class="outline-text-2" id="text-org8653ea5">
 <p>
 We will use <code>turtlesim</code> to simulate a robot in ROS.  The <code>turtle</code> robot will be integrated into various standard ROS systems (e.g., <code>tf</code>, <code>joint_states</code>, etc)
 and then we will control it to catch a brick that is dropped from the sky.
@@ -86,7 +86,7 @@ The repository is called <code>homework2</code> and there will be two packages w
 
 <div id="outline-container-hints-2-P-1" class="outline-3">
 <h3 id="hints-2-P-1">Hints</h3>
-<div class="outline-text-3" id="text-org5154d97">
+<div class="outline-text-3" id="text-orgdeeb3d4">
 <p>
 Here are some general hints for this assignment:
 </p>
@@ -105,7 +105,7 @@ the launchfile makes this process much simpler.</li>
 
 <div id="outline-container-frames-2-P-1" class="outline-3">
 <h3 id="frames-2-P-1">Frames</h3>
-<div class="outline-text-3" id="text-orge23a17d">
+<div class="outline-text-3" id="text-org9dabd15">
 <p>
 The following coordinate frames will be used:
 </p>
@@ -131,7 +131,7 @@ The following coordinate frames will be used:
 
 <div id="outline-container-the-robot-1-P-1" class="outline-2">
 <h2 id="the-robot-1-P-1">The Robot</h2>
-<div class="outline-text-2" id="text-org4f96318">
+<div class="outline-text-2" id="text-orgfccf821">
 <ol class="org-ol">
 <li>The turtle robot has the same kinematics as the <code>turtlesim</code></li>
 <li>The robot is modeled as a unicycle robot that "self balances" on a caster. It consists of
@@ -156,7 +156,7 @@ The following coordinate frames will be used:
 </ol>
 
 
-<figure id="org48926a3">
+<figure id="orgd744482">
 <img src="../../images/hw2_robot.png" alt="hw2_robot.png">
 
 <figcaption><span class="figure-number">Figure 1: </span>A picture of the robot. Your robot should use different colors and sizes</figcaption>
@@ -165,7 +165,7 @@ The following coordinate frames will be used:
 
 <div id="outline-container-the-arena-2-P-1" class="outline-3">
 <h3 id="the-arena-2-P-1">The Arena</h3>
-<div class="outline-text-3" id="text-org43a6ef6">
+<div class="outline-text-3" id="text-org4077ca9">
 <ol class="org-ol">
 <li>The arena should be depicted in <code>rviz2</code>, with rectangular walls (drawn as markers) denoting its boundary</li>
 <li>The arena should be the same size as the <code>turtlesim</code> simulator and have a matching coordinate system
@@ -179,7 +179,7 @@ The following coordinate frames will be used:
 
 <div id="outline-container-configuration-2-P-1" class="outline-3">
 <h3 id="configuration-2-P-1">Configuration</h3>
-<div class="outline-text-3" id="text-org06d4287">
+<div class="outline-text-3" id="text-org1106400">
 <ol class="org-ol">
 <li>A configuration file called <code>config/turtle.yaml</code> should include
 <ul class="org-ul">
@@ -201,7 +201,7 @@ and have the robot appear correctly</li>
 
 <div id="outline-container-visualizing-the-robot-2-P-1" class="outline-3">
 <h3 id="visualizing-the-robot-2-P-1">Visualizing the Robot</h3>
-<div class="outline-text-3" id="text-orgb97d652">
+<div class="outline-text-3" id="text-org37bea67">
 <ol class="org-ol">
 <li>Write a launchfile called <code>show_turtle.launch.{py,xml}</code> that displays the turtle robot (as defined by <code>turtle.urdf.xacro</code>) in <code>rviz</code>
 <ul class="org-ul">
@@ -223,7 +223,7 @@ and have the robot appear correctly</li>
 
 <div id="outline-container-turtle-node-1-P-1" class="outline-2">
 <h2 id="turtle-node-1-P-1">Turtle Node</h2>
-<div class="outline-text-2" id="text-orgb9f4209">
+<div class="outline-text-2" id="text-org3366760">
 <ol class="org-ol">
 <li>A node called <code>turtle_robot</code> serves as a bridge between the <code>turtlesim</code> and actual <code>ros</code> interfaces and is responsible for
 <ul class="org-ul">
@@ -270,7 +270,7 @@ and have the robot appear correctly</li>
 </div>
 <div id="outline-container-physics-module-1-P-1" class="outline-2">
 <h2 id="physics-module-1-P-1">Physics Module</h2>
-<div class="outline-text-2" id="text-org4cdeec7">
+<div class="outline-text-2" id="text-orgf069039">
 <ol class="org-ol">
 <li>A module called <code>physics.py</code> should contain ROS-independent code to keep track of the physics of the environment.</li>
 <li><p>
@@ -325,7 +325,7 @@ It should provide a class with the following definition.
 
 <div id="outline-container-arena-node-1-P-1" class="outline-2">
 <h2 id="arena-node-1-P-1">Arena Node</h2>
-<div class="outline-text-2" id="text-org2e64995">
+<div class="outline-text-2" id="text-org439e21f">
 <ol class="org-ol">
 <li>A node called <code>arena</code> is responsible for simulating the environment by
 <ul class="org-ul">
@@ -353,7 +353,7 @@ It should provide a class with the following definition.
 
 <div id="outline-container-control-node-1-P-1" class="outline-2">
 <h2 id="control-node-1-P-1">Control Node</h2>
-<div class="outline-text-2" id="text-org0f2aa81">
+<div class="outline-text-2" id="text-org6d2f5c6">
 <ol class="org-ol">
 <li>Write a node called <code>catcher</code> that causes the turtle to catch a falling brick
 <ul class="org-ul">
@@ -379,7 +379,7 @@ the brick on-time
 
 <div id="outline-container-testing-1-P-2" class="outline-2">
 <h2 id="testing-1-P-2">Testing</h2>
-<div class="outline-text-2" id="text-orgf502faa">
+<div class="outline-text-2" id="text-orgcd12da3">
 <ol class="org-ol">
 <li>Your code should pass all the standard tests that are run with <code>colcon test</code></li>
 <li>Write at least one <code>pytest</code> unit test for each of the (required) members of the <code>physics.World</code> class</li>
@@ -391,7 +391,7 @@ the brick on-time
 
 <div id="outline-container-readme-1-P-1" class="outline-2">
 <h2 id="readme-1-P-1">README</h2>
-<div class="outline-text-2" id="text-org892ac4e">
+<div class="outline-text-2" id="text-org0ac943b">
 <p>
 In the base directory of your repository (e.g. <code>homework2</code>) create a <code>README.md</code> using the following template (be sure to update the <code>${}</code> with the answers.)
 </p>

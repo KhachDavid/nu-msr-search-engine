@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-11-24 Mon 12:06 -->
+<!-- 2026-01-30 Fri 13:06 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Testing, Documentation, and Design</title>
@@ -100,7 +100,7 @@
 </nav>
 <div id="outline-container-testing-1-P-1" class="outline-2">
 <h2 id="testing-1-P-1">Testing</h2>
-<div class="outline-text-2" id="text-orge39ba0e">
+<div class="outline-text-2" id="text-orgfb37db9">
 <p>
 <i>Program testing can be used to show the presence of bugs, never to show their absence!</i> 
 </p>
@@ -112,7 +112,7 @@
 
 <div id="outline-container-why-testing--2-P-1" class="outline-3">
 <h3 id="why-testing--2-P-1">Why Testing?</h3>
-<div class="outline-text-3" id="text-orgdca4864">
+<div class="outline-text-3" id="text-orged0e471">
 <ul class="org-ul">
 <li>Provides some level of assurance that your code is correct</li>
 <li>When your code changes, it helps you avoid breaking existing functionality</li>
@@ -124,7 +124,7 @@
 
 <div id="outline-container-why-automate-testing--2-P-1" class="outline-3">
 <h3 id="why-automate-testing--2-P-1">Why Automate Testing?</h3>
-<div class="outline-text-3" id="text-orgb42da47">
+<div class="outline-text-3" id="text-orgfed1433">
 <ul class="org-ul">
 <li>Automation is the whole point of robotics!</li>
 <li>Automated tests happen without user intervention which increases the chance that they will be run
@@ -136,7 +136,7 @@ and can serve their purpose to catch errors</li>
 
 <div id="outline-container-testing-in-ros-1-P-1" class="outline-2">
 <h2 id="testing-in-ros-1-P-1">Testing in ROS</h2>
-<div class="outline-text-2" id="text-org4e4acef">
+<div class="outline-text-2" id="text-org3eaf97c">
 <ul class="org-ul">
 <li>The <a href="https://docs.ros.org/en/kilted/The-ROS2-Project/Contributing/Developer-Guide.html#testing">ROS 2 testing philosophy</a> discusses three types of tests: unit, integration, and systems</li>
 <li>These terms are standard terms, but when applied to ROS packages they take on more concrete meaning</li>
@@ -145,7 +145,7 @@ and can serve their purpose to catch errors</li>
 
 <div id="outline-container-unit-testing-2-P-1" class="outline-3">
 <h3 id="unit-testing-2-P-1">Unit Testing</h3>
-<div class="outline-text-3" id="text-org77f3010">
+<div class="outline-text-3" id="text-org0e7f84a">
 <ul class="org-ul">
 <li>Unit Testing usually refers to testing a single function</li>
 <li>Unit tests should ideally be run after every "compile" and can also be run after
@@ -155,7 +155,7 @@ every push to a git repository using continuous integration</li>
 </div>
 <div id="outline-container-mocking-3-P-1" class="outline-4">
 <h4 id="mocking-3-P-1">Mocking</h4>
-<div class="outline-text-4" id="text-orgc7137bc">
+<div class="outline-text-4" id="text-org8e145a1">
 <ul class="org-ul">
 <li>Sometimes (especially in robotics) a function takes a long time or is complicated or moves a robot</li>
 <li>Mocking lets you replace functions by just assuming they return a desired value
@@ -181,7 +181,7 @@ still lets you test A, under the assumption that B is working</li>
 </div>
 <div id="outline-container-integration-testing-2-P-1" class="outline-3">
 <h3 id="integration-testing-2-P-1">Integration Testing</h3>
-<div class="outline-text-3" id="text-org7e0187f">
+<div class="outline-text-3" id="text-orgfaca707">
 <ul class="org-ul">
 <li>Integration tests are tests that require multiple components to work together to function
 <ul class="org-ul">
@@ -195,7 +195,7 @@ and encompass a broader range of functionality</li>
 
 <div id="outline-container-systems-testing-2-P-1" class="outline-3">
 <h3 id="systems-testing-2-P-1">Systems Testing</h3>
-<div class="outline-text-3" id="text-org4ba8863">
+<div class="outline-text-3" id="text-org5f2b7f0">
 <ul class="org-ul">
 <li>A systems test is a type of integration test where a whole end-to-end system is testing</li>
 <li>ROS 2 suggests putting such tests in their own packages to maintain decoupling between packages</li>
@@ -206,7 +206,7 @@ and encompass a broader range of functionality</li>
 
 <div id="outline-container-test-strategies-1-P-1" class="outline-2">
 <h2 id="test-strategies-1-P-1">Test Strategies</h2>
-<div class="outline-text-2" id="text-org22f4cc8">
+<div class="outline-text-2" id="text-org7cad94d">
 <ul class="org-ul">
 <li>Write tests whenever you encounter a bug
 <ul class="org-ul">
@@ -229,7 +229,7 @@ and encompass a broader range of functionality</li>
 </div>
 <div id="outline-container-frameworks-3-P-1" class="outline-4">
 <h4 id="frameworks-3-P-1">Frameworks</h4>
-<div class="outline-text-4" id="text-org124ef7d">
+<div class="outline-text-4" id="text-org9fe6c8b">
 <ul class="org-ul">
 <li>Testing ROS python code involves several choices</li>
 <li>There is the built-in python unit testing framework <a href="https://docs.python.org/3/library/unittest.html">unittest</a></li>
@@ -240,7 +240,7 @@ and encompass a broader range of functionality</li>
 
 <div id="outline-container-pre-made-tests-3-P-1" class="outline-4">
 <h4 id="pre-made-tests-3-P-1">Pre-made Tests</h4>
-<div class="outline-text-4" id="text-orga6f8fbd">
+<div class="outline-text-4" id="text-orge820be3">
 <ul class="org-ul">
 <li>Standard pytest tests are created by default with <code>ros2 pkg</code>
 <ul class="org-ul">
@@ -259,7 +259,7 @@ and encompass a broader range of functionality</li>
 
 <div id="outline-container-writing-pytests-3-P-1" class="outline-4">
 <h4 id="writing-pytests-3-P-1">Writing Pytests</h4>
-<div class="outline-text-4" id="text-org5a399b8">
+<div class="outline-text-4" id="text-org15e0036">
 <ul class="org-ul">
 <li>Create a file called <code>test_&lt;something&gt;.py</code> or <code>&lt;something&gt;_test.py</code> in the <code>test</code> directory</li>
 <li>In that file, write your tests:
@@ -274,7 +274,7 @@ and encompass a broader range of functionality</li>
 </div>
 <div id="outline-container-writing-unittests-3-P-1" class="outline-4">
 <h4 id="writing-unittests-3-P-1">Writing Unittests</h4>
-<div class="outline-text-4" id="text-org487c318">
+<div class="outline-text-4" id="text-org7b06491">
 <ul class="org-ul">
 <li>import <code>unitttest</code></li>
 <li>Write a class that serves as a "Test Case"
@@ -293,7 +293,7 @@ special <code>unittest</code> assertion functions (e.g., <code>self.assertTrue</
 </div>
 <div id="outline-container-dependencies-3-P-1" class="outline-4">
 <h4 id="dependencies-3-P-1">Dependencies</h4>
-<div class="outline-text-4" id="text-org80077aa">
+<div class="outline-text-4" id="text-org93b6fe4">
 <ul class="org-ul">
 <li>Anything that you import in a test becomes a <code>test_depend</code> in the <code>package.xml</code></li>
 </ul>
@@ -303,7 +303,7 @@ special <code>unittest</code> assertion functions (e.g., <code>self.assertTrue</
 
 <div id="outline-container-integration-testing-in-ros-and-python-2-P-1" class="outline-3">
 <h3 id="integration-testing-in-ros-and-python-2-P-1">Integration Testing in ROS and Python</h3>
-<div class="outline-text-3" id="text-orgf76c4f0">
+<div class="outline-text-3" id="text-orgf179912">
 <ol class="org-ol">
 <li>There are three components to integration testing:
 <ul class="org-ul">
@@ -421,7 +421,7 @@ unless you work with events and explicitly do things to order them</li>
 
 <div id="outline-container-running-tests-2-P-1" class="outline-3">
 <h3 id="running-tests-2-P-1">Running Tests</h3>
-<div class="outline-text-3" id="text-org3b366df">
+<div class="outline-text-3" id="text-org8c6dec9">
 <ol class="org-ol">
 <li>Before you can run tests, you must <code>colcon build</code> the workspace</li>
 <li>All tests (unit and integration) can then be run with <code>colcon test</code> (without sourcing the workspace, it seems)</li>
@@ -436,7 +436,7 @@ unless you work with events and explicitly do things to order them</li>
 
 <div id="outline-container-warnings-2-P-1" class="outline-3">
 <h3 id="warnings-2-P-1">Warnings</h3>
-<div class="outline-text-3" id="text-org1ae89ad">
+<div class="outline-text-3" id="text-orgcf900bb">
 <p>
 As of Ubuntu 24.04 and ROS kilted, running some tests with pytests results in a warning:
 </p>
@@ -474,7 +474,7 @@ This will be slower, but does not run into the issues. Hopefully this workaround
 
 <div id="outline-container-quality-1-P-1" class="outline-2">
 <h2 id="quality-1-P-1">Quality</h2>
-<div class="outline-text-2" id="text-org28b5704">
+<div class="outline-text-2" id="text-org3543c91">
 <ul class="org-ul">
 <li>ROS 2 has introduced a concept of <a href="https://ros.org/reps/rep-2004.html">Quality Levels</a> for each package</li>
 <li>When a package adopts a quality declaration it is promising to meet certain quality standards</li>
@@ -493,7 +493,7 @@ This will be slower, but does not run into the issues. Hopefully this workaround
 </div>
 <div id="outline-container-ros-doc-2-2-P-1" class="outline-3">
 <h3 id="ros-doc-2-2-P-1">Ros Doc 2</h3>
-<div class="outline-text-3" id="text-orgccb628e">
+<div class="outline-text-3" id="text-orgb53ad54">
 <ul class="org-ul">
 <li><a href="https://github.com/ros-infrastructure/rosdoc2">rosdoc2</a> is a wrapper for various documentation-generation packages and it is used to generate all ros2 package API documentation.</li>
 <li>Install with <code>sudo apt install python3-rosdoc2</code></li>
@@ -507,7 +507,7 @@ This will be slower, but does not run into the issues. Hopefully this workaround
 </div>
 <div id="outline-container-sphinx-2-P-1" class="outline-3">
 <h3 id="sphinx-2-P-1">Sphinx</h3>
-<div class="outline-text-3" id="text-org952e54e">
+<div class="outline-text-3" id="text-org1388e16">
 <ul class="org-ul">
 <li><a href="http://sphinx-doc.org/en/master">Sphinx</a> is a tool that converts docstrings in your python source code into well-formatted documentation
 <ul class="org-ul">
@@ -521,7 +521,7 @@ This will be slower, but does not run into the issues. Hopefully this workaround
 </div>
 <div id="outline-container-git-2-P-1" class="outline-3">
 <h3 id="git-2-P-1">Git</h3>
-<div class="outline-text-3" id="text-org8ff7662">
+<div class="outline-text-3" id="text-orgb1d5636">
 <ul class="org-ul">
 <li>Git is an important part of the documentation process</li>
 <li>Think of git as documentation for your collaborators (including your future-self)</li>
@@ -536,7 +536,7 @@ This will be slower, but does not run into the issues. Hopefully this workaround
 
 <div id="outline-container-design-guidelines-1-P-1" class="outline-2">
 <h2 id="design-guidelines-1-P-1">Design Guidelines</h2>
-<div class="outline-text-2" id="text-orgd45bfc7">
+<div class="outline-text-2" id="text-orgee80c95">
 <p>
 ROS adds methods for abstraction beyond those provided by a programming language.
 When thinking about the design of a ROS system, here are some questions that often arise and

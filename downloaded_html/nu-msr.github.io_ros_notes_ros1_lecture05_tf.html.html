@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-11-24 Mon 12:06 -->
+<!-- 2026-01-30 Fri 13:06 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Transforms in ROS</title>
@@ -84,7 +84,7 @@
 </nav>
 <div id="outline-container-transforms-1-P-2" class="outline-2">
 <h2 id="transforms-1-P-2">Transforms</h2>
-<div class="outline-text-2" id="text-org438d707">
+<div class="outline-text-2" id="text-org7e2411e">
 <ul class="org-ul">
 <li>In robotics, the positions and orientations of objects 
 (e.g., robots, sensors, and obstacles) are often expressed
@@ -98,7 +98,7 @@ is arbitrary, the right choice of frames can greatly simplify the math required<
 
 <div id="outline-container-transform-tree-2-P-2" class="outline-3">
 <h3 id="transform-tree-2-P-2">Transform Tree</h3>
-<div class="outline-text-3" id="text-orgee2cd5b">
+<div class="outline-text-3" id="text-org2e6d718">
 <ul class="org-ul">
 <li>In ROS, the transforms form a tree, with every node corresponding to a frame</li>
 <li>Every frame has one parent and an unlimited number of children</li>
@@ -113,7 +113,7 @@ frame_id but also the time.</li>
 
 <div id="outline-container-ros-transform-api-1-P-2" class="outline-2">
 <h2 id="ros-transform-api-1-P-2">ROS Transform API</h2>
-<div class="outline-text-2" id="text-orgcc46ab1">
+<div class="outline-text-2" id="text-orge350fbe">
 <ul class="org-ul">
 <li>The transform (<i>tf</i>) tree is available on the <code>/tf</code> topic</li>
 <li>Any node can publish transforms on <code>/tf</code> or retrieve information from <code>/tf</code></li>
@@ -122,7 +122,7 @@ frame_id but also the time.</li>
 
 <div id="outline-container--http-wiki-ros-org-tf2-tutorials-writing-20a-20tf2-20listener-20-28python-29-listeners--2-P-1" class="outline-3">
 <h3 id="-http-wiki-ros-org-tf2-tutorials-writing-20a-20tf2-20listener-20-28python-29-listeners--2-P-1"><a href="http://wiki.ros.org/tf2/Tutorials/Writing%20a%20tf2%20listener%20%28Python%29">Listeners</a></h3>
-<div class="outline-text-3" id="text-org4978292">
+<div class="outline-text-3" id="text-org3a34bd5">
 <ul class="org-ul">
 <li>a <i>listener</i> subscribes to <code>/tf</code> and maintains a time-history of the received frames
 (by default, 10s of history is stored)</li>
@@ -134,7 +134,7 @@ frame_id but also the time.</li>
 
 <div id="outline-container--http-wiki-ros-org-tf2-ros-broadcasting-transforms-broadcasters--2-P-1" class="outline-3">
 <h3 id="-http-wiki-ros-org-tf2-ros-broadcasting-transforms-broadcasters--2-P-1"><a href="http://wiki.ros.org/tf2_ros#Broadcasting_Transforms">Broadcasters</a></h3>
-<div class="outline-text-3" id="text-org1a9be2d">
+<div class="outline-text-3" id="text-orgbde333c">
 <ul class="org-ul">
 <li>A <i>broadcaster</i> publishes frames to <code>/tf</code></li>
 <li>Multiple nodes can publish different frames to <code>/tf</code> and they will
@@ -153,7 +153,7 @@ that violates the tree structure.</li>
 
 <div id="outline-container-static-frames-3-P-1" class="outline-4">
 <h4 id="static-frames-3-P-1">Static frames</h4>
-<div class="outline-text-4" id="text-orgdb48ef7">
+<div class="outline-text-4" id="text-org3599b90">
 <ul class="org-ul">
 <li>Some frames do not change: these are known as <i>static frames</i></li>
 <li>Static frames can be broadcast to the <code>/tf_static</code> to consume less bandwidth</li>
@@ -166,7 +166,7 @@ will be sent to new subscribers.  See <a href="http://wiki.ros.org/rospy/Overvie
 
 <div id="outline-container-datatypes-and-representation-2-P-2" class="outline-3">
 <h3 id="datatypes-and-representation-2-P-2">Datatypes and Representation</h3>
-<div class="outline-text-3" id="text-orgbe721c1">
+<div class="outline-text-3" id="text-org7a1e15f">
 <ul class="org-ul">
 <li>A transformation consists of a Translation and a Rotation</li>
 <li>In C++, there are many data types used for rotations and translations.  
@@ -187,7 +187,7 @@ will be sent to new subscribers.  See <a href="http://wiki.ros.org/rospy/Overvie
 
 <div id="outline-container-ros-packages-1-P-2" class="outline-2">
 <h2 id="ros-packages-1-P-2">ROS Packages</h2>
-<div class="outline-text-2" id="text-orge72c50f">
+<div class="outline-text-2" id="text-orgf6bd554">
 <ul class="org-ul">
 <li>There are two versions of tf in ROS, <a href="https://wiki.ros.org/tf">tf</a> and <a href="https://wiki.ros.org/tf2">tf2</a></li>
 <li><code>tf</code> is deprecated and implemented in terms of <code>tf2</code> now.</li>
@@ -209,7 +209,7 @@ it is already shipped with the base ROS installation and is basically the same.<
 </div>
 <div id="outline-container-documentation-2-P-5" class="outline-3">
 <h3 id="documentation-2-P-5">Documentation</h3>
-<div class="outline-text-3" id="text-orgf1f174e">
+<div class="outline-text-3" id="text-org951ab6d">
 <ul class="org-ul">
 <li><a href="http://wiki.ros.org/tf2">tf2 Documentation</a></li>
 <li><a href="http://wiki.ros.org/tf2/Migration">Migrating from tf</a> - useful for understanding
@@ -234,7 +234,7 @@ in the python files in the <code>tf2_ros/src/tf2_ros</code> directory, comments 
 </div>
 <div id="outline-container-conventions-1-P-1" class="outline-2">
 <h2 id="conventions-1-P-1">Conventions</h2>
-<div class="outline-text-2" id="text-org9b55d20">
+<div class="outline-text-2" id="text-org0734dd9">
 <p>
 ROS follows a set of conventions for frames.
 </p>
@@ -265,7 +265,7 @@ converts points in <i>child_frame_id</i> to into the frame <i>frame_id</i></li>
 
 <div id="outline-container-tools-1-P-2" class="outline-2">
 <h2 id="tools-1-P-2">Tools</h2>
-<div class="outline-text-2" id="text-orgc3b4448">
+<div class="outline-text-2" id="text-org7365ddc">
 <p>
 The <code>tf</code> package provides tools that are still useful with <code>tf2</code>
 </p>
@@ -294,7 +294,7 @@ The <code>tf</code> package provides tools that are still useful with <code>tf2<
 
 <div id="outline-container-tips-and-tricks-1-P-2" class="outline-2">
 <h2 id="tips-and-tricks-1-P-2">Tips and Tricks</h2>
-<div class="outline-text-2" id="text-orge42c00c">
+<div class="outline-text-2" id="text-org96f01e7">
 <ol class="org-ol">
 <li>The timing of the transforms you look up is crucial.
 <ul class="org-ul">
@@ -327,7 +327,7 @@ The <code>tf</code> package provides tools that are still useful with <code>tf2<
 
 <div id="outline-container-tutorials-1-P-2" class="outline-2">
 <h2 id="tutorials-1-P-2">Tutorials</h2>
-<div class="outline-text-2" id="text-orgeee9582">
+<div class="outline-text-2" id="text-orgceb2e86">
 <ul class="org-ul">
 <li>I highly recommend going through the <a href="http://wiki.ros.org/tf2/Tutorials">Tf2 Tutorials</a></li>
 </ul>
@@ -336,7 +336,7 @@ The <code>tf</code> package provides tools that are still useful with <code>tf2<
 
 <div id="outline-container-other-resources-1-P-2" class="outline-2">
 <h2 id="other-resources-1-P-2">Other Resources</h2>
-<div class="outline-text-2" id="text-org17bfe01">
+<div class="outline-text-2" id="text-org570bcda">
 <ul class="org-ul">
 <li><a href="http://wiki.ros.org/tf/Overview/Transformations">Overview of Transformations</a></li>
 <li><a href="http://wiki.ros.org/action/fullsearch/geometry2/RotationMethods">About Rotations</a>

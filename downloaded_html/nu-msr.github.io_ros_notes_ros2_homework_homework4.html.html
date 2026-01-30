@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-11-24 Mon 12:06 -->
+<!-- 2026-01-30 Fri 13:06 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Homework 4</title>
@@ -45,7 +45,7 @@
 </nav>
 <div id="outline-container-logistics-1-P-3" class="outline-2">
 <h2 id="logistics-1-P-3">Logistics</h2>
-<div class="outline-text-2" id="text-org986bc49">
+<div class="outline-text-2" id="text-orgca7ddce">
 <ol class="org-ol">
 <li>Create a git repository using the link provided in Canvas.</li>
 <li>Your homework will be submitted via this git repository.</li>
@@ -58,7 +58,7 @@ you should turn-in, including information about your <code>README.md</code> file
 
 <div id="outline-container-navigation-1-P-1" class="outline-2">
 <h2 id="navigation-1-P-1">Navigation</h2>
-<div class="outline-text-2" id="text-org6d1e230">
+<div class="outline-text-2" id="text-orge5f3f7e">
 <ul class="org-ul">
 <li>The goal is to use the simulated robot to map an environment and then navigate within the map using the <a href="https://index.ros.org/p/slam_toolbox/github-SteveMacenski-slam_toolbox/#jazzy">slam_toolbox</a></li>
 </ul>
@@ -67,7 +67,7 @@ you should turn-in, including information about your <code>README.md</code> file
 
 <div id="outline-container-the-environment-1-P-1" class="outline-2">
 <h2 id="the-environment-1-P-1">The Environment</h2>
-<div class="outline-text-2" id="text-org749586b">
+<div class="outline-text-2" id="text-orgb88741e">
 <ul class="org-ul">
 <li>Clone the package <a href="https://github.com/m-elwin/nubot">nubot</a>, which is a package that simulates a mobile robot with a lidar in Gazebo.</li>
 <li>Your repository will be next to <code>nubot</code> in the source space: e.g.(<code>ws/src/nubot</code> and <code>ws/src/homework4</code>).</li>
@@ -80,7 +80,7 @@ you should turn-in, including information about your <code>README.md</code> file
 
 <div id="outline-container-navigation-stack-setup-1-P-1" class="outline-2">
 <h2 id="navigation-stack-setup-1-P-1">Navigation Stack Setup</h2>
-<div class="outline-text-2" id="text-org4a6f70d">
+<div class="outline-text-2" id="text-orgfa037a8">
 <ul class="org-ul">
 <li>Going through the <a href="https://docs.nav2.org/setup_guides/index.html">First Time Setup Guide</a> (through setting up the robot's footprint) will help you understand how the
 Nav2 stack works, and may be a helpful reference while completing this assignment.</li>
@@ -93,7 +93,7 @@ Nav2 stack works, and may be a helpful reference while completing this assignmen
 
 <div id="outline-container-a-launch-file-2-P-1" class="outline-3">
 <h3 id="a-launch-file-2-P-1">A Launch File</h3>
-<div class="outline-text-3" id="text-org3207532">
+<div class="outline-text-3" id="text-org1bb3398">
 <ul class="org-ul">
 <li>Your package will be called <code>nubot_nav</code></li>
 <li>In <code>nubot_nav</code>, write a launch file called <code>manual_explore.launch.xml</code> that:
@@ -123,7 +123,7 @@ Nav2 stack works, and may be a helpful reference while completing this assignmen
 
 <div id="outline-container-important-3-P-1" class="outline-4">
 <h4 id="important-3-P-1">Important</h4>
-<div class="outline-text-4" id="text-org2caff04">
+<div class="outline-text-4" id="text-org912b8e4">
 <ul class="org-ul">
 <li>In ROS 2 kilted as of v1.4.2, the <code>nav2_bringup</code> package's default <code>nav2_params.yaml</code> file has invalid parameters.</li>
 <li>Use <code>ros2 launch nav2_bringup navigation_launch.py --show-args</code> to find the location of this launchfile,
@@ -136,7 +136,7 @@ copy it into your own package, and modify all values that end in <code>_ZONE_ENA
 
 <div id="outline-container-autonomous-exploration-2-P-1" class="outline-3">
 <h3 id="autonomous-exploration-2-P-1">Autonomous Exploration</h3>
-<div class="outline-text-3" id="text-org6827124">
+<div class="outline-text-3" id="text-orgafb70fd">
 <ul class="org-ul">
 <li>Write a node called <code>explore</code> that causes the robot to explore the environment autonomously while mapping the world.</li>
 <li>The launchfile called <code>explore.launch.xml</code> should start all the nodes necessary to allow the robot to explore and map its environment
@@ -150,7 +150,7 @@ copy it into your own package, and modify all values that end in <code>_ZONE_ENA
 
 <div id="outline-container-exploration-algorithm-3-P-1" class="outline-4">
 <h4 id="exploration-algorithm-3-P-1">Exploration Algorithm</h4>
-<div class="outline-text-4" id="text-org1ba84ad">
+<div class="outline-text-4" id="text-org7f31d84">
 <p>
 There are two choices for exploration algorithm:
 </p>
@@ -181,7 +181,7 @@ There are two choices for exploration algorithm:
 
 <div id="outline-container-hints-3-P-3" class="outline-4">
 <h4 id="hints-3-P-3">Hints</h4>
-<div class="outline-text-4" id="text-orgf61cd96">
+<div class="outline-text-4" id="text-org992ca77">
 <ol class="org-ol">
 <li>Subscribe to the <code>/map</code> topic to get information about the map</li>
 </ol>
@@ -192,7 +192,7 @@ There are two choices for exploration algorithm:
 
 <div id="outline-container-readme-2-P-2" class="outline-3">
 <h3 id="readme-2-P-2">README</h3>
-<div class="outline-text-3" id="text-org731e2f1">
+<div class="outline-text-3" id="text-org8d332b1">
 <ul class="org-ul">
 <li>The <code>README.md</code> should contain your name, and a brief project description.</li>
 <li>It should also describe the <code>ros2 launch</code> commands needed to run the manual and autonomous exploration</li>

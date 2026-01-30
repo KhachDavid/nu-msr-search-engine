@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-11-24 Mon 12:06 -->
+<!-- 2026-01-30 Fri 13:06 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Publishers and Subscriber Activity</title>
@@ -116,7 +116,7 @@
 </div>
 <div id="outline-container-basic-node-2-P-1" class="outline-3">
 <h3 id="basic-node-2-P-1">Basic Node</h3>
-<div class="outline-text-3" id="text-orgf316917">
+<div class="outline-text-3" id="text-orgbb73e54">
 <p>
 Create a node that accomplishes the following:
 </p>
@@ -128,7 +128,7 @@ Create a node that accomplishes the following:
 
 <div id="outline-container-step-by-step-guide-3-P-1" class="outline-4">
 <h4 id="step-by-step-guide-3-P-1">Step-by-Step Guide</h4>
-<div class="outline-text-4" id="text-org2630286">
+<div class="outline-text-4" id="text-orga54d5a3">
 <p>
 Here is an approximate step-by-step guide.
 </p>
@@ -208,7 +208,7 @@ Here is an approximate step-by-step guide.
 </div>
 <div id="outline-container-custom-parameters-2-P-1" class="outline-3">
 <h3 id="custom-parameters-2-P-1">Custom Parameters</h3>
-<div class="outline-text-3" id="text-org5887d2d">
+<div class="outline-text-3" id="text-org3feff78">
 <ol class="org-ol">
 <li>Control the minimum and maximum \(x\) values using parameters called <code>xmin</code> and <code>xmax</code>.</li>
 <li>Make sure the parameters have meaningful default values and have the node log the parameter values to the DEBUG log when it starts.</li>
@@ -224,7 +224,7 @@ Here is an approximate step-by-step guide.
 
 <div id="outline-container-namespaces-2-P-1" class="outline-3">
 <h3 id="namespaces-2-P-1">Namespaces</h3>
-<div class="outline-text-3" id="text-orgb5c1d32">
+<div class="outline-text-3" id="text-org1f4acf5">
 <ol class="org-ol">
 <li>Run two instances of your node and the <code>turtlesim</code> in two separate namespaces with two separate <code>xmin</code> and <code>xmax</code> values.
 <ul class="org-ul">
@@ -243,7 +243,7 @@ Here is an approximate step-by-step guide.
 
 <div id="outline-container-service-call-2-P-1" class="outline-3">
 <h3 id="service-call-2-P-1">Service Call</h3>
-<div class="outline-text-3" id="text-orgef60196">
+<div class="outline-text-3" id="text-org06695d4">
 <ol class="org-ol">
 <li>When your node starts (and before it begins moving the turtle) spawn two new turtles, one at the <code>xmin</code> and one at the <code>xmax</code> values
 <ul class="org-ul">
@@ -256,17 +256,17 @@ Here is an approximate step-by-step guide.
 </div>
 </div>
 
-<details id="orge57df22"><summary class="header-2">Answers</summary>
-<div class="outline-text-2" id="text-orge57df22">
+<details id="orgcc9d253"><summary class="header-2">Answers</summary>
+<div class="outline-text-2" id="text-orgcc9d253">
 <p>
 This section contains the answers. Try to avoid looking at the answers unless you are truly stuck or want to
 verify your work after completing the task.
 </p>
 </div>
 
-<details id="orga6511db"><summary class="header-3">Basic Node</summary>
-<details id="orgd51b811"><summary class="header-4">Creating The Workspace</summary>
-<div class="outline-text-4" id="text-orgd51b811">
+<details id="orgaebcc6c"><summary class="header-3">Basic Node</summary>
+<details id="org8fa7cb7"><summary class="header-4">Creating The Workspace</summary>
+<div class="outline-text-4" id="text-org8fa7cb7">
 <div class="org-src-container">
 <pre class="src src-bash">mkdir -p ws/activity/src
 <span class="org-builtin">cd</span> ws/activity/src
@@ -281,8 +281,8 @@ git commit
 </div>
 </details>
 
-<details id="orgb4a3c16"><summary class="header-4">Editing package.xml and setup.py</summary>
-<div class="outline-text-4" id="text-orgb4a3c16">
+<details id="orga572782"><summary class="header-4">Editing package.xml and setup.py</summary>
+<div class="outline-text-4" id="text-orga572782">
 <div class="org-src-container">
 <label class="org-src-name"><span class="listing-number">Listing 1: </span>package.xml</label><pre class="src src-xml"><span class="org-nxml-processing-instruction-delimiter">&lt;?</span><span class="org-nxml-processing-instruction-target">xml</span> <span class="org-nxml-processing-instruction-content">version="1.0"</span><span class="org-nxml-processing-instruction-delimiter">?&gt;</span>
 <span class="org-nxml-processing-instruction-delimiter">&lt;?</span><span class="org-nxml-processing-instruction-target">xml-model</span> <span class="org-nxml-processing-instruction-content">href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"</span><span class="org-nxml-processing-instruction-delimiter">?&gt;</span>
@@ -346,8 +346,8 @@ This is an activity to practice with publishers and subscribers and launchfiles
 </details>
 
 
-<details id="org6e571ad"><summary class="header-4">Minimal Node</summary>
-<div class="outline-text-4" id="text-org6e571ad">
+<details id="orgcf0b107"><summary class="header-4">Minimal Node</summary>
+<div class="outline-text-4" id="text-orgcf0b107">
 <div class="org-src-container">
 <label class="org-src-name"><span class="listing-number">Listing 4: </span>Snippet of setup.py</label><pre class="src src-python"><span class="org-variable-name">entry_points</span><span class="org-operator">=</span>{
    <span class="org-string">'console_scripts'</span>: [
@@ -377,8 +377,8 @@ This is an activity to practice with publishers and subscribers and launchfiles
 </div>
 </details>
 
-<details id="org8aae067"><summary class="header-4">Creating the Timer</summary>
-<div class="outline-text-4" id="text-org8aae067">
+<details id="orgd1e3ad4"><summary class="header-4">Creating the Timer</summary>
+<div class="outline-text-4" id="text-orgd1e3ad4">
 <div class="org-src-container">
 <label class="org-src-name"><span class="listing-number">Listing 6: </span>pubsub/pubsub.py</label><pre class="src src-python">
 <span class="org-comment-delimiter"># </span><span class="org-comment">Just showing the pubsub node
@@ -396,8 +396,8 @@ This is an activity to practice with publishers and subscribers and launchfiles
 </div>
 </details>
 
-<details id="org72d953e"><summary class="header-4">Running the turtlesim node</summary>
-<div class="outline-text-4" id="text-org72d953e">
+<details id="orgcf870a5"><summary class="header-4">Running the turtlesim node</summary>
+<div class="outline-text-4" id="text-orgcf870a5">
 <div class="org-src-container">
 <pre class="src src-bash">ros2 run turtlesim turtlesim node
 <span class="org-comment-delimiter"># </span><span class="org-comment">In a new window, list all the topics
@@ -414,8 +414,8 @@ This is an activity to practice with publishers and subscribers and launchfiles
 </div>
 </details>
 
-<details id="org0f30a61"><summary class="header-4">Creating the publisher</summary>
-<div class="outline-text-4" id="text-org0f30a61">
+<details id="org8f06b91"><summary class="header-4">Creating the publisher</summary>
+<div class="outline-text-4" id="text-org8f06b91">
 <div class="org-src-container">
 <label class="org-src-name"><span class="listing-number">Listing 7: </span>In pubsub/pubsub.py</label><pre class="src src-python"><span class="org-keyword">from</span> geometry_msgs.msg <span class="org-keyword">import</span> Twist, Vector3
 
@@ -441,8 +441,8 @@ ros2 topic echo /turtle1/cmd_vel
 </div>
 </details>
 
-<details id="orgddc7aac"><summary class="header-4">XML Launchfile</summary>
-<div class="outline-text-4" id="text-orgddc7aac">
+<details id="orgd3f2698"><summary class="header-4">XML Launchfile</summary>
+<div class="outline-text-4" id="text-orgd3f2698">
 <div class="org-src-container">
 <label class="org-src-name"><span class="listing-number">Listing 8: </span>launch/pubsub.launch.xml</label><pre class="src src-xml"><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">launch</span><span class="org-nxml-tag-delimiter">&gt;</span>
   <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">node</span> <span class="org-nxml-attribute-local-name">pkg</span>=<span class="org-string">"turtlesim"</span> <span class="org-nxml-attribute-local-name">exec</span>=<span class="org-string">"turtlesim_node"</span> <span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
@@ -465,8 +465,8 @@ ros2 topic echo /turtle1/cmd_vel
 </div>
 </details>
 
-<details id="org3b139d9"><summary class="header-4">Subscriber</summary>
-<div class="outline-text-4" id="text-org3b139d9">
+<details id="orgfddba5b"><summary class="header-4">Subscriber</summary>
+<div class="outline-text-4" id="text-orgfddba5b">
 <p>
 To find out about the turtlesim pose:
 </p>
@@ -501,9 +501,9 @@ ros2 interface show turtlesim_msgs/msg/Pose
 </details>
 </details>
 
-<details id="orgc8dc0cf"><summary class="header-3">Parameters</summary>
-<details id="orgb117323"><summary class="header-4">Custom Parameters</summary>
-<div class="outline-text-4" id="text-orgb117323">
+<details id="orgc152a16"><summary class="header-3">Parameters</summary>
+<details id="orgb909a90"><summary class="header-4">Custom Parameters</summary>
+<div class="outline-text-4" id="text-orgb909a90">
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-comment-delimiter"># </span><span class="org-comment">In PubsubNode.__init__
 </span><span class="org-keyword">self</span>.declare_parameter(<span class="org-string">"xmin"</span>, 2.0)
@@ -518,8 +518,8 @@ ros2 interface show turtlesim_msgs/msg/Pose
 </div>
 </details>
 
-<details id="org47b4ba4"><summary class="header-4">Testing the Parameters</summary>
-<div class="outline-text-4" id="text-org47b4ba4">
+<details id="orgd938617"><summary class="header-4">Testing the Parameters</summary>
+<div class="outline-text-4" id="text-orgd938617">
 <p>
 To test the node: <code>ros2 run pubsub pubsub --ros-args -p xmin:=3.1 -p xmax:=6.5 --log-level pubsub:=DEBUG</code>
 </p>
@@ -527,8 +527,8 @@ To test the node: <code>ros2 run pubsub pubsub --ros-args -p xmin:=3.1 -p xmax:=
 </details>
 
 
-<details id="orga754d3a"><summary class="header-4">Parameters in launch file</summary>
-<div class="outline-text-4" id="text-orga754d3a">
+<details id="org82ee688"><summary class="header-4">Parameters in launch file</summary>
+<div class="outline-text-4" id="text-org82ee688">
 <div class="org-src-container">
 <label class="org-src-name"><span class="listing-number">Listing 11: </span>pubsub.launch.xml for the pubsub node:</label><pre class="src src-xml"><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">node</span> <span class="org-nxml-attribute-local-name">pkg</span>=<span class="org-string">"pubsub"</span> <span class="org-nxml-attribute-local-name">exec</span>=<span class="org-string">"pubsub"</span><span class="org-nxml-tag-delimiter">&gt;</span>
   <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">remap</span> <span class="org-nxml-attribute-local-name">from</span>=<span class="org-string">"cmd_vel"</span> <span class="org-nxml-attribute-local-name">to</span>=<span class="org-string">"turtle1/cmd_vel"</span> <span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
@@ -542,10 +542,10 @@ To test the node: <code>ros2 run pubsub pubsub --ros-args -p xmin:=3.1 -p xmax:=
 </details>
 </details>
 
-<details id="org4025e41"><summary class="header-3">Namespaces</summary>
+<details id="orgea9955f"><summary class="header-3">Namespaces</summary>
 <div id="outline-container-changing-the-namespace-3-P-1" class="outline-4">
 <h4 id="changing-the-namespace-3-P-1">Changing the Namespace</h4>
-<div class="outline-text-4" id="text-orga1f084e">
+<div class="outline-text-4" id="text-org5990366">
 <div class="org-src-container">
 <pre class="src src-bash">ros2 run turtlesim turtlesim_node --ros-args -r __ns:=/ns1
 ros2 run pubsub pubsub --ros-args -r __ns:=/ns1/turtle1
@@ -556,8 +556,8 @@ ros2 run pubsub pubsub --ros-args -r __ns:=/ns2/turtle1 -p xmin:=1.0 -p xmax:=6.
 </div>
 </div>
 
-<details id="org3c9939f"><summary class="header-4">Namespace Launchfile</summary>
-<div class="outline-text-4" id="text-org3c9939f">
+<details id="org5dda600"><summary class="header-4">Namespace Launchfile</summary>
+<div class="outline-text-4" id="text-org5dda600">
 <div class="org-src-container">
 <label class="org-src-name"><span class="listing-number">Listing 12: </span>two_pubsub.launch.xml</label><pre class="src src-python"><span class="org-operator">&lt;</span>!<span class="org-operator">--</span> Command two turtles <span class="org-keyword">in</span> two turtle sims <span class="org-operator">--&gt;</span>
 <span class="org-operator">&lt;</span>launch<span class="org-operator">&gt;</span>
@@ -587,9 +587,9 @@ ros2 run pubsub pubsub --ros-args -r __ns:=/ns2/turtle1 -p xmin:=1.0 -p xmax:=6.
 </details>
 </details>
 
-<details id="org6d3a4f2"><summary class="header-3">Services</summary>
-<details id="org2ca6b66"><summary class="header-4">Calling the Spawn Service</summary>
-<div class="outline-text-4" id="text-org2ca6b66">
+<details id="org529e40f"><summary class="header-3">Services</summary>
+<details id="org608aa29"><summary class="header-4">Calling the Spawn Service</summary>
+<div class="outline-text-4" id="text-org608aa29">
 <div class="org-src-container">
 <label class="org-src-name"><span class="listing-number">Listing 14: </span>PubsubNode.__init__</label><pre class="src src-python"><span class="org-variable-name">spawn_client</span> <span class="org-operator">=</span> <span class="org-keyword">self</span>.create_client(Spawn, <span class="org-string">"spawn"</span>)
 <span class="org-keyword">if</span> <span class="org-keyword">not</span> spawn_client.wait_for_service(timeout_sec <span class="org-operator">=</span> 2.0):
@@ -602,10 +602,10 @@ rclpy.spin_until_future_complete(<span class="org-keyword">self</span>, spawn_cl
 </details>
 </details>
 
-<details id="org4e061ea"><summary class="header-3">Full Solution</summary>
-<details id="orgb26f350"><summary class="header-4">Do you really want to see it?</summary>
-<details id="orgcdedac6"><summary class="header-5">Are you sure?</summary>
-<div class="outline-text-5" id="text-orgcdedac6">
+<details id="org7c8ef72"><summary class="header-3">Full Solution</summary>
+<details id="org0f5157d"><summary class="header-4">Do you really want to see it?</summary>
+<details id="org7f73d3a"><summary class="header-5">Are you sure?</summary>
+<div class="outline-text-5" id="text-org7f73d3a">
 <p>
 The full solution is at <a href="https://github.com/m-elwin/me495_pubsub">https://github.com/m-elwin/me495_pubsub</a>.
 </p>
@@ -616,7 +616,7 @@ The full solution is at <a href="https://github.com/m-elwin/me495_pubsub">https:
 </details>
 <div id="outline-container-reference-1-P-1" class="outline-2">
 <h2 id="reference-1-P-1">Reference</h2>
-<div class="outline-text-2" id="text-orga23f681">
+<div class="outline-text-2" id="text-orgc7ddda9">
 <ul class="org-ul">
 <li><a href="../basics.html">ROS Basics</a> (and references therein).</li>
 <li><a href="../ros_api.html">ROS API</a> (and references therein).</li>
@@ -626,7 +626,7 @@ The full solution is at <a href="https://github.com/m-elwin/me495_pubsub">https:
 
 <div id="outline-container-tutorials-1-P-1" class="outline-2">
 <h2 id="tutorials-1-P-1">Tutorials</h2>
-<div class="outline-text-2" id="text-org24ea0de">
+<div class="outline-text-2" id="text-org1251995">
 <ul class="org-ul">
 <li><a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-CLI-Tools.html">Beginner CLI Tools</a></li>
 <li><a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-Client-Libraries.html">Beginner Client Libraries</a></li>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-11-24 Mon 12:06 -->
+<!-- 2026-01-30 Fri 13:06 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Visualization in ROS</title>
@@ -48,7 +48,7 @@
 
 <div id="outline-container-overview-1-P-13" class="outline-2">
 <h2 id="overview-1-P-13">Overview</h2>
-<div class="outline-text-2" id="text-orgbcd99d3">
+<div class="outline-text-2" id="text-orgda613d1">
 <ul class="org-ul">
 <li>ROS has several tools for interacting graphically with robotic systems.
 <ul class="org-ul">
@@ -61,7 +61,7 @@
 </div>
 <div id="outline-container-rviz2-1-P-1" class="outline-2">
 <h2 id="rviz2-1-P-1">Rviz2</h2>
-<div class="outline-text-2" id="text-orgcdaae7f">
+<div class="outline-text-2" id="text-orgfa814f3">
 <ul class="org-ul">
 <li><code>rviz2</code> is used to visualize data in ROS in a 3D environment</li>
 <li>In <code>rviz2</code> you add <i>Display Types</i> to the display and connect them 
@@ -73,7 +73,7 @@ to information that <code>rviz2</code> receives via ROS messages and parameters.
 </div>
 <div id="outline-container-paths-2-P-1" class="outline-3">
 <h3 id="paths-2-P-1">Paths</h3>
-<div class="outline-text-3" id="text-org9d5314f">
+<div class="outline-text-3" id="text-orgccff67d">
 <ul class="org-ul">
 <li>Paths allow you to visualize a series of points that have been visited over time</li>
 <li>These are visualized with the <a href="http://wiki.ros.org/rviz2/DisplayTypes/Path">Path</a> datatype using <a href="http://docs.ros.org/api/nav_msgs/html/msg/Path.html">nav_msgs/Path</a> messages</li>
@@ -83,7 +83,7 @@ to information that <code>rviz2</code> receives via ROS messages and parameters.
 
 <div id="outline-container-visualization-messages-2-P-1" class="outline-3">
 <h3 id="visualization-messages-2-P-1">Visualization Messages</h3>
-<div class="outline-text-3" id="text-org4c78228">
+<div class="outline-text-3" id="text-org0e88876">
 <ul class="org-ul">
 <li>The <a href="https://index.ros.org/p/visualization_msgs/">visualization_msgs</a> package contains
 messages for displaying visual primitives in <code>rviz2</code> using some Display Types in Rviz2</li>
@@ -93,7 +93,7 @@ messages for displaying visual primitives in <code>rviz2</code> using some Displ
 
 <div id="outline-container-markers-2-P-1" class="outline-3">
 <h3 id="markers-2-P-1">Markers</h3>
-<div class="outline-text-3" id="text-orgc95f602">
+<div class="outline-text-3" id="text-orgc94cdad">
 <ul class="org-ul">
 <li>Markers are the simplest visualization message</li>
 <li>They let you draw basic shapes at specified locations
@@ -133,7 +133,7 @@ relative to its parent frame, even if that frame moves after the marker is drawn
 
 <div id="outline-container-markerarray-2-P-1" class="outline-3">
 <h3 id="markerarray-2-P-1">MarkerArray</h3>
-<div class="outline-text-3" id="text-org9d43143">
+<div class="outline-text-3" id="text-orgc18c123">
 <ul class="org-ul">
 <li>The <a href="http://docs.ros.org/en/kilted/p/visualization_msgs/msg/MarkerArray.html">MarkerArray</a> message consists of an array of Marker messages</li>
 <li>This message type lets you publish multiple markers with a single message</li>
@@ -144,7 +144,7 @@ relative to its parent frame, even if that frame moves after the marker is drawn
 
 <div id="outline-container-static-markers-3-P-1" class="outline-4">
 <h4 id="static-markers-3-P-1">Static Markers</h4>
-<div class="outline-text-4" id="text-org8bb2a20">
+<div class="outline-text-4" id="text-org38208d5">
 <ol class="org-ol">
 <li>Some markers visualize something that does not move and therefore (in an ideal world) would only be published one time
 <ul class="org-ul">
@@ -186,7 +186,7 @@ create_publisher(Type, <span class="org-string">"topic_name"</span>, qos)
 
 <div id="outline-container-interactivemarkers-2-P-1" class="outline-3">
 <h3 id="interactivemarkers-2-P-1">InteractiveMarkers</h3>
-<div class="outline-text-3" id="text-orgf3de781">
+<div class="outline-text-3" id="text-org3ac3dbd">
 <ul class="org-ul">
 <li><a href="http://wiki.ros.org/interactive_markers">Interactive Markers</a> lets users manipulate markers
 inside Rviz2.  Your nodes can then respond to the actions of the user.</li>
@@ -206,8 +206,8 @@ inside Rviz2.  Your nodes can then respond to the actions of the user.</li>
 </ul>
 </div>
 </div>
-<details id="orgb2b2fc8"><summary class="header-3">Plugins</summary>
-<div class="outline-text-3" id="text-orgb2b2fc8">
+<details id="org5015573"><summary class="header-3">Plugins</summary>
+<div class="outline-text-3" id="text-org5015573">
 <ul class="org-ul">
 <li>Using markers enables you to create complex visualizations by building ROS messages</li>
 <li>However, marker messages are quite large and using many of them can become slow</li>
@@ -225,7 +225,7 @@ inside Rviz2.  Your nodes can then respond to the actions of the user.</li>
 
 <div id="outline-container-rqt-1-P-1" class="outline-2">
 <h2 id="rqt-1-P-1">rqt</h2>
-<div class="outline-text-2" id="text-orgd022766">
+<div class="outline-text-2" id="text-org21b3e76">
 <ul class="org-ul">
 <li><a href="https://www.qt.io">Qt</a> is a library for creating graphical user interfaces</li>
 <li><a href="https://docs.ros.org/en/humble/Concepts/About-RQt.html">rqt</a> is a ROS package that enables you to create GUIs using ROS nodes</li>
@@ -248,7 +248,7 @@ so that others can reproduce your view</li>
 </div>
 <div id="outline-container-rqt-plot-2-P-1" class="outline-3">
 <h3 id="rqt-plot-2-P-1">rqt_plot</h3>
-<div class="outline-text-3" id="text-org3ea201f">
+<div class="outline-text-3" id="text-org1a506ee">
 <ul class="org-ul">
 <li><a href="http://wiki.ros.org/rqt_plot">rqt_plot</a> is the simplest way to draw real-time time-plots of data from ROS topics</li>
 <li>You can specify what fields of which topics to plot in the gui or</li>
@@ -258,7 +258,7 @@ so that others can reproduce your view</li>
 
 <div id="outline-container-plot-juggler-2-P-1" class="outline-3">
 <h3 id="plot-juggler-2-P-1">Plot Juggler</h3>
-<div class="outline-text-3" id="text-org1657dc5">
+<div class="outline-text-3" id="text-org2f31eb3">
 <ol class="org-ol">
 <li><a href="https://plotjuggler.io/">Plot Juggler</a> is an advanced tool for plotting time-series data</li>
 <li>Install using the <a href="https://index.ros.org/p/plotjuggler_ros/">plotjuggler-ros</a> package, it is capable of plotting topics in realtime from ROS 2</li>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-11-24 Mon 12:06 -->
+<!-- 2026-01-30 Fri 13:06 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Xacro, URDF, SDF, Gazebo</title>
@@ -36,7 +36,7 @@
 </nav>
 <div id="outline-container-overview-1-P-19" class="outline-2">
 <h2 id="overview-1-P-19">Overview</h2>
-<div class="outline-text-2" id="text-orgfffa5a1">
+<div class="outline-text-2" id="text-org5bdd07f">
 <ul class="org-ul">
 <li>This document describes how to build Gazebo worlds and models.
 <ul class="org-ul">
@@ -61,7 +61,7 @@
 
 <div id="outline-container-from-xacro-to-gazebo-1-P-1" class="outline-2">
 <h2 id="from-xacro-to-gazebo-1-P-1">From Xacro to Gazebo</h2>
-<div class="outline-text-2" id="text-orga00f28f">
+<div class="outline-text-2" id="text-org2061ab6">
 <p>
 There are three main steps when going from a <code>xacro</code> file to a gazebo file,
 convert to <code>URDF</code>, convert to <code>SDF</code>, and spawn in Gazebo.
@@ -71,7 +71,7 @@ convert to <code>URDF</code>, convert to <code>SDF</code>, and spawn in Gazebo.
 
 <div id="outline-container-gazebo-compatible-urdf-2-P-1" class="outline-3">
 <h3 id="gazebo-compatible-urdf-2-P-1">Gazebo-compatible URDF</h3>
-<div class="outline-text-3" id="text-orgc224ba8">
+<div class="outline-text-3" id="text-org6814eb5">
 <ol class="org-ol">
 <li>The main tutorial for understanding how to make a URDF file ready for gazebo is <a href="http://gazebosim.org/tutorials?tut=ros_urdf&amp;cat=connect_ros">here</a></li>
 <li>A gazebo compatible URDF is a URDF file that can be successfully converted to an SDF file and loaded in Gazebo</li>
@@ -99,7 +99,7 @@ The sections below go through how you can see the individual conversion steps, w
 
 <div id="outline-container-xacro-to-urdf-2-P-1" class="outline-3">
 <h3 id="xacro-to-urdf-2-P-1">Xacro to URDF</h3>
-<div class="outline-text-3" id="text-org486bd43">
+<div class="outline-text-3" id="text-orgfc45f73">
 <ol class="org-ol">
 <li>Use the xacro command and redirect to a urdf file:
 <ul class="org-ul">
@@ -121,7 +121,7 @@ and using the text editor to make sure that all braces are matched.</li>
 
 <div id="outline-container-urdf-to-sdf-2-P-1" class="outline-3">
 <h3 id="urdf-to-sdf-2-P-1">URDF to SDF</h3>
-<div class="outline-text-3" id="text-org6b11057">
+<div class="outline-text-3" id="text-org944d450">
 <ol class="org-ol">
 <li>Use the <code>gz</code> command to convert <code>URDF</code> files to <code>sdf</code> files for gazebo
 <ul class="org-ul">
@@ -151,7 +151,7 @@ joints, links, or globally in the urdf file.</li>
 </div>
 <div id="outline-container-spawning-an-sdf-2-P-1" class="outline-3">
 <h3 id="spawning-an-sdf-2-P-1">Spawning an SDF</h3>
-<div class="outline-text-3" id="text-org2bb0388">
+<div class="outline-text-3" id="text-org510fccd">
 <ol class="org-ol">
 <li>It is convenient to run gazebo (either from a launchfile or <code>rosrun gazebo_ros gazebo</code>)
 and keep it running.</li>
@@ -175,7 +175,7 @@ than specified in your <code>urdf</code>.</li>
 
 <div id="outline-container-gazebo-from-a-launch-file-1-P-1" class="outline-2">
 <h2 id="gazebo-from-a-launch-file-1-P-1">Gazebo From a Launch File</h2>
-<div class="outline-text-2" id="text-org0ab244f">
+<div class="outline-text-2" id="text-orga032638">
 <ol class="org-ol">
 <li><p>
 To start gazebo from a launchfile, it typically makes sense to use the basic <code>empty_world.launch</code> template from the <code>gazebo_ros</code> package and then spawn a model:

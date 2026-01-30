@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-11-24 Mon 12:06 -->
+<!-- 2026-01-30 Fri 13:06 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ROS Navigation</title>
@@ -33,7 +33,7 @@
 
 <div id="outline-container-overview-1-P-11" class="outline-2">
 <h2 id="overview-1-P-11">Overview</h2>
-<div class="outline-text-2" id="text-org3bd3c42">
+<div class="outline-text-2" id="text-org544b4f8">
 <ul class="org-ul">
 <li>ROS <a href="https://docs.nav2.org">Nav2</a> enables mobile robots to navigate in 2D</li>
 <li>Provides the ability to estimate the location of the robot based on feedback from multiple sensors</li>
@@ -50,7 +50,7 @@
 
 <div id="outline-container-frames-of-reference-1-P-1" class="outline-2">
 <h2 id="frames-of-reference-1-P-1">Frames of Reference</h2>
-<div class="outline-text-2" id="text-org403043b">
+<div class="outline-text-2" id="text-orgb55b2b6">
 <ul class="org-ul">
 <li><a href="https://www.ros.org/reps/rep-0105.html">REP 105</a> defines standard ROS frames for robots, and the navigation stack adheres to this standard</li>
 <li>Your robot should have a frame called <code>base_link</code>, which is the root of the robot and is at its "chassis" center.
@@ -73,7 +73,7 @@ the transform from <code>map -&gt; base_link</code> is always the map estimate.<
 
 <div id="outline-container-conceptual-components-1-P-1" class="outline-2">
 <h2 id="conceptual-components-1-P-1">Conceptual Components</h2>
-<div class="outline-text-2" id="text-orgc94a9bf">
+<div class="outline-text-2" id="text-org4e75286">
 <ol class="org-ol">
 <li>Base Controller: Subscribes to a <code>geometry_msgs/Twist</code> (by default on the <code>cmd_vel</code> topic) and makes the robot move.
 <ul class="org-ul">
@@ -113,7 +113,7 @@ in order to retry planning</li>
 
 <div id="outline-container-navigation-packages-1-P-1" class="outline-2">
 <h2 id="navigation-packages-1-P-1">Navigation Packages</h2>
-<div class="outline-text-2" id="text-org29397b4">
+<div class="outline-text-2" id="text-org9ca14e8">
 <p>
 Here is a brief overview of some important nav2 packages.
 </p>
@@ -144,7 +144,7 @@ the possible controls. Then it predicts a trajectory and rates it based on if th
 </div>
 <div id="outline-container-how-to-run-navigation-1-P-1" class="outline-2">
 <h2 id="how-to-run-navigation-1-P-1">How To Run Navigation</h2>
-<div class="outline-text-2" id="text-org492013c">
+<div class="outline-text-2" id="text-org6b1c859">
 <ul class="org-ul">
 <li>The <a href="https://docs.nav2.org/getting_started/index.html">Getting Started</a> provides installation instructions</li>
 <li>The <a href="https://docs.nav2.org/setup_guides/index.html">First-Time Robot Setup Guide</a> provides a quick guide on how to setup a robot for use with navigation2</li>
@@ -157,8 +157,8 @@ the possible controls. Then it predicts a trajectory and rates it based on if th
 </ul>
 </div>
 </div>
-<details id="orgf16b3ea"><summary class="header-2">Other Packages (ROS 1)</summary>
-<div class="outline-text-2" id="text-orgf16b3ea">
+<details id="org5f2d422"><summary class="header-2">Other Packages (ROS 1)</summary>
+<div class="outline-text-2" id="text-org5f2d422">
 <ul class="org-ul">
 <li><a href="https://wiki.ros.org/carrot_planner">carrot_planner</a> A global planner that gets robots as close to obstacles as possible</li>
 <li><a href="https://wiki.ros.org/sbpl">sbpl</a> Search based planning library: a global planner based on "motion primitives"</li>

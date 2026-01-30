@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-11-24 Mon 12:06 -->
+<!-- 2026-01-30 Fri 13:06 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Using Pip With ROS 2</title>
@@ -37,7 +37,7 @@
 </nav>
 <div id="outline-container-overview-1-P-4" class="outline-2">
 <h2 id="overview-1-P-4">Overview</h2>
-<div class="outline-text-2" id="text-org4149349">
+<div class="outline-text-2" id="text-org048f5f4">
 <p>
 This guide explains two methods for installing pip packages directly into a ROS <code>colcon</code> workspace.
 One method uses pip and the ROS 2 workspace method directly, while the other uses virtual environments.
@@ -47,7 +47,7 @@ One method uses pip and the ROS 2 workspace method directly, while the other use
 
 <div id="outline-container-direct-into-a-workspace-1-P-1" class="outline-2">
 <h2 id="direct-into-a-workspace-1-P-1">Direct Into A Workspace</h2>
-<div class="outline-text-2" id="text-orgec2e1f2">
+<div class="outline-text-2" id="text-orgcb102af">
 <ol class="org-ol">
 <li>With this method, you install pip packages directly into a ROS 2 workspace</li>
 <li>Whenever that workspace is sourced (either directly or as an underlay), the python packages installed will be used by all ROS 2 nodes.</li>
@@ -57,7 +57,7 @@ One method uses pip and the ROS 2 workspace method directly, while the other use
 
 <div id="outline-container-steps-2-P-1" class="outline-3">
 <h3 id="steps-2-P-1">Steps</h3>
-<div class="outline-text-3" id="text-org3c2051f">
+<div class="outline-text-3" id="text-orgfbbc341">
 <ol class="org-ol">
 <li><p>
 Create a new ROS workspace and <code>ament_python</code> package
@@ -97,7 +97,7 @@ are from <code>pip</code>.</li>
 
 <div id="outline-container-virtual-environment-1-P-1" class="outline-2">
 <h2 id="virtual-environment-1-P-1">Virtual Environment</h2>
-<div class="outline-text-2" id="text-orgef24ba3">
+<div class="outline-text-2" id="text-orgfe78b96">
 <ol class="org-ol">
 <li>With this method a virtual environment is created and sourced separately.</li>
 <li>Individual packages must opt-in to use the virtual environment in their <code>setup.cfg</code></li>
@@ -107,7 +107,7 @@ are from <code>pip</code>.</li>
 
 <div id="outline-container-steps-2-P-2" class="outline-3">
 <h3 id="steps-2-P-2">Steps</h3>
-<div class="outline-text-3" id="text-org339a190">
+<div class="outline-text-3" id="text-org3e3c67b">
 <ol class="org-ol">
 <li><p>
 Any python package that uses virtual environments must have the following adding to the <code>setup.cfg</code>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-11-24 Mon 12:06 -->
+<!-- 2026-01-30 Fri 13:06 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>TurtleBot3</title>
@@ -38,7 +38,7 @@
 </nav>
 <div id="outline-container-overview-1-P-8" class="outline-2">
 <h2 id="overview-1-P-8">Overview</h2>
-<div class="outline-text-2" id="text-org79ad35e">
+<div class="outline-text-2" id="text-org676862a">
 <p>
 The <a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/">turtlebot3</a> is a small mobile robot with a 2-D Lidar Sensor.
 These instructions describe Northwestern's variant of the software, which has been modified for easy deployment on our networks
@@ -54,7 +54,7 @@ However, most of the content of the reference manual still applies.
 
 <div id="outline-container-powering-the-turtlebot-1-P-1" class="outline-2">
 <h2 id="powering-the-turtlebot-1-P-1">Powering the Turtlebot</h2>
-<div class="outline-text-2" id="text-org0b1e238">
+<div class="outline-text-2" id="text-orgf5fe948">
 <ol class="org-ol">
 <li>The Turtlebot can be powered from a battery, or directly from the wall charger, which gets plugged into the OpenCR board
 <ul class="org-ul">
@@ -90,11 +90,20 @@ turn, the odometry will be incorrect.
 </div>
 <div id="outline-container-connecting-to-the-turtlebot-1-P-1" class="outline-2">
 <h2 id="connecting-to-the-turtlebot-1-P-1">Connecting to the TurtleBot</h2>
-<div class="outline-text-2" id="text-orgc16b69d">
+<div class="outline-text-2" id="text-org426a230">
 <ol class="org-ol">
-<li>Connect to the NUMSR wifi network</li>
+<li><p>
+Connect to the <code>TURTLENET</code> wifi network and disable autoconnection
+</p>
+<div class="SOURCE" id="org0c16b48">
+<p>
+nmcli &#x2013;ask dev wifi connect TURTLENET
+nmcli con modify TURTLENET connection.autoconnect no
+</p>
+
+</div></li>
 <li>Set your <code>ROS_DOMAIN_ID</code> as assigned so you don't see everybody else's nodes.</li>
-<li><code>ssh -oSendEnv=ROS_DOMAIN_ID msr@turtlebot</code></li>
+<li>Use <code>ssh -oSendEnv=ROS_DOMAIN_ID msr@turtlebot</code> to ssh to the turtlebot with the given name</li>
 <li>You can use <code>ssh-copy-id msr@turtlebot</code> to load your ssh key so you don't need a password.</li>
 <li>You should hear the MSR jingle when turning on the turtlebot: if not run <code>opencr_install_firmware</code></li>
 </ol>
@@ -107,19 +116,26 @@ turn, the odometry will be incorrect.
 
 <div id="outline-container-running-nodes-1-P-1" class="outline-2">
 <h2 id="running-nodes-1-P-1">Running Nodes</h2>
-<div class="outline-text-2" id="text-org2cb639a">
+<div class="outline-text-2" id="text-orgb44d5d6">
 <ol class="org-ol">
-<li>To run the MSR-specific code, providing low-level access to the turtlebot, run the following command while ssh'd into the turtlebot:
-<code>ros2 run numsr_turtlebot numsr_turtlebot</code></li>
-<li>The code for this package is at <a href="https://github.com/NU-MSR/numsr_turtlebot">https://github.com/NU-MSR/numsr_turtlebot</a></li>
-<li>It relies on messages in <a href="https://github.com/NU-MSR/numsr_msgs">https://github.com/NU-MSR/numsr_msgs</a></li>
+<li>To run the MSR-specific code, providing low-level access to the turtlebot, run the following command on the turtlebot:
+<ul class="org-ul">
+<li><code>msr@turtlebot$ ros2 run numsr_turtlebot numsr_turtlebot</code></li>
+<li>The code for this node is found at <a href="https://github.com/NU-MSR/numsr_turtlebot">https://github.com/NU-MSR/numsr_turtlebot</a>]]</li>
+<li>It relies on <a href="https://github.com/NU-MSR/nuturtlebot_msgs">https://github.com/NU-MSR/nuturtlebot_msgs</a>]]</li>
+</ul></li>
+<li>To access message definitions from your computer, you need to have [[<a href="https://github.com/NU-MSR/nuturtlebot_msgs">https://github.com/NU-MSR/nuturtlebot_msgs</a>][numsr_msgs]]
+available on your computer (e.g. installed or in your currently active workspace).</li>
+<li>With our network setup you should be able to communicate with the <code>numsr_turtlebot</code> node over the network
+<ul class="org-ul">
+<li><code>ros2 node list</code> on your computer should show the <code>numsr_turtlebot</code> node</li>
+</ul></li>
 </ol>
 </div>
 </div>
-
 <div id="outline-container-cross-compilation-1-P-1" class="outline-2">
 <h2 id="cross-compilation-1-P-1">Cross Compilation</h2>
-<div class="outline-text-2" id="text-org1579ff8">
+<div class="outline-text-2" id="text-orgc0044c7">
 <ol class="org-ol">
 <li>Technically you could develop all your code on the Raspberry Pi 3, but doing this would be extremely slow and frustrating.
 <ul class="org-ul">
@@ -172,7 +188,7 @@ all the libraries that are available on the turtlebot</li>
 </div>
 <div id="outline-container-deployment-1-P-1" class="outline-2">
 <h2 id="deployment-1-P-1">Deployment</h2>
-<div class="outline-text-2" id="text-orgfc11430">
+<div class="outline-text-2" id="text-orgb331c0e">
 <ul class="org-ul">
 <li>To run the nodes they must be present on the remote computer</li>
 <li>Use <code>rsync</code> to copy the <code>install</code> space to the turtlebot:  <code>rsync -av --delete aarch64_install/ msr@leonardo:/home/msr/install</code>
@@ -187,7 +203,7 @@ all the libraries that are available on the turtlebot</li>
 
 <div id="outline-container-remote-debugging-1-P-1" class="outline-2">
 <h2 id="remote-debugging-1-P-1">Remote Debugging</h2>
-<div class="outline-text-2" id="text-org0e6c53d">
+<div class="outline-text-2" id="text-orgb721398">
 <p>
 Because we are only copying the install space to the <code>raspberry pi</code> and because the <code>raspberry pi</code> is so slow, it makes sense, for debugging,
 to run the debugger on our host computer.  To do this, the following commands work (after installing <code>gdb-multiarch</code> on your host machine)
@@ -217,7 +233,7 @@ To kill the remote server:
 
 <div id="outline-container-resources-1-P-5" class="outline-2">
 <h2 id="resources-1-P-5">Resources</h2>
-<div class="outline-text-2" id="text-orgce884bf">
+<div class="outline-text-2" id="text-orgcb3d879">
 <ul class="org-ul">
 <li><a href="http://emanual.robotis.com/docs/en/platform/turtlebot3/overview/">Main turtlebot documentation</a></li>
 <li><a href="http://github.com/m-elwin/rosberrypi">rosberrypi</a>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-11-24 Mon 12:06 -->
+<!-- 2026-01-30 Fri 13:06 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>3-D Sensing</title>
@@ -54,7 +54,7 @@
 
 <div id="outline-container-depth-image-1-P-2" class="outline-2">
 <h2 id="depth-image-1-P-2">Depth Image</h2>
-<div class="outline-text-2" id="text-orge663a4d">
+<div class="outline-text-2" id="text-orgccb2760">
 <p>
 A depth image or depth map is a 2D dimensional image where each pixel value corresponds to the distance of an object from the camera.
 There are several methods for generating a depth image.
@@ -62,7 +62,7 @@ There are several methods for generating a depth image.
 </div>
 <div id="outline-container-structured-light-2-P-2" class="outline-3">
 <h3 id="structured-light-2-P-2">Structured Light</h3>
-<div class="outline-text-3" id="text-org793d498">
+<div class="outline-text-3" id="text-org8880875">
 <ol class="org-ol">
 <li>An active light emitter outputs a pattern</li>
 <li>Objects deform the pattern</li>
@@ -75,7 +75,7 @@ There are several methods for generating a depth image.
 
 <div id="outline-container-stereo-depth-2-P-2" class="outline-3">
 <h3 id="stereo-depth-2-P-2">Stereo Depth</h3>
-<div class="outline-text-3" id="text-org1b9204b">
+<div class="outline-text-3" id="text-org66e8bd6">
 <ol class="org-ol">
 <li>Two images taken some known fixed distance apart</li>
 <li>By comparing the images taken from known different angles, the depth can be known</li>
@@ -88,7 +88,7 @@ There are several methods for generating a depth image.
 </div>
 <div id="outline-container-time-of-flight-2-P-2" class="outline-3">
 <h3 id="time-of-flight-2-P-2">Time of Flight</h3>
-<div class="outline-text-3" id="text-org18df1a2">
+<div class="outline-text-3" id="text-org2362df3">
 <ul class="org-ul">
 <li>LiDar</li>
 <li>Measure depth by emitting light and timing how long it takes to reach the sensor</li>
@@ -101,7 +101,7 @@ There are several methods for generating a depth image.
 
 <div id="outline-container-point-clouds-1-P-2" class="outline-2">
 <h2 id="point-clouds-1-P-2">Point Clouds</h2>
-<div class="outline-text-2" id="text-org5467001">
+<div class="outline-text-2" id="text-org92ead44">
 <ul class="org-ul">
 <li>A Point Cloud is a group of 3 dimensional coordinates (points) that
 constitute a discrete description of 3-dimensional objects.</li>
@@ -112,7 +112,7 @@ constitute a discrete description of 3-dimensional objects.</li>
 </div>
 <div id="outline-container-how-to-point-cloud-2-P-2" class="outline-3">
 <h3 id="how-to-point-cloud-2-P-2">How To Point Cloud</h3>
-<div class="outline-text-3" id="text-orge363a11">
+<div class="outline-text-3" id="text-org0e6e1e1">
 <ol class="org-ol">
 <li>A depth map provides the distance from the camera in pixel coordinates</li>
 <li>Using a camera calibration, this depth map is converted into real-world x,y,z coordinates</li>
@@ -125,7 +125,7 @@ constitute a discrete description of 3-dimensional objects.</li>
 
 <div id="outline-container-devices-that-generate-point-clouds-1-P-2" class="outline-2">
 <h2 id="devices-that-generate-point-clouds-1-P-2">Devices that Generate Point Clouds</h2>
-<div class="outline-text-2" id="text-orgb0ddc26">
+<div class="outline-text-2" id="text-org5b38af9">
 <ul class="org-ul">
 <li>Lidars/Laser Scanners 
 <a href="http://wiki.ros/org/velodyne">Velodyne</a>
@@ -146,7 +146,7 @@ constitute a discrete description of 3-dimensional objects.</li>
 </div>
 <div id="outline-container-intel-realsense-2-P-1" class="outline-3">
 <h3 id="intel-realsense-2-P-1">Intel RealSense</h3>
-<div class="outline-text-3" id="text-org9cd11fe">
+<div class="outline-text-3" id="text-org6afa82f">
 <ul class="org-ul">
 <li>The <a href="https://www.intelrealsense.com/depth-camera-d435i/">Intel Realsense D435i</a> is an active stereo depth camera</li>
 <li>The realsense drivers and library are not yet released for Ubuntu 20.04 and the ros package is not yet released for ROS noetic</li>
@@ -157,7 +157,7 @@ constitute a discrete description of 3-dimensional objects.</li>
 
 <div id="outline-container-using-the-realsense-in-ros-2-P-1" class="outline-3">
 <h3 id="using-the-realsense-in-ros-2-P-1">Using the Realsense In ROS</h3>
-<div class="outline-text-3" id="text-org19cfcde">
+<div class="outline-text-3" id="text-org044b573">
 <p>
 There are 3 ways of using the realsense in ROS. 
 Official documentation is here for using SDK 2.0: <a href="https://dev.intelrealsense.com/docs/docs-get-started">https://dev.intelrealsense.com/docs/docs-get-started</a>
@@ -182,14 +182,14 @@ Official documentation is here for using SDK 2.0: <a href="https://dev.intelreal
 
 <div id="outline-container-manipulating-point-clouds-1-P-2" class="outline-2">
 <h2 id="manipulating-point-clouds-1-P-2">Manipulating Point Clouds</h2>
-<div class="outline-text-2" id="text-org81ca6e9">
+<div class="outline-text-2" id="text-orgf92701a">
 <p>
 There are several ways of manipulating point clouds in ROS. 
 </p>
 </div>
 <div id="outline-container-ros-2-P-2" class="outline-3">
 <h3 id="ros-2-P-2">ROS</h3>
-<div class="outline-text-3" id="text-orgf54dd0e">
+<div class="outline-text-3" id="text-orgb4bd166">
 <ul class="org-ul">
 <li>In ROS, point clouds are sent using the <a href="http://docs.ros.org/en/api/sensor_msgs/html/msg/PointCloud2.html">sensor_msgs/PointCloud2</a> message
 <ul class="org-ul">
@@ -203,7 +203,7 @@ There are several ways of manipulating point clouds in ROS.
 
 <div id="outline-container-c--2-P-2" class="outline-3">
 <h3 id="c--2-P-2">C++</h3>
-<div class="outline-text-3" id="text-org3627c05">
+<div class="outline-text-3" id="text-org36ebbe6">
 <ul class="org-ul">
 <li>The <a href="http://wiki.ros.org/pcl_ros">pcl_ros</a> package also lets you convert point cloud messages into C++ data types for use with the <a href="https://pointclouds.org">Point Cloud Library</a>
 <ul class="org-ul">
@@ -214,7 +214,7 @@ There are several ways of manipulating point clouds in ROS.
 </div>
 <div id="outline-container-python-2-P-2" class="outline-3">
 <h3 id="python-2-P-2">Python</h3>
-<div class="outline-text-3" id="text-orga28c40c">
+<div class="outline-text-3" id="text-orgcd11ea0">
 <ul class="org-ul">
 <li>The <a href="http://wiki.ros.org/sensor_msgs">sensor_msgs</a> package has python tools for manipulating Pointloud2 data
 <ul class="org-ul">
@@ -237,7 +237,7 @@ how to convert data from a PointCloud2 message into a <code>pcl.PointCloud</code
 </div>
 <div id="outline-container-demonstration-1-P-2" class="outline-2">
 <h2 id="demonstration-1-P-2">Demonstration</h2>
-<div class="outline-text-2" id="text-orga560766">
+<div class="outline-text-2" id="text-orga8e9aaa">
 <p>
 The following code demonstrates using some basic pcl "nodelets".  Nodelets are essentially ROS nodes that can all
 be run in a single process to reduce communication overhead.  The <a href="https://github.com/NU-MSR/nodelet_pcl_demo">Nodelet PCL demo</a>
@@ -250,7 +250,7 @@ library (PCL) to perform additional processing.
 
 <div id="outline-container-resources-1-P-9" class="outline-2">
 <h2 id="resources-1-P-9">Resources</h2>
-<div class="outline-text-2" id="text-org11bd384">
+<div class="outline-text-2" id="text-org06ccac5">
 <p>
 <a href="https://www.intelrealsense.com/beginners-guide-to-depth/">Beginner's guide to depth</a>
 </p>

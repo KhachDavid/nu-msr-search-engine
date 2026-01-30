@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-11-24 Mon 12:06 -->
+<!-- 2026-01-30 Fri 13:06 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Advanced ROS</title>
@@ -63,7 +63,7 @@
 
 <div id="outline-container-overview-1-P-30" class="outline-2">
 <h2 id="overview-1-P-30">Overview</h2>
-<div class="outline-text-2" id="text-orgcf455c5">
+<div class="outline-text-2" id="text-orgc81ae57">
 <p>
 These notes cover some more advanced ROS issues that you may encounter from time to time.
 </p>
@@ -72,7 +72,7 @@ These notes cover some more advanced ROS issues that you may encounter from time
 
 <div id="outline-container-actions-1-P-1" class="outline-2">
 <h2 id="actions-1-P-1">Actions</h2>
-<div class="outline-text-2" id="text-orged22ef8">
+<div class="outline-text-2" id="text-org93ae2d8">
 <p>
 <a href="https://wiki.ros.org/actionlib">Actions</a> allow you to
 </p>
@@ -105,7 +105,7 @@ Just as a ROS service has a client andhas a <i>Request</i> and a <i>Response</i>
 
 <div id="outline-container-defining-the-action-2-P-1" class="outline-3">
 <h3 id="defining-the-action-2-P-1">Defining the Action</h3>
-<div class="outline-text-3" id="text-orgb93c35f">
+<div class="outline-text-3" id="text-orgc3e660f">
 <p>
 Just like messages and services, actions are also defined in a file using the same syntax as messages and services. The
 Goal, Feedback, and Result types are separated by <code>---</code>.
@@ -122,7 +122,7 @@ uint32 the_feedback
 
 <div id="outline-container-building-the-action-3-P-1" class="outline-4">
 <h4 id="building-the-action-3-P-1">Building the Action</h4>
-<div class="outline-text-4" id="text-org1518e54">
+<div class="outline-text-4" id="text-org275e093">
 <p>
 Just like for messages and services, you must edit <code>CMakeLists.txt</code> and <code>package.xml</code> to build an action:
 </p>
@@ -135,7 +135,7 @@ Just like for messages and services, you must edit <code>CMakeLists.txt</code> a
 
 <div id="outline-container-using-actions-3-P-1" class="outline-4">
 <h4 id="using-actions-3-P-1">Using Actions</h4>
-<div class="outline-text-4" id="text-orgbc810d2">
+<div class="outline-text-4" id="text-org4456b78">
 <ul class="org-ul">
 <li>The code API reference is <a href="http://docs.ros.org/en/noetic/api/actionlib/html/">here</a>, and there are examples on the <a href="http://wiki.ros.org/actionlib">Wiki</a> page</li>
 <li>Use the <code>action</code> library to create action clients and servers.</li>
@@ -153,7 +153,7 @@ the API is similar for python.
 
 <div id="outline-container-the-action-server-2-P-1" class="outline-3">
 <h3 id="the-action-server-2-P-1">The Action Server</h3>
-<div class="outline-text-3" id="text-org7195533">
+<div class="outline-text-3" id="text-orga139b39">
 <ul class="org-ul">
 <li>Action server creates a callback</li>
 <li>The callback should perform the task and periodically send feedback and check for pre-emption</li>
@@ -164,7 +164,7 @@ the API is similar for python.
 
 <div id="outline-container-the-action-client-2-P-1" class="outline-3">
 <h3 id="the-action-client-2-P-1">The Action Client</h3>
-<div class="outline-text-3" id="text-org84fc961">
+<div class="outline-text-3" id="text-org7c23ddb">
 <ul class="org-ul">
 <li>To start an action, you send it a goal, as per <a href="http://wiki.ros.org/actionlib_tutorials/Tutorials/Writing%20a%20Simple%20Action%20Client%20%28Python%29">this tutorial</a></li>
 <li>There are many options when calling an action <a href="http://docs.ros.org/en/noetic/api/actionlib/html/classactionlib_1_1simple__action__client_1_1SimpleActionClient.html">See API Docs</a>
@@ -177,7 +177,7 @@ the API is similar for python.
 
 <div id="outline-container-under-the-hood-2-P-1" class="outline-3">
 <h3 id="under-the-hood-2-P-1">Under the Hood</h3>
-<div class="outline-text-3" id="text-orge2799e7">
+<div class="outline-text-3" id="text-orgc022012">
 <ul class="org-ul">
 <li>Actions are implemented using ROS messages. So you can set a goal by publishing to a ROS topic
 <ul class="org-ul">
@@ -194,7 +194,7 @@ the API is similar for python.
 
 <div id="outline-container-dynamic-reconfigure-1-P-1" class="outline-2">
 <h2 id="dynamic-reconfigure-1-P-1">Dynamic Reconfigure</h2>
-<div class="outline-text-2" id="text-orgd523f3b">
+<div class="outline-text-2" id="text-orgeb3dbc6">
 <p>
 <a href="http://wiki.ros.org/dynamic_reconfigure">Dynamic Reconfigure</a> is an extension to ROS parameters that can be updated at runtime.
 </p>
@@ -211,7 +211,7 @@ such as <code>dynparam</code> that allow a user to change these parameters at ru
 
 <div id="outline-container-using-dynamic-reconfigure-2-P-1" class="outline-3">
 <h3 id="using-dynamic-reconfigure-2-P-1">Using Dynamic Reconfigure</h3>
-<div class="outline-text-3" id="text-org5ce7c81">
+<div class="outline-text-3" id="text-org9e09dbb">
 <ol class="org-ol">
 <li>You must create a <code>.cfg</code> file.  This file is actually an executable python file that uses the dynamic reconfigure API to define
 the parameters that should be dynamically reconfigured. This file</li>
@@ -225,7 +225,7 @@ using the <code>dynamic_reconfigure</code> client tools.</li>
 
 <div id="outline-container-uses-of-dynamic-reconfigure-2-P-1" class="outline-3">
 <h3 id="uses-of-dynamic-reconfigure-2-P-1">Uses of Dynamic Reconfigure</h3>
-<div class="outline-text-3" id="text-org22844d3">
+<div class="outline-text-3" id="text-org3c4bd4c">
 <ol class="org-ol">
 <li>Dynamic reconfigure is very useful for nodes that have parameters that are constant but need to be <code>tuned</code> by the user</li>
 <li>Sometimes it is easier to just have these values modified by a regular ROS service or subscriber, but using dynamic reconfigure
@@ -238,7 +238,7 @@ allows you to take advantage of all the client tools (including GUI's) to change
 
 <div id="outline-container-nodelets-1-P-1" class="outline-2">
 <h2 id="nodelets-1-P-1">Nodelets</h2>
-<div class="outline-text-2" id="text-orgc5360e8">
+<div class="outline-text-2" id="text-orgdcfcdc3">
 <ul class="org-ul">
 <li><a href="http://wiki.ros.org/nodelet">Nodelets</a> essentially allow you to run multiple ROS nodes within the same process</li>
 <li>When nodes are in the same process, they do not need to copy data when sending/receiving messages.</li>
@@ -250,7 +250,7 @@ allows you to take advantage of all the client tools (including GUI's) to change
 
 <div id="outline-container-remote-nodes-1-P-1" class="outline-2">
 <h2 id="remote-nodes-1-P-1">Remote Nodes</h2>
-<div class="outline-text-2" id="text-orga25fa28">
+<div class="outline-text-2" id="text-org9910f3e">
 <ul class="org-ul">
 <li>ROS nodes can be running on multiple computers</li>
 <li><code>roscore</code> always runs on a single computer, and nodes connect to it via the environment variable <code>ROS_MASTER_URI</code>.
@@ -262,7 +262,7 @@ allows you to take advantage of all the client tools (including GUI's) to change
 </div>
 <div id="outline-container-basic-networking-2-P-1" class="outline-3">
 <h3 id="basic-networking-2-P-1">Basic Networking</h3>
-<div class="outline-text-3" id="text-org2561552">
+<div class="outline-text-3" id="text-org38c04d7">
 <ul class="org-ul">
 <li>Every network device has an IP address.</li>
 <li>Every computer on the network has a hostname.</li>
@@ -292,7 +292,7 @@ network is running avahi, you can resolve hostnames via <code>hostname.local</co
 </div>
 <div id="outline-container-my-preferred-network-setup-2-P-1" class="outline-3">
 <h3 id="my-preferred-network-setup-2-P-1">My preferred network setup</h3>
-<div class="outline-text-3" id="text-orgc9f1c15">
+<div class="outline-text-3" id="text-orgd17275b">
 <ul class="org-ul">
 <li>The easiest way to do handle the network is to connect everything to a router running <a href="https://openwrt.org/">OpenWrt</a>.</li>
 <li>By default <code>OpenWrt</code> configures a Domain Name Server (DNS) to resolve all hostnames connected to the router</li>
@@ -302,7 +302,7 @@ most consumer-level devices with the default firmware do not have DNS running</l
 </div>
 <div id="outline-container-northwestern-specific-setup-3-P-1" class="outline-4">
 <h4 id="northwestern-specific-setup-3-P-1">Northwestern Specific Setup</h4>
-<div class="outline-text-4" id="text-orgb744ccd">
+<div class="outline-text-4" id="text-orgf2258df">
 <ul class="org-ul">
 <li>Northwestern has the Device Northwestern Wireless network for embedded device</li>
 <li>I run a DNS server and also a server that allows devices to register with it</li>
@@ -318,7 +318,7 @@ most consumer-level devices with the default firmware do not have DNS running</l
 
 <div id="outline-container-launchfiles-2-P-2" class="outline-3">
 <h3 id="launchfiles-2-P-2">Launchfiles</h3>
-<div class="outline-text-3" id="text-orgd4ad60b">
+<div class="outline-text-3" id="text-org93119d9">
 <ul class="org-ul">
 <li>The <code>&lt;machine&gt;</code> tag lets you define a remote machine a launchfile</li>
 <li>You can then refer to the <code>machine</code> when you launch a node.</li>
@@ -329,7 +329,7 @@ most consumer-level devices with the default firmware do not have DNS running</l
 </div>
 <div id="outline-container-a-trick-3-P-1" class="outline-4">
 <h4 id="a-trick-3-P-1">A Trick</h4>
-<div class="outline-text-4" id="text-org4f1e54d">
+<div class="outline-text-4" id="text-orgdbda099">
 <p>
 You can take advantage of some properties of launch files to make development easier.
 </p>

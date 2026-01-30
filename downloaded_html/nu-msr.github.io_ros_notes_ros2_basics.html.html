@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-11-24 Mon 12:06 -->
+<!-- 2026-01-30 Fri 13:06 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ROS Basics</title>
@@ -90,7 +90,7 @@
 
 <div id="outline-container-introduction-1-P-4" class="outline-2">
 <h2 id="introduction-1-P-4">Introduction</h2>
-<div class="outline-text-2" id="text-org59fb9a8">
+<div class="outline-text-2" id="text-org887956d">
 <p>
 The ROS ecosystem consists of a collection of tools, software, and documentation.
 These are used to describe, implement, and inspect a ROS program, which consists of multiple processes (called <i>nodes</i>)
@@ -101,7 +101,7 @@ that run in parallel and communicate with each other using inter-process communi
 
 <div id="outline-container-documentation-1-P-3" class="outline-2">
 <h2 id="documentation-1-P-3">Documentation</h2>
-<div class="outline-text-2" id="text-org450965d">
+<div class="outline-text-2" id="text-org2654c49">
 <ul class="org-ul">
 <li><a href="https://docs.ros.org">https://docs.ros.org</a>: The main documentation for ROS</li>
 <li>The official <a href="https://docs.ros.org/en/kilted/Tutorials.html">ROS Tutorials</a>. The beginner tutorials are especially worth doing.</li>
@@ -128,7 +128,7 @@ that run in parallel and communicate with each other using inter-process communi
 
 <div id="outline-container-deprecated-documentation-2-P-1" class="outline-3">
 <h3 id="deprecated-documentation-2-P-1">Deprecated Documentation</h3>
-<div class="outline-text-3" id="text-org523e645">
+<div class="outline-text-3" id="text-org38e250e">
 <p>
 Sometimes there is a lot of overlap between ROS 1 and ROS 2 packages but the ROS 2 packages are not yet documented.
 </p>
@@ -142,7 +142,7 @@ Sometimes there is a lot of overlap between ROS 1 and ROS 2 packages but the ROS
 
 <div id="outline-container-workspaces-1-P-1" class="outline-2">
 <h2 id="workspaces-1-P-1">Workspaces</h2>
-<div class="outline-text-2" id="text-org91607d7">
+<div class="outline-text-2" id="text-org2bf82a1">
 <ul class="org-ul">
 <li>By default ROS 2 commands are not on the <code>PATH</code> and cannot be found</li>
 <li>At least one ROS 2 workspace must be "sourced" before you can run ROS 2</li>
@@ -160,7 +160,7 @@ Sometimes there is a lot of overlap between ROS 1 and ROS 2 packages but the ROS
 
 <div id="outline-container-packages-1-P-1" class="outline-2">
 <h2 id="packages-1-P-1">Packages</h2>
-<div class="outline-text-2" id="text-orge8763e9">
+<div class="outline-text-2" id="text-orgd06e4bf">
 <p>
 <a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html">Packages</a> are the basic organization unit for ROS components.
 </p>
@@ -177,7 +177,7 @@ Sometimes there is a lot of overlap between ROS 1 and ROS 2 packages but the ROS
 
 <div id="outline-container-installation-2-P-2" class="outline-3">
 <h3 id="installation-2-P-2">Installation</h3>
-<div class="outline-text-3" id="text-org10d3491">
+<div class="outline-text-3" id="text-org4cd5789">
 <p>
 There are a few ways to install and use packages in ROS:
 </p>
@@ -211,7 +211,7 @@ There are a few ways to install and use packages in ROS:
 
 <div id="outline-container-metadata-2-P-1" class="outline-3">
 <h3 id="metadata-2-P-1">Metadata</h3>
-<div class="outline-text-3" id="text-orgadb63fe">
+<div class="outline-text-3" id="text-org63aee5b">
 <ul class="org-ul">
 <li>Metadata about ROS packages is stored in a manifest file called <code>package.xml</code> (sometimes referred to as the package <i>manifest</i>).
 <ul class="org-ul">
@@ -234,7 +234,7 @@ There are a few ways to install and use packages in ROS:
 
 <div id="outline-container-rosdep-2-P-1" class="outline-3">
 <h3 id="rosdep-2-P-1">rosdep</h3>
-<div class="outline-text-3" id="text-orgce9e97a">
+<div class="outline-text-3" id="text-org1e4b021">
 <ul class="org-ul">
 <li>ROS maintains a tool called <a href="https://docs.ros.org/en/independent/api/rosdep/html/">rosdep</a> which enables ROS packages
 to specify their dependencies on other ROS packages and on system dependencies.</li>
@@ -248,7 +248,7 @@ to specify their dependencies on other ROS packages and on system dependencies.<
 
 <div id="outline-container-nodes-1-P-1" class="outline-2">
 <h2 id="nodes-1-P-1">Nodes</h2>
-<div class="outline-text-2" id="text-org2dd7a5c">
+<div class="outline-text-2" id="text-org51f67a4">
 <ul class="org-ul">
 <li>A <a href="https://docs.ros.org/en/kilted/Concepts/Basic/About-Nodes.html">Node</a><a href="http://docs.ros.org/en/kilted/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Nodes/Understanding-ROS2-Nodes.html">Node</a> in ROS executes code and communicates with other nodes.</li>
 <li><p>
@@ -279,7 +279,7 @@ a complete robotic system.</li>
 </div>
 <div id="outline-container-running-nodes-2-P-1" class="outline-3">
 <h3 id="running-nodes-2-P-1">Running Nodes</h3>
-<div class="outline-text-3" id="text-orgec99168">
+<div class="outline-text-3" id="text-org2bef909">
 <ul class="org-ul">
 <li>Start a node with <code>ros2 run &lt;package&gt; &lt;node&gt;</code></li>
 <li>Nodes can also take <a href="https://docs.ros.org/en/kilted/How-To-Guides/Node-arguments.html">command-line arguments</a></li>
@@ -294,7 +294,7 @@ a complete robotic system.</li>
 </div>
 <div id="outline-container-inter-node-communication-1-P-1" class="outline-2">
 <h2 id="inter-node-communication-1-P-1">Inter-Node Communication</h2>
-<div class="outline-text-2" id="text-org0c4f1d4">
+<div class="outline-text-2" id="text-org8e9608e">
 <p>
 In ROS, there are a few methods for nodes to exchange information.  These modes work whether the nodes are running within the same process,
 on different processes on the same computer, or on different computers.
@@ -302,7 +302,7 @@ on different processes on the same computer, or on different computers.
 </div>
 <div id="outline-container-topics-2-P-1" class="outline-3">
 <h3 id="topics-2-P-1">Topics</h3>
-<div class="outline-text-3" id="text-orgee57c3a">
+<div class="outline-text-3" id="text-org3e236e7">
 <p>
 <a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Topics/Understanding-ROS2-Topics.html">Topics</a> are labeled channels for communication between nodes and are an implementation of a Publish/Subscribe communication pattern.
 </p>
@@ -324,7 +324,7 @@ on different processes on the same computer, or on different computers.
 
 <div id="outline-container-services-2-P-2" class="outline-3">
 <h3 id="services-2-P-2">Services</h3>
-<div class="outline-text-3" id="text-org6686970">
+<div class="outline-text-3" id="text-orgf682cc3">
 <p>
 <a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Services/Understanding-ROS2-Services.html">Services</a> provide a request/response mechanism for inter-node communication.
 </p>
@@ -371,7 +371,7 @@ on different processes on the same computer, or on different computers.
 
 <div id="outline-container-interfaces-2-P-2" class="outline-3">
 <h3 id="interfaces-2-P-2">Interfaces</h3>
-<div class="outline-text-3" id="text-orgbbafd37">
+<div class="outline-text-3" id="text-orgd60e4bb">
 <ul class="org-ul">
 <li><a href="https://docs.ros.org/en/kilted/Concepts/About-ROS-Interfaces.html">Interfaces</a> are a generic name for Topics, Services, and Actions (the interface to a node).
 <ul class="org-ul">
@@ -392,7 +392,7 @@ on different processes on the same computer, or on different computers.
 </div>
 <div id="outline-container-ros-idl-3-P-1" class="outline-4">
 <h4 id="ros-idl-3-P-1">ROS IDL</h4>
-<div class="outline-text-4" id="text-org3fb02ec">
+<div class="outline-text-4" id="text-orgfde2067">
 <ul class="org-ul">
 <li>Each line in an IDL file specifies a field in the data type.</li>
 <li>Each field contains a type-specifier and the name of the field.
@@ -417,7 +417,7 @@ on different processes on the same computer, or on different computers.
 
 <div id="outline-container-ros-graph-1-P-1" class="outline-2">
 <h2 id="ros-graph-1-P-1">ROS Graph</h2>
-<div class="outline-text-2" id="text-org8007df8">
+<div class="outline-text-2" id="text-orgdaa4336">
 <ul class="org-ul">
 <li>All running nodes in a ROS system can be thought of as vertices (aka nodes) in a computation graph.</li>
 <li>All topics in a ROS system can be thought of as the directed edges in a computation graph.</li>
@@ -444,7 +444,7 @@ being exchanged (whether via topics or services):
 
 <div id="outline-container-differences-from-ros-1-2-P-1" class="outline-3">
 <h3 id="differences-from-ros-1-2-P-1">Differences from ROS 1</h3>
-<div class="outline-text-3" id="text-org33b9017">
+<div class="outline-text-3" id="text-org4addac4">
 <ul class="org-ul">
 <li>In ROS 1, all nodes register themselves with a central server called <a href="https://wiki.ros.org/roscore">roscore</a>, which must be running at all times</li>
 <li>ROS 1 uses a custom IPC protocol based on XML, and there is no concept of Quality of Service.</li>
@@ -471,7 +471,7 @@ values for a node.
 </div>
 <div id="outline-container-yaml-files-3-P-1" class="outline-4">
 <h4 id="yaml-files-3-P-1">Yaml Files</h4>
-<div class="outline-text-4" id="text-orge4804c2">
+<div class="outline-text-4" id="text-orgd9dbfce">
 <ul class="org-ul">
 <li>Parameters are specified using the <a href="http://wiki.ros.org/rosparam">YAML</a> format</li>
 <li>YAML files can be stored on disk and loaded by <code>rosparam</code> or a launchfile into the parameter server</li>
@@ -481,7 +481,7 @@ values for a node.
 
 <div id="outline-container-differences-from-ros-1-2-P-2" class="outline-3">
 <h3 id="differences-from-ros-1-2-P-2">Differences from ROS 1</h3>
-<div class="outline-text-3" id="text-orge12b839">
+<div class="outline-text-3" id="text-org1d62336">
 <ul class="org-ul">
 <li>In ROS 1 parameters are stored in a central server called the ROS parameter server.</li>
 <li>The behavior of a central parameter server can be emulated by creating a node that is only used to store parameters.</li>
@@ -492,7 +492,7 @@ values for a node.
 
 <div id="outline-container-launchfiles-1-P-1" class="outline-2">
 <h2 id="launchfiles-1-P-1">Launchfiles</h2>
-<div class="outline-text-2" id="text-org0727d74">
+<div class="outline-text-2" id="text-org91dffbe">
 <p>
 <a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-CLI-Tools/Launching-Multiple-Nodes/Launching-Multiple-Nodes.html">Launchfiles</a> enable multiple nodes to be
 started with a single command.
@@ -511,7 +511,7 @@ started with a single command.
 </div>
 <div id="outline-container-bags-1-P-1" class="outline-2">
 <h2 id="bags-1-P-1">Bags</h2>
-<div class="outline-text-2" id="text-orgf6772df">
+<div class="outline-text-2" id="text-org9eb7f5f">
 <p>
 <a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-CLI-Tools/Recording-And-Playing-Back-Data/Recording-And-Playing-Back-Data.html">Bags</a> enable you to capture
 data from ROS topics to a file and play them back in real time.
@@ -527,7 +527,7 @@ testing different algorithms and parameters on it is extremely useful.</li>
 
 <div id="outline-container-logging-1-P-1" class="outline-2">
 <h2 id="logging-1-P-1">Logging</h2>
-<div class="outline-text-2" id="text-orge34d120">
+<div class="outline-text-2" id="text-org5497500">
 <p>
 Nodes can log information at different <a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-CLI-Tools/Using-Rqt-Console/Using-Rqt-Console.html">logger levels</a>, indicating the severity of the message.
 </p>
@@ -546,7 +546,7 @@ Nodes can log information at different <a href="https://docs.ros.org/en/kilted/T
 </div>
 <div id="outline-container-debugging-1-P-1" class="outline-2">
 <h2 id="debugging-1-P-1">Debugging</h2>
-<div class="outline-text-2" id="text-org22c5e39">
+<div class="outline-text-2" id="text-org1045675">
 <ul class="org-ul">
 <li><code>ros2 doctor</code> can help point out problems with your ROS setup</li>
 </ul>
@@ -560,7 +560,7 @@ Nodes can log information at different <a href="https://docs.ros.org/en/kilted/T
 </div>
 <div id="outline-container-understanding-names-1-P-2" class="outline-2">
 <h2 id="understanding-names-1-P-2">Understanding Names</h2>
-<div class="outline-text-2" id="text-org8fea123">
+<div class="outline-text-2" id="text-org36f2154">
 <ol class="org-ol">
 <li>Every item in the ROS Computation Graph has a <a href="https://wiki.ros.org/Names">Graph Resource Name</a> (ROS 1 documentation, it is similar in ROS 2)
 <ul class="org-ul">
@@ -594,7 +594,7 @@ The base name of the node is <code>mynode</code></li>
 </div>
 <div id="outline-container-example-2-P-3" class="outline-3">
 <h3 id="example-2-P-3">Example</h3>
-<div class="outline-text-3" id="text-org0f46e6f">
+<div class="outline-text-3" id="text-org17adf73">
 <p>
 Suppose we have a node called <code>/this/is/mynode</code>
 </p>
@@ -617,7 +617,7 @@ Suppose <code>/this/is/mynode</code> creates a publisher on the <code>hello</cod
 
 <div id="outline-container-comparison-with-ros-1-2-P-2" class="outline-3">
 <h3 id="comparison-with-ros-1-2-P-2">Comparison with ROS 1</h3>
-<div class="outline-text-3" id="text-org223e766">
+<div class="outline-text-3" id="text-orgbe0e53e">
 <ol class="org-ol">
 <li>In ROS 1, parameters were global and followed the same naming conventions as other entities.</li>
 <li>In ROS 2, parameters are always associated with a specific node and within that node can optionally have their own <a href="https://docs.ros.org/en/jazzy/Concepts/Basic/About-Parameters.html">parameter namespace</a>.</li>
@@ -662,7 +662,7 @@ Suppose <code>/this/is/mynode</code> creates a publisher on the <code>hello</cod
 
 <div id="outline-container-a-node-s-ros-api-3-P-1" class="outline-4">
 <h4 id="a-node-s-ros-api-3-P-1">A Node's ROS API</h4>
-<div class="outline-text-4" id="text-orgc123316">
+<div class="outline-text-4" id="text-orgcade716">
 <ul class="org-ul">
 <li>The publishers, subscribers, services, parameters, and actions a node declares comprise it's ROS API
 <ul class="org-ul">
@@ -678,7 +678,7 @@ how modules, functions, and classes are used from within python.</li>
 
 <div id="outline-container-ros-2-structure-1-P-1" class="outline-2">
 <h2 id="ros-2-structure-1-P-1">ROS 2 Structure</h2>
-<div class="outline-text-2" id="text-orgbc62364">
+<div class="outline-text-2" id="text-org50073c1">
 <p>
 The <a href="https://design.ros2.org/articles/ros_middleware_interface.html">design of ROS 2</a> involves several layers of abstraction, which can roughly be summarized as follows:
 </p>
