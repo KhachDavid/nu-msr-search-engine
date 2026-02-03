@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-30 Fri 13:06 -->
+<!-- 2026-02-03 Tue 08:58 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>TurtleBot3</title>
@@ -21,7 +21,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#overview-1-P-8">Overview</a></li>
+<li><a href="#overview-1-P-1">Overview</a></li>
 <li><a href="#powering-the-turtlebot-1-P-1">Powering the Turtlebot</a></li>
 <li><a href="#connecting-to-the-turtlebot-1-P-1">Connecting to the TurtleBot</a></li>
 <li><a href="#running-nodes-1-P-1">Running Nodes</a></li>
@@ -32,12 +32,12 @@
 </li>
 <li><a href="#deployment-1-P-1">Deployment</a></li>
 <li><a href="#remote-debugging-1-P-1">Remote Debugging</a></li>
-<li><a href="#resources-1-P-5">Resources</a></li>
+<li><a href="#resources-1-P-1">Resources</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-overview-1-P-8" class="outline-2">
-<h2 id="overview-1-P-8">Overview</h2>
+<div id="outline-container-overview-1-P-1" class="outline-2">
+<h2 id="overview-1-P-1">Overview</h2>
 <div class="outline-text-2" id="text-org676862a">
 <p>
 The <a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/">turtlebot3</a> is a small mobile robot with a 2-D Lidar Sensor.
@@ -95,7 +95,7 @@ turn, the odometry will be incorrect.
 <li><p>
 Connect to the <code>TURTLENET</code> wifi network and disable autoconnection
 </p>
-<div class="SOURCE" id="org0c16b48">
+<div class="SOURCE" id="org7ddfdbe">
 <p>
 nmcli &#x2013;ask dev wifi connect TURTLENET
 nmcli con modify TURTLENET connection.autoconnect no
@@ -133,6 +133,7 @@ available on your computer (e.g. installed or in your currently active workspace
 </ol>
 </div>
 </div>
+
 <div id="outline-container-cross-compilation-1-P-1" class="outline-2">
 <h2 id="cross-compilation-1-P-1">Cross Compilation</h2>
 <div class="outline-text-2" id="text-orgc0044c7">
@@ -162,11 +163,11 @@ it can be difficult to obtain and link against non-native libraries.</li>
 <h3 id="cross-compilation">Cross-Compilation Docker Container</h3>
 <div class="outline-text-3" id="text-cross-compilation">
 <ol class="org-ol">
-<li>I've created a <a href="https://docker.com">docker container</a> with the necessary libraries and setup for cross compilation.</li>
+<li>I've created a <a href="https://docker.com">docker</a> container with the necessary libraries and setup for cross compilation.</li>
 <li>The container is derived from the container I use to build the custom Raspberry Pi disk image and therefore has
 all the libraries that are available on the turtlebot</li>
 <li>To use, install docker <code>sudo apt install docker.io</code>.</li>
-<li>Next, in your ROS workspace, run <code>sudo docker run reem17/rosberrypi-xcompile:iron &gt; aarch64  &amp;&amp; chmod 755 aarch64</code>
+<li>Next, in your ROS workspace, run <code>sudo docker run reem17/rosberrypi-xcompile:kilted &gt; aarch64  &amp;&amp; chmod 755 aarch64</code>
 <ul class="org-ul">
 <li>This command downloads the docker image, runs the docker container, and outputs a script (<code>aarch64</code>) that makes future uses easier.</li>
 </ul></li>
@@ -186,6 +187,7 @@ all the libraries that are available on the turtlebot</li>
 </div>
 </div>
 </div>
+
 <div id="outline-container-deployment-1-P-1" class="outline-2">
 <h2 id="deployment-1-P-1">Deployment</h2>
 <div class="outline-text-2" id="text-orgb331c0e">
@@ -231,8 +233,8 @@ To kill the remote server:
 </div>
 
 
-<div id="outline-container-resources-1-P-5" class="outline-2">
-<h2 id="resources-1-P-5">Resources</h2>
+<div id="outline-container-resources-1-P-1" class="outline-2">
+<h2 id="resources-1-P-1">Resources</h2>
 <div class="outline-text-2" id="text-orgcb3d879">
 <ul class="org-ul">
 <li><a href="http://emanual.robotis.com/docs/en/platform/turtlebot3/overview/">Main turtlebot documentation</a></li>
@@ -241,7 +243,7 @@ To kill the remote server:
 <li>Contains the scripts used to create the full turtlebot image and also the cross-compilation docker container</li>
 </ul></li>
 <li>Code for the numsr node is at <a href="https://github.com/NU-MSR/numsr_turtlebot">https://github.com/NU-MSR/numsr_turtlebot</a></li>
-<li>Custom numsr ROS messages: <a href="https://github.com/NU-MSR/numsr_msgs">https://github.com/NU-MSR/numsr_msgs</a> (TODO, put numsr_turtlebot and numsr_msgs in same git repository).</li>
+<li>Custom numsr ROS messages: <a href="https://github.com/NU-MSR/nuturtlebot_msgs">https://github.com/NU-MSR/nuturtlebot_msgs</a></li>
 <li>Custom numsr firmware: <a href="https://github.com/NU-MSR/opencr">OpenCr</a></li>
 </ul>
 </div>
