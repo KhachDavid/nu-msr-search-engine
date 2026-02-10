@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-29 Thu 11:26 -->
+<!-- 2026-02-10 Tue 08:47 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Probability Basics for Robotics</title>
@@ -127,7 +127,7 @@
 <li><a href="#more-conditional-probability-1-P-1">More conditional probability</a></li>
 <li><a href="#more-linear-transformations--1-P-1">More linear transformations:</a></li>
 <li><a href="#conditional-independence-1-P-1">Conditional Independence</a></li>
-<li><a href="#resources-1-P-3">Resources</a></li>
+<li><a href="#resources-1-P-1">Resources</a></li>
 </ul>
 </div>
 </nav>
@@ -203,7 +203,7 @@ Ultimately, we will reach the limit of our ability to model everything precisely
 form the sample space</li>
 <li>The sample space could also consist of (literally) the face of the die that is showing.
 <ul class="org-ul">
-<li>\(S=\{⚀,⚁,⚂,⚃,⚄,⚅\}\)</li>
+<li><span style="font-size:150%"> \(S=\{⚀,⚁,⚂,⚃,⚄,⚅\}\) </span></li>
 </ul></li>
 <li>For this example the sample space is finite</li>
 </ul></li>
@@ -239,18 +239,18 @@ form the sample space</li>
 </ul></li>
 <li>At least one observation, for example
 <ul class="org-ul">
-<li>Note the position of the robot relative to the world coordinate frame)</li>
+<li>Observe the position of the robot relative to the world coordinate frame</li>
 <li>Observe if the number showing at the top of the die is a 1</li>
 <li>Observe if the number showing at the top of the die is even or odd</li>
 <li>Observe the distance the robot has traveled from its initial to final position</li>
-<li>Observe the (theta, x, y) pose of the robot in a world coordinate frame</li>
+<li>Observe the \((\theta, x, y)\) pose of the robot in a world coordinate frame</li>
 </ul></li>
 </ol></li>
 <li>Define the sample space \(S\) as the set of possible outcomes (i.e., possible things you have observed)</li>
-<li>Thus all outcomes in the sample space are mutually exclusive (no two outcomes occur at the same time)
+<li>All outcomes in the sample space are mutually exclusive (no two outcomes occur at the same time)
 <ol class="org-ol">
 <li>For a single die and observing the number at the top it is \(S=\{1,2,3,4,5,6\}\)</li>
-<li>For a single die and observing if the number at the top of the die is a 1 it is \(S=\{1 \text{is showing}, 1 \text{is not showing}\}\)</li>
+<li>For a single die and observing if the number at the top of the die is a 1 it is \(S=\{1\text{ is showing}, 1\text{ is not showing}\}\)</li>
 <li>For the robot driving forward when we measure distance it is the set of positive real numbers (since distance is positive)
 <ul class="org-ul">
 <li>You can also define the sample space as all real numbers, with some outcomes being impossible</li>
@@ -420,7 +420,7 @@ How does knowledge about event \(B\) occurring change the probability of event \
 </div>
 <div id="outline-container-example--2-P-1" class="outline-3">
 <h3 id="example--2-P-1">Example:</h3>
-<div class="outline-text-3" id="text-org0d712c1">
+<div class="outline-text-3" id="text-org0a36549">
 <p>
 Random Experiment: Flip two coins, count the number of Heads
 </p>
@@ -539,7 +539,7 @@ What is the probability that Linus uses Linux?
 <li>E - Linus is a computer programmer who likes writing bash scripts and is a git expert.</li>
 </ul>
 
-<figure id="org123e5a0">
+<figure id="orgf2dc59e">
 <img src="../images/bayes.svg" alt="bayes.svg" class="org-svg">
 
 </figure>
@@ -621,7 +621,7 @@ in the sample space occurs after performing the experiment</li>
 </div>
 <div id="outline-container-example--2-P-2" class="outline-3">
 <h3 id="example--2-P-2">Example:</h3>
-<div class="outline-text-3" id="text-org45c9dbc">
+<div class="outline-text-3" id="text-org1a92001">
 <ul class="org-ul">
 <li><p>
 Flip two coins. \(\xi \in S\). 
@@ -711,7 +711,7 @@ Flip two coins. \(\xi \in S\).
 <h2 id="example-1-P-1">Example</h2>
 <div class="outline-text-2" id="text-org8c6c10d">
 
-<figure id="org696b993">
+<figure id="org3ad8939">
 <img src="../images/binomial_pmf.svg" alt="binomial_pmf.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 1: </span>A probability mass function for a binomial distribution.</figcaption>
@@ -1026,8 +1026,8 @@ Not equivalent to independence.
 </div>
 </div>
 
-<div id="outline-container-resources-1-P-3" class="outline-2">
-<h2 id="resources-1-P-3">Resources</h2>
+<div id="outline-container-resources-1-P-1" class="outline-2">
+<h2 id="resources-1-P-1">Resources</h2>
 <div class="outline-text-2" id="text-orga3074ad">
 <ol class="org-ol">
 <li><i>Probability, Statistics, and Random Processes for Electrical Enginering</i>, Alberto Leon-Garcia</li>

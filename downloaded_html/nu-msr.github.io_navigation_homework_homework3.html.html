@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-29 Thu 11:26 -->
+<!-- 2026-02-10 Tue 08:37 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Homework 3</title>
@@ -60,13 +60,13 @@
 </li>
 <li><a href="#task-v-visualization--1-P-1">Task V (Visualization)</a>
 <ul>
-<li><a href="#task-v-1-simulation-standalone--2-P-1">Task V.1 (Simulation Standalone)</a>
+<li><a href="#V1">Task V.1 (Simulation Standalone)</a>
 <ul>
 <li><a href="#from-previous-homeworks-3-P-1">From Previous Homeworks</a></li>
 <li><a href="#to-add-3-P-1">To Add</a></li>
 </ul>
 </li>
-<li><a href="#task-v-2-simulation-with-odometry--2-P-1">Task V.2 (Simulation with Odometry)</a></li>
+<li><a href="#V2">Task V.2 (Simulation with Odometry)</a></li>
 <li><a href="#task-v-3-real-robot-with-odometry--2-P-1">Task V.3 (Real robot with Odometry)</a></li>
 <li><a href="#task-v-4-simulated-robot-with-slam--2-P-1">Task V.4 (Simulated Robot With SLAM)</a></li>
 </ul>
@@ -78,18 +78,21 @@
 <li><a href="#task-c-11-collision-detection--2-P-1">Task C.11 (Collision Detection)</a></li>
 <li><a href="#task-c-12-lidar--2-P-1">Task C.12 (Lidar)</a>
 <ul>
-<li><a href="#hint-3-P-3">Hint</a></li>
+<li><a href="#hint-3-P-1">Hint</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#task-l-slam--1-P-2">Task L (SLAM)</a>
+<li><a href="#task-l-slam--1-P-1">Task L (SLAM)</a>
 <ul>
 <li><a href="#task-l-1-main-slam-results--2-P-1">Task L.1 (Main SLAM Results)</a></li>
 <li><a href="#task-l-2-slam-in-controlled-environment--2-P-1">Task L.2 (SLAM in controlled environment)</a></li>
-<li><a href="#suggested-structure-2-P-1">Suggested Structure</a></li>
-<li><a href="#matrix-library-2-P-1">Matrix Library</a></li>
-<li><a href="#slam-2-P-1">SLAM</a></li>
+<li><a href="#structure-2-P-1">Structure</a>
+<ul>
+<li><a href="#matrix-library-3-P-1">Matrix Library</a></li>
+<li><a href="#slam-3-P-1">SLAM</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -131,11 +134,11 @@ in a higher-level launchfile that loads it's own <code>rviz</code> setup.</li>
 </ul>
 </div>
 
-<div id="outline-container-task-v-1-simulation-standalone--2-P-1" class="outline-3">
-<h3 id="task-v-1-simulation-standalone--2-P-1">Task V.1 (Simulation Standalone)</h3>
-<div class="outline-text-3" id="text-org26cc106">
+<div id="outline-container-V1" class="outline-3">
+<h3 id="V1">Task V.1 (Simulation Standalone)</h3>
+<div class="outline-text-3" id="text-V1">
 <p>
-When the <code>nusim</code> is run in a standalone manner (e.g. <code>ros2 launch nusim nusim</code>, the following should be displayed:
+When the <code>nusim</code> is run in a standalone manner (e.g. <code>ros2 launch nusim nusim.launch.xml</code>, the following should be displayed:
 </p>
 </div>
 <div id="outline-container-from-previous-homeworks-3-P-1" class="outline-4">
@@ -155,7 +158,7 @@ When the <code>nusim</code> is run in a standalone manner (e.g. <code>ros2 launc
 <div class="outline-text-4" id="text-orgeff279d">
 <ol class="org-ol">
 <li>A <code>nav_msgs/Path</code> (in red) tracing the path of the robot</li>
-<li>A MarkerArray (in yellow) displaying the relative \((x,y)\) measurements of the markers
+<li>A <code>MarkerArray</code> (in yellow) displaying the relative \((x,y)\) measurements of the markers
 <ul class="org-ul">
 <li>These markers are added in task C.11, and will not necessarily align with the red markers due to noise.</li>
 <li>If the measured marker cannot be seen by the robot, it should not be displayed</li>
@@ -165,21 +168,23 @@ When the <code>nusim</code> is run in a standalone manner (e.g. <code>ros2 launc
 </div>
 </div>
 </div>
-<div id="outline-container-task-v-2-simulation-with-odometry--2-P-1" class="outline-3">
-<h3 id="task-v-2-simulation-with-odometry--2-P-1">Task V.2 (Simulation with Odometry)</h3>
-<div class="outline-text-3" id="text-org6cf65f6">
+
+<div id="outline-container-V2" class="outline-3">
+<h3 id="V2">Task V.2 (Simulation with Odometry)</h3>
+<div class="outline-text-3" id="text-V2">
 <p>
-When the <code>nusim</code> is run with the odometry node (e.g., <code>ros2 launch nuturtle_control start_robot.launch robot:=nusim</code>
+When the <code>nusim</code> is run with the odometry node (e.g., <code>ros2 launch nuturtle_control start_robot.launch.xml robot:=nusim</code>
 </p>
 
 <ol class="org-ol">
-<li>Everything from task V.1</li>
+<li>Everything from <a href="#V1">Task V.1</a></li>
 <li>The robot model, at the location of the odometry estimate (in blue)</li>
 <li>A <code>nav_msgs/Path</code>  corresponding to the path the robot takes according to odometry measurements (in blue)</li>
 <li>Blue indicates information learned via odometry</li>
 </ol>
 </div>
 </div>
+
 <div id="outline-container-task-v-3-real-robot-with-odometry--2-P-1" class="outline-3">
 <h3 id="task-v-3-real-robot-with-odometry--2-P-1">Task V.3 (Real robot with Odometry)</h3>
 <div class="outline-text-3" id="text-orgc9c464b">
@@ -188,14 +193,9 @@ When <code>ros2 launch nuturtle_control start_robot.launch robot:=none</code> (o
      <code>ros2 launch nuturtle_control start_robot.launch robot:=localhost</code> (on the turtlebot).
 </p>
 <ol class="org-ol">
-<li>Draw the actual obstacle locations and walls (in red)
-<ul class="org-ul">
-<li>Add a parameter called <code>draw_only</code> to <code>nusim</code> that causes it to just draw the obstacles from the configuration file rather than simulating anything</li>
-<li>When the node is launched under these circumstances, set its name to <code>nuwall</code> to distinguish it from a running simulation</li>
-</ul></li>
 <li>Draw the robot according to the odometry (in blue)</li>
-<li>A <code>nav_msgs/Path</code> corresponding to the path the robot takes according to odometry measurements (in blue)</li>
-<li>A sensor_messages/LaserScan displaying the real laser scan data (in Yellow)</li>
+<li>A <code>nav_msgs/msg/Path</code> corresponding to the path the robot takes according to odometry measurements (in blue)</li>
+<li>A <code>sensor_messages/msg/LaserScan</code> displaying the laser scan data from the turtlebot3 LiDar (in Yellow)</li>
 </ol>
 </div>
 </div>
@@ -207,13 +207,15 @@ When <code>ros2 launch nuturtle_control start_robot.launch robot:=none</code> (o
 When <code>ros2 launch nuslam slam.launch.xml robot:=nusim</code> is used
 </p>
 <ol class="org-ol">
-<li>Everything from Task V.2
+<li>Everything from <a href="#V2">Task V.2</a>
 <ul class="org-ul">
-<li>The <code>odometry</code> node in this task will be broadcasting from <code>odom</code> to <code>green/base_footprint</code>, and there will also be a transform from <code>map-&gt;odom</code></li>
+<li>The <code>odometry</code> node in this task will be broadcasting from <code>odom</code> to <code>green/base_footprint</code>, and there will also be a transform from <code>map</code> to <code>odom</code></li>
 <li>The <code>blue</code> robot should be located where the robot thinks it is according to it's uncorrected odometry in the world frame</li>
-<li>Hint: You will need to have an additional <code>tf</code> broadcast from <code>world</code> to <code>blue/base_footprint</code>. You can either modify the <code>odometry</code> node or run two of them to
-see where the robot is according to it's odometry, without correction from SLAM. This extra <code>tf</code> is needed because the <code>odometry</code> used by SLAM is
-continuously corrected using the sensor measurements</li>
+<li>Hint: You will need to have an additional <code>tf</code> broadcast from <code>world</code> to <code>blue/base_footprint</code>.
+<ul class="org-ul">
+<li>You can either modify the <code>odometry</code> node or run two of them to see where the robot is according to it's odometry, without correction from SLAM.</li>
+<li>This extra <code>tf</code> is needed because the <code>odometry</code> used by SLAM is continuously corrected using the sensor measurements</li>
+</ul></li>
 </ul></li>
 <li>The map, consisting of the estimated obstacle locations (in green)</li>
 <li>The robot (in green) at the estimated robot location (from SLAM)</li>
@@ -223,6 +225,7 @@ continuously corrected using the sensor measurements</li>
 </div>
 </div>
 </div>
+
 <div id="outline-container-task-c-simulation--1-P-1" class="outline-2">
 <h2 id="task-c-simulation--1-P-1">Task C (Simulation)</h2>
 <div class="outline-text-2" id="text-task-c-simulation--1-P-1">
@@ -262,7 +265,7 @@ We will add a sensor that determines the relative \((x,y)\) locations of the obs
 </p>
 
 <ol class="org-ol">
-<li>At a frequency of 5 Hz, publish a MarkerArray on the <code>/fake_sensor</code> topic. It contains the measured positions of the cylindrical obstacles relative to the robot.
+<li>At a frequency of 5 Hz, publish a <code>MarkerArray</code> on the <code>/fake_sensor</code> topic. It contains the measured positions of the cylindrical obstacles relative to the robot.
 <ul class="org-ul">
 <li>The positions of these markers should have zero mean Gaussian noise added to them, with the amount added being specified as parameter <code>basic_sensor_variance</code>.</li>
 <li>If a marker is not within a radius <code>max_range</code> of the robot, the action for it should be set to <code>DELETE</code> to make it non-visible.
@@ -282,13 +285,13 @@ We will add a sensor that determines the relative \((x,y)\) locations of the obs
 <ol class="org-ol">
 <li>Implement collision detection between the simulated robot and the obstacles
 <ul class="org-ul">
-<li>Represent the robot as a circle with a fixed collision radius. There should already be a <code>collision_radius</code> parameter in <code>diff_params.yaml</code> (see Homework 2: A.7)</li>
+<li>Represent the robot as a circle with a fixed collision radius. There should already be a <code>collision_radius</code> parameter in <code>diff_params.yaml</code> (see <a href="./homework1.html#nuturtle_description_yaml">Homework 1, A3</a>)</li>
 <li>If after updating the robot's position, the robot intersects with a cylinder obstacle
 <ul class="org-ul">
 <li>Compute the line between the robot center and the obstacle center</li>
 <li>Move the robot's center along this line so that the collision circles are tangent</li>
 <li>Spin the wheels as if the robot had moved normally</li>
-<li>This simulates what happens when a turtlebot collides with a fixed obstacles: the wheels spin but the robot does not move</li>
+<li>This action simulates what happens when a turtlebot collides with a fixed obstacles: the wheels spin but the robot does not move</li>
 </ul></li>
 </ul></li>
 <li>Check for collision each time you update the position of the robot</li>
@@ -308,7 +311,7 @@ The goal of this task is to simulate the turtlebot's lidar.
 <li>Your <code>nusim</code> simulation node should publish a <code>sensor_msgs/msg/LaserScan</code> message with simulated lidar data at 5Hz
 <ul class="org-ul">
 <li>You may omit the intensities from the message.</li>
-<li>Use values from the real turtlebot's LaserScan message to fill this in by looking at a live message from the turtlebot</li>
+<li>Use values from the real turtlebot's LaserScan message to fill in parameters by looking at a live message from the turtlebot</li>
 </ul></li>
 <li>The laser scanner will have Gaussian noise added to the simulated values.</li>
 <li>Values for the following constants should be settable with ROS parameters
@@ -322,8 +325,8 @@ The goal of this task is to simulate the turtlebot's lidar.
 </ol>
 </div>
 
-<div id="outline-container-hint-3-P-3" class="outline-4">
-<h4 id="hint-3-P-3">Hint</h4>
+<div id="outline-container-hint-3-P-1" class="outline-4">
+<h4 id="hint-3-P-1">Hint</h4>
 <div class="outline-text-4" id="text-org2b4077c">
 <ol class="org-ol">
 <li>There are many ways of implementing this sensor, but this article on Circle-Line intersection may help <a href="https://mathworld.wolfram.com/Circle-LineIntersection.html">https://mathworld.wolfram.com/Circle-LineIntersection.html</a></li>
@@ -333,8 +336,8 @@ The goal of this task is to simulate the turtlebot's lidar.
 </div>
 </div>
 
-<div id="outline-container-task-l-slam--1-P-2" class="outline-2">
-<h2 id="task-l-slam--1-P-2">Task L (SLAM)</h2>
+<div id="outline-container-task-l-slam--1-P-1" class="outline-2">
+<h2 id="task-l-slam--1-P-1">Task L (SLAM)</h2>
 <div class="outline-text-2" id="text-orgea7ecb1">
 <ul class="org-ul">
 <li>This task is about implementing Feature-Based Kalman Filter SLAM.</li>
@@ -343,20 +346,19 @@ The goal of this task is to simulate the turtlebot's lidar.
 <li>Task L.2 - This is a subset of L.1 (implementing SLAM in a controlled environment).  Once you implement this, you have
 completed the core algorithm.</li>
 <li>I am not mandating specific nodes or parameters or a structure for you to use. The design is up to you.</li>
-<li>However, following the pattern we've been using in this course of keeping calculations separate from the mechanics of the nodes
-may prove helpful</li>
-<li>Be sure to incldue in your README all instructions to run SLAM</li>
+<li>However, you should follow the pattern we've been using in this course of keeping calculations separate from the mechanics of the nodes</li>
+<li>Be sure to include (in your <code>README.md</code>) all the instructions required to run SLAM</li>
 </ul>
 </div>
+
 <div id="outline-container-task-l-1-main-slam-results--2-P-1" class="outline-3">
 <h3 id="task-l-1-main-slam-results--2-P-1">Task L.1 (Main SLAM Results)</h3>
 <div class="outline-text-3" id="text-org0283484">
 <ul class="org-ul">
 <li>This task is about the main interface for running and visualizing your algorithms.</li>
-<li>You can write whatever nodes you want, as long as you can run a <code>slam.launch</code> file as specified below and, where appropriate
-view the necessary visualizations.</li>
+<li>You can write whatever nodes you want, as long as you can run a <code>slam.launch.xml</code> file as specified below and view the visualizations.</li>
 <li>You may also need to modify some nodes to let them publish appropriate visualization topics</li>
-<li>Write a launchfile, <code>slam.launch robot:=X</code> that runs your SLAM algorithm and all other necessary nodes
+<li>Write a launchfile, <code>slam.launch.xml robot:=X</code> that runs your SLAM algorithm and all other necessary nodes
 <ul class="org-ul">
 <li>If <code>robot == nusim</code> the robot is simulated by <code>nusim</code>.</li>
 <li>In Homework 4, <code>robot == turtlebotname</code> will run the code on the turtlebot.</li>
@@ -373,7 +375,7 @@ view the necessary visualizations.</li>
 <ul class="org-ul">
 <li>In this task, you will test the extended Kalman Filter SLAM algorithm in the simulation environment.</li>
 <li>This environment enables you to verify the correctness of the algorithm without worrying about data-association or noise.</li>
-<li>You should be able to run the code for this task by specifying <code>robot:=nusim</code> with the <code>slam.launch</code> launchfile</li>
+<li>You should be able to run the code for this task by specifying <code>robot:=nusim</code> with the <code>slam.launch.xml</code> launchfile</li>
 <li>In the next assignment, you will be using machine learning to find landmarks from 2D-Lidar data.
 <ul class="org-ul">
 <li>The data from the simulator, however, has identifiers directly specifying the landmarks.</li>
@@ -384,13 +386,13 @@ view the necessary visualizations.</li>
 <li>See <a href="https://www.ros.org/reps/rep-0105.html">ROS REP 105</a></li>
 </ul></li>
 <li>Implement extended Kalman Filter Slam, assuming a known data association.  (That is you know which measurement goes with which landmark)</li>
-<li>Drive the robot along closed path in <code>nusim</code> with several landmarks and take a screenshot of <code>rviz</code> at the end of your run.
+<li>Drive the robot along closed path in <code>nusim</code> with at least 5 landmarks and take a screenshot of <code>rviz</code> at the end of your run.
 <ul class="org-ul">
-<li>The screenshot should clearly show the actual robot position, the estimated position, the map frame, the odom frame, and the paths of the real, odometry, and SLAM robots.</li>
+<li>The screenshot should clearly show the actual robot position, the estimated position, the map frame, the odom frame, and the paths of the real, odometry, and SLAM robots, and the estimated and actual locations of the landmarks.</li>
 <li>You should have noise enabled and a limited detection radius for this test (the radius should be small enough such that you do not see all the landmarks all the time)</li>
 <li>The robot should follow a path such that it sees all the landmarks on its journey</li>
 </ul></li>
-<li>If you set to the simulator to generate no sensor noise and have a large detection radius, the SLAM path and actual path should line-up almost exactly and 
+<li>If you set to the simulator to generate no sensor noise and have a large detection radius, the SLAM path and actual path should line-up almost exactly and
 the landmark positions should be correct, even if the odometry noise is still present.
 <ul class="org-ul">
 <li>A good way to test your algorithm (in simulation!) is to drive your robot into a landmark (to make the odometry be very wrong) and watch the map estimate
@@ -399,54 +401,55 @@ remain good.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-suggested-structure-2-P-1" class="outline-3">
-<h3 id="suggested-structure-2-P-1">Suggested Structure</h3>
-<div class="outline-text-3" id="text-org7b820e0">
+<div id="outline-container-structure-2-P-1" class="outline-3">
+<h3 id="structure-2-P-1">Structure</h3>
+<div class="outline-text-3" id="text-org4b1c010">
 <p>
-The below ideas are my suggestions for how to accomplish this task; however, you may choose to ignore them.
+The below ideas are my suggestions for how to accomplish this task
 </p>
 </div>
-</div>
-<div id="outline-container-matrix-library-2-P-1" class="outline-3">
-<h3 id="matrix-library-2-P-1">Matrix Library</h3>
-<div class="outline-text-3" id="text-org5a84530">
+
+<div id="outline-container-matrix-library-3-P-1" class="outline-4">
+<h4 id="matrix-library-3-P-1">Matrix Library</h4>
+<div class="outline-text-4" id="text-org5a84530">
 <ol class="org-ol">
-<li>I recommend using the armadillo library <a href="http://arma.sourceforge.net/">http://arma.sourceforge.net/</a> for C++</li>
-<li>Install <code>libarmadillo-dev</code></li>
-<li>In cmake, <code>find_package(Armadillo)</code>, then add <code>${ARMADILLO_INCLUDE_DIRS}</code> to the <code>include_directories()</code> and <code>target_link_libraries(${ARMADILLO_LIBRARIES})</code> to targets that use armadillo</li>
+<li>You may (and probably should) use a matrix library for these tasks</li>
+<li>The matrix library that is primarily supported in this class is <a href="http://arma.sourceforge.net">armadillo</a>
+<ul class="org-ul">
+<li>Install <code>libarmadillo-dev</code> and use <code>armadillo</code> as a <code>depend</code> in the <code>package.xml</code></li>
+<li>In CMake use <code>find_package(Armadillo)</code> and <code>target_link_libraries(mytarget Armadillo::Armadillo)</code></li>
+<li>Armadillo is a C++ wrapper for existing matrix algebra libraries
+<ul class="org-ul">
+<li>Enables switching between optimized versions</li>
+<li>Requires additional installation complexity (mostly hidden by <code>apt</code>)</li>
+</ul></li>
+</ul></li>
+<li>You may also choose to use <a href="https://libeigen.gitlab.io/">Eigen</a>
+<ul class="org-ul">
+<li>A pure C++ implementation of matrix algebra routines</li>
+<li>More popular in ROS than <code>armadillo</code></li>
+</ul></li>
 </ol>
 </div>
 </div>
 
-<div id="outline-container-slam-2-P-1" class="outline-3">
-<h3 id="slam-2-P-1">SLAM</h3>
-<div class="outline-text-3" id="text-orgeddd142">
+<div id="outline-container-slam-3-P-1" class="outline-4">
+<h4 id="slam-3-P-1">SLAM</h4>
+<div class="outline-text-4" id="text-orgeddd142">
 <ol class="org-ol">
-<li>You may choose to use the odometry node as-is, or to copy its source code into the <code>nuslam</code> package and modify it to be a <code>slam</code> and <code>odometry</code> node.
+<li>You may choose to use the odometry node as-is, or to copy its source code into the <code>nuslam</code> package and modify it to be a combined <code>slam</code> and <code>odometry</code> node.
 <ul class="org-ul">
-<li>Keeping it separate is more versatile/realistic, since then somebody could theoretically use your <code>slam</code> node with different <code>odometry</code>
+<li>Keeping <code>odometry</code> separate is more versatile/realistic, and follows the pattern used by real ROS packages.  Somebody could theoretically use your <code>slam</code> node with different <code>odometry</code></li>
+<li>Making a combined node makes implementation easier, enabling simpler synchronization between <code>odometry</code> and <code>sensor</code> updates.
 <ul class="org-ul">
-<li>It also makes re-using launchfiles easier.</li>
-</ul></li>
-<li>Making a combined node arguably could be easier to synchronize <code>odometry</code> data with <code>sensor</code> updates.</li>
-</ul></li>
-<li>Start with the <code>odometery</code> node from a previous homework.  Copy the source code into the <code>nuslam</code> package and call it <code>slam.cpp</code>
+<li>Since <code>tf</code> must be a tree we can't broadcast the <code>map</code> to <code>green/base_footprint</code> transform directly.
 <ul class="org-ul">
-<li>In this guide, we will implement all SLAM functionality in a single node.</li>
-<li>This node will also implement the odometry functionality</li>
-<li>This decision makes it easier to keep everything in sync.
-<ul class="org-ul">
-<li>You need to be careful about synchronization. Since <code>tf</code> must be a tree we can't broadcast the <code>map</code> to <code>green/base_footprint</code> transform directly:
-instead, we must publish a <code>map</code> to <code>odom</code> transform such that the <code>map</code> to <code>base_footprint</code> transform is the desired value.
-Having all these quantities in the same node makes this process easier</li>
-<li>However, you lose flexibility: odometry and SLAM are now coupled: for this project the trade-off between flexibility and complication seems worth it.</li>
-</ul></li>
-<li>It is also important that the SLAM filter be updated one with odometry and once with the sensor measurements, even though odometry comes in at a faster rate
-<ul class="org-ul">
-<li>It is easiest to accumulate the odometry within the 5Hz period, and use it to make a single prediction</li>
+<li>Instead we publish a <code>map</code> to <code>odom</code> transform such that the <code>map</code> to <code>base_footprint</code> transform is the desired value.</li>
+<li>Having all these quantities in the same node makes this process easier</li>
 </ul></li>
 </ul></li>
-<li>Prior to implementing the algorithm, make sure the visualizations are working 
+</ul></li>
+<li>Prior to implementing the algorithm, make sure the visualizations are working
 <ul class="org-ul">
 <li>The inverted measurement model can provide a crude map estimate at each timestep, just to help get the visualization working</li>
 </ul></li>
@@ -461,6 +464,7 @@ Having all these quantities in the same node makes this process easier</li>
 <li>The SLAM method we use is a direct application of an extended Kalman Filter</li>
 </ul></li>
 </ol>
+</div>
 </div>
 </div>
 </div>
