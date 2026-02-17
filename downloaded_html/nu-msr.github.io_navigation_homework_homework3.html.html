@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-02-10 Tue 08:37 -->
+<!-- 2026-02-12 Thu 09:19 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Homework 3</title>
@@ -194,6 +194,12 @@ When <code>ros2 launch nuturtle_control start_robot.launch robot:=none</code> (o
 </p>
 <ol class="org-ol">
 <li>Draw the robot according to the odometry (in blue)</li>
+<li>Draw the landmarks in <code>rviz</code> from a landmark configuration file in red
+<ul class="org-ul">
+<li>To do this, add a parameter to <code>nusim</code> called <code>draw_only</code>. In this mode, the <code>nusim</code> only draws the landmarks and does nothing else</li>
+<li>The run-time name of the <code>nusim</code> node, when used in this mode, should be called <code>nuwalls</code></li>
+<li>This mode allows us to specify nominal landmark locations, even when doing a real-world experiment.</li>
+</ul></li>
 <li>A <code>nav_msgs/msg/Path</code> corresponding to the path the robot takes according to odometry measurements (in blue)</li>
 <li>A <code>sensor_messages/msg/LaserScan</code> displaying the laser scan data from the turtlebot3 LiDar (in Yellow)</li>
 </ol>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-02-10 Tue 08:47 -->
+<!-- 2026-02-17 Tue 08:52 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Probability Basics for Robotics</title>
@@ -118,7 +118,19 @@
 </li>
 </ul>
 </li>
-<li><a href="#functions-of-random-variables--1-P-1">Functions of Random Variables:</a></li>
+<li><a href="#functions-of-random-variables-1-P-1">Functions of Random Variables</a>
+<ul>
+<li><a href="#overview-2-P-1">Overview</a></li>
+<li><a href="#formal-definitions-2-P-1">Formal Definitions</a></li>
+<li><a href="#discrete-distributions-2-P-1">Discrete Distributions</a></li>
+<li><a href="#continuous-distributions-2-P-1">Continuous Distributions</a>
+<ul>
+<li><a href="#pdf_func">Invertible g(x)</a></li>
+</ul>
+</li>
+<li><a href="#linear-example-2-P-1">Linear Example</a></li>
+</ul>
+</li>
 <li><a href="#joint-distributions-1-P-1">Joint Distributions</a>
 <ul>
 <li><a href="#joint-moments-expected-value-2-P-1">Joint Moments/expected value</a></li>
@@ -420,7 +432,7 @@ How does knowledge about event \(B\) occurring change the probability of event \
 </div>
 <div id="outline-container-example--2-P-1" class="outline-3">
 <h3 id="example--2-P-1">Example:</h3>
-<div class="outline-text-3" id="text-org0a36549">
+<div class="outline-text-3" id="text-org98bc7f1">
 <p>
 Random Experiment: Flip two coins, count the number of Heads
 </p>
@@ -530,7 +542,7 @@ of the sample space to only those samples consistent with the Evidence event hav
 <div class="outline-text-3" id="text-org378ff75">
 <ul class="org-ul">
 <li><p>
-Linus is a computer programmer. He likes writing bash scripts and is a git expert.
+Linus is a computer programmer who likes writing bash scripts and is a git expert.
 What is the probability that Linus uses Linux?
 </p>
 <ul class="org-ul">
@@ -539,7 +551,7 @@ What is the probability that Linus uses Linux?
 <li>E - Linus is a computer programmer who likes writing bash scripts and is a git expert.</li>
 </ul>
 
-<figure id="orgf2dc59e">
+<figure id="org7aa8685">
 <img src="../images/bayes.svg" alt="bayes.svg" class="org-svg">
 
 </figure>
@@ -621,7 +633,7 @@ in the sample space occurs after performing the experiment</li>
 </div>
 <div id="outline-container-example--2-P-2" class="outline-3">
 <h3 id="example--2-P-2">Example:</h3>
-<div class="outline-text-3" id="text-org1a92001">
+<div class="outline-text-3" id="text-org2c9f020">
 <ul class="org-ul">
 <li><p>
 Flip two coins. \(\xi \in S\). 
@@ -711,7 +723,7 @@ Flip two coins. \(\xi \in S\).
 <h2 id="example-1-P-1">Example</h2>
 <div class="outline-text-2" id="text-org8c6c10d">
 
-<figure id="org3ad8939">
+<figure id="orga1fcfb4">
 <img src="../images/binomial_pmf.svg" alt="binomial_pmf.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 1: </span>A probability mass function for a binomial distribution.</figcaption>
@@ -859,51 +871,197 @@ f_x(x) = \frac{1}{\sigma \sqrt{2\pi}}e^{\frac{-(x-m)^2}{2\sigma^2}}
 </div>
 
 
-<div id="outline-container-functions-of-random-variables--1-P-1" class="outline-2">
-<h2 id="functions-of-random-variables--1-P-1">Functions of Random Variables:</h2>
-<div class="outline-text-2" id="text-org65dd94d">
+<div id="outline-container-functions-of-random-variables-1-P-1" class="outline-2">
+<h2 id="functions-of-random-variables-1-P-1">Functions of Random Variables</h2>
+<div class="outline-text-2" id="text-functions-of-random-variables-1-P-1">
+</div>
+<div id="outline-container-overview-2-P-1" class="outline-3">
+<h3 id="overview-2-P-1">Overview</h3>
+<div class="outline-text-3" id="text-orgafb4d87">
 <p>
-If \(Y = g(X)\) then, given a pdf or cdf of X, what is the equivalent pdf or cdf of g?
-Let \(C\) be an event.
+If \(Y = g(X)\) then, given a pdf or cdf of \(X\), what is the equivalent pdf or cdf of \(Y\)?
+</p>
+
+<p>
+Let \(C \subseteq \mathbb{R}\) be a subset possible values of \(Y\).
+Then we can define probabilities of equivalent events as follows:
 </p>
 \begin{equation}
-P[Y \in C] = P[g(X) \in C] = P[X \in \{e : g(X) \in C\}]
+\label{eq:equiv}
+P[Y \in C] = P[g(X) \in C] = P[X \in \{x : g(x) \in C\}]
 \end{equation}
 
 <p>
-For example:
-\(Y = a X + b\)
+Equation \eqref{eq:equiv} shows us how to write a probability for random variable \(Y\) in terms
+of an equivalent probability for random variable \(X\) (it's all the values of \(X\) such that \(g(X)\) is in \(C\)).
+</p>
+</div>
+</div>
+
+
+<details id="org77998ff"><summary class="header-3">Formal Definitions</summary>
+<div class="outline-text-3" id="text-org77998ff">
+<p>
+The above example uses some common shorthand notation and omits mention of the sample space \(\Omega\).
+In particular, probabilities are properly defined on element of the sample space, and with this strict
+interpretation equation \label{eq:equiv} is not technically correct (because \(Y \in C\) is not an element of the sample space since
+\(C\) is not the sample space).
+</p>
+
+<p>
+First, we write the random variables explicitly as functions of \(\omega \in \Omega\) (an element of the sample space), yielding
+</p>
+\begin{equation}
+Y(\omega) = g(X(\omega)).
+\end{equation}
+
+<p>
+Define the set \(A_C = \{\omega \in \Omega : Y(\omega) \in C\}\). Thus \(A_C\) is the event such that
+\(Y(\omega)\) takes on a value in \(C\). Since probabilities are technically defined
+on elements of the sample space, \(P[Y \in C]\) is properly interpreted as \(P[\omega \in A_C]\).
+</p>
+
+<p>
+Define the set \(B_C = \{\omega \in \Omega : g(X(\omega)) \in C\}\). Since \(Y(\omega) = g(X(\omega)\),
+\(A_C = B_C\) and thus \(P[\omega \in A_C] = P[\omega \in B_C]\).
+</p>
+</div>
+</details>
+
+<div id="outline-container-discrete-distributions-2-P-1" class="outline-3">
+<h3 id="discrete-distributions-2-P-1">Discrete Distributions</h3>
+<div class="outline-text-3" id="text-org35a4ac8">
+<p>
+For discrete distributions, we can directly apply equation \eqref{eq:equiv} by letting
+\(C = \{y\}\), thus
+</p>
+\begin{equation}
+p_Y(y) = P[Y = y] = P[Y \in C] = P[X \in \{x : g(x) \in C\}] = P[X \in \{x : g(x) = y\}].
+\end{equation}
+
+<p>
+Let \(B = \{x : g(x) \in C\}\). The events corresponding to \(X = x\) for each \(x \in B\) are mutually exclusive, therefore
+</p>
+\begin{equation}
+P[X \in \{x : g(x) = y\}] = \sum_{x \in B} P[X = x] = \sum_{x \in B} p_X(x).
+\end{equation}
+
+<p>
+Therefore, \(p_Y(y) = \sum_{x \in B} p_X(x)\).
+</p>
+</div>
+</div>
+
+<div id="outline-container-continuous-distributions-2-P-1" class="outline-3">
+<h3 id="continuous-distributions-2-P-1">Continuous Distributions</h3>
+<div class="outline-text-3" id="text-org747233a">
+<p>
+For continuous distributions, we let \(C = \{q : q \leq y\}\), so that equation \eqref{eq:equiv} becomes
+</p>
+\begin{equation}
+F_Y(y) = P[Y \leq y] = P[Y \in C] = P[X \in \{x : g(x) \in C\}] = P[X \in \{x : g(x) \leq y\}] .
+\end{equation}
+
+<p>
+Let \(B_y = \{x : g(x) \leq y\}\). In general, \(g(x)\) need not be invertible so:
+</p>
+\begin{equation}
+P[X \in B_y] = \int_{\{x \in B_y\}} f_X(x) dx.
+\end{equation}
+<p>
+and therefore the CDF of \(Y\) is written in terms of the PDF of \(X\):
+</p>
+\begin{equation}
+F_Y(y) = \int_{x \in B_y} f_X(x) dx.
+\end{equation}
+</div>
+
+<div id="outline-container-pdf_func" class="outline-4">
+<h4 id="pdf_func">Invertible g(x)</h4>
+<div class="outline-text-4" id="text-pdf_func">
+<p>
+If \(g(x)\) is invertible then we can write the CDF of \(Y\) in terms of the CDF of \(X\):
+</p>
+\begin{equation}
+F_Y(y) = P[X \in B_y] = P[X \leq g^{-1}(y)] = F_X(g^{-1}(y)).
+\end{equation}
+
+<p>
+In this case PDF can be found  by applying the chain rule. Let \(u(y) = g^{-1}(y)\). Then:
+</p>
+\begin{equation}
+f_Y(y) = \frac{d F_Y}{d y} = \frac{d F_X(u(y))}{dy} = \frac{d F_X}{d u}\frac{du}{dy}.
+\end{equation}
+
+<p>
+Because \(\frac{d F_X}{d u} = f_X(x)\), the equation simplifies to a direct relationship between the PDFs of \(Y\) and \(X\):
+</p>
+\begin{equation}
+f_Y(y) = f_X(x) \frac{du}{dy}.
+\end{equation}
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-linear-example-2-P-1" class="outline-3">
+<h3 id="linear-example-2-P-1">Linear Example</h3>
+<div class="outline-text-3" id="text-orgc049dd2">
+<p>
+Suppose \(Y = a X + b\), with \(a \neq 0\).
+</p>
+
+<p>
 Then
 </p>
 \begin{align}
-P[Y \leq y] &= P[a X + b \leq y]\\ 
+P[Y \leq y] &= P[a X + b \leq y]\\
 &= \begin{cases}P[X \leq \frac{y - b}{a}] & a > 0 \\ P[X \geq \frac{y-b}{a}] & a < 0\end{cases}.
 \end{align}
+
 <p>
-From a CDF perspective, we write
+Writing in terms of the CDF yields
 </p>
 \begin{equation}
 F_Y(y) = \begin{cases} F_X(\frac{y-b}{a}) & a > 0 \\ 1 - F_X(\frac{y-b}{a}) & a < 0\end{cases}.
 \end{equation}
 
-<p>
-To get equivalent PDF:
-\(\frac{d F}{dy} = \frac{dF}{du}\frac{du}{dy}\), where \(u\) is the argument to \(F_X\)
-</p>
 
 <p>
-After doing the math for both cases, the result is
-\(f_Y(y) = \frac{1}{|a|}f_X(\frac{y-b}{a})\)
+In this example we compute
 </p>
+\begin{align}
+g^{-1}(y) = u(y) &= \frac{y-b}{a}, \\
+\frac{d u} {dy} &= \frac{1}{a}.
+\end{align}
 
-<ul class="org-ul">
-<li>Exercise: prove that a linear function of a Gaussian is also a Gaussian.
-<ul class="org-ul">
-<li>Substitute PDF for a gaussian into the equation above, rearrange to show that it is also in the form of a Gaussian</li>
-</ul></li>
-</ul>
+<p>
+Applying the above result to both cases yields:
+</p>
+<ol class="org-ol">
+<li><p>
+\(a > 0\):
+</p>
+\begin{equation}
+f_Y(y) = \frac{1}{a} f_X(u) = \frac{1}{a} f_X(\frac{y-b}{a})
+\end{equation}</li>
+<li><p>
+\(a < 0\):
+</p>
+\begin{equation}
+f_Y(y) = -\frac{1}{a} f_X(u) = -\frac{1}{a} f_X(\frac{y-b}{a})
+\end{equation}</li>
+</ol>
+<p>
+Both cases can be condensed into a single case using \(\lvert a \rvert\) (because in both cases \(\frac{1}{a}\) is positive):
+</p>
+\begin{equation}
+f_Y(y) = \frac{1}{\lvert a \rvert} f_X(\frac{y-b}{a}).
+\end{equation}
 </div>
 </div>
+</div>
+
 
 <div id="outline-container-joint-distributions-1-P-1" class="outline-2">
 <h2 id="joint-distributions-1-P-1">Joint Distributions</h2>
@@ -948,7 +1106,7 @@ p_{X_j}(x_j) &= P[X = x_j \text { and } X_1, \dots X_{j-1}, X_{j+1}, \dots, X_n
 <h3 id="joint-moments-expected-value-2-P-1">Joint Moments/expected value</h3>
 <div class="outline-text-3" id="text-orgd03f1b6">
 <p>
-Let Z = g(X_1, &#x2026; X_n).
+Let \(Z = g(X_1, ... X_n)\).
 </p>
 <ul class="org-ul">
 <li>for continuous Then \(E[Z] = \int_{-\infty}^{\infty} \dots \int_{-\infty}^{\infty}g(X_1, ... X_n)f_{X_1...X_n}(x_1, ..., x_n) dx_1 \dots dx_n\)</li>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-05 Mon 23:16 -->
+<!-- 2026-02-16 Mon 23:46 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Jointly Gaussian Distributions</title>
@@ -53,10 +53,10 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#overview-1-P-15">Overview</a></li>
+<li><a href="#overview-1-P-1">Overview</a></li>
 <li><a href="#linear-transform-1-P-1">Linear Transform</a>
 <ul>
-<li><a href="#sketch-of-a-proof-2-P-1">Sketch of a Proof</a></li>
+<li><a href="#proof-2-P-1">Proof</a></li>
 </ul>
 </li>
 <li><a href="#conditional-distribution-1-P-1">Conditional Distribution</a></li>
@@ -73,8 +73,8 @@
 </ul>
 </div>
 </nav>
-<div id="outline-container-overview-1-P-15" class="outline-2">
-<h2 id="overview-1-P-15">Overview</h2>
+<div id="outline-container-overview-1-P-1" class="outline-2">
+<h2 id="overview-1-P-1">Overview</h2>
 <div class="outline-text-2" id="text-org256998c">
 <ul class="org-ul">
 <li>Also called Multivariate Normal Distrubtions (or Multi-Normal)</li>
@@ -101,8 +101,8 @@ f_X(x) = (2\pi)^{-\frac{k}{2}}(\det{\Sigma})^{-\frac{1}{2}}e^{-\frac{1}{2}(x-\mu
 <li>Then \(Y \sim \mathcal{N}(A \mu + b, A \Sigma A^T)\)</li>
 </ul>
 </div>
-<details id="orgb30e02d"><summary class="header-3">Sketch of a Proof</summary>
-<div class="outline-text-3" id="text-orgb30e02d">
+<details id="org66647d3"><summary class="header-3">Proof</summary>
+<div class="outline-text-3" id="text-org66647d3">
 <ol class="org-ol">
 <li><p>
 Use the multi-variable change of variables formula to find the new density:
