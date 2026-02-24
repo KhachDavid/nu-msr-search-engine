@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-02-16 Mon 23:05 -->
+<!-- 2026-02-24 Tue 09:10 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ME495 Sensing, Navigation, and Machine Learning for Robotics Schedule</title>
@@ -36,6 +36,10 @@
 <li><a href="#day-9-turtlebot3-2-P-1">Day 9: Turtlebot3</a></li>
 <li><a href="#day-10-slam-introduction-2-P-1">Day 10: SLAM Introduction</a></li>
 <li><a href="#day-11-probability-2-P-1">Day 11: Probability</a></li>
+<li><a href="#day-12-probability-2-P-1">Day 12: Probability</a></li>
+<li><a href="#day-13-estimation-and-gaussians-2-P-1">Day 13: Estimation and Gaussians</a></li>
+<li><a href="#day-14-kalman-filter-2-P-1">Day 14: Kalman Filter</a></li>
+<li><a href="#day-15-slam-2-P-1">Day 15: SLAM</a></li>
 </ul>
 </li>
 <li><a href="#winter-2024-1-P-1">Winter 2024</a>
@@ -61,9 +65,10 @@
 </ul>
 </div>
 </nav>
+
 <div id="outline-container-description-1-P-1" class="outline-2">
 <h2 id="description-1-P-1">Description</h2>
-<div class="outline-text-2" id="text-orgef6268f">
+<div class="outline-text-2" id="text-org5854cf1">
 <p>
 Welcome to the lecture notes for ME495: Sensing, Navigation, and Machine Learning for Robotics,
 an elective course for Northwestern University's <a href="https://www.mccormick.northwestern.edu/robotics/">Master of Science in Robotics Program</a>!
@@ -75,13 +80,14 @@ The notes are also <a href="./index.html">organized by topic</a>.
 </p>
 </div>
 </div>
+
 <div id="outline-container-winter-2025-1-P-1" class="outline-2">
 <h2 id="winter-2025-1-P-1">Winter 2025</h2>
 <div class="outline-text-2" id="text-winter-2025-1-P-1">
 </div>
 <div id="outline-container-homework-2-P-1" class="outline-3">
 <h3 id="homework-2-P-1">Homework</h3>
-<div class="outline-text-3" id="text-org1114e8c">
+<div class="outline-text-3" id="text-orgdb7c488">
 <ol class="org-ol">
 <li><a href="./homework/guidelines.html">Homework Guidelines</a></li>
 <li><a href="./homework/homework1.html">Homework 1</a> [Due 1/20 at 9am].</li>
@@ -92,7 +98,7 @@ The notes are also <a href="./index.html">organized by topic</a>.
 </div>
 <div id="outline-container-day-1-course-introduction-2-P-1" class="outline-3">
 <h3 id="day-1-course-introduction-2-P-1">Day 1: Course Introduction</h3>
-<div class="outline-text-3" id="text-org4243a49">
+<div class="outline-text-3" id="text-org65ac585">
 <ol class="org-ol">
 <li><p>
 Install a more up-to-date C++ Compiler and make it the default:
@@ -112,9 +118,10 @@ sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 100
 </ol>
 </div>
 </div>
+
 <div id="outline-container-day-2-basic-c--2-P-1" class="outline-3">
 <h3 id="day-2-basic-c--2-P-1">Day 2: Basic C++</h3>
-<div class="outline-text-3" id="text-org4545779">
+<div class="outline-text-3" id="text-orgd5a4333">
 <ol class="org-ol">
 <li><a href="./lectures/cpp/cpp_basics.html">C++ Basics</a></li>
 <li><a href="./lectures/cmake_basics.html">CMake Basics</a></li>
@@ -122,18 +129,20 @@ sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 100
 </ol>
 </div>
 </div>
+
 <div id="outline-container-day-3-cmake-deep-dive-2-P-1" class="outline-3">
 <h3 id="day-3-cmake-deep-dive-2-P-1">Day 3: CMake Deep-Dive</h3>
-<div class="outline-text-3" id="text-orgaa745dc">
+<div class="outline-text-3" id="text-org9ee7c71">
 <ol class="org-ol">
 <li><a href="./lectures/cmake_basics.html">CMake Basics</a></li>
 <li><a href="https://docs.ros.org/en/kilted/How-To-Guides/Ament-CMake-Documentation.html">Ament CMake</a></li>
 </ol>
 </div>
 </div>
+
 <div id="outline-container-day-4-ros-node-structure-2-P-1" class="outline-3">
 <h3 id="day-4-ros-node-structure-2-P-1">Day 4: ROS Node Structure</h3>
-<div class="outline-text-3" id="text-orgea22926">
+<div class="outline-text-3" id="text-org8c8a7a0">
 <ol class="org-ol">
 <li><a href="https://github.com/ros2/examples">ROS 2 Examples</a>
 <ul class="org-ul">
@@ -145,41 +154,46 @@ sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 100
 </ol>
 </div>
 </div>
+
 <div id="outline-container-day-5-rigid-body-transforms-in-2d-2-P-1" class="outline-3">
 <h3 id="day-5-rigid-body-transforms-in-2d-2-P-1">Day 5: Rigid Body Transforms in 2D</h3>
-<div class="outline-text-3" id="text-org87bead2">
+<div class="outline-text-3" id="text-org1c8bf06">
 <ol class="org-ol">
 <li><a href="./lectures/rigid2d.html">2D Transforms Review</a></li>
 </ol>
 </div>
 </div>
+
 <div id="outline-container-day-6-deriving-kinematics-2-P-1" class="outline-3">
 <h3 id="day-6-deriving-kinematics-2-P-1">Day 6: Deriving Kinematics</h3>
-<div class="outline-text-3" id="text-org9ddceef">
+<div class="outline-text-3" id="text-org7c50bcc">
 <ol class="org-ol">
 <li><a href="./lectures/derive_kinematics.html">Deriving Kinematics</a></li>
 </ol>
 </div>
 </div>
+
 <div id="outline-container-day-7-odometry-2-P-1" class="outline-3">
 <h3 id="day-7-odometry-2-P-1">Day 7: Odometry</h3>
-<div class="outline-text-3" id="text-org7958408">
+<div class="outline-text-3" id="text-orgf1ef44d">
 <ol class="org-ol">
 <li><a href="./lectures/odometry.html">Odometry</a></li>
 </ol>
 </div>
 </div>
+
 <div id="outline-container-day-8-testing-and-debuging-2-P-1" class="outline-3">
 <h3 id="day-8-testing-and-debuging-2-P-1">Day 8: Testing and Debuging</h3>
-<div class="outline-text-3" id="text-org7d6aee2">
+<div class="outline-text-3" id="text-org3f9a033">
 <ol class="org-ol">
 <li><a href="./lectures/unit_test_cpp.html">Unit Testing and Debugging</a></li>
 </ol>
 </div>
 </div>
+
 <div id="outline-container-day-9-turtlebot3-2-P-1" class="outline-3">
 <h3 id="day-9-turtlebot3-2-P-1">Day 9: Turtlebot3</h3>
-<div class="outline-text-3" id="text-org6a274b3">
+<div class="outline-text-3" id="text-orgb88ea86">
 <ol class="org-ol">
 <li><a href="../ros_notes/ros2/turtlebot3.html">Turtlebot3</a></li>
 <li><a href="https://github.com/m-elwin/rosberrypi">Docker Setup for Turtlebot3</a></li>
@@ -187,27 +201,67 @@ sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 100
 </ol>
 </div>
 </div>
+
 <div id="outline-container-day-10-slam-introduction-2-P-1" class="outline-3">
 <h3 id="day-10-slam-introduction-2-P-1">Day 10: SLAM Introduction</h3>
-<div class="outline-text-3" id="text-org5af413a">
+<div class="outline-text-3" id="text-orga750410">
 <ul class="org-ul">
 <li>Discussed a general overview of the SLAM problem</li>
 </ul>
 </div>
 </div>
+
 <div id="outline-container-day-11-probability-2-P-1" class="outline-3">
 <h3 id="day-11-probability-2-P-1">Day 11: Probability</h3>
-<div class="outline-text-3" id="text-org7ad031c">
+<div class="outline-text-3" id="text-orgc45f64f">
 <ul class="org-ul">
 <li><a href="./lectures/probability.html">Probability Review</a></li>
 </ul>
 </div>
 </div>
+
+<div id="outline-container-day-12-probability-2-P-1" class="outline-3">
+<h3 id="day-12-probability-2-P-1">Day 12: Probability</h3>
+<div class="outline-text-3" id="text-org6900ec4">
+<ul class="org-ul">
+<li><a href="./lectures/probability.html">Probability Review</a></li>
+</ul>
 </div>
-<details id="org79442e3"><summary class="header-2">Winter 2024</summary>
+</div>
+
+<div id="outline-container-day-13-estimation-and-gaussians-2-P-1" class="outline-3">
+<h3 id="day-13-estimation-and-gaussians-2-P-1">Day 13: Estimation and Gaussians</h3>
+<div class="outline-text-3" id="text-org21cc0e0">
+<ul class="org-ul">
+<li><a href="./lectures/estimation_example.html">Estimation Example</a></li>
+<li><a href="./lectures/gaussian.html">Multi-Variate Gaussians</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-day-14-kalman-filter-2-P-1" class="outline-3">
+<h3 id="day-14-kalman-filter-2-P-1">Day 14: Kalman Filter</h3>
+<div class="outline-text-3" id="text-orgcf8b91c">
+<ul class="org-ul">
+<li><a href="./lectures/kalman_filter.html">Kalman Filter</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-day-15-slam-2-P-1" class="outline-3">
+<h3 id="day-15-slam-2-P-1">Day 15: SLAM</h3>
+<div class="outline-text-3" id="text-org5df4e1c">
+<ul class="org-ul">
+<li><a href="./lectures/slam/slam.pdf">SLAM Implementation Notes</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+<details id="org0953bd2"><summary class="header-2">Winter 2024</summary>
 <div id="outline-container-day-1-2-P-1" class="outline-3">
 <h3 id="day-1-2-P-1">Day 1</h3>
-<div class="outline-text-3" id="text-orga473e6b">
+<div class="outline-text-3" id="text-orgd7e98c4">
 <p>
 These links will likely be helpful in transitioning from ROS python to ROS C++
 </p>
@@ -220,64 +274,71 @@ These links will likely be helpful in transitioning from ROS python to ROS C++
 </div>
 <div id="outline-container-day-2-2-P-1" class="outline-3">
 <h3 id="day-2-2-P-1">Day 2</h3>
-<div class="outline-text-3" id="text-orgd502830">
+<div class="outline-text-3" id="text-org6d85cb6">
 <ol class="org-ol">
 <li><a href="./lectures/cmake_basics.html">CMake Basics</a></li>
 </ol>
 </div>
 </div>
+
 <div id="outline-container-day-3-2-P-1" class="outline-3">
 <h3 id="day-3-2-P-1">Day 3</h3>
-<div class="outline-text-3" id="text-org73325aa">
+<div class="outline-text-3" id="text-orgada1450">
 <ol class="org-ol">
 <li><a href="https://docs.ros.org/en/iron/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Cpp-Publisher-And-Subscriber.html">ROS 2 C++ Tutorial</a></li>
 <li><a href="./lectures/rigid2d.html">2D Transforms Review</a></li>
 </ol>
 </div>
 </div>
+
 <div id="outline-container-day-4-2-P-1" class="outline-3">
 <h3 id="day-4-2-P-1">Day 4</h3>
-<div class="outline-text-3" id="text-orgc62f2fe">
+<div class="outline-text-3" id="text-orgb5b07b0">
 <ol class="org-ol">
 <li><a href="./lectures/ros2_cpp.html">ROS2 and C++</a></li>
 </ol>
 </div>
 </div>
+
 <div id="outline-container-day-5-2-P-1" class="outline-3">
 <h3 id="day-5-2-P-1">Day 5</h3>
-<div class="outline-text-3" id="text-orgf4e7035">
+<div class="outline-text-3" id="text-org659ffd7">
 <ol class="org-ol">
 <li><a href="./lectures/rigid2d.html">2D Transforms Review</a></li>
 </ol>
 </div>
 </div>
+
 <div id="outline-container-day-6-2-P-1" class="outline-3">
 <h3 id="day-6-2-P-1">Day 6</h3>
-<div class="outline-text-3" id="text-org4a808ad">
+<div class="outline-text-3" id="text-orgb66f6d9">
 <ol class="org-ol">
 <li><a href="./lectures/derive_kinematics.html">Derive Kinematics</a></li>
 </ol>
 </div>
 </div>
+
 <div id="outline-container-day-7-2-P-1" class="outline-3">
 <h3 id="day-7-2-P-1">Day 7</h3>
-<div class="outline-text-3" id="text-org2430baa">
+<div class="outline-text-3" id="text-org2834045">
 <ol class="org-ol">
 <li><a href="./lectures/odometry.html">Odometry</a></li>
 </ol>
 </div>
 </div>
+
 <div id="outline-container-day-8-2-P-1" class="outline-3">
 <h3 id="day-8-2-P-1">Day 8</h3>
-<div class="outline-text-3" id="text-orgeea1e53">
+<div class="outline-text-3" id="text-orgf076e8a">
 <ol class="org-ol">
 <li><a href="./lectures/debugging.html">Debugging</a></li>
 </ol>
 </div>
 </div>
+
 <div id="outline-container-day-9-10-2-P-1" class="outline-3">
 <h3 id="day-9-10-2-P-1">Day 9, 10</h3>
-<div class="outline-text-3" id="text-org082ddcf">
+<div class="outline-text-3" id="text-org28e3d00">
 <ol class="org-ol">
 <li><a href="../ros_notes/ros2/turtlebot3.html">Turtlebot 3</a></li>
 </ol>
@@ -285,7 +346,7 @@ These links will likely be helpful in transitioning from ROS python to ROS C++
 </div>
 <div id="outline-container-day-11-12-2-P-1" class="outline-3">
 <h3 id="day-11-12-2-P-1">Day 11, 12</h3>
-<div class="outline-text-3" id="text-orga66f04c">
+<div class="outline-text-3" id="text-org8b68e27">
 <p>
 <a href="./lectures/probability.html">Probability Review</a>
 </p>
@@ -293,7 +354,7 @@ These links will likely be helpful in transitioning from ROS python to ROS C++
 </div>
 <div id="outline-container-day-13-2-P-1" class="outline-3">
 <h3 id="day-13-2-P-1">Day 13</h3>
-<div class="outline-text-3" id="text-org5b73687">
+<div class="outline-text-3" id="text-org2a974a2">
 <p>
 <a href="./lectures/estimation_example.html">Estimation Example</a>
 </p>
@@ -301,7 +362,7 @@ These links will likely be helpful in transitioning from ROS python to ROS C++
 </div>
 <div id="outline-container-day-14-2-P-1" class="outline-3">
 <h3 id="day-14-2-P-1">Day 14</h3>
-<div class="outline-text-3" id="text-orgaba7198">
+<div class="outline-text-3" id="text-orgbe558f4">
 <p>
 <a href="./lectures/kalman_filter.html">Kalman Filter</a>
 </p>
@@ -309,7 +370,7 @@ These links will likely be helpful in transitioning from ROS python to ROS C++
 </div>
 <div id="outline-container-day-15-2-P-1" class="outline-3">
 <h3 id="day-15-2-P-1">Day 15</h3>
-<div class="outline-text-3" id="text-orgf428211">
+<div class="outline-text-3" id="text-org0b85949">
 <p>
 <a href="./lectures/slam.pdf">SLAM Implementation Notes</a>
 </p>
@@ -317,7 +378,7 @@ These links will likely be helpful in transitioning from ROS python to ROS C++
 </div>
 <div id="outline-container-day-16-2-P-1" class="outline-3">
 <h3 id="day-16-2-P-1">Day 16</h3>
-<div class="outline-text-3" id="text-org9893579">
+<div class="outline-text-3" id="text-org3494684">
 <ul class="org-ul">
 <li><a href="./lectures/data_assoc.html">Data Association</a></li>
 </ul>
@@ -325,7 +386,7 @@ These links will likely be helpful in transitioning from ROS python to ROS C++
 </div>
 <div id="outline-container-day-17-2-P-1" class="outline-3">
 <h3 id="day-17-2-P-1">Day 17</h3>
-<div class="outline-text-3" id="text-orgfd1c11b">
+<div class="outline-text-3" id="text-orgc2b2145">
 <ul class="org-ul">
 <li><a href="./lectures/regression.html">Supervised Learning (Regression)</a></li>
 </ul>
@@ -333,7 +394,7 @@ These links will likely be helpful in transitioning from ROS python to ROS C++
 </div>
 <div id="outline-container-day-18-2-P-1" class="outline-3">
 <h3 id="day-18-2-P-1">Day 18</h3>
-<div class="outline-text-3" id="text-org55fa02a">
+<div class="outline-text-3" id="text-org583a598">
 <ol class="org-ol">
 <li><a href="./lectures/circle_fit.html">Circle Detection</a></li>
 </ol>

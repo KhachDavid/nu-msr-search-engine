@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-02-17 Tue 08:52 -->
+<!-- 2026-02-23 Mon 14:23 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Probability Basics for Robotics</title>
@@ -54,19 +54,9 @@
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
 <li><a href="#why-probability--1-P-1">Why Probability?</a></li>
-<li><a href="#random-experiments-1-P-1">Random Experiments</a>
-<ul>
-<li><a href="#examples-2-P-1">Examples</a></li>
-<li><a href="#defining-random-experiments-2-P-1">Defining Random Experiments</a></li>
-</ul>
-</li>
+<li><a href="#random-experiments-1-P-1">Random Experiments</a></li>
 <li><a href="#statistical-regularity-1-P-1">Statistical Regularity</a>
 <ul>
-<li>
-<ul>
-<li><a href="#example-roll-a-die-n-times-3-P-1">Example: roll a die \(n\) times</a></li>
-</ul>
-</li>
 <li><a href="#some-properties-of-statistical-regularity-2-P-1">Some Properties of statistical regularity</a></li>
 <li><a href="#discrete-and-continuous-sample-spaces-2-P-1">Discrete and Continuous Sample Spaces</a></li>
 <li><a href="#events--2-P-1">Events:</a></li>
@@ -78,11 +68,7 @@
 <li><a href="#important-corollaries--2-P-1">Important Corollaries:</a></li>
 </ul>
 </li>
-<li><a href="#conditional-probability-1-P-1">Conditional Probability</a>
-<ul>
-<li><a href="#example--2-P-1">Example:</a></li>
-</ul>
-</li>
+<li><a href="#conditional-probability-1-P-1">Conditional Probability</a></li>
 <li><a href="#theorem-on-total-probability-1-P-1">Theorem on total probability</a></li>
 <li><a href="#bayes-theorem-1-P-1">Bayes' Theorem</a>
 <ul>
@@ -93,7 +79,6 @@
 <li><a href="#independence-1-P-1">Independence</a></li>
 <li><a href="#random-variable-1-P-1">Random Variable</a>
 <ul>
-<li><a href="#example--2-P-2">Example:</a></li>
 <li><a href="#discrete-random-variables-2-P-1">Discrete Random Variables</a></li>
 </ul>
 </li>
@@ -145,7 +130,7 @@
 </nav>
 <div id="outline-container-why-probability--1-P-1" class="outline-2">
 <h2 id="why-probability--1-P-1">Why Probability?</h2>
-<div class="outline-text-2" id="text-orgf9f23b7">
+<div class="outline-text-2" id="text-orga206a37">
 <ul class="org-ul">
 <li>Until now, we have discussed deterministic models
 <ul class="org-ul">
@@ -183,10 +168,9 @@ Ultimately, we will reach the limit of our ability to model everything precisely
 </ul>
 </div>
 </div>
-
 <div id="outline-container-random-experiments-1-P-1" class="outline-2">
 <h2 id="random-experiments-1-P-1">Random Experiments</h2>
-<div class="outline-text-2" id="text-orgc91f8c9">
+<div class="outline-text-2" id="text-orgfa90c74">
 <ul class="org-ul">
 <li>A procedure that has an unpredictable outcome despite being repeated under the same conditions.
 <ul class="org-ul">
@@ -207,7 +191,7 @@ Ultimately, we will reach the limit of our ability to model everything precisely
 </div>
 <div id="outline-container-examples-2-P-1" class="outline-3">
 <h3 id="examples-2-P-1">Examples</h3>
-<div class="outline-text-3" id="text-org8d61e76">
+<div class="outline-text-3" id="text-org1dbcdb9">
 <ul class="org-ul">
 <li>Rolling a single die
 <ul class="org-ul">
@@ -237,10 +221,9 @@ form the sample space</li>
 </ul>
 </div>
 </div>
-
 <div id="outline-container-defining-random-experiments-2-P-1" class="outline-3">
 <h3 id="defining-random-experiments-2-P-1">Defining Random Experiments</h3>
-<div class="outline-text-3" id="text-org6e84e06">
+<div class="outline-text-3" id="text-org41b4bb8">
 <ul class="org-ul">
 <li>Specify a random experiment by defining
 <ol class="org-ol">
@@ -278,10 +261,9 @@ form the sample space</li>
 </div>
 </div>
 </div>
-
 <div id="outline-container-statistical-regularity-1-P-1" class="outline-2">
 <h2 id="statistical-regularity-1-P-1">Statistical Regularity</h2>
-<div class="outline-text-2" id="text-org0c63940">
+<div class="outline-text-2" id="text-orga0fa9b5">
 <ul class="org-ul">
 <li>Why do we care about probability at all?</li>
 <li>After many repetitions, average outcome of a random experiment should be the same</li>
@@ -290,16 +272,16 @@ that were run</li>
 <li>Statistical regularity is important for connecting theoretical notions of probability to real-world outcomes</li>
 </ul>
 </div>
-<div id="outline-container-example-roll-a-die-n-times-3-P-1" class="outline-4">
-<h4 id="example-roll-a-die-n-times-3-P-1">Example: roll a die \(n\) times</h4>
-<div class="outline-text-4" id="text-org274558f">
+<div id="outline-container-example-roll-a-die-n-times-2-P-1" class="outline-3">
+<h3 id="example-roll-a-die-n-times-2-P-1">Example: roll a die \(n\) times</h3>
+<div class="outline-text-3" id="text-org3c0075d">
 <ul class="org-ul">
-<li>Relative frequency: number of times a 1 appears divided by \(n\) times</li>
+<li>Relative frequency: number of times a 1 appears divided by \(n\) times
+<ul class="org-ul">
 <li>As \(n\) goes to infinity, relative frequency of the die goes to \(1/6\),
 just as 1 out of 6 elements in the sample space is a 1</li>
 <li>This is the probability of rolling a 1.</li>
-</ul>
-<ul class="org-ul">
+</ul></li>
 <li>If you can use a computer to repeat an experiment many times, you can sometimes brute-force
 an estimate for probability.</li>
 <li>In the real world, it is (technically) impossible to repeat the same exact experiment more than once,
@@ -307,10 +289,9 @@ but we rely on controlling as many of the initial conditions as possible.</li>
 </ul>
 </div>
 </div>
-
 <div id="outline-container-some-properties-of-statistical-regularity-2-P-1" class="outline-3">
 <h3 id="some-properties-of-statistical-regularity-2-P-1">Some Properties of statistical regularity</h3>
-<div class="outline-text-3" id="text-org4dfe1f0">
+<div class="outline-text-3" id="text-orgc798a97">
 <ol class="org-ol">
 <li>Each outcome has relative frequency between 0 and 1
 <ul class="org-ul">
@@ -327,10 +308,9 @@ but we rely on controlling as many of the initial conditions as possible.</li>
 </ol>
 </div>
 </div>
-
 <div id="outline-container-discrete-and-continuous-sample-spaces-2-P-1" class="outline-3">
 <h3 id="discrete-and-continuous-sample-spaces-2-P-1">Discrete and Continuous Sample Spaces</h3>
-<div class="outline-text-3" id="text-org196c1f0">
+<div class="outline-text-3" id="text-orgdbb5f91">
 <ul class="org-ul">
 <li>Discrete: Sample space is a finite or countably infinite
 <ul class="org-ul">
@@ -346,10 +326,9 @@ Flip a coin until it is heads.  Observe the numbers of tails</li>
 </ul>
 </div>
 </div>
-
 <div id="outline-container-events--2-P-1" class="outline-3">
 <h3 id="events--2-P-1">Events:</h3>
-<div class="outline-text-3" id="text-org2d86546">
+<div class="outline-text-3" id="text-org6db20e8">
 <ul class="org-ul">
 <li>Informally: anything that can happen as a result of an experiment that we might want to know the probability of.</li>
 <li>An event is a subset of the sample space.
@@ -372,10 +351,9 @@ Flip a coin until it is heads.  Observe the numbers of tails</li>
 </div>
 </div>
 </div>
-
 <div id="outline-container-probability-axioms-1-P-1" class="outline-2">
 <h2 id="probability-axioms-1-P-1">Probability Axioms</h2>
-<div class="outline-text-2" id="text-orgad211dd">
+<div class="outline-text-2" id="text-orgd710400">
 <ul class="org-ul">
 <li>The Assumptions:
 <ul class="org-ul">
@@ -399,14 +377,14 @@ Flip a coin until it is heads.  Observe the numbers of tails</li>
 </div>
 <div id="outline-container-venn-diagrams-1-P-1" class="outline-2">
 <h2 id="venn-diagrams-1-P-1">Venn Diagrams</h2>
-<div class="outline-text-2" id="text-org03e73d2">
+<div class="outline-text-2" id="text-orgf298c87">
 <ul class="org-ul">
 <li>We can use Venn diagrams to visualize probability</li>
 </ul>
 </div>
 <div id="outline-container-important-corollaries--2-P-1" class="outline-3">
 <h3 id="important-corollaries--2-P-1">Important Corollaries:</h3>
-<div class="outline-text-3" id="text-orga611aef">
+<div class="outline-text-3" id="text-org876a85a">
 <ol class="org-ol">
 <li>\(P[A^c] = 1 - P[A]\) (because \(S = A \cup A^c\), \(P[S] = 1\), and \(P[A \cup A^c] = P[A] + P[A^c]\))</li>
 <li>\(P[A] <= 1\): (from 1, and the fact that \(P[A^c] \geq 0\)).</li>
@@ -416,10 +394,9 @@ Flip a coin until it is heads.  Observe the numbers of tails</li>
 </div>
 </div>
 </div>
-
 <div id="outline-container-conditional-probability-1-P-1" class="outline-2">
 <h2 id="conditional-probability-1-P-1">Conditional Probability</h2>
-<div class="outline-text-2" id="text-org6722d9c">
+<div class="outline-text-2" id="text-orgb1a3bae">
 <p>
 How does knowledge about event \(B\) occurring change the probability of event \(A\)?
 </p>
@@ -430,9 +407,9 @@ How does knowledge about event \(B\) occurring change the probability of event \
 <li>For fixed \(B\), \(P[A | B]\) is itself a  probability over this reduced sample space</li>
 </ul>
 </div>
-<div id="outline-container-example--2-P-1" class="outline-3">
-<h3 id="example--2-P-1">Example:</h3>
-<div class="outline-text-3" id="text-org98bc7f1">
+<div id="outline-container-example-2-P-1" class="outline-3">
+<h3 id="example-2-P-1">Example</h3>
+<div class="outline-text-3" id="text-orga737a64">
 <p>
 Random Experiment: Flip two coins, count the number of Heads
 </p>
@@ -459,10 +436,9 @@ P[\{1\} | \{1, 2\}] &= \frac{P[\{1\} \cap \{1, 2\}]}{P[\{1, 2\}]} \notag \\
 </div>
 </div>
 </div>
-
 <div id="outline-container-theorem-on-total-probability-1-P-1" class="outline-2">
 <h2 id="theorem-on-total-probability-1-P-1">Theorem on total probability</h2>
-<div class="outline-text-2" id="text-orgff6feb8">
+<div class="outline-text-2" id="text-orgb25e745">
 <ul class="org-ul">
 <li>A practical way of computing probabilities when only conditionals are known.</li>
 <li>\(B_1, \dots B_n\) are mutally exclusive events whose union is the entire sample space
@@ -470,11 +446,9 @@ P[\{1\} | \{1, 2\}] &= \frac{P[\{1\} \cap \{1, 2\}]}{P[\{1, 2\}]} \notag \\
 </ul>
 </div>
 </div>
-
-
 <div id="outline-container-bayes-theorem-1-P-1" class="outline-2">
 <h2 id="bayes-theorem-1-P-1">Bayes' Theorem</h2>
-<div class="outline-text-2" id="text-orgac2cbf9">
+<div class="outline-text-2" id="text-org3dbf20e">
 <ul class="org-ul">
 <li>The problem: what is the probability that a hypthesis \(H\) is correct given evidence \(E\)?</li>
 <li>So, there is a random experiment, we observe event \(E\), how likely is event \(H\)?</li>
@@ -518,7 +492,7 @@ is because, to begin with, there is a very small chance of a fire.</li>
 </div>
 <div id="outline-container-terminology--2-P-1" class="outline-3">
 <h3 id="terminology--2-P-1">Terminology:</h3>
-<div class="outline-text-3" id="text-orgdc8d4b1">
+<div class="outline-text-3" id="text-org43965f0">
 <ul class="org-ul">
 <li>Hypothesis: \(H\) (There is a fire in Tech)</li>
 <li>Evidence: \(E\) (The fire alarm is going off)</li>
@@ -536,10 +510,9 @@ of the sample space to only those samples consistent with the Evidence event hav
 </ul>
 </div>
 </div>
-
 <div id="outline-container-graphical-approach--2-P-1" class="outline-3">
 <h3 id="graphical-approach--2-P-1">Graphical Approach:</h3>
-<div class="outline-text-3" id="text-org378ff75">
+<div class="outline-text-3" id="text-org6985f92">
 <ul class="org-ul">
 <li><p>
 Linus is a computer programmer who likes writing bash scripts and is a git expert.
@@ -551,7 +524,7 @@ What is the probability that Linus uses Linux?
 <li>E - Linus is a computer programmer who likes writing bash scripts and is a git expert.</li>
 </ul>
 
-<figure id="org7aa8685">
+<figure id="orgc5287f6">
 <img src="../images/bayes.svg" alt="bayes.svg" class="org-svg">
 
 </figure>
@@ -568,11 +541,9 @@ chance of Linus using Windows/Other rather than Linux.</li>
 </div>
 </div>
 </div>
-
-
 <div id="outline-container-independence-1-P-1" class="outline-2">
 <h2 id="independence-1-P-1">Independence</h2>
-<div class="outline-text-2" id="text-org9dce02a">
+<div class="outline-text-2" id="text-org05f1f44">
 <p>
 Knowledge that event B occurs does not affect the chance of A occuring:
 \(P[A \cap B] = P[A] P[B]\), which implies that \(P[A|B] = P[A]\) and \(P[B|A] = P[B]\) (because of the law on conditional probability)
@@ -609,10 +580,9 @@ For \(k \in \{2, \dots, n\}\):
 </ol>
 </div>
 </div>
-
 <div id="outline-container-random-variable-1-P-1" class="outline-2">
 <h2 id="random-variable-1-P-1">Random Variable</h2>
-<div class="outline-text-2" id="text-org98283fc">
+<div class="outline-text-2" id="text-org917b520">
 <ul class="org-ul">
 <li>Informally: A function that assigns a real number to each outcome in the sample space.</li>
 <li>Not a Variable
@@ -631,9 +601,9 @@ in the sample space occurs after performing the experiment</li>
 </ul></li>
 </ul>
 </div>
-<div id="outline-container-example--2-P-2" class="outline-3">
-<h3 id="example--2-P-2">Example:</h3>
-<div class="outline-text-3" id="text-org2c9f020">
+<div id="outline-container-example-2-P-2" class="outline-3">
+<h3 id="example-2-P-2">Example</h3>
+<div class="outline-text-3" id="text-org991e4c7">
 <ul class="org-ul">
 <li><p>
 Flip two coins. \(\xi \in S\). 
@@ -689,10 +659,9 @@ Flip two coins. \(\xi \in S\).
 </ul>
 </div>
 </div>
-
 <div id="outline-container-discrete-random-variables-2-P-1" class="outline-3">
 <h3 id="discrete-random-variables-2-P-1">Discrete Random Variables</h3>
-<div class="outline-text-3" id="text-org9b44e3a">
+<div class="outline-text-3" id="text-org0eefcf6">
 <ul class="org-ul">
 <li>The random variable maps items in the sample space to a finite set of values</li>
 <li>Probability for events \(A_k = \{\xi: X(\xi) = x_k\}\)</li>
@@ -718,12 +687,11 @@ Flip two coins. \(\xi \in S\).
 </div>
 </div>
 </div>
-
 <div id="outline-container-example-1-P-1" class="outline-2">
 <h2 id="example-1-P-1">Example</h2>
-<div class="outline-text-2" id="text-org8c6c10d">
+<div class="outline-text-2" id="text-orgdbd105c">
 
-<figure id="orga1fcfb4">
+<figure id="orgf843846">
 <img src="../images/binomial_pmf.svg" alt="binomial_pmf.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 1: </span>A probability mass function for a binomial distribution.</figcaption>
@@ -731,7 +699,7 @@ Flip two coins. \(\xi \in S\).
 </div>
 <div id="outline-container-continuous-random-variables-2-P-1" class="outline-3">
 <h3 id="continuous-random-variables-2-P-1">Continuous Random Variables</h3>
-<div class="outline-text-3" id="text-org05b0565">
+<div class="outline-text-3" id="text-org23ded26">
 <ul class="org-ul">
 <li>\(X(\xi)\) is a function from \(S\) to \(\mathbb{R}\) such that \(A_b = \{\xi : X(\xi) \leq b\}\) is in the event class for every \(b\) in \(\mathbb{R}\).
 <ul class="org-ul">
@@ -781,14 +749,13 @@ f_X(x|C) = \frac{d F_x(x | C)}{dx}
 </div>
 </div>
 </div>
-
 <div id="outline-container-expected-value-1-P-1" class="outline-2">
 <h2 id="expected-value-1-P-1">Expected Value</h2>
 <div class="outline-text-2" id="text-expected-value-1-P-1">
 </div>
 <div id="outline-container-discrete-2-P-1" class="outline-3">
 <h3 id="discrete-2-P-1">Discrete</h3>
-<div class="outline-text-3" id="text-orgbea981b">
+<div class="outline-text-3" id="text-org41088ab">
 <p>
 Let \(S_x\) be the range of the random variable \(X\). Then
 </p>
@@ -807,10 +774,9 @@ m_x = E[X(\xi)] = \sum_{x \in S_x}xp_x(x) = \sum_{k}x_kp_x(x_k)
 For example, flip a coin, \(X(H) = 0\), \(X(T) = 1\), assuming a fair coin \(E[X] = 1/2\).</li>
 </ul>
 </div>
-
 <div id="outline-container-applications-3-P-1" class="outline-4">
 <h4 id="applications-3-P-1">Applications</h4>
-<div class="outline-text-4" id="text-orgff61073">
+<div class="outline-text-4" id="text-orge3210a6">
 <ol class="org-ol">
 <li>How much money should I bet in  a game?
 <ul class="org-ul">
@@ -828,7 +794,7 @@ For example, flip a coin, \(X(H) = 0\), \(X(T) = 1\), assuming a fair coin \(E[X
 </div>
 <div id="outline-container-continuous-2-P-1" class="outline-3">
 <h3 id="continuous-2-P-1">Continuous</h3>
-<div class="outline-text-3" id="text-org5efb347">
+<div class="outline-text-3" id="text-orgeb0b1be">
 <p>
 Expected value of \(Y = g(X)\)
 \(E[Y]= \int_{-\infty}^{\infty}g(x)f_x(x)dx\)
@@ -845,16 +811,15 @@ Expected value of \(Y = g(X)\)
 </div>
 <div id="outline-container-uniform-random-variable-any-value-is-equally-likely-3-P-1" class="outline-4">
 <h4 id="uniform-random-variable-any-value-is-equally-likely-3-P-1">Uniform Random variable: any value is equally likely</h4>
-<div class="outline-text-4" id="text-org440f066">
+<div class="outline-text-4" id="text-orgbfc9d78">
 <p>
 \(f_U(x)= \begin{cases}\frac{1}{b-a} & a \leq x \leq b \\ 0\end{cases}\)
 </p>
 </div>
 </div>
-
 <div id="outline-container-gaussian-random-variable-3-P-1" class="outline-4">
 <h4 id="gaussian-random-variable-3-P-1">Gaussian Random Variable</h4>
-<div class="outline-text-4" id="text-orgcc1b61d">
+<div class="outline-text-4" id="text-orge543a3b">
 <ol class="org-ol">
 <li>Lots of special properties: it often can model the sum of large numbers of independent random variables (Central Limit Theorem)</li>
 <li>Completely determined by two parameters: mean and covariance</li>
@@ -869,15 +834,13 @@ f_x(x) = \frac{1}{\sigma \sqrt{2\pi}}e^{\frac{-(x-m)^2}{2\sigma^2}}
 </div>
 </div>
 </div>
-
-
 <div id="outline-container-functions-of-random-variables-1-P-1" class="outline-2">
 <h2 id="functions-of-random-variables-1-P-1">Functions of Random Variables</h2>
 <div class="outline-text-2" id="text-functions-of-random-variables-1-P-1">
 </div>
 <div id="outline-container-overview-2-P-1" class="outline-3">
 <h3 id="overview-2-P-1">Overview</h3>
-<div class="outline-text-3" id="text-orgafb4d87">
+<div class="outline-text-3" id="text-org39d7ba8">
 <p>
 If \(Y = g(X)\) then, given a pdf or cdf of \(X\), what is the equivalent pdf or cdf of \(Y\)?
 </p>
@@ -897,10 +860,8 @@ of an equivalent probability for random variable \(X\) (it's all the values of \
 </p>
 </div>
 </div>
-
-
-<details id="org77998ff"><summary class="header-3">Formal Definitions</summary>
-<div class="outline-text-3" id="text-org77998ff">
+<details id="org7c45e56"><summary class="header-3">Formal Definitions</summary>
+<div class="outline-text-3" id="text-org7c45e56">
 <p>
 The above example uses some common shorthand notation and omits mention of the sample space \(\Omega\).
 In particular, probabilities are properly defined on element of the sample space, and with this strict
@@ -927,10 +888,9 @@ Define the set \(B_C = \{\omega \in \Omega : g(X(\omega)) \in C\}\). Since \(Y(\
 </p>
 </div>
 </details>
-
 <div id="outline-container-discrete-distributions-2-P-1" class="outline-3">
 <h3 id="discrete-distributions-2-P-1">Discrete Distributions</h3>
-<div class="outline-text-3" id="text-org35a4ac8">
+<div class="outline-text-3" id="text-org0d62a69">
 <p>
 For discrete distributions, we can directly apply equation \eqref{eq:equiv} by letting
 \(C = \{y\}\), thus
@@ -951,10 +911,9 @@ Therefore, \(p_Y(y) = \sum_{x \in B} p_X(x)\).
 </p>
 </div>
 </div>
-
 <div id="outline-container-continuous-distributions-2-P-1" class="outline-3">
 <h3 id="continuous-distributions-2-P-1">Continuous Distributions</h3>
-<div class="outline-text-3" id="text-org747233a">
+<div class="outline-text-3" id="text-org17c1b63">
 <p>
 For continuous distributions, we let \(C = \{q : q \leq y\}\), so that equation \eqref{eq:equiv} becomes
 </p>
@@ -975,7 +934,6 @@ and therefore the CDF of \(Y\) is written in terms of the PDF of \(X\):
 F_Y(y) = \int_{x \in B_y} f_X(x) dx.
 \end{equation}
 </div>
-
 <div id="outline-container-pdf_func" class="outline-4">
 <h4 id="pdf_func">Invertible g(x)</h4>
 <div class="outline-text-4" id="text-pdf_func">
@@ -1002,11 +960,9 @@ f_Y(y) = f_X(x) \frac{du}{dy}.
 </div>
 </div>
 </div>
-
-
 <div id="outline-container-linear-example-2-P-1" class="outline-3">
 <h3 id="linear-example-2-P-1">Linear Example</h3>
-<div class="outline-text-3" id="text-orgc049dd2">
+<div class="outline-text-3" id="text-orgb91c363">
 <p>
 Suppose \(Y = a X + b\), with \(a \neq 0\).
 </p>
@@ -1061,11 +1017,9 @@ f_Y(y) = \frac{1}{\lvert a \rvert} f_X(\frac{y-b}{a}).
 </div>
 </div>
 </div>
-
-
 <div id="outline-container-joint-distributions-1-P-1" class="outline-2">
 <h2 id="joint-distributions-1-P-1">Joint Distributions</h2>
-<div class="outline-text-2" id="text-orgdf6e408">
+<div class="outline-text-2" id="text-org3e25720">
 <ul class="org-ul">
 <li>What happens when we have more than one random variable at a time?</li>
 <li>These vector random variables map the sample space to a vector in \(R^n\)</li>
@@ -1101,10 +1055,9 @@ p_{X_j}(x_j) &= P[X = x_j \text { and } X_1, \dots X_{j-1}, X_{j+1}, \dots, X_n
 <li>Two random variables are independent if and only if \(p_{xy}(x_j, y_k) = p_{x}(x_j)p_y(y_j)\).</li>
 </ul>
 </div>
-
 <div id="outline-container-joint-moments-expected-value-2-P-1" class="outline-3">
 <h3 id="joint-moments-expected-value-2-P-1">Joint Moments/expected value</h3>
-<div class="outline-text-3" id="text-orgd03f1b6">
+<div class="outline-text-3" id="text-org04cdc90">
 <p>
 Let \(Z = g(X_1, ... X_n)\).
 </p>
@@ -1124,10 +1077,9 @@ Let \(Z = g(X_1, ... X_n)\).
 </div>
 </div>
 </div>
-
 <div id="outline-container-more-conditional-probability-1-P-1" class="outline-2">
 <h2 id="more-conditional-probability-1-P-1">More conditional probability</h2>
-<div class="outline-text-2" id="text-orgf75d69f">
+<div class="outline-text-2" id="text-org5bf4f3e">
 <ul class="org-ul">
 <li>Conditional pmf: \(p_y(y | x) = \frac{p_{xy}(x,y)}{p_x(x)}\)</li>
 <li>Conditional pdf: \(f_{Y}(y | x) =  \frac{f_{xy}(x,y)}{f_X(x)}\)</li>
@@ -1146,7 +1098,7 @@ Note \(E[Y] = E[E[Y|X]]\)</li>
 </div>
 <div id="outline-container-more-linear-transformations--1-P-1" class="outline-2">
 <h2 id="more-linear-transformations--1-P-1">More linear transformations:</h2>
-<div class="outline-text-2" id="text-orgbeb60f2">
+<div class="outline-text-2" id="text-org36b41ae">
 <p>
 If \(Z = A X\) then \(f_z(z) = f_x(A^{-1}z)/det(A)\)
 </p>
@@ -1168,10 +1120,9 @@ f_x(x) = \frac{e^{-\frac{1}{2}(x-m)^TK^{-1}(x-m)}}{(2\pi)^{n/2}|K|^{\frac{1}{2}}
 </ul>
 </div>
 </div>
-
 <div id="outline-container-conditional-independence-1-P-1" class="outline-2">
 <h2 id="conditional-independence-1-P-1">Conditional Independence</h2>
-<div class="outline-text-2" id="text-orgf5a4dc5">
+<div class="outline-text-2" id="text-org52b596f">
 <p>
 \(P(A \cap B | C) = P(A | C)P(B |C)\)
 Also:
@@ -1183,10 +1134,9 @@ Not equivalent to independence.
 </p>
 </div>
 </div>
-
 <div id="outline-container-resources-1-P-1" class="outline-2">
 <h2 id="resources-1-P-1">Resources</h2>
-<div class="outline-text-2" id="text-orga3074ad">
+<div class="outline-text-2" id="text-orga66a5eb">
 <ol class="org-ol">
 <li><i>Probability, Statistics, and Random Processes for Electrical Enginering</i>, Alberto Leon-Garcia</li>
 <li><a href="https://www.youtube.com/watch?v=HZGCoVF3YvM">Bayes Theorem by 3Blue1Brown</a></li>
