@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-12-18 Thu 11:43 -->
+<!-- 2026-02-27 Fri 09:35 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Franka Setup</title>
@@ -48,7 +48,7 @@
 </nav>
 <div id="outline-container-overview-1-P-1" class="outline-2">
 <h2 id="overview-1-P-1">Overview</h2>
-<div class="outline-text-2" id="text-orga606d83">
+<div class="outline-text-2" id="text-org1becc69">
 <ul class="org-ul">
 <li>Describes the setup for the <a href="https://www.mccormick.northwestern.edu/robotics/">Northwestern MS in Robotics</a> program's Franka Emika Panda robots (since renamed to FER).</li>
 <li>These setup instructions are for to configure the robots themselves: most students will want to follow <a href="./ros_notes/ros2/franka.html">Franka Notes</a></li>
@@ -58,7 +58,7 @@
 
 <div id="outline-container-workstation-computer-1-P-1" class="outline-2">
 <h2 id="workstation-computer-1-P-1">Workstation Computer</h2>
-<div class="outline-text-2" id="text-org3f12b9e">
+<div class="outline-text-2" id="text-orga53d502">
 <ul class="org-ul">
 <li>These instructions are for how our Franka workstation computers are setup.</li>
 <li>Do NOT run these instructions on your personal computer, unless you want to turn it into a Realtime Linux system capable of directly plugging in
@@ -68,7 +68,7 @@ to the Franka Robot (likely not what you want).</li>
 
 <div id="outline-container-operating-system-2-P-1" class="outline-3">
 <h3 id="operating-system-2-P-1">Operating System</h3>
-<div class="outline-text-3" id="text-org574c1fb">
+<div class="outline-text-3" id="text-org1fbd28d">
 <ol class="org-ol">
 <li>Install Ubuntu according to the <a href="https://nu-msr.github.io/hackathon/computer_setup.html">Computer Setup</a> (skipping over System76-specific instructions and most desktop customization)
 <ul class="org-ul">
@@ -150,7 +150,7 @@ Add the following content to the <code>.bashrc</code> of user accounts
 </div>
 <div id="outline-container-ethernet-connections-3-P-1" class="outline-4">
 <h4 id="ethernet-connections-3-P-1">Ethernet Connections</h4>
-<div class="outline-text-4" id="text-org9f58d5f">
+<div class="outline-text-4" id="text-org7c4b1aa">
 <ul class="org-ul">
 <li><code>enp109s0</code>: This is the 1Gb/s ethernet port built into the motherboard. It is used to connect to the laptop.
 <ul class="org-ul">
@@ -172,7 +172,7 @@ Add the following content to the <code>.bashrc</code> of user accounts
 
 <ul class="org-ul">
 <li><a id="bridge-4-P-1"></a>Bridge<br>
-<div class="outline-text-5" id="text-org6dbf8cc">
+<div class="outline-text-5" id="text-org10e5516">
 <ul class="org-ul">
 <li>All connections are bridged on <code>br0</code>, which is given ip address <code>192.168.18.1</code>.
 <ul class="org-ul">
@@ -200,7 +200,7 @@ nmcli con add type ethernet con-name br-pandaY ifname ens24f1 master br0
 
 <div id="outline-container-dns-3-P-1" class="outline-4">
 <h4 id="dns-3-P-1">DNS</h4>
-<div class="outline-text-4" id="text-org435d4d3">
+<div class="outline-text-4" id="text-orga3c2c00">
 <ol class="org-ol">
 <li>Install dnsmasq: <code>sudo apt install dnsmasq</code>
 <ul class="org-ul">
@@ -261,7 +261,7 @@ is how both pandas can get an IP address</li>
 </div>
 <div id="outline-container-ssh-3-P-1" class="outline-4">
 <h4 id="ssh-3-P-1">SSH</h4>
-<div class="outline-text-4" id="text-org6c44025">
+<div class="outline-text-4" id="text-org198b444">
 <p>
 The <code>station</code> should have an <code>ssh</code> server:
 </p>
@@ -273,7 +273,7 @@ The <code>station</code> should have an <code>ssh</code> server:
 
 <div id="outline-container-ntp-3-P-1" class="outline-4">
 <h4 id="ntp-3-P-1">NTP</h4>
-<div class="outline-text-4" id="text-orgadff065">
+<div class="outline-text-4" id="text-org44e2934">
 <ul class="org-ul">
 <li>The <code>station</code> computer is not usually connected to the internet.</li>
 <li>It needs to be synchronized with the user's laptop time.</li>
@@ -291,7 +291,7 @@ The <code>station</code> should have an <code>ssh</code> server:
 </div>
 <div id="outline-container-internet-3-P-1" class="outline-4">
 <h4 id="internet-3-P-1">Internet</h4>
-<div class="outline-text-4" id="text-org696e9df">
+<div class="outline-text-4" id="text-org11becf6">
 <ol class="org-ol">
 <li>The Franka robots are, by default, intentionally disconnected from the internet</li>
 <li>To get internet on the Franka, it is easiest to route through the user's laptop:
@@ -313,7 +313,7 @@ The <code>station</code> should have an <code>ssh</code> server:
 </div>
 <div id="outline-container-reverse-proxy-3-P-1" class="outline-4">
 <h4 id="reverse-proxy-3-P-1">Reverse Proxy</h4>
-<div class="outline-text-4" id="text-orgbc99acb">
+<div class="outline-text-4" id="text-org8c2b1c5">
 <ol class="org-ol">
 <li>The Franka Panda's SSH certificate has expired, making it difficult to access the web UI from Firefox (because Firefox will not let users add exceptions
 for expired certificates through the UI).</li>
@@ -340,7 +340,7 @@ sudo mv station.crt /etc/nginx/ssl
 </div>
 <div id="outline-container-ros-2-iron-2-P-1" class="outline-3">
 <h3 id="ros-2-iron-2-P-1">ROS 2 Iron</h3>
-<div class="outline-text-3" id="text-orgfc38f1e">
+<div class="outline-text-3" id="text-org31a2925">
 <ol class="org-ol">
 <li>A ROS 2 Iron docker container is available on dockerhub at <a href="https://hub.docker.com/repository/docker/reem17/franka_iron/general">https://hub.docker.com/repository/docker/reem17/franka_iron/general</a></li>
 <li>Install docker on station: <code>sudo apt install --no-install-recommends docker.io</code></li>
@@ -375,8 +375,8 @@ Docker messes up network settings with network bridges. To fix, create <code>/et
 </ul></li>
 </ol>
 </div>
-<details id="orgbb8e211"><summary class="header-4">Building The Container</summary>
-<div class="outline-text-4" id="text-orgbb8e211">
+<details id="orgf0ceed0"><summary class="header-4">Building The Container</summary>
+<div class="outline-text-4" id="text-orgf0ceed0">
 <ul class="org-ul">
 <li>The docker file context is available here: <a href="./images/franka_docker/Dockerfile">Dockerfile</a>.</li>
 <li>The <a href="./images/franka_docker/limits.conf">limits.conf</a> file must be in the build context folder.</li>
@@ -389,7 +389,7 @@ Docker messes up network settings with network bridges. To fix, create <code>/et
 
 <div id="outline-container-final-touches-2-P-1" class="outline-3">
 <h3 id="final-touches-2-P-1">Final Touches</h3>
-<div class="outline-text-3" id="text-orgea55669">
+<div class="outline-text-3" id="text-org0cff1b2">
 <ol class="org-ol">
 <li>Make sure that in the bios setup, the option to need to "press F1 on boot failure" is disabled. Otherwise if power is cut the user
 will need a keyboard.</li>
