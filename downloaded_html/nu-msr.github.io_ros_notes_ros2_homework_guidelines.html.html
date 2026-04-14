@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-30 Fri 13:06 -->
+<!-- 2026-03-04 Wed 08:40 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Homework Guidelines: ME495 Embedded Systems in Robotics</title>
@@ -23,11 +23,11 @@
 <ul>
 <li><a href="#guidelines-1-P-1">Guidelines</a>
 <ul>
-<li><a href="#git-2-P-2">Git</a></li>
-<li><a href="#readme-2-P-3">README</a></li>
+<li><a href="#git-2-P-1">Git</a></li>
+<li><a href="#readme-2-P-1">README</a></li>
 <li><a href="#citations-2-P-1">Citations</a></li>
 <li><a href="#appropriate-use-of-sources-2-P-1">Appropriate Use of Sources</a></li>
-<li><a href="#documentation-2-P-3">Documentation</a></li>
+<li><a href="#documentation-2-P-1">Documentation</a></li>
 <li><a href="#coding-guidelines-2-P-1">Coding Guidelines</a></li>
 </ul>
 </li>
@@ -47,8 +47,8 @@ which means providing documentation, using git properly, and providing tests whe
 </p>
 </div>
 
-<div id="outline-container-git-2-P-2" class="outline-3">
-<h3 id="git-2-P-2">Git</h3>
+<div id="outline-container-git-2-P-1" class="outline-3">
+<h3 id="git-2-P-1">Git</h3>
 <div class="outline-text-3" id="text-org17c4d63">
 <ol class="org-ol">
 <li>Create a git repository using the link provided under the homework assignment in Canvas.</li>
@@ -78,8 +78,8 @@ which means providing documentation, using git properly, and providing tests whe
 </div>
 </div>
 
-<div id="outline-container-readme-2-P-3" class="outline-3">
-<h3 id="readme-2-P-3">README</h3>
+<div id="outline-container-readme-2-P-1" class="outline-3">
+<h3 id="readme-2-P-1">README</h3>
 <div class="outline-text-3" id="text-org4f726b9">
 <ol class="org-ol">
 <li>Your <code>README.md</code> should be formatted using markdown: see <a href="https://guides.github.com/features/mastering-markdown/">this guide</a>.
@@ -135,8 +135,8 @@ for portions of your homework that are derived from a prior student's solution.<
 </div>
 </div>
 
-<div id="outline-container-documentation-2-P-3" class="outline-3">
-<h3 id="documentation-2-P-3">Documentation</h3>
+<div id="outline-container-documentation-2-P-1" class="outline-3">
+<h3 id="documentation-2-P-1">Documentation</h3>
 <div class="outline-text-3" id="text-org00cf2e7">
 <ol class="org-ol">
 <li>Each node that you write should start with a python <a href="https://peps.python.org/pep-0257/">docstring</a> describing its ROS API:
@@ -227,7 +227,11 @@ Below is a checklist to use when you are finished and are thinking about turning
 
 <ol class="org-ol">
 <li>Clone your repository into a brand new workspace to make sure you have committed and pushed everything to <code>git</code></li>
-<li>Does <code>colcon build</code> and <code>colcon test</code> run cleanly?</li>
+<li>Does <code>colcon build</code> and <code>colcon test</code> run cleanly?
+<ul class="org-ul">
+<li>To be extra safe run <code>colcon build --executor sequential</code> ensuring that there are no race conditions
+related to parallel dependencies in the build.</li>
+</ul></li>
 <li>Run the commands in the <code>README.md</code>. Do the instructions work?</li>
 <li>Are your debugging statements either removed or logged with using ROS logging tools?</li>
 <li>Do your python files have a docstrings explaining the ROS publishers/subscribers/etc&#x2026;</li>
