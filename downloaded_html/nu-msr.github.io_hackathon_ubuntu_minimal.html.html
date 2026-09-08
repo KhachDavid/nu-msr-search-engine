@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-09-12 Fri 16:38 -->
+<!-- 2026-09-08 Tue 08:48 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Minimal Ubuntu Install</title>
@@ -23,60 +23,64 @@
 <ul>
 <li><a href="#overview-1-P-4">Overview</a>
 <ul>
-<li><a href="#disclaimer-2-P-1">Disclaimer</a></li>
+<li><a href="#previous-versions-2-P-1">Previous Versions</a></li>
+<li><a href="#disclaimer-2-P-2">Disclaimer</a></li>
 </ul>
 </li>
-<li><a href="#setup-1-P-5">Setup</a>
+<li><a href="#setup-1-P-3">Setup</a>
 <ul>
-<li><a href="#working-copy-of-livecd-2-P-1">Working Copy of LiveCD</a></li>
-<li><a href="#the-system-image-2-P-1">The System Image</a></li>
-<li><a href="#make-the-minimal-squashfs-2-P-1">Make the Minimal Squashfs</a></li>
-<li><a href="#make-the-desktop-squashfs-2-P-1">Make the Desktop Squashfs</a>
+<li><a href="#working-copy-of-livecd-2-P-2">Working Copy of LiveCD</a></li>
+<li><a href="#the-minimal-system-image-2-P-1">The Minimal System Image</a></li>
+<li><a href="#adding-packages-to-the-iso-repository-2-P-1">Adding Packages to the ISO Repository</a></li>
+<li><a href="#setting-up-the-iso-repository-2-P-1">Setting Up The ISO Repository</a></li>
+<li><a href="#make-the-minimal-squashfs-2-P-2">Make the Minimal Squashfs</a></li>
+<li><a href="#make-the-desktop-squashfs-2-P-2">Make the Desktop Squashfs</a>
 <ul>
-<li><a href="#new-squashfs-entry-3-P-1">New Squashfs Entry</a></li>
-<li><a href="#mounting-the-squashfs-3-P-1">Mounting the Squashfs</a></li>
-<li><a href="#work-inside-the-chroot-3-P-1">Work Inside the chroot</a></li>
-<li><a href="#cleanup-3-P-1">Cleanup</a></li>
-<li><a href="#make-the-squashfs-3-P-1">Make The Squashfs</a></li>
+<li><a href="#new-squashfs-entry-3-P-2">New Squashfs Entry</a></li>
+<li><a href="#mounting-the-squashfs-3-P-2">Mounting the Squashfs</a></li>
+<li><a href="#work-inside-the-chroot-3-P-2">Work Inside the chroot</a></li>
+<li><a href="#cleanup-3-P-2">Cleanup</a></li>
+<li><a href="#make-the-squashfs-3-P-2">Make The Squashfs</a></li>
 </ul>
 </li>
-<li><a href="#update-the-live-squashfs-2-P-1">Update the Live Squashfs</a></li>
-<li><a href="#recreate-the-iso-2-P-1">Recreate the ISO</a></li>
-<li><a href="#testing-the-image-in-a-virtual-machine-2-P-1">Testing the Image in a Virtual Machine</a></li>
-<li><a href="#writing-the-iso-to-a-usb-drive--2-P-1">Writing The ISO To a USB Drive:</a></li>
+<li><a href="#update-the-live-squashfs-2-P-2">Update the Live Squashfs</a></li>
+<li><a href="#recreate-the-iso-2-P-2">Recreate the ISO</a></li>
+<li><a href="#testing-the-image-in-a-virtual-machine-2-P-2">Testing the Image in a Virtual Machine</a></li>
+<li><a href="#writing-the-iso-to-a-usb-drive--2-P-2">Writing The ISO To a USB Drive:</a></li>
 </ul>
 </li>
-<li><a href="#structure-of-the-installation-image-1-P-1">Structure of the Installation Image</a>
+<li><a href="#structure-of-the-installation-image-1-P-2">Structure of the Installation Image</a>
 <ul>
 <li>
 <ul>
-<li><a href="#casper-3-P-1">casper</a></li>
+<li><a href="#casper-3-P-2">casper</a></li>
 </ul>
 </li>
-<li><a href="#structure-of-the-live-cd-2-P-1">Structure of the Live CD</a></li>
+<li><a href="#structure-of-the-live-cd-2-P-2">Structure of the Live CD</a></li>
 </ul>
 </li>
-<li><a href="#exploring-packages-1-P-1">Exploring Packages</a></li>
-<li><a href="#the-base-system-1-P-1">The Base System</a>
+<li><a href="#exploring-packages-1-P-2">Exploring Packages</a></li>
+<li><a href="#the-base-system-1-P-2">The Base System</a>
 <ul>
-<li><a href="#bootstrap-2-P-1">Bootstrap</a></li>
-<li><a href="#bootloader-and-kernel-2-P-1">Bootloader and Kernel</a></li>
-<li><a href="#minimal-ubuntu-userspace-2-P-1">Minimal Ubuntu Userspace</a>
+<li><a href="#bootstrap-2-P-2">Bootstrap</a></li>
+<li><a href="#bootloader-and-kernel-2-P-2">Bootloader and Kernel</a></li>
+<li><a href="#minimal-ubuntu-userspace-2-P-2">Minimal Ubuntu Userspace</a>
 <ul>
-<li><a href="#ubuntu-minimal-3-P-1">Ubuntu Minimal</a></li>
-<li><a href="#netplan-3-P-1">Netplan</a></li>
-<li><a href="#ubuntu-pro-client-3-P-1">Ubuntu Pro Client</a></li>
-<li><a href="#cloud-init-3-P-1">Cloud-init</a></li>
-<li><a href="#additional-packages-3-P-1">Additional Packages</a></li>
-<li><a href="#blocked-packages-3-P-1">Blocked packages</a></li>
-<li><a href="#additional-package-options-3-P-1">Additional Package Options</a></li>
+<li><a href="#ubuntu-minimal-3-P-2">Ubuntu Minimal</a></li>
+<li><a href="#netplan-3-P-2">Netplan</a></li>
+<li><a href="#ubuntu-pro-client-3-P-2">Ubuntu Pro Client</a></li>
+<li><a href="#cloud-init-3-P-2">Cloud-init</a></li>
+<li><a href="#additional-packages-3-P-3">Additional Packages</a></li>
+<li><a href="#recommended-dependencies-3-P-1">Recommended Dependencies</a></li>
+<li><a href="#blocked-packages-3-P-2">Blocked packages</a></li>
+<li><a href="#additional-package-options-3-P-2">Additional Package Options</a></li>
 </ul>
 </li>
 <li><a href="#desktop-setup">Desktop</a>
 <ul>
-<li><a href="#required-3-P-1">Required</a></li>
-<li><a href="#recommended-3-P-1">Recommended</a></li>
-<li><a href="#additional-packages-3-P-2">Additional Packages</a></li>
+<li><a href="#required-3-P-2">Required</a></li>
+<li><a href="#recommended-3-P-2">Recommended</a></li>
+<li><a href="#additional-packages-3-P-4">Additional Packages</a></li>
 </ul>
 </li>
 </ul>
@@ -84,12 +88,11 @@
 </ul>
 </div>
 </nav>
-
 <div id="outline-container-overview-1-P-4" class="outline-2">
 <h2 id="overview-1-P-4">Overview</h2>
-<div class="outline-text-2" id="text-org5661a8a">
+<div class="outline-text-2" id="text-orgc1d0c18">
 <p>
-This document discusses the how and why of creating a minimal Ubuntu Linux 24.04 (Noble Numbat) installation (referred to as MSR Ubuntu).
+This document discusses the how and why of creating a minimal Ubuntu Linux 26.04 (Resolute Raccoon) installation (referred to as MSR Ubuntu).
 </p>
 
 <p>
@@ -106,10 +109,17 @@ The goals of this lightly-customized Ubuntu are:
 </ol></li>
 </ol>
 </div>
+<details id="org80992c2"><summary class="header-3">Previous Versions</summary>
+<div class="outline-text-3" id="text-org80992c2">
+<ol class="org-ol">
+<li><a href="./archive/ubuntu_minimal_24.04">Ubuntu 24.04</a></li>
+</ol>
+</div>
+</details>
 
-<div id="outline-container-disclaimer-2-P-1" class="outline-3">
-<h3 id="disclaimer-2-P-1">Disclaimer</h3>
-<div class="outline-text-3" id="text-orga72d1b7">
+<div id="outline-container-disclaimer-2-P-2" class="outline-3">
+<h3 id="disclaimer-2-P-2">Disclaimer</h3>
+<div class="outline-text-3" id="text-org7529ab9">
 <p>
 This document attempts to relay knowledge gleaned from experimenting and reverse-engineering parts of Ubuntu and its install process,
 as there is not (to my knowledge) and up-to-date tutorial explaining the process in detail. Therefore, it may contain factual errors.
@@ -124,19 +134,29 @@ and personal preferences. Reasonable people may come to different conclusions.
 </div>
 </div>
 
-<div id="outline-container-setup-1-P-5" class="outline-2">
-<h2 id="setup-1-P-5">Setup</h2>
-<div class="outline-text-2" id="text-orgee76898">
+
+
+<div id="outline-container-setup-1-P-3" class="outline-2">
+<h2 id="setup-1-P-3">Setup</h2>
+<div class="outline-text-2" id="text-orgb28f5cd">
 <ol class="org-ol">
 <li>These instructions are adapted from <a href="https://help.ubuntu.com/community/LiveCDCustomization">Ubuntu LiveCD Customization</a></li>
 <li>All commands are assumed to be run in order from a working directory. It is recommended that this directory starts out empty.</li>
 </ol>
 </div>
 
-<div id="outline-container-working-copy-of-livecd-2-P-1" class="outline-3">
-<h3 id="working-copy-of-livecd-2-P-1">Working Copy of LiveCD</h3>
-<div class="outline-text-3" id="text-org5f8d8e6">
+<div id="outline-container-working-copy-of-livecd-2-P-2" class="outline-3">
+<h3 id="working-copy-of-livecd-2-P-2">Working Copy of LiveCD</h3>
+<div class="outline-text-3" id="text-orgf4f414f">
 <ol class="org-ol">
+<li><p>
+Create a working directory (we will use <code>ubuntu</code> and refer to it herein)
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">mkdir ubuntu
+<span class="org-builtin">cd</span> ubuntu
+</pre>
+</div></li>
 <li><p>
 Download the CD image.
 </p>
@@ -145,11 +165,12 @@ Download the CD image.
 that files downloaded via debootstrap are from the same update as the files on the CD image.</li>
 </ul>
 <div class="org-src-container">
-<pre class="src src-bash">wget https://cdimage.ubuntu.com/noble/daily-live/pending/noble-desktop-amd64.iso
-wget https://cdimage.ubuntu.com/noble/daily-live/pending/SHA256SUMS
-wget https://cdimage.ubuntu.com/noble/daily-live/pending/SHA256SUMS.gpg
+<pre class="src src-bash">wget -O ubuntu.iso https://cdimage.ubuntu.com/ubuntu/resolute/daily-live/current/resolute-desktop-amd64.iso
+wget https://cdimage.ubuntu.com/ubuntu/resolute/daily-live/current/SHA256SUMS
+wget https://cdimage.ubuntu.com/ubuntu/resolute/daily-live/current/SHA256SUMS.gpg
 </pre>
 </div></li>
+
 <li><p>
 Verify the image: <a href="https://ubuntu.com/tutorials/how-to-verify-ubuntu">How To Verify Ubuntu</a>
 </p>
@@ -158,16 +179,16 @@ Verify the image: <a href="https://ubuntu.com/tutorials/how-to-verify-ubuntu">Ho
 </span>gpg --keyid-format long --keyserver hkp://keyserver.ubuntu.com --recv-keys 0x46181433FBB75451 0xD94AA3F0EFE21092
 gpg --keyid-format long --list-keys --with-fingerprint 0x46181433FBB75451 0xD94AA3F0EFE21092
 <span class="org-comment-delimiter"># </span><span class="org-comment">Ensure that the output shows the following:
-</span><span class="org-comment-delimiter">#</span><span class="org-comment">pub   dsa1024/46181433FBB75451 2004-12-30 [SC]
-</span><span class="org-comment-delimiter">#    </span><span class="org-comment">Key fingerprint = C598 6B4F 1257 FFA8 6632  CBA7 4618 1433 FBB7 5451
-</span><span class="org-comment-delimiter">#</span><span class="org-comment">uid                  Ubuntu CD Image Automatic Signing Key <a href="mailto:cdimage%40ubuntu.com">&lt;cdimage@ubuntu.com&gt;</a>
-</span><span class="org-comment-delimiter">#</span><span class="org-comment">
-</span><span class="org-comment-delimiter">#</span><span class="org-comment">pub   rsa4096/D94AA3F0EFE21092 2012-05-11 [SC]
-</span><span class="org-comment-delimiter">#    </span><span class="org-comment">Key fingerprint = 8439 38DF 228D 22F7 B374  2BC0 D94A A3F0 EFE2 1092
-</span><span class="org-comment-delimiter">#</span><span class="org-comment">uid                  Ubuntu CD Image Automatic Signing Key (2012) <a href="mailto:cdimage%40ubuntu.com">&lt;cdimage@ubuntu.com&gt;</a>
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">Verify the iso
+</span>pub   rsa4096/D94AA3F0EFE21092 2012-05-11 [SC]
+ Key <span class="org-variable-name">fingerprint</span> = 8439 38DF 228D 22F7 B374  2BC0 D94A A3F0 EFE2 1092
+uid                 [ unknown] Ubuntu CD Image Automatic Signing Key (2012) <a href="mailto:cdimage%40ubuntu.com">&lt;cdimage@ubuntu.com&gt;</a>
+
+pub   dsa1024/46181433FBB75451 2004-12-30 [SC]
+ Key <span class="org-variable-name">fingerprint</span> = C598 6B4F 1257 FFA8 6632  CBA7 4618 1433 FBB7 5451
+uid                 [ unknown] Ubuntu CD Image Automatic Signing Key <a href="mailto:cdimage%40ubuntu.com">&lt;cdimage@ubuntu.com&gt;</a>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Verify the iso
 </span>gpg --keyid-format long --verify SHA256SUMS.gpg SHA256SUMS
-<span class="org-comment-delimiter"># </span><span class="org-comment">You should see "gpg: Good Signature from "Ubuntu CD ..."</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">You should see "gpg: Good Signature from "Ubuntu CD ..., you can ignore the warning about a trusted signature"</span>
 </pre>
 </div></li>
 <li><p>
@@ -175,10 +196,11 @@ Mount the iso image to a loopback device:
 </p>
 <div class="org-src-container">
 <pre class="src src-bash"><span class="org-comment-delimiter"># </span><span class="org-comment">Setup loopback device, and store the device in loopdev variable
-</span><span class="org-builtin">export</span> <span class="org-variable-name">loopdev</span>=$(<span class="org-sh-quoted-exec">sudo losetup --show -Pf noble-desktop-amd64.iso</span>)
+</span><span class="org-builtin">export</span> <span class="org-variable-name">loopdev</span>=$(sudo losetup --show -Pf ubuntu.iso)
 <span class="org-comment-delimiter"># </span><span class="org-comment">Mount the iso mount point and mount the iso
 </span>mkdir isomnt
 sudo mount ${<span class="org-variable-name">loopdev</span>}p1 isomnt
+<span class="org-comment-delimiter"># </span><span class="org-comment">The warning about write protection is expected</span>
 </pre>
 </div></li>
 <li><p>
@@ -187,14 +209,13 @@ Copy the image, so that we can modify it (we can't change it in-place because .i
 <div class="org-src-container">
 <pre class="src src-bash">cp -a isomnt extracted
 <span class="org-comment-delimiter"># </span><span class="org-comment">Remove the files we don't need
-</span>sudo rm extracted/casper/*.{de,en,es,fr,it,no-languages,pt,ru,zh}<span class="org-builtin">.</span>*
+</span>sudo rm extracted/casper/*.{de,en,es,fr,it,no-languages,pt,ru,zh}.*
 sudo rm extracted/casper/*secureboot*
-sudo rm extracted/casper/*filesystem*
 </pre>
 </div></li>
 
 <li><p>
-To reconstruct the filesystem we need the boot code from the Master Boot Record and EFI partition. 
+To reconstruct the filesystem we need the boot code from the Master Boot Record and EFI partition.
 </p>
 <ul class="org-ul">
 <li>The MBR is the first sector (512 bytes) of the disk and the first 446 bytes of that constitute the boot code.</li>
@@ -202,30 +223,45 @@ To reconstruct the filesystem we need the boot code from the Master Boot Record 
 </ul>
 <div class="org-src-container">
 <pre class="src src-bash"><span class="org-comment-delimiter"># </span><span class="org-comment">Copy the MBR
-</span>dd <span class="org-variable-name">bs</span>=1 <span class="org-variable-name">count</span>=446 <span class="org-variable-name">if</span>=noble-desktop-amd64.iso <span class="org-variable-name">of</span>=mbr.img
+</span>dd <span class="org-variable-name">bs</span>=1 <span class="org-variable-name">count</span>=446 <span class="org-variable-name">if</span>=ubuntu.iso <span class="org-variable-name">of</span>=mbr.img
 <span class="org-comment-delimiter"># </span><span class="org-comment">Copy the EFI partition
 </span>sudo cp ${<span class="org-variable-name">loopdev</span>}p2 EFI.img
 </pre>
 </div></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-the-minimal-system-image-2-P-1" class="outline-3">
+<h3 id="the-minimal-system-image-2-P-1">The Minimal System Image</h3>
+<div class="outline-text-3" id="text-orge3b0108">
+<p>
+These instructions discuss how to create the <code>msr.squashfs</code> filesystem that will be installed by <code>subiquity</code> (the Ubuntu Installer).
+</p>
+<ul class="org-ul">
+<li>The <code>msr.squashfs</code> system is extracted to the harddrive and provides most of the starting packages for the new system</li>
 
 <li><p>
 Setup the image to install a custom disk image, rather than one of the provided images:
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span class="org-comment-delimiter"># </span><span class="org-comment">Overrite the install-sources.yaml
+<pre class="src src-bash"><span class="org-comment-delimiter"># </span><span class="org-comment">Overwrite the install-sources.yaml
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">Note that size is set to 0, and we will also not provide
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">A corresponding .manifest, .size, or .gpg file like the original image did.
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">I removed these files and set size to 0 with no ill effects so they do not seem
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">necessary. Of course the size and manifest could be calculated but this is more work.
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">Of course, there could be something that I am overlooking here.
 </span>cat &lt;&lt; EOF | sudo tee extracted/casper/install-sources.yaml<span class="org-sh-heredoc">
+kernel:
+  default: linux-generic-hwe-24.04
+sources:
 - default: false
   description:
-     en: Minimal Ubuntu for NUMSR.
+     en: Minimal Ubuntu for NU-MSR.
   id: ubuntu-desktop-minimal
   locale_support: langpack
   name:
-     en: Ubuntu (minimized)
+     en: Ubuntu MSR (minimized)
   size: 0
   path: msr.squashfs
   type: fsimage-layered
@@ -233,23 +269,6 @@ Setup the image to install a custom disk image, rather than one of the provided 
 EOF</span>
 </pre>
 </div></li>
-</ol>
-</div>
-</div>
-
-<div id="outline-container-the-system-image-2-P-1" class="outline-3">
-<h3 id="the-system-image-2-P-1">The System Image</h3>
-<div class="outline-text-3" id="text-org540f9f3">
-<p>
-These instructions discuss how to create the <code>msr.squashfs</code> filesystem that will be installed by subiquity (the Ubuntu Installer).
-</p>
-<ul class="org-ul">
-<li>The <code>msr.squashfs</code> system is extracted to the harddrive and provides most of the starting packages for the new system</li>
-<li>To create this partition, we download packages from the internet. If these packages end up not being from the same exact release/update
-as the packages on the CD image, problems can ensue when doing an offline installation.</li>
-<li>Therefore, this step and the above step should be done at similar times.</li>
-<li>Another potential workaround is to actually bootstrap packages from the CD rather than the internet, however not all bootstrap packages are actually
-archived on the CD. Theoretically, you could create your own Ubuntu mirror on the CD that has all packages needed for the image and installation.</li>
 </ul>
 
 <p>
@@ -278,7 +297,7 @@ kbd,<span class="org-sh-escaped-newline">\</span>
 kmod,<span class="org-sh-escaped-newline">\</span>
 language-selector-common,<span class="org-sh-escaped-newline">\</span>
 less,<span class="org-sh-escaped-newline">\</span>
-linux-image-generic,<span class="org-sh-escaped-newline">\</span>
+linux-generic-hwe-24.04,<span class="org-sh-escaped-newline">\</span>
 locales,<span class="org-sh-escaped-newline">\</span>
 lsb-release,<span class="org-sh-escaped-newline">\</span>
 mawk,<span class="org-sh-escaped-newline">\</span>
@@ -298,25 +317,7 @@ vim-tiny,<span class="org-sh-escaped-newline">\</span>
 whiptail,<span class="org-sh-escaped-newline">\</span>
 rsyslog,<span class="org-sh-escaped-newline">\</span>
 zstd <span class="org-sh-escaped-newline">\</span>
-noble msr_image
-
-<span class="org-comment-delimiter"># </span><span class="org-comment">Create a file that prioritizes the numsr-robotics repository
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">This means that packages here will supersede other packages even if they
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">are an older version of the package
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">We also prevent the installation of netplan.io and other files we removed
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">to prevent accidental installation.
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">For example, if our unpatched network-manager co-exists on a system with netplan.io, changes
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">made in network-manager won't be synced with netplan
-</span>cat &lt;&lt; EOF | sudo tee msr_image/etc/apt/preferences.d/numsr-apt-preferences<span class="org-sh-heredoc">
-Package: *
-Pin: release o=LP-PPA-numsr-robotics
-Pin-Priority: 1020
-
-Package: apport cloud-init netplan.io snap ubuntu-pro-client unattended-upgrades whoopsie
-Pin: release *
-Pin-Priority: -1
-EOF
-</span>
+resolute msr_image
 </pre>
 </div>
 
@@ -342,8 +343,28 @@ sudo chroot msr_image
 The following commands take place inside the chroot
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span class="org-comment-delimiter"># </span><span class="org-comment">Install some improtant packages
-</span>apt update
+<pre class="src src-bash"><span class="org-comment-delimiter"># </span><span class="org-comment">Set up apt
+</span>apt modernize-sources -y
+rm /etc/apt/sources.list.bak
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Create a file that prioritizes the numsr-robotics repository
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">This means that packages here will supersede other packages even if they
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">are an older version of the package
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">We also prevent the installation of netplan.io and other files we removed
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">to prevent accidental installation.
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">For example, if our unpatched network-manager co-exists on a system with netplan.io, changes
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">made in network-manager won't be synced with netplan
+</span>cat &lt;&lt; EOF &gt; /etc/apt/preferences.d/numsr-apt-preferences<span class="org-sh-heredoc">
+Package: *
+Pin: release o=LP-PPA-numsr-robotics
+Pin-Priority: 1020
+
+Package: apport cloud-init netplan.io snapd ubuntu-pro-client unattended-upgrades whoopsie
+Pin: release *
+Pin-Priority: -1
+EOF
+</span>
+apt update
 apt install --no-install-recommends -y software-properties-common
 
 <span class="org-comment-delimiter"># </span><span class="org-comment">Add all ubuntu distribution components
@@ -364,23 +385,35 @@ add-apt-repository -y multiverse
               wpasupplicant <span class="org-sh-escaped-newline">\</span>
               uncloud-init
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Make a network manager connection profile for eduroam
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">The end user will have to modify this, but it will be
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">easier if most of the settings are already there.
-</span>nmcli --offline con add type wifi <span class="org-sh-escaped-newline">\</span>
-        con-name eduroam <span class="org-sh-escaped-newline">\</span>
-        autoconnect no <span class="org-sh-escaped-newline">\</span>
-        ssid eduroam <span class="org-sh-escaped-newline">\</span>
-        802-1x.eap peap <span class="org-sh-escaped-newline">\</span>
-        802-1x.identity NETID@northwestern.edu <span class="org-sh-escaped-newline">\</span>
-        802-1x.phase2-autheap mschapv2 <span class="org-sh-escaped-newline">\</span>
-        wifi-sec.auth-alg open <span class="org-sh-escaped-newline">\</span>
-        wifi-sec.key-mgmt wpa-eap <span class="org-sh-escaped-newline">\</span>
-        &gt; /etc/NetworkManager/system-connections/eduroam.nmconnection
-chmod 600 /etc/NetworkManager/system-connections/eduroam.nmconnection
-
 <span class="org-comment-delimiter"># </span><span class="org-comment">Disable phased updates so we are all on the same version of Ubuntu with the same packages
 </span><span class="org-builtin">echo</span> <span class="org-string">"APT::Get::Never-Include-Phased-Updates true;"</span> &gt; /etc/apt/apt.conf.d/99-Phased_Updates
+
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">We also need an /etc/apt/sources.list or the installer will fail
+</span>cat &lt;&lt; EOF &gt; /etc/apt/sources.list<span class="org-sh-heredoc">
+# Ubuntu sources have moved to the /etc/apt/sources.list.d/ubuntu.sources
+# file, which uses the deb822 format. Use deb822-formatted .sources files
+# to manage package sources in the /etc/apt/sources.list.d/ directory.
+# See the sources.list(5) manual page for details.
+EOF
+</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Edit /etc/apt/sources.list.d/ubuntu.sources to add the
+</span>sed -i <span class="org-string">'/^Suites:/c\Suites: resolute resolute-updates resolute-security'</span> /etc/apt/sources.list.d/ubuntu.sources
+
+apt update
+apt upgrade --no-install-recommends
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Clean up old apt files
+</span>rm -rf /var/lib/apt/lists/*
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Disable some timers
+</span>rm /etc/systemd/system/timers.target.wants/apt-daily-upgrade.timer
+rm /etc/systemd/system/timers.target.wants/apt-daily.timer
+rm /etc/systemd/system/timers.target.wants/motd-news.timer
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Disable some motd scripts
+</span>chmod a-x /etc/update-motd.d/10-help-text
+chmod a-x /etc/update-motd.d/50-motd-news
 <span class="org-comment-delimiter"># </span><span class="org-comment">exit the chroot
 </span><span class="org-keyword">exit</span>
 </pre>
@@ -395,14 +428,95 @@ sudo umount msr_image/sys
 sudo umount msr_image/dev/pts
 sudo umount msr_image/tmp
 sudo umount msr_image/run
+
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-make-the-minimal-squashfs-2-P-1" class="outline-3">
-<h3 id="make-the-minimal-squashfs-2-P-1">Make the Minimal Squashfs</h3>
-<div class="outline-text-3" id="text-orgacaa438">
+<div id="outline-container-adding-packages-to-the-iso-repository-2-P-1" class="outline-3">
+<h3 id="adding-packages-to-the-iso-repository-2-P-1">Adding Packages to the ISO Repository</h3>
+<div class="outline-text-3" id="text-org4180208">
+<p>
+These steps are necessary if using full disk encryption on the install.
+</p>
+<ol class="org-ol">
+<li>The iso image ships with Debian packages that can be optionally installed by the user or the installer
+<ul class="org-ul">
+<li>Certain options, such as disk encryption, may require additional packages</li>
+</ul></li>
+<li>Choosing to encrypt causes the installer to install additional packages
+<ul class="org-ul">
+<li>Some of these packages would be present in a less-minimal install</li>
+</ul></li>
+<li>The packages to be added are <code>dmsetup</code> <code>libedit2</code> <code>cryptsetup-initramfs</code> and <code>libcryptsetup12</code> <code>libjson-c5</code></li>
+<li><p>
+From a Resolute environment download the packages:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">apt download dmsetup libedit2 cryptsetup-initramfs libcryptsetup12 libjson-c5
+</pre>
+</div></li>
+<li>Each package is placed in <code>extracted/pool/main/msr</code></li>
+<li>Enter the <code>extracted</code> directory</li>
+<li>Update the Package list:
+<code>apt-ftparchive packages pool/main/ | sudo tee dists/stable/main/binary-amd64/Packages</code></li>
+<li>Update the compressed package list:
+<code>gzip -9c dists/stable/main/binary-amd64/Packages | sudo tee dists/stable/main/binary-amd64/Packages.gz &gt; /dev/null</code></li>
+<li>Regenerate the architecture Release file:
+<code>apt-ftparchive release dists/stable/main/binary-amd64/ | sudo tee dists/stable/main/binary-amd64/Release</code></li>
+<li>Regenerate the top-level dists Release file
+<code>apt-ftparchive release dists/stable/ | sudo tee dists/stable/Release</code></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-setting-up-the-iso-repository-2-P-1" class="outline-3">
+<h3 id="setting-up-the-iso-repository-2-P-1">Setting Up The ISO Repository</h3>
+<div class="outline-text-3" id="text-org43dd25a">
+<ol class="org-ol">
+<li>We need to set up the <code>cdrom</code> install repository</li>
+<li><p>
+If you did not add packages to the iso repository:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">sudo unsquashfs casper/minimal.squashfs
+sudo cp squashfs-root/etc/apt/sources.list.d/cdrom.source msr_image/etc/apt/sources.list.d
+</pre>
+</div></li>
+<li><p>
+If you did modify the repository:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span class="org-comment-delimiter"># </span><span class="org-comment">Sign the release file with gpg (you will need to create a key if you don't have one)
+</span>gpg -abs -u &lt;YOUR_KEY_ID&gt; -o Release.gpg extracted/dists/stable/Release
+sudo mv Release.gpg extracted/dists/stable
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Set up the sources
+</span>cat &lt;&lt; EOF | sudo tee msr_image/etc/apt/sources.list.d/cdrom.sources<span class="org-sh-heredoc">
+Types: deb
+URIs: file:///cdrom
+Suites: resolute
+Components: restricted main
+Check-Date: no
+Signed-By:
+EOF
+</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Next add your signature
+</span>gpg --armor --export &lt;YOUR_KEY_ID&gt; | sed <span class="org-string">'s/^/ /'</span> | sudo tee -a msr_image/etc/apt/sources.list.d/cdrom.sources
+</pre>
+</div></li>
+<li>If you want to bypass signature checking:
+<ul class="org-ul">
+<li>Replace the <code>Signed-By:</code> with <code>Trusted: yes</code></li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-make-the-minimal-squashfs-2-P-2" class="outline-3">
+<h3 id="make-the-minimal-squashfs-2-P-2">Make the Minimal Squashfs</h3>
+<div class="outline-text-3" id="text-orgd355b57">
 <p>
 We now need to compress the filesystem image and add it to the install CD
 </p>
@@ -414,23 +528,22 @@ Add the installable filesystem to the iso
 </p>
 <div class="org-src-container">
 <pre class="src src-bash"><span class="org-comment-delimiter"># </span><span class="org-comment">Make the squashfs filesystem from the chroot environment
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">Warning, there should not be an existing msr.squashfs present: rm msr.squashfs
-</span>sudo mksquashfs msr_image msr.squashfs -comp xz
-
-<span class="org-comment-delimiter"># </span><span class="org-comment">Copy squashfs to casper
-</span>sudo cp msr.squashfs extracted/casper
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">Warning, there should not be an existing msr.squashfs present:
+</span>sudo rm -f extracted/casper/msr.squashfs
+sudo mksquashfs msr_image extracted/casper/msr.squashfs -comp xz
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-make-the-desktop-squashfs-2-P-1" class="outline-3">
-<h3 id="make-the-desktop-squashfs-2-P-1">Make the Desktop Squashfs</h3>
-<div class="outline-text-3" id="text-make-the-desktop-squashfs-2-P-1">
+
+<div id="outline-container-make-the-desktop-squashfs-2-P-2" class="outline-3">
+<h3 id="make-the-desktop-squashfs-2-P-2">Make the Desktop Squashfs</h3>
+<div class="outline-text-3" id="text-make-the-desktop-squashfs-2-P-2">
 </div>
-<div id="outline-container-new-squashfs-entry-3-P-1" class="outline-4">
-<h4 id="new-squashfs-entry-3-P-1">New Squashfs Entry</h4>
-<div class="outline-text-4" id="text-org93ea011">
+<div id="outline-container-new-squashfs-entry-3-P-2" class="outline-4">
+<h4 id="new-squashfs-entry-3-P-2">New Squashfs Entry</h4>
+<div class="outline-text-4" id="text-org737463b">
 <p>
 We can make an install ISO with <code>msr.squashfs</code> as the deployed filesystem. This will be
 a minimal Ubuntu system with <code>network-manager</code> and a user can therefore connect to the network (wirelessly if needed)
@@ -446,7 +559,7 @@ First, add an entry for a new squashfs:
 </span>cat &lt;&lt; EOF | sudo tee -a extracted/casper/install-sources.yaml<span class="org-sh-heredoc">
 - default: true
   description:
-    en: A minimal Ubuntu Desktop for NUMSR.
+    en: Ubuntu Desktop for NUMSR.
   id: ubuntu-desktop
   locale_support: langpack
   name:
@@ -455,6 +568,7 @@ First, add an entry for a new squashfs:
   path: msr.desktop.squashfs
   type: fsimage-layered
   variant: minimal
+version: 2
 EOF</span>
 </pre>
 </div>
@@ -466,9 +580,9 @@ For more details see <a href="https://tldp.org/HOWTO/SquashFS-HOWTO/creatingandu
 </div>
 </div>
 
-<div id="outline-container-mounting-the-squashfs-3-P-1" class="outline-4">
-<h4 id="mounting-the-squashfs-3-P-1">Mounting the Squashfs</h4>
-<div class="outline-text-4" id="text-org8f442d2">
+<div id="outline-container-mounting-the-squashfs-3-P-2" class="outline-4">
+<h4 id="mounting-the-squashfs-3-P-2">Mounting the Squashfs</h4>
+<div class="outline-text-4" id="text-org5881dd9">
 <ol class="org-ol">
 <li>Make some new directories: <code>mkdir msr_desktop msr_desktop.work msr_desktop.upper msr_image.mnt</code>
 <ul class="org-ul">
@@ -481,7 +595,7 @@ For more details see <a href="https://tldp.org/HOWTO/SquashFS-HOWTO/creatingandu
 Mount the overlay (assumes <code>fuse-overlayfs</code> is installed):
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">sudo mount -t squashfs msr.squashfs msr_image.mnt -o loop
+<pre class="src src-bash">sudo mount -t squashfs extracted/casper/msr.squashfs msr_image.mnt -o loop
 sudo mount -t overlay <span class="org-sh-escaped-newline">\</span>
  -o <span class="org-variable-name">lowerdir</span>=msr_image.mnt,<span class="org-variable-name">upperdir</span>=msr_desktop.upper,<span class="org-variable-name">workdir</span>=msr_desktop.work <span class="org-sh-escaped-newline">\</span>
  overlay msr_desktop
@@ -507,9 +621,9 @@ sudo chroot msr_desktop
 </div>
 </div>
 
-<div id="outline-container-work-inside-the-chroot-3-P-1" class="outline-4">
-<h4 id="work-inside-the-chroot-3-P-1">Work Inside the chroot</h4>
-<div class="outline-text-4" id="text-orgcbded59">
+<div id="outline-container-work-inside-the-chroot-3-P-2" class="outline-4">
+<h4 id="work-inside-the-chroot-3-P-2">Work Inside the chroot</h4>
+<div class="outline-text-4" id="text-org0e57efb">
 <ol class="org-ol">
 <li>Install all the desktop files: this is where you customize the installation. Below are the commands I used, in the chroot.
 <ul class="org-ul">
@@ -522,12 +636,12 @@ sudo chroot msr_desktop
 <div class="outline-text-5" id="text-install_desktop_packages">
 <div class="org-src-container">
 <pre class="src src-bash">apt update
-apt install -y <span class="org-sh-escaped-newline">\</span>
+apt install  --no-install-recommends <span class="org-sh-escaped-newline">\</span>
 alsa-base <span class="org-sh-escaped-newline">\</span>
 alsa-utils <span class="org-sh-escaped-newline">\</span>
-anacron <span class="org-sh-escaped-newline">\</span>
 at-spi2-core <span class="org-sh-escaped-newline">\</span>
 bc <span class="org-sh-escaped-newline">\</span>
+dbus-user-session <span class="org-sh-escaped-newline">\</span>
 dbus-x11 <span class="org-sh-escaped-newline">\</span>
 dmz-cursor-theme <span class="org-sh-escaped-newline">\</span>
 fontconfig <span class="org-sh-escaped-newline">\</span>
@@ -536,14 +650,12 @@ foomatic-db-compressed-ppds <span class="org-sh-escaped-newline">\</span>
 gdm3 <span class="org-sh-escaped-newline">\</span>
 ghostscript <span class="org-sh-escaped-newline">\</span>
 gnome-control-center <span class="org-sh-escaped-newline">\</span>
+gnome-keyring-pkcs11 <span class="org-sh-escaped-newline">\</span>
 gnome-menus <span class="org-sh-escaped-newline">\</span>
 gnome-session-canberra <span class="org-sh-escaped-newline">\</span>
 gnome-settings-daemon <span class="org-sh-escaped-newline">\</span>
 gnome-shell <span class="org-sh-escaped-newline">\</span>
-gnome-shell-extension-appindicator <span class="org-sh-escaped-newline">\</span>
-gnome-shell-extension-desktop-icons-ng <span class="org-sh-escaped-newline">\</span>
-gnome-shell-extension-ubuntu-dock <span class="org-sh-escaped-newline">\</span>
-gnome-shell-extension-ubuntu-tiling-assistant <span class="org-sh-escaped-newline">\</span>
+gnome-shell-ubuntu-extensions <span class="org-sh-escaped-newline">\</span>
 gstreamer1.0-alsa <span class="org-sh-escaped-newline">\</span>
 gstreamer1.0-packagekit <span class="org-sh-escaped-newline">\</span>
 gstreamer1.0-plugins-base-apps <span class="org-sh-escaped-newline">\</span>
@@ -552,10 +664,10 @@ language-selector-gnome <span class="org-sh-escaped-newline">\</span>
 libatk-adaptor <span class="org-sh-escaped-newline">\</span>
 libnotify-bin <span class="org-sh-escaped-newline">\</span>
 libsasl2-modules <span class="org-sh-escaped-newline">\</span>
-libu2f-udev <span class="org-sh-escaped-newline">\</span>
 nautilus <span class="org-sh-escaped-newline">\</span>
 openprinting-ppds <span class="org-sh-escaped-newline">\</span>
 pipewire-pulse <span class="org-sh-escaped-newline">\</span>
+pkexec <span class="org-sh-escaped-newline">\</span>
 printer-driver-pnm2ppa <span class="org-sh-escaped-newline">\</span>
 rfkill <span class="org-sh-escaped-newline">\</span>
 spice-vdagent <span class="org-sh-escaped-newline">\</span>
@@ -563,7 +675,6 @@ ubuntu-drivers-common <span class="org-sh-escaped-newline">\</span>
 ubuntu-session <span class="org-sh-escaped-newline">\</span>
 ubuntu-settings <span class="org-sh-escaped-newline">\</span>
 unzip <span class="org-sh-escaped-newline">\</span>
-wireless-tools <span class="org-sh-escaped-newline">\</span>
 wireplumber <span class="org-sh-escaped-newline">\</span>
 xdg-user-dirs <span class="org-sh-escaped-newline">\</span>
 xdg-user-dirs-gtk <span class="org-sh-escaped-newline">\</span>
@@ -614,15 +725,13 @@ ibus-gtk <span class="org-sh-escaped-newline">\</span>
 ibus-gtk3 <span class="org-sh-escaped-newline">\</span>
 ibus-table <span class="org-sh-escaped-newline">\</span>
 im-config <span class="org-sh-escaped-newline">\</span>
-kerneloops <span class="org-sh-escaped-newline">\</span>
 laptop-detect <span class="org-sh-escaped-newline">\</span>
 libnss-mdns <span class="org-sh-escaped-newline">\</span>
 libpam-gnome-keyring <span class="org-sh-escaped-newline">\</span>
 libpam-sss <span class="org-sh-escaped-newline">\</span>
 libspa-0.2-bluetooth <span class="org-sh-escaped-newline">\</span>
-libwmf0.2-7-gtk <span class="org-sh-escaped-newline">\</span>
+libwmf-0.2-7-gtk <span class="org-sh-escaped-newline">\</span>
 memtest86+ <span class="org-sh-escaped-newline">\</span>
-mousetweaks <span class="org-sh-escaped-newline">\</span>
 nautilus-sendto <span class="org-sh-escaped-newline">\</span>
 orca <span class="org-sh-escaped-newline">\</span>
 plymouth-theme-spinner <span class="org-sh-escaped-newline">\</span>
@@ -638,21 +747,49 @@ xdg-utils <span class="org-sh-escaped-newline">\</span>
 yaru-theme-gnome-shell <span class="org-sh-escaped-newline">\</span>
 yaru-theme-gtk <span class="org-sh-escaped-newline">\</span>
 yaru-theme-icon <span class="org-sh-escaped-newline">\</span>
-yaru-theme-sound
+yaru-theme-sound <span class="org-sh-escaped-newline">\</span>
+avahi-daemon- <span class="org-sh-escaped-newline">\</span>
+printer-driver-braille- <span class="org-sh-escaped-newline">\</span>
+iio-sensor-proxy- <span class="org-sh-escaped-newline">\</span>
+modemmanager- <span class="org-sh-escaped-newline">\</span>
+mobile-broadband-provider-info- <span class="org-sh-escaped-newline">\</span>
+rygel- <span class="org-sh-escaped-newline">\</span>
+evolution-data-server- <span class="org-sh-escaped-newline">\</span>
+gnome-software- <span class="org-sh-escaped-newline">\</span>
+apport- <span class="org-sh-escaped-newline">\</span>
+whoopsie-
 </pre>
 </div>
 
+<ol class="org-ol">
+<li><p>
+Disable some notifications and checking
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">rm /etc/systemd/system/timers.target.wants/fwupd-refresh.timer
+chmod a-x /etc/update-motd.d/85-fwupd
+</pre>
+</div></li>
+</ol>
+
 <p>
-We will install Firefox from the Mozilla apt repository (adapted from <a href="https://support.mozilla.org/en-US/kb/install-firefox-linux#w_install-firefox-deb-package-for-debian-based-distributions">Mozilla Documentation</a>:
+We will install Firefox from the Mozilla apt repository (adapted from <a href="https://support.mozilla.org/en-US/kb/install-firefox-linux#w_install-firefox-deb-package-for-debian-based-distributions">Mozilla Documentation</a>):
 </p>
 <div class="org-src-container">
 <pre class="src src-bash"><span class="org-comment-delimiter"># </span><span class="org-comment">Get mozilla's signing key
 </span>wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O /etc/apt/keyrings/packages.mozilla.org.asc
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Verify that it's fingerprint is 35BAA0B33E9EB396F59CA838C0BA5CE6DC6315A3
-</span>gpg -n -q --import --import-options import-show /etc/apt/keyrings/packages.mozilla.org.asc
+<span class="org-comment-delimiter"># </span><span class="org-comment">Verify that it's fingerprint is 35BA A0B3 3E9E B396 F59C A838 C0BA 5CE6 DC63 15A3
+</span>gpg --show-keys --with-fingerprint /etc/apt/keyrings/packages.mozilla.org.asc
 
-<span class="org-builtin">echo</span> <span class="org-string">"deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main"</span> &gt; /etc/apt/sources.list.d/mozilla.list
+sudo tee /etc/apt/sources.list.d/mozilla.sources &gt; /dev/null &lt;&lt; EOF<span class="org-sh-heredoc">
+Types: deb
+URIs: https://packages.mozilla.org/apt
+Suites: mozilla
+Components: main
+Signed-By: /etc/apt/keyrings/packages.mozilla.org.asc
+EOF
+</span>
 
 <span class="org-comment-delimiter"># </span><span class="org-comment">Ensure this firefox takes precedence over the fake apt package
 </span>cat &lt;&lt; EOF &gt; /etc/apt/preferences.d/mozilla<span class="org-sh-heredoc">
@@ -663,6 +800,9 @@ EOF
 </span>
 apt update
 apt install firefox
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">clean up apt files
+</span>rm -rf /var/lib/apt/lists/*
 </pre>
 </div>
 </div>
@@ -670,9 +810,9 @@ apt install firefox
 </ul>
 </div>
 
-<div id="outline-container-cleanup-3-P-1" class="outline-4">
-<h4 id="cleanup-3-P-1">Cleanup</h4>
-<div class="outline-text-4" id="text-orge2104db">
+<div id="outline-container-cleanup-3-P-2" class="outline-4">
+<h4 id="cleanup-3-P-2">Cleanup</h4>
+<div class="outline-text-4" id="text-org32a47d7">
 <ol class="org-ol">
 <li>Exit the <code>chroot</code></li>
 <li><p>
@@ -689,14 +829,18 @@ sudo umount msr_desktop/run
 </ol>
 </div>
 </div>
-<div id="outline-container-make-the-squashfs-3-P-1" class="outline-4">
-<h4 id="make-the-squashfs-3-P-1">Make The Squashfs</h4>
-<div class="outline-text-4" id="text-org121083d">
+<div id="outline-container-make-the-squashfs-3-P-2" class="outline-4">
+<h4 id="make-the-squashfs-3-P-2">Make The Squashfs</h4>
+<div class="outline-text-4" id="text-org4c1b98c">
 <ol class="org-ol">
-<li>Make the squashfs of the overlayed filesystem:
-<code>sudo mksquashfs msr_desktop.upper msr.desktop.squashfs -comp xz</code></li>
-<li>Copy the squashfs to the iso:
-<code>sudo cp msr.desktop.squashfs extracted/casper</code></li>
+<li><p>
+Make the squashfs of the overlayed filesystem:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">rm -f extracted/casper/msr.desktop.squashfs
+sudo mksquashfs msr_desktop.upper extracted/casper/msr.desktop.squashfs -comp xz
+</pre>
+</div></li>
 <li>Unmount the overlay <code>sudo umount msr_desktop</code></li>
 <li>Unmount the underlay <code>sudo umount msr_image.mnt</code></li>
 </ol>
@@ -704,9 +848,9 @@ sudo umount msr_desktop/run
 </div>
 </div>
 
-<div id="outline-container-update-the-live-squashfs-2-P-1" class="outline-3">
-<h3 id="update-the-live-squashfs-2-P-1">Update the Live Squashfs</h3>
-<div class="outline-text-3" id="text-org21b9619">
+<div id="outline-container-update-the-live-squashfs-2-P-2" class="outline-3">
+<h3 id="update-the-live-squashfs-2-P-2">Update the Live Squashfs</h3>
+<div class="outline-text-3" id="text-org89ad4ce">
 <ol class="org-ol">
 <li>The live squashfs (<code>minimal.standard.live.squashfs</code>) contains files that are available on the Live cd but not necessarily on the installed system</li>
 <li>We will add two utilities: <code>clonezilla</code>, which enables cloning harddrives and <code>debootstrap</code> which enables doing a bare-bones minimal installation.</li>
@@ -714,9 +858,9 @@ sudo umount msr_desktop/run
 Extract the squashfs filesystems:
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">sudo unsquashfs extracted/casper/minimal.squashfs &amp;&amp; mv squashfs-root minimal.root
-sudo unsquashfs extracted/casper/minimal.standard.squashfs &amp;&amp; mv squashfs-root minimal.standard.root
-sudo unsquashfs extracted/casper/minimal.standard.live.squashfs &amp;&amp; mv squashfs-root minimal.standard.live.root
+<pre class="src src-bash">sudo unsquashfs -d minimal.root extracted/casper/minimal.squashfs
+sudo unsquashfs -d minimal.standard.root extracted/casper/minimal.standard.squashfs
+sudo unsquashfs -d minimal.standard.live.root extracted/casper/minimal.standard.live.squashfs
 </pre>
 </div></li>
 <li><p>
@@ -781,15 +925,16 @@ sudo umount minimal_standard.mnt
 </ol>
 </div>
 </div>
-<div id="outline-container-recreate-the-iso-2-P-1" class="outline-3">
-<h3 id="recreate-the-iso-2-P-1">Recreate the ISO</h3>
-<div class="outline-text-3" id="text-org40f1440">
+
+<div id="outline-container-recreate-the-iso-2-P-2" class="outline-3">
+<h3 id="recreate-the-iso-2-P-2">Recreate the ISO</h3>
+<div class="outline-text-3" id="text-org187330b">
 <div class="org-src-container">
 <pre class="src src-bash"><span class="org-comment-delimiter"># </span><span class="org-comment">Re-create the iso.  This will create a .iso file called msr.iso
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">WARNING! you must remove any existing msr.iso before running this command or it will fail
 </span>sudo xorriso -outdev msr.iso <span class="org-sh-escaped-newline">\</span>
       -map extracted / -- <span class="org-sh-escaped-newline">\</span>
-      -volid <span class="org-string">"Ubuntu 24.04 MSR"</span> <span class="org-sh-escaped-newline">\</span>
+      -volid <span class="org-string">"UBUNTU_26_MSR"</span> <span class="org-sh-escaped-newline">\</span>
       -boot_image grub <span class="org-variable-name">grub2_mbr</span>=mbr.img <span class="org-sh-escaped-newline">\</span>
       -boot_image any <span class="org-variable-name">partition_table</span>=on <span class="org-sh-escaped-newline">\</span>
       -boot_image any <span class="org-variable-name">partition_cyl_align</span>=off <span class="org-sh-escaped-newline">\</span>
@@ -812,14 +957,14 @@ sudo umount minimal_standard.mnt
       -boot_image any <span class="org-variable-name">load_size</span>=full
 
 <span class="org-comment-delimiter"># </span><span class="org-comment">The above command came from reading the options to build the original .iso which can be done via
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">sudo xoriso -indev ubuntu-desktop-24.04.iso -report_el_torrito cmd</span>
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">sudo xoriso -indev ubuntu.iso -report_el_torrito cmd</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-testing-the-image-in-a-virtual-machine-2-P-1" class="outline-3">
-<h3 id="testing-the-image-in-a-virtual-machine-2-P-1">Testing the Image in a Virtual Machine</h3>
-<div class="outline-text-3" id="text-orgcdcdfdc">
+<div id="outline-container-testing-the-image-in-a-virtual-machine-2-P-2" class="outline-3">
+<h3 id="testing-the-image-in-a-virtual-machine-2-P-2">Testing the Image in a Virtual Machine</h3>
+<div class="outline-text-3" id="text-orgb6a399b">
 <ul class="org-ul">
 <li>During development, it is helpful to run the image in a virtual machine, in order to test it.</li>
 <li>Install the open-source UEFI firmware for qemu: <code>sudo apt install ovmf</code></li>
@@ -831,13 +976,15 @@ sudo umount minimal_standard.mnt
 <p>
 <code>qemu-system-x86_64 -drive if=pflash,format=raw,file=./OVMF_CODE_4M.fd -cdrom msr.iso -drive file=test.img -m 20G -enable-kvm -cpu host -smp 8</code>
 </p>
+<ul class="org-ul">
+<li>If installation fails, you can check logs from the running live CD. Most logs are available under <code>/var/log/installer</code></li>
+</ul>
 </div>
 </div>
 
-
-<div id="outline-container-writing-the-iso-to-a-usb-drive--2-P-1" class="outline-3">
-<h3 id="writing-the-iso-to-a-usb-drive--2-P-1">Writing The ISO To a USB Drive:</h3>
-<div class="outline-text-3" id="text-orgc735392">
+<div id="outline-container-writing-the-iso-to-a-usb-drive--2-P-2" class="outline-3">
+<h3 id="writing-the-iso-to-a-usb-drive--2-P-2">Writing The ISO To a USB Drive:</h3>
+<div class="outline-text-3" id="text-orgda63822">
 <ol class="org-ol">
 <li>Use <code>lsblk</code> to find the name of the flash drive and ensure that it is not mounted</li>
 <li>Use <code>sudo chown &lt;user&gt;:&lt;user&gt;  name/of/flashdrive</code> to give your user permission to write to the drive
@@ -854,12 +1001,12 @@ sudo umount minimal_standard.mnt
 </div>
 </div>
 
-<div id="outline-container-structure-of-the-installation-image-1-P-1" class="outline-2">
-<h2 id="structure-of-the-installation-image-1-P-1">Structure of the Installation Image</h2>
-<div class="outline-text-2" id="text-org646502f">
+<div id="outline-container-structure-of-the-installation-image-1-P-2" class="outline-2">
+<h2 id="structure-of-the-installation-image-1-P-2">Structure of the Installation Image</h2>
+<div class="outline-text-2" id="text-org41f4e43">
 <p>
 The official <a href="https://releases.ubuntu.com/noble/ubuntu-24.04-desktop-amd64.iso">Ubuntu Install Image</a> is an <i>iso0660</i> formatted disk image designed to be booted
-from either a CD or an external hard-drive. It enables users to test a Live Ubuntu 24.04 system and then do the installation.
+from either a CD or an external hard-drive. It enables users to test a Live Ubuntu system and then do the installation.
 </p>
 
 <p>
@@ -868,9 +1015,9 @@ The first 446 bytes of the mbr is the boot code.
 </p>
 </div>
 
-<div id="outline-container-casper-3-P-1" class="outline-4">
-<h4 id="casper-3-P-1">casper</h4>
-<div class="outline-text-4" id="text-orgf8291d7">
+<div id="outline-container-casper-3-P-2" class="outline-4">
+<h4 id="casper-3-P-2">casper</h4>
+<div class="outline-text-4" id="text-org592ba5f">
 <p>
 The <code>/casper</code> directory contains various <code>squashfs</code> images that are either extracted as part of the LiveCD environment or the installation environment.
 </p>
@@ -923,9 +1070,9 @@ ISO disk file is a read-only disk format that contains a live Ubuntu 24.04 syste
 </div>
 </div>
 
-<div id="outline-container-structure-of-the-live-cd-2-P-1" class="outline-3">
-<h3 id="structure-of-the-live-cd-2-P-1">Structure of the Live CD</h3>
-<div class="outline-text-3" id="text-orgfcfe178">
+<div id="outline-container-structure-of-the-live-cd-2-P-2" class="outline-3">
+<h3 id="structure-of-the-live-cd-2-P-2">Structure of the Live CD</h3>
+<div class="outline-text-3" id="text-org7d52421">
 <p>
 Logs for the subiquity installer are stored in <code>/var/log/installer</code>. Looking at these logs is particularly helpful if the installer fails,
 to figure out why it failed.
@@ -934,9 +1081,9 @@ to figure out why it failed.
 </div>
 </div>
 
-<div id="outline-container-exploring-packages-1-P-1" class="outline-2">
-<h2 id="exploring-packages-1-P-1">Exploring Packages</h2>
-<div class="outline-text-2" id="text-org12116ad">
+<div id="outline-container-exploring-packages-1-P-2" class="outline-2">
+<h2 id="exploring-packages-1-P-2">Exploring Packages</h2>
+<div class="outline-text-2" id="text-org8d43d07">
 <ol class="org-ol">
 <li><a href="https://packages.ubuntu.com">https://packages.ubuntu.com</a> is a one-stop shop for exploring all the packages on any Ubuntu distribution.</li>
 <li>The <a href="https://packages.ubuntu.com/noble/apt-rdepends">apt-rdepends</a> package is incredibly useful for recursively exploring package dependencies for a distribution:
@@ -952,9 +1099,9 @@ a given package that is usually on an Ubuntu system is removed.</li>
 </div>
 
 
-<div id="outline-container-the-base-system-1-P-1" class="outline-2">
-<h2 id="the-base-system-1-P-1">The Base System</h2>
-<div class="outline-text-2" id="text-org0dbafd3">
+<div id="outline-container-the-base-system-1-P-2" class="outline-2">
+<h2 id="the-base-system-1-P-2">The Base System</h2>
+<div class="outline-text-2" id="text-org86deb22">
 <p>
 The base system consists of
 </p>
@@ -965,9 +1112,9 @@ The base system consists of
 </ol>
 </div>
 
-<div id="outline-container-bootstrap-2-P-1" class="outline-3">
-<h3 id="bootstrap-2-P-1">Bootstrap</h3>
-<div class="outline-text-3" id="text-org2d387c0">
+<div id="outline-container-bootstrap-2-P-2" class="outline-3">
+<h3 id="bootstrap-2-P-2">Bootstrap</h3>
+<div class="outline-text-3" id="text-org38e1b14">
 <p>
 An Ubuntu system can be "bootstrapped" using the <code>debootstrap</code> tool.
 </p>
@@ -987,16 +1134,20 @@ A system with just the bootstrap is essentially useless: all it has is the packa
 </div>
 </div>
 
-<div id="outline-container-bootloader-and-kernel-2-P-1" class="outline-3">
-<h3 id="bootloader-and-kernel-2-P-1">Bootloader and Kernel</h3>
-<div class="outline-text-3" id="text-org0ab7501">
+<div id="outline-container-bootloader-and-kernel-2-P-2" class="outline-3">
+<h3 id="bootloader-and-kernel-2-P-2">Bootloader and Kernel</h3>
+<div class="outline-text-3" id="text-org84961b4">
 <ul class="org-ul">
 <li>The <code>Ubuntu</code> install CD will install the bootloader files and kernel if they are not provided.</li>
 <li>However, these packages are not included on the CD, so this will necessitate an internet install</li>
 <li>To ensure a repeatable experience, it makes sense to install the following packages via <code>debootstrap</code>
 <ul class="org-ul">
 <li>Bootloader: <code>efibootmgr</code>, <code>grub-efi-amd64</code>, <code>grub-efi-amd64-signed</code>, <code>shim-signed</code>.</li>
-<li>Kernel: <code>linux-image-generic</code>, <code>initramfs-tools</code></li>
+<li>Kernel: The kernel is specified in the <code>casper/install-sources.yaml</code>
+<ul class="org-ul">
+<li>Ubuntu 26.04 uses <code>linux-generic-hwe-24.04</code></li>
+<li>The <code>initramfs-tools</code> is also needed.</li>
+</ul></li>
 <li>We rely on dependency resolution to bring in the necessary dependencies of the above packages.</li>
 </ul></li>
 <li>We also install <code>zstd</code>, a compression tool. This allows the setup to compress the <code>initramfs</code> with <code>zstd</code> instead of <code>gzip</code>, which
@@ -1005,9 +1156,9 @@ is a better compression algorithm.</li>
 </div>
 </div>
 
-<div id="outline-container-minimal-ubuntu-userspace-2-P-1" class="outline-3">
-<h3 id="minimal-ubuntu-userspace-2-P-1">Minimal Ubuntu Userspace</h3>
-<div class="outline-text-3" id="text-org291ed34">
+<div id="outline-container-minimal-ubuntu-userspace-2-P-2" class="outline-3">
+<h3 id="minimal-ubuntu-userspace-2-P-2">Minimal Ubuntu Userspace</h3>
+<div class="outline-text-3" id="text-orge3be9c6">
 <p>
 Ubuntu defines a <a href="https://packages.ubuntu.com/noble/ubuntu-minimal">ubuntu-minimal</a> package, which forms the basis of the minimal
 packages we will install.
@@ -1023,9 +1174,9 @@ With the tools of the minimal userspace installed, you can log in, connect to th
 Of course, you will need to do this all at a console, as there is no graphical user interface (GUI) or desktop.
 </p>
 </div>
-<div id="outline-container-ubuntu-minimal-3-P-1" class="outline-4">
-<h4 id="ubuntu-minimal-3-P-1">Ubuntu Minimal</h4>
-<div class="outline-text-4" id="text-org1905e20">
+<div id="outline-container-ubuntu-minimal-3-P-2" class="outline-4">
+<h4 id="ubuntu-minimal-3-P-2">Ubuntu Minimal</h4>
+<div class="outline-text-4" id="text-org544f1dc">
 <p>
 The <code>ubuntu-minimal</code> package is a meta-package that no other packages depend on. Since we won't have all the packages in <code>ubuntu-minimal</code> we
 will not install it. Instead we will manually pick and install the dependencies of <code>ubuntu-minimal</code> that we want.
@@ -1033,9 +1184,9 @@ will not install it. Instead we will manually pick and install the dependencies 
 </div>
 </div>
 
-<div id="outline-container-netplan-3-P-1" class="outline-4">
-<h4 id="netplan-3-P-1">Netplan</h4>
-<div class="outline-text-4" id="text-orgca9cf9a">
+<div id="outline-container-netplan-3-P-2" class="outline-4">
+<h4 id="netplan-3-P-2">Netplan</h4>
+<div class="outline-text-4" id="text-org9b8a8bb">
 <p>
 Netplan (package: <code>netplan.io</code>) is method for configuring Linux networks using YAML files and is part of <code>ubuntu-minimal</code>.
 Overall, this package is being removed because it is mainly only used on Ubuntu and makes debugging networking more difficult.
@@ -1043,8 +1194,8 @@ Overall, this package is being removed because it is mainly only used on Ubuntu 
 </div>
 
 <ul class="org-ul">
-<li><a id="reasons-for-keeping-netplan-4-P-1"></a>Reasons for Keeping Netplan<br>
-<div class="outline-text-5" id="text-org7f178be">
+<li><a id="reasons-for-keeping-netplan-4-P-2"></a>Reasons for Keeping Netplan<br>
+<div class="outline-text-5" id="text-org08e348c">
 <ol class="org-ol">
 <li>Ubuntu created <a href="https://ubuntu.com/blog/introducing-netplan-v1">Netplan</a> to unify network configuration between NetworkManager and systemd-networkd (the only two supported backends as of 2024).</li>
 <li>Netplan reads a YAML configuration file and translates that into a configuration used by whichever backend is chosen.</li>
@@ -1058,8 +1209,8 @@ Overall, this package is being removed because it is mainly only used on Ubuntu 
 </div>
 </li>
 
-<li><a id="reasons-for-removing-netplan-4-P-1"></a>Reasons for Removing Netplan<br>
-<div class="outline-text-5" id="text-org5fd7d53">
+<li><a id="reasons-for-removing-netplan-4-P-2"></a>Reasons for Removing Netplan<br>
+<div class="outline-text-5" id="text-orgd6e6b11">
 <ol class="org-ol">
 <li>I have not encountered a use-case where I need a unified configuration between NetworkManager and systemd-networkd
 <ul class="org-ul">
@@ -1093,9 +1244,9 @@ learn, and debug when something goes wrong.</li>
 </div>
 
 
-<div id="outline-container-ubuntu-pro-client-3-P-1" class="outline-4">
-<h4 id="ubuntu-pro-client-3-P-1">Ubuntu Pro Client</h4>
-<div class="outline-text-4" id="text-orga4ac571">
+<div id="outline-container-ubuntu-pro-client-3-P-2" class="outline-4">
+<h4 id="ubuntu-pro-client-3-P-2">Ubuntu Pro Client</h4>
+<div class="outline-text-4" id="text-org8c62ec1">
 <p>
 Ubuntu Pro is a paid version of Ubuntu (although it is free in certain cases) with additional updates and support.
 We will not use Ubuntu Pro and therefore do not need this package.
@@ -1103,8 +1254,8 @@ We will not use Ubuntu Pro and therefore do not need this package.
 </div>
 
 <ul class="org-ul">
-<li><a id="reasons-for-keeping-4-P-1"></a>Reasons for Keeping<br>
-<div class="outline-text-5" id="text-org837f260">
+<li><a id="reasons-for-keeping-4-P-2"></a>Reasons for Keeping<br>
+<div class="outline-text-5" id="text-org4d1da76">
 <ol class="org-ol">
 <li>There are some packages (particularly meta packages) that depend on on <code>ubuntu-pro-client</code>.</li>
 <li>Canonical (the company behind Ubuntu) needs to make money somehow.</li>
@@ -1113,8 +1264,8 @@ We will not use Ubuntu Pro and therefore do not need this package.
 </div>
 </li>
 
-<li><a id="reasons-for-removing-4-P-1"></a>Reasons for Removing<br>
-<div class="outline-text-5" id="text-org836e7d4">
+<li><a id="reasons-for-removing-4-P-2"></a>Reasons for Removing<br>
+<div class="outline-text-5" id="text-org84cba6d">
 <ol class="org-ol">
 <li>We do not use its features.</li>
 <li>It is related to things that will (lightly and respectfully) nag you about getting Ubuntu Pro</li>
@@ -1132,9 +1283,9 @@ without it.</li>
 </div>
 
 
-<div id="outline-container-cloud-init-3-P-1" class="outline-4">
-<h4 id="cloud-init-3-P-1">Cloud-init</h4>
-<div class="outline-text-4" id="text-org522602f">
+<div id="outline-container-cloud-init-3-P-2" class="outline-4">
+<h4 id="cloud-init-3-P-2">Cloud-init</h4>
+<div class="outline-text-4" id="text-orga4142e5">
 <p>
 Cloud-init is Ubuntu's method of provisioning containers (and other cloud computers) using YAML configuration files.
 In Ubuntu 24.04, they also use cloud-init as part of the desktop.
@@ -1142,8 +1293,8 @@ In Ubuntu 24.04, they also use cloud-init as part of the desktop.
 </div>
 
 <ul class="org-ul">
-<li><a id="reasons-for-using-cloud-init-4-P-1"></a>Reasons for Using Cloud Init<br>
-<div class="outline-text-5" id="text-org0f05d72">
+<li><a id="reasons-for-using-cloud-init-4-P-2"></a>Reasons for Using Cloud Init<br>
+<div class="outline-text-5" id="text-orgb562fa0">
 <ol class="org-ol">
 <li>It is the default for Ubuntu 24.04</li>
 <li>It is hard to replace because it does essential tasks (such as creating the user account) on the first boot</li>
@@ -1151,8 +1302,8 @@ In Ubuntu 24.04, they also use cloud-init as part of the desktop.
 </div>
 </li>
 
-<li><a id="reasons-for-removing-cloud-init-4-P-1"></a>Reasons for Removing Cloud Init<br>
-<div class="outline-text-5" id="text-orge8bc4d1">
+<li><a id="reasons-for-removing-cloud-init-4-P-2"></a>Reasons for Removing Cloud Init<br>
+<div class="outline-text-5" id="text-orgf819fdd">
 <ol class="org-ol">
 <li>We are not provisioning cloud-servers, we are making a single laptop computer</li>
 <li>It runs on every boot, even though in our case it only does work on the first boot</li>
@@ -1167,22 +1318,44 @@ In Ubuntu 24.04, they also use cloud-init as part of the desktop.
 
 
 
-<div id="outline-container-additional-packages-3-P-1" class="outline-4">
-<h4 id="additional-packages-3-P-1">Additional Packages</h4>
-<div class="outline-text-4" id="text-orgeb38311">
+<div id="outline-container-additional-packages-3-P-3" class="outline-4">
+<h4 id="additional-packages-3-P-3">Additional Packages</h4>
+<div class="outline-text-4" id="text-orgf15a484">
+<p>
+These packages are not in <code>ubuntu-minimal</code> but we need/want them
+</p>
 <ol class="org-ol">
 <li><code>language-selector-common</code> is used by <code>curtin</code> (I don't know exactly what it does but it seems to setup languages)</li>
 <li><code>network-manager</code> (from the <a href="https://launchpad.net/~numsr">nu-msr ppa</a>) is used to configure networking</li>
 <li><code>software-properties-common</code> tools for managing apt repositories</li>
 <li><code>systemd-resolved</code> is used by NetworkManager for resolving DNS queries</li>
-<li>I also add a configuration file  <code>/etc/NetworkManager/system-connections</code> that makes it easier to connect to <code>eduroam</code> WiFi networks</li>
+<li><code>dmsetup</code> needed for encrypted install drives (this is installed by <code>curtin</code> so we don't put it directly in the image)</li>
 </ol>
 </div>
 </div>
 
-<div id="outline-container-blocked-packages-3-P-1" class="outline-4">
-<h4 id="blocked-packages-3-P-1">Blocked packages</h4>
-<div class="outline-text-4" id="text-org81751d1">
+<div id="outline-container-recommended-dependencies-3-P-1" class="outline-4">
+<h4 id="recommended-dependencies-3-P-1">Recommended Dependencies</h4>
+<div class="outline-text-4" id="text-orgba87707">
+<p>
+We skip the following recommended dependencies
+</p>
+<ol class="org-ol">
+<li><code>avahi-daemon</code> Redundant with <code>systemd mDNS</code> (also skipped as part of Ubuntu Minimal)</li>
+<li><code>printer-driver-braille</code> Not using braille</li>
+<li><code>iio-sensor-proxy</code> Our machines don't sense their orientation, can install if needed</li>
+<li><code>mobile-broadband-provider-info</code> <code>modemmanage-</code> Don't have a celluar modem</li>
+<li><code>rygel</code> Some sort of streaming thing we don't actually use</li>
+<li><code>evolution-data-server</code> power's the gnome calendar/address book functions, but runs in the background. Install if you want to use those features</li>
+<li><code>gnome-software</code> We use <code>apt</code> to install packages. This is just another way of auto-checking for updates</li>
+<li><code>apport</code> <code>whoopsie</code>: Already blocked but good to explicitly exclude anyway</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-blocked-packages-3-P-2" class="outline-4">
+<h4 id="blocked-packages-3-P-2">Blocked packages</h4>
+<div class="outline-text-4" id="text-orgcbc21ff">
 <p>
 To avoid accidentally installing certain packages that are unwanted,
 the installation blocks them using <code>/etc/apt/preferences.d/numsr-apt-preferences</code>.
@@ -1203,9 +1376,9 @@ The packages that are blocked are:
 </div>
 </div>
 
-<div id="outline-container-additional-package-options-3-P-1" class="outline-4">
-<h4 id="additional-package-options-3-P-1">Additional Package Options</h4>
-<div class="outline-text-4" id="text-orge0c6cc6">
+<div id="outline-container-additional-package-options-3-P-2" class="outline-4">
+<h4 id="additional-package-options-3-P-2">Additional Package Options</h4>
+<div class="outline-text-4" id="text-org75fb5a2">
 <p>
 <a href="https://ubuntu.com/server/docs/about-apt-upgrade-and-phased-updates">Phased Updates</a> are disabled, ensuring that we are all on more-similar Ubuntu versions.
 </p>
@@ -1242,13 +1415,14 @@ It is possible, after installation, to install your own desktop environment or b
 We install most of the packages from <code>ubuntu-desktop-minimal</code> except for:
 </p>
 </div>
-<div id="outline-container-required-3-P-1" class="outline-4">
-<h4 id="required-3-P-1">Required</h4>
-<div class="outline-text-4" id="text-org05cc779">
+<div id="outline-container-required-3-P-2" class="outline-4">
+<h4 id="required-3-P-2">Required</h4>
+<div class="outline-text-4" id="text-orgd53aba9">
 <p>
 Packages that are <b>NOT</b> included
 </p>
 <ol class="org-ol">
+<li><code>anacron</code> (redundant with systemd timers)</li>
 <li><code>ca-certificates</code> (already installed)</li>
 <li><code>software-properties-gtk</code> (we manage software via the commandline and it has undesirable dependencies)</li>
 <li><code>ubuntu-release-upgrader-gtk</code> (we do not want to ever upgrade the release).</li>
@@ -1265,12 +1439,12 @@ Packages that are <b>NOT</b> included
 </div>
 </div>
 
-<div id="outline-container-recommended-3-P-1" class="outline-4">
-<h4 id="recommended-3-P-1">Recommended</h4>
-<div class="outline-text-4" id="text-orgca6326d">
+<div id="outline-container-recommended-3-P-2" class="outline-4">
+<h4 id="recommended-3-P-2">Recommended</h4>
+<div class="outline-text-4" id="text-org154e071">
 <ul class="org-ul">
 <li>Lots of the suggested packages are there as "just in case your computer has X hardware".</li>
-<li>I have culled these partially based on what hardware is available on the Sys76 Adder4 laptop</li>
+<li>I have culled these partially based on what hardware is available on the MSR Laptop</li>
 </ul>
 
 <p>
@@ -1292,9 +1466,9 @@ Packages that are <b>NOT</b> included
 </div>
 </div>
 
-<div id="outline-container-additional-packages-3-P-2" class="outline-4">
-<h4 id="additional-packages-3-P-2">Additional Packages</h4>
-<div class="outline-text-4" id="text-org3821f02">
+<div id="outline-container-additional-packages-3-P-4" class="outline-4">
+<h4 id="additional-packages-3-P-4">Additional Packages</h4>
+<div class="outline-text-4" id="text-org6cf400d">
 <p>
 Since the move to snaps, there are no mainstream web-browsers that are regular <code>apt</code> packages.
 We will install <code>firefox</code> from the <a href="https://support.mozilla.org/en-US/kb/install-firefox-linux#w_install-firefox-deb-package-for-debian-based-distributions">Official Mozila APT Repository</a>

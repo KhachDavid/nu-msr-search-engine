@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2025-09-12 Fri 16:38 -->
+<!-- 2026-09-08 Tue 08:48 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>The Northwestern MS Robotics Personal Package Archive</title>
@@ -37,7 +37,7 @@
 </li>
 <li><a href="#package-format-1-P-1">Package Format</a>
 <ul>
-<li><a href="#git-and-quilt-2-P-1">Git and Quilt</a>
+<li><a href="#quilt-packages-2-P-1">Quilt Packages</a>
 <ul>
 <li><a href="#references-3-P-2">References</a></li>
 </ul>
@@ -49,18 +49,19 @@
 <ul>
 <li><a href="#realsense-dkms-2-P-1">realsense-dkms</a></li>
 <li><a href="#librealsense2-2-P-1">librealsense2</a></li>
-<li><a href="#ros-jazzy-librealsense2-2-P-1">ros-jazzy-librealsense2</a></li>
 </ul>
 </li>
+<li><a href="#uncloud-init-1-P-1">Uncloud-init</a></li>
+<li><a href="#network-manager-1-P-1">Network Manager</a></li>
 </ul>
 </div>
 </nav>
 <div id="outline-container-msr-ppa-1-P-1" class="outline-2">
 <h2 id="msr-ppa-1-P-1">MSR PPA</h2>
-<div class="outline-text-2" id="text-orgb74eed7">
+<div class="outline-text-2" id="text-org7f8b1ab">
 <p>
 A personal package archive (PPA) is a way for users of Ubuntu to distribute personal packages.
-Northwestern MS in Robotics has a PPA at <a href="https://launchpad.net/~numsr/robotics">https://launchpad.net/~numsr/robotics</a>.
+Northwestern MS in Robotics has a PPA at <a href="https://launchpad.net/~numsr/+archive/ubuntu/robotics">https://launchpad.net/~numsr/+archive/ubuntu/robotics</a>.
 </p>
 
 <p>
@@ -73,7 +74,7 @@ The following steps should be done from Ubuntu LTS
 </div>
 <div id="outline-container-how-to-make-a-ppa-2-P-1" class="outline-3">
 <h3 id="how-to-make-a-ppa-2-P-1">How To Make A PPA</h3>
-<div class="outline-text-3" id="text-orgab138b5">
+<div class="outline-text-3" id="text-org2aebb6b">
 <ol class="org-ol">
 <li>Sign up for a launchpad.net account</li>
 <li>Create an OpenPGP key:
@@ -89,7 +90,7 @@ The following steps should be done from Ubuntu LTS
 </div>
 <div id="outline-container-references-3-P-1" class="outline-4">
 <h4 id="references-3-P-1">References</h4>
-<div class="outline-text-4" id="text-org1cb26ca">
+<div class="outline-text-4" id="text-org02e957c">
 <ol class="org-ol">
 <li><a href="https://launchpad.net/+help-registry/openpgp-keys.html">Launchpad Keys</a></li>
 <li><a href="https://help.ubuntu.com/community/GnuPrivacyGuardHowto">Ubuntu GPG Guide</a></li>
@@ -105,20 +106,12 @@ The following steps should be done from Ubuntu LTS
 </div>
 <div id="outline-container-from-a-source-debian-3-P-1" class="outline-4">
 <h4 id="from-a-source-debian-3-P-1">From a Source Debian</h4>
-<div class="outline-text-4" id="text-org653633d">
+<div class="outline-text-4" id="text-orga25308a">
 <ol class="org-ol">
 <li>Make sure the <code>pgp</code> keys are setup on the system you are building the package on.</li>
 <li>Install the <code>devscripts</code> package</li>
-<li><p>
-Create <code>/etc/apt/sources.list.d/ubuntu-src.sources to let =apt</code> know where to get source packages from.
-</p>
-<pre class="example">
-Types: deb-src
-URIs: http://archive.ubuntu.com/ubuntu/
-Suites: noble noble-updates noble-backports
-Components: main universe restricted multiverse
-Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
-</pre></li>
+<li>Add <code>deb-src</code> to the <code>Types:</code> stanza in <code>/etc/apt/sources.list.d/ubuntu</code>
+It should look like <code>Types: deb deb-src</code></li>
 <li><code>sudo apt update</code></li>
 <li><code>apt build-dep &lt;packagename&gt;</code> installs the build dependencies</li>
 <li>Create a working directory <code>&lt;workdir&gt;</code> and <code>cd &lt;workdir&gt;</code>.</li>
@@ -138,7 +131,7 @@ Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
 <li>When done editing use <code>quilt refresh</code> to apply the patch.</li>
 </ul></li>
 </ul></li>
-<li>Edit <code>debian/changelog</code>, adding a new entry for yourself outlining the changes you made
+<li>Use <code>dch</code> to edit <code>debian/changelog</code>, adding a new entry for yourself outlining the changes you made
 <ul class="org-ul">
 <li>Be sure to boost the version number in the changelog.</li>
 <li>If you have just made changing to the packaging, change the debian version (the part after the <code>-</code>)</li>
@@ -170,42 +163,43 @@ are changing source code you likely want to make the changes in a fork or even s
 
 <div id="outline-container-package-format-1-P-1" class="outline-2">
 <h2 id="package-format-1-P-1">Package Format</h2>
-<div class="outline-text-2" id="text-org4a1a9c9">
+<div class="outline-text-2" id="text-orgf4f13c7">
 <p>
 There are two package formats, as specified in <code>debian/source/format</code>
 </p>
 <ol class="org-ol">
 <li><code>3.0 (quilt)</code> this uses the quilt patch system and assumes source code is provided as a separate tarball from the <code>debian/</code> folder</li>
-<li><code>3.0 (native)</code> this mode allows the <code>debian/</code> folder to be directly in the repository</li>
-<li>For packages that I make for the PPA going forward, I find it easiest to use the native format. The process goes like
+<li><code>3.0 (native)</code> this mode allows the <code>debian/</code> folder to be directly in the repository
 <ul class="org-ul">
-<li>Fork the repository in git, make whatever changes</li>
-<li>Add the debian directory, in native format</li>
-<li>Build the package and upload to the ppa</li>
-<li>Optionally, the debian/ directory can be added to the repository, but also it is obtainable from the debian source package.
-It can make maintaining the fork easier to not have the debian/ directory</li>
+<li>The downside of <code>native</code> is that the full source code becomes part of the debian source package, making it harder to track what Ubuntu-specific changes were made</li>
+<li>There is worse Launchpad performance since the full code must be uploaded even if only the <code>debian/</code> directory changes.</li>
 </ul></li>
 </ol>
 </div>
-<div id="outline-container-git-and-quilt-2-P-1" class="outline-3">
-<h3 id="git-and-quilt-2-P-1">Git and Quilt</h3>
-<div class="outline-text-3" id="text-orga986ba9">
+<div id="outline-container-quilt-packages-2-P-1" class="outline-3">
+<h3 id="quilt-packages-2-P-1">Quilt Packages</h3>
+<div class="outline-text-3" id="text-orge991b53">
+<ol class="org-ol">
+<li>Fork the package to <code>package</code>.</li>
+<li>Make the original tarball:
+<ul class="org-ul">
+<li><code>tar --exclude=.git --exclude=debian/ -czf package_name_version.orig.tar.gz git_folder_name/ .</code></li>
+</ul></li>
+<li>Commit to your modification branch</li>
+<li>Use <code>git format-patch</code> commit to create a patch set and save it somewhere</li>
+<li>On the original (non-fork) branch create the <code>debian/</code> directory and required files</li>
+</ol>
 <p>
-Quilt is used in debian packages to keep track of "upstream debian changes" and the source code version.
-Here is how to use git to manage the changes and turn those changes into quilt-compatible patches
+4.. <code>export QUILT_PATCHES=debian/patches</code>
 </p>
-
-<p>
-I like to fork a package and make changes in the fork.
-I then use "git format-patch &lt;commit&gt;" to turn the commits to HEAD from &lt;commit&gt; into a patchset
-In the original debain package (say it's version 2.44), I then use "quilt import" on each patch created by git format-patch.
-Now the debian source package contains the patches made against the upstream version to debianize it, but meanwhile all my code is in git
-Quilt environment variable QUILT_PATCHES=debian/patches should be set
-</p>
+<ol class="org-ol">
+<li>Use <code>quilt import</code> on each patch to apply the patches</li>
+</ol>
 </div>
+
 <div id="outline-container-references-3-P-2" class="outline-4">
 <h4 id="references-3-P-2">References</h4>
-<div class="outline-text-4" id="text-org4859b8d">
+<div class="outline-text-4" id="text-orgfd2fc92">
 <p>
 <a href="https://help.launchpad.net/Packaging/PPA/BuildingASourcePackage">Building A Source Package</a>
 <a href="https://manpages.ubuntu.com/manpages/trusty/man1/quilt.1.html">Quilt Manpage</a>
@@ -277,7 +271,7 @@ There are two Realsense packages in the PPA
 </div>
 <div id="outline-container-realsense-dkms-2-P-1" class="outline-3">
 <h3 id="realsense-dkms-2-P-1">realsense-dkms</h3>
-<div class="outline-text-3" id="text-orgf4636f1">
+<div class="outline-text-3" id="text-org27b84be">
 <ol class="org-ol">
 <li>The realsense has some slightly modified kernel drivers to help it report timing information better.
 <ul class="org-ul">
@@ -299,35 +293,37 @@ There are two Realsense packages in the PPA
 
 <div id="outline-container-librealsense2-2-P-1" class="outline-3">
 <h3 id="librealsense2-2-P-1">librealsense2</h3>
-<div class="outline-text-3" id="text-org9065d39">
+<div class="outline-text-3" id="text-org9d3a798">
 <ol class="org-ol">
-<li>My version package has the python bindings compiled in, and installed</li>
-<li>It also provides <code>ros-jazzy-librealsense2</code> and <code>ros-kilted-librealsense2</code> so that ROS packages that depend on the realsense can be installed
+<li>This version now matches the upstream version, and differs only from the <code>ros-&lt;version&gt;-librealsense2</code> package based on it's compilation options
 <ul class="org-ul">
-<li>The versions provided by ROS don't have the utilities or the python bindings.</li>
-<li>This version also installs the udev rules</li>
-</ul></li>
-<li>I do not provide a cuda-version package, but you can create a cuda version by modifying <code>debian/rules</code> and setting <code>BUILD_WITH_CUDA</code> to <code>ON</code> under the <code>override_dh_auto_configure</code>
-<ul class="org-ul">
-<li>Including CUDA necessitates the user having CUDA installed: this is why all official binaries do not have CUDA support by default.</li>
-</ul></li>
-<li>This version of the package is based off the <code>m-elwin/librealsense2</code> fork (<code>kilted</code> branch).
-<ul class="org-ul">
-<li>The <code>debian</code> files are not in git, they are stored in the source package.</li>
+<li>CUDA is enabled (in tests of e.g., aligning frames, this results in a 10x speedup)</li>
+<li>Python bindings are provided</li>
+<li>The intel realsense utilities are provided</li>
+<li>The udev rules are installed</li>
 </ul></li>
 </ol>
 </div>
 </div>
-
-<details id="orgde97917"><summary class="header-3">ros-jazzy-librealsense2</summary>
-<div class="outline-text-3" id="text-orgde97917">
-<p>
-This package used to be used to override the version that shipped with ROS. It required extra patches to install python bindings under
-the proper ROS <code>/opt/ros</code> directory. Instead, <code>librealsense2</code> installs everything in a standard location (so it is decoupled from ROS) but it
-provides this package so that the dependency can be satisfied.
-</p>
 </div>
-</details>
+
+<div id="outline-container-uncloud-init-1-P-1" class="outline-2">
+<h2 id="uncloud-init-1-P-1">Uncloud-init</h2>
+<div class="outline-text-2" id="text-orgc438844">
+<ul class="org-ul">
+<li>A replacement for cloud-init that serves the purpose of providing the minimal cloud-init functionality needed to perform an installation of Ubuntu.</li>
+<li>The <code>README.md</code> in the package provides the details</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-network-manager-1-P-1" class="outline-2">
+<h2 id="network-manager-1-P-1">Network Manager</h2>
+<div class="outline-text-2" id="text-orga1eff44">
+<ul class="org-ul">
+<li>Removes dependencies of Network Manager on netplan.io</li>
+</ul>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">
