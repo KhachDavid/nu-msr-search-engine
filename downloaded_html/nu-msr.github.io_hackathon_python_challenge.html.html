@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-09-08 Tue 08:22 -->
+<!-- 2026-09-09 Wed 12:44 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Python a-Maze-ing Challenge</title>
@@ -73,10 +73,9 @@
 </ul>
 </div>
 </nav>
-
 <div id="outline-container-the-challenge-1-P-1" class="outline-2">
 <h2 id="the-challenge-1-P-1">The Challenge</h2>
-<div class="outline-text-2" id="text-orgae77439">
+<div class="outline-text-2" id="text-org6419fbb">
 <p>
 You and your team will create maze exploration software.
 A simulated robotic agent, in a maze, takes discrete steps on a grid while trying to navigate to a goal.
@@ -93,10 +92,9 @@ You team should collaborate using <code>git</code>, using the <a href="./git_int
 At the end, your code should be combined into a single <code>main</code> branch.
 </p>
 </div>
-
 <div id="outline-container-mazes-2-P-1" class="outline-3">
 <h3 id="mazes-2-P-1">Mazes</h3>
-<div class="outline-text-3" id="text-orgb396e7f">
+<div class="outline-text-3" id="text-org94419a2">
 <p>
 You have a choice of two maze types:
 </p>
@@ -126,10 +124,9 @@ For each of the maze types, there are the following rules:
 </ol>
 </div>
 </div>
-
 <div id="outline-container-solvers-2-P-1" class="outline-3">
 <h3 id="solvers-2-P-1">Solvers</h3>
-<div class="outline-text-3" id="text-orgdf1f092">
+<div class="outline-text-3" id="text-org934653c">
 <p>
 You can implement one of the following solving methods:
 </p>
@@ -166,7 +163,7 @@ Does not require full knowledge of the maze (because exploration starts at the s
 step in the search).
 </p>
 
-<figure id="orgd5992e0">
+<figure id="orgb6cbdc8">
 <img src="./images/maze_solved.svg" alt="maze_solved.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 1: </span>The order in which open squares are visited, when the search proceeds North, East, South, West.  The final path is in Blue</figcaption>
@@ -191,10 +188,9 @@ no matter where it started</li>
 </ol>
 </div>
 </div>
-
 <div id="outline-container-generation-2-P-1" class="outline-3">
 <h3 id="generation-2-P-1">Generation</h3>
-<div class="outline-text-3" id="text-org484925c">
+<div class="outline-text-3" id="text-org53b261e">
 <ol class="org-ol">
 <li>Manual
 <ul class="org-ul">
@@ -215,8 +211,8 @@ There are two commonly used maze representations:
 <p>
 The pseudocode below uses our representation
 </p>
-<pre class="example">
-All cells are walls.
+<div class="org-src-container">
+<pre class="src src-nil">All cells are walls.
 Randomly choose a cell Q and mark it as free.
 Add cell Q's neighbors to the wall list.
 While the wall list is not empty:
@@ -229,7 +225,8 @@ While the wall list is not empty:
        Make A free
        Add the walls of A to the wall list
     Remove W from the wall list
-</pre></li>
+</pre>
+</div></li>
 
 <li>When Prim's algorithm is successful you should achieve a "perfect" maze,
 that is a Maze without any loops or any inaccessible areas.</li>
@@ -237,10 +234,9 @@ that is a Maze without any loops or any inaccessible areas.</li>
 </div>
 </div>
 </div>
-
 <div id="outline-container-core-tasks-1-P-1" class="outline-2">
 <h2 id="core-tasks-1-P-1">Core Tasks</h2>
-<div class="outline-text-2" id="text-orgdf64e0b">
+<div class="outline-text-2" id="text-orgd5e6499">
 <ol class="org-ol">
 <li>Here are some tasks that may be useful to perform in order to accomplish the goals of the project.
 <ul class="org-ul">
@@ -252,10 +248,9 @@ that is a Maze without any loops or any inaccessible areas.</li>
 way to improve your own knowledge of the subject!</li>
 </ol>
 </div>
-
 <div id="outline-container-display-the-maze-2-P-1" class="outline-3">
 <h3 id="display-the-maze-2-P-1">Display the maze</h3>
-<div class="outline-text-3" id="text-orge5b9ec6">
+<div class="outline-text-3" id="text-org27f7acb">
 <ul class="org-ul">
 <li>Print the state of the maze to the terminal.</li>
 <li>The display should include the walls, free cells, start position, goal position, and robot position</li>
@@ -267,7 +262,7 @@ way to improve your own knowledge of the subject!</li>
 </div>
 <div id="outline-container-maze-state-2-P-1" class="outline-3">
 <h3 id="maze-state-2-P-1">Maze state</h3>
-<div class="outline-text-3" id="text-org8f981c3">
+<div class="outline-text-3" id="text-org945fed9">
 <ul class="org-ul">
 <li>Track the state of the maze and determine if a grid square is a wall, free, the goal, the start</li>
 <li>Be able to find the 1-hop and 2-hop neighbors of a cell</li>
@@ -275,20 +270,18 @@ way to improve your own knowledge of the subject!</li>
 </ul>
 </div>
 </div>
-
 <div id="outline-container-solve-the-maze-2-P-1" class="outline-3">
 <h3 id="solve-the-maze-2-P-1">Solve the maze</h3>
-<div class="outline-text-3" id="text-org617666b">
+<div class="outline-text-3" id="text-orgdb14b58">
 <ul class="org-ul">
 <li>Implement one of the maze solving algorithms</li>
 <li>The display should be able to print your solution</li>
 </ul>
 </div>
 </div>
-
 <div id="outline-container-maze-generation-2-P-1" class="outline-3">
 <h3 id="maze-generation-2-P-1">Maze generation</h3>
-<div class="outline-text-3" id="text-org85f00b6">
+<div class="outline-text-3" id="text-org2ed326d">
 <ul class="org-ul">
 <li>Although it may seem counterintuitive, I recommend starting with a manual maze, then working through some other issues before
 trying a maze generation algorithm.</li>
@@ -297,10 +290,9 @@ trying a maze generation algorithm.</li>
 </ul>
 </div>
 </div>
-
 <div id="outline-container-maze-interface-2-P-1" class="outline-3">
 <h3 id="maze-interface-2-P-1">Maze Interface</h3>
-<div class="outline-text-3" id="text-orge3487df">
+<div class="outline-text-3" id="text-org62e1d67">
 <ul class="org-ul">
 <li>Allow a maze to be loaded from a file</li>
 <li>Allow a user to specify the start and end positions</li>
@@ -309,10 +301,9 @@ trying a maze generation algorithm.</li>
 </div>
 </div>
 </div>
-
 <div id="outline-container-resources-1-P-2" class="outline-2">
 <h2 id="resources-1-P-2">Resources</h2>
-<div class="outline-text-2" id="text-org464dbd9">
+<div class="outline-text-2" id="text-org90d3c9c">
 <ul class="org-ul">
 <li><a href="https://www.astrolog.org/labyrnth/algrithm.htm">Maze Algorithms</a></li>
 <li>(There is enough there for an MS in Mazes).</li>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-09-08 Tue 08:22 -->
+<!-- 2026-09-09 Wed 12:44 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Rapidly-Exploring Random Tree</title>
@@ -66,7 +66,7 @@
 </nav>
 <div id="outline-container-introduction-1-P-1" class="outline-2">
 <h2 id="introduction-1-P-1">Introduction</h2>
-<div class="outline-text-2" id="text-org05fe798">
+<div class="outline-text-2" id="text-org2485e79">
 <p>
 A Rapidly-Exploring Random Tree (RRT) is a fundamental
 path planning algorithm in robotics, first developed by Steven LaValle in 1998 (see <a href="#ref">References</a>).  Path planning is the task
@@ -124,10 +124,9 @@ The three tasks below are listed in order of increasing difficulty.
 </p>
 </div>
 </div>
-
 <div id="outline-container-task-1-simple-rrt-1-P-1" class="outline-2">
 <h2 id="task-1-simple-rrt-1-P-1">Task 1: Simple RRT</h2>
-<div class="outline-text-2" id="text-org9c4b69e">
+<div class="outline-text-2" id="text-orgb8613f2">
 <p>
 Implement an RRT in a two-dimensional domain, \(D = [0, 100] \times [0, 100]\).
 Use an initial configuration of \(q_\text{init} = (50, 50)\) and \(\Delta = 1\).
@@ -144,17 +143,16 @@ over the whole space.
 </p>
 
 
-<figure id="orgf617285">
+<figure id="org3060950">
 <img src="./images/rrt1.png" alt="rrt1.png">
 
 <figcaption><span class="figure-number">Figure 1: </span>An RRT after 500 iterations</figcaption>
 </figure>
 </div>
 </div>
-
 <div id="outline-container-task-2-planning-a-path-with-obstacles-1-P-1" class="outline-2">
 <h2 id="task-2-planning-a-path-with-obstacles-1-P-1">Task 2: Planning a Path with Obstacles</h2>
-<div class="outline-text-2" id="text-org614e7f5">
+<div class="outline-text-2" id="text-org6d5fbc0">
 <p>
 We will now add circular obstacles to the domain.
 </p>
@@ -201,17 +199,16 @@ Your code should be able to generate a plot (using <code>matplotlib</code>) with
 </ol>
 
 
-<figure id="orgf6c1cf6">
+<figure id="orgec1fd8f">
 <img src="./images/rrt2.png" alt="rrt2.png">
 
 <figcaption><span class="figure-number">Figure 2: </span>A sample RRT run</figcaption>
 </figure>
 </div>
 </div>
-
 <div id="outline-container-task-3-rrt-with-arbitrary-objects-1-P-1" class="outline-2">
 <h2 id="task-3-rrt-with-arbitrary-objects-1-P-1">Task 3: RRT with Arbitrary Objects</h2>
-<div class="outline-text-2" id="text-org86eacc1">
+<div class="outline-text-2" id="text-org1a49331">
 <p>
 Now let's consider arbitrary objects, represented by black pixels in a binary image.
 </p>
@@ -227,7 +224,7 @@ Plot the image in the background of your results
 </p>
 
 
-<figure id="org1b3ef84">
+<figure id="orgba6d823">
 <img src="./images/N_map.png" alt="N_map.png">
 
 <figcaption><span class="figure-number">Figure 3: </span>A sample obstacle map</figcaption>
@@ -242,17 +239,16 @@ implementation.</li>
 </ul>
 
 
-<figure id="org55f48a8">
+<figure id="orga219e5a">
 <img src="./images/n_rrt.png" alt="n_rrt.png">
 
 <figcaption><span class="figure-number">Figure 4: </span>An example RRT run</figcaption>
 </figure>
 </div>
 </div>
-
 <div id="outline-container-task-4-rrt-with-robot-dynamics-1-P-1" class="outline-2">
 <h2 id="task-4-rrt-with-robot-dynamics-1-P-1">Task 4: RRT With Robot Dynamics</h2>
-<div class="outline-text-2" id="text-orgdd451fa">
+<div class="outline-text-2" id="text-org86bc6f6">
 <p>
 The main simplifications made in the above algorithms is to move a by a fixed step-size to find \(q_\mathrm{new}\) and only
 add that node if it is collision free. This method does not account for the robot dynamics and is inefficient because some
@@ -274,10 +270,9 @@ should be modified as follows:
 </ol>
 </div>
 </div>
-
 <div id="outline-container-libraries-to-use-1-P-1" class="outline-2">
 <h2 id="libraries-to-use-1-P-1">Libraries to Use</h2>
-<div class="outline-text-2" id="text-orged028e2">
+<div class="outline-text-2" id="text-org1f822c2">
 <p>
 Here are some libraries you should use
 </p>
@@ -290,7 +285,7 @@ Here are some libraries you should use
 </div>
 <div id="outline-container-hints-1-P-1" class="outline-2">
 <h2 id="hints-1-P-1">Hints</h2>
-<div class="outline-text-2" id="text-org64fa897">
+<div class="outline-text-2" id="text-org30528d4">
 <ol class="org-ol">
 <li>The <a href="https://matplotlib.org/stable/api/index.html">Matplotlib Documentation</a> will be useful</li>
 <li>There are many ways to plot an RRT.
