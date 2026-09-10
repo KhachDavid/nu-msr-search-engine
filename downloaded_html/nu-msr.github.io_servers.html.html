@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-02-27 Fri 09:35 -->
+<!-- 2026-09-10 Thu 00:14 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MSR GPU Servers</title>
@@ -23,24 +23,39 @@
 <ul>
 <li><a href="#servers-1-P-1">Servers</a>
 <ul>
-<li><a href="#hardware-2-P-1">Hardware</a></li>
-<li><a href="#access-2-P-1">Access</a></li>
-<li><a href="#software">Software</a></li>
+<li><a href="#gpu-machines-2-P-1">GPU Machines</a>
+<ul>
+<li><a href="#technical-specifications-3-P-1">Technical Specifications</a></li>
+<li><a href="#hosts-3-P-1">Hosts</a></li>
+<li><a href="#additional-information-3-P-1">Additional Information</a></li>
 </ul>
 </li>
+<li><a href="#nas-machines-2-P-1">NAS Machines</a>
+<ul>
+<li><a href="#technical-specifications-3-P-2">Technical Specifications</a></li>
+<li><a href="#hosts-3-P-2">Hosts</a></li>
+</ul>
+</li>
+<li><a href="#access-2-P-1">Access</a></li>
+</ul>
+</li>
+<li><a href="#software">Software</a></li>
 <li><a href="#docker-1-P-1">Docker</a></li>
 <li><a href="#usage-hints-1-P-1">Usage Hints</a></li>
 </ul>
 </div>
 </nav>
-
 <div id="outline-container-servers-1-P-1" class="outline-2">
 <h2 id="servers-1-P-1">Servers</h2>
 <div class="outline-text-2" id="text-servers-1-P-1">
 </div>
-<div id="outline-container-hardware-2-P-1" class="outline-3">
-<h3 id="hardware-2-P-1">Hardware</h3>
-<div class="outline-text-3" id="text-orgbc523fb">
+<div id="outline-container-gpu-machines-2-P-1" class="outline-3">
+<h3 id="gpu-machines-2-P-1">GPU Machines</h3>
+<div class="outline-text-3" id="text-gpu-machines-2-P-1">
+</div>
+<div id="outline-container-technical-specifications-3-P-1" class="outline-4">
+<h4 id="technical-specifications-3-P-1">Technical Specifications</h4>
+<div class="outline-text-4" id="text-org6b8a596">
 <p>
 Lambda Labs Workstations with:
 </p>
@@ -52,52 +67,88 @@ Lambda Labs Workstations with:
 </ol>
 </div>
 </div>
-
-<div id="outline-container-access-2-P-1" class="outline-3">
-<h3 id="access-2-P-1">Access</h3>
-<div class="outline-text-3" id="text-orgfdcce86">
-<ol class="org-ol">
-<li>The servers maintained by MSR are accessible only on the Northwestern Network
+<div id="outline-container-hosts-3-P-1" class="outline-4">
+<h4 id="hosts-3-P-1">Hosts</h4>
+<div class="outline-text-4" id="text-org1938781">
+<p>
+The GPU servers are available at
+</p>
 <ul class="org-ul">
-<li>NUIT does not maintain and is unable to help you with these servers (even though you initially access them via your netID).</li>
-</ul></li>
-<li>For off-campus access, users must connect to the Northwestern network via <a href="./hackathon/computer_setup.html#vpn">VPN</a>.</li>
-<li>The servers are available at:
-<ul class="org-ul">
-<li><code>lamb.mech.northwestern.edu</code></li>
 <li><code>sheep.mech.northwestern.edu</code></li>
-</ul></li>
-<li>You will need your <code>netid</code> (e.g., <code>nuit1337</code>) and it's associated password, as provided by NUIT.</li>
-<li>Use <code>ssh-copy-id netid@server</code> to copy the ssh key to the server you want access to.
+<li><code>lamb.mech.northwestern.edu</code></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-additional-information-3-P-1" class="outline-4">
+<h4 id="additional-information-3-P-1">Additional Information</h4>
+<div class="outline-text-4" id="text-org0c85834">
 <ul class="org-ul">
-<li>Your password is your <a href="https://services.northwestern.edu/TDClient/30/Portal/Requests/ServiceDet?ID=99">netID password</a></li>
-<li>For example <code>ssh-copy-id nuit1337@lamb.mech.northwestern.edu</code> to gain access to <code>lamb</code></li>
-</ul></li>
-<li>After running the above command you should be able to <code>ssh netid@server</code> and not be prompted for your password (e.g., <code>ssh nuit1337@lamb.mech.northwestern.edu</code>).
-If you are prompted for a password:
-<ol class="org-ol">
-<li>If your <code>netID</code> password grants access, then the previous command failed, likely because you have not setup an <a href="./hackathon/linux_introduction.html#ssh_keys">ssh key</a> (these were setup during the hackathon).</li>
-<li>If your <code>ssh_key</code> password grants access then, you have not loaded the key into the <code>ssh-agent</code>. Either review the <a href="./hackathon/linux_introduction.html#ssh_keys">these instructions</a> or suffer and enter your password every time!</li>
-</ol></li>
-<li>You should assume that data on the server can be deleted at the end of each quarter.
-<ul class="org-ul">
-<li>There is no redundancy on the server so backup everything that is important to you.</li>
-</ul></li>
+<li>You should assume that data on the GPU servers can be deleted without notice at the end of each quarter</li>
+<li>There is no redundancy on the server so backup everything that is important to you</li>
 <li>In addition to your home directory you have access to <code>/data/users/netID</code>, which provides additional storage.
 <ul class="org-ul">
 <li>Each user is limited to <code>150GB</code> in their <code>/home/netID</code> directory</li>
 <li>Each netID has an additional <code>850GB</code> in their <code>/data/users/netID</code> directory</li>
 <li>Use <code>quota -vs</code> to see how much disk space you are using relative to your quotas.</li>
 </ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-nas-machines-2-P-1" class="outline-3">
+<h3 id="nas-machines-2-P-1">NAS Machines</h3>
+<div class="outline-text-3" id="text-nas-machines-2-P-1">
+</div>
+<div id="outline-container-technical-specifications-3-P-2" class="outline-4">
+<h4 id="technical-specifications-3-P-2">Technical Specifications</h4>
+<div class="outline-text-4" id="text-orgffa8b22">
+<ol class="org-ol">
+<li>26TB of RAIDZ2 Storage</li>
+<li>Regular snapshots are taken so that you can restore your work at multiple points.</li>
 </ol>
 </div>
 </div>
-
-<div id="outline-container-software" class="outline-3">
-<h3 id="software">Software</h3>
-<div class="outline-text-3" id="text-software">
+<div id="outline-container-hosts-3-P-2" class="outline-4">
+<h4 id="hosts-3-P-2">Hosts</h4>
+<div class="outline-text-4" id="text-org1eabbdd">
 <p>
-Some useful software includes:
+The NAS server is available at
+</p>
+<ul class="org-ul">
+<li><code>tank.mech.northwestern.edu</code></li>
+<li>Users do not have <code>ssh</code> login access</li>
+<li>You may use <code>rsync</code> to send files to the machine</li>
+<li>You can browse files on the machine with <code>sftp</code></li>
+<li>Data is encrypted but accessible to the machine administrator</li>
+<li>Each user has 1 Tb of storage</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-access-2-P-1" class="outline-3">
+<h3 id="access-2-P-1">Access</h3>
+<div class="outline-text-3" id="text-orgdb88bc5">
+<ol class="org-ol">
+<li>The servers maintained by MSR are accessible only on the Northwestern Network
+<ul class="org-ul">
+<li>NUIT does not maintain and is unable to help you with these servers (even though you initially access them via your netID).</li>
+</ul></li>
+<li>For off-campus access, users must connect to the Northwestern network via <a href="./hackathon/computer_setup.html#vpn">VPN</a>.</li>
+<li>You will need your <code>netid</code> (e.g., <code>nuit1337</code>) and it's associated password, as provided by NUIT.
+<ul class="org-ul">
+<li>Enroll by going to <code>[[beast.mech.northwestern.edu/enroll]]</code></li>
+<li>Enter your netid, netid password, email address, name, and your public ssh-key (e.g., <code>~/.ssh/id_ed25519.pub</code>)</li>
+<li>Enrollment only works if you have been explicitly granted permission to enroll.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-software" class="outline-2">
+<h2 id="software">Software</h2>
+<div class="outline-text-2" id="text-software">
+<p>
+Some useful software on the GPU machines includes:
 </p>
 <ol class="org-ol">
 <li>Ubuntu 24.04 LTS (using the <a href="./hackathon/ubuntu_minimal.html">Ubuntu Minimal</a> installation.</li>
@@ -107,11 +158,9 @@ Some useful software includes:
 </ol>
 </div>
 </div>
-</div>
-
 <div id="outline-container-docker-1-P-1" class="outline-2">
 <h2 id="docker-1-P-1">Docker</h2>
-<div class="outline-text-2" id="text-org357b36c">
+<div class="outline-text-2" id="text-org38a44a6">
 <ul class="org-ul">
 <li>If the preinstalled software is not sufficient (wrong versions etc) then you should make a <a href="https://docs.docker.com/get-started/">docker image</a> to do what you need</li>
 <li>All users can access Docker only in rootless mode. Docker rootless mode is already set up for you.</li>
@@ -140,7 +189,7 @@ Some useful software includes:
 </div>
 <div id="outline-container-usage-hints-1-P-1" class="outline-2">
 <h2 id="usage-hints-1-P-1">Usage Hints</h2>
-<div class="outline-text-2" id="text-org344a7f6">
+<div class="outline-text-2" id="text-org62e9c0d">
 <ol class="org-ol">
 <li>Use <a href="https://github.com/tmux/tmux/wiki">tmux</a> to persist your session across ssh logins
 <ul class="org-ul">
