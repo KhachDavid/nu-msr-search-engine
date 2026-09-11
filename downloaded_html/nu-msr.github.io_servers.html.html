@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-09-10 Thu 00:14 -->
+<!-- 2026-09-11 Fri 09:55 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MSR GPU Servers</title>
@@ -33,10 +33,11 @@
 <li><a href="#nas-machines-2-P-1">NAS Machines</a>
 <ul>
 <li><a href="#technical-specifications-3-P-2">Technical Specifications</a></li>
-<li><a href="#hosts-3-P-2">Hosts</a></li>
+<li><a href="#rsync_backup">Rsync Backups</a></li>
+<li><a href="#snapshots">Old Files</a></li>
 </ul>
 </li>
-<li><a href="#access-2-P-1">Access</a></li>
+<li><a href="#access">Access</a></li>
 </ul>
 </li>
 <li><a href="#software">Software</a></li>
@@ -55,7 +56,7 @@
 </div>
 <div id="outline-container-technical-specifications-3-P-1" class="outline-4">
 <h4 id="technical-specifications-3-P-1">Technical Specifications</h4>
-<div class="outline-text-4" id="text-org6b8a596">
+<div class="outline-text-4" id="text-org4f661c0">
 <p>
 Lambda Labs Workstations with:
 </p>
@@ -69,7 +70,7 @@ Lambda Labs Workstations with:
 </div>
 <div id="outline-container-hosts-3-P-1" class="outline-4">
 <h4 id="hosts-3-P-1">Hosts</h4>
-<div class="outline-text-4" id="text-org1938781">
+<div class="outline-text-4" id="text-orgffce566">
 <p>
 The GPU servers are available at
 </p>
@@ -81,7 +82,7 @@ The GPU servers are available at
 </div>
 <div id="outline-container-additional-information-3-P-1" class="outline-4">
 <h4 id="additional-information-3-P-1">Additional Information</h4>
-<div class="outline-text-4" id="text-org0c85834">
+<div class="outline-text-4" id="text-org018b554">
 <ul class="org-ul">
 <li>You should assume that data on the GPU servers can be deleted without notice at the end of each quarter</li>
 <li>There is no redundancy on the server so backup everything that is important to you</li>
@@ -101,33 +102,64 @@ The GPU servers are available at
 </div>
 <div id="outline-container-technical-specifications-3-P-2" class="outline-4">
 <h4 id="technical-specifications-3-P-2">Technical Specifications</h4>
-<div class="outline-text-4" id="text-orgffa8b22">
+<div class="outline-text-4" id="text-org824039e">
 <ol class="org-ol">
+<li><code>tank.mech.northwestern.edu</code></li>
 <li>26TB of RAIDZ2 Storage</li>
 <li>Regular snapshots are taken so that you can restore your work at multiple points.</li>
+<li><code>sftp</code> and <code>rsync</code> access only, no shell accounts on this server.
+<ul class="org-ul">
+<li>There are multiple <code>sftp</code> clients, the standard <code>sftp</code> command is rather basic.</li>
+<li>An alternative is <code>lftp</code></li>
+</ul></li>
 </ol>
 </div>
 </div>
-<div id="outline-container-hosts-3-P-2" class="outline-4">
-<h4 id="hosts-3-P-2">Hosts</h4>
-<div class="outline-text-4" id="text-org1eabbdd">
-<p>
-The NAS server is available at
+<div id="outline-container-rsync_backup" class="outline-4">
+<h4 id="rsync_backup">Rsync Backups</h4>
+<div class="outline-text-4" id="text-rsync_backup">
+<ol class="org-ol">
+<li><p>
+Customize <a href="./code/backup.bash">./code/backup.bash</a> to back up your home directory
 </p>
+<div class="org-src-container">
+<pre class="src src-bash"><span class="org-comment-delimiter">#</span><span class="org-comment">!/usr/bin/</span><span class="org-keyword">bash</span><span class="org-comment">
+</span>rsync -aH <span class="org-sh-escaped-newline">\</span>
+    --info=progress2 --no-inc-recursive -h <span class="org-sh-escaped-newline">\</span>
+    --delete <span class="org-sh-escaped-newline">\</span>
+    --exclude=<span class="org-string">'.zfs/'</span> <span class="org-sh-escaped-newline">\</span>
+    --exclude=<span class="org-string">'.cache/'</span> <span class="org-sh-escaped-newline">\</span>
+    --exclude=<span class="org-string">'.ssh/id_ed25519'</span> <span class="org-sh-escaped-newline">\</span>
+    <span class="org-string">"$HOME/"</span> <span class="org-sh-escaped-newline">\</span>
+    <span class="org-string">"&lt;netid&gt;@tank.mech.northwestern.edu:$(</span><span class="org-sh-quoted-exec">hostname -s</span><span class="org-string">)/"</span>
+</pre>
+</div></li>
+<li>You will need to replace <code>&lt;netid&gt;</code> with your netid</li>
+<li>By default I exclude some local directories that don't belong on the server and your private ssh key</li>
+<li>Add more directories to exclude by specifying additional <code>--exclude</code> lines</li>
+<li>By default your <code>$HOME/</code> directory is backed up. You could also use a different directory depending on your needs</li>
+<li>Restoration can be accomplished by reversing the source and destination.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-snapshots" class="outline-4">
+<h4 id="snapshots">Old Files</h4>
+<div class="outline-text-4" id="text-snapshots">
 <ul class="org-ul">
-<li><code>tank.mech.northwestern.edu</code></li>
-<li>Users do not have <code>ssh</code> login access</li>
-<li>You may use <code>rsync</code> to send files to the machine</li>
-<li>You can browse files on the machine with <code>sftp</code></li>
-<li>Data is encrypted but accessible to the machine administrator</li>
-<li>Each user has 1 Tb of storage</li>
+<li>Browse snapshots under <code>~/.zfs/snapshots</code>
+<ul class="org-ul">
+<li>Snapshots allow you to see versions of your files on the backup server as of a specific date</li>
+</ul></li>
+<li>Snapshots are taken frequently (every 15 minutes), hourly, daily, monthly and yearly.</li>
+<li>Generally you may want to download individual files (using <code>sftp</code>) but you can also
+copy files back to your machine from snapshots using rsync.</li>
 </ul>
 </div>
 </div>
 </div>
-<div id="outline-container-access-2-P-1" class="outline-3">
-<h3 id="access-2-P-1">Access</h3>
-<div class="outline-text-3" id="text-orgdb88bc5">
+<div id="outline-container-access" class="outline-3">
+<h3 id="access">Access</h3>
+<div class="outline-text-3" id="text-access">
 <ol class="org-ol">
 <li>The servers maintained by MSR are accessible only on the Northwestern Network
 <ul class="org-ul">
@@ -160,7 +192,7 @@ Some useful software on the GPU machines includes:
 </div>
 <div id="outline-container-docker-1-P-1" class="outline-2">
 <h2 id="docker-1-P-1">Docker</h2>
-<div class="outline-text-2" id="text-org38a44a6">
+<div class="outline-text-2" id="text-orge038b68">
 <ul class="org-ul">
 <li>If the preinstalled software is not sufficient (wrong versions etc) then you should make a <a href="https://docs.docker.com/get-started/">docker image</a> to do what you need</li>
 <li>All users can access Docker only in rootless mode. Docker rootless mode is already set up for you.</li>
@@ -189,7 +221,7 @@ Some useful software on the GPU machines includes:
 </div>
 <div id="outline-container-usage-hints-1-P-1" class="outline-2">
 <h2 id="usage-hints-1-P-1">Usage Hints</h2>
-<div class="outline-text-2" id="text-org62e9c0d">
+<div class="outline-text-2" id="text-orgc8e3b66">
 <ol class="org-ol">
 <li>Use <a href="https://github.com/tmux/tmux/wiki">tmux</a> to persist your session across ssh logins
 <ul class="org-ul">
