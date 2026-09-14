@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-09-10 Thu 00:10 -->
+<!-- 2026-09-14 Mon 14:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Belief State Planner</title>
@@ -21,16 +21,17 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#setup-1-P-2">Setup</a></li>
-<li><a href="#move-north-1-P-1">Move North</a></li>
-<li><a href="#move-north-1-P-2">Move North</a></li>
-<li><a href="#move-north-1-P-3">Move North</a></li>
-<li><a href="#move-north-1-P-4">Move North</a></li>
-<li><a href="#move-east-1-P-1">Move East</a></li>
-<li><a href="#move-north-1-P-5">Move North</a></li>
-<li><a href="#move-north-1-P-6">Move North</a></li>
-<li><a href="#move-north-1-P-7">Move North</a></li>
-<li><a href="#continue-moving-1-P-2">Continue Moving</a></li>
+<li><a href="#setup-1-P-1">Setup</a></li>
+<li><a href="#move-north-1--1-P-1">Move North (1)</a></li>
+<li><a href="#move-north-2--1-P-1">Move North (2)</a></li>
+<li><a href="#move-north-3--1-P-1">Move North (3)</a></li>
+<li><a href="#move-north-4--1-P-1">Move North (4)</a></li>
+<li><a href="#move-east-5--1-P-1">Move East (5)</a></li>
+<li><a href="#move-north-6--1-P-1">Move North (6)</a></li>
+<li><a href="#move-north-7--1-P-1">Move North (7)</a></li>
+<li><a href="#move-north-8--1-P-1">Move North (8)</a></li>
+<li><a href="#move-north-9--1-P-1">Move North (9)</a></li>
+<li><a href="#continue-moving-1-P-1">Continue Moving</a></li>
 <li><a href="#more-movement-1-P-1">More Movement</a></li>
 </ul>
 </div>
@@ -40,143 +41,158 @@ The belief state planner is a method for planning in the maze where the robot ke
 positions that it could be in, and narrows those positions down through movement.
 When the robot is given a movement command that is not possible, the robot remains in it's current position.
 </p>
-<div id="outline-container-setup-1-P-2" class="outline-2">
-<h2 id="setup-1-P-2">Setup</h2>
-<div class="outline-text-2" id="text-orgf099e4f">
+<div id="outline-container-setup-1-P-1" class="outline-2">
+<h2 id="setup-1-P-1">Setup</h2>
+<div class="outline-text-2" id="text-org5b100a0">
 <ol class="org-ol">
 <li>The robot can initially be anywhere in the maze</li>
 </ol>
 
-<figure id="orgd90727c">
+<figure id="org707ad25">
 <img src="./images/bstate1.svg" alt="bstate1.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 1: </span>The Goal is the red square.  The robot (purple circle) can be anywhere. Obstacles are Black, free space is white.</figcaption>
 </figure>
 </div>
 </div>
-<div id="outline-container-move-north-1-P-1" class="outline-2">
-<h2 id="move-north-1-P-1">Move North</h2>
-<div class="outline-text-2" id="text-org4c90562">
+<div id="outline-container-move-north-1--1-P-1" class="outline-2">
+<h2 id="move-north-1--1-P-1">Move North (1)</h2>
+<div class="outline-text-2" id="text-orgc1e12ba">
 <ol class="org-ol">
 <li>The robot is commanded to move North.</li>
 <li>The locations where the robot could be have been narrowed down.</li>
 </ol>
 
-<figure id="orga9fcdf7">
+<figure id="org40d7231">
 <img src="./images/bstate2.svg" alt="bstate2.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 2: </span>State after the first step.</figcaption>
 </figure>
 </div>
 </div>
-<div id="outline-container-move-north-1-P-2" class="outline-2">
-<h2 id="move-north-1-P-2">Move North</h2>
-<div class="outline-text-2" id="text-org6c83e5d">
+<div id="outline-container-move-north-2--1-P-1" class="outline-2">
+<h2 id="move-north-2--1-P-1">Move North (2)</h2>
+<div class="outline-text-2" id="text-orgc4194db">
 <ol class="org-ol">
 <li>The robot is commanded to move North.</li>
 <li>The locations where the robot could be have been narrowed down.</li>
 </ol>
 
-<figure id="org90a5bdd">
+<figure id="org5b1e958">
 <img src="./images/bstate3.svg" alt="bstate3.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 3: </span>State after second step to the North</figcaption>
 </figure>
 </div>
 </div>
-<div id="outline-container-move-north-1-P-3" class="outline-2">
-<h2 id="move-north-1-P-3">Move North</h2>
-<div class="outline-text-2" id="text-org358139d">
+<div id="outline-container-move-north-3--1-P-1" class="outline-2">
+<h2 id="move-north-3--1-P-1">Move North (3)</h2>
+<div class="outline-text-2" id="text-orgee266a0">
 <ol class="org-ol">
 <li>The robot is commanded to move North.</li>
 <li>The locations where the robot could be have been narrowed down.</li>
 </ol>
 
-<figure id="org6f57bf0">
+<figure id="org1e08288">
 <img src="./images/bstate4.svg" alt="bstate4.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 4: </span>State after third step to the North</figcaption>
 </figure>
 </div>
 </div>
-<div id="outline-container-move-north-1-P-4" class="outline-2">
-<h2 id="move-north-1-P-4">Move North</h2>
-<div class="outline-text-2" id="text-org2d18ead">
+<div id="outline-container-move-north-4--1-P-1" class="outline-2">
+<h2 id="move-north-4--1-P-1">Move North (4)</h2>
+<div class="outline-text-2" id="text-org47a6919">
 <ol class="org-ol">
 <li>The robot is commanded to move North.</li>
 <li>The locations where the robot can be are not narrowed down. Try a new direction</li>
 </ol>
 
-<figure id="orgcf60600">
+<figure id="org853f545">
 <img src="./images/bstate4.svg" alt="bstate4.svg" class="org-svg">
 
-<figcaption><span class="figure-number">Figure 5: </span>State after third step to the North</figcaption>
+<figcaption><span class="figure-number">Figure 5: </span>State after fourth step to the North (no change from third step)</figcaption>
 </figure>
 </div>
 </div>
-<div id="outline-container-move-east-1-P-1" class="outline-2">
-<h2 id="move-east-1-P-1">Move East</h2>
-<div class="outline-text-2" id="text-org6b7e5f2">
+<div id="outline-container-move-east-5--1-P-1" class="outline-2">
+<h2 id="move-east-5--1-P-1">Move East (5)</h2>
+<div class="outline-text-2" id="text-orgdc1cc5d">
 <ol class="org-ol">
 <li>The robot is commanded to move East.</li>
 <li>The locations where the robot could be have been narrowed down.</li>
 </ol>
 
-<figure id="org9e30526">
+<figure id="orgd578873">
 <img src="./images/bstate5.svg" alt="bstate5.svg" class="org-svg">
 
 <figcaption><span class="figure-number">Figure 6: </span>State after a step to the East.</figcaption>
 </figure>
 </div>
 </div>
-<div id="outline-container-move-north-1-P-5" class="outline-2">
-<h2 id="move-north-1-P-5">Move North</h2>
-<div class="outline-text-2" id="text-orgf3ed2fc">
+<div id="outline-container-move-north-6--1-P-1" class="outline-2">
+<h2 id="move-north-6--1-P-1">Move North (6)</h2>
+<div class="outline-text-2" id="text-org3b6a363">
 <ol class="org-ol">
 <li>The robot is commanded to move North.</li>
-<li>The locations where the robot can be are not narrowed down. Try a new direction.</li>
+<li>The locations where the robot could be are narrowed down</li>
 </ol>
 
-<figure id="org74c622f">
+<figure id="org211f0db">
 <img src="./images/bstate6.svg" alt="bstate6.svg" class="org-svg">
 
-<figcaption><span class="figure-number">Figure 7: </span>State after third step to the North</figcaption>
+<figcaption><span class="figure-number">Figure 7: </span>State after moving North</figcaption>
 </figure>
 </div>
 </div>
-<div id="outline-container-move-north-1-P-6" class="outline-2">
-<h2 id="move-north-1-P-6">Move North</h2>
-<div class="outline-text-2" id="text-orgd9b5dc6">
+<div id="outline-container-move-north-7--1-P-1" class="outline-2">
+<h2 id="move-north-7--1-P-1">Move North (7)</h2>
+<div class="outline-text-2" id="text-orga66e30a">
 <ol class="org-ol">
 <li>The robot is commanded to move North.</li>
-<li>The locations where the robot can be are not narrowed down. Try a new direction.</li>
+<li>The locations where the robot can be are narrowed down.</li>
 </ol>
 
-<figure id="org1b2a092">
+<figure id="org2a51caa">
 <img src="./images/bstate7.svg" alt="bstate7.svg" class="org-svg">
 
-<figcaption><span class="figure-number">Figure 8: </span>State after third step to the North</figcaption>
+<figcaption><span class="figure-number">Figure 8: </span>State after moving North</figcaption>
 </figure>
 </div>
 </div>
-<div id="outline-container-move-north-1-P-7" class="outline-2">
-<h2 id="move-north-1-P-7">Move North</h2>
-<div class="outline-text-2" id="text-orga2c84f7">
+<div id="outline-container-move-north-8--1-P-1" class="outline-2">
+<h2 id="move-north-8--1-P-1">Move North (8)</h2>
+<div class="outline-text-2" id="text-org9f8195e">
 <ol class="org-ol">
 <li>The robot is commanded to move North.</li>
-<li>The locations where the robot can be are not narrowed down. Try a new direction.</li>
+<li>The locations where the robot can be are narrowed down.</li>
 </ol>
 
-<figure id="orgc8a78c6">
+<figure id="org83d8229">
 <img src="./images/bstate8.svg" alt="bstate8.svg" class="org-svg">
 
-<figcaption><span class="figure-number">Figure 9: </span>State after third step to the North</figcaption>
+<figcaption><span class="figure-number">Figure 9: </span>State after moving North</figcaption>
 </figure>
 </div>
 </div>
-<div id="outline-container-continue-moving-1-P-2" class="outline-2">
-<h2 id="continue-moving-1-P-2">Continue Moving</h2>
-<div class="outline-text-2" id="text-org2de6c6d">
+<div id="outline-container-move-north-9--1-P-1" class="outline-2">
+<h2 id="move-north-9--1-P-1">Move North (9)</h2>
+<div class="outline-text-2" id="text-org71a2d37">
+<ol class="org-ol">
+<li>The robot is commanded to move North.</li>
+<li>The locations where the robot can are not narrowed down. Try moving East.</li>
+</ol>
+
+<figure id="org64d9d5b">
+<img src="./images/bstate8.svg" alt="bstate8.svg" class="org-svg">
+
+<figcaption><span class="figure-number">Figure 10: </span>State after moving North</figcaption>
+</figure>
+</div>
+</div>
+<div id="outline-container-continue-moving-1-P-1" class="outline-2">
+<h2 id="continue-moving-1-P-1">Continue Moving</h2>
+<div class="outline-text-2" id="text-org0a912f9">
 <ol class="org-ol">
 <li>In this scenario, the robot will enter a cycle:
 <ul class="org-ul">
@@ -187,16 +203,16 @@ When the robot is given a movement command that is not possible, the robot remai
 <li>Eventually there will be two locations for the robot</li>
 </ol>
 
-<figure id="org9746030">
+<figure id="orgda72fc4">
 <img src="./images/bstate9.svg" alt="bstate9.svg" class="org-svg">
 
-<figcaption><span class="figure-number">Figure 10: </span>State after several North and East Movements</figcaption>
+<figcaption><span class="figure-number">Figure 11: </span>State after several North and East Movements</figcaption>
 </figure>
 </div>
 </div>
 <div id="outline-container-more-movement-1-P-1" class="outline-2">
 <h2 id="more-movement-1-P-1">More Movement</h2>
-<div class="outline-text-2" id="text-orge94ad46">
+<div class="outline-text-2" id="text-orgcb34b14">
 <ol class="org-ol">
 <li>Continue issuing movements, while avoiding visited states, until there is only one possible robot location.</li>
 <li>Once the robot is in a single location, another planning method can be used.</li>
