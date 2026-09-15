@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-09-10 Thu 00:10 -->
+<!-- 2026-09-15 Tue 09:09 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Who Stole My Pen?</title>
@@ -89,7 +89,7 @@
 </ul>
 </li>
 <li><a href="#relay-mode-1-P-1">Relay Mode</a></li>
-<li><a href="#hints-1-P-1">Hints</a></li>
+<li><a href="#hints-1-P-2">Hints</a></li>
 <li><a href="#other-references-1-P-1">Other References</a></li>
 <li><a href="#bibliography-1-P-1">Bibliography</a></li>
 </ul>
@@ -97,7 +97,7 @@
 </nav>
 <div id="outline-container-overview-1-P-2" class="outline-2">
 <h2 id="overview-1-P-2">Overview</h2>
-<div class="outline-text-2" id="text-org5e8075a">
+<div class="outline-text-2" id="text-org36fbfcb">
 <p>
 We've all done it. "Borrowed" a pen and then lost it.
 Let's see if we can get PincherX 100 to hold on to it for us!
@@ -114,7 +114,7 @@ The goal is enable the PincherX 100 to grab a pen that is held in front of it.
 </div>
 <div id="outline-container-software-2-P-1" class="outline-3">
 <h3 id="software-2-P-1">Software</h3>
-<div class="outline-text-3" id="text-orgf8cd4ff">
+<div class="outline-text-3" id="text-org43816af">
 <p>
 The software setup was completed as part of <a href="./computer_setup.html">Computer Setup</a>.
 </p>
@@ -122,7 +122,7 @@ The software setup was completed as part of <a href="./computer_setup.html">Comp
 </div>
 <div id="outline-container-physical-2-P-1" class="outline-3">
 <h3 id="physical-2-P-1">Physical</h3>
-<div class="outline-text-3" id="text-org0ac7598">
+<div class="outline-text-3" id="text-org863fe99">
 <p>
 The physical setup for this project requires the Trossen PincherX 100 and the Intel Realsense D435i.
 Here are some tips for how to locate the hardware.
@@ -145,7 +145,7 @@ the algorithm may have different parameters.</li>
 </div>
 <div id="outline-container-pen-recognition-1-P-1" class="outline-2">
 <h2 id="pen-recognition-1-P-1">Pen Recognition</h2>
-<div class="outline-text-2" id="text-org0b63ae1">
+<div class="outline-text-2" id="text-org28e3c11">
 <p>
 Use the RealSense to measure the 3D location of your purple MSR pen.
 This guide provides steps that I consider to be the simplest that can minimally accomplish the accuracy needed
@@ -161,7 +161,7 @@ a controller that will enable the robot to grab the pen.
 </div>
 <div id="outline-container-alignment-2-P-1" class="outline-3">
 <h3 id="alignment-2-P-1">Alignment</h3>
-<div class="outline-text-3" id="text-org19c1465">
+<div class="outline-text-3" id="text-org481865b">
 <ol class="org-ol">
 <li>Alignment is the process of placing two images, taken from different perspectives into the same reference frame</li>
 <li>In this case, we collect two images: a depth map and a Red, Green, Blue (RGB) image
@@ -186,7 +186,7 @@ a controller that will enable the robot to grab the pen.
 </div>
 <div id="outline-container-design-notes-3-P-1" class="outline-4">
 <h4 id="design-notes-3-P-1">Design Notes</h4>
-<div class="outline-text-4" id="text-org67babd9">
+<div class="outline-text-4" id="text-org4878b15">
 <ol class="org-ol">
 <li>What follows are some notes on how to think about designing and organizing your code:</li>
 <li>A good strategy, after running and understanding the <a href="https://github.com/IntelRealSense/librealsense/blob/master/wrappers/python/examples/align-depth2color.py">Alignment Example</a> is to divide it into the components that you need and encapsulate them in a class.</li>
@@ -216,7 +216,7 @@ program to be designed to operate in a loop where one of these functions are cal
 </div>
 <div id="outline-container-resources-3-P-1" class="outline-4">
 <h4 id="resources-3-P-1">Resources</h4>
-<div class="outline-text-4" id="text-orgb6ccd53">
+<div class="outline-text-4" id="text-org11288a7">
 <ol class="org-ol">
 <li><a href="https://intelrealsense.github.io/librealsense/python_docs/">Realsense Python API Documentation</a></li>
 <li><a href="https://github.com/IntelRealSense/librealsense/tree/master/wrappers/python/examples">PyRealSense Examples</a></li>
@@ -226,7 +226,7 @@ program to be designed to operate in a loop where one of these functions are cal
 </div>
 <div id="outline-container-recording-2-P-1" class="outline-3">
 <h3 id="recording-2-P-1">Recording</h3>
-<div class="outline-text-3" id="text-org2f22217">
+<div class="outline-text-3" id="text-org18554e8">
 <ul class="org-ul">
 <li>Being able to record data and play it back is useful when testing an image pipeline because it ensures that you are using the same data each time.</li>
 <li>To record data, use <a href="https://intelrealsense.github.io/librealsense/python_docs/_generated/pyrealsense2.config.html#pyrealsense2.config.enable_record_to_file">config.enable_record_to_file(filename)</a></li>
@@ -236,7 +236,7 @@ program to be designed to operate in a loop where one of these functions are cal
 </div>
 <div id="outline-container-design-notes-3-P-2" class="outline-4">
 <h4 id="design-notes-3-P-2">Design Notes</h4>
-<div class="outline-text-4" id="text-orgce9473d">
+<div class="outline-text-4" id="text-org1339e44">
 <ol class="org-ol">
 <li>By encapsulating the camera streaming in a class, it is easier to write a program that lets a user choose between playing from a recording or streaming live data.</li>
 <li>The recording and playback functionalities are useful to implement before moving forward with the image pipeline.</li>
@@ -246,7 +246,7 @@ program to be designed to operate in a loop where one of these functions are cal
 </div>
 <div id="outline-container-image-pipeline-2-P-1" class="outline-3">
 <h3 id="image-pipeline-2-P-1">Image Pipeline</h3>
-<div class="outline-text-3" id="text-orgae2cf02">
+<div class="outline-text-3" id="text-org9107658">
 <ol class="org-ol">
 <li>We will use OpenCV to process the images from the Realsense.</li>
 <li>A complete list of python tutorials is <a href="https://docs.opencv.org/4.6.0/d6/d00/tutorial_py_root.html">here</a>.</li>
@@ -264,7 +264,7 @@ program to be designed to operate in a loop where one of these functions are cal
 <ul class="org-ul">
 <li>You can use camera calibration and the known positions of the robot and RealSense to solve for the other dimensions.</li>
 <li>The Realsense's built-in calibration is not great so for most projects you should do a calibration yourself: however, it is good enough for this project.</li>
-<li>More information on calibration is under <a href="#org4f05d0b">Useful Techniques</a></li>
+<li>More information on calibration is under <a href="#orgd8468bc">Useful Techniques</a></li>
 </ul></li>
 <li>The output of the image pipeline should be the \((x,y,z)\) location, in meters, relative to the camera frame.
 <ul class="org-ul">
@@ -274,7 +274,7 @@ program to be designed to operate in a loop where one of these functions are cal
 </div>
 <div id="outline-container-useful-techniques-3-P-1" class="outline-4">
 <h4 id="useful-techniques-3-P-1">Useful Techniques</h4>
-<div class="outline-text-4" id="text-org4f05d0b">
+<div class="outline-text-4" id="text-orgd8468bc">
 <ol class="org-ol">
 <li><a href="https://docs.opencv.org/4.6.0/da/d6a/tutorial_trackbar.html">Trackbars</a>
 <ul class="org-ul">
@@ -323,10 +323,10 @@ program to be designed to operate in a loop where one of these functions are cal
 </p>
 <div class="org-src-container">
 <pre class="src src-python">rs.rs2_deproject_pixel_to_point(intrinsics, [px, py], depth)
-<span class="org-comment-delimiter"># </span><span class="org-comment">intrinsics - the intrinsic parameters</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">(px, py) - the pixel coordinates</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">depth - the depth in meters</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">returns the x,y, and z coordinates in meters as a list</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">intrinsics - the intrinsic parameters
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">(px, py) - the pixel coordinates
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">depth - the depth in meters
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">returns the x,y, and z coordinates in meters as a list</span>
 </pre>
 </div></li>
 <li><p>
@@ -357,7 +357,7 @@ cylindrical coordinates centered at the base frame of the pincherX</li>
 </div>
 <div id="outline-container-design-notes-3-P-3" class="outline-4">
 <h4 id="design-notes-3-P-3">Design Notes</h4>
-<div class="outline-text-4" id="text-orgddb1d88">
+<div class="outline-text-4" id="text-org5e0c76a">
 <ol class="org-ol">
 <li>The ultimate goal of the pipeline is to get the 3D pen location from the RGB image and depth map.</li>
 <li>Do not worry about precision and accuracy at this stage: just get a rough reasonable version working.
@@ -378,7 +378,7 @@ cylindrical coordinates centered at the base frame of the pincherX</li>
 </div>
 <div id="outline-container-robot-control-1-P-1" class="outline-2">
 <h2 id="robot-control-1-P-1">Robot Control</h2>
-<div class="outline-text-2" id="text-orgbba9f06">
+<div class="outline-text-2" id="text-org0a8fff5">
 <p>
 We will use the <code>interbotix_xs_toolbox</code> to control the robot.
 Although the arm can be fully controlled with ROS 2, we will use only minimally use it during the hackathon,
@@ -387,7 +387,7 @@ instead relying on the simpler <code>python</code> API (which uses ROS 2 under t
 </div>
 <div id="outline-container-caution-2-P-1" class="outline-3">
 <h3 id="caution-2-P-1">Caution</h3>
-<div class="outline-text-3" id="text-orgc6bbc79">
+<div class="outline-text-3" id="text-orgc4f3bfe">
 <ul class="org-ul">
 <li>See <a href="https://docs.trossenrobotics.com/interbotix_xsarms_docs/specifications/px100.html">Specifications</a> for a list of joint ids and their limits</li>
 <li>If a joint limit is exceeded, it will hit a hard-stop and the motor will turn off and flash red.</li>
@@ -400,7 +400,7 @@ instead relying on the simpler <code>python</code> API (which uses ROS 2 under t
 </div>
 <div id="outline-container-first-moves-2-P-1" class="outline-3">
 <h3 id="first-moves-2-P-1">First Moves</h3>
-<div class="outline-text-3" id="text-orge33d743">
+<div class="outline-text-3" id="text-org9060a0f">
 <ol class="org-ol">
 <li>Each time you plug in the arm run <code>stty -F /dev/ttyDXL 1000000</code>
 <ul class="org-ul">
@@ -434,13 +434,13 @@ You must <code>source ws/interbotix/install/setup.bash</code> from any terminal 
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-keyword">from</span> interbotix_xs_modules.xs_robot.arm <span class="org-keyword">import</span> InterbotixManipulatorXS
 <span class="org-keyword">from</span> interbotix_common_modules.common_robot.robot <span class="org-keyword">import</span> robot_shutdown, robot_startup
-<span class="org-comment-delimiter"># </span><span class="org-comment">The robot object is what you use to control the robot</span>
-<span class="org-variable-name">robot</span> <span class="org-operator">=</span> InterbotixManipulatorXS(<span class="org-string">"px100"</span>, <span class="org-string">"arm"</span>, <span class="org-string">"gripper"</span>)
+<span class="org-comment-delimiter"># </span><span class="org-comment">The robot object is what you use to control the robot
+</span><span class="org-variable-name">robot</span> <span class="org-operator">=</span> InterbotixManipulatorXS(<span class="org-string">"px100"</span>, <span class="org-string">"arm"</span>, <span class="org-string">"gripper"</span>)
 
 robot_startup()
 <span class="org-variable-name">mode</span> <span class="org-operator">=</span> <span class="org-string">'h'</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Let the user select the position</span>
-<span class="org-keyword">while</span> mode <span class="org-operator">!=</span> <span class="org-string">'q'</span>:
+<span class="org-comment-delimiter"># </span><span class="org-comment">Let the user select the position
+</span><span class="org-keyword">while</span> mode <span class="org-operator">!=</span> <span class="org-string">'q'</span>:
     <span class="org-variable-name">mode</span><span class="org-operator">=</span><span class="org-builtin">input</span>(<span class="org-string">"[h]ome, [s]leep, [q]uit "</span>)
     <span class="org-keyword">if</span> mode <span class="org-operator">==</span> <span class="org-string">"h"</span>:
         robot.arm.go_to_home_pose()
@@ -471,7 +471,7 @@ to power cycle the robot and try again</li>
 </div>
 <div id="outline-container-next-moves-2-P-1" class="outline-3">
 <h3 id="next-moves-2-P-1">Next Moves</h3>
-<div class="outline-text-3" id="text-org362e464">
+<div class="outline-text-3" id="text-orge6ef4f8">
 <p>
 Here are some recommended steps to get the robot capturing the pen.
 </p>
@@ -509,7 +509,7 @@ so slowly due to friction and other losses in the system.</li>
 </div>
 <div id="outline-container-useful-functions-2-P-1" class="outline-3">
 <h3 id="useful-functions-2-P-1">Useful Functions</h3>
-<div class="outline-text-3" id="text-orgb192519">
+<div class="outline-text-3" id="text-org7181e97">
 <ol class="org-ol">
 <li><code>robot.arm.set_ee_cartesian_trajectory</code>
 <ul class="org-ul">
@@ -544,8 +544,8 @@ can use the <a href="https://github.com/NxRLab/ModernRobotics">modern_robotics</
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-keyword">import</span> modern_robotics <span class="org-keyword">as</span> mr
-<span class="org-variable-name">joints</span> <span class="org-operator">=</span> [waist, shoulder, elbow, waist_angle] <span class="org-comment-delimiter"># </span><span class="org-comment">pseudocode, use your own values</span>
-<span class="org-variable-name">T</span> <span class="org-operator">=</span> mr.FKinSpace(robot.arm.robot_des.M, robot.arm.robot_des.Slist, joints)
+<span class="org-variable-name">joints</span> <span class="org-operator">=</span> [waist, shoulder, elbow, waist_angle] <span class="org-comment-delimiter"># </span><span class="org-comment">pseudocode, use your own values
+</span><span class="org-variable-name">T</span> <span class="org-operator">=</span> mr.FKinSpace(robot.arm.robot_des.M, robot.arm.robot_des.Slist, joints)
 [<span class="org-variable-name">R</span>, <span class="org-variable-name">p</span>] <span class="org-operator">=</span> mr.TransToRp(T) <span class="org-comment-delimiter"># </span><span class="org-comment">get the rotation matrix and the displacement</span>
 </pre>
 </div></li>
@@ -559,7 +559,7 @@ can use the <a href="https://github.com/NxRLab/ModernRobotics">modern_robotics</
 </div>
 <div id="outline-container-workarounds-2-P-1" class="outline-3">
 <h3 id="workarounds-2-P-1">Workarounds</h3>
-<div class="outline-text-3" id="text-org5e8c1ae">
+<div class="outline-text-3" id="text-orgee19cde">
 <ul class="org-ul">
 <li>The following are workarounds either to undocumented or incorrect behavior in the <code>interbotix</code> library</li>
 <li>Narrowing the problem down to a minimal example and reporting it on github can likely lead to a successful pull-request.</li>
@@ -624,7 +624,7 @@ is essential for debugging.
 </div>
 <div id="outline-container-drawing-and-assumptions-3-P-1" class="outline-4">
 <h4 id="drawing-and-assumptions-3-P-1">Drawing and Assumptions</h4>
-<div class="outline-text-4" id="text-org244fe12">
+<div class="outline-text-4" id="text-orgc0737d8">
 <ol class="org-ol">
 <li>Make sure you understand the coordinate systems used by the camera and the robot.
 <ul class="org-ul">
@@ -648,7 +648,7 @@ is essential for debugging.
 </div>
 <div id="outline-container-calibration-math-2-P-1" class="outline-3">
 <h3 id="calibration-math-2-P-1">Calibration Math</h3>
-<div class="outline-text-3" id="text-org8a59f65">
+<div class="outline-text-3" id="text-orgb7f3e8e">
 <p>
 Here I provide practical guide for the calibration math. This section is based on the notes here: <a href="#citeproc_bib_item_1">[1]</a>)
 </p>
@@ -687,7 +687,7 @@ Here I provide practical guide for the calibration math. This section is based o
 </div>
 <div id="outline-container-calibration-procedure-2-P-1" class="outline-3">
 <h3 id="calibration-procedure-2-P-1">Calibration Procedure</h3>
-<div class="outline-text-3" id="text-org1205eca">
+<div class="outline-text-3" id="text-org430a917">
 <p>
 Write a script that performs the calibration procedure:
 </p>
@@ -700,7 +700,7 @@ Write a script that performs the calibration procedure:
 </div>
 <div id="outline-container-design-notes-3-P-4" class="outline-4">
 <h4 id="design-notes-3-P-4">Design Notes</h4>
-<div class="outline-text-4" id="text-org900828b">
+<div class="outline-text-4" id="text-orgac6647c">
 <ol class="org-ol">
 <li>There is an offset between where the pen is detected and the center of the robot's end-effector frame:
 this offset can be manually accounted for.</li>
@@ -723,7 +723,7 @@ this offset can be manually accounted for.</li>
 </div>
 <div id="outline-container-robot-control-1-P-2" class="outline-2">
 <h2 id="robot-control-1-P-2">Robot Control</h2>
-<div class="outline-text-2" id="text-orgce64246">
+<div class="outline-text-2" id="text-org8b0a2aa">
 <p>
 A basic robot control loop consists of the following steps:
 </p>
@@ -747,7 +747,7 @@ Below are descriptions of both the closed loop and open loop approach to pointin
 </div>
 <div id="outline-container-closed-loop-3-P-1" class="outline-4">
 <h4 id="closed-loop-3-P-1">Closed Loop</h4>
-<div class="outline-text-4" id="text-org5713e3d">
+<div class="outline-text-4" id="text-org30439dd">
 <p>
 When rotating (this assumes that both the arm and pen's locations are expressed as cylindrical coordinates relative to the robot base):
 </p>
@@ -760,7 +760,7 @@ When rotating (this assumes that both the arm and pen's locations are expressed 
 </div>
 <div id="outline-container-open-loop-3-P-1" class="outline-4">
 <h4 id="open-loop-3-P-1">Open Loop</h4>
-<div class="outline-text-4" id="text-org82e9f40">
+<div class="outline-text-4" id="text-org7b2a929">
 <ol class="org-ol">
 <li>Given the pen's location, compute the <code>waist</code> angle and move the arm to that angle</li>
 <li>Then move forward based on the computed distance.</li>
@@ -769,7 +769,7 @@ When rotating (this assumes that both the arm and pen's locations are expressed 
 </div>
 <div id="outline-container-design-notes-3-P-5" class="outline-4">
 <h4 id="design-notes-3-P-5">Design Notes</h4>
-<div class="outline-text-4" id="text-orgc70e3d3">
+<div class="outline-text-4" id="text-orga781409">
 <ol class="org-ol">
 <li>There may be a few modes of operation as you control the robot (e.g., moving to the pen, closing grippers, etc). It makes sense to track these modes
 by assigning a state to each of them. You can use a python <a href="https://docs.python.org/3/library/enum.html">enum</a> to label and track states</li>
@@ -786,7 +786,7 @@ by assigning a state to each of them. You can use a python <a href="https://docs
 </div>
 <div id="outline-container-multi-processing-2-P-1" class="outline-3">
 <h3 id="multi-processing-2-P-1">Multi-Processing</h3>
-<div class="outline-text-3" id="text-orgb70c2fa">
+<div class="outline-text-3" id="text-org1d16f66">
 <ul class="org-ul">
 <li>You may have noticed (depending on how you implemented your control loop) that when putting the control together, the image data from the camera slows down.</li>
 <li>There are a few contributing factors to this slowness
@@ -821,7 +821,7 @@ between the processes.</li>
 </div>
 <div id="outline-container-relay-mode-1-P-1" class="outline-2">
 <h2 id="relay-mode-1-P-1">Relay Mode</h2>
-<div class="outline-text-2" id="text-org7179f27">
+<div class="outline-text-2" id="text-orgd6682a0">
 <p>
 If you've gotten this far, the challenge is complete.  But there is always more to do!
 </p>
@@ -835,9 +835,9 @@ If you've gotten this far, the challenge is complete.  But there is always more 
 </ol>
 </div>
 </div>
-<div id="outline-container-hints-1-P-1" class="outline-2">
-<h2 id="hints-1-P-1">Hints</h2>
-<div class="outline-text-2" id="text-orga800d34">
+<div id="outline-container-hints-1-P-2" class="outline-2">
+<h2 id="hints-1-P-2">Hints</h2>
+<div class="outline-text-2" id="text-org36162b2">
 <ol class="org-ol">
 <li>I suggest tackling the project in stages
 <ul class="org-ul">
@@ -868,7 +868,7 @@ If you've gotten this far, the challenge is complete.  But there is always more 
 </div>
 <div id="outline-container-other-references-1-P-1" class="outline-2">
 <h2 id="other-references-1-P-1">Other References</h2>
-<div class="outline-text-2" id="text-org390a198">
+<div class="outline-text-2" id="text-org68f4ee1">
 <ul class="org-ul">
 <li><a href="https://docs.opencv.org/4.6.0/d6/d00/tutorial_py_root.html">OpenCV Python Tutorials</a></li>
 <li><a href="https://numpy.org/doc/1.19/">Numpy Manual</a></li>
@@ -878,7 +878,7 @@ If you've gotten this far, the challenge is complete.  But there is always more 
 </div>
 <div id="outline-container-bibliography-1-P-1" class="outline-2">
 <h2 id="bibliography-1-P-1">Bibliography</h2>
-<div class="outline-text-2" id="text-org6cdb9e2">
+<div class="outline-text-2" id="text-orgd7ff077">
 <style>.csl-left-margin{float: left; padding-right: 0em;}
  .csl-right-inline{margin: 0 0 0 1em;}</style><div class="csl-bib-body">
   <div class="csl-entry"><a id="citeproc_bib_item_1"></a>

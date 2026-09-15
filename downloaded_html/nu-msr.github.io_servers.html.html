@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-09-11 Fri 09:55 -->
+<!-- 2026-09-15 Tue 09:58 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MSR GPU Servers</title>
@@ -21,145 +21,44 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#servers-1-P-1">Servers</a>
-<ul>
-<li><a href="#gpu-machines-2-P-1">GPU Machines</a>
-<ul>
-<li><a href="#technical-specifications-3-P-1">Technical Specifications</a></li>
-<li><a href="#hosts-3-P-1">Hosts</a></li>
-<li><a href="#additional-information-3-P-1">Additional Information</a></li>
-</ul>
-</li>
-<li><a href="#nas-machines-2-P-1">NAS Machines</a>
-<ul>
-<li><a href="#technical-specifications-3-P-2">Technical Specifications</a></li>
-<li><a href="#rsync_backup">Rsync Backups</a></li>
-<li><a href="#snapshots">Old Files</a></li>
-</ul>
-</li>
+<li><a href="#servers-1-P-1">Servers</a></li>
 <li><a href="#access">Access</a></li>
+<li><a href="#gpu-servers-1-P-1">GPU Servers</a>
+<ul>
+<li><a href="#technical-specifications-2-P-1">Technical Specifications</a></li>
+<li><a href="#hosts-2-P-1">Hosts</a></li>
+<li><a href="#data-storage-2-P-1">Data Storage</a></li>
+<li><a href="#usage-hints-2-P-1">Usage Hints</a></li>
+<li><a href="#software">Software</a></li>
+<li><a href="#docker-2-P-1">Docker</a></li>
 </ul>
 </li>
-<li><a href="#software">Software</a></li>
-<li><a href="#docker-1-P-1">Docker</a></li>
-<li><a href="#usage-hints-1-P-1">Usage Hints</a></li>
+<li><a href="#network-attached-storage-1-P-1">Network Attached Storage</a>
+<ul>
+<li><a href="#technical-specifications-2-P-2">Technical Specifications</a></li>
+<li><a href="#rsync_backup">Rsync Backups</a></li>
+<li><a href="#snapshots">Old File Versions</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </nav>
 <div id="outline-container-servers-1-P-1" class="outline-2">
 <h2 id="servers-1-P-1">Servers</h2>
-<div class="outline-text-2" id="text-servers-1-P-1">
-</div>
-<div id="outline-container-gpu-machines-2-P-1" class="outline-3">
-<h3 id="gpu-machines-2-P-1">GPU Machines</h3>
-<div class="outline-text-3" id="text-gpu-machines-2-P-1">
-</div>
-<div id="outline-container-technical-specifications-3-P-1" class="outline-4">
-<h4 id="technical-specifications-3-P-1">Technical Specifications</h4>
-<div class="outline-text-4" id="text-org4f661c0">
+<div class="outline-text-2" id="text-orge104b54">
 <p>
-Lambda Labs Workstations with:
+Northwestern MSR maintains several servers for use by MSR students:
 </p>
 <ol class="org-ol">
-<li>AMD Ryzen Threadripper PRO 5995WX with 64 Cores</li>
-<li>1 TB of RAM</li>
-<li>Two NVIDIA RTX 6000 Ada GPUs with 48 GB Ram</li>
-<li>Disks: a 4TB and a 14TB NVME Drive</li>
+<li><code>lamb.mech.northwestern.edu</code> - GPU server with SSH access</li>
+<li><code>sheep.mech.northwestern.edu</code> - GPU server with SSH access</li>
+<li><code>tank.mech.northwestern.edu</code> - NAS for data backup</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-hosts-3-P-1" class="outline-4">
-<h4 id="hosts-3-P-1">Hosts</h4>
-<div class="outline-text-4" id="text-orgffce566">
-<p>
-The GPU servers are available at
-</p>
-<ul class="org-ul">
-<li><code>sheep.mech.northwestern.edu</code></li>
-<li><code>lamb.mech.northwestern.edu</code></li>
-</ul>
-</div>
-</div>
-<div id="outline-container-additional-information-3-P-1" class="outline-4">
-<h4 id="additional-information-3-P-1">Additional Information</h4>
-<div class="outline-text-4" id="text-org018b554">
-<ul class="org-ul">
-<li>You should assume that data on the GPU servers can be deleted without notice at the end of each quarter</li>
-<li>There is no redundancy on the server so backup everything that is important to you</li>
-<li>In addition to your home directory you have access to <code>/data/users/netID</code>, which provides additional storage.
-<ul class="org-ul">
-<li>Each user is limited to <code>150GB</code> in their <code>/home/netID</code> directory</li>
-<li>Each netID has an additional <code>850GB</code> in their <code>/data/users/netID</code> directory</li>
-<li>Use <code>quota -vs</code> to see how much disk space you are using relative to your quotas.</li>
-</ul></li>
-</ul>
-</div>
-</div>
-</div>
-<div id="outline-container-nas-machines-2-P-1" class="outline-3">
-<h3 id="nas-machines-2-P-1">NAS Machines</h3>
-<div class="outline-text-3" id="text-nas-machines-2-P-1">
-</div>
-<div id="outline-container-technical-specifications-3-P-2" class="outline-4">
-<h4 id="technical-specifications-3-P-2">Technical Specifications</h4>
-<div class="outline-text-4" id="text-org824039e">
-<ol class="org-ol">
-<li><code>tank.mech.northwestern.edu</code></li>
-<li>26TB of RAIDZ2 Storage</li>
-<li>Regular snapshots are taken so that you can restore your work at multiple points.</li>
-<li><code>sftp</code> and <code>rsync</code> access only, no shell accounts on this server.
-<ul class="org-ul">
-<li>There are multiple <code>sftp</code> clients, the standard <code>sftp</code> command is rather basic.</li>
-<li>An alternative is <code>lftp</code></li>
-</ul></li>
-</ol>
-</div>
-</div>
-<div id="outline-container-rsync_backup" class="outline-4">
-<h4 id="rsync_backup">Rsync Backups</h4>
-<div class="outline-text-4" id="text-rsync_backup">
-<ol class="org-ol">
-<li><p>
-Customize <a href="./code/backup.bash">./code/backup.bash</a> to back up your home directory
-</p>
-<div class="org-src-container">
-<pre class="src src-bash"><span class="org-comment-delimiter">#</span><span class="org-comment">!/usr/bin/</span><span class="org-keyword">bash</span><span class="org-comment">
-</span>rsync -aH <span class="org-sh-escaped-newline">\</span>
-    --info=progress2 --no-inc-recursive -h <span class="org-sh-escaped-newline">\</span>
-    --delete <span class="org-sh-escaped-newline">\</span>
-    --exclude=<span class="org-string">'.zfs/'</span> <span class="org-sh-escaped-newline">\</span>
-    --exclude=<span class="org-string">'.cache/'</span> <span class="org-sh-escaped-newline">\</span>
-    --exclude=<span class="org-string">'.ssh/id_ed25519'</span> <span class="org-sh-escaped-newline">\</span>
-    <span class="org-string">"$HOME/"</span> <span class="org-sh-escaped-newline">\</span>
-    <span class="org-string">"&lt;netid&gt;@tank.mech.northwestern.edu:$(</span><span class="org-sh-quoted-exec">hostname -s</span><span class="org-string">)/"</span>
-</pre>
-</div></li>
-<li>You will need to replace <code>&lt;netid&gt;</code> with your netid</li>
-<li>By default I exclude some local directories that don't belong on the server and your private ssh key</li>
-<li>Add more directories to exclude by specifying additional <code>--exclude</code> lines</li>
-<li>By default your <code>$HOME/</code> directory is backed up. You could also use a different directory depending on your needs</li>
-<li>Restoration can be accomplished by reversing the source and destination.</li>
-</ol>
-</div>
-</div>
-<div id="outline-container-snapshots" class="outline-4">
-<h4 id="snapshots">Old Files</h4>
-<div class="outline-text-4" id="text-snapshots">
-<ul class="org-ul">
-<li>Browse snapshots under <code>~/.zfs/snapshots</code>
-<ul class="org-ul">
-<li>Snapshots allow you to see versions of your files on the backup server as of a specific date</li>
-</ul></li>
-<li>Snapshots are taken frequently (every 15 minutes), hourly, daily, monthly and yearly.</li>
-<li>Generally you may want to download individual files (using <code>sftp</code>) but you can also
-copy files back to your machine from snapshots using rsync.</li>
-</ul>
-</div>
-</div>
-</div>
-<div id="outline-container-access" class="outline-3">
-<h3 id="access">Access</h3>
-<div class="outline-text-3" id="text-access">
+<div id="outline-container-access" class="outline-2">
+<h2 id="access">Access</h2>
+<div class="outline-text-2" id="text-access">
 <ol class="org-ol">
 <li>The servers maintained by MSR are accessible only on the Northwestern Network
 <ul class="org-ul">
@@ -175,53 +74,54 @@ copy files back to your machine from snapshots using rsync.</li>
 </ol>
 </div>
 </div>
+<div id="outline-container-gpu-servers-1-P-1" class="outline-2">
+<h2 id="gpu-servers-1-P-1">GPU Servers</h2>
+<div class="outline-text-2" id="text-gpu-servers-1-P-1">
 </div>
-<div id="outline-container-software" class="outline-2">
-<h2 id="software">Software</h2>
-<div class="outline-text-2" id="text-software">
+<div id="outline-container-technical-specifications-2-P-1" class="outline-3">
+<h3 id="technical-specifications-2-P-1">Technical Specifications</h3>
+<div class="outline-text-3" id="text-org824039e">
 <p>
-Some useful software on the GPU machines includes:
+Lambda Labs Workstations with:
 </p>
 <ol class="org-ol">
-<li>Ubuntu 24.04 LTS (using the <a href="./hackathon/ubuntu_minimal.html">Ubuntu Minimal</a> installation.</li>
-<li>ROS 2 Jazzy (and image pipeline, moveit2, simulator, nav2, rtabmap, and others).</li>
-<li><a href="https://lambdalabs.com/lambda-stack-deep-learning-software">Lambda Stack</a> (provides PyTorch, TensorFlow, etc.)</li>
-<li>Docker</li>
+<li>AMD Ryzen Threadripper PRO 5995WX with 64 Cores</li>
+<li>1 TB of RAM</li>
+<li>Two NVIDIA RTX 6000 Ada GPUs with 48 GB Ram</li>
+<li>Disks: a 4TB and a 14TB NVME Drive</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-docker-1-P-1" class="outline-2">
-<h2 id="docker-1-P-1">Docker</h2>
-<div class="outline-text-2" id="text-orge038b68">
+<div id="outline-container-hosts-2-P-1" class="outline-3">
+<h3 id="hosts-2-P-1">Hosts</h3>
+<div class="outline-text-3" id="text-orgffce566">
+<p>
+The GPU servers are available at
+</p>
 <ul class="org-ul">
-<li>If the preinstalled software is not sufficient (wrong versions etc) then you should make a <a href="https://docs.docker.com/get-started/">docker image</a> to do what you need</li>
-<li>All users can access Docker only in rootless mode. Docker rootless mode is already set up for you.</li>
-<li>When interpreting instructions for docker on the internet:
+<li><code>sheep.mech.northwestern.edu</code></li>
+<li><code>lamb.mech.northwestern.edu</code></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-data-storage-2-P-1" class="outline-3">
+<h3 id="data-storage-2-P-1">Data Storage</h3>
+<div class="outline-text-3" id="text-orgbdc8ca6">
 <ul class="org-ul">
-<li>Skip anything related to installing <code>docker</code>, nvidia drivers, or the nvidia container toolkit.</li>
-<li>If the instructions involve <code>sudo</code> omit the <code>sudo</code>. Most commands should work but if they don't that means you can't (and likely do not actually need to) run it.</li>
-<li>If the instructions involve <code>systemctl &lt;SOMETHING&gt; docker</code> substitute <code>systemctl --user &lt;SOMETHING&gt; docker</code> instead.
+<li>You should assume that data on the GPU servers can be deleted without notice at the end of each quarter</li>
+<li>There is no redundancy on the server so backup everything that is important to you</li>
+<li>In addition to your home directory you have access to <code>/data/users/netID</code>, which provides additional storage.
 <ul class="org-ul">
-<li>The docker daemon must be running. It should start automatically but use <code>systemctl --user start docker</code> to start it if it is not.</li>
-</ul></li>
-<li>If the instructions involve <code>--privileged</code> you can't do it (but there is likely another way to do what you need to do).</li>
-</ul></li>
-<li>To use the <code>nvidia</code> gpus in a docker container add the following flags to the <code>docker run</code> command: <code>--runtime=nvidia --gpus all</code>
-<ul class="org-ul">
-<li>For example <code>docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi</code></li>
-</ul></li>
-<li>For more information see <a href="https://docs.docker.com/engine/security/rootless/">Rootless Docker</a> and <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#rootless-mode">NVIDIA Docker Rootless Mode</a></li>
-<li>By default your docker images are stored in <code>/data/users/&lt;netID&gt;/docker</code>
-<ul class="org-ul">
-<li>Use <code>docker image ls</code> to see downloaded docker images and the amount of disk space they are using</li>
-<li>Use <code>docker image rm</code> to delete a docker image.</li>
+<li>Each user is limited to <code>150GB</code> in their <code>/home/netID</code> directory</li>
+<li>Each netID has an additional <code>850GB</code> in their <code>/data/users/netID</code> directory</li>
+<li>Use <code>quota -vs</code> to see how much disk space you are using relative to your quotas.</li>
 </ul></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-usage-hints-1-P-1" class="outline-2">
-<h2 id="usage-hints-1-P-1">Usage Hints</h2>
-<div class="outline-text-2" id="text-orgc8e3b66">
+<div id="outline-container-usage-hints-2-P-1" class="outline-3">
+<h3 id="usage-hints-2-P-1">Usage Hints</h3>
+<div class="outline-text-3" id="text-orgc8e3b66">
 <ol class="org-ol">
 <li>Use <a href="https://github.com/tmux/tmux/wiki">tmux</a> to persist your session across ssh logins
 <ul class="org-ul">
@@ -249,6 +149,111 @@ Some useful software on the GPU machines includes:
 <li>If you are coding your own script, your quickest path to success is to use the versions of the pre-installed packages that are on the server and on your laptop.</li>
 <li>There are no limits on GPU or CPU usage, but be mindful of other students by coordinating when you will use each machine and GPU.</li>
 </ol>
+</div>
+</div>
+<div id="outline-container-software" class="outline-3">
+<h3 id="software">Software</h3>
+<div class="outline-text-3" id="text-software">
+<p>
+Some useful software on the GPU machines includes:
+</p>
+<ol class="org-ol">
+<li>Ubuntu 24.04 LTS (using the <a href="./hackathon/ubuntu_minimal.html">Ubuntu Minimal</a> installation.</li>
+<li>ROS 2 Jazzy (and image pipeline, moveit2, simulator, nav2, rtabmap, and others).</li>
+<li><a href="https://lambdalabs.com/lambda-stack-deep-learning-software">Lambda Stack</a> (provides PyTorch, TensorFlow, etc.)</li>
+<li>Docker</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-docker-2-P-1" class="outline-3">
+<h3 id="docker-2-P-1">Docker</h3>
+<div class="outline-text-3" id="text-orge038b68">
+<ul class="org-ul">
+<li>If the preinstalled software is not sufficient (wrong versions etc) then you should make a <a href="https://docs.docker.com/get-started/">docker image</a> to do what you need</li>
+<li>All users can access Docker only in rootless mode. Docker rootless mode is already set up for you.</li>
+<li>When interpreting instructions for docker on the internet:
+<ul class="org-ul">
+<li>Skip anything related to installing <code>docker</code>, nvidia drivers, or the nvidia container toolkit.</li>
+<li>If the instructions involve <code>sudo</code> omit the <code>sudo</code>. Most commands should work but if they don't that means you can't (and likely do not actually need to) run it.</li>
+<li>If the instructions involve <code>systemctl &lt;SOMETHING&gt; docker</code> substitute <code>systemctl --user &lt;SOMETHING&gt; docker</code> instead.
+<ul class="org-ul">
+<li>The docker daemon must be running. It should start automatically but use <code>systemctl --user start docker</code> to start it if it is not.</li>
+</ul></li>
+<li>If the instructions involve <code>--privileged</code> you can't do it (but there is likely another way to do what you need to do).</li>
+</ul></li>
+<li>To use the <code>nvidia</code> gpus in a docker container add the following flags to the <code>docker run</code> command: <code>--runtime=nvidia --gpus all</code>
+<ul class="org-ul">
+<li>For example <code>docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi</code></li>
+</ul></li>
+<li>For more information see <a href="https://docs.docker.com/engine/security/rootless/">Rootless Docker</a> and <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#rootless-mode">NVIDIA Docker Rootless Mode</a></li>
+<li>By default your docker images are stored in <code>/data/users/&lt;netID&gt;/docker</code>
+<ul class="org-ul">
+<li>Use <code>docker image ls</code> to see downloaded docker images and the amount of disk space they are using</li>
+<li>Use <code>docker image rm</code> to delete a docker image.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-network-attached-storage-1-P-1" class="outline-2">
+<h2 id="network-attached-storage-1-P-1">Network Attached Storage</h2>
+<div class="outline-text-2" id="text-network-attached-storage-1-P-1">
+</div>
+<div id="outline-container-technical-specifications-2-P-2" class="outline-3">
+<h3 id="technical-specifications-2-P-2">Technical Specifications</h3>
+<div class="outline-text-3" id="text-orgc76a1eb">
+<ol class="org-ol">
+<li><code>tank.mech.northwestern.edu</code></li>
+<li>26TB of RAIDZ2 Storage</li>
+<li>Regular snapshots are taken so that you can restore your work at multiple points.</li>
+<li><code>sftp</code> and <code>rsync</code> access only, no shell accounts on this server.
+<ul class="org-ul">
+<li>There are multiple <code>sftp</code> clients, the standard <code>sftp</code> command is rather basic.</li>
+<li>An alternative is <code>lftp</code></li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-rsync_backup" class="outline-3">
+<h3 id="rsync_backup">Rsync Backups</h3>
+<div class="outline-text-3" id="text-rsync_backup">
+<ol class="org-ol">
+<li><p>
+Customize <a href="./code/backup.bash">./code/backup.bash</a> to back up your home directory
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span class="org-comment-delimiter">#</span><span class="org-comment">!/usr/bin/</span><span class="org-keyword">bash</span><span class="org-comment">
+</span>rsync -aH <span class="org-sh-escaped-newline">\</span>
+    --info=progress2 --no-inc-recursive -h <span class="org-sh-escaped-newline">\</span>
+    --delete <span class="org-sh-escaped-newline">\</span>
+    --exclude=<span class="org-string">'.zfs/'</span> <span class="org-sh-escaped-newline">\</span>
+    --exclude=<span class="org-string">'.cache/'</span> <span class="org-sh-escaped-newline">\</span>
+    --exclude=<span class="org-string">'.ssh/id_ed25519'</span> <span class="org-sh-escaped-newline">\</span>
+    <span class="org-string">"$HOME/"</span> <span class="org-sh-escaped-newline">\</span>
+    <span class="org-string">"&lt;netid&gt;@tank.mech.northwestern.edu:$(</span><span class="org-sh-quoted-exec">hostname -s</span><span class="org-string">)/"</span>
+</pre>
+</div></li>
+<li>You will need to replace <code>&lt;netid&gt;</code> with your netid</li>
+<li>By default I exclude some local directories that don't belong on the server and your private ssh key</li>
+<li>Add more directories to exclude by specifying additional <code>--exclude</code> lines</li>
+<li>By default your <code>$HOME/</code> directory is backed up. You could also use a different directory depending on your needs</li>
+<li>Restoration can be accomplished by reversing the source and destination.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-snapshots" class="outline-3">
+<h3 id="snapshots">Old File Versions</h3>
+<div class="outline-text-3" id="text-snapshots">
+<ul class="org-ul">
+<li>Browse snapshots under <code>~/.zfs/snapshots</code> using <code>sftp</code>
+<ul class="org-ul">
+<li>Snapshots allow you to see versions of your files on the backup server as of a specific date</li>
+</ul></li>
+<li>Snapshots are taken frequently (every 15 minutes), hourly, daily, monthly and yearly.</li>
+<li>Generally you may want to download individual files (using <code>sftp</code>) but you can also
+copy files back to your machine from snapshots using rsync.</li>
+</ul>
+</div>
 </div>
 </div>
 </div>

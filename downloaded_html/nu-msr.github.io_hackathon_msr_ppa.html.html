@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-09-10 Thu 00:10 -->
+<!-- 2026-09-15 Tue 09:09 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>The Northwestern MS Robotics Personal Package Archive</title>
@@ -58,7 +58,7 @@
 </nav>
 <div id="outline-container-msr-ppa-1-P-1" class="outline-2">
 <h2 id="msr-ppa-1-P-1">MSR PPA</h2>
-<div class="outline-text-2" id="text-org75c118b">
+<div class="outline-text-2" id="text-org02958c5">
 <p>
 A personal package archive (PPA) is a way for users of Ubuntu to distribute personal packages.
 Northwestern MS in Robotics has a PPA at <a href="https://launchpad.net/~numsr/+archive/ubuntu/robotics">https://launchpad.net/~numsr/+archive/ubuntu/robotics</a>.
@@ -74,7 +74,7 @@ The following steps should be done from Ubuntu LTS
 </div>
 <div id="outline-container-how-to-make-a-ppa-2-P-1" class="outline-3">
 <h3 id="how-to-make-a-ppa-2-P-1">How To Make A PPA</h3>
-<div class="outline-text-3" id="text-org68a2652">
+<div class="outline-text-3" id="text-orgbaa396a">
 <ol class="org-ol">
 <li>Sign up for a launchpad.net account</li>
 <li>Create an OpenPGP key:
@@ -90,7 +90,7 @@ The following steps should be done from Ubuntu LTS
 </div>
 <div id="outline-container-references-3-P-1" class="outline-4">
 <h4 id="references-3-P-1">References</h4>
-<div class="outline-text-4" id="text-org4931439">
+<div class="outline-text-4" id="text-orgc98088e">
 <ol class="org-ol">
 <li><a href="https://launchpad.net/+help-registry/openpgp-keys.html">Launchpad Keys</a></li>
 <li><a href="https://help.ubuntu.com/community/GnuPrivacyGuardHowto">Ubuntu GPG Guide</a></li>
@@ -105,7 +105,7 @@ The following steps should be done from Ubuntu LTS
 </div>
 <div id="outline-container-from-a-source-debian-3-P-1" class="outline-4">
 <h4 id="from-a-source-debian-3-P-1">From a Source Debian</h4>
-<div class="outline-text-4" id="text-org8e71b8d">
+<div class="outline-text-4" id="text-orgfb07432">
 <ol class="org-ol">
 <li>Make sure the <code>pgp</code> keys are setup on the system you are building the package on.</li>
 <li>Install the <code>devscripts</code> package</li>
@@ -161,7 +161,7 @@ are changing source code you likely want to make the changes in a fork or even s
 </div>
 <div id="outline-container-package-format-1-P-1" class="outline-2">
 <h2 id="package-format-1-P-1">Package Format</h2>
-<div class="outline-text-2" id="text-orga3f4a21">
+<div class="outline-text-2" id="text-org33368a1">
 <p>
 There are two package formats, as specified in <code>debian/source/format</code>
 </p>
@@ -176,7 +176,7 @@ There are two package formats, as specified in <code>debian/source/format</code>
 </div>
 <div id="outline-container-quilt-packages-2-P-1" class="outline-3">
 <h3 id="quilt-packages-2-P-1">Quilt Packages</h3>
-<div class="outline-text-3" id="text-org0a82188">
+<div class="outline-text-3" id="text-orgf5b1aa9">
 <ol class="org-ol">
 <li>Fork the package to <code>package</code>.</li>
 <li>Make the original tarball:
@@ -196,7 +196,7 @@ There are two package formats, as specified in <code>debian/source/format</code>
 </div>
 <div id="outline-container-references-3-P-2" class="outline-4">
 <h4 id="references-3-P-2">References</h4>
-<div class="outline-text-4" id="text-org437b6b0">
+<div class="outline-text-4" id="text-orgd5c0be4">
 <p>
 <a href="https://help.launchpad.net/Packaging/PPA/BuildingASourcePackage">Building A Source Package</a>
 <a href="https://manpages.ubuntu.com/manpages/trusty/man1/quilt.1.html">Quilt Manpage</a>
@@ -265,7 +265,7 @@ There are two Realsense packages in the PPA
 </div>
 <div id="outline-container-realsense-dkms-2-P-1" class="outline-3">
 <h3 id="realsense-dkms-2-P-1">realsense-dkms</h3>
-<div class="outline-text-3" id="text-org2bc8ec0">
+<div class="outline-text-3" id="text-org0971225">
 <ol class="org-ol">
 <li>The realsense has some slightly modified kernel drivers to help it report timing information better.
 <ul class="org-ul">
@@ -286,7 +286,7 @@ There are two Realsense packages in the PPA
 </div>
 <div id="outline-container-librealsense2-2-P-1" class="outline-3">
 <h3 id="librealsense2-2-P-1">librealsense2</h3>
-<div class="outline-text-3" id="text-org779e6c9">
+<div class="outline-text-3" id="text-orgca7ada6">
 <ol class="org-ol">
 <li>This version now matches the upstream version, and differs only from the <code>ros-&lt;version&gt;-librealsense2</code> package based on it's compilation options
 <ul class="org-ul">
@@ -301,7 +301,7 @@ There are two Realsense packages in the PPA
 </div>
 <div id="outline-container-uncloud-init-1-P-1" class="outline-2">
 <h2 id="uncloud-init-1-P-1">Uncloud-init</h2>
-<div class="outline-text-2" id="text-orgb08d642">
+<div class="outline-text-2" id="text-org45069ed">
 <ul class="org-ul">
 <li>A replacement for cloud-init that serves the purpose of providing the minimal cloud-init functionality needed to perform an installation of Ubuntu.</li>
 <li>The <code>README.md</code> in the package provides the details</li>
@@ -310,7 +310,7 @@ There are two Realsense packages in the PPA
 </div>
 <div id="outline-container-network-manager-1-P-1" class="outline-2">
 <h2 id="network-manager-1-P-1">Network Manager</h2>
-<div class="outline-text-2" id="text-org1dbafc8">
+<div class="outline-text-2" id="text-orgc4134e8">
 <ul class="org-ul">
 <li>Removes dependencies of Network Manager on netplan.io</li>
 </ul>
