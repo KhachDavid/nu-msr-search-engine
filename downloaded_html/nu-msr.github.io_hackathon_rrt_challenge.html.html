@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-09-15 Tue 09:09 -->
+<!-- 2026-09-16 Wed 12:18 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Rapidly-Exploring Random Tree</title>
@@ -143,7 +143,7 @@ over the whole space.
 </p>
 
 
-<figure id="orgc8ab164">
+<figure id="orgf90eda6">
 <img src="./images/rrt1.png" alt="rrt1.png">
 
 <figcaption><span class="figure-number">Figure 1: </span>An RRT after 500 iterations</figcaption>
@@ -199,7 +199,7 @@ Your code should be able to generate a plot (using <code>matplotlib</code>) with
 </ol>
 
 
-<figure id="orgec5521c">
+<figure id="orgcb68f50">
 <img src="./images/rrt2.png" alt="rrt2.png">
 
 <figcaption><span class="figure-number">Figure 2: </span>A sample RRT run</figcaption>
@@ -224,7 +224,7 @@ Plot the image in the background of your results
 </p>
 
 
-<figure id="orgfe28556">
+<figure id="orgf8ccf14">
 <img src="./images/N_map.png" alt="N_map.png">
 
 <figcaption><span class="figure-number">Figure 3: </span>A sample obstacle map</figcaption>
@@ -239,7 +239,7 @@ implementation.</li>
 </ul>
 
 
-<figure id="org01df6e2">
+<figure id="org9c21923">
 <img src="./images/n_rrt.png" alt="n_rrt.png">
 
 <figcaption><span class="figure-number">Figure 4: </span>An example RRT run</figcaption>
@@ -279,7 +279,7 @@ Here are some libraries you should use
 <ul class="org-ul">
 <li>matplotlib - for plotting</li>
 <li>numpy - for the math</li>
-<li>imageio - for reading the image</li>
+<li>PIL for reading the image</li>
 </ul>
 </div>
 </div>
@@ -296,7 +296,7 @@ See: <a href="https://matplotlib.org/stable/gallery/shapes_and_collections/line_
 </ul></li>
 <li>It is often useful to seed the random number generator when testing,  which causes it to return the same sequence of numbers every time you run your program.
 <ul class="org-ul">
-<li>If you use the <code>numpy</code> random number generator, you can seed it with <code>numpy.random.seed</code>.</li>
+<li>If you use the <code>numpy</code> random number generator, you can seed it with <code>numpy.random.default_rng(seed)</code>.</li>
 </ul></li>
 <li>For plotting, it may be helpful to manually set the x and y limits to fit the domain.</li>
 <li>For collision checking between a circle and a line:
@@ -313,11 +313,11 @@ and the value of the parameter determines whether the point is on the line segme
 <li><a href="http://www.cse.yorku.ca/~amana/research/grid.pdf">A Fast Voxel Traversal Algorithm for Ray Tracing</a> is one way to ensure that all pixels that intersect with the line are visited.</li>
 </ul></li>
 
-<li>The <code>imread</code> function from the <a href="https://imageio.github.io">imageio</a> library can be used to load the image.
+<li>The <a href="https://pillow.readthedocs.io/en/stable/">Pillow</a> library is a dependency of <code>matplotlib</code> and allows you to read in images.
 <ul class="org-ul">
-<li>The image is a <code>numpy</code> array of pixels.</li>
-<li>The pixel coordinate system increases from top to bottom.  You can use <a href="https://numpy.org/doc/stable/reference/generated/numpy.flipud.html">numpy.flipud</a> to
-compensate.</li>
+<li>The image file provided in the example is a 1-bit black and white image, where black represents an obstacle.</li>
+<li>The pixels are inverted by Pillow when the <code>PIL.Image</code> is converted to a <code>numpy</code> array.</li>
+<li>The pixel coordinate system increases from top to bottom.  You can use <a href="https://numpy.org/doc/stable/reference/generated/numpy.flipud.html">numpy.flipud</a> to compensate.</li>
 <li>To show the image, use <code>imshow</code> and, if you flipped it, use <code>origin = 'lower'</code>.</li>
 <li>You should set <code>cmap = 'gray'</code> to view the image in black and white, since the image is a grayscale image.</li>
 <li>When accessing an image as an array, rows correspond to y values and columns to x values.</li>

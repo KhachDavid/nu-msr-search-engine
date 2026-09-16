@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-09-15 Tue 09:09 -->
+<!-- 2026-09-16 Wed 13:09 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Who Stole My Pen?</title>
@@ -53,8 +53,8 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#overview-1-P-2">Overview</a></li>
-<li><a href="#setup-1-P-3">Setup</a>
+<li><a href="#overview-1-P-1">Overview</a></li>
+<li><a href="#setup-1-P-1">Setup</a>
 <ul>
 <li><a href="#software-2-P-1">Software</a></li>
 <li><a href="#physical-2-P-1">Physical</a></li>
@@ -89,14 +89,14 @@
 </ul>
 </li>
 <li><a href="#relay-mode-1-P-1">Relay Mode</a></li>
-<li><a href="#hints-1-P-2">Hints</a></li>
+<li><a href="#hints-1-P-1">Hints</a></li>
 <li><a href="#other-references-1-P-1">Other References</a></li>
 <li><a href="#bibliography-1-P-1">Bibliography</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-overview-1-P-2" class="outline-2">
-<h2 id="overview-1-P-2">Overview</h2>
+<div id="outline-container-overview-1-P-1" class="outline-2">
+<h2 id="overview-1-P-1">Overview</h2>
 <div class="outline-text-2" id="text-org36fbfcb">
 <p>
 We've all done it. "Borrowed" a pen and then lost it.
@@ -108,9 +108,9 @@ The goal is enable the PincherX 100 to grab a pen that is held in front of it.
 </p>
 </div>
 </div>
-<div id="outline-container-setup-1-P-3" class="outline-2">
-<h2 id="setup-1-P-3">Setup</h2>
-<div class="outline-text-2" id="text-setup-1-P-3">
+<div id="outline-container-setup-1-P-1" class="outline-2">
+<h2 id="setup-1-P-1">Setup</h2>
+<div class="outline-text-2" id="text-setup-1-P-1">
 </div>
 <div id="outline-container-software-2-P-1" class="outline-3">
 <h3 id="software-2-P-1">Software</h3>
@@ -124,7 +124,7 @@ The software setup was completed as part of <a href="./computer_setup.html">Comp
 <h3 id="physical-2-P-1">Physical</h3>
 <div class="outline-text-3" id="text-org863fe99">
 <p>
-The physical setup for this project requires the Trossen PincherX 100 and the Intel Realsense D435i.
+The physical setup for this project requires the Trossen PincherX 100 and the Realsense D435i.
 Here are some tips for how to locate the hardware.
 </p>
 
@@ -169,13 +169,13 @@ a controller that will enable the robot to grab the pen.
 <li>The Depth Map is an <code>NxM</code> array, where each "pixel" is a 16-bit integer proportional to the distance from the camera to the nearest object.</li>
 <li>The RGB image is an <code>NxMx3</code> array, where each <code>NxM</code> slice is a different R, G, or B color (be careful, OpenCV often uses BGR instead of RGB ordering for colors!)</li>
 </ul></li>
-<li>This <a href="https://github.com/IntelRealSense/librealsense/blob/master/wrappers/python/examples/align-depth2color.py">Alignment Example</a> from Intel demonstrates how to do several tasks and is a good starting point for your project
+<li>This <a href="https://github.com/realsenseai/librealsense/blob/master/wrappers/python/examples/align-depth2color.py">Alignment Example</a> from RealsenseAI demonstrates how to do several tasks and is a good starting point for your project
 <ol class="org-ol">
 <li>Stream depth and RGB images from the camera</li>
 <li>Convert the depth "pixel" value into meters
 <ul class="org-ul">
 <li>The example finds a scaling factor and manually converts. This scaling factor is useful if you want to, for example, convert the entire depth-image to meters.</li>
-<li>The depth image also has a <a href="https://intelrealsense.github.io/librealsense/python_docs/_generated/pyrealsense2.depth_frame.html#pyrealsense2.depth_frame.get_distance">get_distance</a> function that does the conversion for a single pixel.</li>
+<li>The depth image also has a <a href="https://realsenseai.github.io/librealsense/python_docs/_generated/pyrealsense2.depth_frame.html#pyrealsense2.depth_frame.get_distance">get_distance</a> function that does the conversion for a single pixel.</li>
 </ul></li>
 <li>Remove objects that are farther than a distance threshold away</li>
 <li>Align both images</li>
@@ -186,10 +186,10 @@ a controller that will enable the robot to grab the pen.
 </div>
 <div id="outline-container-design-notes-3-P-1" class="outline-4">
 <h4 id="design-notes-3-P-1">Design Notes</h4>
-<div class="outline-text-4" id="text-org4878b15">
+<div class="outline-text-4" id="text-org8d8df33">
 <ol class="org-ol">
 <li>What follows are some notes on how to think about designing and organizing your code:</li>
-<li>A good strategy, after running and understanding the <a href="https://github.com/IntelRealSense/librealsense/blob/master/wrappers/python/examples/align-depth2color.py">Alignment Example</a> is to divide it into the components that you need and encapsulate them in a class.</li>
+<li>A good strategy, after running and understanding the <a href="https://github.com/realsenseai/librealsense/blob/master/wrappers/python/examples/align-depth2color.py">Alignment Example</a> is to divide it into the components that you need and encapsulate them in a class.</li>
 <li>For example, there are a few steps required to capture images:
 <ul class="org-ul">
 <li>Setup streaming (this can be done, for example, in the <code>__init__</code> method).</li>
@@ -218,8 +218,8 @@ program to be designed to operate in a loop where one of these functions are cal
 <h4 id="resources-3-P-1">Resources</h4>
 <div class="outline-text-4" id="text-org11288a7">
 <ol class="org-ol">
-<li><a href="https://intelrealsense.github.io/librealsense/python_docs/">Realsense Python API Documentation</a></li>
-<li><a href="https://github.com/IntelRealSense/librealsense/tree/master/wrappers/python/examples">PyRealSense Examples</a></li>
+<li><a href="https://realsenseai.github.io/librealsense/python_docs/_generated/pyrealsense2.config.html">Realsense Python API Documentation</a></li>
+<li><a href="https://github.com/realsenseai/librealsense/tree/master/wrappers/python/examples">PyRealSense Examples</a></li>
 </ol>
 </div>
 </div>
@@ -229,14 +229,14 @@ program to be designed to operate in a loop where one of these functions are cal
 <div class="outline-text-3" id="text-org18554e8">
 <ul class="org-ul">
 <li>Being able to record data and play it back is useful when testing an image pipeline because it ensures that you are using the same data each time.</li>
-<li>To record data, use <a href="https://intelrealsense.github.io/librealsense/python_docs/_generated/pyrealsense2.config.html#pyrealsense2.config.enable_record_to_file">config.enable_record_to_file(filename)</a></li>
-<li>To play back the data, use the <a href="https://intelrealsense.github.io/librealsense/python_docs/_generated/pyrealsense2.config.html#pyrealsense2.config.enable_device_from_file">config.enable_device_from_file(filename)</a></li>
+<li>To record data, use <a href="https://realsenseai.github.io/librealsense/python_docs/_generated/pyrealsense2.config.html#pyrealsense2.config.enable_record_to_file">config.enable_record_to_file(filename)</a></li>
+<li>To play back the data, use the <a href="https://realsenseai.github.io/librealsense/python_docs/_generated/pyrealsense2.config.html#pyrealsense2.config.enable_device_from_file">config.enable_device_from_file(filename)</a></li>
 <li>You may wish to provide command-line arguments to easily switch between recording and playback: the <a href="https://docs.python.org/3/library/argparse.html">argparse</a> library may be helpful.</li>
 </ul>
 </div>
 <div id="outline-container-design-notes-3-P-2" class="outline-4">
 <h4 id="design-notes-3-P-2">Design Notes</h4>
-<div class="outline-text-4" id="text-org1339e44">
+<div class="outline-text-4" id="text-org9a08605">
 <ol class="org-ol">
 <li>By encapsulating the camera streaming in a class, it is easier to write a program that lets a user choose between playing from a recording or streaming live data.</li>
 <li>The recording and playback functionalities are useful to implement before moving forward with the image pipeline.</li>
@@ -260,7 +260,7 @@ program to be designed to operate in a loop where one of these functions are cal
 <li>I've listed some techniques to get you started</li>
 <li>The end goal of this pipeline is to output the centroid of the pen</li>
 </ul></li>
-<li>The Depth map is calibrated by Intel and you can directly convert to real units (as the alignment example does)
+<li>The Depth map is calibrated by RealSense and you can directly convert to real units (as the alignment example does)
 <ul class="org-ul">
 <li>You can use camera calibration and the known positions of the robot and RealSense to solve for the other dimensions.</li>
 <li>The Realsense's built-in calibration is not great so for most projects you should do a calibration yourself: however, it is good enough for this project.</li>
@@ -315,11 +315,11 @@ program to be designed to operate in a loop where one of these functions are cal
 <li><a href="https://docs.opencv.org/4.6.0/db/df6/tutorial_erosion_dilatation.html">Additional image filters</a></li>
 <li><a href="https://docs.opencv.org/4.6.0/d3/dbe/tutorial_opening_closing_hats.html">More Filters</a></li>
 </ul></li>
-<li><a href="https://github.com/IntelRealSense/librealsense/wiki/Projection-in-RealSense-SDK-2.0">Intel Documentation</a> describes various camera parameters and how to convert between pixel and real-world coordinates.
+<li><a href="https://github.com/realsenseai/librealsense/wiki/Projection-in-RealSense-SDK-2.0">RealSense Documentation</a> describes various camera parameters and how to convert between pixel and real-world coordinates.
 <ul class="org-ul">
 <li>The approach I suggest uses a 2D color image and a depth map, but you may also be able to complete this project using point-clouds (a collection of 3-dimensional points).</li>
 <li><p>
-<a href="https://intelrealsense.github.io/librealsense/python_docs/_generated/pyrealsense2.html">rs2_deproject_pixel_to_point</a> can be used to to convert the depth map and pixel coordinates into real coordinates
+<a href="https://realsenseai.github.io/librealsense/python_docs/_generated/pyrealsense2.html">rs2_deproject_pixel_to_point</a> can be used to to convert the depth map and pixel coordinates into real coordinates
 </p>
 <div class="org-src-container">
 <pre class="src src-python">rs.rs2_deproject_pixel_to_point(intrinsics, [px, py], depth)
@@ -330,7 +330,7 @@ program to be designed to operate in a loop where one of these functions are cal
 </pre>
 </div></li>
 <li><p>
-The realsense knows its own <a href="https://intelrealsense.github.io/librealsense/python_docs/_generated/pyrealsense2.intrinsics.html?highlight=intrinsics">intrinsic</a> parameters. You can get them with the python api
+The realsense knows its own <a href="https://realsenseai.github.io/librealsense/python_docs/_generated/pyrealsense2.intrinsics.html?highlight=intrinsics">intrinsic</a> parameters. You can get them with the python api
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-variable-name">cfg</span> <span class="org-operator">=</span> pipeline.start(config)
@@ -357,7 +357,7 @@ cylindrical coordinates centered at the base frame of the pincherX</li>
 </div>
 <div id="outline-container-design-notes-3-P-3" class="outline-4">
 <h4 id="design-notes-3-P-3">Design Notes</h4>
-<div class="outline-text-4" id="text-org5e0c76a">
+<div class="outline-text-4" id="text-orgdc516b9">
 <ol class="org-ol">
 <li>The ultimate goal of the pipeline is to get the 3D pen location from the RGB image and depth map.</li>
 <li>Do not worry about precision and accuracy at this stage: just get a rough reasonable version working.
@@ -378,7 +378,7 @@ cylindrical coordinates centered at the base frame of the pincherX</li>
 </div>
 <div id="outline-container-robot-control-1-P-1" class="outline-2">
 <h2 id="robot-control-1-P-1">Robot Control</h2>
-<div class="outline-text-2" id="text-org0a8fff5">
+<div class="outline-text-2" id="text-orge0c8001">
 <p>
 We will use the <code>interbotix_xs_toolbox</code> to control the robot.
 Although the arm can be fully controlled with ROS 2, we will use only minimally use it during the hackathon,
@@ -628,7 +628,7 @@ is essential for debugging.
 <ol class="org-ol">
 <li>Make sure you understand the coordinate systems used by the camera and the robot.
 <ul class="org-ul">
-<li>You can discover this through experimentation or by reading the <a href="https://dev.intelrealsense.com/docs/projection-in-intel-realsense-sdk-20">documentation</a></li>
+<li>You can discover this through experimentation or by reading the <a href="https://dev.realsenseai.com/docs/projection-in-realsense-sdk-2-0">documentation</a></li>
 <li>You should develop a theoretical understanding from the documentation that you then confirm with experiments</li>
 </ul></li>
 <li>Make a drawing of the coordinate systems involved. It should include
@@ -700,7 +700,7 @@ Write a script that performs the calibration procedure:
 </div>
 <div id="outline-container-design-notes-3-P-4" class="outline-4">
 <h4 id="design-notes-3-P-4">Design Notes</h4>
-<div class="outline-text-4" id="text-orgac6647c">
+<div class="outline-text-4" id="text-orga2a288a">
 <ol class="org-ol">
 <li>There is an offset between where the pen is detected and the center of the robot's end-effector frame:
 this offset can be manually accounted for.</li>
@@ -723,7 +723,7 @@ this offset can be manually accounted for.</li>
 </div>
 <div id="outline-container-robot-control-1-P-2" class="outline-2">
 <h2 id="robot-control-1-P-2">Robot Control</h2>
-<div class="outline-text-2" id="text-org8b0a2aa">
+<div class="outline-text-2" id="text-org8e3bb75">
 <p>
 A basic robot control loop consists of the following steps:
 </p>
@@ -769,7 +769,7 @@ When rotating (this assumes that both the arm and pen's locations are expressed 
 </div>
 <div id="outline-container-design-notes-3-P-5" class="outline-4">
 <h4 id="design-notes-3-P-5">Design Notes</h4>
-<div class="outline-text-4" id="text-orga781409">
+<div class="outline-text-4" id="text-orgf492ebc">
 <ol class="org-ol">
 <li>There may be a few modes of operation as you control the robot (e.g., moving to the pen, closing grippers, etc). It makes sense to track these modes
 by assigning a state to each of them. You can use a python <a href="https://docs.python.org/3/library/enum.html">enum</a> to label and track states</li>
@@ -835,8 +835,8 @@ If you've gotten this far, the challenge is complete.  But there is always more 
 </ol>
 </div>
 </div>
-<div id="outline-container-hints-1-P-2" class="outline-2">
-<h2 id="hints-1-P-2">Hints</h2>
+<div id="outline-container-hints-1-P-1" class="outline-2">
+<h2 id="hints-1-P-1">Hints</h2>
 <div class="outline-text-2" id="text-org36162b2">
 <ol class="org-ol">
 <li>I suggest tackling the project in stages
