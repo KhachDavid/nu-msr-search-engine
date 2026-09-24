@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-30 Fri 13:06 -->
+<!-- 2026-09-23 Wed 23:35 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Threads in ROS and Python</title>
@@ -21,7 +21,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#overview-1-P-21">Overview</a></li>
+<li><a href="#overview-1-P-23">Overview</a></li>
 <li><a href="#thread-basics-1-P-1">Thread Basics</a>
 <ul>
 <li><a href="#what-is-a-process--2-P-1">What is a process?</a></li>
@@ -43,9 +43,9 @@
 </ul>
 </div>
 </nav>
-<div id="outline-container-overview-1-P-21" class="outline-2">
-<h2 id="overview-1-P-21">Overview</h2>
-<div class="outline-text-2" id="text-org512975a">
+<div id="outline-container-overview-1-P-23" class="outline-2">
+<h2 id="overview-1-P-23">Overview</h2>
+<div class="outline-text-2" id="text-orgce93ec5">
 <p>
 This is a practical guide to threads in ROS, focused on python. 
 There are two goals:
@@ -60,14 +60,13 @@ Resources for learning more about threads in python are at the <a href="#resourc
 </p>
 </div>
 </div>
-
 <div id="outline-container-thread-basics-1-P-1" class="outline-2">
 <h2 id="thread-basics-1-P-1">Thread Basics</h2>
 <div class="outline-text-2" id="text-thread-basics-1-P-1">
 </div>
 <div id="outline-container-what-is-a-process--2-P-1" class="outline-3">
 <h3 id="what-is-a-process--2-P-1">What is a process?</h3>
-<div class="outline-text-3" id="text-org3e4003d">
+<div class="outline-text-3" id="text-orgdbce5d9">
 <ol class="org-ol">
 <li>A <a href="https://www.tldp.org/LDP/tlk/kernel/processes.html">process</a> is an abstraction used by
 the Linux Kernel (and other operating systems) to segregate sequences of machine instructions into
@@ -84,7 +83,7 @@ of the operating system.</li>
 </div>
 <div id="outline-container-what-is-a-thread--2-P-1" class="outline-3">
 <h3 id="what-is-a-thread--2-P-1">What is a thread?</h3>
-<div class="outline-text-3" id="text-org54a6edf">
+<div class="outline-text-3" id="text-org0057f01">
 <ol class="org-ol">
 <li>A <a href="https://www.tldp.org/FAQ/Threads-FAQ/Types.html">thread</a> is subordinate unit of execution within a process</li>
 <li>Each process can have multiple threads each of which executes its respective machine code instructions simultaneously (as scheduled by the kernel)
@@ -121,10 +120,9 @@ schedules execution, which in turn depends on what else is happening on the comp
 </ol>
 </div>
 </div>
-
 <div id="outline-container-threads-in-python-2-P-2" class="outline-3">
 <h3 id="threads-in-python-2-P-2">Threads in Python</h3>
-<div class="outline-text-3" id="text-org7a714d9">
+<div class="outline-text-3" id="text-orgd8ac8c5">
 <ol class="org-ol">
 <li>The most common python interpreter, CPython, implements a <a href="http://wiki.python.org/moin/GlobalInterpreterLock">Global Interpreter Lock (GIL)</a>
 <ul class="org-ul">
@@ -169,18 +167,19 @@ computationally bound ones.
 If you perform a non-atomic operation, the thread you are running on can be interrupted in the middle.
 Assume we have two threads, both performing  <code>i = i + 1</code>, a non-atomic operation.  Thus what is actually executed gets broken into several interruptable steps
 </p>
-<pre class="example">
-i = 0
+<div class="org-src-container">
+<pre class="src src-nil">i = 0
 # Two threads are started
 Thread 1            |        Thread 2
    i = i + 1        |           i = i + 1
 </pre>
+</div>
 
 <p>
 Operations can happen in multiple ways leading to different results: for example
 </p>
-<pre class="example">
-Thread 1, reads i, it is 0
+<div class="org-src-container">
+<pre class="src src-nil">Thread 1, reads i, it is 0
 Thread 2, reads i, it is 0
 Thread 1 adds 1 to what it read, yielding 1
 Thread 1 stores 1 in i
@@ -189,24 +188,23 @@ Thread 1 adds 1 to what it read, yielding 2
 Thread 2 adds 1 to what it read, yielding 1
 Thread 1 stores 2 in i
 Thread 2 stores 1 in i
-</pre></li>
+</pre>
+</div></li>
 </ol>
 </div>
 </div>
 </div>
-
 <div id="outline-container-threads-in-rospy-1-P-1" class="outline-2">
 <h2 id="threads-in-rospy-1-P-1">Threads in rospy</h2>
-<div class="outline-text-2" id="text-org6e0c83b">
+<div class="outline-text-2" id="text-orgfa50dc0">
 <p>
 The threading model for rospy is poorly documented by ROS
 The information here comes from my own explorations and discussion here <a href="https://answers.ros.org/question/9543/rospy-threading-model/">https://answers.ros.org/question/9543/rospy-threading-model/</a> (the whole series of answers).
 </p>
 </div>
-
 <div id="outline-container-timers-2-P-1" class="outline-3">
 <h3 id="timers-2-P-1">Timers</h3>
-<div class="outline-text-3" id="text-orgd98674b">
+<div class="outline-text-3" id="text-org2715672">
 <ul class="org-ul">
 <li><code>rospy.Timer(Rate(hz), callback)</code> lets you execute a callback at a given frequency.</li>
 <li>Each timer runs in its own thread as soon as you create the timer.</li>
@@ -221,7 +219,7 @@ The timer will effectively only trigger once every 3 seconds</li>
 </div>
 <div id="outline-container-subscribers-2-P-1" class="outline-3">
 <h3 id="subscribers-2-P-1">Subscribers</h3>
-<div class="outline-text-3" id="text-org3824833">
+<div class="outline-text-3" id="text-orgdc1120d">
 <ul class="org-ul">
 <li>In rospy, it seems that each topic you subscribe to gets one thread per publisher.</li>
 <li>This means that a given subscriber callback can execute in different threads.</li>
@@ -229,19 +227,17 @@ The timer will effectively only trigger once every 3 seconds</li>
 </ul>
 </div>
 </div>
-
 <div id="outline-container-service-handlers-2-P-1" class="outline-3">
 <h3 id="service-handlers-2-P-1">Service Handlers</h3>
-<div class="outline-text-3" id="text-orgff28ee0">
+<div class="outline-text-3" id="text-org25449b4">
 <ul class="org-ul">
 <li>Service Handlers execute in their own threads</li>
 </ul>
 </div>
 </div>
-
 <div id="outline-container-what-this-threading-model-means-for-you-2-P-1" class="outline-3">
 <h3 id="what-this-threading-model-means-for-you-2-P-1">What this threading model means for you</h3>
-<div class="outline-text-3" id="text-org2c0345b">
+<div class="outline-text-3" id="text-org2835f7b">
 <ol class="org-ol">
 <li>Be aware that the callbacks you write may operate in a separate threads</li>
 <li>These threads are different from the main thread of your program</li>
@@ -263,10 +259,9 @@ One thread puts data onto the queue, the other thread reads it from the queue.</
 </div>
 </div>
 </div>
-
 <div id="outline-container-roscpp-and-threads-1-P-1" class="outline-2">
 <h2 id="roscpp-and-threads-1-P-1">roscpp and threads</h2>
-<div class="outline-text-2" id="text-org55cdc0c">
+<div class="outline-text-2" id="text-org85ead8e">
 <ol class="org-ol">
 <li>The thread model for ROS is different in python and in C++</li>
 <li>In roscpp, there is a single thread unless you explicitly create multiple threads</li>
@@ -277,16 +272,14 @@ therefore, you must be very careful when synchronizing threads</li>
 </ol>
 </div>
 </div>
-
 <div id="outline-container-threads-example-1-P-1" class="outline-2">
 <h2 id="threads-example-1-P-1">Threads Example</h2>
-<div class="outline-text-2" id="text-orgc0f2ae4">
+<div class="outline-text-2" id="text-org3b51878">
 <ol class="org-ol">
 <li>Here is an interactive example for exploring threads in python <a href="https://github.com/m-elwin/me495_threads">Threads</a></li>
 </ol>
 </div>
 </div>
-
 <div id="outline-container-resources" class="outline-2">
 <h2 id="resources">Python Resources</h2>
 <div class="outline-text-2" id="text-resources">

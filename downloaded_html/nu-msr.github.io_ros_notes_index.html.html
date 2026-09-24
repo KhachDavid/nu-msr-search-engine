@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-02-03 Tue 08:58 -->
+<!-- 2026-09-24 Thu 08:46 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ROS and ROS2 Lecture Notes</title>
+<title>ROS Lecture Notes</title>
 <meta name="author" content="Matthew Elwin" />
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" href="./pubme.css" type="text/css"/>
@@ -16,13 +16,17 @@
  <a accesskey="H" href="./index.html"> HOME </a>
 </div><div id="content" class="content">
 <header>
-<h1 class="title">ROS and ROS2 Lecture Notes</h1>
+<h1 class="title">ROS Lecture Notes</h1>
 </header><nav id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#description-1-P-1">Description</a></li>
-<li><a href="#schedule-1-P-1">Schedule</a></li>
+<li><a href="#description-1-P-2">Description</a></li>
+<li><a href="#schedule-1-P-1">Schedule</a>
+<ul>
+<li><a href="#previous-years-2-P-1">Previous Years</a></li>
+</ul>
+</li>
 <li><a href="#ros-2-1-P-1">ROS 2</a>
 <ul>
 <li><a href="#basics-2-P-1">Basics</a></li>
@@ -32,7 +36,7 @@
 <li><a href="#hardware-2-P-1">Hardware</a></li>
 <li><a href="#low-level-2-P-1">Low-Level</a></li>
 <li><a href="#activities-2-P-1">Activities</a></li>
-<li><a href="#homework-2-P-1">Homework</a></li>
+<li><a href="#homework-2-P-3">Homework</a></li>
 <li><a href="#howto-2-P-1">HOWTO</a></li>
 </ul>
 </li>
@@ -44,15 +48,15 @@
 <li><a href="#sensing-2-P-2">Sensing</a></li>
 <li><a href="#hardware-2-P-2">Hardware</a></li>
 <li><a href="#activities-2-P-2">Activities</a></li>
-<li><a href="#homework-2-P-2">Homework</a></li>
+<li><a href="#homework-2-P-4">Homework</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-description-1-P-1" class="outline-2">
-<h2 id="description-1-P-1">Description</h2>
+<div id="outline-container-description-1-P-2" class="outline-2">
+<h2 id="description-1-P-2">Description</h2>
 <div class="outline-text-2" id="text-orgda0958f">
 <p>
 Welcome to the lecture notes for ME495: Embedded Systems in Robotics, a core course for Northwestern University's
@@ -72,10 +76,17 @@ By the end of the course, student teams will have completed a robotics project u
 <h2 id="schedule-1-P-1">Schedule</h2>
 <div class="outline-text-2" id="text-orgd3b9cd5">
 <ul class="org-ul">
-<li><a href="./schedule.html#2025">2025 Schedule</a></li>
-<li><a href="./schedule.html#2024">2024 Schedule</a></li>
+<li><a href="./schedule.html">2026 Schedule</a></li>
 </ul>
 </div>
+<details id="org558f18c"><summary class="header-3">Previous Years</summary>
+<div class="outline-text-3" id="text-org558f18c">
+<ul class="org-ul">
+<li><a href="./archive/schedule_2025.html">2025 Schedule</a></li>
+<li><a href="./archive/schedule_2024.html">2024 Schedule</a></li>
+</ul>
+</div>
+</details>
 </div>
 
 <div id="outline-container-ros-2-1-P-1" class="outline-2">
@@ -88,9 +99,11 @@ By the end of the course, student teams will have completed a robotics project u
 <ul class="org-ul">
 <li><a href="./ros2/preliminaries.html">Preliminaries</a></li>
 <li><a href="./ros2/ros_history.html">About ROS</a></li>
-<li><a href="./ros2/basics.html">Basics</a></li>
+<li><a href="./ros2/ecosystem.html">The ROS Ecosystem</a></li>
+<li><a href="./ros2/ros_graph.html">The ROS Graph</a></li>
 <li><a href="./ros2/colcon.html">Workspaces and Packages</a></li>
 <li><a href="./ros2/ros_api.html">The ROS API and Python</a></li>
+<li><a href="./ros2/naming.html">Naming in ROS</a></li>
 <li><a href="./ros2/launch.html">Launchfiles</a></li>
 <li><a href="./ros2/spin.html">Spinning and Asynchronicity</a></li>
 <li><a href="./ros2/design_doc_test.html">Testing and Documentation</a></li>
@@ -99,7 +112,7 @@ By the end of the course, student teams will have completed a robotics project u
 </div>
 <div id="outline-container-modeling-robots-2-P-1" class="outline-3">
 <h3 id="modeling-robots-2-P-1">Modeling Robots</h3>
-<div class="outline-text-3" id="text-org5818756">
+<div class="outline-text-3" id="text-orgad4e58e">
 <ul class="org-ul">
 <li><a href="./ros2/tf.html">The Tf Tree</a></li>
 <li><a href="./ros2/modeling.html">Modeling Robots</a></li>
@@ -112,7 +125,7 @@ By the end of the course, student teams will have completed a robotics project u
 
 <div id="outline-container-manipulation-2-P-1" class="outline-3">
 <h3 id="manipulation-2-P-1">Manipulation</h3>
-<div class="outline-text-3" id="text-orgec973a8">
+<div class="outline-text-3" id="text-org5adf11a">
 <ul class="org-ul">
 <li><a href="./ros2/moveit.html">MoveIt 2</a></li>
 <li><a href="./ros2/control.html">ROS 2 Control</a></li>
@@ -121,7 +134,7 @@ By the end of the course, student teams will have completed a robotics project u
 </div>
 <div id="outline-container-sensing-2-P-1" class="outline-3">
 <h3 id="sensing-2-P-1">Sensing</h3>
-<div class="outline-text-3" id="text-orgced0640">
+<div class="outline-text-3" id="text-org1514133">
 <ul class="org-ul">
 <li><a href="./ros2/computer_vision.html">Computer Vision</a></li>
 <li><a href="./ros2/3dsensing.html">3D Sensing</a></li>
@@ -131,7 +144,7 @@ By the end of the course, student teams will have completed a robotics project u
 </div>
 <div id="outline-container-hardware-2-P-1" class="outline-3">
 <h3 id="hardware-2-P-1">Hardware</h3>
-<div class="outline-text-3" id="text-orgc75671a">
+<div class="outline-text-3" id="text-org412f8cc">
 <ul class="org-ul">
 <li><a href="./ros2/pincherX100.html">PincherX 100</a></li>
 <li><a href="./ros2/franka.html">Emika Franka Panda</a></li>
@@ -151,7 +164,7 @@ By the end of the course, student teams will have completed a robotics project u
 
 <div id="outline-container-activities-2-P-1" class="outline-3">
 <h3 id="activities-2-P-1">Activities</h3>
-<div class="outline-text-3" id="text-orgb97c315">
+<div class="outline-text-3" id="text-orgbb75230">
 <ul class="org-ul">
 <li><a href="./ros2/activity/pubsub_activity.html">Publisher/Subscriber Activity</a></li>
 <li><a href="https://github.com/m-elwin/async_experiments">Asynchronous Clients</a></li>
@@ -162,9 +175,9 @@ By the end of the course, student teams will have completed a robotics project u
 </ul>
 </div>
 </div>
-<div id="outline-container-homework-2-P-1" class="outline-3">
-<h3 id="homework-2-P-1">Homework</h3>
-<div class="outline-text-3" id="text-orgaa3a9bf">
+<div id="outline-container-homework-2-P-3" class="outline-3">
+<h3 id="homework-2-P-3">Homework</h3>
+<div class="outline-text-3" id="text-org261bb5d">
 <ul class="org-ul">
 <li><a href="./ros2/homework/guidelines.html">Guidelines</a></li>
 <li><a href="./ros2/homework/homework1.html">Homework 1</a></li>
@@ -211,7 +224,7 @@ These notes are from the ROS 1 Version of the course and they remain here for re
 
 <div id="outline-container-modeling-robots-2-P-2" class="outline-3">
 <h3 id="modeling-robots-2-P-2">Modeling Robots</h3>
-<div class="outline-text-3" id="text-orgad4e58e">
+<div class="outline-text-3" id="text-orgbb7e64f">
 <ul class="org-ul">
 <li><a href="./ros1/lecture05_tf.html">The Tf Tree</a></li>
 <li><a href="./ros1/lecture06_modeling.html">Robot Modeling</a></li>
@@ -223,7 +236,7 @@ These notes are from the ROS 1 Version of the course and they remain here for re
 </div>
 <div id="outline-container-manipulation-2-P-2" class="outline-3">
 <h3 id="manipulation-2-P-2">Manipulation</h3>
-<div class="outline-text-3" id="text-org5adf11a">
+<div class="outline-text-3" id="text-orgacb30e3">
 <ul class="org-ul">
 <li><a href="./ros1/lecture18_moveit.html">MoveIt!</a></li>
 <li><a href="./ros1/lecture17_advanced_ros.html">Advanced ROS</a></li>
@@ -233,7 +246,7 @@ These notes are from the ROS 1 Version of the course and they remain here for re
 </div>
 <div id="outline-container-sensing-2-P-2" class="outline-3">
 <h3 id="sensing-2-P-2">Sensing</h3>
-<div class="outline-text-3" id="text-org1514133">
+<div class="outline-text-3" id="text-org60c7268">
 <ul class="org-ul">
 <li><a href="./ros1/lecture11_images.html">Image Processing</a></li>
 <li><a href="./ros1/lecture15_pointclouds.html">Point Clouds</a></li>
@@ -244,7 +257,7 @@ These notes are from the ROS 1 Version of the course and they remain here for re
 </div>
 <div id="outline-container-hardware-2-P-2" class="outline-3">
 <h3 id="hardware-2-P-2">Hardware</h3>
-<div class="outline-text-3" id="text-org412f8cc">
+<div class="outline-text-3" id="text-orgab464d9">
 <ul class="org-ul">
 <li><a href="./ros1/turtlebot3.html">Turtlebot3 Setup</a></li>
 <li><a href="./ros1/pincherX100.html">PincherX 100</a></li>
@@ -257,7 +270,7 @@ These notes are from the ROS 1 Version of the course and they remain here for re
 </div>
 <div id="outline-container-activities-2-P-2" class="outline-3">
 <h3 id="activities-2-P-2">Activities</h3>
-<div class="outline-text-3" id="text-orgbb75230">
+<div class="outline-text-3" id="text-org11c29a6">
 <ul class="org-ul">
 <li><a href="./ros1/activity01.html">Basic ROS Activity</a></li>
 <li><a href="./ros1/activity02.html">Names and Launchfiles</a></li>
@@ -270,9 +283,9 @@ These notes are from the ROS 1 Version of the course and they remain here for re
 </ul>
 </div>
 </div>
-<div id="outline-container-homework-2-P-2" class="outline-3">
-<h3 id="homework-2-P-2">Homework</h3>
-<div class="outline-text-3" id="text-org261bb5d">
+<div id="outline-container-homework-2-P-4" class="outline-3">
+<h3 id="homework-2-P-4">Homework</h3>
+<div class="outline-text-3" id="text-org6707c82">
 <ol class="org-ol">
 <li><a href="./ros1/homework/guidelines.html">Guidelines</a> These apply to every homework</li>
 <li><a href="./ros1/homework/homework01.html">Homework 1</a></li>

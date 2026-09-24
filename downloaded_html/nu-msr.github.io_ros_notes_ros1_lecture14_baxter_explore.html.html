@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-30 Fri 13:06 -->
+<!-- 2026-09-23 Wed 23:35 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Exploring the Baxter</title>
@@ -21,7 +21,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#overview-1-P-15">Overview</a></li>
+<li><a href="#overview-1-P-21">Overview</a></li>
 <li><a href="#the-simulator-1-P-1">The Simulator</a>
 <ul>
 <li><a href="#experimenting-2-P-1">Experimenting</a></li>
@@ -43,10 +43,9 @@
 </ul>
 </div>
 </nav>
-
-<div id="outline-container-overview-1-P-15" class="outline-2">
-<h2 id="overview-1-P-15">Overview</h2>
-<div class="outline-text-2" id="text-orgdd99c3d">
+<div id="outline-container-overview-1-P-21" class="outline-2">
+<h2 id="overview-1-P-21">Overview</h2>
+<div class="outline-text-2" id="text-org9b2c730">
 <p>
 When approaching a robot for the first time, you must read documentation, read example source code, and 
 perform experiments to become familiar with it's features.
@@ -55,11 +54,9 @@ The <a href="./lecture13_rethink.html">previous lecture</a> describes how to set
 </p>
 </div>
 </div>
-
-
 <div id="outline-container-the-simulator-1-P-1" class="outline-2">
 <h2 id="the-simulator-1-P-1">The Simulator</h2>
-<div class="outline-text-2" id="text-org997ccbe">
+<div class="outline-text-2" id="text-org769ea31">
 <ul class="org-ul">
 <li><a href="https://sdk.rethinkrobotics.com/wiki/Baxter_Simulator">The Baxter Simulator</a> provides a safe method of testing out ideas.</li>
 <li><code>roslaunch baxter_gazebo baxter_world.launch</code> to start the simulator</li>
@@ -67,7 +64,7 @@ The <a href="./lecture13_rethink.html">previous lecture</a> describes how to set
 </div>
 <div id="outline-container-experimenting-2-P-1" class="outline-3">
 <h3 id="experimenting-2-P-1">Experimenting</h3>
-<div class="outline-text-3" id="text-org4e65ac5">
+<div class="outline-text-3" id="text-orga9316a9">
 <ul class="org-ul">
 <li>Run <code>rostopic list</code> and <code>rosservice list</code>
 <ul class="org-ul">
@@ -78,10 +75,9 @@ The <a href="./lecture13_rethink.html">previous lecture</a> describes how to set
 </div>
 </div>
 </div>
-
 <div id="outline-container-exploring-the-ros-api-1-P-1" class="outline-2">
 <h2 id="exploring-the-ros-api-1-P-1">Exploring the ROS API</h2>
-<div class="outline-text-2" id="text-orgb094c1c">
+<div class="outline-text-2" id="text-org506921c">
 <ul class="org-ul">
 <li><a href="http://sdk.rethinkrobotics.com/wiki/API_Reference">ROS API</a></li>
 <li>Enable the robot: <code>rosrun baxter_tools enable.py -e</code></li>
@@ -92,10 +88,9 @@ The <a href="./lecture13_rethink.html">previous lecture</a> describes how to set
 </ul>
 </div>
 </div>
-
 <div id="outline-container-starting-out-1-P-1" class="outline-2">
 <h2 id="starting-out-1-P-1">Starting Out</h2>
-<div class="outline-text-2" id="text-orgcd99b2c">
+<div class="outline-text-2" id="text-orgbca671e">
 <ul class="org-ul">
 <li><a href="https://sdk.rethinkrobotics.com/wiki/Foundations">Foundations</a> Baxter Foundations Page
 <ul class="org-ul">
@@ -105,7 +100,7 @@ The <a href="./lecture13_rethink.html">previous lecture</a> describes how to set
 </div>
 <div id="outline-container-tools-2-P-1" class="outline-3">
 <h3 id="tools-2-P-1">Tools</h3>
-<div class="outline-text-3" id="text-org1534ba6">
+<div class="outline-text-3" id="text-org6f0d943">
 <ul class="org-ul">
 <li><a href="https://sdk.rethinkrobotics.com/wiki/Foundations#Baxter_SDK_Tools">Tools</a></li>
 <li><code>rosrun baxter_tools robot_enable.py</code> Used to enable/disable the robot
@@ -121,7 +116,7 @@ The <a href="./lecture13_rethink.html">previous lecture</a> describes how to set
 </div>
 <div id="outline-container-exercise-3-P-1" class="outline-4">
 <h4 id="exercise-3-P-1">Exercise</h4>
-<div class="outline-text-4" id="text-org134a6bc">
+<div class="outline-text-4" id="text-org542fcea">
 <ul class="org-ul">
 <li>Enable the robot, get its state, and disable the robot:
 <ul class="org-ul">
@@ -130,22 +125,22 @@ The <a href="./lecture13_rethink.html">previous lecture</a> describes how to set
 <li><p>
 Using python (code below to get you started)
 </p>
-<pre class="example">
-import baxter_interface
+<div class="org-src-container">
+<pre class="src src-nil">import baxter_interface
 import rospy
 rospy.init_node("resetter")
 r = baxter_interface.robot_enable.RobotEnable()
-</pre></li>
+</pre>
+</div></li>
 </ul></li>
 </ul>
 </div>
 </div>
 </div>
 </div>
-
 <div id="outline-container-moving-an-arm-1-P-1" class="outline-2">
 <h2 id="moving-an-arm-1-P-1">Moving an Arm</h2>
-<div class="outline-text-2" id="text-org9f8139a">
+<div class="outline-text-2" id="text-org62fedac">
 <ul class="org-ul">
 <li><a href="https://sdk.rethinkrobotics.com/wiki/API_Reference#Arm_Joints">ROS API: Arm Joints</a></li>
 <li>There are 4 joint control modes</li>
@@ -163,10 +158,9 @@ the hardware of the robot:
 </ul>
 </div>
 </div>
-
 <div id="outline-container-tips--1-P-1" class="outline-2">
 <h2 id="tips--1-P-1">Tips:</h2>
-<div class="outline-text-2" id="text-org67a393c">
+<div class="outline-text-2" id="text-orgcfa3626">
 <ul class="org-ul">
 <li>You can use the source code for <code>baxter_interface</code> to help understand
 the meanings of some fields in messages, since it is just a thin wrapper around
@@ -175,11 +169,9 @@ the ROS API</li>
 </ul>
 </div>
 </div>
-
-
 <div id="outline-container-exercise--1-P-1" class="outline-2">
 <h2 id="exercise--1-P-1">Exercise:</h2>
-<div class="outline-text-2" id="text-org5a90d81">
+<div class="outline-text-2" id="text-org5c4f96a">
 <ul class="org-ul">
 <li>Repeat the above with Sawyer</li>
 <li>Open and close the grippers using both ROS messages and the python API</li>

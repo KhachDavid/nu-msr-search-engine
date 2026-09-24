@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-30 Fri 13:06 -->
+<!-- 2026-09-23 Wed 23:35 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Image Processing with ROS</title>
@@ -21,7 +21,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#overview-1-P-16">Overview</a></li>
+<li><a href="#overview-1-P-28">Overview</a></li>
 <li><a href="#cameras-on-linux--1-P-1">Cameras On Linux:</a></li>
 <li><a href="#ros-camera-drivers--1-P-2">ROS Camera "Drivers"</a>
 <ul>
@@ -40,19 +40,17 @@
 </ul>
 </div>
 </nav>
-
-<div id="outline-container-overview-1-P-16" class="outline-2">
-<h2 id="overview-1-P-16">Overview</h2>
-<div class="outline-text-2" id="text-orgdafd38b">
+<div id="outline-container-overview-1-P-28" class="outline-2">
+<h2 id="overview-1-P-28">Overview</h2>
+<div class="outline-text-2" id="text-org4dd4de2">
 <p>
 This lecture is about how to interface ROS with cameras and vision processing libraries.
 </p>
 </div>
 </div>
-
 <div id="outline-container-cameras-on-linux--1-P-1" class="outline-2">
 <h2 id="cameras-on-linux--1-P-1">Cameras On Linux:</h2>
-<div class="outline-text-2" id="text-org7f8e6fe">
+<div class="outline-text-2" id="text-org104f5df">
 <ul class="org-ul">
 <li>Cameras on Linux are viewed as files (like any other device).</li>
 <li>Cameras on Linux are usually called <code>/dev/videoX</code>, where <code>X</code> is a number</li>
@@ -73,7 +71,7 @@ the proper permissions and a persistent name.</li>
 </div>
 <div id="outline-container-ros-camera-drivers--1-P-2" class="outline-2">
 <h2 id="ros-camera-drivers--1-P-2">ROS Camera "Drivers"</h2>
-<div class="outline-text-2" id="text-org7776459">
+<div class="outline-text-2" id="text-orge4a31c1">
 <ol class="org-ol">
 <li><a href="https://wiki.ros.org/usb_cam">usb_cam</a>  The main and most up-to-date ROS camera driver. Try this one first and prefer it to the others.</li>
 <li><a href="http://wiki.ros.org/cv_camera">cv_camera</a> A camera driver that uses OpenCV to open the camera. So if you can use your camera in open CV this node should work</li>
@@ -102,11 +100,9 @@ that follow the UVC standard (most modern webcameras) and usb_cam uses the v4l f
 via Vendor Id (VID), Product Id (PID), and Serial number</li>
 </ul>
 </div>
-
-
 <div id="outline-container-using-usb-cam-2-P-2" class="outline-3">
 <h3 id="using-usb-cam-2-P-2">Using usb_cam</h3>
-<div class="outline-text-3" id="text-org5c7898e">
+<div class="outline-text-3" id="text-org77d76ac">
 <ol class="org-ol">
 <li>The camera is one of the <code>/dev/videoX</code> devices</li>
 <li>Run the <code>usb_cam</code> node.  The basic parameters for most webcams are:
@@ -116,10 +112,9 @@ via Vendor Id (VID), Product Id (PID), and Serial number</li>
 </ol>
 </div>
 </div>
-
 <div id="outline-container-using-cv-camera-2-P-1" class="outline-3">
 <h3 id="using-cv-camera-2-P-1">Using cv_camera</h3>
-<div class="outline-text-3" id="text-org76cbd89">
+<div class="outline-text-3" id="text-orgc43fc86">
 <ol class="org-ol">
 <li>The camera is one of the <code>/dev/videoX</code> devices</li>
 <li>Run the <code>cv_camera_node</code>. The basic parameters for most webcams are:
@@ -127,8 +122,8 @@ via Vendor Id (VID), Product Id (PID), and Serial number</li>
 </ol>
 </div>
 </div>
-<details id="org53441fd"><summary class="header-3">Using libuvc_camera</summary>
-<div class="outline-text-3" id="text-org53441fd">
+<details id="orgaa6ef33"><summary class="header-3">Using libuvc_camera</summary>
+<div class="outline-text-3" id="text-orgaa6ef33">
 <ol class="org-ol">
 <li>Find the VID, PID, and Serial number of your camera: requires some investiagion
 <ul class="org-ul">
@@ -146,11 +141,9 @@ via Vendor Id (VID), Product Id (PID), and Serial number</li>
 </div>
 </details>
 </div>
-
-
 <div id="outline-container-the-image-pipeline-1-P-2" class="outline-2">
 <h2 id="the-image-pipeline-1-P-2">The Image Pipeline</h2>
-<div class="outline-text-2" id="text-orgf7a6716">
+<div class="outline-text-2" id="text-org4eb1e69">
 <p>
 <a href="http://wiki.ros.org/image_pipeline">image_pipeline</a> contains several packages relating to image manipulation in ROS.
 The idea is to chain various calibration and image processing steps together to complete computer vision tasks.
@@ -212,10 +205,9 @@ in the scene.</li>
 </ul>
 </div>
 </div>
-
 <div id="outline-container-other-image-tools-1-P-2" class="outline-2">
 <h2 id="other-image-tools-1-P-2">Other Image Tools</h2>
-<div class="outline-text-2" id="text-org2b8b105">
+<div class="outline-text-2" id="text-orgaa15d7f">
 <ol class="org-ol">
 <li><a href="http://wiki.ros.org/image_transport">Image Transport</a> determines how image data is sent across the system.</li>
 </ol>
@@ -230,10 +222,9 @@ useful if interfacing your robot to a website.</li>
 </ol>
 </div>
 </div>
-
 <div id="outline-container-opencv-1-P-2" class="outline-2">
 <h2 id="opencv-1-P-2">OpenCV</h2>
-<div class="outline-text-2" id="text-org6682c8a">
+<div class="outline-text-2" id="text-orgafe2fb6">
 <p>
 <a href="https://opencv.org">OpenCV</a> is a major image processing library.
 Their website has many tutorials on how to process images.
@@ -260,7 +251,7 @@ lets you convert between pixel coordinates and the other frames in your system.
 </div>
 <div id="outline-container-tag-tracking-1-P-2" class="outline-2">
 <h2 id="tag-tracking-1-P-2">Tag Tracking</h2>
-<div class="outline-text-2" id="text-org0c79c01">
+<div class="outline-text-2" id="text-org8e32cd6">
 <p>
 Tags are special 2-Dimensional patterns that are designed to be viewed with a camera. 
 Computer vision algorithms can then determine the 6 Degree of freedom pose of the tag and
@@ -295,11 +286,9 @@ There are many other types of tags, that have different properties: for example 
 </p>
 </div>
 </div>
-
-
 <div id="outline-container-other-image-packages-and-libraries-1-P-2" class="outline-2">
 <h2 id="other-image-packages-and-libraries-1-P-2">Other Image Packages and Libraries</h2>
-<div class="outline-text-2" id="text-org9ef338f">
+<div class="outline-text-2" id="text-org887d9d9">
 <ol class="org-ol">
 <li><a href="http://wiki.ros.org/darknet_ros">Darknet ROS</a> - realtime object detection</li>
 <li><a href="https://github.com/tzutalin/awesome-visual-slam">Up to date list of visual SLAM solutions</a></li>
@@ -311,21 +300,17 @@ released for ROS indigo.</li>
 </ol>
 </div>
 </div>
-
-
-
 <div id="outline-container-example-image-processing-1-P-1" class="outline-2">
 <h2 id="example-image-processing-1-P-1">Example Image Processing</h2>
-<div class="outline-text-2" id="text-orgbabac93">
+<div class="outline-text-2" id="text-org30f1860">
 <ul class="org-ul">
 <li>See <a href="https://github.com/m-elwin/me495_image.git">https://github.com/m-elwin/me495_image.git</a></li>
 </ul>
 </div>
 </div>
-
 <div id="outline-container-other-learning-resources-1-P-2" class="outline-2">
 <h2 id="other-learning-resources-1-P-2">Other Learning Resources</h2>
-<div class="outline-text-2" id="text-org6a1e77c">
+<div class="outline-text-2" id="text-org8e53bc4">
 <ul class="org-ul">
 <li><a href="https://ciechanow.ski/cameras-and-lenses/">Cameras and Lenses</a> (Highly recommend this)</li>
 <li><a href="http://mrcal.secretsauce.net/">mrcal</a> NASA-quality lenses modeling and calibration software.</li>

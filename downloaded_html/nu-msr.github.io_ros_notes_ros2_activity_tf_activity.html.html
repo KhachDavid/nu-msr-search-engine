@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-30 Fri 13:06 -->
+<!-- 2026-09-24 Thu 00:26 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ROS Tf Activity</title>
@@ -24,21 +24,19 @@
 <li><a href="#introduction-1-P-3">Introduction</a></li>
 <li><a href="#demo">Demonstration</a></li>
 <li><a href="#exercises-1-P-1">Exercises</a></li>
-<li><a href="#resources-1-P-4">Resources</a></li>
+<li><a href="#resources-1-P-2">Resources</a></li>
 </ul>
 </div>
 </nav>
-
 <div id="outline-container-introduction-1-P-3" class="outline-2">
 <h2 id="introduction-1-P-3">Introduction</h2>
-<div class="outline-text-2" id="text-org68a45c9">
+<div class="outline-text-2" id="text-org8fdf8bf">
 <ul class="org-ul">
 <li>This activity is designed to help provide experience with the ROS 2 tf trees and it's associated <code>tf2_ros</code> API.</li>
 <li>It is meant to compliment the <a href="https://docs.ros.org/en/kilted/Tutorials/Intermediate/Tf2/Tf2-Main.html">ROS 2 tf2 Tutorials</a></li>
 </ul>
 </div>
 </div>
-
 <div id="outline-container-demo" class="outline-2">
 <h2 id="demo">Demonstration</h2>
 <div class="outline-text-2" id="text-demo">
@@ -47,51 +45,50 @@ The following demonstration is based on code in <a href="https://github.com/m-el
 </p>
 
 <div class="org-src-container">
-<pre class="src src-bash"><span class="org-comment-delimiter"># </span><span class="org-comment">create the workspace and clone the repository and get set up.
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">Substitute your own workspace directory for ws
-</span>mkdir -p ws/src
+<pre class="src src-bash"><span class="org-comment-delimiter"># </span><span class="org-comment">create the workspace and clone the repository and get set up.</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Substitute your own workspace directory for ws</span>
+mkdir -p ws/src
 <span class="org-builtin">cd</span> ws/src
 git clone https://github.com/m-elwin/me495_tf.git -b ros2
 <span class="org-builtin">cd</span> ..
 colcon build --symlink-install
 <span class="org-builtin">source</span> install/setup.bash
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">run the broadcaster, in the background (the &amp;)
-</span>ros2 run me495_tf in_out &amp;
+<span class="org-comment-delimiter"># </span><span class="org-comment">run the broadcaster, in the background (the &amp;)</span>
+ros2 run me495_tf in_out &amp;
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">list the topics, notice the /tf and /tf_static
-</span>ros2 topic list
+<span class="org-comment-delimiter"># </span><span class="org-comment">list the topics, notice the /tf and /tf_static</span>
+ros2 topic list
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">use tf2_tools to generate a pdf view of the frames
-</span>ros2 run tf2_tools view_frames
+<span class="org-comment-delimiter"># </span><span class="org-comment">use tf2_tools to generate a pdf view of the frames</span>
+ros2 run tf2_tools view_frames
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Also can use rqt_tf_tree.
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">Need to install the rqt_tf_tree package if it is not installed
-</span>sudo apt install ros-kilted-rqt-tf-tree
+<span class="org-comment-delimiter"># </span><span class="org-comment">Also can use rqt_tf_tree.</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Need to install the rqt_tf_tree package if it is not installed</span>
+sudo apt install ros-kilted-rqt-tf-tree
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Due to what appears to be a bug, need to first discover the plugin
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">(Just once it seems, maybe once per rebooot?)
-</span>rqt --list-plugins --force-discover
+<span class="org-comment-delimiter"># </span><span class="org-comment">Due to what appears to be a bug, need to first discover the plugin</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">(Just once it seems, maybe once per rebooot?)</span>
+rqt --list-plugins --force-discover
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Actually run the rqt_tf_tree to view the tree
-</span>ros2 run rqt_tf_tree rqt_tf_tree
+<span class="org-comment-delimiter"># </span><span class="org-comment">Actually run the rqt_tf_tree to view the tree</span>
+ros2 run rqt_tf_tree rqt_tf_tree
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">use tf_echo to see translation between frames. C-c to quit
-</span>ros2 run tf2_ros tf2_echo right left
+<span class="org-comment-delimiter"># </span><span class="org-comment">use tf_echo to see translation between frames. C-c to quit</span>
+ros2 run tf2_ros tf2_echo right left
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">run in rviz, using the rviz config provided by the package
-</span>rviz2 -d src/me495_tf/config/view.rviz
+<span class="org-comment-delimiter"># </span><span class="org-comment">run in rviz, using the rviz config provided by the package</span>
+rviz2 -d src/me495_tf/config/view.rviz
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">run the tracker node
-</span>ros2 run me495_tf tracker
+<span class="org-comment-delimiter"># </span><span class="org-comment">run the tracker node</span>
+ros2 run me495_tf tracker
 </pre>
 </div>
 </div>
 </div>
-
 <div id="outline-container-exercises-1-P-1" class="outline-2">
 <h2 id="exercises-1-P-1">Exercises</h2>
-<div class="outline-text-2" id="text-org0f8b4a6">
+<div class="outline-text-2" id="text-org291be83">
 <ol class="org-ol">
 <li>Walk through the demonstration above to gain familiarity with the tf tools.
 <ul class="org-ul">
@@ -115,9 +112,9 @@ colcon build --symlink-install
 </ol>
 </div>
 </div>
-<div id="outline-container-resources-1-P-4" class="outline-2">
-<h2 id="resources-1-P-4">Resources</h2>
-<div class="outline-text-2" id="text-orga36691e">
+<div id="outline-container-resources-1-P-2" class="outline-2">
+<h2 id="resources-1-P-2">Resources</h2>
+<div class="outline-text-2" id="text-orgf51ae19">
 <ul class="org-ul">
 <li><a href="../tf.html">TF Notes</a></li>
 <li><a href="https://docs.ros.org/en/kilted/Tutorials/Intermediate/Tf2/Tf2-Main.html">ROS 2 tf2 Tutorials</a></li>

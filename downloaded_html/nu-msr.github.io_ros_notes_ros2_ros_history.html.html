@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-30 Fri 13:06 -->
+<!-- 2026-09-24 Thu 08:46 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>About ROS</title>
@@ -23,7 +23,7 @@
 <ul>
 <li><a href="#introduction-and-history-1-P-1">Introduction and History</a></li>
 <li><a href="#why-ros--1-P-1">Why ROS?</a></li>
-<li><a href="#why-ros-2--1-P-1">Why ROS 2?</a></li>
+<li><a href="#ros-vs-ros-2--1-P-1">ROS vs ROS 2?</a></li>
 <li><a href="#the-future-of-ros-1-P-1">The Future of ROS</a></li>
 <li><a href="#usage-statistics-1-P-1">Usage Statistics</a></li>
 <li><a href="#ros-versions-1-P-1">ROS Versions</a></li>
@@ -48,7 +48,7 @@
 <p>
 The <a href="https://www.ros.org/">Robot Operating System</a> (ROS) is a collection of tools, software libraries, and documentation
 facilitating the development and sharing of robotics software. The term "Operating System" is a misnomer: ROS
- is more like a framework or middleware plus a <a href="https://www.ros.org/blog/community/">developer community</a>. Its federated package model allows unrelated entities
+is really a framework plus a <a href="https://www.ros.org/blog/community/">developer community</a>. Its federated package model allows unrelated entities
 to create and reuse compatible software.
 </p>
 
@@ -100,27 +100,16 @@ enables easy sharing of code between research groups and allows people to use th
 </div>
 </div>
 
-<div id="outline-container-why-ros-2--1-P-1" class="outline-2">
-<h2 id="why-ros-2--1-P-1">Why ROS 2?</h2>
-<div class="outline-text-2" id="text-org953b789">
-<p>
-ROS 2 was started in 2007, first announced in 2014, and first released in 2017. It was created to address several issues identified with ROS 1:
-</p>
+<div id="outline-container-ros-vs-ros-2--1-P-1" class="outline-2">
+<h2 id="ros-vs-ros-2--1-P-1">ROS vs ROS 2?</h2>
+<div class="outline-text-2" id="text-org7ea50fa">
 <ol class="org-ol">
-<li>ROS 1 was designed for use with a single robot and hence had a central component (<code>roscore</code>) that needed to be accounted for.</li>
-<li>ROS 1 communicates all data unencrypted over the network and is insecure. ROS 2 has a formal security model.</li>
-<li>ROS 1 has no real-time performance guarantees. ROS 2 is working on enabling real-time control.</li>
-<li>ROS 1 used a custom service/message middleware whereas ROS 2 uses industry standard versions.</li>
-</ol>
+<li>ROS 2 was started in 2007, first announced in 2014, and first released in 2017. It was created to address several issues identified with ROS 1.</li>
+<li>All development on ROS 1 has ceased and ROS 2 is now the primary ROS version that is used</li>
 
-<p>
-Overall ROS 2 is less complete than ROS 1 (in that it has fewer packages and more rough edges to its declared functionality), but it is growing every day..
-</p>
-
-<ul class="org-ul">
 <li><a href="https://design.ros2.org/articles/why_ros2.html">ROS 2 Design Rationale</a></li>
 <li><a href="https://www.science.org/doi/10.1126/scirobotics.abm6074">Robot Operating System 2: Design, architecture, and uses in the wild</a></li>
-</ul>
+</ol>
 </div>
 </div>
 
@@ -139,32 +128,9 @@ For the latest ROS news see <a href="https://planet.ros.org">https://planet.ros.
 <p>
 The <a href="https://metrics.ros.org">ROS Metrics</a> tracks statistics on ROS usage.
 </p>
-
-<p>
-At the start of Fall 2024:
-</p>
-<ul class="org-ul">
-<li>95% of commits to ROS are to ROS 2 repositories.</li>
-<li>72% of ROS downloads are from ROS 2 repositories.</li>
-</ul>
-
-<p>
-At the start of Fall 2023:
-</p>
-<ul class="org-ul">
-<li>74% of commits to ROS are to ROS 2 repositories.</li>
-<li>55% of ROS downloads are from ROS 2 repositories.</li>
-</ul>
-
-<p>
-At the start of Fall 2024:
-</p>
-<ul class="org-ul">
-<li>63% of commits to ROS are to ROS 2 repositories.</li>
-<li>40% of ROS downloads are from ROS 2 repositories.</li>
-</ul>
 </div>
 </div>
+
 
 <div id="outline-container-ros-versions-1-P-1" class="outline-2">
 <h2 id="ros-versions-1-P-1">ROS Versions</h2>
@@ -177,7 +143,7 @@ At the start of Fall 2024:
 <li>Versions are usually referred to by the adjective only.</li>
 <li>The versions increase alphabetically.</li>
 <li>The latest (and final) stable version of ROS 1 is <code>noetic</code>, which was released in May 2020.</li>
-<li>The most recent version of ROS 2 is <code>kilted</code> (Kilted Kaiju).</li>
+<li>The most recent version of ROS 2 is <code>lyrical</code> (Lyrical Luth).</li>
 <li>In ROS 2, there is a <code>rolling</code> distribution (Rolling Ridley) that integrates the latest updates to ROS packages and serves as a testing ground for future releases.</li>
 </ul>
 </div>
@@ -191,6 +157,7 @@ At the start of Fall 2024:
 <h4 id="full-size-robots-3-P-1">Full-Size Robots</h4>
 <div class="outline-text-4" id="text-orgcc83df4">
 <ul class="org-ul">
+<li><a href="https://www.universal-robots.com/products/ur7e-920/">UR7e</a></li>
 <li><a href="https://www.franka.de/robot-system">Franka Emika Panda</a></li>
 <li><a href="https://clearpathrobotics.com/jackal-small-unmanned-ground-vehicle/">Clearpath Jackal</a></li>
 <li><a href="https://clearpathrobotics.com/ridgeback-indoor-robot-platform">Clearpath Ridgeback</a></li>

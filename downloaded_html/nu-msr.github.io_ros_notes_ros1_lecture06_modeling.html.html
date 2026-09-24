@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-30 Fri 13:06 -->
+<!-- 2026-09-23 Wed 23:35 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Robot Modeling</title>
@@ -45,17 +45,16 @@
 </nav>
 <div id="outline-container-unified-robot-description-format-1-P-2" class="outline-2">
 <h2 id="unified-robot-description-format-1-P-2">Unified Robot Description Format</h2>
-<div class="outline-text-2" id="text-org5a731d9">
+<div class="outline-text-2" id="text-org7ccf7d6">
 <ul class="org-ul">
 <li><code>urdf</code> is the main description format for robots in ROS</li>
 <li>It is an XML format with special tags for defining a robot</li>
 <li>The <a href="https://wiki.ros.org/urdf">urdf</a> ROS package that enables the file to be parsed from C++</li>
 </ul>
 </div>
-
 <div id="outline-container-urdf-xml-2-P-2" class="outline-3">
 <h3 id="urdf-xml-2-P-2">URDF XML</h3>
-<div class="outline-text-3" id="text-org5d495b9">
+<div class="outline-text-3" id="text-orge22dc88">
 <p>
 The <a href="https://wiki.ros.org/urdf/XML">urdf XML specification</a> contains nine sub-specifications.
 Many of the specifications are not used or only used with specific packages.
@@ -103,10 +102,9 @@ For more information see <a href="http://gazebosim.org/tutorials?tut=ros_urdf&am
 </ul>
 </div>
 </div>
-
 <div id="outline-container-related-formats-2-P-2" class="outline-3">
 <h3 id="related-formats-2-P-2">Related Formats</h3>
-<div class="outline-text-3" id="text-org5dbcee3">
+<div class="outline-text-3" id="text-org8275889">
 <p>
 There are other formats used in robotics (not just ROS) that relate to URDF files. 
 </p>
@@ -131,10 +129,9 @@ There are other formats used in robotics (not just ROS) that relate to URDF file
 </div>
 </div>
 </div>
-
 <div id="outline-container-robot-state-publisher-1-P-2" class="outline-2">
 <h2 id="robot-state-publisher-1-P-2">robot_state_publisher</h2>
-<div class="outline-text-2" id="text-org1411590">
+<div class="outline-text-2" id="text-org145d296">
 <p>
 The <a href="https://wiki.ros.org/robot_state_publisher">robot_state_publisher</a> is used to publish the transforms that compose your <code>urdf</code> file on <code>/tf</code> and
 integrate it with the transform tree.
@@ -154,10 +151,9 @@ which is useful for testing the robot model without needing the physical robot.<
 </ul>
 </div>
 </div>
-
 <div id="outline-container-joint-state-publisher-1-P-2" class="outline-2">
 <h2 id="joint-state-publisher-1-P-2">joint_state_publisher</h2>
-<div class="outline-text-2" id="text-orgfda6da6">
+<div class="outline-text-2" id="text-orgd9a301d">
 <p>
 The <a href="http://wiki.ros.org/joint_state_publisher">joint_state_publisher</a> publishes <code>sensor_msgs/JointState</code> messages on the <code>joint_states</code> topic.
 </p>
@@ -182,7 +178,7 @@ It operates in a few different modes:
 </div>
 <div id="outline-container-debugging-urdf-hints-1-P-2" class="outline-2">
 <h2 id="debugging-urdf-hints-1-P-2">Debugging URDF hints</h2>
-<div class="outline-text-2" id="text-org1b69abc">
+<div class="outline-text-2" id="text-org252c6de">
 <ol class="org-ol">
 <li>Build up the URDF slowly. Test each time you add a new link or joint.</li>
 <li>Create a Launchfile to help with testing. This launchfile will likely evolve or parts of it will be used in your actual application
@@ -208,7 +204,7 @@ It operates in a few different modes:
 </div>
 <div id="outline-container-xacro-1-P-1" class="outline-2">
 <h2 id="xacro-1-P-1">xacro</h2>
-<div class="outline-text-2" id="text-orga4920d7">
+<div class="outline-text-2" id="text-org92d2c52">
 <ul class="org-ul">
 <li><a href="http://wiki.ros.org/xacro">xacro</a> is a macro language for XML.</li>
 <li>Variables can store values and basic math can be performed</li>
@@ -248,20 +244,17 @@ in the <code>robot_description</code> parameter, you would use the following ele
 </ul>
 </div>
 </div>
-
-
 <div id="outline-container-useful-xacro-patterns-1-P-1" class="outline-2">
 <h2 id="useful-xacro-patterns-1-P-1">Useful Xacro Patterns</h2>
-<div class="outline-text-2" id="text-org2a6b815">
+<div class="outline-text-2" id="text-org94706d2">
 <ul class="org-ul">
 <li>Using <code>xacro</code> effectively makes your robot description much more robust and easy to change because
 it cuts down on repetition and makes your file more modular.</li>
 </ul>
 </div>
-
 <div id="outline-container-xacro-properties-2-P-2" class="outline-3">
 <h3 id="xacro-properties-2-P-2">Xacro Properties</h3>
-<div class="outline-text-3" id="text-org21e2c24">
+<div class="outline-text-3" id="text-orgeb842cf">
 <ul class="org-ul">
 <li>Use the <code>&lt;xacro:property name = "name" value = "value"&gt;</code> to define a constant in <code>xacro</code>
 <ul class="org-ul">
@@ -283,10 +276,9 @@ It often makes sense to load non-changeable robot parameters directly from a yam
 </ul>
 </div>
 </div>
-
 <div id="outline-container-xacro-macros-2-P-2" class="outline-3">
 <h3 id="xacro-macros-2-P-2">Xacro Macros</h3>
-<div class="outline-text-3" id="text-org4b8ad7e">
+<div class="outline-text-3" id="text-org759cdf2">
 <ul class="org-ul">
 <li>Macro's are the most useful tools when creating <code>urdf</code> files for eventual use with gazebo</li>
 <li><p>
@@ -294,11 +286,11 @@ A common case: you want the visual, inertial, and collision elements of a link t
 to each other:
 </p>
 <div class="org-src-container">
-<pre class="src src-xml"> <span class="org-comment-delimiter">&lt;!-- </span><span class="org-comment">Create a link with
-      visual, inertial, and collision for a z-axis aligned cylinder.
-      Also enables specifying a material block.
-      Assumes the default cylinder orientation</span><span class="org-comment-delimiter">
- --&gt;</span>
+<pre class="src src-xml"> <span class="org-comment-delimiter">&lt;!-- </span><span class="org-comment">Create a link with</span>
+<span class="org-comment">      visual, inertial, and collision for a z-axis aligned cylinder.</span>
+<span class="org-comment">      Also enables specifying a material block.</span>
+<span class="org-comment">      Assumes the default cylinder orientation</span>
+<span class="org-comment-delimiter"> --&gt;</span>
 <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-prefix">xacro</span><span class="org-nxml-element-colon">:</span><span class="org-nxml-element-local-name">macro</span> <span class="org-nxml-attribute-local-name">name</span>=<span class="org-string">"cylinder_link"</span> <span class="org-nxml-attribute-local-name">params</span>=<span class="org-string">"name length radius mass *material"</span><span class="org-nxml-tag-delimiter">&gt;</span>
   <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">link</span> <span class="org-nxml-attribute-local-name">name</span>=<span class="org-string">"${name}"</span><span class="org-nxml-tag-delimiter">&gt;</span>
     <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">visual</span><span class="org-nxml-tag-delimiter">&gt;</span>
@@ -328,10 +320,9 @@ to each other:
 </ul>
 </div>
 </div>
-
 <div id="outline-container-xacro-include-2-P-2" class="outline-3">
 <h3 id="xacro-include-2-P-2">Xacro Include</h3>
-<div class="outline-text-3" id="text-orgd2a2744">
+<div class="outline-text-3" id="text-org016a94c">
 <ul class="org-ul">
 <li>You can include <code>xacro</code> files in other <code>xacro</code> files using 
 <code>&lt;xacro:include filename = "$(find package)/urdf/myfile.xacro"&gt;</code></li>
@@ -342,10 +333,9 @@ and non-gazebo parts of your file.</li>
 </ul>
 </div>
 </div>
-
 <div id="outline-container-xacro-if-2-P-2" class="outline-3">
 <h3 id="xacro-if-2-P-2">Xacro If</h3>
-<div class="outline-text-3" id="text-org3ee71c6">
+<div class="outline-text-3" id="text-org9fe53e1">
 <ul class="org-ul">
 <li>Conditionally include a block using <code>&lt;xacro:if value = "expression"&gt;</code></li>
 </ul>
@@ -353,7 +343,7 @@ and non-gazebo parts of your file.</li>
 </div>
 <div id="outline-container-xacro-arguments-2-P-2" class="outline-3">
 <h3 id="xacro-arguments-2-P-2">Xacro Arguments</h3>
-<div class="outline-text-3" id="text-orgb2707e9">
+<div class="outline-text-3" id="text-orgefab739">
 <ul class="org-ul">
 <li>Pass arguments to <code>xacro</code> using <code>xacro model variable:=value</code> syntax..</li>
 <li>Access arguments within <code>xacro</code> using <code>$(arg name)</code></li>

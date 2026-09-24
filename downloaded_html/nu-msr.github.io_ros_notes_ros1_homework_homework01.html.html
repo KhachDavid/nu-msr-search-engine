@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-30 Fri 13:06 -->
+<!-- 2026-09-23 Wed 23:35 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ME495: Embedded Systems in Robotics</title>
@@ -21,11 +21,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#logistics-1-P-7">Logistics</a></li>
-<li><a href="#part-i-inspection-1-P-2">Part I: Inspection</a></li>
-<li><a href="#part-ii-turtle-control-1-P-2">Part II: Turtle Control</a>
+<li><a href="#logistics-1-P-5">Logistics</a></li>
+<li><a href="#part-i-inspection-1-P-1">Part I: Inspection</a></li>
+<li><a href="#part-ii-turtle-control-1-P-1">Part II: Turtle Control</a>
 <ul>
-<li><a href="#package-setup-2-P-2">Package Setup</a></li>
+<li><a href="#package-setup-2-P-1">Package Setup</a></li>
 <li><a href="#drawing-the-waypoints-2-P-1">Drawing the Waypoints</a>
 <ul>
 <li><a href="#node-setup-3-P-1">Node: setup</a></li>
@@ -53,10 +53,9 @@
 </ul>
 </div>
 </nav>
-
-<div id="outline-container-logistics-1-P-7" class="outline-2">
-<h2 id="logistics-1-P-7">Logistics</h2>
-<div class="outline-text-2" id="text-orgf4ba6e6">
+<div id="outline-container-logistics-1-P-5" class="outline-2">
+<h2 id="logistics-1-P-5">Logistics</h2>
+<div class="outline-text-2" id="text-orgdb0c58b">
 <ol class="org-ol">
 <li>Create a git repository using the link provided in Canvas.</li>
 <li>Your homework will be submitted via this git repository.</li>
@@ -73,10 +72,9 @@ important information about what you should turn-in.</li>
 </ol>
 </div>
 </div>
-
-<div id="outline-container-part-i-inspection-1-P-2" class="outline-2">
-<h2 id="part-i-inspection-1-P-2">Part I: Inspection</h2>
-<div class="outline-text-2" id="text-org6536aab">
+<div id="outline-container-part-i-inspection-1-P-1" class="outline-2">
+<h2 id="part-i-inspection-1-P-1">Part I: Inspection</h2>
+<div class="outline-text-2" id="text-orgac8e453">
 <p>
 Here you will inspect a poorly-documented ROS package called <code>crazy_turtle</code> and improve its documentation.
 </p>
@@ -91,12 +89,13 @@ Here you will inspect a poorly-documented ROS package called <code>crazy_turtle<
 <li><p>
 Your Workspace should look like the following  (assuming that <code>${ws} = ws</code> and <code>${hw} = turtle_hw</code>:
 </p>
-<pre class="example">
-ws/                    # This directory is NOT a git repository
+<div class="org-src-container">
+<pre class="src src-nil">ws/                    # This directory is NOT a git repository
 ws/src                 # This directory is NOT a git repository
 ws/src/crazy_turtle    # This directory is a git repository, but it is my git repository not yours.
 ws/src/turtle_hw       # This directory is the git repository you are using for this assignment.
-</pre></li>
+</pre>
+</div></li>
 <li>Copy <code>${ws}/src/crazy_turtle/README.md</code> into <code>${ws}/src/${hw}/inspection.md</code> and add it to your git repository.</li>
 <li><code>inspection.md</code> contains additional exercises that you should complete. Follow <code>inspection.md</code> and replace the <code>${item}</code> substitutions with the answer.
 <ul class="org-ul">
@@ -107,10 +106,9 @@ replacing them with the appropriate word or phrase.</li>
 </ol>
 </div>
 </div>
-
-<div id="outline-container-part-ii-turtle-control-1-P-2" class="outline-2">
-<h2 id="part-ii-turtle-control-1-P-2">Part II: Turtle Control</h2>
-<div class="outline-text-2" id="text-org44f6356">
+<div id="outline-container-part-ii-turtle-control-1-P-1" class="outline-2">
+<h2 id="part-ii-turtle-control-1-P-1">Part II: Turtle Control</h2>
+<div class="outline-text-2" id="text-org105fd42">
 <p>
 In this section you will write a package called <code>turtle_control</code> that makes a <code>turtle</code> in <code>turtlesim</code>
 follow waypoints.
@@ -127,10 +125,9 @@ Next, a different turtle will follow those waypoints.
 <li>It also makes sense to work on the Launchfile in parallel, as having a launchfile early makes testing and debugging easier.</li>
 </ul>
 </div>
-
-<div id="outline-container-package-setup-2-P-2" class="outline-3">
-<h3 id="package-setup-2-P-2">Package Setup</h3>
-<div class="outline-text-3" id="text-org492ca61">
+<div id="outline-container-package-setup-2-P-1" class="outline-3">
+<h3 id="package-setup-2-P-1">Package Setup</h3>
+<div class="outline-text-3" id="text-org2d6a935">
 <ol class="org-ol">
 <li>The package you create should be called <code>turtle_control</code> and contained in a single git repository</li>
 <li>Create the <code>package.xml</code> and <code>CMakeLists.txt</code> in the <code>turtle_control</code> repository.
@@ -147,14 +144,13 @@ Next, a different turtle will follow those waypoints.
 </ol>
 </div>
 </div>
-
 <div id="outline-container-drawing-the-waypoints-2-P-1" class="outline-3">
 <h3 id="drawing-the-waypoints-2-P-1">Drawing the Waypoints</h3>
 <div class="outline-text-3" id="text-drawing-the-waypoints-2-P-1">
 </div>
 <div id="outline-container-node-setup-3-P-1" class="outline-4">
 <h4 id="node-setup-3-P-1">Node: setup</h4>
-<div class="outline-text-4" id="text-orgceec736">
+<div class="outline-text-4" id="text-orgea75d3e">
 <ol class="org-ol">
 <li>The <code>setup</code> node is responsible for drawing all of the waypoints. Code this node in <code>nodes/setup</code></li>
 <li>The waypoints should be stored in <code>config/waypoint.yaml</code> as a list of coordinates (each coordinate is itself a list of length 2).
@@ -174,14 +170,13 @@ Next, a different turtle will follow those waypoints.
 </div>
 </div>
 </div>
-
 <div id="outline-container-velocity-translator-2-P-1" class="outline-3">
 <h3 id="velocity-translator-2-P-1">Velocity Translator</h3>
 <div class="outline-text-3" id="text-velocity-translator-2-P-1">
 </div>
 <div id="outline-container-custom-message-turtlevelocity-3-P-1" class="outline-4">
 <h4 id="custom-message-turtlevelocity-3-P-1">Custom Message: TurtleVelocity</h4>
-<div class="outline-text-4" id="text-orge483c5b">
+<div class="outline-text-4" id="text-org0a36297">
 <ol class="org-ol">
 <li>Velocities in ROS are 3-D and use the <code>geometry_msgs/Twist</code> type. For 2D velocities, <code>linear.x</code> is the forward velocity and <code>angular.z</code> is the rotational velocity.</li>
 <li>Create a custom message called <code>TurtleVelocity</code>, with the following two fields:
@@ -199,10 +194,9 @@ Next, a different turtle will follow those waypoints.
 </ol>
 </div>
 </div>
-
 <div id="outline-container-node-translate-3-P-1" class="outline-4">
 <h4 id="node-translate-3-P-1">Node: translate</h4>
-<div class="outline-text-4" id="text-org36f3060">
+<div class="outline-text-4" id="text-orgb41e32f">
 <ol class="org-ol">
 <li>Write a node called <code>translate</code> that converts between <code>geometry_msgs/Twist</code> and <code>turtle_control/TurtleVelocity</code> messages</li>
 <li>The node subscribes to a topic called <code>turtle_cmd</code> of type <code>TurtleVelocity</code>
@@ -220,20 +214,17 @@ Next, a different turtle will follow those waypoints.
 </div>
 </div>
 </div>
-
-
 <div id="outline-container-waypoint-follower-2-P-1" class="outline-3">
 <h3 id="waypoint-follower-2-P-1">Waypoint Follower</h3>
-<div class="outline-text-3" id="text-orge534506">
+<div class="outline-text-3" id="text-org9955a6e">
 <p>
 Write a node called <code>follow</code> that causes <code>turtle1</code> to follow a series of waypoints. 
 When the turtle reaches the last waypoint it should head to the first waypoint and restart the cycle.
 </p>
 </div>
-
 <div id="outline-container-parameters-3-P-1" class="outline-4">
 <h4 id="parameters-3-P-1">Parameters</h4>
-<div class="outline-text-4" id="text-org32806ba">
+<div class="outline-text-4" id="text-org2ddd310">
 <ol class="org-ol">
 <li>The waypoints are loaded into the Parameter server from <code>config/waypoint.yaml</code> (this is the same file and parameter used by the setup node)</li>
 
@@ -244,19 +235,17 @@ to the next waypoint.</li>
 </ol>
 </div>
 </div>
-
 <div id="outline-container-subscribers-3-P-1" class="outline-4">
 <h4 id="subscribers-3-P-1">Subscribers</h4>
-<div class="outline-text-4" id="text-orgd12af24">
+<div class="outline-text-4" id="text-org7236da0">
 <ol class="org-ol">
 <li>The turtle may subscribe to the <code>pose</code> topic from the turtlesim to read the pose, as reported by the turtle.</li>
 </ol>
 </div>
 </div>
-
 <div id="outline-container-services-3-P-1" class="outline-4">
 <h4 id="services-3-P-1">Services</h4>
-<div class="outline-text-4" id="text-org4b90d1e">
+<div class="outline-text-4" id="text-orgd0f272f">
 <ol class="org-ol">
 <li>Create a custom service type called <code>Start</code>
 <ul class="org-ul">
@@ -275,10 +264,9 @@ the waypoints (not including any wrap-around/waypoints visited twice)</li>
 </ol>
 </div>
 </div>
-
 <div id="outline-container-publishers-3-P-1" class="outline-4">
 <h4 id="publishers-3-P-1">Publishers</h4>
-<div class="outline-text-4" id="text-orga3c07c0">
+<div class="outline-text-4" id="text-org14139e6">
 <ol class="org-ol">
 <li>The node should publish a <code>TurtleVelocity</code> message on the <code>turtle_cmd</code> topic to control the turtle and make it follow the waypoints.
 <ul class="org-ul">
@@ -289,10 +277,9 @@ the waypoints (not including any wrap-around/waypoints visited twice)</li>
 </div>
 </div>
 </div>
-
 <div id="outline-container-launchfile-2-P-1" class="outline-3">
 <h3 id="launchfile-2-P-1">Launchfile</h3>
-<div class="outline-text-3" id="text-org2a95532">
+<div class="outline-text-3" id="text-org2546c73">
 <ol class="org-ol">
 <li>Write a launchfile called  <code>launch/run_waypoints.launch</code> that loads all the parameters, launches the <code>turtlesim</code>, <code>translate</code>, <code>follow</code>, and setup nodes.</li>
 <li>The launchfile should connect all the nodes together to make the turtle follow the waypoints</li>
@@ -300,10 +287,9 @@ the waypoints (not including any wrap-around/waypoints visited twice)</li>
 </ol>
 </div>
 </div>
-
 <div id="outline-container-rosbag-2-P-1" class="outline-3">
 <h3 id="rosbag-2-P-1">Rosbag</h3>
-<div class="outline-text-3" id="text-orge78750d">
+<div class="outline-text-3" id="text-orgc521a27">
 <ol class="org-ol">
 <li>Use <code>rosbag</code> to capture enough <code>cmd_vel</code> commands for the turtle to visit each waypoint twice, when starting from <code>(x, y)</code> (you may choose any <code>x</code> and <code>y</code>.  
 <ul class="org-ul">
@@ -318,10 +304,9 @@ the waypoints (not including any wrap-around/waypoints visited twice)</li>
 </ol>
 </div>
 </div>
-
 <div id="outline-container-demonstration-2-P-1" class="outline-3">
 <h3 id="demonstration-2-P-1">Demonstration</h3>
-<div class="outline-text-3" id="text-orgf470da4">
+<div class="outline-text-3" id="text-org6833120">
 <ol class="org-ol">
 <li>Install <code>simplescreenrecorder</code> (via <code>apt</code>) or different screen recording software and use it to create a video of your code working.</li>
 <li>Add your video to the <code>README.md</code> by placing it on a video-sharing website and writing out a link to it.</li>

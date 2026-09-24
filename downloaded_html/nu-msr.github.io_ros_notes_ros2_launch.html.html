@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-30 Fri 13:06 -->
+<!-- 2026-09-24 Thu 00:26 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Launchfiles</title>
@@ -45,7 +45,7 @@
 <li><a href="#actions-2-P-1">Actions</a></li>
 <li><a href="#substitutions">Substitutions</a></li>
 <li><a href="#conditions-2-P-1">Conditions</a></li>
-<li><a href="#events-2-P-2">Events</a></li>
+<li><a href="#events-2-P-1">Events</a></li>
 <li><a href="#parameter-files-2-P-1">Parameter Files</a></li>
 </ul>
 </li>
@@ -56,7 +56,7 @@
 </nav>
 <div id="outline-container-launchfiles-and-ros-1-P-1" class="outline-2">
 <h2 id="launchfiles-and-ros-1-P-1">Launchfiles and ROS</h2>
-<div class="outline-text-2" id="text-orgeedab94">
+<div class="outline-text-2" id="text-org9e00191">
 <ul class="org-ul">
 <li>ROS programs consist of many nodes communicating over topics and services</li>
 <li>For non-trivial programs, manually running nodes using <code>ros2 run</code> becomes tedious
@@ -71,10 +71,9 @@ and hard to reproduce</li>
 <li>These <a href="https://docs.ros.org/en/kilted/Tutorials/Intermediate/Launch/Launch-Main.html">Launchfile Tutorials</a> will help get you started.</li>
 </ul>
 </div>
-
 <div id="outline-container-documentation-note-2-P-1" class="outline-3">
 <h3 id="documentation-note-2-P-1">Documentation Note</h3>
-<div class="outline-text-3" id="text-org2fced36">
+<div class="outline-text-3" id="text-org7d1cc3e">
 <ol class="org-ol">
 <li>As of 10/2025 the <a href="http://docs.ros.org/en/jazzy/p/launch">API Documentation</a> for jazzy launch files is not fully populated
 <ul class="org-ul">
@@ -92,7 +91,7 @@ and hard to reproduce</li>
 </div>
 <div id="outline-container-types-of-launchfiles-2-P-1" class="outline-3">
 <h3 id="types-of-launchfiles-2-P-1">Types of Launchfiles</h3>
-<div class="outline-text-3" id="text-orgf227fb3">
+<div class="outline-text-3" id="text-org75f8c1e">
 <p>
 In ROS 2 (unlike ROS 1) there are multiple types of launchfiles:
 </p>
@@ -111,10 +110,9 @@ point of basically being programming without a real programming language. In the
 </div>
 </div>
 </div>
-
 <div id="outline-container-using-ros2-launch-1-P-1" class="outline-2">
 <h2 id="using-ros2-launch-1-P-1">Using ros2 launch</h2>
-<div class="outline-text-2" id="text-org5287b70">
+<div class="outline-text-2" id="text-orgb627d00">
 <ul class="org-ul">
 <li>The command-line tool for using launch files is <a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-CLI-Tools/Launching-Multiple-Nodes/Launching-Multiple-Nodes.html">ros2 launch</a></li>
 <li>There are two ways of invoking a launchfile:
@@ -132,10 +130,9 @@ point of basically being programming without a real programming language. In the
 <li>You can pass arguments to a launch file using the <code>arg_name:=value</code> syntax.</li>
 </ul>
 </div>
-
 <div id="outline-container-ros2-launch-options-2-P-1" class="outline-3">
 <h3 id="ros2-launch-options-2-P-1">Ros2 launch options</h3>
-<div class="outline-text-3" id="text-orgdbcbcac">
+<div class="outline-text-3" id="text-org06ec697">
 <ol class="org-ol">
 <li>Use <code>ros2 launch --help</code> for a complete list of the options.</li>
 <li><code>-s</code> or <code>--show-arg</code>
@@ -145,7 +142,6 @@ This flag shows all the possible arguments provided by the launchfile and their 
 </div>
 </div>
 </div>
-
 <div id="outline-container-xml_launch" class="outline-2">
 <h2 id="xml_launch">XML Launchfiles</h2>
 <div class="outline-text-2" id="text-xml_launch">
@@ -258,12 +254,13 @@ In <code>&lt;pkg&gt;/config</code>, create a <code>&lt;myconfig&gt;.yaml</code> 
 <li>The next subkey is <code>ros__parameters</code> (note the double <code>_</code>)</li>
 <li>Then the next keys are parameters and their values</li>
 </ul>
-<pre class="example">
-node_name_here:
+<div class="org-src-container">
+<pre class="src src-nil">node_name_here:
    ros__parameters:
        param1: value
        pram2: value
-</pre></li>
+</pre>
+</div></li>
 <li><p>
 <code>ros2 param load</code> can load these files
 </p>
@@ -278,14 +275,13 @@ node_name_here:
 </ol>
 </div>
 </div>
-
 <div id="outline-container-python_launch" class="outline-2">
 <h2 id="python_launch">Python Launchfiles</h2>
 <div class="outline-text-2" id="text-python_launch">
 </div>
 <div id="outline-container-general-concepts-2-P-1" class="outline-3">
 <h3 id="general-concepts-2-P-1">General Concepts</h3>
-<div class="outline-text-3" id="text-org73cfd8d">
+<div class="outline-text-3" id="text-org419c344">
 <ul class="org-ul">
 <li>In ROS 2, <code>launch</code> was first implemented as a python API. Ultimately the XML and YAML launch files use this API.</li>
 <li><code>python</code> launchfiles are therefore the most feature-complete version of launch files</li>
@@ -305,10 +301,9 @@ generating a file that contains instructions for <code>ros2 launch</code></li>
 <li>The <code>launch_ros</code> package contains ros-specific launchfile components.</li>
 </ul>
 </div>
-
 <div id="outline-container-theory-of-launchfiles-3-P-1" class="outline-4">
 <h4 id="theory-of-launchfiles-3-P-1">Theory of Launchfiles</h4>
-<div class="outline-text-4" id="text-org612b142">
+<div class="outline-text-4" id="text-org46292c0">
 <ul class="org-ul">
 <li>Python launchfile programming is meant to be declarative rather than imperative.
 <ul class="org-ul">
@@ -334,7 +329,6 @@ however there are some things that can only be done in python and others (when l
 </ul>
 </div>
 </div>
-
 <div id="outline-container-declarative" class="outline-4">
 <h4 id="declarative">Declarative Python Launchfiles</h4>
 <div class="outline-text-4" id="text-declarative">
@@ -365,10 +359,9 @@ the functionality of declarative launchfiles and also make that functionality av
 </div>
 </div>
 </div>
-
 <div id="outline-container-description-2-P-1" class="outline-3">
 <h3 id="description-2-P-1">Description</h3>
-<div class="outline-text-3" id="text-org12dd9e0">
+<div class="outline-text-3" id="text-orga943747">
 <ul class="org-ul">
 <li><code>launch.LaunchDescription</code> is the object that describes what <i>LaunchActions</i> should be taken when running the Launchfile</li>
 <li>All python launchfiles have a <code>generate_launch_description()</code> function that returns a <code>launch.LaunchDescription</code> Object</li>
@@ -379,7 +372,7 @@ the functionality of declarative launchfiles and also make that functionality av
 </div>
 <div id="outline-container-actions-2-P-1" class="outline-3">
 <h3 id="actions-2-P-1">Actions</h3>
-<div class="outline-text-3" id="text-org4763b8b">
+<div class="outline-text-3" id="text-org7914cbc">
 <ul class="org-ul">
 <li>When executing <code>ros2 launch</code>, all of the <a href="http://docs.ros.org/en/kilted/p/launch/architecture.html#actions">Actions</a> listed in the <code>LaunchDescription</code> object returned by <code>generate_launch_description()</code> are executed
 <ul class="org-ul">
@@ -403,7 +396,7 @@ the functionality of declarative launchfiles and also make that functionality av
 <ul class="org-ul">
 <li>Equivalent to the <code>&lt;executable&gt;</code> tag in XML (ROS 2 only)</li>
 </ul></li>
-<li>The <a href="http://docs.ros.org/en/kilted/p/launch/launch.actions.register_event_handler.html">launch.actions.RegisterEventHandler</a> enables the launch file to respond to events (see <a href="#org881ec29">Events</a>)
+<li>The <a href="http://docs.ros.org/en/kilted/p/launch/launch.actions.register_event_handler.html">launch.actions.RegisterEventHandler</a> enables the launch file to respond to events (see <a href="#orgd86aedd">Events</a>)
 <ul class="org-ul">
 <li>There are not methods for handling events in XML or YAML launchfiles.</li>
 </ul></li>
@@ -444,7 +437,7 @@ the functionality of declarative launchfiles and also make that functionality av
 </div>
 <div id="outline-container-conditions-2-P-1" class="outline-3">
 <h3 id="conditions-2-P-1">Conditions</h3>
-<div class="outline-text-3" id="text-org7a26817">
+<div class="outline-text-3" id="text-orgd23c01e">
 <ul class="org-ul">
 <li>Conditions allow branching during <code>ros2 launch</code> time</li>
 <li><a href="https://github.com/ros2/launch/blob/rolling/launch/launch/conditions/if_condition.py">launch.conditions.IfCondition</a> when passed as a <code>condition</code> keyword argument to certain actions (e.g., Node), the action will execute if the provided expression is True or 1 (roughly equivalent to the <code>if=""</code> attribute)</li>
@@ -456,9 +449,9 @@ the functionality of declarative launchfiles and also make that functionality av
 </ul>
 </div>
 </div>
-<div id="outline-container-events-2-P-2" class="outline-3">
-<h3 id="events-2-P-2">Events</h3>
-<div class="outline-text-3" id="text-org881ec29">
+<div id="outline-container-events-2-P-1" class="outline-3">
+<h3 id="events-2-P-1">Events</h3>
+<div class="outline-text-3" id="text-orgd86aedd">
 <ul class="org-ul">
 <li>Python Launchfiles provide access to certain events in the lifecycle of a node</li>
 <li>Launchfiles can respond to events (via the RegisterEventHandler action)</li>
@@ -472,7 +465,7 @@ Set <code>on_exit</code> to the <code>Shutdown()</code> action.</li>
 </div>
 <div id="outline-container-parameter-files-2-P-1" class="outline-3">
 <h3 id="parameter-files-2-P-1">Parameter Files</h3>
-<div class="outline-text-3" id="text-org0cb1188">
+<div class="outline-text-3" id="text-orgeabd249">
 <ul class="org-ul">
 <li>Parameter files can be created using <a href="https://github.com/ros2/launch_ros/blob/rolling/launch_ros/launch_ros/parameter_descriptions.py">launch_ros.parameter_descriptions.ParameterFile</a>
 <ul class="org-ul">
@@ -486,7 +479,6 @@ Set <code>on_exit</code> to the <code>Shutdown()</code> action.</li>
 </div>
 </div>
 </div>
-
 <div id="outline-container-best_practices" class="outline-2">
 <h2 id="best_practices">Best Practices</h2>
 <div class="outline-text-2" id="text-best_practices">
@@ -513,10 +505,9 @@ as an alternative to XML). It is mainly a syntactic stylistic preference between
 </ol>
 </div>
 </div>
-
 <div id="outline-container-references-1-P-1" class="outline-2">
 <h2 id="references-1-P-1">References</h2>
-<div class="outline-text-2" id="text-orgad47a9a">
+<div class="outline-text-2" id="text-org6c8f4b1">
 <ul class="org-ul">
 <li><a href="https://docs.ros.org/en/kilted/Tutorials/Intermediate/Launch/Launch-Main.html#launch">ROS 2 Launchfile Tutorials</a></li>
 <li><a href="https://docs.ros.org/en/kilted/How-To-Guides/Migrating-from-ROS1/Migrating-Launch-Files.html">Migrating from ROS1</a>

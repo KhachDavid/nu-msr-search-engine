@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2026-09-24 Thu 08:46 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The ROS Ecosystem</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">The ROS Ecosystem</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#introduction-1-P-1">Introduction</a></li>
+<li><a href="#packages-1-P-1">Packages</a>
+<ul>
+<li><a href="#installation-2-P-1">Installation</a></li>
+<li><a href="#metadata-2-P-1">Metadata</a></li>
+<li><a href="#rosdep-2-P-1">rosdep</a></li>
+</ul>
+</li>
+<li><a href="#ros-environment-1-P-1">ROS Environment</a></li>
+<li><a href="#documentation-1-P-1">Documentation</a>
+<ul>
+<li><a href="#deprecated-documentation-2-P-1">Deprecated Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-introduction-1-P-1" class="outline-2">
+<h2 id="introduction-1-P-1">Introduction</h2>
+<div class="outline-text-2" id="text-orgb7ce425">
+<p>
+The ROS ecosystem consists of a collection of tools, software, and documentation.
+These are used to describe, implement, and inspect a ROS program, which consists of multiple processes (called <i>nodes</i>)
+that run in parallel and communicate with each other using inter-process communication.
+</p>
+
+<p>
+As a federated system, the components of a ROS system can be supplied by anybody.  While <i>core</i> ROS developers
+create and maintain components, standards, infrastructure, and documentation used by everybody else, the majority of ROS components
+are contributed by members of the community. As anybody can contribute to ROS there is wide variance in package quality, usability and documentation.
+</p>
+</div>
+</div>
+
+<div id="outline-container-packages-1-P-1" class="outline-2">
+<h2 id="packages-1-P-1">Packages</h2>
+<div class="outline-text-2" id="text-org98a3a46">
+<p>
+<a href="https://docs.ros.org/en/lyrical/ROS-Framework/client-libraries/Working-with-Client-Libraries/Creating-Your-First-ROS2-Package.html">Packages</a> are the basic organization unit for ROS components.
+</p>
+<ul class="org-ul">
+<li>Packages are created from source code and data (e.g., python files, C++ files, configuration files, interface descriptions).</li>
+<li>Packages are distributed either as source code (e.g., as a git repository or a tarball) or as a binary file (e.g., a debian (<code>.deb</code>) file).</li>
+<li>Some packages rely on other packages to function. If package <code>A</code> depends on packages <code>B</code> and <code>C</code> then packages <code>B</code> and <code>C</code> are <i>dependencies</i> of package <code>A</code>.</li>
+<li>Many ROS packages depend on packages that are distributed with Ubuntu.
+<ul class="org-ul">
+<li>Packages distributed with the operating system (e.g., Ubuntu) are called <i>system dependencies</i>.</li>
+</ul></li>
+</ul>
+</div>
+
+<div id="outline-container-installation-2-P-1" class="outline-3">
+<h3 id="installation-2-P-1">Installation</h3>
+<div class="outline-text-3" id="text-org3b82e3f">
+<p>
+There are a few ways to install and use packages in ROS:
+</p>
+<ol class="org-ol">
+<li>ROS provides a central <code>apt</code> repository where packages released for the ROS distribution (e.g., <code>lyrical</code>) can be downloaded using <code>apt</code>.
+<ul class="org-ul">
+<li><code>sudo apt install ros-lyrical-&lt;package-name&gt;</code>, where <code>&lt;package-name&gt;</code> is the package name where the underscores (<code>_</code>) have been changed to dashes (<code>-</code>).</li>
+<li>This method is the most common for installing ROS packages and is preferred.</li>
+</ul></li>
+
+<li>You can download the source code for the package, build it, and use it:
+<ul class="org-ul">
+<li>This method is used if the binary package is unavailable or you wish to modify a package.</li>
+</ul></li>
+
+<li>You can use a language-specific package manager (e.g., <code>pip</code> for python).
+<ul class="org-ul">
+<li>If you wish to publish a ROS package and have it included in the ROS distribution, you must also package any dependencies that are not available via <code>apt</code>.</li>
+<li>It is also possible to add a dependency on a <code>pip</code> package; however, there are complications due to <code>pip</code> no longer installing packages system-wide without the <code>--break-system-packages</code> flag.</li>
+</ul></li>
+
+<li>The <a href="https://index.ros.org">ROS Index</a> provides information on all ROS packages and dependencies, including information about:
+<ul class="org-ul">
+<li>What versions of ROS the package is released for.</li>
+<li>The location of the source code.</li>
+<li>Package documentation.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-metadata-2-P-1" class="outline-3">
+<h3 id="metadata-2-P-1">Metadata</h3>
+<div class="outline-text-3" id="text-org5d79940">
+<ul class="org-ul">
+<li>Metadata about ROS packages is stored in a manifest file called <code>package.xml</code> (sometimes referred to as the package <i>manifest</i>).
+<ul class="org-ul">
+<li>Metadata includes dependency information, author information, a package description, etc.</li>
+</ul></li>
+<li>You can view the package manifest for any ROS package using <code>ros2 pkg xml &lt;package&gt;</code>, where <code>&lt;package&gt;</code> is the package's name.
+<ul class="org-ul">
+<li><code>ros2 pkg --help</code> provides a list of other useful <code>pkg</code> commands.</li>
+<li><code>ros2 pkg</code> is part of the <a href="https://index.ros.org/p/ros2cli/">ros2cli</a> package, the ROS 2 Command Line Interface.</li>
+</ul></li>
+<li>The format for <code>package.xml</code> is specified in <a href="https://ros.org/reps/rep-0149.html">REP 0149</a>.</li>
+<li>In ROS 2, meta information about packages is stored in the location <code>&lt;prefix&gt;/share/ament_index</code>
+<ul class="org-ul">
+<li>The <code>&lt;prefix&gt;</code> directory is the location where the package is installed (for your main ROS installation it is <code>/opt/ros/lyrical</code>)</li>
+</ul></li>
+<li>The structure of the <code>ament_index</code> directory provides information about the package. Development of this index is ongoing.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-rosdep-2-P-1" class="outline-3">
+<h3 id="rosdep-2-P-1">rosdep</h3>
+<div class="outline-text-3" id="text-org1fe9af4">
+<ul class="org-ul">
+<li>ROS maintains a tool called <a href="https://docs.ros.org/en/independent/api/rosdep/html/">rosdep</a> which enables ROS packages to specify their dependencies on other ROS packages and on system dependencies.</li>
+<li>Every system dependency in the ROS ecosystem is given a name that is used across all operating systems that ROS supports</li>
+<li>Because every Linux Distribution names its packages differently, <code>rosdep</code> maps ROS names for system dependencies to the appropriate name on the underlying
+supported operating system</li>
+<li>The <a href="https://github.com/ros/rosdistro">rosdistro</a> repository maintains a list of system dependencies that ROS packages can use.</li>
+<li><code>rosdep</code> is useful if you are installing packages from source code and want to download their dependencies first.</li>
+<li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/client-libraries/Working-with-Client-Libraries/Rosdep.html">rosdep tutorial</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-ros-environment-1-P-1" class="outline-2">
+<h2 id="ros-environment-1-P-1">ROS Environment</h2>
+<div class="outline-text-2" id="text-orgb3f2afe">
+<ul class="org-ul">
+<li>Collections of ROS packages are built and installed under a directory called a <i>workspace</i></li>
+<li>The packages installed via <code>apt</code> are located in the workspace located at <code>/opt/ros/&lt;version&gt;</code> (e.g., <code>/opt/ros/yrical</code>)
+<ul class="org-ul">
+<li>This scheme prevents conflicts with OS packages that might have the same name and also enables installing multiple ROS versions on the same machine</li>
+</ul></li>
+<li>By default ROS 2 commands are not on the <code>PATH</code> and cannot be found</li>
+<li>At least one ROS 2 workspace must be "sourced" before ROS 2 can be used</li>
+<li>When you installed ROS 2 you added the line <code>source /opt/ros/lyrical/setup.bash</code> to the <code>~/.bashrc</code> file.
+<ul class="org-ul">
+<li>This line "sources" the workspace, putting the <code>ros2</code> commands on the path and setting everything up so you can use ROS</li>
+<li>If the <code>ros2</code> command is not found, it likely means that the workspace has not been sourced</li>
+</ul></li>
+<li>The first workspace you source (e.g., at <code>/opt/ros/lyrical</code>) is called the <i>underlay</i></li>
+<li>Subsequent workspaces you source (e.g., for your project) are <i>overlays</i></li>
+<li>The <a href="https://docs.ros.org/en/lyrical/Get-Started/Configuring-ROS2-Environment.html">ROS2 Configuring Environment Tutorial</a> goes through the process of setting up the ROS 2 environment</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-documentation-1-P-1" class="outline-2">
+<h2 id="documentation-1-P-1">Documentation</h2>
+<div class="outline-text-2" id="text-orgc9c10a6">
+<p>
+ROS has centralized documentation for its core packages as well as providing infrastructure for individuals to provide documentation for their own packages.
+As an open source project, users are encouraged to contribute to the documentation.
+</p>
+
+<ul class="org-ul">
+<li><a href="https://docs.ros.org">https://docs.ros.org</a>: The main user documentation for ROS</li>
+<li><a href="https://index.ros.org">https://index.ros.org</a> The ROS index tracks ROS packages and links to documentation for them.
+<ul class="org-ul">
+<li>This page is extremely useful and should be your first stop when trying to learn about a package.</li>
+<li>It allows search based on ROS distribution</li>
+<li>Search for "system dependencies" (e.g., packages that are downloaded from Ubuntu)</li>
+<li>Search for "ROS dependencies" (i.e., packages that are downloaded from ROS servers).</li>
+<li>Currently documentation for <code>lyrical</code> is mostly not published, use <code>rolling</code> or <code>kilted</code> instead.</li>
+</ul></li>
+<li><a href="https://repo.ros2.org/status_page/ros_lyrical_default.html">https://repo.ros2.org/status_page/ros_lyrical_default.html</a>: The status page showing what packages from <i>lyrical</i> are released
+<ul class="org-ul">
+<li>Released packages are downloadable via <code>apt</code></li>
+</ul></li>
+<li><a href="https://www.ros.org/reps/rep-0000.html">ROS Enhancement Proposals (REP)</a> - Documents ROS design decisions and best practices.</li>
+
+<li><a href="https://robotics.stackexchange.com">https://robotics.stackexchange.com</a> - The preferred Q &amp; A website for asking ROS questions.</li>
+
+<li>Built-in documentation: Most ros tools accept a <code>--help</code> or <code>-h</code> argument to display their help.</li>
+<li>External Documentation: Sometimes the package itself has an external documentation website (often linked on the ROS wiki, often on the repository page).</li>
+<li>Some of the tools used in ROS are actually maintained separately from ROS and have their own documentation as well.</li>
+<li>The source code is often the ultimate documentation. Do not be afraid to read the code.</li>
+<li>Part of this course is about learning how to use the documentation, so not all the answers will be provided in these notes or in lecture!</li>
+</ul>
+</div>
+
+<div id="outline-container-deprecated-documentation-2-P-1" class="outline-3">
+<h3 id="deprecated-documentation-2-P-1">Deprecated Documentation</h3>
+<div class="outline-text-3" id="text-org29e3c89">
+<p>
+Sometimes there is a lot of overlap between ROS 1 and ROS 2 packages but the ROS 2 packages are not yet documented.
+</p>
+<ul class="org-ul">
+<li><a href="https://wiki.ros.org">https://wiki.ros.org</a> - The ROS wiki is the main documentation for ROS 1.</li>
+<li><a href="https://answers.ros.org">https://answers.ros.org</a> on August 11, 2023 in favor of the robotics stack exchange website. It is still available in read-only mode.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

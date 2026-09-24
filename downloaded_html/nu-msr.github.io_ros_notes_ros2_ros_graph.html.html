@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2026-09-24 Thu 08:46 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ROS Graph</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">ROS Graph</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#ros-graph-1-P-1">ROS Graph</a>
+<ul>
+<li><a href="#overview-2-P-1">Overview</a></li>
+<li><a href="#communication-layers-2-P-1">Communication Layers</a></li>
+<li><a href="#quality-of-service-2-P-1">Quality of Service</a></li>
+</ul>
+</li>
+<li><a href="#nodes-1-P-1">Nodes</a>
+<ul>
+<li><a href="#overview-2-P-2">Overview</a></li>
+<li><a href="#inspecting-nodes-2-P-1">Inspecting Nodes</a></li>
+<li><a href="#advanced-2-P-1">Advanced</a>
+<ul>
+<li><a href="#ros-1-comparison-3-P-1">ROS 1 Comparison</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#topics-1-P-1">Topics</a>
+<ul>
+<li><a href="#overview-2-P-3">Overview</a></li>
+<li><a href="#inspecting-topics-2-P-1">Inspecting Topics</a></li>
+</ul>
+</li>
+<li><a href="#services-1-P-1">Services</a>
+<ul>
+<li><a href="#overview-2-P-4">Overview</a></li>
+<li><a href="#inspecting-services-2-P-1">Inspecting Services</a></li>
+</ul>
+</li>
+<li><a href="#actions">Actions</a>
+<ul>
+<li><a href="#overview-2-P-5">Overview</a></li>
+<li><a href="#inspecting-actions-2-P-1">Inspecting Actions</a></li>
+<li><a href="#interfaces-2-P-1">Interfaces</a>
+<ul>
+<li><a href="#ros-idl-3-P-1">ROS IDL</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#parameters">Parameters</a>
+<ul>
+<li><a href="#overview-2-P-6">Overview</a></li>
+<li><a href="#inspecting-parameters-2-P-1">Inspecting Parameters</a></li>
+<li><a href="#ros-1-2-P-1">ROS 1</a></li>
+</ul>
+</li>
+<li><a href="#launchfiles-1-P-1">Launchfiles</a>
+<ul>
+<li><a href="#overview-2-P-7">Overview</a></li>
+<li><a href="#using-launchfiles-2-P-1">Using Launchfiles</a></li>
+</ul>
+</li>
+<li><a href="#bags-1-P-1">Bags</a>
+<ul>
+<li><a href="#overview-2-P-8">Overview</a></li>
+</ul>
+</li>
+<li><a href="#logging-1-P-1">Logging</a>
+<ul>
+<li><a href="#overview-2-P-9">Overview</a></li>
+<li><a href="#inspecting-logs-2-P-1">Inspecting Logs</a></li>
+</ul>
+</li>
+<li><a href="#debugging-1-P-1">Debugging</a></li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-ros-graph-1-P-1" class="outline-2">
+<h2 id="ros-graph-1-P-1">ROS Graph</h2>
+<div class="outline-text-2" id="text-ros-graph-1-P-1">
+</div>
+<div id="outline-container-overview-2-P-1" class="outline-3">
+<h3 id="overview-2-P-1">Overview</h3>
+<div class="outline-text-3" id="text-org7999e52">
+<ul class="org-ul">
+<li>A ROS-based system consists of a collection of <i>nodes</i> that execute code and communicate with each other, either locally or over the network.</li>
+<li>The <i>nodes</i> and are connected to each other via <i>topics</i> which are directed communication channels
+<ul class="org-ul">
+<li><i>nodes</i> can be viewed as vertices in a communication graph and <i>topics</i> are directed edges</li>
+<li>There are also other communication methods, such as <i>services</i> and <i>actions</i> that can connect nodes</li>
+</ul></li>
+<li>Every entity in the ROS graph (nodes, topics, etc) is labeled with a unique name, and can be referenced using that name.</li>
+</ul>
+
+
+<ul class="org-ul">
+<li>In ROS 2 nodes can <a href="https://docs.ros.org/en/lyrical/ROS-Framework/nodes/About-Discovery.html">discover</a> each other automatically, even across a local area network</li>
+<li>ROS 1 required a central process called <code>roscore</code> to manage all traffic between nodes</li>
+<li>Aspects of the ROS Graph can be inspected with the <code>ros2</code> command line tool</li>
+<li>The ROS Graph can be visualized interactively with <code>rqt</code> and <code>rqt_graph</code></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-communication-layers-2-P-1" class="outline-3">
+<h3 id="communication-layers-2-P-1">Communication Layers</h3>
+<div class="outline-text-3" id="text-org2b70c0b">
+<p>
+The <a href="https://design.ros2.org/articles/ros_middleware_interface.html">design of ROS 2</a> involves several layers of abstraction, which can roughly be summarized as follows:
+</p>
+<ol class="org-ol">
+<li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/About-Client-Libraries.html">ROS Client Libraries</a> provide the interface that most ROS 2 users interact with.
+<ul class="org-ul">
+<li>Programming-language-specific API libraries that abstract away the low-level details of communication.</li>
+<li>Users use concepts like Nodes, Topics, Services, Actions, and Parameters</li>
+<li>Built top of the ROS Middleware layer</li>
+</ul></li>
+<li><a href="https://index.ros.org/p/rmw/#rolling">The ROS Middleware</a> (rmw) is an abstract layer that interfaces between ROS 2 and different Middleware vendors
+<ul class="org-ul">
+<li>This layer enables changing the underlying communication protocols without changing the user-facing client API</li>
+</ul></li>
+</ol>
+<p>
+3 <a href="https://docs.ros.org/en/lyrical/ROS-Framework/client-libraries/About-Middleware-Implementations.html">Middleware Implementation</a> is what is used to actually send data
+</p>
+<ul class="org-ul">
+<li>Prior to <i>kilted</i> all ROS middleware was based on a standard protocol called <a href="https://www.omg.org/omg-dds-portal/">Data Distribution Service</a> (DDS)</li>
+<li>Beyond <i>kilted</i> there is also a ROS middleware implementation available based on <a href="https://zenoh.io/">Zenoh</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-quality-of-service-2-P-1" class="outline-3">
+<h3 id="quality-of-service-2-P-1">Quality of Service</h3>
+<div class="outline-text-3" id="text-orge874aa5">
+<ul class="org-ul">
+<li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/interfaces/topics/About-Quality-of-Service-Settings.html">Quality of Service</a> settings determine polices for how data is handled when data is being exchanges between nodes</li>
+<li>QoS determines what to do various scenarios such as communication over an unreliable connection or when messages are coming in too fast to be processed.</li>
+<li>Generally nodes must have the same QoS settings to communicate properly.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-nodes-1-P-1" class="outline-2">
+<h2 id="nodes-1-P-1">Nodes</h2>
+<div class="outline-text-2" id="text-nodes-1-P-1">
+</div>
+<div id="outline-container-overview-2-P-2" class="outline-3">
+<h3 id="overview-2-P-2">Overview</h3>
+<div class="outline-text-3" id="text-org557d822">
+<ul class="org-ul">
+<li>A <a href="https://docs.ros.org/en/lyrical/ROS-Framework/About-Nodes.html">Node</a> in ROS executes code and communicates with other nodes</li>
+<li>Nodes use ROS <a href="https://docs.ros.org/en/lyrical/ROS-Framework/About-Client-Libraries.html">client libraries</a> to interact with other nodes and the ROS system.
+<ul class="org-ul">
+<li>Client libraries are programming-language specific APIs and are how ROS is actually used when writing ROS software</li>
+<li><a href="https://docs.ros.org/en/kilted/p/rclpy/">rclpy</a> is the Python client library.</li>
+<li><a href="https://docs.ros.org/en/kilted/p/rclcpp/">rclcpp</a> is the C++ client library.</li>
+<li><a href="https://docs.ros.org/en/kilted/p/rcl/">rcl</a> is the C client library, upon which the other client libraries are built.</li>
+</ul></li>
+<li>Nodes can run on multiple machines on a network and communicate with each other using <i>topics</i>, <i>services</i>, <i>actions</i>, and <i>parameters</i></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-inspecting-nodes-2-P-1" class="outline-3">
+<h3 id="inspecting-nodes-2-P-1">Inspecting Nodes</h3>
+<div class="outline-text-3" id="text-org027b3f5">
+<ul class="org-ul">
+<li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/nodes/Working-with-nodes/Understanding-ROS2-Nodes/Understanding-ROS2-Nodes.html">Node Tutorial</a></li>
+<li><code>ros2 node</code> is a command that is used to interact with running nodes from the command line.</li>
+<li>Start a node with <code>ros2 run &lt;package&gt; &lt;node&gt;</code></li>
+<li>Nodes can also take <a href="https://docs.ros.org/en/lyrical/Developer-Tools/Introspection-and-analysis/Node-arguments.html">command-line arguments</a></li>
+<li>To kill a node, kill the process it is running in using standard Linux commands such as <code>kill</code> or <code>pkill</code></li>
+</ul>
+</div>
+</div>
+
+<details id="orgc1ac73c"><summary class="header-3">Advanced</summary>
+<div class="outline-text-3" id="text-orgc1ac73c">
+<ul class="org-ul">
+<li>A Node is often its own process, but in ROS 2 multiple nodes may run under a single process (e.g., to reduce communication overhead).
+<ul class="org-ul">
+<li>A node needs to be made in a specific way to be <i>composable</i>. A Composable Node is referred to as a <i>component</i>.</li>
+<li>Composable nodes can currently only be written in C++.</li>
+<li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/nodes/Working-with-nodes/Composition.html">Tutorial on Composable Nodes</a></li>
+</ul></li>
+<li>Each node communicates with other nodes (which may be running in the same process, different processes on the same computer, or on different computers) to form
+a complete robotic system.</li>
+<li>In ROS 2 <a href="https://docs.ros.org/en/lyrical/ROS-Framework/nodes/Working-with-nodes/Managed-Nodes.html">Lifecycles</a> may be used to manage and control when and how a node runs.
+<ul class="org-ul">
+<li>Lifecycle nodes can currently only be written in C++.</li>
+</ul></li>
+</ul>
+</div>
+<div id="outline-container-ros-1-comparison-3-P-1" class="outline-4">
+<h4 id="ros-1-comparison-3-P-1">ROS 1 Comparison</h4>
+<div class="outline-text-4" id="text-orgacfed7d">
+<ul class="org-ul">
+<li>In ROS 1, a command <code>rosnode kill nodename</code> existed. There is no equivalent <a href="https://github.com/ros2/design/issues/287">currently in ROS 2</a>.
+<ul class="org-ul">
+<li>Instead you should kill the proccess running the node</li>
+<li>Often, you can accomplish this with <code>pkill nodename</code>.  You can also <code>ps aux | grep ros</code> to locate ROS nodes</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</details>
+</div>
+
+<div id="outline-container-topics-1-P-1" class="outline-2">
+<h2 id="topics-1-P-1">Topics</h2>
+<div class="outline-text-2" id="text-topics-1-P-1">
+</div>
+<div id="outline-container-overview-2-P-3" class="outline-3">
+<h3 id="overview-2-P-3">Overview</h3>
+<div class="outline-text-3" id="text-orge4360e5">
+<ul class="org-ul">
+<li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/interfaces/About-Topics.html">Topics</a> are labeled channels for communication between nodes</li>
+<li>A node sends information to nodes that <i>subscribe</i> by <i>publishing</i> a <i>message</i> to a <i>topic</i>.</li>
+<li>A node receives information from nodes that <i>publish</i> by <i>subscribing</i> to a <i>topic</i>.</li>
+<li>Every topic has a <i>message type</i> that determines what information is sent over the topic</li>
+<li>Nodes can <i>subscribe</i> and <i>publish</i> to any number of <i>topics</i></li>
+<li>Topics are a many-to-many communication channel: any number of nodes may publish or subscribe to a given topic.</li>
+<li>Publishers do not know what nodes are subscribed or whether they receive the message</li>
+<li>Topics are the primary method for communicating streaming data in ROS</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-inspecting-topics-2-P-1" class="outline-3">
+<h3 id="inspecting-topics-2-P-1">Inspecting Topics</h3>
+<div class="outline-text-3" id="text-org0182db5">
+<ul class="org-ul">
+<li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/interfaces/topics/Understanding-ROS2-Topics/Understanding-ROS2-Topics.html">Topics Tutorial</a></li>
+<li><code>ros2 topic</code> provides commands for investigating topics.</li>
+<li><code>rqt_plot</code> (<code>ros2 run rqt_plot rqt_plot</code>) can plot a topic value over time
+<ul class="org-ul">
+<li>An <code>rqt</code> plot can also be added to the GUI when running <code>rqt</code></li>
+</ul></li>
+<li><code>rqt</code> also provides plugins for working with topics.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-services-1-P-1" class="outline-2">
+<h2 id="services-1-P-1">Services</h2>
+<div class="outline-text-2" id="text-services-1-P-1">
+</div>
+<div id="outline-container-overview-2-P-4" class="outline-3">
+<h3 id="overview-2-P-4">Overview</h3>
+<div class="outline-text-3" id="text-org026305c">
+<ul class="org-ul">
+<li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/interfaces/About-Services.html">Services</a> provide a request/response mechanism for inter-node communication.</li>
+<li>A node provides a <i>service</i> by creating a <i>service server</i> (sometimes referred to as just a <i>server</i>).</li>
+<li>A node calls a <i>service</i> by creating a <i>service client</i> (sometimes referred to as just a <i>client</i>).</li>
+<li>A service client sends a <i>request</i> to a service server and expects a <i>response</i></li>
+<li>Every services has a <i>service type</i> that determines the data that is sent in both the <i>request</i> and the <i>response</i>.</li>
+<li>Services are many-one communication channels: Each service has exactly one <i>server</i>, but multiple clients can connect to the same server.</li>
+<li>A service client always expects a response from a service server, or it is an error.</li>
+<li>Services are useful for sending infrequent signals to a node or for asking a node to perform a calculation.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-inspecting-services-2-P-1" class="outline-3">
+<h3 id="inspecting-services-2-P-1">Inspecting Services</h3>
+<div class="outline-text-3" id="text-orga2fdb96">
+<ul class="org-ul">
+<li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/interfaces/services/Working-with-services/Understanding-ROS2-Services/Understanding-ROS2-Services.html">Services Tutorial</a></li>
+<li><code>ros2 service</code> provides commands for investigating services.</li>
+<li><code>rqt</code> also provides plugins for working with services.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-actions" class="outline-2">
+<h2 id="actions">Actions</h2>
+<div class="outline-text-2" id="text-actions">
+</div>
+<div id="outline-container-overview-2-P-5" class="outline-3">
+<h3 id="overview-2-P-5">Overview</h3>
+<div class="outline-text-3" id="text-org17ca489">
+<ul class="org-ul">
+<li>[[<a href="https://docs.ros.org/en/lyrical/ROS-Framework/interfaces/About-Actions.html">Actions</a> enable nodes to initiate a long-running task and receive periodic feedback.</li>
+<li>Actions consist of three parts: a <i>goal</i>, a <i>result</i>, and <i>feedback</i>.
+<ul class="org-ul">
+<li>The <i>action client</i> initiates a <i>goal</i> and waits for a <i>result</i> from the <i>action server</i> (analogously to the <i>request</i> and <i>response</i> of a service)</li>
+<li>While the <i>action client</i> is waiting, the <i>action server</i> can periodically publish <i>feedback</i> (over a <i>topic</i>) that the <i>client</i> can subscribe to.</li>
+<li>When the action is complete the server sends a <i>result</i> (much like a <i>response</i> for a service).</li>
+</ul></li>
+<li>Clients can send multiple <i>goals</i> to the <i>action server</i> while the initial request is pending.</li>
+<li>Clients can also send a <i>cancel</i> goal to the <i>action server</i> to tell it to end the action.</li>
+<li>Actions are implemented, at a lower-level, in terms of services and topics.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-inspecting-actions-2-P-1" class="outline-3">
+<h3 id="inspecting-actions-2-P-1">Inspecting Actions</h3>
+<div class="outline-text-3" id="text-orge33da01">
+<ul class="org-ul">
+<li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/interfaces/actions/Working-with-actions/Understanding-ROS2-Actions/Understanding-ROS2-Actions.html">Action Tutorial</a></li>
+<li><code>ros2 action</code> provides commands for examining actions.</li>
+<li><code>rqt</code> also provides plugins for working with actions.</li>
+<li>The underlying services and topics used by the action are hidden by default
+<ul class="org-ul">
+<li>Passing <code>--include-hidden-topics</code> to <code>ros2 topic</code> and <code>--include-hidden-services</code> to <code>ros2 service</code> provides access to these hidden topics and services</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-interfaces-2-P-1" class="outline-3">
+<h3 id="interfaces-2-P-1">Interfaces</h3>
+<div class="outline-text-3" id="text-org1f9cf2c">
+<ul class="org-ul">
+<li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/interfaces/About-Interfaces.html">Interfaces</a> are a generic name for Topics, Services, and Actions (the interface to a node).
+<ul class="org-ul">
+<li>Topics have an associated <i>Message Type</i> that determines the layout of the message published to the topic.</li>
+<li>Services have an associated <i>Service Type</i> that determines the layout of the associated request and response.</li>
+<li>Actions have an associated <i>Action Type</i> that determines the layout of the request, result, and feedback.</li>
+<li>An <i>Interface Type</i> generically refers to <i>Message Type</i>, <i>Service Type</i> or <i>Action Type</i>.</li>
+<li>Sometimes, in conversation we say "Interface", "Message", "Service" or "Action" to mean the associated type: context makes the distinction.</li>
+</ul></li>
+
+<li>ROS Interface Types are specified using the Interface Definition Language (IDL):
+<ul class="org-ul">
+<li>Message Types are specified in <code>&lt;pkg&gt;/msg/&lt;MessageType&gt;.msg</code> files</li>
+<li>Service Types are specified in <code>&lt;pkg&gt;/srv/&lt;ServiceType&gt;.srv</code> files</li>
+<li>Action  Types are stored in <code>&lt;pkg&gt;/action/&lt;ActionType&gt;.action</code> files</li>
+</ul></li>
+</ul>
+</div>
+<div id="outline-container-ros-idl-3-P-1" class="outline-4">
+<h4 id="ros-idl-3-P-1">ROS IDL</h4>
+<div class="outline-text-4" id="text-org03eaeaf">
+<ul class="org-ul">
+<li>Each line in an IDL file specifies a field in the data type.</li>
+<li>Each field contains a type-specifier and the name of the field.
+<ul class="org-ul">
+<li>The ROS IDL has several built-in <a href="https://docs.ros.org/en/lyrical/ROS-Framework/interfaces/About-Interfaces.html#field-types">types</a> (e.g., bool, uint32, string, and arrays of these types)</li>
+<li>Messages can also be used as a type (and therefore IDL types can be nested).</li>
+<li>It is also possible to define constants in the IDL.</li>
+</ul></li>
+<li>Service files contain both a request and a response (in that order). They are separated by a single line containing <code>---</code>.</li>
+<li>Action files  contain a request, a result, and a feedback (in that order). Each of these is separated by a single line containing <code>---</code>.</li>
+<li>Interface files are converted into data types in the programming languages ROS targets:
+<ul class="org-ul">
+<li><a href="https://github.com/ros2/rosidl">rosidl</a> Contains basic IDL functionality, including code to generate interfaces code for C and to C++.</li>
+<li><a href="https://github.com/ros2/rosidl_python">rosidl_python</a> contains code to convert interface files to python.</li>
+</ul></li>
+<li>Use <code>ros2 interface</code>  to get information about interfaces.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-parameters" class="outline-2">
+<h2 id="parameters">Parameters</h2>
+<div class="outline-text-2" id="text-parameters">
+</div>
+<div id="outline-container-overview-2-P-6" class="outline-3">
+<h3 id="overview-2-P-6">Overview</h3>
+<div class="outline-text-3" id="text-org38b0671">
+<ul class="org-ul">
+<li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/About-Parameters.html">Parameters</a> enable storing configuration values for a node.</li>
+<li>Parameters are used as settings that can be accessed by all ROS nodes and modified by the user to change node behavior.</li>
+<li>Often nodes read parameters once when they start, but it is possible for a Node to update it's value when a parameter changes.</li>
+<li>Parameters can store strings, integers, floats, dates, times, and lists.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-inspecting-parameters-2-P-1" class="outline-3">
+<h3 id="inspecting-parameters-2-P-1">Inspecting Parameters</h3>
+<div class="outline-text-3" id="text-org92e284d">
+<ul class="org-ul">
+<li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/parameters/Working-with-parameters/Understanding-ROS2-Parameters/Understanding-ROS2-Parameters.html">Parameter Tutorial</a></li>
+<li>Use <code>ros2 param</code> to perform actions on nodes.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-ros-1-2-P-1" class="outline-3">
+<h3 id="ros-1-2-P-1">ROS 1</h3>
+<div class="outline-text-3" id="text-org5621b4b">
+<ul class="org-ul">
+<li>In ROS 1 parameters are stored in a central server called the ROS parameter server.</li>
+<li>The behavior of a central parameter server can be emulated by creating a node that is only used to store parameters.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-launchfiles-1-P-1" class="outline-2">
+<h2 id="launchfiles-1-P-1">Launchfiles</h2>
+<div class="outline-text-2" id="text-launchfiles-1-P-1">
+</div>
+<div id="outline-container-overview-2-P-7" class="outline-3">
+<h3 id="overview-2-P-7">Overview</h3>
+<div class="outline-text-3" id="text-org4cc47bd">
+<ul class="org-ul">
+<li><a href="https://docs.ros.org/en/lyrical/Developer-Tools/Launch/Launch-Main.html">Launch files</a> enable multiple nodes to be started with a single command</li>
+<li>In ROS 2 there are 3 formats for launchfiles
+<ul class="org-ul">
+<li>XML: The format as used in ROS 1. Directly declares what nodes are running but can perform minimal logic.</li>
+<li>YAML: Another format for writing what is essentially the same as an XML launchfile (do you like tags or indentation?).</li>
+<li>Python: python scripts that use the ROS 2 launch API to configure and run nodes. The most flexible and powerful but also most complicated</li>
+</ul></li>
+<li>Effectively, launchfiles provide a method for declaring the structure of the ROS graph on a single computer
+<ul class="org-ul">
+<li>In ROS 1 it was also possible to launch nodes on remote computers, but that functionality has not been implemented</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-using-launchfiles-2-P-1" class="outline-3">
+<h3 id="using-launchfiles-2-P-1">Using Launchfiles</h3>
+<div class="outline-text-3" id="text-orgfc1cee5">
+<ul class="org-ul">
+<li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/nodes/Working-with-nodes/Launching-Multiple-Nodes/Launching-Multiple-Nodes.html">Launchfile Tutorial</a></li>
+<li><code>ros2 launch</code> lets you run and interact with launchfiles.</li>
+<li>Strive to have one launchfile completely start your project</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-bags-1-P-1" class="outline-2">
+<h2 id="bags-1-P-1">Bags</h2>
+<div class="outline-text-2" id="text-bags-1-P-1">
+</div>
+<div id="outline-container-overview-2-P-8" class="outline-3">
+<h3 id="overview-2-P-8">Overview</h3>
+<div class="outline-text-3" id="text-orge450279">
+<p>
+<a href="https://docs.ros.org/en/lyrical/ROS-Framework/interfaces/Working-with-interfaces/Recording-And-Playing-Back-Data/Recording-And-Playing-Back-Data.html">Bags</a> enable you to record ROS communication data across the graph and play it back later.
+</p>
+<ul class="org-ul">
+<li>Use <code>ros2 bag</code> to interact with and record bags.</li>
+<li>Running robotics experiments is often frustrating and difficult.  Capturing the data from a run and
+testing different algorithms and parameters on it is extremely useful.</li>
+<li><code>rqt</code> has a plugin called <code>rqt_bag</code> that enables interaction with bagfiles.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-logging-1-P-1" class="outline-2">
+<h2 id="logging-1-P-1">Logging</h2>
+<div class="outline-text-2" id="text-logging-1-P-1">
+</div>
+<div id="outline-container-overview-2-P-9" class="outline-3">
+<h3 id="overview-2-P-9">Overview</h3>
+<div class="outline-text-3" id="text-orgdab0173">
+<ul class="org-ul">
+<li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/nodes/About-Logging/About-Logging.html">Logging</a> is used to record important diagnostic information from ROS nodes</li>
+<li>There are five severity levels: <code>DEBUG</code>, <code>INFO</code>, <code>WARN</code>, <code>ERROR</code>, <code>FATAL</code> that can be configured and messages can be filtered based on severity</li>
+<li>Logs are saved to files, published on the <code>/rosout</code> topic and can also be viewed in real time using <code>rqt_console</code></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-inspecting-logs-2-P-1" class="outline-3">
+<h3 id="inspecting-logs-2-P-1">Inspecting Logs</h3>
+<div class="outline-text-3" id="text-orge2ce305">
+<ul class="org-ul">
+<li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/nodes/Working-with-nodes/Using-Rqt-Console/Using-Rqt-Console.html">rqt_console tutorial</a></li>
+<li><a href="https://docs.ros.org/en/lyrical/Developer-Tools/Introspection-and-analysis/Logging-and-logger-configuration.html">Configuring Logging</a></li>
+<li>When running a node passing <code>--ros-args --log-level LEVEL</code> sets the logger level
+<ul class="org-ul">
+<li>To specify a particular node within a container use <code>--ros-args --log-level node_name:=DEBUG</code></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-debugging-1-P-1" class="outline-2">
+<h2 id="debugging-1-P-1">Debugging</h2>
+<div class="outline-text-2" id="text-orga468c2c">
+<ul class="org-ul">
+<li><code>ros2 doctor</code> can help point out problems with your ROS setup</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

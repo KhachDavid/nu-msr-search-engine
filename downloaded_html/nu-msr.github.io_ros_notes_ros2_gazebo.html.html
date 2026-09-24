@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-30 Fri 13:06 -->
+<!-- 2026-09-24 Thu 00:26 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Simulation</title>
@@ -22,7 +22,7 @@
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
 <li><a href="#gazebo-and-ros-1-P-1">Gazebo and ROS</a></li>
-<li><a href="#installation-1-P-2">Installation</a></li>
+<li><a href="#installation-1-P-1">Installation</a></li>
 <li><a href="#running-1-P-1">Running</a>
 <ul>
 <li><a href="#from-the-command-line-2-P-1">From the Command Line</a></li>
@@ -62,25 +62,23 @@
 <ul>
 <li><a href="#general-issues-2-P-1">General Issues</a></li>
 <li><a href="#transition">Software in Transition</a></li>
-<li><a href="#documentation-2-P-2">Documentation</a></li>
+<li><a href="#documentation-2-P-3">Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-
 <div id="outline-container-gazebo-and-ros-1-P-1" class="outline-2">
 <h2 id="gazebo-and-ros-1-P-1">Gazebo and ROS</h2>
-<div class="outline-text-2" id="text-org103f48c">
+<div class="outline-text-2" id="text-orgfbe448a">
 <p>
 These notes discuss practical usage of <a href="https://gazebosim.org/home">(Modern) Gazebo</a> in ROS 2.
 </p>
 </div>
 </div>
-
-<div id="outline-container-installation-1-P-2" class="outline-2">
-<h2 id="installation-1-P-2">Installation</h2>
-<div class="outline-text-2" id="text-orgb690d9b">
+<div id="outline-container-installation-1-P-1" class="outline-2">
+<h2 id="installation-1-P-1">Installation</h2>
+<div class="outline-text-2" id="text-orgaa362af">
 <ol class="org-ol">
 <li>Install gazebo and its ROS components with <code>sudo apt install ros-kilted-ros-gz-sim</code></li>
 <li><a href="https://gazebosim.org/docs/ionic">Tutorials for Gazebo Ionic</a> (Ionic is the version name)
@@ -105,14 +103,13 @@ when the <code>install/setup.bash</code> is sourced.</li>
 </ol>
 </div>
 </div>
-
 <div id="outline-container-running-1-P-1" class="outline-2">
 <h2 id="running-1-P-1">Running</h2>
 <div class="outline-text-2" id="text-running-1-P-1">
 </div>
 <div id="outline-container-from-the-command-line-2-P-1" class="outline-3">
 <h3 id="from-the-command-line-2-P-1">From the Command Line</h3>
-<div class="outline-text-3" id="text-orgc010612">
+<div class="outline-text-3" id="text-orgb9bd2e8">
 <ol class="org-ol">
 <li>Run gazebo with <code>ros2 launch ros_gz_sim gz_sim.launch.py</code>
 <ul class="org-ul">
@@ -133,7 +130,7 @@ when the <code>install/setup.bash</code> is sourced.</li>
 </div>
 <div id="outline-container-from-a-launch-file-2-P-1" class="outline-3">
 <h3 id="from-a-launch-file-2-P-1">From a Launch File</h3>
-<div class="outline-text-3" id="text-orgbb86c73">
+<div class="outline-text-3" id="text-org57d6dba">
 <ol class="org-ol">
 <li>The server can be started with the <a href="https://gazebosim.org/docs/ionic/ros2_launch_gazebo/#using-a-custom-launch-file"><code>&lt;gz_server&gt;</code></a> action in an XML launchfile</li>
 <li>The <a href="https://github.com/gazebosim/ros_gz/blob/kilted/ros_gz_sim/ros_gz_sim/actions/gzserver.py">GzServer</a> action is used in a Python launchfile
@@ -151,7 +148,7 @@ when the <code>install/setup.bash</code> is sourced.</li>
 </div>
 <div id="outline-container-package-layout-1-P-1" class="outline-2">
 <h2 id="package-layout-1-P-1">Package Layout</h2>
-<div class="outline-text-2" id="text-org93df677">
+<div class="outline-text-2" id="text-orgd022d71">
 <ol class="org-ol">
 <li>An example of this package layout can be found at <a href="https://github.com/m-elwin/me495_gazebo">https://github.com/m-elwin/me495_gazebo</a>.</li>
 <li>SDF files for <code>worlds</code> go in a <code>worlds/</code> directory and are installed to <code>share/&lt;pkg_name&gt;/worlds</code>
@@ -173,12 +170,13 @@ The <code>GZ_SIM_&lt;SOMETHING&gt;_PATH</code> environment variables tells <code
 <li><p>
 Create a <code>.dsv</code> file in the <code>env-hooks</code> directory of your package with the following content (be sure to update the <code>&lt;pkg_name&gt;</code> to be the name of the package):
 </p>
-<pre class="example">
-prepend-non-duplicate;GZ_SIM_RESOURCE_PATH;share/&lt;pkg_name&gt;/models
+<div class="org-src-container">
+<pre class="src src-nil">prepend-non-duplicate;GZ_SIM_RESOURCE_PATH;share/&lt;pkg_name&gt;/models
 prepend-non-duplicate;GZ_SIM_RESOURCE_PATH;share/&lt;pkg_name&gt;/worlds
 prepend-non-duplicate;GZ_SIM_PLUGIN_PATH;share/&lt;pkg_name&gt;/plugins
 prepend-non-duplicate;GZ_SYSTEM_PLUGIN_PATH;share/&lt;pkg_name&gt;/plugins
-</pre></li>
+</pre>
+</div></li>
 </ul>
 <ul class="org-ul">
 <li>Follow the <a href="./colcon.html#colcon-pkg">colcon.pkg</a> instructions to install the hook and have it update the environment whenever you source <code>install/setup.bash</code>
@@ -192,14 +190,13 @@ we are not currently adopting this practice: see <a href="#transition">Transitio
 </ol>
 </div>
 </div>
-
 <div id="outline-container-sdf-files-1-P-1" class="outline-2">
 <h2 id="sdf-files-1-P-1">SDF Files</h2>
 <div class="outline-text-2" id="text-sdf-files-1-P-1">
 </div>
 <div id="outline-container-format-2-P-1" class="outline-3">
 <h3 id="format-2-P-1">Format</h3>
-<div class="outline-text-3" id="text-org82ceb57">
+<div class="outline-text-3" id="text-orgec3fd6b">
 <ul class="org-ul">
 <li>Gazebo uses <a href="https://sdformat.org">SDF</a> files to represent robots, worlds, and everything that appears in the simulation.
 <ul class="org-ul">
@@ -215,10 +212,9 @@ we are not currently adopting this practice: see <a href="#transition">Transitio
 </ul>
 </div>
 </div>
-
 <div id="outline-container-model-management-2-P-1" class="outline-3">
 <h3 id="model-management-2-P-1">Model Management</h3>
-<div class="outline-text-3" id="text-org3774bf3">
+<div class="outline-text-3" id="text-org57e90b9">
 <ul class="org-ul">
 <li>Gazebo allows anybody to share simulation assets with the world via <a href="https://app.gazebosim.org">Gazebo Fuel</a>
 <ul class="org-ul">
@@ -239,10 +235,9 @@ we are not currently adopting this practice: see <a href="#transition">Transitio
 </ul>
 </div>
 </div>
-
 <div id="outline-container-creating-worlds-2-P-1" class="outline-3">
 <h3 id="creating-worlds-2-P-1">Creating Worlds</h3>
-<div class="outline-text-3" id="text-orgec52073">
+<div class="outline-text-3" id="text-orga6498dc">
 <ul class="org-ul">
 <li>In the Gazebo GUI, you can add the <i>Resource Spawner</i> to add models directly from Gazebo Fuel or your local computer, enabling you to create SDF world files interactively</li>
 <li>When saving the world file, Gazebo will include a URI that contains the absolute local path to each model in the world
@@ -266,14 +261,13 @@ we use installs those models and puts the install directory on the <code>GZ_SIM_
 </ul>
 </div>
 </div>
-
 <div id="outline-container-loading-urdf-sdf-files-2-P-1" class="outline-3">
 <h3 id="loading-urdf-sdf-files-2-P-1">Loading URDF/SDF files</h3>
 <div class="outline-text-3" id="text-loading-urdf-sdf-files-2-P-1">
 </div>
 <div id="outline-container-urdf-to-sdf-3-P-1" class="outline-4">
 <h4 id="urdf-to-sdf-3-P-1">URDF to SDF</h4>
-<div class="outline-text-4" id="text-orgc8f1da7">
+<div class="outline-text-4" id="text-orge76b2f3">
 <ul class="org-ul">
 <li>ROS can be used to load both URDF and SDF models into the simulator.
 <ul class="org-ul">
@@ -284,17 +278,17 @@ we use installs those models and puts the install directory on the <code>GZ_SIM_
 Additional <code>sdf</code> tags can be added to a URDF by using the <code>&lt;gazebo&gt;</code> tag, which provide additional flexibility when converting a URDF to an SDF
 </p>
 <div class="org-src-container">
-<pre class="src src-xml"><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">robot</span> <span class="org-nxml-namespace-attribute-xmlns">xmlns</span><span class="org-nxml-namespace-attribute-colon">:</span><span class="org-nxml-namespace-attribute-prefix">xacro</span>=<span class="org-string">"http://www.ros.org/wiki/xacro</span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span><span class="org-string">
-</span><span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span><span class="org-string">
-&lt;!-- Resulting SDF file will have all the SDF tags here and will be associated with the full robot model at the top-level--&gt;
-</span><span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-tag-slash">/</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span><span class="org-string">
-</span><span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"> </span><span class="org-string"><span class="org-nxml-attribute-local-name">reference</span></span><span class="org-string">="</span>link_name<span class="org-string">"</span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span><span class="org-string">
-&lt;!-- resulting SDF file will have these SDF tags under the link named "</span>link_name<span class="org-string">" --&gt;
-</span><span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-tag-slash">/</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span><span class="org-string">
-</span><span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"> </span><span class="org-string"><span class="org-nxml-attribute-local-name">reference</span></span><span class="org-string">="</span>joint_name<span class="org-string">"</span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span><span class="org-string">
-&lt;!-- resulting SDF file will have these SDF tags under the joint named "</span>joint_name<span class="org-string">" --&gt;
-</span><span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-tag-slash">/</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span><span class="org-string">
-</span><span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-tag-slash">/</span></span><span class="org-string"><span class="org-nxml-element-local-name">robot</span></span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span>
+<pre class="src src-xml"><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">robot</span> <span class="org-nxml-namespace-attribute-xmlns">xmlns</span><span class="org-nxml-namespace-attribute-colon">:</span><span class="org-nxml-namespace-attribute-prefix">xacro</span>=<span class="org-string">"http://www.ros.org/wiki/xacro</span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span>
+<span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span>
+<span class="org-string">&lt;!-- Resulting SDF file will have all the SDF tags here and will be associated with the full robot model at the top-level--&gt;</span>
+<span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-tag-slash">/</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span>
+<span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"> </span><span class="org-string"><span class="org-nxml-attribute-local-name">reference</span></span><span class="org-string">="</span>link_name<span class="org-string">"</span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span>
+<span class="org-string">&lt;!-- resulting SDF file will have these SDF tags under the link named "</span>link_name<span class="org-string">" --&gt;</span>
+<span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-tag-slash">/</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span>
+<span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"> </span><span class="org-string"><span class="org-nxml-attribute-local-name">reference</span></span><span class="org-string">="</span>joint_name<span class="org-string">"</span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span>
+<span class="org-string">&lt;!-- resulting SDF file will have these SDF tags under the joint named "</span>joint_name<span class="org-string">" --&gt;</span>
+<span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-tag-slash">/</span></span><span class="org-string"><span class="org-nxml-element-local-name">gazebo</span></span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span>
+<span class="org-string"><span class="org-nxml-tag-delimiter">&lt;</span></span><span class="org-string"><span class="org-nxml-tag-slash">/</span></span><span class="org-string"><span class="org-nxml-element-local-name">robot</span></span><span class="org-string"><span class="org-nxml-tag-delimiter">&gt;</span></span>
 </pre>
 </div></li>
 <li>A typical project structure is for a robot to provide:
@@ -314,10 +308,9 @@ The <a href="http://sdformat.org/tutorials?tut=sdformat_urdf_extensions&amp;cat=
 </p>
 </div>
 </div>
-
 <div id="outline-container-sdf-to-urdf-3-P-1" class="outline-4">
 <h4 id="sdf-to-urdf-3-P-1">SDF to URDF</h4>
-<div class="outline-text-4" id="text-org49bd8d8">
+<div class="outline-text-4" id="text-orgd4ee3cc">
 <ol class="org-ol">
 <li>It is also possible to maintain a robot as an SDF file and convert it to a URDF file automatically using the <a href="https://index.ros.org/p/sdformat_urdf/">sdformat_urdf</a> package</li>
 <li>The SDF format is much broader than the URDF format, so maintaining an SDF file that can be reliably converted into a URDF file imposes additional restrictions on the SDF file</li>
@@ -325,10 +318,9 @@ The <a href="http://sdformat.org/tutorials?tut=sdformat_urdf_extensions&amp;cat=
 </ol>
 </div>
 </div>
-
 <div id="outline-container-debugging-3-P-1" class="outline-4">
 <h4 id="debugging-3-P-1">Debugging</h4>
-<div class="outline-text-4" id="text-orgb067a06">
+<div class="outline-text-4" id="text-org524183d">
 <p>
 It can be helpful to inspect <code>urdf</code> files at different stages of conversion, especially if there are errors
 when trying to load your model.
@@ -344,17 +336,16 @@ when trying to load your model.
 </div>
 </div>
 </div>
-
 <div id="outline-container-spawning-robots-1-P-1" class="outline-2">
 <h2 id="spawning-robots-1-P-1">Spawning Robots</h2>
-<div class="outline-text-2" id="text-org60aa8e8">
+<div class="outline-text-2" id="text-orgdf92a33">
 <p>
 There are several ways to <a href="https://gazebosim.org/docs/latest/ros2_spawn_model/">spawn a URDF model in gazebo</a>, provided by the <code>ros_gz_sim</code> package
 </p>
 </div>
 <div id="outline-container-from-command-line-2-P-1" class="outline-3">
 <h3 id="from-command-line-2-P-1">From Command Line</h3>
-<div class="outline-text-3" id="text-orgb4ecdf6">
+<div class="outline-text-3" id="text-orgd4a6000">
 <ul class="org-ul">
 <li>The <code>ros2 run ros_gz_sim create</code> node is the most straightforward method to spawning a model from the command-line (use <code>--help</code> to see all the options
 <ul class="org-ul">
@@ -370,10 +361,9 @@ or from a <code>model_string</code> by using command substitution: <code>$(xacro
 </ul>
 </div>
 </div>
-
 <div id="outline-container-from-a-launch-file-2-P-2" class="outline-3">
 <h3 id="from-a-launch-file-2-P-2">From a Launch File</h3>
-<div class="outline-text-3" id="text-org2cdbc19">
+<div class="outline-text-3" id="text-org78e8a88">
 <ol class="org-ol">
 <li>The <a href="https://gazebosim.org/docs/latest/ros2_spawn_model/#spawn-a-model-from-a-custom-launch-file"><code>&lt;gz_spawn_model&gt;</code></a> tag is used to spawn a robot from an XML launch file</li>
 <li>There is also <a href="https://github.com/gazebosim/ros_gz/blob/kilted/ros_gz_sim/ros_gz_sim/actions/gz_spawn_model.py">GzSpawnModel</a> for python launchfiles
@@ -392,10 +382,9 @@ or from a <code>model_string</code> by using command substitution: <code>$(xacro
 </div>
 </div>
 </div>
-
 <div id="outline-container-bridging-1-P-1" class="outline-2">
 <h2 id="bridging-1-P-1">Bridging</h2>
-<div class="outline-text-2" id="text-org0661159">
+<div class="outline-text-2" id="text-org6dd78f6">
 <ul class="org-ul">
 <li>The <a href="https://index.ros.org/p/ros_gz_bridge/">ROS GZ Bridge</a> is a node that is used to connect ROS topics and services to Gazebo topics and services.</li>
 <li>Once the bridge is running you can publish/subscribe to the topics like any other ROS topic</li>
@@ -405,7 +394,7 @@ or from a <code>model_string</code> by using command substitution: <code>$(xacro
 </div>
 <div id="outline-container-from-the-command-line-2-P-2" class="outline-3">
 <h3 id="from-the-command-line-2-P-2">From the Command Line</h3>
-<div class="outline-text-3" id="text-org922732c">
+<div class="outline-text-3" id="text-orgd7d3ec6">
 <ul class="org-ul">
 <li><code>ros2 run ros_gz_bridge parameter_bridge topic@ros_type@gz_type</code>
 <ul class="org-ul">
@@ -426,7 +415,7 @@ or from a <code>model_string</code> by using command substitution: <code>$(xacro
 </div>
 <div id="outline-container-from-a-launch-file-2-P-3" class="outline-3">
 <h3 id="from-a-launch-file-2-P-3">From a Launch File</h3>
-<div class="outline-text-3" id="text-org29acaa3">
+<div class="outline-text-3" id="text-org2813dc1">
 <ol class="org-ol">
 <li>The <a href="https://gazebosim.org/docs/latest/ros2_integration/#launching-the-bridge-using-the-launch-files-included-in-ros-gz-bridge-package"><code>&lt;ros_gz_bridge&gt;</code></a> tag is used to spawn a robot from an XML launch file
 <ul class="org-ul">
@@ -441,10 +430,9 @@ or from a <code>model_string</code> by using command substitution: <code>$(xacro
 </div>
 </div>
 </div>
-
 <div id="outline-container-simulation-time-1-P-1" class="outline-2">
 <h2 id="simulation-time-1-P-1">Simulation Time</h2>
-<div class="outline-text-2" id="text-org9d92021">
+<div class="outline-text-2" id="text-org5ef504e">
 <ol class="org-ol">
 <li>Time in simulation can run at a different speed than time in the real world</li>
 <li>ROS 2 Nodes can use time from a simulator by setting the <code>use_sim_time</code> parameter to <code>true</code></li>
@@ -460,10 +448,9 @@ ensuring that all nodes are using simulated time becomes important.</li>
 </ol>
 </div>
 </div>
-
 <div id="outline-container-plugins-1-P-1" class="outline-2">
 <h2 id="plugins-1-P-1">Plugins</h2>
-<div class="outline-text-2" id="text-org1d6625f">
+<div class="outline-text-2" id="text-orgfe8dfbc">
 <ol class="org-ol">
 <li>Gazebo uses plugins to enhance/modify functionality</li>
 <li>Some plugins can be associated with specific models and used to control them</li>
@@ -485,15 +472,13 @@ ensuring that all nodes are using simulated time becomes important.</li>
 </ol>
 </div>
 </div>
-
-
 <div id="outline-container-common-problems-1-P-1" class="outline-2">
 <h2 id="common-problems-1-P-1">Common Problems</h2>
 <div class="outline-text-2" id="text-common-problems-1-P-1">
 </div>
 <div id="outline-container-general-issues-2-P-1" class="outline-3">
 <h3 id="general-issues-2-P-1">General Issues</h3>
-<div class="outline-text-3" id="text-org6954ec3">
+<div class="outline-text-3" id="text-orgcbd8278">
 <ol class="org-ol">
 <li>Gazebo uses a client-server architecture. Often the server does not exit when the client does and is running in the background
 <ul class="org-ul">
@@ -503,7 +488,6 @@ ensuring that all nodes are using simulated time becomes important.</li>
 </ol>
 </div>
 </div>
-
 <div id="outline-container-transition" class="outline-3">
 <h3 id="transition">Software in Transition</h3>
 <div class="outline-text-3" id="text-transition">
@@ -555,9 +539,9 @@ and am hesitant to adopt this practice given that SDF files are more general tha
 </ol>
 </div>
 </div>
-<div id="outline-container-documentation-2-P-2" class="outline-3">
-<h3 id="documentation-2-P-2">Documentation</h3>
-<div class="outline-text-3" id="text-orgddb536f">
+<div id="outline-container-documentation-2-P-3" class="outline-3">
+<h3 id="documentation-2-P-3">Documentation</h3>
+<div class="outline-text-3" id="text-orge495ae1">
 <ol class="org-ol">
 <li><a href="https://gazebosim.org/docs/fortress/tutorials">Gazebo Tutorials</a></li>
 <li><a href="https://sdformat.org">SDF Format</a></li>

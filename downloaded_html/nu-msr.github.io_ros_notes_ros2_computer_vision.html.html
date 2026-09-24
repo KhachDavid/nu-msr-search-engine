@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-30 Fri 13:06 -->
+<!-- 2026-09-24 Thu 00:26 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Image Processing with ROS</title>
@@ -21,7 +21,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#overview-1-P-7">Overview</a></li>
+<li><a href="#overview-1-P-1">Overview</a></li>
 <li><a href="#cameras-on-linux-1-P-1">Cameras On Linux</a></li>
 <li><a href="#ros-camera-drivers--1-P-1">ROS Camera "Drivers"</a>
 <ul>
@@ -34,7 +34,7 @@
 <li><a href="#image-pipeline-2-P-1">Image Pipeline</a></li>
 <li><a href="#camera-calibration-2-P-1">Camera Calibration</a>
 <ul>
-<li><a href="#example-3-P-3">Example</a></li>
+<li><a href="#example-3-P-1">Example</a></li>
 </ul>
 </li>
 <li><a href="#mrcal-2-P-1">MrCal</a></li>
@@ -63,19 +63,17 @@
 </ul>
 </div>
 </nav>
-
-<div id="outline-container-overview-1-P-7" class="outline-2">
-<h2 id="overview-1-P-7">Overview</h2>
-<div class="outline-text-2" id="text-org6cdea91">
+<div id="outline-container-overview-1-P-1" class="outline-2">
+<h2 id="overview-1-P-1">Overview</h2>
+<div class="outline-text-2" id="text-orgcb13df7">
 <p>
 This lecture is about how to interface ROS with cameras and vision processing libraries.
 </p>
 </div>
 </div>
-
 <div id="outline-container-cameras-on-linux-1-P-1" class="outline-2">
 <h2 id="cameras-on-linux-1-P-1">Cameras On Linux</h2>
-<div class="outline-text-2" id="text-org48e369d">
+<div class="outline-text-2" id="text-orga78a611">
 <ul class="org-ul">
 <li>Cameras on Linux are viewed as files (like any other device).</li>
 <li>A <i>driver</i> in the Linux Kernel enables users to work with cameras using a common interface</li>
@@ -104,10 +102,9 @@ the proper permissions and a persistent name.
 </ul>
 </div>
 </div>
-
 <div id="outline-container-ros-camera-drivers--1-P-1" class="outline-2">
 <h2 id="ros-camera-drivers--1-P-1">ROS Camera "Drivers"</h2>
-<div class="outline-text-2" id="text-org1b10a4c">
+<div class="outline-text-2" id="text-org6384d30">
 <ul class="org-ul">
 <li>A <i>ros driver</i> is a node (or set of nodes) that interacts with hardware and provides a standard ROS interface</li>
 <li>There are at least two packages that contain ROS drivers for interacting with USB cameras that operate via the v4l2 interface</li>
@@ -124,11 +121,9 @@ the proper permissions and a persistent name.
 <li>However, all camera drivers ultimately provide a consistent ROS interface</li>
 </ul>
 </div>
-
-
 <div id="outline-container-using-v4l2-camera-2-P-1" class="outline-3">
 <h3 id="using-v4l2-camera-2-P-1">Using v4l2_camera</h3>
-<div class="outline-text-3" id="text-orgdaf434c">
+<div class="outline-text-3" id="text-org43032e0">
 <ul class="org-ul">
 <li>The <a href="https://index.ros.org/p/v4l2_camera">v4l2_camera</a> package is designed to expose many v4l2 camera options to ROS via parameters
 <ul class="org-ul">
@@ -138,10 +133,9 @@ the proper permissions and a persistent name.
 </ul>
 </div>
 </div>
-
 <div id="outline-container-using-usb-cam-2-P-1" class="outline-3">
 <h3 id="using-usb-cam-2-P-1">Using usb_cam</h3>
-<div class="outline-text-3" id="text-org0e36608">
+<div class="outline-text-3" id="text-orgeba3974">
 <ol class="org-ol">
 <li>The <a href="https://index.ros.org/p/usb_cam/">usb_cam</a> package can be used with many cameras</li>
 <li>The camera is one of the <code>/dev/videoX</code> devices, and can be specified with the <code>video_device</code> parameter</li>
@@ -165,14 +159,13 @@ the proper permissions and a persistent name.
 </div>
 </div>
 </div>
-
 <div id="outline-container-the-image-pipeline-1-P-1" class="outline-2">
 <h2 id="the-image-pipeline-1-P-1">The Image Pipeline</h2>
 <div class="outline-text-2" id="text-the-image-pipeline-1-P-1">
 </div>
 <div id="outline-container-image-pipeline-2-P-1" class="outline-3">
 <h3 id="image-pipeline-2-P-1">Image Pipeline</h3>
-<div class="outline-text-3" id="text-orga66a90f">
+<div class="outline-text-3" id="text-org909083e">
 <p>
 The <a href="http://docs.ros.org/en/kilted/p/image_pipeline/">image_pipeline</a> contains several packages relating to image manipulation in ROS.
 </p>
@@ -182,10 +175,9 @@ The <a href="http://docs.ros.org/en/kilted/p/image_pipeline/">image_pipeline</a>
 </ul>
 </div>
 </div>
-
 <div id="outline-container-camera-calibration-2-P-1" class="outline-3">
 <h3 id="camera-calibration-2-P-1">Camera Calibration</h3>
-<div class="outline-text-3" id="text-orgc8803ff">
+<div class="outline-text-3" id="text-org4a87090">
 <p>
 <a href="http://docs.ros.org/en/kilted/p/camera_calibration/index.html">camera_calibration</a> finds the intrinsic parameters of a camera using a checkerboard pattern and OpenCV.
 </p>
@@ -216,9 +208,9 @@ useful information about camera calibration</li>
 </ul></li>
 </ul>
 </div>
-<div id="outline-container-example-3-P-3" class="outline-4">
-<h4 id="example-3-P-3">Example</h4>
-<div class="outline-text-4" id="text-orgd3a3f42">
+<div id="outline-container-example-3-P-1" class="outline-4">
+<h4 id="example-3-P-1">Example</h4>
+<div class="outline-text-4" id="text-orgb7b0d95">
 <p>
 Here is an example for how to start the camera calibration using <code>usb_cam</code> as the camera source.
 </p>
@@ -233,16 +225,15 @@ ros2 launch image_proc image_proc.launch.py
 </div>
 <div id="outline-container-mrcal-2-P-1" class="outline-3">
 <h3 id="mrcal-2-P-1">MrCal</h3>
-<div class="outline-text-3" id="text-orgb31b8c3">
+<div class="outline-text-3" id="text-org27786c5">
 <ol class="org-ol">
 <li>The <a href="https://mrcal.secretsauce.net/">mrcal</a> package provides routines for calibrating (and verifying the calibration) in a way that is much more rigorous and precise than the usual calibration methods</li>
 </ol>
 </div>
 </div>
-
 <div id="outline-container-image-proc-2-P-1" class="outline-3">
 <h3 id="image-proc-2-P-1">Image Proc</h3>
-<div class="outline-text-3" id="text-orgeb45dba">
+<div class="outline-text-3" id="text-org1546467">
 <ul class="org-ul">
 <li>The <a href="http://docs.ros.org/en/kilted/p/image_proc/">image_proc</a> package handles rectifying and debayering images.</li>
 <li>Rectification is a method to compensate for camera lens distortion (which can make parallel lines appear curved in an image)</li>
@@ -266,10 +257,9 @@ ros2 launch image_proc image_proc.launch.py
 </ul>
 </div>
 </div>
-
 <div id="outline-container-depth-images-2-P-1" class="outline-3">
 <h3 id="depth-images-2-P-1">Depth Images</h3>
-<div class="outline-text-3" id="text-org9f79f2c">
+<div class="outline-text-3" id="text-orga523591">
 <p>
 <a href="http://docs.ros.org/en/kilted/p/depth_image_proc/">depth_image_proc</a> Processes depth image
 </p>
@@ -282,10 +272,9 @@ in the scene.</li>
 </div>
 </div>
 </div>
-
 <div id="outline-container-other-image-tools-1-P-1" class="outline-2">
 <h2 id="other-image-tools-1-P-1">Other Image Tools</h2>
-<div class="outline-text-2" id="text-orgf8f164b">
+<div class="outline-text-2" id="text-orga49339f">
 <ol class="org-ol">
 <li><a href="http://docs.ros.org/en/kilted/p/image_transport/">image_transport</a> determines how image data is sent across the system.</li>
 </ol>
@@ -306,7 +295,7 @@ useful if interfacing your robot to a website.</li>
 </div>
 <div id="outline-container-opencv-1-P-1" class="outline-2">
 <h2 id="opencv-1-P-1">OpenCV</h2>
-<div class="outline-text-2" id="text-orgcb32cff">
+<div class="outline-text-2" id="text-org2f32034">
 <p>
 <a href="https://opencv.org">OpenCV</a> is a major image processing library.
 Their website has many tutorials on how to process images.
@@ -332,7 +321,7 @@ Some packages that use/relate to OpenCV are:
 </div>
 <div id="outline-container-not-in-ros-2-yet--3-P-1" class="outline-4">
 <h4 id="not-in-ros-2-yet--3-P-1">Not In ROS 2 (yet)</h4>
-<div class="outline-text-4" id="text-org11c87c5">
+<div class="outline-text-4" id="text-org0f8b0db">
 <ol class="org-ol">
 <li><a href="http://wiki.ros.org/opencv_apps">opencv_apps</a> Each "app" is a node that performs a single
 image processing function using opencv.  Thus you can chain together many computer vision algorithms
@@ -341,11 +330,9 @@ by connecting some nodes together in a launchfile.</li>
 </div>
 </div>
 </div>
-
-
 <div id="outline-container-tag-tracking-1-P-1" class="outline-2">
 <h2 id="tag-tracking-1-P-1">Tag Tracking</h2>
-<div class="outline-text-2" id="text-org5076a83">
+<div class="outline-text-2" id="text-orgc2f5e6a">
 <p>
 Tags are special 2-Dimensional patterns that are designed to be viewed with a camera. 
 Computer vision algorithms can then determine the 6 Degree of freedom pose of the tag and
@@ -366,10 +353,9 @@ often an identifier (thus Tags are like QR codes but they also contain geometric
 </ul></li>
 </ul>
 </div>
-
 <div id="outline-container-april-tags-in-ros-2-P-1" class="outline-3">
 <h3 id="april-tags-in-ros-2-P-1">April Tags in ROS</h3>
-<div class="outline-text-3" id="text-orgfc5e1c7">
+<div class="outline-text-3" id="text-orgbbe3938">
 <ol class="org-ol">
 <li>The <a href="https://index.ros.org/p/apriltag_ros/github-christianrauch-apriltag_ros/#kilted">apriltag_ros</a> provides april-tag related functionality for ROS
 <ul class="org-ul">
@@ -394,10 +380,9 @@ often an identifier (thus Tags are like QR codes but they also contain geometric
 </div>
 </div>
 </div>
-
 <div id="outline-container-ultralytics-yolo-1-P-1" class="outline-2">
 <h2 id="ultralytics-yolo-1-P-1">Ultralytics Yolo</h2>
-<div class="outline-text-2" id="text-orgd4507c5">
+<div class="outline-text-2" id="text-orgd644d0c">
 <ul class="org-ul">
 <li>YOLO "You Only Look Once" is a family of machine-learning vision algorithms</li>
 <li>The <a href="https://github.com/ultralytics/ultralytics">Ultralytics YOLO Models</a> are a convenient implementation of various pre-trained YOLO models implemented in <a href="https://pytorch.org">pytorch</a></li>
@@ -413,10 +398,9 @@ often an identifier (thus Tags are like QR codes but they also contain geometric
 </ul>
 </div>
 </div>
-
 <div id="outline-container-other-image-packages-and-libraries-1-P-1" class="outline-2">
 <h2 id="other-image-packages-and-libraries-1-P-1">Other Image Packages and Libraries</h2>
-<div class="outline-text-2" id="text-org7072a9d">
+<div class="outline-text-2" id="text-org7a50aab">
 <ol class="org-ol">
 <li><a href="https://github.com/ros2/openrobotics_darknet_ros">Darknet ROS 2</a> - realtime object detection (last released for foxy)</li>
 <li><a href="https://github.com/tzutalin/awesome-visual-slam">Up to date list of visual SLAM solutions</a></li>
@@ -429,11 +413,9 @@ released for ROS indigo.</li>
 </ol>
 </div>
 </div>
-
-
 <div id="outline-container-other-learning-resources-1-P-1" class="outline-2">
 <h2 id="other-learning-resources-1-P-1">Other Learning Resources</h2>
-<div class="outline-text-2" id="text-org0329ff5">
+<div class="outline-text-2" id="text-org8fad140">
 <ul class="org-ul">
 <li><a href="https://ciechanow.ski/cameras-and-lenses/">Cameras and Lenses</a> (Highly recommend this)</li>
 <li><a href="http://mrcal.secretsauce.net/">mrcal</a> NASA-quality lenses modeling and calibration software.</li>

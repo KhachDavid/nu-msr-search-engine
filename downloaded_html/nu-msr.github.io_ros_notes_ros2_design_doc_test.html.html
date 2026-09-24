@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-30 Fri 13:06 -->
+<!-- 2026-09-24 Thu 00:26 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Testing, Documentation, and Design</title>
@@ -53,7 +53,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#testing-1-P-1">Testing</a>
+<li><a href="#testing-1-P-2">Testing</a>
 <ul>
 <li><a href="#why-testing--2-P-1">Why Testing?</a></li>
 <li><a href="#why-automate-testing--2-P-1">Why Automate Testing?</a></li>
@@ -91,16 +91,16 @@
 <ul>
 <li><a href="#ros-doc-2-2-P-1">Ros Doc 2</a></li>
 <li><a href="#sphinx-2-P-1">Sphinx</a></li>
-<li><a href="#git-2-P-1">Git</a></li>
+<li><a href="#git-2-P-2">Git</a></li>
 </ul>
 </li>
 <li><a href="#design-guidelines-1-P-1">Design Guidelines</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-testing-1-P-1" class="outline-2">
-<h2 id="testing-1-P-1">Testing</h2>
-<div class="outline-text-2" id="text-orgfb37db9">
+<div id="outline-container-testing-1-P-2" class="outline-2">
+<h2 id="testing-1-P-2">Testing</h2>
+<div class="outline-text-2" id="text-orgc7525b5">
 <p>
 <i>Program testing can be used to show the presence of bugs, never to show their absence!</i> 
 </p>
@@ -109,10 +109,9 @@
 \(-\) Edsger Dijkstra
 </p>
 </div>
-
 <div id="outline-container-why-testing--2-P-1" class="outline-3">
 <h3 id="why-testing--2-P-1">Why Testing?</h3>
-<div class="outline-text-3" id="text-orged0e471">
+<div class="outline-text-3" id="text-org96f7368">
 <ul class="org-ul">
 <li>Provides some level of assurance that your code is correct</li>
 <li>When your code changes, it helps you avoid breaking existing functionality</li>
@@ -121,10 +120,9 @@
 </ul>
 </div>
 </div>
-
 <div id="outline-container-why-automate-testing--2-P-1" class="outline-3">
 <h3 id="why-automate-testing--2-P-1">Why Automate Testing?</h3>
-<div class="outline-text-3" id="text-orgfed1433">
+<div class="outline-text-3" id="text-orgb432122">
 <ul class="org-ul">
 <li>Automation is the whole point of robotics!</li>
 <li>Automated tests happen without user intervention which increases the chance that they will be run
@@ -133,19 +131,17 @@ and can serve their purpose to catch errors</li>
 </div>
 </div>
 </div>
-
 <div id="outline-container-testing-in-ros-1-P-1" class="outline-2">
 <h2 id="testing-in-ros-1-P-1">Testing in ROS</h2>
-<div class="outline-text-2" id="text-org3eaf97c">
+<div class="outline-text-2" id="text-org77c32e1">
 <ul class="org-ul">
 <li>The <a href="https://docs.ros.org/en/kilted/The-ROS2-Project/Contributing/Developer-Guide.html#testing">ROS 2 testing philosophy</a> discusses three types of tests: unit, integration, and systems</li>
 <li>These terms are standard terms, but when applied to ROS packages they take on more concrete meaning</li>
 </ul>
 </div>
-
 <div id="outline-container-unit-testing-2-P-1" class="outline-3">
 <h3 id="unit-testing-2-P-1">Unit Testing</h3>
-<div class="outline-text-3" id="text-org0e7f84a">
+<div class="outline-text-3" id="text-org285a76f">
 <ul class="org-ul">
 <li>Unit Testing usually refers to testing a single function</li>
 <li>Unit tests should ideally be run after every "compile" and can also be run after
@@ -155,7 +151,7 @@ every push to a git repository using continuous integration</li>
 </div>
 <div id="outline-container-mocking-3-P-1" class="outline-4">
 <h4 id="mocking-3-P-1">Mocking</h4>
-<div class="outline-text-4" id="text-org8e145a1">
+<div class="outline-text-4" id="text-org008fa23">
 <ul class="org-ul">
 <li>Sometimes (especially in robotics) a function takes a long time or is complicated or moves a robot</li>
 <li>Mocking lets you replace functions by just assuming they return a desired value
@@ -181,7 +177,7 @@ still lets you test A, under the assumption that B is working</li>
 </div>
 <div id="outline-container-integration-testing-2-P-1" class="outline-3">
 <h3 id="integration-testing-2-P-1">Integration Testing</h3>
-<div class="outline-text-3" id="text-orgfaca707">
+<div class="outline-text-3" id="text-orgc2660f1">
 <ul class="org-ul">
 <li>Integration tests are tests that require multiple components to work together to function
 <ul class="org-ul">
@@ -192,10 +188,9 @@ and encompass a broader range of functionality</li>
 </ul>
 </div>
 </div>
-
 <div id="outline-container-systems-testing-2-P-1" class="outline-3">
 <h3 id="systems-testing-2-P-1">Systems Testing</h3>
-<div class="outline-text-3" id="text-org5f2b7f0">
+<div class="outline-text-3" id="text-orgb602692">
 <ul class="org-ul">
 <li>A systems test is a type of integration test where a whole end-to-end system is testing</li>
 <li>ROS 2 suggests putting such tests in their own packages to maintain decoupling between packages</li>
@@ -203,10 +198,9 @@ and encompass a broader range of functionality</li>
 </div>
 </div>
 </div>
-
 <div id="outline-container-test-strategies-1-P-1" class="outline-2">
 <h2 id="test-strategies-1-P-1">Test Strategies</h2>
-<div class="outline-text-2" id="text-org7cad94d">
+<div class="outline-text-2" id="text-org8b4d584">
 <ul class="org-ul">
 <li>Write tests whenever you encounter a bug
 <ul class="org-ul">
@@ -222,14 +216,13 @@ and encompass a broader range of functionality</li>
 </ul></li>
 </ul>
 </div>
-
 <div id="outline-container-unit-testing-in-ros-and-python-2-P-1" class="outline-3">
 <h3 id="unit-testing-in-ros-and-python-2-P-1">Unit Testing in ROS and Python</h3>
 <div class="outline-text-3" id="text-unit-testing-in-ros-and-python-2-P-1">
 </div>
 <div id="outline-container-frameworks-3-P-1" class="outline-4">
 <h4 id="frameworks-3-P-1">Frameworks</h4>
-<div class="outline-text-4" id="text-org9fe6c8b">
+<div class="outline-text-4" id="text-orge584447">
 <ul class="org-ul">
 <li>Testing ROS python code involves several choices</li>
 <li>There is the built-in python unit testing framework <a href="https://docs.python.org/3/library/unittest.html">unittest</a></li>
@@ -237,10 +230,9 @@ and encompass a broader range of functionality</li>
 </ul>
 </div>
 </div>
-
 <div id="outline-container-pre-made-tests-3-P-1" class="outline-4">
 <h4 id="pre-made-tests-3-P-1">Pre-made Tests</h4>
-<div class="outline-text-4" id="text-orge820be3">
+<div class="outline-text-4" id="text-org6ba0614">
 <ul class="org-ul">
 <li>Standard pytest tests are created by default with <code>ros2 pkg</code>
 <ul class="org-ul">
@@ -256,10 +248,9 @@ and encompass a broader range of functionality</li>
 </ul>
 </div>
 </div>
-
 <div id="outline-container-writing-pytests-3-P-1" class="outline-4">
 <h4 id="writing-pytests-3-P-1">Writing Pytests</h4>
-<div class="outline-text-4" id="text-org15e0036">
+<div class="outline-text-4" id="text-org072fa7b">
 <ul class="org-ul">
 <li>Create a file called <code>test_&lt;something&gt;.py</code> or <code>&lt;something&gt;_test.py</code> in the <code>test</code> directory</li>
 <li>In that file, write your tests:
@@ -274,7 +265,7 @@ and encompass a broader range of functionality</li>
 </div>
 <div id="outline-container-writing-unittests-3-P-1" class="outline-4">
 <h4 id="writing-unittests-3-P-1">Writing Unittests</h4>
-<div class="outline-text-4" id="text-org7b06491">
+<div class="outline-text-4" id="text-orgc20dce8">
 <ul class="org-ul">
 <li>import <code>unitttest</code></li>
 <li>Write a class that serves as a "Test Case"
@@ -293,17 +284,16 @@ special <code>unittest</code> assertion functions (e.g., <code>self.assertTrue</
 </div>
 <div id="outline-container-dependencies-3-P-1" class="outline-4">
 <h4 id="dependencies-3-P-1">Dependencies</h4>
-<div class="outline-text-4" id="text-org93b6fe4">
+<div class="outline-text-4" id="text-orgd564ea0">
 <ul class="org-ul">
 <li>Anything that you import in a test becomes a <code>test_depend</code> in the <code>package.xml</code></li>
 </ul>
 </div>
 </div>
 </div>
-
 <div id="outline-container-integration-testing-in-ros-and-python-2-P-1" class="outline-3">
 <h3 id="integration-testing-in-ros-and-python-2-P-1">Integration Testing in ROS and Python</h3>
-<div class="outline-text-3" id="text-orgf179912">
+<div class="outline-text-3" id="text-org54d249e">
 <ol class="org-ol">
 <li>There are three components to integration testing:
 <ul class="org-ul">
@@ -349,28 +339,28 @@ and a test launch file and explains how it works
 <span class="org-keyword">import</span> pytest
 <span class="org-keyword">from</span> launch <span class="org-keyword">import</span> LaunchDescription
 <span class="org-keyword">from</span> launch_testing.actions <span class="org-keyword">import</span> ReadyToTest
-<span class="org-comment-delimiter"># </span><span class="org-comment">Mark the launch description generation as a rostest
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">Also, it's called generate_test_description() for a test
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">But it still returns a LaunchDescription
-</span><span class="org-type">@pytest.mark.rostest</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Mark the launch description generation as a rostest</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Also, it's called generate_test_description() for a test</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">But it still returns a LaunchDescription</span>
+<span class="org-type">@pytest.mark.rostest</span>
 <span class="org-keyword">def</span> <span class="org-function-name">generate_test_description</span>():
     <span class="org-keyword">return</span> (
         LaunchDescription([
-            Node(...), <span class="org-comment-delimiter"># </span><span class="org-comment">here is where you put all launch actions you want to run during the test
-</span>                  <span class="org-comment-delimiter"># </span><span class="org-comment">To test a particular launch file, IncludeLaunchDescription()
-</span>            ReadyToTest() <span class="org-comment-delimiter"># </span><span class="org-comment">this is the last action. Can be used elsewhere somehow
-</span>            ]),
-            <span class="org-comment-delimiter"># </span><span class="org-comment">Here is a dictionary of additional arguments to pass to test functions
-</span>            <span class="org-comment-delimiter"># </span><span class="org-comment">You could, for example, store the Node Action in a variable and pass it to the test
-</span>            <span class="org-comment-delimiter"># </span><span class="org-comment">functions. 
-</span>            {<span class="org-string">'my_argument'</span>:  additional_argument} 
+            Node(...), <span class="org-comment-delimiter"># </span><span class="org-comment">here is where you put all launch actions you want to run during the test</span>
+                  <span class="org-comment-delimiter"># </span><span class="org-comment">To test a particular launch file, IncludeLaunchDescription()</span>
+            ReadyToTest() <span class="org-comment-delimiter"># </span><span class="org-comment">this is the last action. Can be used elsewhere somehow</span>
+            ]),
+            <span class="org-comment-delimiter"># </span><span class="org-comment">Here is a dictionary of additional arguments to pass to test functions</span>
+            <span class="org-comment-delimiter"># </span><span class="org-comment">You could, for example, store the Node Action in a variable and pass it to the test</span>
+            <span class="org-comment-delimiter"># </span><span class="org-comment">functions. </span>
+            {<span class="org-string">'my_argument'</span>:  additional_argument} 
             )
-<span class="org-comment-delimiter"># </span><span class="org-comment">The above returns the launch description. Now it's time for the test
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">The goal is essentially to create a node that can then be used in all tests to
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">call services and subscribe/publish messages
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">unlike a regular node, it is often useful to not subclass node but rather
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">just create it. It is also useful (and necessary) to spin_once() as needed
-</span><span class="org-keyword">class</span> <span class="org-type">TestMyTestCaseName</span>(unittest.TestCase):
+<span class="org-comment-delimiter"># </span><span class="org-comment">The above returns the launch description. Now it's time for the test</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">The goal is essentially to create a node that can then be used in all tests to</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">call services and subscribe/publish messages</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">unlike a regular node, it is often useful to not subclass node but rather</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">just create it. It is also useful (and necessary) to spin_once() as needed</span>
+<span class="org-keyword">class</span> <span class="org-type">TestMyTestCaseName</span>(unittest.TestCase):
     @<span class="org-builtin">classmethod</span>
     <span class="org-keyword">def</span> <span class="org-function-name">setUpClass</span>(cls):
         <span class="org-doc">"""Runs one time, when the testcase is loaded"""</span>
@@ -383,30 +373,30 @@ and a test launch file and explains how it works
 
     <span class="org-keyword">def</span> <span class="org-function-name">setUp</span>(<span class="org-keyword">self</span>):
         <span class="org-doc">"""Runs before every test"""</span>
-        <span class="org-comment-delimiter"># </span><span class="org-comment">so before every test, we create a new node
-</span>        <span class="org-keyword">self</span>.<span class="org-variable-name">node</span> <span class="org-operator">=</span> rclpy.create_node(<span class="org-string">'test_node'</span>)
+        <span class="org-comment-delimiter"># </span><span class="org-comment">so before every test, we create a new node</span>
+        <span class="org-keyword">self</span>.<span class="org-variable-name">node</span> <span class="org-operator">=</span> rclpy.create_node(<span class="org-string">'test_node'</span>)
 
     <span class="org-keyword">def</span> <span class="org-function-name">tearDown</span>(<span class="org-keyword">self</span>):
         <span class="org-doc">"""Runs after every test"""</span>
-        <span class="org-comment-delimiter"># </span><span class="org-comment">so after every test we destroy the node
-</span>        <span class="org-comment-delimiter"># </span><span class="org-comment">Is a new node necessary for each test, or could we
-</span>        <span class="org-comment-delimiter"># </span><span class="org-comment">create the nodes when we setupClass?
-</span>        <span class="org-keyword">self</span>.node.destroy_node()
+        <span class="org-comment-delimiter"># </span><span class="org-comment">so after every test we destroy the node</span>
+        <span class="org-comment-delimiter"># </span><span class="org-comment">Is a new node necessary for each test, or could we</span>
+        <span class="org-comment-delimiter"># </span><span class="org-comment">create the nodes when we setupClass?</span>
+        <span class="org-keyword">self</span>.node.destroy_node()
 
     <span class="org-keyword">def</span> <span class="org-function-name">test_my_test1</span>(<span class="org-keyword">self</span>, launch_service, proc_output, my_argument):
-       <span class="org-doc">"""In UnitTest, any function starting with "test" is run as a test
+       <span class="org-doc">"""In UnitTest, any function starting with "test" is run as a test</span>
 
-          Args:
-             launch_service - information about the launch
-             proc_output - this object streams the output (if any) from the running process
-             my_argument - this was passed in when we created the description
-       """</span>
-       <span class="org-comment-delimiter"># </span><span class="org-comment">Here you can use self.node to publish and subscribe
-</span>       <span class="org-comment-delimiter"># </span><span class="org-comment">launch_testing_ros.WaitForTopics waits for something to be published on a topic
-</span>       <span class="org-comment-delimiter"># </span><span class="org-comment">spin with rclpy.spin_once()
-</span>       <span class="org-comment-delimiter"># </span><span class="org-comment">You can check and verify output with proc_output. launch/launch_testing has more information
-</span>       <span class="org-comment-delimiter"># </span><span class="org-comment">You should specify a timeout for rclpy.spin_once() because if no ROS events happen it will
-</span>       <span class="org-comment-delimiter"># </span><span class="org-comment">block forever (but if no events happen that is a bug and the test should fail</span>
+<span class="org-doc">          Args:</span>
+<span class="org-doc">             launch_service - information about the launch</span>
+<span class="org-doc">             proc_output - this object streams the output (if any) from the running process</span>
+<span class="org-doc">             my_argument - this was passed in when we created the description</span>
+<span class="org-doc">       """</span>
+       <span class="org-comment-delimiter"># </span><span class="org-comment">Here you can use self.node to publish and subscribe</span>
+       <span class="org-comment-delimiter"># </span><span class="org-comment">launch_testing_ros.WaitForTopics waits for something to be published on a topic</span>
+       <span class="org-comment-delimiter"># </span><span class="org-comment">spin with rclpy.spin_once()</span>
+       <span class="org-comment-delimiter"># </span><span class="org-comment">You can check and verify output with proc_output. launch/launch_testing has more information</span>
+       <span class="org-comment-delimiter"># </span><span class="org-comment">You should specify a timeout for rclpy.spin_once() because if no ROS events happen it will</span>
+       <span class="org-comment-delimiter"># </span><span class="org-comment">block forever (but if no events happen that is a bug and the test should fail</span>
 </pre>
 </div></li>
 </ul></li>
@@ -418,10 +408,9 @@ unless you work with events and explicitly do things to order them</li>
 </ol>
 </div>
 </div>
-
 <div id="outline-container-running-tests-2-P-1" class="outline-3">
 <h3 id="running-tests-2-P-1">Running Tests</h3>
-<div class="outline-text-3" id="text-org8c6dec9">
+<div class="outline-text-3" id="text-orgffce292">
 <ol class="org-ol">
 <li>Before you can run tests, you must <code>colcon build</code> the workspace</li>
 <li>All tests (unit and integration) can then be run with <code>colcon test</code> (without sourcing the workspace, it seems)</li>
@@ -433,17 +422,17 @@ unless you work with events and explicitly do things to order them</li>
 </ol>
 </div>
 </div>
-
 <div id="outline-container-warnings-2-P-1" class="outline-3">
 <h3 id="warnings-2-P-1">Warnings</h3>
-<div class="outline-text-3" id="text-orgcf900bb">
+<div class="outline-text-3" id="text-org26631d1">
 <p>
 As of Ubuntu 24.04 and ROS kilted, running some tests with pytests results in a warning:
 </p>
-<pre class="example">
-test/test_flake8.py: 22 warnings
+<div class="org-src-container">
+<pre class="src src-nil">test/test_flake8.py: 22 warnings
   Warning: This process (pid=&lt;PID&gt;) is multi-threaded, use of fork() may lead to deadlocks in the child.
 </pre>
+</div>
 
 <p>
 This warning is <a href="https://github.com/python/cpython/issues/100228?">from the python interpreter itself</a>, and is related to deadlocks when
@@ -470,11 +459,9 @@ This will be slower, but does not run into the issues. Hopefully this workaround
 </div>
 </div>
 </div>
-
-
 <div id="outline-container-quality-1-P-1" class="outline-2">
 <h2 id="quality-1-P-1">Quality</h2>
-<div class="outline-text-2" id="text-org3543c91">
+<div class="outline-text-2" id="text-orgaeac269">
 <ul class="org-ul">
 <li>ROS 2 has introduced a concept of <a href="https://ros.org/reps/rep-2004.html">Quality Levels</a> for each package</li>
 <li>When a package adopts a quality declaration it is promising to meet certain quality standards</li>
@@ -486,14 +473,13 @@ This will be slower, but does not run into the issues. Hopefully this workaround
 </ul>
 </div>
 </div>
-
 <div id="outline-container-documentation-1-P-2" class="outline-2">
 <h2 id="documentation-1-P-2">Documentation</h2>
 <div class="outline-text-2" id="text-documentation-1-P-2">
 </div>
 <div id="outline-container-ros-doc-2-2-P-1" class="outline-3">
 <h3 id="ros-doc-2-2-P-1">Ros Doc 2</h3>
-<div class="outline-text-3" id="text-orgb53ad54">
+<div class="outline-text-3" id="text-org85ca45a">
 <ul class="org-ul">
 <li><a href="https://github.com/ros-infrastructure/rosdoc2">rosdoc2</a> is a wrapper for various documentation-generation packages and it is used to generate all ros2 package API documentation.</li>
 <li>Install with <code>sudo apt install python3-rosdoc2</code></li>
@@ -507,7 +493,7 @@ This will be slower, but does not run into the issues. Hopefully this workaround
 </div>
 <div id="outline-container-sphinx-2-P-1" class="outline-3">
 <h3 id="sphinx-2-P-1">Sphinx</h3>
-<div class="outline-text-3" id="text-org1388e16">
+<div class="outline-text-3" id="text-orge16eef5">
 <ul class="org-ul">
 <li><a href="http://sphinx-doc.org/en/master">Sphinx</a> is a tool that converts docstrings in your python source code into well-formatted documentation
 <ul class="org-ul">
@@ -519,9 +505,9 @@ This will be slower, but does not run into the issues. Hopefully this workaround
 </ul>
 </div>
 </div>
-<div id="outline-container-git-2-P-1" class="outline-3">
-<h3 id="git-2-P-1">Git</h3>
-<div class="outline-text-3" id="text-orgb1d5636">
+<div id="outline-container-git-2-P-2" class="outline-3">
+<h3 id="git-2-P-2">Git</h3>
+<div class="outline-text-3" id="text-org73ff584">
 <ul class="org-ul">
 <li>Git is an important part of the documentation process</li>
 <li>Think of git as documentation for your collaborators (including your future-self)</li>
@@ -532,11 +518,9 @@ This will be slower, but does not run into the issues. Hopefully this workaround
 </div>
 </div>
 </div>
-
-
 <div id="outline-container-design-guidelines-1-P-1" class="outline-2">
 <h2 id="design-guidelines-1-P-1">Design Guidelines</h2>
-<div class="outline-text-2" id="text-orgee80c95">
+<div class="outline-text-2" id="text-orgcaaf8fe">
 <p>
 ROS adds methods for abstraction beyond those provided by a programming language.
 When thinking about the design of a ROS system, here are some questions that often arise and

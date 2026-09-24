@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-03-04 Wed 08:40 -->
+<!-- 2026-09-24 Thu 08:46 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Homework Guidelines: ME495 Embedded Systems in Robotics</title>
@@ -21,7 +21,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#guidelines-1-P-1">Guidelines</a>
+<li><a href="#guidelines-1-P-2">Guidelines</a>
 <ul>
 <li><a href="#git-2-P-1">Git</a></li>
 <li><a href="#readme-2-P-1">README</a></li>
@@ -33,12 +33,12 @@
 </li>
 <li><a href="#asking-for-help-1-P-1">Asking For Help</a></li>
 <li><a href="#tips-1-P-1">Tips</a></li>
-<li><a href="#checklist-1-P-1">Checklist</a></li>
+<li><a href="#final-submission-checklist-1-P-1">Final Submission Checklist</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-guidelines-1-P-1" class="outline-2">
-<h2 id="guidelines-1-P-1">Guidelines</h2>
+<div id="outline-container-guidelines-1-P-2" class="outline-2">
+<h2 id="guidelines-1-P-2">Guidelines</h2>
 <div class="outline-text-2" id="text-orgfd7ee30">
 <p>
 This document describes expectations for homework submissions.
@@ -67,11 +67,11 @@ which means providing documentation, using git properly, and providing tests whe
 <ol class="org-ol">
 <li>There should be no backup files your text editor created (such as <code>file.py~</code> or <code>.#file</code> or <code>.vscode</code>).</li>
 <li>There should be no python bytecode files (<code>file.pyc</code>) committed. (e.g., add <code>__pycache__</code> to <code>.gitignore</code>).</li>
-<li>There should be no files that are generated form source code that you wrote.</li>
+<li>There should be no files that are generated from source code</li>
 </ol></li>
 <li>The parent directory of your repository should be <code>ws/src/${repository}</code>.
 <ul class="org-ul">
-<li>There should be no files from outside the <code>src/</code> space. This means that <code>ws</code> and <code>ws/src</code> should not be part of the git repository.</li>
+<li>There should be no files from outside <code>${repository}</code>, so no <code>ws/src</code>, <code>ws/build</code>, <code>ws/log</code>, or <code>ws/install</code></li>
 </ul></li>
 <li>Refer to the <a href="https://git-scm.com">Git Book</a> and <a href="https://nu-msr.github.io/hackathon/git_intro.html">Git Intro</a> for more information on how to use <code>git</code></li>
 </ol>
@@ -102,6 +102,11 @@ which means providing documentation, using git properly, and providing tests whe
 <ul class="org-ul">
 <li>What options are available to change the behavior of the program or its nodes and how are they used?</li>
 </ul></li>
+<li>Videos:
+<ul class="org-ul">
+<li>Any videos that are requested shall be directly embedded in the <code>README.md</code> and must be playable when viewed on the <code>github.com</code> website.</li>
+<li>To do this, upload the video using a <code>github</code> issue and link to the video on its own line in the <code>README.md</code></li>
+</ul></li>
 </ol></li>
 <li>Filenames are case sensitive in Linux. Variations such as <code>readme.md</code>, <code>README.MD</code> will not be accepted.</li>
 </ol>
@@ -118,6 +123,11 @@ which means providing documentation, using git properly, and providing tests whe
 <li>Anything on <a href="https://index.ros.org">https://index.ros.org</a> or provided by the the "API Docs" or "Browse Code" button on that website need not be cited.</li>
 <li>Python API documentation on <a href="https://docs.python.org">https://docs.python.org</a> need not be cited.</li>
 <li>All other sources must be cited.</li>
+<li>The base directory of your repository shall contain the <code>citations.txt</code> file (case sensitive).
+<ul class="org-ul">
+<li>Lack of this file is a declaration that you did not work with anybody or consult outside sources.</li>
+</ul></li>
+<li>If applicable, the base directory of your repository shall contain the <code>ai_citations</code> directory with referenced <code>AI</code> generated material</li>
 </ol>
 </div>
 </div>
@@ -127,10 +137,11 @@ which means providing documentation, using git properly, and providing tests whe
 <div class="outline-text-3" id="text-org7464a5f">
 <ol class="org-ol">
 <li>You are expected to use sources to enhance your learning and understanding, as opposed to as a shortcut to copy down solutions</li>
-<li>Strive to fully understand all code that is used in your homework solution, even if it is inspired from an external source</li>
-<li>Using a prior student's homework solution is against this spirit and highly discouraged.</li>
-<li>Although the use of any properly cited source is not an honor code violation, I reserve the right to deduct partial credit
-for portions of your homework that are derived from a prior student's solution.</li>
+<li>You are responsible for fully understanding all code that is used in your homework solution, even if it is inspired from an external source
+<ul class="org-ul">
+<li>Lack of understanding of any code can result in a lower grade.</li>
+</ul></li>
+<li>Using a prior student's homework solution or directly "vibe coding" the assignment is against the spirit of the class, is detrimental to learning, and is therefore highly discouraged.</li>
 </ol>
 </div>
 </div>
@@ -148,16 +159,7 @@ for portions of your homework that are derived from a prior student's solution.<
 <li>What parameters are used, their type, and what they do.</li>
 <li>See <a href="https://github.com/m-elwin/crazy_turtle">https://github.com/m-elwin/crazy_turtle</a> for a basic template.</li>
 </ol></li>
-<li>Be sure to follow the <a href="https://peps.python.org/pep-0257/">docstring</a> conventions.</li>
-</ol>
-</div>
-</div>
-
-<div id="outline-container-coding-guidelines-2-P-1" class="outline-3">
-<h3 id="coding-guidelines-2-P-1">Coding Guidelines</h3>
-<div class="outline-text-3" id="text-org37ee4cc">
-<ol class="org-ol">
-<li>Strive to follow the <a href="https://www.python.org/dev/peps/pep-0008/">PEP8</a> Style guidelines.</li>
+<li>Follow the <a href="https://peps.python.org/pep-0257/">docstring</a> conventions.</li>
 <li>Every class and function you write should have an associated docstring.
 <ul class="org-ul">
 <li>A brief description of what the class or function does</li>
@@ -168,9 +170,18 @@ for portions of your homework that are derived from a prior student's solution.<
 <li>This format is also described <a href="https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html">in the Sphinx documentation</a>,</li>
 <li>Other formats that can be understood by Sphinx are also permissible including NumPy style docstrings or the default reStructured text.</li>
 </ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-coding-guidelines-2-P-1" class="outline-3">
+<h3 id="coding-guidelines-2-P-1">Coding Guidelines</h3>
+<div class="outline-text-3" id="text-org37ee4cc">
+<ol class="org-ol">
+<li>Strive to follow the <a href="https://www.python.org/dev/peps/pep-0008/">PEP8</a> Style guidelines.</li>
 <li>Errors and Warnings should be heeded and fixed.</li>
 <li>In general, refer to <code>ROS</code> entities using relative names from within your nodes.</li>
-<li>Do not leave debugging statements in code to spew data onto the screen.  If the statements may be long-term useful, use <code>rospy.logdebug</code></li>
+<li>Do not leave debugging statements in code.  If the statements may be long-term useful, use <code>rospy.logdebug</code></li>
 <li>Do not use <code>time.sleep()</code> or insert other arbitrary delays in order to make your code work.
 <ul class="org-ul">
 <li>In most cases (and all cases in the homework) depending on precise delays to make your code work (e.g., to wait for something to finish) is
@@ -190,7 +201,7 @@ sleeping can hide timing bugs.</li>
 <ul class="org-ul">
 <li>This is especially important when asking for help on internet forums</li>
 </ul></li>
-<li>Don't send screenshots for non-graphical items
+<li>Do not send screenshots for non-graphical items
 <ul class="org-ul">
 <li>The person helping you can't easily copy and paste text from an image!</li>
 <li>For small code snippets, include code inline, formatted as code</li>
@@ -218,16 +229,16 @@ sleeping can hide timing bugs.</li>
 </div>
 </div>
 
-<div id="outline-container-checklist-1-P-1" class="outline-2">
-<h2 id="checklist-1-P-1">Checklist</h2>
-<div class="outline-text-2" id="text-org2233ad9">
+<div id="outline-container-final-submission-checklist-1-P-1" class="outline-2">
+<h2 id="final-submission-checklist-1-P-1">Final Submission Checklist</h2>
+<div class="outline-text-2" id="text-org8282194">
 <p>
 Below is a checklist to use when you are finished and are thinking about turning in your homework.
 </p>
 
 <ol class="org-ol">
 <li>Clone your repository into a brand new workspace to make sure you have committed and pushed everything to <code>git</code></li>
-<li>Does <code>colcon build</code> and <code>colcon test</code> run cleanly?
+<li>Do <code>colcon build</code> and <code>colcon test</code> run cleanly?
 <ul class="org-ul">
 <li>To be extra safe run <code>colcon build --executor sequential</code> ensuring that there are no race conditions
 related to parallel dependencies in the build.</li>
@@ -236,7 +247,9 @@ related to parallel dependencies in the build.</li>
 <li>Are your debugging statements either removed or logged with using ROS logging tools?</li>
 <li>Do your python files have a docstrings explaining the ROS publishers/subscribers/etc&#x2026;</li>
 <li>Do your functions have docstrings describing the arguments and return types?</li>
+<li>Have the <code>package.xml</code> and <code>setup.py</code> been updated and are they consistent?</li>
 <li>Are there any files (including hidden files) that should be in <code>.gitignore</code> but are instead committed?</li>
+<li>Ensure that there are no hard-coded paths that are specific to your machine in the source code or configuration files</li>
 </ol>
 </div>
 </div>

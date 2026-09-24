@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-30 Fri 13:06 -->
+<!-- 2026-09-23 Wed 23:35 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Custom Workspace</title>
@@ -21,7 +21,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#introduction-1-P-9">Introduction</a></li>
+<li><a href="#introduction-1-P-10">Introduction</a></li>
 <li><a href="#general-steps-1-P-1">General Steps</a>
 <ul>
 <li><a href="#sharing-2-P-1">Sharing</a></li>
@@ -36,9 +36,9 @@
 </ul>
 </div>
 </nav>
-<div id="outline-container-introduction-1-P-9" class="outline-2">
-<h2 id="introduction-1-P-9">Introduction</h2>
-<div class="outline-text-2" id="text-org07db183">
+<div id="outline-container-introduction-1-P-10" class="outline-2">
+<h2 id="introduction-1-P-10">Introduction</h2>
+<div class="outline-text-2" id="text-orgccc9dd6">
 <ul class="org-ul">
 <li>When you encounter a package released for another ROS distribution but not the one you are on, chances are you can still use it.</li>
 <li>The ROS API has not changed in a long time</li>
@@ -46,10 +46,9 @@
 </ul>
 </div>
 </div>
-
 <div id="outline-container-general-steps-1-P-1" class="outline-2">
 <h2 id="general-steps-1-P-1">General Steps</h2>
-<div class="outline-text-2" id="text-orgb7e920d">
+<div class="outline-text-2" id="text-orgb7d0e20">
 <p>
 These steps provide a generic example for how to install a package that is not released for <code>noetic</code>
 </p>
@@ -59,11 +58,12 @@ These steps provide a generic example for how to install a package that is not r
 <li><p>
 Make sure that you have installed and initialized <code>rosdep</code>
 </p>
-<pre class="example">
-sudo apt install python3-rosdep
+<div class="org-src-container">
+<pre class="src src-nil">sudo apt install python3-rosdep
 sudo rosdep init
 rosdep update
-</pre></li>
+</pre>
+</div></li>
 <li><a href="https://wiki.ros.org/rosdep">rosdep</a> is ROS's dependency management tool. It allows ROS packages to depend on
 libraries and other <code>system dependencies</code>, that is packages that are a part of the operating system and entirely seperate from ROS</li>
 <li>From <code>ws/</code> run <code>rosdep install --from-paths src --ignore-src -y</code>
@@ -77,7 +77,7 @@ libraries and other <code>system dependencies</code>, that is packages that are 
 </div>
 <div id="outline-container-sharing-2-P-1" class="outline-3">
 <h3 id="sharing-2-P-1">Sharing</h3>
-<div class="outline-text-3" id="text-org21939c1">
+<div class="outline-text-3" id="text-orgd034fcf">
 <ol class="org-ol">
 <li>During this process you may have cloned many repositories</li>
 <li>You can use <code>vscstool</code> (<code>sudo apt install python3-vcstool</code>) to easily share these repositories with others</li>
@@ -88,21 +88,21 @@ you have in your workspace. The <code>--exact</code> flag when exporting will ev
 </div>
 </div>
 </div>
-
 <div id="outline-container-for-me495-in-fall-2020-1-P-1" class="outline-2">
 <h2 id="for-me495-in-fall-2020-1-P-1">For ME495 in Fall 2020</h2>
 <div class="outline-text-2" id="text-for-me495-in-fall-2020-1-P-1">
 </div>
 <div id="outline-container-to-msr-students-who-participated-in-the-hackathon-2-P-1" class="outline-3">
 <h3 id="to-msr-students-who-participated-in-the-hackathon-2-P-1">To MSR students who participated in the hackathon</h3>
-<div class="outline-text-3" id="text-org195bb5b">
+<div class="outline-text-3" id="text-org6f35647">
 <p>
 MoveIT has been released for <code>noetic</code>
 </p>
-<pre class="example">
-sudo apt update
+<div class="org-src-container">
+<pre class="src src-nil">sudo apt update
 sudo apt upgrade
 </pre>
+</div>
 <p>
 Remove the <code>source /home/$USER/nuws/devel/setup.bash</code> line that you added for the hackathon.
 </p>
@@ -110,7 +110,7 @@ Remove the <code>source /home/$USER/nuws/devel/setup.bash</code> line that you a
 </div>
 <div id="outline-container-to-everyone-2-P-1" class="outline-3">
 <h3 id="to-everyone-2-P-1">To Everyone</h3>
-<div class="outline-text-3" id="text-org44083ee">
+<div class="outline-text-3" id="text-org046f00d">
 <ol class="org-ol">
 <li>Install some package <code>sudo apt install ros-noetic-dynamixel-sdk ros-noetic-rviz-visual-tools ros-noetic-openslam-gmapping ros-noetic-turtlebot3-msgs ros-noetic-moveit-ros-planning ros-noetic-ros-control ros-noetic-ros-controllers ros-noetic-moveit ros-noetic-joy</code></li>
 <li>Create a new workspace: <code>mkdir -p nuws/src</code></li>

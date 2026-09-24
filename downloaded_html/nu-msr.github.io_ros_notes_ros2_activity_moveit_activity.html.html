@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-01-30 Fri 13:06 -->
+<!-- 2026-09-24 Thu 00:26 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MoveWhat? Activity</title>
@@ -31,14 +31,14 @@
 <li><a href="#joints-3-P-1">Joints</a></li>
 </ul>
 </li>
-<li><a href="#planning-scene-2-P-1">Planning Scene</a></li>
+<li><a href="#planning-scene-2-P-2">Planning Scene</a></li>
 </ul>
 </li>
 <li><a href="#how-it-works-1-P-1">How It Works</a>
 <ul>
 <li><a href="#the-plan-2-P-1">The Plan</a></li>
 <li><a href="#basic-action-inspection-2-P-1">Basic Action Inspection</a></li>
-<li><a href="#documentation-2-P-1">Documentation</a></li>
+<li><a href="#documentation-2-P-2">Documentation</a></li>
 <li><a href="#alternative-methods-2-P-1">Alternative Methods</a></li>
 <li><a href="#answers-2-P-1">Answers</a></li>
 </ul>
@@ -46,10 +46,9 @@
 </ul>
 </div>
 </nav>
-
 <div id="outline-container-introduction-1-P-2" class="outline-2">
 <h2 id="introduction-1-P-2">Introduction</h2>
-<div class="outline-text-2" id="text-org59d852f">
+<div class="outline-text-2" id="text-orgc5bf96d">
 <ol class="org-ol">
 <li>MoveIt 2 is a massive package, with many features, but it is still under development and is under-documented.</li>
 <li>To make our robot move, without using C++, we will need to do some detective work</li>
@@ -57,19 +56,17 @@
 </ol>
 </div>
 </div>
-
 <div id="outline-container-preliminaries-1-P-1" class="outline-2">
 <h2 id="preliminaries-1-P-1">Preliminaries</h2>
-<div class="outline-text-2" id="text-org6db57fd">
+<div class="outline-text-2" id="text-orgd5903cb">
 <ol class="org-ol">
 <li>Setup the <a href="../franka.html#franka_setup">franka workspace</a> on your computer.</li>
 </ol>
 </div>
 </div>
-
 <div id="outline-container-first-steps-1-P-1" class="outline-2">
 <h2 id="first-steps-1-P-1">First Steps</h2>
-<div class="outline-text-2" id="text-org56ba5b9">
+<div class="outline-text-2" id="text-orgff91ad2">
 <ol class="org-ol">
 <li>To start the franka robot <code>ros2 launch franka_fer_moveit_config demo.launch.py</code>
 <ul class="org-ul">
@@ -79,10 +76,9 @@ joint positions as inputs and returns fake joint states as sensor data.</li>
 </ul></li>
 </ol>
 </div>
-
 <div id="outline-container-rviz2-2-P-1" class="outline-3">
 <h3 id="rviz2-2-P-1">Rviz2</h3>
-<div class="outline-text-3" id="text-org8be1b4f">
+<div class="outline-text-3" id="text-org2757743">
 <ol class="org-ol">
 <li>There are two new Rviz widgets (which show up in the left-pane) that have been added by the setup when you run these launch files
 <ul class="org-ul">
@@ -93,10 +89,9 @@ joint positions as inputs and returns fake joint states as sensor data.</li>
 </ol>
 </div>
 </div>
-
 <div id="outline-container-motion-plan-2-P-1" class="outline-3">
 <h3 id="motion-plan-2-P-1">Motion Plan</h3>
-<div class="outline-text-3" id="text-orga75f19f">
+<div class="outline-text-3" id="text-orgca93607">
 <ol class="org-ol">
 <li>You should see an orange overlay on the robot.
 <ul class="org-ul">
@@ -134,7 +129,7 @@ joint positions as inputs and returns fake joint states as sensor data.</li>
 </div>
 <div id="outline-container-joints-3-P-1" class="outline-4">
 <h4 id="joints-3-P-1">Joints</h4>
-<div class="outline-text-4" id="text-org20793ee">
+<div class="outline-text-4" id="text-org67767d8">
 <ol class="org-ol">
 <li>The Joints tab allows you to plan to a specific joint configuration rather than an end-effector configuration</li>
 <li>Notice that if you move the marker at the end-effector, the joint states move as well indicating that inverse kinematics is happening here!
@@ -145,9 +140,9 @@ joint positions as inputs and returns fake joint states as sensor data.</li>
 </div>
 </div>
 </div>
-<div id="outline-container-planning-scene-2-P-1" class="outline-3">
-<h3 id="planning-scene-2-P-1">Planning Scene</h3>
-<div class="outline-text-3" id="text-org7939a30">
+<div id="outline-container-planning-scene-2-P-2" class="outline-3">
+<h3 id="planning-scene-2-P-2">Planning Scene</h3>
+<div class="outline-text-3" id="text-org6b80101">
 <ol class="org-ol">
 <li>Under the <i>Scene Objects</i> tab, you can manipulate obstacles in the environment
 <ol class="org-ol">
@@ -179,10 +174,9 @@ joint positions as inputs and returns fake joint states as sensor data.</li>
 </div>
 </div>
 </div>
-
 <div id="outline-container-how-it-works-1-P-1" class="outline-2">
 <h2 id="how-it-works-1-P-1">How It Works</h2>
-<div class="outline-text-2" id="text-org7fa213f">
+<div class="outline-text-2" id="text-orgb95ae23">
 <ol class="org-ol">
 <li>The <a href="https://moveit.picknik.ai/main/index.html">Moveit Documentation</a> provides an overview, particularly the <a href="https://moveit.picknik.ai/main/doc/concepts/move_group.html">Move Group</a> diagram.</li>
 <li>The <a href="http://docs.ros.org/en/kilted/p/moveit_msgs/">moveit_msgs</a> documentation explains how to use the ROS API for the <code>/move_group</code> node.</li>
@@ -209,7 +203,7 @@ joint positions as inputs and returns fake joint states as sensor data.</li>
 </div>
 <div id="outline-container-the-plan-2-P-1" class="outline-3">
 <h3 id="the-plan-2-P-1">The Plan</h3>
-<div class="outline-text-3" id="text-orga891dad">
+<div class="outline-text-3" id="text-org032d8c8">
 <ol class="org-ol">
 <li>Let's use our working interface to the move-group node (that is, Rviz) to help us better understand how the ROS API for the <code>/move_group</code> node works
 <ul class="org-ul">
@@ -228,11 +222,9 @@ joint positions as inputs and returns fake joint states as sensor data.</li>
 </ol>
 </div>
 </div>
-
-
 <div id="outline-container-basic-action-inspection-2-P-1" class="outline-3">
 <h3 id="basic-action-inspection-2-P-1">Basic Action Inspection</h3>
-<div class="outline-text-3" id="text-org7fa6459">
+<div class="outline-text-3" id="text-org9c33ad7">
 <ol class="org-ol">
 <li>Make a new package to inspect actions</li>
 <li>Create a node and an action Server for <code>/viz/move_action</code>:
@@ -299,10 +291,9 @@ responses back. This can get complicated for actions because there are several m
 </ol>
 </div>
 </div>
-
-<div id="outline-container-documentation-2-P-1" class="outline-3">
-<h3 id="documentation-2-P-1">Documentation</h3>
-<div class="outline-text-3" id="text-org906044c">
+<div id="outline-container-documentation-2-P-2" class="outline-3">
+<h3 id="documentation-2-P-2">Documentation</h3>
+<div class="outline-text-3" id="text-org8630752">
 <ul class="org-ul">
 <li>It is not necessary to fully reverse engineer the action service. Though it can be helpful because <code>rviz</code> provides a working example of using the ROS API.</li>
 <li>The API documentation for <code>moveit_msgs</code> (available on <a href="https://index.ros.org">https://index.ros.org</a>) is very helpful for understanding the capabilities of the <code>/move_action</code></li>
@@ -310,10 +301,9 @@ responses back. This can get complicated for actions because there are several m
 </ul>
 </div>
 </div>
-
 <div id="outline-container-alternative-methods-2-P-1" class="outline-3">
 <h3 id="alternative-methods-2-P-1">Alternative Methods</h3>
-<div class="outline-text-3" id="text-org856b291">
+<div class="outline-text-3" id="text-org81a0a94">
 <ol class="org-ol">
 <li>In ROS 2 it is possible to allow users to <a href="https://docs.ros.org/en/kilted/Tutorials/Demos/Service-Introspection.html">introspect services</a> and <a href="https://docs.ros.org/en/kilted/Tutorials/Demos/Action-Introspection.html">actions</a></li>
 <li>This functionality, however, must be enabled in code, and it is not currently for <code>moveit</code></li>
@@ -321,9 +311,8 @@ responses back. This can get complicated for actions because there are several m
 </ol>
 </div>
 </div>
-
-<details id="org18cc6ff"><summary class="header-3">Answers</summary>
-<div class="outline-text-3" id="text-org18cc6ff">
+<details id="org0480542"><summary class="header-3">Answers</summary>
+<div class="outline-text-3" id="text-org0480542">
 <ol class="org-ol">
 <li>Here is a repository (<a href="https://github.com/m-elwin/me495_inspector">https://github.com/m-elwin/me495_inspector</a>) that intercepts and forwards actions from <code>rviz</code> to the move_group node.
 <ul class="org-ul">

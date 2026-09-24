@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2026-09-24 Thu 08:46 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Naming in ROS</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">Naming in ROS</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#names">Naming in ROS</a>
+<ul>
+<li><a href="#understanding-names-2-P-1">Understanding Names</a></li>
+<li><a href="#example-2-P-1">Example</a></li>
+<li><a href="#comparison-with-ros-1-2-P-1">Comparison with ROS 1</a></li>
+</ul>
+</li>
+<li><a href="#remapping">Manipulating Names</a>
+<ul>
+<li><a href="#name-mapping-2-P-1">Name Mapping</a></li>
+<li><a href="#a-node-s-ros-api-2-P-1">A Node's ROS API</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-names" class="outline-2">
+<h2 id="names">Naming in ROS</h2>
+<div class="outline-text-2" id="text-names">
+</div>
+<div id="outline-container-understanding-names-2-P-1" class="outline-3">
+<h3 id="understanding-names-2-P-1">Understanding Names</h3>
+<div class="outline-text-3" id="text-org6b5b15f">
+<ol class="org-ol">
+<li>Every item in the ROS Computation Graph has a <a href="https://wiki.ros.org/Names">Graph Resource Name</a>
+<ul class="org-ul">
+<li>The link is for ROS 1 as I have not yet found equivalent documentation for ROS 2 and it is substantially similar.</li>
+<li>When using <code>rclpy</code> functions to create nodes, subscribers, clients, and services, each of these entities is provided a name as one of the arguments.</li>
+<li>The name is used by <code>rclpy</code> to register the python object with the appropriate entity in the ROS graph (e.g., publisher/subscriber with a topic).</li>
+<li>Names are best thought of as placeholder default values: they can be changed by users when the node runs.</li>
+</ul></li>
+<li>Every ROS 2 node exists within a =/namespace/
+<ul class="org-ul">
+<li>Namespaces are like directories on Linux: they start from the global namespace (called <code>/</code>) and can be nested (e.g., <code>/ns1/ns2/ns3</code>).</li>
+</ul></li>
+<li>Just like paths on Linux, ROS names can be relative or absolute
+<ul class="org-ul">
+<li>An absolute name is any name that starts with a <code>/</code></li>
+<li>A <i>relative name</i> is any name that does not start with a <code>/</code>. This name will be interpreted relative to a context
+<ul class="org-ul">
+<li>For example, topics that do not start with a <code>/</code> become relative to the namespace the node is in.</li>
+</ul></li>
+<li>The <i>base name</i> is the name of the entity without any preceding namespaces.</li>
+<li>A <code>~</code> symbol makes a name <code>private</code>.
+<ul class="org-ul">
+<li>The <code>~</code> gets expanded to the full absolute name of the node (including the base name).</li>
+<li>Private is enforced by convention and just means that the node namespace and name are prepended.</li>
+</ul></li>
+<li>Suppose we have a node called <code>/this/is/mynode</code>:
+<ul class="org-ul">
+<li>The base name of the node is <code>mynode</code></li>
+</ul></li>
+</ul></li>
+<li>Names should start with a lower case letter, and then can contain letters, or underscores.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-example-2-P-1" class="outline-3">
+<h3 id="example-2-P-1">Example</h3>
+<div class="outline-text-3" id="text-orgb3aa4a6">
+<p>
+Suppose we have a node called <code>/this/is/mynode</code>
+</p>
+<ol class="org-ol">
+<li>The base name of the node is <code>mynode</code>.</li>
+<li>The namespace of the node is <code>/this/is</code>.</li>
+<li>The <code>is</code> namespace is nested under the <code>/this</code> namespace</li>
+</ol>
+
+<p>
+Suppose <code>/this/is/mynode</code> creates a publisher on the <code>hello</code> topic and a subscriber on the <code>/foo/data</code> topic and a service server called <code>~/help</code>:
+</p>
+<ol class="org-ol">
+<li>The node (by default) will publish to <code>/this/is/hello</code>.</li>
+<li>The node (by default) will subscribe to <code>/foo/data</code>.</li>
+<li>The node will offer a service (by default) on <code>/this/is/mynode/help</code>.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-comparison-with-ros-1-2-P-1" class="outline-3">
+<h3 id="comparison-with-ros-1-2-P-1">Comparison with ROS 1</h3>
+<div class="outline-text-3" id="text-org64fa839">
+<ol class="org-ol">
+<li>In ROS 1, parameters were global and followed the same naming conventions as other entities.</li>
+<li>In ROS 2, parameters are always associated with a specific node and within that node can optionally have their own <a href="https://docs.ros.org/en/kilted/Concepts/Basic/About-Parameters.html">parameter namespace</a>.</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-remapping" class="outline-2">
+<h2 id="remapping">Manipulating Names</h2>
+<div class="outline-text-2" id="text-remapping">
+</div>
+<div id="outline-container-name-mapping-2-P-1" class="outline-3">
+<h3 id="name-mapping-2-P-1">Name Mapping</h3>
+<div class="outline-text-3" id="text-org33d4484">
+<ol class="org-ol">
+<li>Resources can be <i>remapped</i> to any name that you want using <a href="https://docs.ros.org/en/kilted/How-To-Guides/Node-arguments.html">Node Arguments</a>
+<ul class="org-ul">
+<li>This behavior is like a <code>mv</code> operation in the Linux filesystem</li>
+<li>It enables multiple copies of a node to run with different names for the topics they subscribe to</li>
+<li>Any name referred to in the node (including absolute and private names) can be remapped.</li>
+<li>To remap a specific name use <code>ros2 run package node --ros-args -r old_name:=new_name</code>
+<ul class="org-ul">
+<li>Multiple <code>-r</code> arguments can be passed after <code>--ros-args</code> to rename multiple entities</li>
+</ul></li>
+<li>The node can be renamed using <code>-r __node:=new_node_name</code> in the above</li>
+<li>The namespace can be changed using <code>-r __ns:=/new_namespace</code>. The <code>namespace</code> must start with a <code>/</code></li>
+</ul></li>
+
+<li>When the node's namespace is changed, all entities (e.g., topics) that used relative names will be moved relative to the provided namespace
+<ul class="org-ul">
+<li>This behavior makes it easy to remap groups of related names</li>
+<li>Namespaces also allow running multiple groups of nodes simultaneously with the same topics</li>
+<li>For example, the <code>turtlesim_node</code> supports multiple turtles, each controlled via the same topics. They do not interfere because each turtle is in its own namespace.</li>
+</ul></li>
+<li>In practice, ROS nodes should be written with <code>remapping</code> in mind:
+<ul class="org-ul">
+<li>Generally, use simple, base names for ROS nodes, the services they offer, and the topics they publish and subscribe to (so do not include the leading <code>/</code>.
+<ul class="org-ul">
+<li>This way, your node can easily be run under a different namespace without needing to remap each topic individually</li>
+<li>Using absolute node names makes your node less flexible and harder to use.</li>
+</ul></li>
+<li>Users of the node then remap these topics and services as needed</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-a-node-s-ros-api-2-P-1" class="outline-3">
+<h3 id="a-node-s-ros-api-2-P-1">A Node's ROS API</h3>
+<div class="outline-text-3" id="text-org3c59917">
+<ul class="org-ul">
+<li>The publishers, subscribers, services, parameters, and actions a node declares comprise it's ROS API
+<ul class="org-ul">
+<li>They determine how other nodes interact with your node, on a ROS level</li>
+</ul></li>
+<li>These ROS inter-process communication mechanisms are how you link nodes together, much like
+how modules, functions, and classes are used from within python.</li>
+<li>These items should be documented in a docstring at the top of the file that defines your node.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>

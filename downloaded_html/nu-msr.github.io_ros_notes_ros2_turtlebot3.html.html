@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-02-03 Tue 08:58 -->
+<!-- 2026-09-24 Thu 00:26 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>TurtleBot3</title>
@@ -21,7 +21,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#overview-1-P-1">Overview</a></li>
+<li><a href="#overview-1-P-13">Overview</a></li>
 <li><a href="#powering-the-turtlebot-1-P-1">Powering the Turtlebot</a></li>
 <li><a href="#connecting-to-the-turtlebot-1-P-1">Connecting to the TurtleBot</a></li>
 <li><a href="#running-nodes-1-P-1">Running Nodes</a></li>
@@ -32,13 +32,13 @@
 </li>
 <li><a href="#deployment-1-P-1">Deployment</a></li>
 <li><a href="#remote-debugging-1-P-1">Remote Debugging</a></li>
-<li><a href="#resources-1-P-1">Resources</a></li>
+<li><a href="#resources-1-P-5">Resources</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-overview-1-P-1" class="outline-2">
-<h2 id="overview-1-P-1">Overview</h2>
-<div class="outline-text-2" id="text-org676862a">
+<div id="outline-container-overview-1-P-13" class="outline-2">
+<h2 id="overview-1-P-13">Overview</h2>
+<div class="outline-text-2" id="text-org72ca526">
 <p>
 The <a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/">turtlebot3</a> is a small mobile robot with a 2-D Lidar Sensor.
 These instructions describe Northwestern's variant of the software, which has been modified for easy deployment on our networks
@@ -50,11 +50,9 @@ However, most of the content of the reference manual still applies.
 </p>
 </div>
 </div>
-
-
 <div id="outline-container-powering-the-turtlebot-1-P-1" class="outline-2">
 <h2 id="powering-the-turtlebot-1-P-1">Powering the Turtlebot</h2>
-<div class="outline-text-2" id="text-orgf5fe948">
+<div class="outline-text-2" id="text-org3ff0a64">
 <ol class="org-ol">
 <li>The Turtlebot can be powered from a battery, or directly from the wall charger, which gets plugged into the OpenCR board
 <ul class="org-ul">
@@ -90,12 +88,12 @@ turn, the odometry will be incorrect.
 </div>
 <div id="outline-container-connecting-to-the-turtlebot-1-P-1" class="outline-2">
 <h2 id="connecting-to-the-turtlebot-1-P-1">Connecting to the TurtleBot</h2>
-<div class="outline-text-2" id="text-org426a230">
+<div class="outline-text-2" id="text-org9ab63dd">
 <ol class="org-ol">
 <li><p>
 Connect to the <code>TURTLENET</code> wifi network and disable autoconnection
 </p>
-<div class="SOURCE" id="org7ddfdbe">
+<div class="SOURCE" id="orgfa34b56">
 <p>
 nmcli &#x2013;ask dev wifi connect TURTLENET
 nmcli con modify TURTLENET connection.autoconnect no
@@ -109,14 +107,9 @@ nmcli con modify TURTLENET connection.autoconnect no
 </ol>
 </div>
 </div>
-
-
-
-
-
 <div id="outline-container-running-nodes-1-P-1" class="outline-2">
 <h2 id="running-nodes-1-P-1">Running Nodes</h2>
-<div class="outline-text-2" id="text-orgb44d5d6">
+<div class="outline-text-2" id="text-org5f73161">
 <ol class="org-ol">
 <li>To run the MSR-specific code, providing low-level access to the turtlebot, run the following command on the turtlebot:
 <ul class="org-ul">
@@ -133,10 +126,9 @@ available on your computer (e.g. installed or in your currently active workspace
 </ol>
 </div>
 </div>
-
 <div id="outline-container-cross-compilation-1-P-1" class="outline-2">
 <h2 id="cross-compilation-1-P-1">Cross Compilation</h2>
-<div class="outline-text-2" id="text-orgc0044c7">
+<div class="outline-text-2" id="text-org1438ebe">
 <ol class="org-ol">
 <li>Technically you could develop all your code on the Raspberry Pi 3, but doing this would be extremely slow and frustrating.
 <ul class="org-ul">
@@ -187,10 +179,9 @@ all the libraries that are available on the turtlebot</li>
 </div>
 </div>
 </div>
-
 <div id="outline-container-deployment-1-P-1" class="outline-2">
 <h2 id="deployment-1-P-1">Deployment</h2>
-<div class="outline-text-2" id="text-orgb331c0e">
+<div class="outline-text-2" id="text-orgf985336">
 <ul class="org-ul">
 <li>To run the nodes they must be present on the remote computer</li>
 <li>Use <code>rsync</code> to copy the <code>install</code> space to the turtlebot:  <code>rsync -av --delete aarch64_install/ msr@leonardo:/home/msr/install</code>
@@ -202,10 +193,9 @@ all the libraries that are available on the turtlebot</li>
 </ul>
 </div>
 </div>
-
 <div id="outline-container-remote-debugging-1-P-1" class="outline-2">
 <h2 id="remote-debugging-1-P-1">Remote Debugging</h2>
-<div class="outline-text-2" id="text-orgb721398">
+<div class="outline-text-2" id="text-orgc7dc5a0">
 <p>
 Because we are only copying the install space to the <code>raspberry pi</code> and because the <code>raspberry pi</code> is so slow, it makes sense, for debugging,
 to run the debugger on our host computer.  To do this, the following commands work (after installing <code>gdb-multiarch</code> on your host machine)
@@ -231,11 +221,9 @@ To kill the remote server:
 </ol>
 </div>
 </div>
-
-
-<div id="outline-container-resources-1-P-1" class="outline-2">
-<h2 id="resources-1-P-1">Resources</h2>
-<div class="outline-text-2" id="text-orgcb3d879">
+<div id="outline-container-resources-1-P-5" class="outline-2">
+<h2 id="resources-1-P-5">Resources</h2>
+<div class="outline-text-2" id="text-orge610988">
 <ul class="org-ul">
 <li><a href="http://emanual.robotis.com/docs/en/platform/turtlebot3/overview/">Main turtlebot documentation</a></li>
 <li><a href="http://github.com/m-elwin/rosberrypi">rosberrypi</a>
