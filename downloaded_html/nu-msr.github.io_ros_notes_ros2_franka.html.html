@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-09-24 Thu 00:26 -->
+<!-- 2026-09-29 Tue 09:23 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Emika Franka Panda Robot</title>
@@ -47,13 +47,13 @@
 </ul>
 </li>
 <li><a href="#mechanical-1-P-1">Mechanical</a></li>
-<li><a href="#resources-1-P-1">Resources</a></li>
+<li><a href="#resources-1-P-2">Resources</a></li>
 </ul>
 </div>
 </nav>
 <div id="outline-container-introduction-1-P-1" class="outline-2">
 <h2 id="introduction-1-P-1">Introduction</h2>
-<div class="outline-text-2" id="text-orga8a7910">
+<div class="outline-text-2" id="text-org4f51cc0">
 <p>
 The Emika Franka Panda robot is a 7-DOF robot arm with a 3kg max payload
 and full torque sensing at each joint.
@@ -72,7 +72,7 @@ however, in more advanced configurations it is possible to run your code directl
 </div>
 <div id="outline-container-layers-of-control-1-P-1" class="outline-2">
 <h2 id="layers-of-control-1-P-1">Layers of Control</h2>
-<div class="outline-text-2" id="text-org644c8f5">
+<div class="outline-text-2" id="text-orgf85054b">
 <ol class="org-ol">
 <li>MoveIt: At the highest layer, the robot can be controlled
 through MoveIt and ROS, provided by <a href="https://frankaemika.github.io/docs/franka_ros2.html">franka_ros2</a></li>
@@ -97,7 +97,7 @@ interactively placing the robot and storing its position.</li>
 </div>
 <div id="outline-container-robot-versions-1-P-1" class="outline-2">
 <h2 id="robot-versions-1-P-1">Robot Versions</h2>
-<div class="outline-text-2" id="text-orgbd3ba9a">
+<div class="outline-text-2" id="text-org2d60c9e">
 <ol class="org-ol">
 <li>MSR has four Franka Emika Panda robots. These robots are now referred to as FER robots.</li>
 <li>There is also a newer (but substantially similar) Franka robot called the FR3, which some research groups have in the lab.</li>
@@ -151,7 +151,7 @@ local stratum 5
 </div>
 <div id="outline-container-rules-2-P-1" class="outline-3">
 <h3 id="rules-2-P-1">Rules</h3>
-<div class="outline-text-3" id="text-org430b7a0">
+<div class="outline-text-3" id="text-orga938524">
 <ol class="org-ol">
 <li>Make sure the workspace is clear of people and objects whenever the robot's lights are blue or green.</li>
 <li>Never force the robot to move physically. Always use the guided movement mode (pressing buttons on arm, lights are white).</li>
@@ -178,7 +178,7 @@ local stratum 5
 </div>
 <div id="outline-container-power-on-2-P-1" class="outline-3">
 <h3 id="power-on-2-P-1">Power On</h3>
-<div class="outline-text-3" id="text-org1308e74">
+<div class="outline-text-3" id="text-org0275ef8">
 <p>
 If the robot is off, you will need to turn it on (obviously!).
 </p>
@@ -197,7 +197,7 @@ If the robot is off, you will need to turn it on (obviously!).
 </div>
 <div id="outline-container-the-web-interface-2-P-1" class="outline-3">
 <h3 id="the-web-interface-2-P-1">The Web Interface</h3>
-<div class="outline-text-3" id="text-org7a22f9e">
+<div class="outline-text-3" id="text-org444986d">
 <ol class="org-ol">
 <li>Plug the ethernet cord from the robot into your computer.
 <ul class="org-ul">
@@ -227,8 +227,8 @@ If the robot is off, you will need to turn it on (obviously!).
 </ul></li>
 </ol>
 </div>
-<details id="orgf3d992e"><summary class="header-4">SSL Certificates</summary>
-<div class="outline-text-4" id="text-orgf3d992e">
+<details id="orgb111e56"><summary class="header-4">SSL Certificates</summary>
+<div class="outline-text-4" id="text-orgb111e56">
 <ol class="org-ol">
 <li>The Franka Panda Web Interface has an expired SSL certificate that cannot be updated</li>
 <li>Firefox blocks all pages with expired SSL certificates and does not provide a way in it's user interface for the user to overrid</li>
@@ -273,7 +273,7 @@ openssl x509 -outform PEM &gt; franka.crt
 </div>
 <div id="outline-container-enabling-ros-2-P-1" class="outline-3">
 <h3 id="enabling-ros-2-P-1">Enabling ROS</h3>
-<div class="outline-text-3" id="text-org734c108">
+<div class="outline-text-3" id="text-orgae837e7">
 <ol class="org-ol">
 <li>In the hamburger menu in the upper-right corner, select Activate Franka Control Interface (FCI)</li>
 <li>The web interface no longer has control, and you can now use ROS</li>
@@ -282,7 +282,7 @@ openssl x509 -outform PEM &gt; franka.crt
 </div>
 <div id="outline-container-using-ros-2-P-1" class="outline-3">
 <h3 id="using-ros-2-P-1">Using ROS</h3>
-<div class="outline-text-3" id="text-orge0f4850">
+<div class="outline-text-3" id="text-org1f305dc">
 <ol class="org-ol">
 <li>ssh into <code>station</code>, using the credentials that I provide.
 <ul class="org-ul">
@@ -302,7 +302,7 @@ openssl x509 -outform PEM &gt; franka.crt
 </div>
 <div id="outline-container-enabling-device-2-P-1" class="outline-3">
 <h3 id="enabling-device-2-P-1">Enabling Device</h3>
-<div class="outline-text-3" id="text-org4333578">
+<div class="outline-text-3" id="text-orgdd636d9">
 <ol class="org-ol">
 <li>Feel free to press the enabling device at any time to stop the robot</li>
 <li>After pressing, you will need to
@@ -316,7 +316,7 @@ openssl x509 -outform PEM &gt; franka.crt
 </div>
 <div id="outline-container-finished-with-robot-2-P-1" class="outline-3">
 <h3 id="finished-with-robot-2-P-1">Finished With Robot</h3>
-<div class="outline-text-3" id="text-orgad1b008">
+<div class="outline-text-3" id="text-orge566e78">
 <p>
 Before you step away from the robot:
 </p>
@@ -332,7 +332,7 @@ Before you step away from the robot:
 </div>
 <div id="outline-container-power-off-2-P-1" class="outline-3">
 <h3 id="power-off-2-P-1">Power Off</h3>
-<div class="outline-text-3" id="text-org6dc6f75">
+<div class="outline-text-3" id="text-orgc8f3565">
 <ol class="org-ol">
 <li>In the web interface, select shutdown.</li>
 <li>Wait for the robot's lights to turn off and the fans in the control box to stop spinning</li>
@@ -343,7 +343,7 @@ Before you step away from the robot:
 </div>
 <div id="outline-container-robot-status-lights-1-P-1" class="outline-2">
 <h2 id="robot-status-lights-1-P-1">Robot Status Lights</h2>
-<div class="outline-text-2" id="text-org0ff945c">
+<div class="outline-text-2" id="text-orgb918a33">
 <ol class="org-ol">
 <li>Yellow: Robot is Locked. Do not attempt to move the arm, you can damage it.
 <ul class="org-ul">
@@ -376,7 +376,7 @@ Before you step away from the robot:
 </div>
 <div id="outline-container-red-light-troubleshooting-2-P-1" class="outline-3">
 <h3 id="red-light-troubleshooting-2-P-1">Red Light Troubleshooting</h3>
-<div class="outline-text-3" id="text-org91001e1">
+<div class="outline-text-3" id="text-org9999947">
 <ul class="org-ul">
 <li>If the red lights turn on but then clear after resetting the robot you are likely near a joint limit</li>
 <li>To see if this is the issue, unlock the robot and enable it (Blue Lights)
@@ -390,15 +390,15 @@ Before you step away from the robot:
 </div>
 <div id="outline-container-mechanical-1-P-1" class="outline-2">
 <h2 id="mechanical-1-P-1">Mechanical</h2>
-<div class="outline-text-2" id="text-org1490de7">
+<div class="outline-text-2" id="text-org957ccf0">
 <ol class="org-ol">
 <li>Franka World provides a full SolidWorks Model of the robot and also CAD for mounting cameras to the arm</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-resources-1-P-1" class="outline-2">
-<h2 id="resources-1-P-1">Resources</h2>
-<div class="outline-text-2" id="text-org9d4a3f5">
+<div id="outline-container-resources-1-P-2" class="outline-2">
+<h2 id="resources-1-P-2">Resources</h2>
+<div class="outline-text-2" id="text-org6beebbc">
 <ol class="org-ol">
 <li><a href="https://support.franka.de/docs/franka_ros2.html">Software Documentation</a>
 <ul class="org-ul">

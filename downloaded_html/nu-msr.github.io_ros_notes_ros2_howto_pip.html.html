@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-09-24 Thu 00:26 -->
+<!-- 2026-09-29 Tue 09:23 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Using Pip With ROS 2</title>
@@ -21,7 +21,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#overview-1-P-5">Overview</a></li>
+<li><a href="#overview-1-P-10">Overview</a></li>
 <li><a href="#direct-into-a-workspace-1-P-1">Direct Into A Workspace</a>
 <ul>
 <li><a href="#steps-2-P-1">Steps</a></li>
@@ -35,9 +35,9 @@
 </ul>
 </div>
 </nav>
-<div id="outline-container-overview-1-P-5" class="outline-2">
-<h2 id="overview-1-P-5">Overview</h2>
-<div class="outline-text-2" id="text-org91c7a04">
+<div id="outline-container-overview-1-P-10" class="outline-2">
+<h2 id="overview-1-P-10">Overview</h2>
+<div class="outline-text-2" id="text-org1714d92">
 <p>
 This guide explains two methods for installing pip packages directly into a ROS <code>colcon</code> workspace.
 One method uses pip and the ROS 2 workspace method directly, while the other uses virtual environments.
@@ -46,7 +46,7 @@ One method uses pip and the ROS 2 workspace method directly, while the other use
 </div>
 <div id="outline-container-direct-into-a-workspace-1-P-1" class="outline-2">
 <h2 id="direct-into-a-workspace-1-P-1">Direct Into A Workspace</h2>
-<div class="outline-text-2" id="text-org81d465b">
+<div class="outline-text-2" id="text-org4a14a82">
 <ol class="org-ol">
 <li>With this method, you install pip packages directly into a ROS 2 workspace</li>
 <li>Whenever that workspace is sourced (either directly or as an underlay), the python packages installed will be used by all ROS 2 nodes.</li>
@@ -55,7 +55,7 @@ One method uses pip and the ROS 2 workspace method directly, while the other use
 </div>
 <div id="outline-container-steps-2-P-1" class="outline-3">
 <h3 id="steps-2-P-1">Steps</h3>
-<div class="outline-text-3" id="text-orgaeec72a">
+<div class="outline-text-3" id="text-orgcb1672e">
 <ol class="org-ol">
 <li><p>
 Create a new ROS workspace and <code>ament_python</code> package
@@ -94,7 +94,7 @@ are from <code>pip</code>.</li>
 </div>
 <div id="outline-container-virtual-environment-1-P-1" class="outline-2">
 <h2 id="virtual-environment-1-P-1">Virtual Environment</h2>
-<div class="outline-text-2" id="text-orgfcae104">
+<div class="outline-text-2" id="text-orgd9a3a7c">
 <ol class="org-ol">
 <li>With this method a virtual environment is created and sourced separately.</li>
 <li>Individual packages must opt-in to use the virtual environment in their <code>setup.cfg</code></li>
@@ -103,7 +103,7 @@ are from <code>pip</code>.</li>
 </div>
 <div id="outline-container-steps-2-P-2" class="outline-3">
 <h3 id="steps-2-P-2">Steps</h3>
-<div class="outline-text-3" id="text-org40cd77b">
+<div class="outline-text-3" id="text-orga02712c">
 <ol class="org-ol">
 <li><p>
 Any python package that uses virtual environments must have the following adding to the <code>setup.cfg</code>

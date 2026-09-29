@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-09-24 Thu 08:46 -->
+<!-- 2026-09-29 Tue 09:23 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>The ROS API and Python</title>
@@ -21,33 +21,40 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#client-libraries-1-P-1">Client Libraries</a>
+<li><a href="#client-libraries-1-P-1">Client Libraries</a></li>
+<li><a href="#rclpy">rclpy</a>
 <ul>
-<li><a href="#rclpy">rclpy</a></li>
 <li><a href="#interfaces-2-P-2">Interfaces</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-
 <div id="outline-container-client-libraries-1-P-1" class="outline-2">
 <h2 id="client-libraries-1-P-1">Client Libraries</h2>
-<div class="outline-text-2" id="text-orgd37343b">
+<div class="outline-text-2" id="text-org0516c7c">
 <p>
-<a href="https://docs.ros.org/en/kilted/Concepts/About-ROS-2-Client-Libraries.html">ROS client libraries</a> allow programs to interact with other ROS processes.
+<a href="https://docs.ros.org/en/lyrical/ROS-Framework/About-Client-Libraries.html">ROS client libraries</a> are how generic ROS concepts such as <i>Nodes</i>, <i>Topics</i>, <i>Services</i> etc. are actually
+implemented and used in a given programming language.
+</p>
+
+<p>
 There are three primarily supported client libraries:
 </p>
 <ul class="org-ul">
-<li><a href="https://docs.ros.org/en/kilted/p/rcl/">rcl</a> is the C client library, upon which the other client libraries are built.</li>
-<li><a href="https://docs.ros.org/en/kilted/p/rclcpp/">rclcpp</a> is the C++ client library.</li>
-<li><a href="http://docs.ros.org/en/kilted/p/rclpy/">rclpy</a> is the Python client library.</li>
+<li><a href="https://docs.ros.org/en/rolling/p/rclcpp/">rclcpp</a> is the C++ client library.</li>
+<li><a href="http://docs.ros.org/en/rolling/p/rclpy/">rclpy</a> is the Python client library.</li>
+<li><a href="https://docs.ros.org/en/rolling/p/rcl/">rcl</a> is the C client library, upon which the other client libraries are built.</li>
 </ul>
-</div>
 
-<div id="outline-container-rclpy" class="outline-3">
-<h3 id="rclpy">rclpy</h3>
-<div class="outline-text-3" id="text-rclpy">
+<p>
+Volunteers also maintain client libraries for many other programming languages, but these are not officially "supported" by ROS.
+</p>
+</div>
+</div>
+<div id="outline-container-rclpy" class="outline-2">
+<h2 id="rclpy">rclpy</h2>
+<div class="outline-text-2" id="text-rclpy">
 <p>
 <code>rclpy</code> is a python library that allows a python program to become a ROS 2 node.
 </p>
@@ -57,7 +64,7 @@ There are three primarily supported client libraries:
 <ul class="org-ul">
 <li>One way to make nodes in ROS 2 is to sub-class <code>rclpy.node</code></li>
 <li>We focus on this method because it is the most flexible and makes it easier to combine nodes within the same python process.</li>
-<li>It is also possible to instantiate an <code>rclpy.node.Node</code> object and call it's methods.</li>
+<li>It is also possible to instantiate an <code>rclpy.node.Node</code> object and call it's methods directly.</li>
 </ul></li>
 <li>Each python ROS 2 node has an <code>entry_point</code> function that is called when the node is started.
 <ul class="org-ul">
@@ -67,32 +74,30 @@ There are three primarily supported client libraries:
 </ul></li>
 <li>The <code>Node</code> class has methods that enable
 <ul class="org-ul">
-<li>Creating service servers: <a href="https://docs.ros.org/en/kilted/p/rclpy/rclpy.node.html#rclpy.node.Node.create_service">create_service</a></li>
-<li>Creating service clients: <a href="https://docs.ros.org/en/kilted/p/rclpy/rclpy.node.html#rclpy.node.Node.create_client">create_client</a></li>
-<li>Creating publishers: <a href="https://docs.ros.org/en/kilted/p/rclpy/rclpy.node.html#rclpy.node.Node.create_publisher">create_publisher</a></li>
-<li>Creating subscribers: <a href="https://docs.ros.org/en/kilted/p/rclpy/rclpy.node.html#rclpy.node.Node.create_subscription">create_subscription</a></li>
-<li>Creating timers: <a href="https://docs.ros.org/en/kilted/p/rclpy/rclpy.node.html#rclpy.node.Node.create_timer">create_timer</a></li>
-<li>Declaring and using parameters: <a href="https://docs.ros.org/en/kilted/p/rclpy/rclpy.node.html#rclpy.node.Node.declare_parameters">declare_parameters</a>, <a href="https://docs.ros2.org/foxy/api/rclpy/api/node.html#rclpy.node.Node.get_parameter">get_parameter</a>
+<li>Creating service servers: <a href="https://docs.ros.org/en/rolling/p/rclpy/rclpy.node.html#rclpy.node.Node.create_service">create_service</a></li>
+<li>Creating service clients: <a href="https://docs.ros.org/en/rolling/p/rclpy/rclpy.node.html#rclpy.node.Node.create_client">create_client</a></li>
+<li>Creating publishers: <a href="https://docs.ros.org/en/rolling/p/rclpy/rclpy.node.html#rclpy.node.Node.create_publisher">create_publisher</a></li>
+<li>Creating subscribers: <a href="https://docs.ros.org/en/rolling/p/rclpy/rclpy.node.html#rclpy.node.Node.create_subscription">create_subscription</a></li>
+<li>Creating timers: <a href="https://docs.ros.org/en/rolling/p/rclpy/rclpy.node.html#rclpy.node.Node.create_timer">create_timer</a></li>
+<li>Declaring and using parameters: <a href="https://docs.ros.org/en/rolling/p/rclpy/rclpy.node.html#rclpy.node.Node.declare_parameters">declare_parameters</a>, <a href="https://docs.ros2.org/foxy/api/rclpy/api/node.html#rclpy.node.Node.get_parameter">get_parameter</a>
 <ul class="org-ul">
-<li>The <a href="http://docs.ros.org/en/kilted/p/rcl_interfaces/">rcl_interfaces</a> package defines some types that are useful for describing and interacting with parameters.</li>
-<li>For example, there are a few basic data types for parameters, outlined in the <a href="http://docs.ros.org/en/kilted/p/rcl_interfaces/msg/ParameterType.html">ParameterType</a> message</li>
-<li>The <a href="http://docs.ros.org/en/kilted/p/rcl_interfaces/msg/ParameterDescriptor.html">ParameterDescriptor</a> message allows setting metadata for parameters</li>
+<li>The <a href="http://docs.ros.org/en/rolling/p/rcl_interfaces/">rcl_interfaces</a> package defines some types that are useful for describing and interacting with parameters.</li>
+<li>For example, there are a few basic data types for parameters, outlined in the <a href="http://docs.ros.org/en/rolling/p/rcl_interfaces/msg/ParameterType.html">ParameterType</a> message</li>
+<li>The <a href="http://docs.ros.org/en/rolling/p/rcl_interfaces/msg/ParameterDescriptor.html">ParameterDescriptor</a> message allows setting metadata for parameters</li>
 </ul></li>
 <li>Logging:
 <ul class="org-ul">
-<li>Obtain the logger associated with a node using <a href="https://docs.ros.org/en/kilted/p/rclpy/rclpy.node.html#rclpy.node.Node.get_logger">Node.get_logger</a></li>
-<li>The <a href="https://docs.ros.org/en/kilted/p/rclpy/rclpy.impl.rcutils_logger.html#rclpy.impl.rcutils_logger.RcutilsLogger">Logger API</a></li>
+<li>Obtain the logger associated with a node using <a href="https://docs.ros.org/en/rolling/p/rclpy/rclpy.node.html#rclpy.node.Node.get_logger">Node.get_logger</a></li>
+<li>The <a href="https://docs.ros.org/en/rolling/p/rclpy/rclpy.impl.rcutils_logger.html#rclpy.impl.rcutils_logger.RcutilsLogger">Logger API</a></li>
 </ul></li>
 </ul></li>
 <li>There are many other ROS functions and classes available in <code>rclpy</code>, look at the documentation.</li>
 <li>An example of some ROS API functions is available at <a href="https://github.com/m-elwin/me495_demo">https://github.com/m-elwin/me495_demo</a></li>
 </ol>
 </div>
-</div>
-
 <div id="outline-container-interfaces-2-P-2" class="outline-3">
 <h3 id="interfaces-2-P-2">Interfaces</h3>
-<div class="outline-text-3" id="text-org30e00f3">
+<div class="outline-text-3" id="text-org9280704">
 <p>
 To use interfaces from a ROS node you must import the corresponding package. This will expose an object that contains the elements in that interface.
 </p>
