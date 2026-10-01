@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-09-29 Tue 09:23 -->
+<!-- 2026-10-01 Thu 09:21 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ME450 Embedded Systems in Robotics Schedule</title>
@@ -25,6 +25,7 @@
 <li><a href="#homework-1-P-1">Homework</a></li>
 <li><a href="#day-1-9-24-2026-introduction-1-P-1">Day 1: 9/24/2026: Introduction</a></li>
 <li><a href="#day-2-9-29-2026-ros-2-basics-1-P-1">Day 2: 9/29/2026: ROS 2 Basics</a></li>
+<li><a href="#day-03-10-01-2026-colcon-launchfiles-async-1-P-1">Day 03: 10/01/2026: Colcon, Launchfiles, Async</a></li>
 <li><a href="#final-12-10-2026-live-demo-in-the-lab--1-P-1">Final: 12/10/2026: Live Demo, in the Lab!</a></li>
 <li><a href="#building-documentation-1-P-1">Building Documentation</a></li>
 </ul>
@@ -49,7 +50,7 @@ The notes are also <a href="./index.html">organized by topic</a>.
 <div class="outline-text-2" id="text-org1227006">
 <ul class="org-ul">
 <li><a href="./ros2/homework/guidelines.html">Guidelines</a></li>
-<li><a href="./ros2/homework/homework1.html">Homework 1</a> (Issued 09/24/2026. Due 10/05/2026, 11:59 pm.)</li>
+<li><a href="./ros2/homework/homework1.html">Homework 1</a> (Issued 09/24/2026. Due 10/07/2026, 11:59 pm.)</li>
 </ul>
 </div>
 </div>
@@ -70,7 +71,7 @@ The notes are also <a href="./index.html">organized by topic</a>.
 </div>
 <div id="outline-container-course-notes-2-P-1" class="outline-3">
 <h3 id="course-notes-2-P-1">Course Notes</h3>
-<div class="outline-text-3" id="text-orga9a210f">
+<div class="outline-text-3" id="text-orgfc2bf9d">
 <ul class="org-ul">
 <li><a href="./ros2/preliminaries.html">Preliminaries</a></li>
 <li><a href="./ros2/ros_history.html">About ROS</a></li>
@@ -81,7 +82,7 @@ The notes are also <a href="./index.html">organized by topic</a>.
 </div>
 <div id="outline-container-tutorials-2-P-1" class="outline-3">
 <h3 id="tutorials-2-P-1">Tutorials</h3>
-<div class="outline-text-3" id="text-orge194a8a">
+<div class="outline-text-3" id="text-org13b5ea6">
 <ul class="org-ul">
 <li><a href="https://docs.ros.org/en/lyrical/Get-Started/Introducing-Turtlesim/Introducing-Turtlesim.html">Turtlesim Tutorial</a></li>
 <li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/nodes/Working-with-nodes/Understanding-ROS2-Nodes/Understanding-ROS2-Nodes.html">Node Tutorial</a></li>
@@ -99,7 +100,7 @@ The notes are also <a href="./index.html">organized by topic</a>.
 </div>
 <div id="outline-container-course-notes-2-P-2" class="outline-3">
 <h3 id="course-notes-2-P-2">Course Notes</h3>
-<div class="outline-text-3" id="text-orge675ae2">
+<div class="outline-text-3" id="text-org4257689">
 <ul class="org-ul">
 <li><a href="./ros2/naming.html">Naming in ROS</a></li>
 <li><a href="./ros2/ros_api.html">ROS Client Libraries</a></li>
@@ -115,7 +116,7 @@ The notes are also <a href="./index.html">organized by topic</a>.
 </div>
 <div id="outline-container-tutorials-2-P-2" class="outline-3">
 <h3 id="tutorials-2-P-2">Tutorials</h3>
-<div class="outline-text-3" id="text-orgd6d745b">
+<div class="outline-text-3" id="text-org65b0f79">
 <ul class="org-ul">
 <li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/client-libraries/Working-with-Client-Libraries/Colcon-Tutorial.html">Colcon Tutorial</a></li>
 <li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/client-libraries/Working-with-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html">Creating A Workspace</a></li>
@@ -123,6 +124,38 @@ The notes are also <a href="./index.html">organized by topic</a>.
 <li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/client-libraries/Working-with-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber.html">Writing a Python Publisher/Subscriber</a></li>
 <li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/client-libraries/Working-with-Client-Libraries/Writing-A-Simple-Py-Service-And-Client.html">Writing a Python Service and Client</a></li>
 <li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/client-libraries/Working-with-Client-Libraries/Using-Parameters-In-A-Class-Python.html">Using Parameters in a Class</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-day-03-10-01-2026-colcon-launchfiles-async-1-P-1" class="outline-2">
+<h2 id="day-03-10-01-2026-colcon-launchfiles-async-1-P-1">Day 03: 10/01/2026: Colcon, Launchfiles, Async</h2>
+<div class="outline-text-2" id="text-orgf459f73">
+<ul class="org-ul">
+<li><a href="./ros2/colcon.html">Colcon</a></li>
+<li><a href="./ros2/launch.html">Launchfiles</a> (XML Only)</li>
+<li><a href="./ros2/spin.html">Spinning and Asynchronicity</a>, focused primarily on:
+<ul class="org-ul">
+<li><a href="./ros2/spin.html#service client">Service Clients</a></li>
+<li><a href="./ros2/spin.html#blocking_calls">blocking_calls</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="outline-container-tutorials-2-P-3" class="outline-3">
+<h3 id="tutorials-2-P-3">Tutorials</h3>
+<div class="outline-text-3" id="text-org0086b33">
+<ul class="org-ul">
+<li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/client-libraries/Working-with-Client-Libraries/Custom-ROS2-Interfaces.html">Creating Custom Messages and Services Tutorial</a></li>
+<li><a href="https://docs.ros.org/en/lyrical/Developer-Tools/Launch/Launch-Main.html">Launchfiles</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-activities-2-P-1" class="outline-3">
+<h3 id="activities-2-P-1">Activities</h3>
+<div class="outline-text-3" id="text-orgd7a29e4">
+<ul class="org-ul">
+<li><a href="./ros2/activity/pubsub_activity.html">Publish/Subscribe Activity</a></li>
+<li><a href="https://github.com/m-elwin/crazy_turtle">Crazy Turtle</a></li>
 </ul>
 </div>
 </div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-09-29 Tue 09:23 -->
+<!-- 2026-10-01 Thu 09:09 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Packages and Workspaces</title>
@@ -23,7 +23,7 @@
 <ul>
 <li><a href="#packages">Packages</a>
 <ul>
-<li><a href="#package-structure-2-P-2">Package Structure</a></li>
+<li><a href="#package-structure-2-P-1">Package Structure</a></li>
 <li><a href="#package_xml">package.xml</a></li>
 <li><a href="#ament_python">Ament Python Packages</a></li>
 <li><a href="#ament_cmake">Ament CMake Packages</a></li>
@@ -49,7 +49,7 @@
 <li><a href="#colcon-pkg">colcon.pkg</a></li>
 </ul>
 </li>
-<li><a href="#ros-environment-1-P-2">ROS Environment</a>
+<li><a href="#ros-environment-1-P-1">ROS Environment</a>
 <ul>
 <li><a href="#overlays-2-P-1">Overlays</a></li>
 </ul>
@@ -62,20 +62,20 @@
 <h2 id="packages">Packages</h2>
 <div class="outline-text-2" id="text-packages">
 <p>
-A ROS <a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html">Package</a> is a collection of source code and
+A ROS <a href="https://docs.ros.org/en/lyrical/ROS-Framework/client-libraries/Working-with-Client-Libraries/Creating-Your-First-ROS2-Package.html">Package</a> is a collection of source code and
 other resources that is distributed as a single unit.
 </p>
 <ul class="org-ul">
 <li>Binary versions of ROS packages are distributed on ROS's package server and can be downloaded via <code>apt</code> (as done when you installed ROS).
 <ul class="org-ul">
-<li>The naming convention when using apt is to do <code>ros-kilted-package-name</code> where <code>package-name</code> is the name of the package, with underscores <code>_</code> converted to dashes <code>-</code>.</li>
+<li>The naming convention when using apt is to do <code>ros-lyrical-package-name</code> where <code>package-name</code> is the name of the package, with underscores <code>_</code> converted to dashes <code>-</code>.</li>
 </ul></li>
 <li>The source code for ROS packages can be easily downloaded and compiled.</li>
 <li>It is easier and less time consuming to download a package, but to create ROS code you need to create a package.</li>
 </ul>
 </div>
-<div id="outline-container-package-structure-2-P-2" class="outline-3">
-<h3 id="package-structure-2-P-2">Package Structure</h3>
+<div id="outline-container-package-structure-2-P-1" class="outline-3">
+<h3 id="package-structure-2-P-1">Package Structure</h3>
 <div class="outline-text-3" id="text-org019bb31">
 <ol class="org-ol">
 <li>All ROS packages have a base directory containing a manifest file called <code>package.xml</code>.
@@ -86,9 +86,9 @@ other resources that is distributed as a single unit.
 </ul></li>
 <li>An important element of <code>package.xml</code> is the <code>&lt;export&gt;&lt;build_type&gt;</code>, which determines the type of package
 <ul class="org-ul">
-<li><a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html">ament python</a> is used for pure python packages.</li>
-<li><a href="https://docs.ros.org/en/kilted/How-To-Guides/Ament-CMake-Documentation.html">ament_cmake</a> is used for C++ packages and packages that define custom Messages, Services, or Actions (i.e., Interfaces)</li>
-<li><a href="https://docs.ros.org/en/kilted/How-To-Guides/Ament-CMake-Python-Documentation.html">ament_cmake_python</a> is for packages with mixed python/C++ code.</li>
+<li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/client-libraries/Working-with-Client-Libraries/Creating-Your-First-ROS2-Package.html">ament python</a> is used for pure python packages.</li>
+<li><a href="https://docs.ros.org/en/lyrical/Developer-Tools/Build/Ament-CMake-Documentation.html">ament_cmake</a> is used for C++ packages and packages that define custom Messages, Services, or Actions (i.e., Interfaces)</li>
+<li><a href="https://docs.ros.org/en/lyrical/Developer-Tools/Build/Ament-CMake-Python-Documentation.html">ament_cmake_python</a> is for packages with mixed python/C++ code.</li>
 </ul></li>
 </ol>
 </div>
@@ -132,7 +132,7 @@ In python especially, whenever you have a <code>&lt;build_depend&gt;</code> you 
 use <code>&lt;depend&gt;</code>.</li>
 <li>The tool <a href="https://docs.ros.org/en/independent/api/rosdep/html/">rosdep</a> analyzes the dependencies in <code>package.xml</code> and can
 automatically install missing dependencies.</li>
-<li>The <a href="https://docs.ros.org/en/kilted/Tutorials/Intermediate/Rosdep.html">rosdep tutorial</a> explains these dependency types.</li>
+<li>The <a href="https://docs.ros.org/en/lyrical/ROS-Framework/client-libraries/Working-with-Client-Libraries/Rosdep.html">rosdep tutorial</a> explains these dependency types.</li>
 </ul>
 </div>
 <details id="org72e7704"><summary class="header-5">Advanced Dependencies</summary>
@@ -175,7 +175,7 @@ These packages would depend on <code>rosidl_interface_packages</code> so that if
 <h3 id="ament_python">Ament Python Packages</h3>
 <div class="outline-text-3" id="text-ament_python">
 <ul class="org-ul">
-<li><a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html">Ament Python</a> is the preferred package type for pure python ROS 2 packages</li>
+<li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/client-libraries/Working-with-Client-Libraries/Creating-Your-First-ROS2-Package.html">Ament Python</a> is the preferred package type for pure python ROS 2 packages</li>
 <li>Boilerplate for this package can be created using <code>ros2 pkg create --build-type ament_python</code></li>
 <li><p>
 The directory structure is:
@@ -241,7 +241,7 @@ The directory structure is:
 <h3 id="ament_cmake">Ament CMake Packages</h3>
 <div class="outline-text-3" id="text-ament_cmake">
 <ul class="org-ul">
-<li><a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html">Ament Cmake</a> packages are primarily used for C++ ROS projects</li>
+<li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/client-libraries/Working-with-Client-Libraries/Creating-Your-First-ROS2-Package.html">Ament Cmake</a> packages are primarily used for C++ ROS projects</li>
 <li>Boilerplate for this package can be created using <code>ros2 pkg create --build-type ament_cmake</code></li>
 <li>Currently, custom interfaces (e.g., messages, services, or actions) need to be in their own Ament CMake package</li>
 <li><p>
@@ -272,12 +272,12 @@ The directory structure is:
 <div class="outline-text-3" id="text-orgb588ca3">
 <ol class="org-ol">
 <li>Custom interfaces are created in <code>ament_cmake</code> type packages</li>
-<li>To create a custom interface file, first write an interface file using the <a href="https://docs.ros.org/en/kilted/Concepts/About-ROS-Interfaces.html">ROS IDL</a>
+<li>To create a custom interface file, first write an interface file using the <a href="https://docs.ros.org/en/lyrical/ROS-Framework/interfaces/About-Interfaces.html">ROS IDL</a>
 <ul class="org-ul">
 <li>Message files end with <code>.msg</code> and go in <code>&lt;package_name&gt;/msg</code></li>
 <li>Service files end with <code>.srv</code> and go in <code>&lt;package_name&gt;/srv</code></li>
 <li>Action files end with <code>.action</code> and go in <code>&lt;package_name&gt;/action</code></li>
-<li>See the <a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-Client-Libraries/Custom-ROS2-Interfaces.html">Custom ROS Interface Tutorial</a></li>
+<li>See the <a href="https://docs.ros.org/en/lyrical/ROS-Framework/client-libraries/Working-with-Client-Libraries/Custom-ROS2-Interfaces.html">Custom ROS Interface Tutorial</a></li>
 </ul></li>
 
 <li><p>
@@ -311,7 +311,7 @@ Edit <code>CMakeLists.txt</code> and add
 <li>You should also <code>&lt;depend&gt;</code> on any packages whose types were used within your custom types (in this example <code>geometry_msgs</code>)</li>
 </ul></li>
 <li>All custom interface must start with a capital letter, and the names can contain only letters and numbers</li>
-<li>More information at <a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-Client-Libraries/Single-Package-Define-And-Use-Interface.html">Implementing Custom Interfaces Tutorial</a></li>
+<li>More information at <a href="https://docs.ros.org/en/lyrical/ROS-Framework/client-libraries/Working-with-Client-Libraries/Single-Package-Define-And-Use-Interface.html">Implementing Custom Interfaces Tutorial</a></li>
 <li>It is generally good ROS practice to make interfaces is separate packages so that they can be more easily used
 <ul class="org-ul">
 <li>It is also generally good ROS practice to use existing interfaces when possible, to make your code as compatible as possible with the rest of the ROS ecosystem.</li>
@@ -356,7 +356,7 @@ A ROS <a href="https://colcon.readthedocs.io/en/released/user/what-is-a-workspac
 <li>A directory where the packages are installed: <code>ws/install</code></li>
 <li>ROS workspaces enable you to build collections of related packages</li>
 <li>Use a new workspace for each project, that way issues in packages you aren't currently developing won't effect you.</li>
-<li>For a practical guide see the <a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html">Creating a Workspace Tutorial</a>.</li>
+<li>For a practical guide see the <a href="https://docs.ros.org/en/lyrical/ROS-Framework/client-libraries/Working-with-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html">Creating a Workspace Tutorial</a>.</li>
 </ol>
 </div>
 </div>
@@ -364,7 +364,7 @@ A ROS <a href="https://colcon.readthedocs.io/en/released/user/what-is-a-workspac
 <h3 id="building-a-workspace-2-P-1">Building a Workspace</h3>
 <div class="outline-text-3" id="text-org7c648d1">
 <ul class="org-ul">
-<li>Workspaces must be <a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html#build-the-workspace-with-colcon">built</a> before they can be used.</li>
+<li>Workspaces must be <a href="https://docs.ros.org/en/lyrical/ROS-Framework/client-libraries/Working-with-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html#build-the-workspace-with-colcon">built</a> before they can be used.</li>
 <li>Run <code>colcon build</code> from the workspace directory (<code>ws</code>) to build all the packages in the <code>ws/src</code> directory
 <ul class="org-ul">
 <li>Build artifacts are stored in <code>ws/build</code></li>
@@ -406,7 +406,7 @@ all package files of a given type (e.g., libraries and executables) in common di
 <ul class="org-ul">
 <li>This contains your python files and other files (as long as you properly installed them in <code>setup.py</code>)</li>
 </ul></li>
-<li>After building you must <a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html#source-the-overlay">source</a> it
+<li>After building you must <a href="https://docs.ros.org/en/lyrical/ROS-Framework/client-libraries/Working-with-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html#source-the-overlay">source</a> it
 to make the files in it available to ROS</li>
 <li>To source the workspace run <code>source &lt;path_to_install_space&gt;/setup.bash</code>
 <ul class="org-ul">
@@ -445,7 +445,7 @@ are hosted on the <a href="https://github.com/colcon">Colcon Github Organization
 is not specified, <code>colcon</code> may try to build both at the same time. If <code>&lt;package B&gt;</code> finishes before the <code>&lt;package A&gt;</code> process needs it the build will succeed</li>
 <li>To test that your dependencies will always build, build each package in series by specifying <code>colcon build --executor sequential</code></li>
 </ul></li>
-<li><a href="https://docs.ros.org/en/kilted/Concepts/About-Build-System.html">More information about the ROS 2 build system</a></li>
+<li><a href="https://docs.ros.org/en/lyrical/Developer-Tools/Build/About-Build-System.html">More information about the ROS 2 build system</a></li>
 </ul>
 </div>
 <div id="outline-container-colcon-cd-2-P-1" class="outline-3">
@@ -499,17 +499,17 @@ Add the hook in <code>colcon.pkg</code>:
 </div>
 </div>
 </div>
-<div id="outline-container-ros-environment-1-P-2" class="outline-2">
-<h2 id="ros-environment-1-P-2">ROS Environment</h2>
+<div id="outline-container-ros-environment-1-P-1" class="outline-2">
+<h2 id="ros-environment-1-P-1">ROS Environment</h2>
 <div class="outline-text-2" id="text-org3e90d46">
 <ul class="org-ul">
-<li>ROS relies on <a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-CLI-Tools/Configuring-ROS2-Environment.html">environment variables</a> to control settings and find nodes and libraries
+<li>ROS relies on <a href="https://docs.ros.org/en/lyrical/Get-Started/Configuring-ROS2-Environment.html">environment variables</a> to control settings and find nodes and libraries
 <ul class="org-ul">
 <li>See <a href="../../hackathon/linux_interactive.html#org84b8e28">Environment Varaibles</a> for more information on environment variables generally</li>
 </ul></li>
 <li>ROS environment variables are set when <i>underlay</i> is sourced.
 <ul class="org-ul">
-<li>To source the <code>underlay</code> run <code>source /opt/ros/kilted/setup.bash</code></li>
+<li>To source the <code>underlay</code> run <code>source /opt/ros/lyrical/setup.bash</code></li>
 <li>When you installed <code>ROS</code> you added the above command to the <code>~/.bashrc</code> so that it runs automatically whenever <code>bash</code> is opened</li>
 <li>The underlay must be sourced to have access to the ROS command-line tools and system-installed packages</li>
 </ul></li>

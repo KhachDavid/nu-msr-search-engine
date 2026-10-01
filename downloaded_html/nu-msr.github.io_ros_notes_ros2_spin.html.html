@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-09-29 Tue 09:23 -->
+<!-- 2026-10-01 Thu 09:21 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Threads, Spinning, and Async in ROS 2</title>
@@ -21,10 +21,12 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#overview-1-P-4">Overview</a></li>
+<li><a href="#overview-1-P-1">Overview</a></li>
 <li><a href="#service_client">Service Clients</a>
 <ul>
-<li><a href="#steps-to-call-a-service-2-P-1">Steps to Call a Service</a></li>
+<li><a href="#basic-sequence-2-P-1">Basic Sequence</a></li>
+<li><a href="#timing-2-P-1">Timing</a></li>
+<li><a href="#calling-a-service-2-P-1">Calling a Service</a></li>
 </ul>
 </li>
 <li><a href="#events-1-P-1">Events</a></li>
@@ -71,74 +73,119 @@
 <li><a href="#thread-2-P-1">Thread</a></li>
 <li><a href="#threads-in-python-2-P-1">Threads in Python</a>
 <ul>
-<li><a href="#example-3-P-2">Example</a></li>
+<li><a href="#example-3-P-1">Example</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#resources-1-P-3">Resources</a></li>
+<li><a href="#resources-1-P-1">Resources</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-overview-1-P-4" class="outline-2">
-<h2 id="overview-1-P-4">Overview</h2>
+<div id="outline-container-overview-1-P-1" class="outline-2">
+<h2 id="overview-1-P-1">Overview</h2>
 <div class="outline-text-2" id="text-org558ff5f">
 <ul class="org-ul">
-<li>Python ROS 2 nodes (unlike their counterparts in ROS 1) are single-threaded and sequential by default.</li>
-<li>Lack of threads makes reasoning about ROS 2 python nodes easier, makes them more similar to C++ nodes (which were single-threaded in ROS 1) and also provides more control over execution</li>
-<li>ROS 2 python, however, supports highly configurable modes of execution, which require knowledge of both the python concurrency model and how ROS 2 fits in with it.</li>
-<li>In most cases, the single-threaded sequential of ROS 2 makes coding much easier and eliminates whole classes of possible bugs</li>
-<li>This default model, however, is sometimes overly restrictive and reduces potential performance</li>
-<li>There is also one common case where sticking with the default model makes coding much more difficult: using service clients.</li>
+<li>ROS 2 nodes are single-threaded and sequential by default.
+<ul class="org-ul">
+<li>In ROS 1 C++ nodes were single-threaded by default but python nodes were multi-threaded by default</li>
+</ul></li>
+<li>Being single threaded simplifies reasoning about ROS 2 node execution</li>
+<li>Nodes can use other (e.g., multi-threaded) execution models if needed
+<ul class="org-ul">
+<li>Multi-threading is primarily a trade-off of complexity for potential performance</li>
+</ul></li>
+<li>Single-threaded nodes still allow concurrent execution
+<ul class="org-ul">
+<li>With concurrent execution, multiple tasks can make progress sequentially, and that progress can be interleaved</li>
+<li>Concurrency enables, for example, doing useful work while waiting for a response from a service</li>
+</ul></li>
 </ul>
 </div>
 </div>
 <div id="outline-container-service_client" class="outline-2">
 <h2 id="service_client">Service Clients</h2>
 <div class="outline-text-2" id="text-service_client">
+</div>
+<div id="outline-container-basic-sequence-2-P-1" class="outline-3">
+<h3 id="basic-sequence-2-P-1">Basic Sequence</h3>
+<div class="outline-text-3" id="text-orgec8fbae">
 <ul class="org-ul">
-<li>When a service is called using <code>service.async_call</code>, the following happens:
+<li>When a service is called there are two nodes involved:
 <ul class="org-ul">
-<li>The request is sent to the server</li>
-<li>The server processes the request and computes the response</li>
-<li>The response is sent back to the client</li>
-<li>The client receives the response</li>
+<li>The <i>client</i>: This is the node that is calling the service</li>
+<li>The <i>server</i>: This is the node that that is responding to the service</li>
 </ul></li>
-<li>The full sequence of events in a service call take an unspecified amount of time during which the client does not have a response.
-What should the client do while waiting for the response?
+<li>A <i>client</i> calls the service using <code>service.async_call(...)</code>. Upon calling this function:
 <ol class="org-ol">
-<li>Wait until the response is received before doing anything. In this case the request is <i>synchronous</i> and the client <i>blocks</i> until it receives the result</li>
-<li>Perform other useful work while waiting for the result to be received. In this case the request is <i>asynchronous</i> and does not block (i.e., it is <i>non-blocking</i>).
-If the node cares about the response, it needs some way to process the response when it is received.</li>
+<li>A <i>request</i> is sent to the <i>server</i></li>
+<li>The <code>service.async_call(...)</code> function immediately returns</li>
+<li>The <i>client</i> is able continue running without receiving the <i>response</i></li>
+</ol></li>
+<li>Meanwhile, the <i>server</i>
+<ol class="org-ol">
+<li>Receives the <i>request</i></li>
+<li>Computes the <i>response</i></li>
+<li>Sends the <i>response</i> to the <i>client</i></li>
+</ol></li>
+<li>Finally, the <i>client</i> must
+<ol class="org-ol">
+<li>Check for the <i>response</i> and see that it has arrived</li>
+<li>process the <i>response</i></li>
 </ol></li>
 </ul>
 </div>
-<div id="outline-container-steps-to-call-a-service-2-P-1" class="outline-3">
-<h3 id="steps-to-call-a-service-2-P-1">Steps to Call a Service</h3>
-<div class="outline-text-3" id="text-orgadb59e5">
+</div>
+<div id="outline-container-timing-2-P-1" class="outline-3">
+<h3 id="timing-2-P-1">Timing</h3>
+<div class="outline-text-3" id="text-org064cc20">
+<ul class="org-ul">
+<li>The full sequence of events in a service call take an unspecified amount of time.
+<ul class="org-ul">
+<li>The time it takes for the request to reach the server is variable</li>
+<li>The time it takes the server to process the request is variable</li>
+<li>The time it takes the response to be received by the client is variable</li>
+</ul></li>
+<li>There are several options for what the client can do while waiting for the response:
 <ol class="org-ol">
-<li>Create a service client (call it <code>client</code>) using <code>Node.create_client</code></li>
-<li>Wait for the service to become available using <code>client.wait_for_service(timeout_sec</code>&#x2026;)=</li>
-<li>Issue a request with <code>client.call_async</code>
+<li>Do nothing until the response is received.
 <ul class="org-ul">
-<li>Synchronous calls are generally not well supported in ROS 2, although there is a synchronous calling method in <code>rclpy</code></li>
+<li>In this case the request can be viewed as <i>synchronous</i> and the client is said to <i>block</i> until it receives the response.</li>
 </ul></li>
-<li>If you don't want to block
+<li>Perform other useful work while waiting for the result to be received.
 <ul class="org-ul">
-<li>Do a little bit of work</li>
-<li>Check for a result</li>
-<li>Repeat until a result is ready</li>
+<li>In this case the request is <i>asynchronous</i> and does not block (i.e., it is <i>non-blocking</i>).</li>
+<li>If the node cares about the information from the response, it needs some way to process the response when it is received.</li>
 </ul></li>
-<li>If you do want to block, wait for the result until it is ready
+</ol></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-calling-a-service-2-P-1" class="outline-3">
+<h3 id="calling-a-service-2-P-1">Calling a Service</h3>
+<div class="outline-text-3" id="text-org694151b">
+<ol class="org-ol">
+<li>Create a service client (call it <code>client</code>) using <code>Node.create_client</code> (e.g., in the Node's <code>__init__</code>)</li>
+<li>Wait for the service to become available using <code>client.wait_for_service(timeout_sec</code>&#x2026;)=
 <ul class="org-ul">
-<li>The <a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Service-And-Client.html#write-the-client-node">Service Tutorial</a> uses <code>rclpy.spin_until_future_complete</code> to accomplish this task</li>
+<li>We will generally make the assumption in this course that once a node discovers that a service is available, it will remain available.</li>
+</ul></li>
+<li>Issue a request with <code>client.call_async(...)</code></li>
+<li>For a non-blocking <i>service call</i>
+<ul class="org-ul">
+<li>Do a little bit of work (e.g., in a timer)</li>
+<li>Check if a response is ready</li>
+<li>Repeat until a response is ready</li>
+</ul></li>
+<li>For a blocking <i>service call</i> wait for the result until it is ready
+<ul class="org-ul">
+<li>The <a href="https://docs.ros.org/en/lyrical/ROS-Framework/client-libraries/Working-with-Client-Libraries/Writing-A-Simple-Py-Service-And-Client.html#write-the-client-node">Service Tutorial</a> uses <code>rclpy.spin_until_future_complete</code> to accomplish this task</li>
 <li>But the code in the tutorial <b>WILL NOT WORK</b> if used from within another callback function!</li>
-<li>What is a future anyway? And why is it spinning?</li>
+<li>Generally, <code>rclpy.spin_until_future_complete</code> is mainly useful for calling services that are part of a node's one-time setup sequence.</li>
 </ul></li>
+<li>The rest of these notes address how to easily wait for a service call to complete in ROS 2, while also explaining in some detail the concepts and machinery</li>
 </ol>
-
 <p>
-The rest of these notes address how to easily wait for a service call to complete in ROS 2, while also explaining in some detail the concepts and machinery
 required to make it happen. For quick instruction see <a href="#patterns">Patterns.</a>
 </p>
 </div>
@@ -200,7 +247,7 @@ required to make it happen. For quick instruction see <a href="#patterns">Patter
 <li>This behavior means that spinning from within a callback will not allow other callback functions to be called (via <code>rclpy.spin_once</code>).</li>
 <li>In other words, the callbacks cannot be nested by default.</li>
 </ul></li>
-<li>The behavior of what callbacks can be called by <code>rclpy.spin_once</code> is controlled using <a href="https://docs.ros.org/en/kilted/How-To-Guides/Using-callback-groups.html">Callback Groups</a></li>
+<li>The behavior of what callbacks can be called by <code>rclpy.spin_once</code> is controlled using <a href="https://docs.ros.org/en/lyrical/ROS-Framework/nodes/Working-with-nodes/Using-callback-groups.html">Callback Groups</a></li>
 <li>There are two primary callback groups types: <code>MutuallyExclusiveCallbackGroup</code> and <code>ReentrantCallbackGroup</code>.</li>
 </ul>
 </div>
@@ -387,13 +434,15 @@ Examples can be found at <a href="https://github.com/m-elwin/async_experiments">
 <div class="outline-text-4" id="text-blocking_calls">
 <ol class="org-ol">
 <li>Blocking calls are the easiest to handle and are preferred unless performance requirements dictate otherwise</li>
-<li>Assume that you want to call the service from <code>callback</code></li>
-<li>Make <code>callback</code> an <code>async</code> function.</li>
-<li>Create a new <code>MutuallyExclusiveCallbackGroup</code> and assign every <code>service client</code> to that callback group.</li>
-<li>All other callback functions remain in the default <code>MutuallyExclusiveCallbackGroup</code>.</li>
-<li>From within <code>callback</code> you can now <code>await</code> the result of the <code>call_async</code> on the service client:
+<li>Assume that you want to call the service from a callback named <code>callback1</code>: make the <code>callback1</code> an <code>async</code> function</li>
+<li>In the node class's <code>__init__</code>, create a new <code>MutuallyExclusiveCallbackGroup</code> (called <code>mux_cb1</code>) and assign every <code>service client</code> to <code>mux_cb1</code>.</li>
+<li>All other callbacks (including <code>callback1</code>) remain in the default <code>MutuallyExclusiveCallbackGroup</code> (we'll refer to this group as <code>mux_default</code>).</li>
+<li>When you <code>await</code> the result of the <code>call_async</code> from within <code>callback1</code>:
 <ul class="org-ul">
-<li>This <code>await</code> will send the service request, suspend <code>callback</code>, and return control to the event loop</li>
+<li>The client sends the service request</li>
+<li>Execution of <code>callback1</code> is suspended and control is returned to the main event loop</li>
+<li>While waiting, no callbacks in <code>mux_default</code> can run, even if the event triggering them is received</li>
+<li>The event loop can receive and process the <code>result</code> from the service request, since it is in a separate <code>mux_cb1</code> callback group</li>
 <li>When the event loop receives the response, <code>callback</code> will be resumed where it had been suspended and you will have access to the response.</li>
 </ul></li>
 <li>See the AwaitClient example in <a href="https://github.com/m-elwin/async_experiments">https://github.com/m-elwin/async_experiments</a>.</li>
@@ -656,8 +705,8 @@ another thread can run while the other thread waits for the system.</li>
 </ul></li>
 </ol>
 </div>
-<div id="outline-container-example-3-P-2" class="outline-4">
-<h4 id="example-3-P-2">Example</h4>
+<div id="outline-container-example-3-P-1" class="outline-4">
+<h4 id="example-3-P-1">Example</h4>
 <div class="outline-text-4" id="text-orga30d81f">
 <p>
 If you perform a non-atomic operation, the thread you are running on can be interrupted in the middle.
@@ -690,14 +739,14 @@ Thread 2 stores 1 in i
 </div>
 </div>
 </div>
-<div id="outline-container-resources-1-P-3" class="outline-2">
-<h2 id="resources-1-P-3">Resources</h2>
+<div id="outline-container-resources-1-P-1" class="outline-2">
+<h2 id="resources-1-P-1">Resources</h2>
 <div class="outline-text-2" id="text-org53c68ca">
 <ul class="org-ul">
-<li><a href="https://docs.ros.org/en/kilted/How-To-Guides/Sync-Vs-Async.html">Async vs Synchronous Service Clients</a></li>
-<li><a href="https://docs.ros.org/en/kilted/How-To-Guides/Using-callback-groups.html">Callback Groups</a></li>
+<li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/interfaces/services/Working-with-services/Sync-Vs-Async.html">Async vs Synchronous Service Clients</a></li>
+<li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/nodes/Working-with-nodes/Using-callback-groups.html">Callback Groups</a></li>
 <li><a href="https://docs.ros2.org/foxy/api/rclpy/api/init_shutdown.html">Spinning</a></li>
-<li><a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Service-And-Client.html">Writing A Service</a></li>
+<li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/client-libraries/Working-with-Client-Libraries/Writing-A-Simple-Py-Service-And-Client.html">Writing A Service</a></li>
 <li><a href="https://github.com/m-elwin/async_experiments">Examples</a></li>
 <li><a href="https://github.com/ros2/examples/tree/rolling/rclpy/services/minimal_client">rclpy Service client Examples</a></li>
 <li><a href="https://docs.python.org/3/library/asyncio.html">Python Async IO</a></li>

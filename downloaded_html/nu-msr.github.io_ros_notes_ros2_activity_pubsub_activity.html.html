@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-09-29 Tue 09:23 -->
+<!-- 2026-10-01 Thu 09:09 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Publishers and Subscriber Activity</title>
@@ -105,7 +105,6 @@
 </ul>
 </li>
 <li><a href="#reference-1-P-1">Reference</a></li>
-<li><a href="#tutorials-1-P-1">Tutorials</a></li>
 </ul>
 </div>
 </nav>
@@ -115,7 +114,7 @@
 </div>
 <div id="outline-container-basic-node-2-P-1" class="outline-3">
 <h3 id="basic-node-2-P-1">Basic Node</h3>
-<div class="outline-text-3" id="text-org27e9672">
+<div class="outline-text-3" id="text-org2e6eea5">
 <p>
 Create a node that accomplishes the following:
 </p>
@@ -206,7 +205,7 @@ Here is an approximate step-by-step guide.
 </div>
 <div id="outline-container-custom-parameters-2-P-1" class="outline-3">
 <h3 id="custom-parameters-2-P-1">Custom Parameters</h3>
-<div class="outline-text-3" id="text-orgc32fdd4">
+<div class="outline-text-3" id="text-org68ecff4">
 <ol class="org-ol">
 <li>Control the minimum and maximum \(x\) values using parameters called <code>xmin</code> and <code>xmax</code>.</li>
 <li>Make sure the parameters have meaningful default values and have the node log the parameter values to the DEBUG log when it starts.</li>
@@ -221,7 +220,7 @@ Here is an approximate step-by-step guide.
 </div>
 <div id="outline-container-namespaces-2-P-1" class="outline-3">
 <h3 id="namespaces-2-P-1">Namespaces</h3>
-<div class="outline-text-3" id="text-org4b07334">
+<div class="outline-text-3" id="text-orgf635a6f">
 <ol class="org-ol">
 <li>Run two instances of your node and the <code>turtlesim</code> in two separate namespaces with two separate <code>xmin</code> and <code>xmax</code> values.
 <ul class="org-ul">
@@ -258,7 +257,7 @@ This section contains the answers. Try to avoid looking at the answers unless yo
 verify your work after completing the task.
 </p>
 </div>
-<details id="org2e6eea5"><summary class="header-3">Basic Node</summary>
+<details id="org6f17e27"><summary class="header-3">Basic Node</summary>
 <details id="orgaafc66e"><summary class="header-4">Creating The Workspace</summary>
 <div class="outline-text-4" id="text-orgaafc66e">
 <div class="org-src-container">
@@ -320,7 +319,11 @@ setup(
     maintainer_email<span class="org-operator">=</span><span class="org-string">'youremail@domain.edu'</span>,
     description<span class="org-operator">=</span><span class="org-string">'A pubsub demo'</span>,
     <span class="org-constant">license</span><span class="org-operator">=</span><span class="org-string">'GPLv3'</span>,
-    tests_require<span class="org-operator">=</span>[<span class="org-string">'pytest'</span>],
+    extras_require<span class="org-operator">=</span>{
+        <span class="org-string">'test'</span>: [
+            <span class="org-string">'pytest'</span>,
+            ],
+        },
     entry_points<span class="org-operator">=</span>{
         <span class="org-string">'console_scripts'</span>: [
         ],
@@ -350,6 +353,7 @@ This is an activity to practice with publishers and subscribers and launchfiles
 
 <div class="org-src-container">
 <label class="org-src-name"><span class="listing-number">Listing 5: </span>pubsub/pubsub.py</label><pre class="src src-python"><span class="org-keyword">import</span> rclpy
+<span class="org-keyword">from</span> rclpy.executors <span class="org-keyword">import</span> ExternalShutdownException
 <span class="org-keyword">from</span> rclpy.node <span class="org-keyword">import</span> Node
 
 <span class="org-keyword">class</span> <span class="org-type">PubsubNode</span>(Node):
@@ -359,11 +363,12 @@ This is an activity to practice with publishers and subscribers and launchfiles
 
 
 <span class="org-keyword">def</span> <span class="org-function-name">main</span>(args<span class="org-operator">=</span><span class="org-constant">None</span>):
-    rclpy.init(args<span class="org-operator">=</span>args)
-    <span class="org-variable-name">pubsub_node</span> <span class="org-operator">=</span> PubsubNode()
-    rclpy.spin(pubsub_node)
-    pubsub_node.destroy_node()
-    rclpy.shutdown()
+    <span class="org-keyword">try</span>:
+        <span class="org-keyword">with</span> rclpy.init(args<span class="org-operator">=</span>args):
+            <span class="org-variable-name">pubsub_node</span> <span class="org-operator">=</span> PubsubNode()
+            rclpy.spin(pubsub_node)
+    <span class="org-keyword">except</span> (<span class="org-type">KeyboardInterrupt</span>, ExternalShutdownException):
+        <span class="org-keyword">pass</span>
 </pre>
 </div>
 </div>
@@ -488,8 +493,8 @@ ros2 interface show turtlesim_msgs/msg/Pose
 </details>
 </details>
 <details id="orgd8cda92"><summary class="header-3">Parameters</summary>
-<details id="org68ecff4"><summary class="header-4">Custom Parameters</summary>
-<div class="outline-text-4" id="text-org68ecff4">
+<details id="org8e559da"><summary class="header-4">Custom Parameters</summary>
+<div class="outline-text-4" id="text-org8e559da">
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-comment-delimiter"># </span><span class="org-comment">In PubsubNode.__init__
 </span><span class="org-keyword">self</span>.declare_parameter(<span class="org-string">"xmin"</span>, 2.0)
@@ -524,7 +529,7 @@ To test the node: <code>ros2 run pubsub pubsub --ros-args -p xmin:=3.1 -p xmax:=
 </div>
 </details>
 </details>
-<details id="orgf635a6f"><summary class="header-3">Namespaces</summary>
+<details id="orge287ad5"><summary class="header-3">Namespaces</summary>
 <div id="outline-container-changing-the-namespace-3-P-1" class="outline-4">
 <h4 id="changing-the-namespace-3-P-1">Changing the Namespace</h4>
 <div class="outline-text-4" id="text-orgec5a046">
@@ -599,18 +604,6 @@ The full solution is at <a href="https://github.com/m-elwin/me495_pubsub">https:
 <ul class="org-ul">
 <li><a href="../basics.html">ROS Basics</a> (and references therein).</li>
 <li><a href="../ros_api.html">ROS API</a> (and references therein).</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-tutorials-1-P-1" class="outline-2">
-<h2 id="tutorials-1-P-1">Tutorials</h2>
-<div class="outline-text-2" id="text-org2c4fd18">
-<ul class="org-ul">
-<li><a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-CLI-Tools.html">Beginner CLI Tools</a></li>
-<li><a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-Client-Libraries.html">Beginner Client Libraries</a></li>
-<li><a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html">Workspace</a></li>
-<li><a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html">Package</a></li>
-<li><a href="https://docs.ros.org/en/kilted/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber.html">Publisher and Subscriber</a></li>
 </ul>
 </div>
 </div>
