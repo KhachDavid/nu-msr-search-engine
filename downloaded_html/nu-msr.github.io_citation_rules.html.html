@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-09-11 Fri 09:55 -->
+<!-- 2026-10-05 Mon 15:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Citation Rules</title>
@@ -24,7 +24,7 @@
 <li><a href="#citations">Citations</a></li>
 <li><a href="#reports-and-written-work-including-portfolios--1-P-1">Reports and Written Work (including Portfolios)</a>
 <ul>
-<li><a href="#citing-collaborators-2-P-1">Citing Collaborators</a></li>
+<li><a href="#collab">Citing Collaborators</a></li>
 </ul>
 </li>
 <li><a href="#source-code-1-P-1">Source Code</a>
@@ -36,12 +36,13 @@
 </li>
 <li><a href="#ai-tools-1-P-1">AI Tools</a>
 <ul>
-<li><a href="#conversational-ai-2-P-1">Conversational AI</a></li>
 <li><a href="#agentic-ai-2-P-1">Agentic AI</a></li>
 <li><a href="#code-completion-ai-2-P-1">Code Completion AI</a></li>
-<li><a href="#example-2-P-1">Example</a></li>
+<li><a href="#transcripts-2-P-1">Transcripts</a></li>
+<li><a href="#artifacts-2-P-1">Artifacts</a></li>
 </ul>
 </li>
+<li><a href="#example-1-P-1">Example</a></li>
 <li><a href="#group-projects-1-P-1">Group Projects</a></li>
 <li><a href="#references-1-P-1">References</a></li>
 </ul>
@@ -87,9 +88,9 @@ however, it may be important as part of proper formatting and style.</li>
 </ul></li>
 </ol>
 </div>
-<div id="outline-container-citing-collaborators-2-P-1" class="outline-3">
-<h3 id="citing-collaborators-2-P-1">Citing Collaborators</h3>
-<div class="outline-text-3" id="text-org9fe8f9b">
+<div id="outline-container-collab" class="outline-3">
+<h3 id="collab">Citing Collaborators</h3>
+<div class="outline-text-3" id="text-collab">
 <ol class="org-ol">
 <li>To cite fellow students with whom you have worked, and whose contributions do not require a inline citation, use the following format:
 <ul class="org-ul">
@@ -102,6 +103,8 @@ and acknowledged where authorship is acknowledged (e.g., in the <code>README.md<
 <li>The absence of a first reference stating who you worked with is a declaration that you did not work with anybody on the assignment.</li>
 <li>If a student or group of students makes a contribution that requires an inline citation, those students should be listed on a separate line,
 using the format outlined in [1, Sec. Q], which looks like <code>Author1, Author2, private communication, Abbrev Month, year</code></li>
+<li>You may optionally provide a summary of the conversation under the citation in the <code>citations.txt</code> or refer to a separate file under <code>transcripts/</code>
+with a description. The purpose of the summary is to provide additional context for what the conversation covered.</li>
 </ol>
 </div>
 </div>
@@ -220,35 +223,18 @@ understand the theory behind the code.</li>
 There are additional rules for AI tools, depending on the nature of the tool.
 </p>
 <ol class="org-ol">
-<li>The citation format is  <code>Model Name, ver X. Company Name. Used On: Date. Transcript Available: (URL or local path to transcript)</code>
+<li>The citation format is  <code>Model Name, ver X. Company Name. Used On: Date.</code>
 <ul class="org-ul">
 <li>Company name may be <code>Self-Hosted</code> if you are self-hosting the assistant.</li>
 </ul></li>
-<li>Additional Information will be on subsequent lines, depending on the nature of the AI used</li>
-</ol>
-</div>
-<div id="outline-container-conversational-ai-2-P-1" class="outline-3">
-<h3 id="conversational-ai-2-P-1">Conversational AI</h3>
-<div class="outline-text-3" id="text-orgcb2b8ec">
-<p>
-If your use of the AI tool is in the form of a conversation that does not directly modify your code (e.g., copying and pasting from ChatGPT):
-</p>
+<li>You may choose to include a transcript or additional context for the conversation, in order to clarify
 <ol class="org-ol">
-<li>The full transcript of that conversation shall be treated as an external website and provided either as
-<ul class="org-ul">
-<li>A persistent and publically accessible URL</li>
-<li>A full local copy of the conversation stored within a directory called <code>ai_citations/</code> in the base directory of your repository</li>
-</ul></li>
-<li>Inline citation should direct the reader to the specific section (e.g., the first prompt prior to the generated content) of the cited transcript
-either by
-<ol class="org-ol">
-<li>Specifying a line number. The inline citation is then =[4, ai_transcript:234-456]]</li>
-<li>Specifying an easily searchable text string [4, ai_transcript:"This short phrase", occurrence 3]</li>
-<li>An additional short copied excerpt of just the relevant portion, stored under <code>ai_citations/excerpts</code>.
-The inline citation is then <code>[4, ai_citations/excerpts/name_of_excerpt]</code></li>
+<li>How the AI tool was used</li>
+<li>What your thought process was while using the tool</li>
+<li>What information the AI tool provided</li>
 </ol></li>
+<li>Including additional information is optional, however, such information can help establish your understanding and responsibility for the AI contribution.</li>
 </ol>
-</div>
 </div>
 <div id="outline-container-agentic-ai-2-P-1" class="outline-3">
 <h3 id="agentic-ai-2-P-1">Agentic AI</h3>
@@ -257,11 +243,7 @@ The inline citation is then <code>[4, ai_citations/excerpts/name_of_excerpt]</co
 If your AI tool directly edits code and makes git commits:
 </p>
 <ol class="org-ol">
-<li>The transcript of your interactions with the AI agent should be included in <code>ai_citations</code>
-<ul class="org-ul">
-<li>With Claude Code, for example, such a transcript can be generated with <code>/export</code></li>
-</ul></li>
-<li>Commits that were primarily written by you with AI assistance should provide inline citations that refer to locations in the transcript, as per the <a href="#conversational-ai-2-P-1">Conversational AI</a></li>
+<li>Commits that were primarily written by you with AI assistance should provide inline citations.</li>
 <li>Commits where the code was primarily written by the AI have the following rules:
 <ul class="org-ul">
 <li>The AI is named as the author in the git commit log</li>
@@ -274,15 +256,19 @@ If your AI tool directly edits code and makes git commits:
 Here is an example
 </p>
 <div class="org-src-container">
-<pre class="src src-nil">[4] Claude Code: Opus 5, Anthropic. Used On 5/5/2026. Transcript Available: ai_citations/agent_export.txt
+<pre class="src src-nil">[4] Claude Code: Opus 5, Anthropic. Used On 5/5/2026. Transcript Available: transcripts/agent_export.txt
 - Files written by AI:
     - file1.py
     - file2.py
-- The following files were primarily written by AI
+- Files written by me
     - file3.py
-    - file 4.py
+    - file4.py
 </pre>
 </div></li>
+</ul></li>
+<li>You can also add clarifying statements such as
+<ul class="org-ul">
+<li><code>Files written by AI and edited by me.</code></li>
 </ul></li>
 </ol>
 </div>
@@ -305,48 +291,62 @@ Some generative AI tools are built into editors (e.g., Copilot)
 <li>Roughly, if the completion available would have been available in 2015, it is exempt.</li>
 </ol></li>
 </ul></li>
-<li>Non-exempt code must be cited like any other AI generated code (including transcripts of any explicit prompts used).</li>
-<li>If there is no clear transcript/prompt (e.g., the code itself is the prompt) then you should:
-<ul class="org-ul">
-<li>List the name of the file in the <code>citations.txt</code> instead of the transcript</li>
-<li>The context immediately following the auto-completed code that you feel was relevant to the generation should be marked
-at the start and end with <code>BEGIN_PROMPT [Citation Number]</code> and <code>END_PROMPT</code></li>
-</ul></li>
-<li><p>
-Here is an example
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span class="org-keyword">def</span> <span class="org-function-name">myufunction</span>(stuff):
-    <span class="org-comment-delimiter"># </span><span class="org-comment">BEGIN_PROMPT [4]
-</span>    <span class="org-doc">""" Write a function that performs an important task
-    It takes stuff as an argument and then does things
-    """</span>
-    <span class="org-comment-delimiter"># </span><span class="org-comment">END_PROMPT
-</span>    <span class="org-keyword">return</span> <span class="org-operator">=</span>this_ai_code()
-</pre>
-</div></li>
+<li>Non-exempt code must be cited like any other AI generated code</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-example-2-P-1" class="outline-3">
-<h3 id="example-2-P-1">Example</h3>
-<div class="outline-text-3" id="text-org59e472c">
+<div id="outline-container-transcripts-2-P-1" class="outline-3">
+<h3 id="transcripts-2-P-1">Transcripts</h3>
+<div class="outline-text-3" id="text-org056d274">
+<ol class="org-ol">
+<li>It may be useful to include a transcript of your conversation with an AI chatbot, or otherwise document your interactions with AI.
+<ul class="org-ul">
+<li>Place the transcript under the <code>transcripts/</code> directory or provide a persistent URL to the transcript.</li>
+<li>Refer to them on the second line of <code>citations.txt</code> as
+<ul class="org-ul">
+<li>"[ Full | Edited | Summary ] [with AI] Transcript: &lt;url | transcripts/filename&gt;"</li>
+</ul></li>
+<li>Full means the complete transcript, as exported from the AI tool (be careful, such transcripts can reveal personal information)</li>
+<li>Edited means that you redacted, modified or curated the transcript in some manner</li>
+<li>Summary means that you describe the overall purpose and content of the transcript, without directly providing content from the transcript.</li>
+<li>It is appropriate to describe in <code>citations.txt</code> what editing you did.</li>
+</ul></li>
+<li>AI may be used to help edit or summarize existing transcripts.
+<ul class="org-ul">
+<li>The usage must be disclosed by adding <code>with AI</code>, but no further citation is required.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-artifacts-2-P-1" class="outline-3">
+<h3 id="artifacts-2-P-1">Artifacts</h3>
+<div class="outline-text-3" id="text-org5e8db46">
+<ol class="org-ol">
+<li>During your AI usage, the AI may produce reference documents, graphics, or other references that you then go on to use</li>
+<li>Such artifacts can be included under the <code>transcripts/</code> directory or a persistent, publicly-accessible URL to them can be provided</li>
+<li>It can also be appropriate to provide, in <code>citations.txt</code> a brief description of what the artifact is</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-example-1-P-1" class="outline-2">
+<h2 id="example-1-P-1">Example</h2>
+<div class="outline-text-2" id="text-org59e472c">
 <p>
 Here is an example <code>citations.txt</code>:
 </p>
 <div class="org-src-container">
 <pre class="src src-nil">Worked With: [List every person you worked with generally here.]
-[1] Claude Sonnet 4. Anthropic. Used on 9/21/2025. Transcript Available: ai_citations/claude_session.txt
+[1] Claude Sonnet 4. Anthropic. Used on 9/21/2025. Edited with AI Transcript: transcripts/claude_session.txt
     - Files written by me:
        - care_alot.py
-[2] ChatGpt. OpenAIUsed on 9/22/2023. Transcript is in ./chatgpt/transcript1.txt
+[2] ChatGpt. OpenAIUsed on 9/22/2023. Full Transcript: transcripts/transcript1.txt
      Used to help explain some difficult concepts
 [3] https://stackoverflow.com/the/answer Accessed on 9/23/22
     Provided general information on debugging bugs
 [4] John Smith [if John Smith gave you a specific idea outside of generally working with you].
      Discussed the algorithm, I used his pseudocode and implemented it in python
 </pre>
-</div>
 </div>
 </div>
 </div>
@@ -376,7 +376,7 @@ In group coding projects (and unless otherwise specified), each person should be
 </div>
 </div>
 <div id="postamble" class="status">
-<p><p class="outline-2">Author: Northwestern University MS in Robotics.  Date: September 9, 2024.</p></p>
+<p><p class="outline-2">Author: Northwestern University MS in Robotics.  Date: October 5, 2026.</p></p>
 </div>
 </body>
 </html>

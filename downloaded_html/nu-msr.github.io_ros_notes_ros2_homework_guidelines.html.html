@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-09-29 Tue 09:23 -->
+<!-- 2026-10-05 Mon 15:34 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Homework Guidelines: ME495 Embedded Systems in Robotics</title>
@@ -21,24 +21,25 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#guidelines-1-P-2">Guidelines</a>
+<li><a href="#guidelines-1-P-1">Guidelines</a>
 <ul>
 <li><a href="#git-2-P-1">Git</a></li>
-<li><a href="#readme-2-P-2">README</a></li>
+<li><a href="#readme-2-P-1">README</a></li>
 <li><a href="#citations-2-P-1">Citations</a></li>
 <li><a href="#appropriate-use-of-sources-2-P-1">Appropriate Use of Sources</a></li>
-<li><a href="#documentation-2-P-3">Documentation</a></li>
+<li><a href="#documentation-2-P-1">Documentation</a></li>
 <li><a href="#coding-guidelines-2-P-1">Coding Guidelines</a></li>
 </ul>
 </li>
 <li><a href="#asking-for-help-1-P-1">Asking For Help</a></li>
 <li><a href="#tips-1-P-1">Tips</a></li>
 <li><a href="#final-submission-checklist-1-P-1">Final Submission Checklist</a></li>
+<li><a href="#passing-ros-2-linting-tests-1-P-1">Passing ROS 2 Linting Tests</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-guidelines-1-P-2" class="outline-2">
-<h2 id="guidelines-1-P-2">Guidelines</h2>
+<div id="outline-container-guidelines-1-P-1" class="outline-2">
+<h2 id="guidelines-1-P-1">Guidelines</h2>
 <div class="outline-text-2" id="text-org3c10af8">
 <p>
 This document describes expectations for homework submissions.
@@ -76,8 +77,8 @@ which means providing documentation, using git properly, and providing tests whe
 </ol>
 </div>
 </div>
-<div id="outline-container-readme-2-P-2" class="outline-3">
-<h3 id="readme-2-P-2">README</h3>
+<div id="outline-container-readme-2-P-1" class="outline-3">
+<h3 id="readme-2-P-1">README</h3>
 <div class="outline-text-3" id="text-org1325e7f">
 <ol class="org-ol">
 <li>Your <code>README.md</code> should be formatted using markdown: see <a href="https://guides.github.com/features/mastering-markdown/">this guide</a>.
@@ -141,8 +142,8 @@ which means providing documentation, using git properly, and providing tests whe
 </ol>
 </div>
 </div>
-<div id="outline-container-documentation-2-P-3" class="outline-3">
-<h3 id="documentation-2-P-3">Documentation</h3>
+<div id="outline-container-documentation-2-P-1" class="outline-3">
+<h3 id="documentation-2-P-1">Documentation</h3>
 <div class="outline-text-3" id="text-org6c01e2d">
 <ol class="org-ol">
 <li>Each node that you write should start with a python <a href="https://peps.python.org/pep-0257/">docstring</a> describing its ROS API:
@@ -182,6 +183,7 @@ which means providing documentation, using git properly, and providing tests whe
 unreliable and dangerous. The time to complete a task may vary between computers or based on different computer usage patterns and therefore
 sleeping can hide timing bugs.</li>
 </ul></li>
+<li>Your code should pass <code>colcon test</code> cleanly</li>
 </ol>
 </div>
 </div>
@@ -242,6 +244,20 @@ related to parallel dependencies in the build.</li>
 <li>Are there any files (including hidden files) that should be in <code>.gitignore</code> but are instead committed?</li>
 <li>Ensure that there are no hard-coded paths that are specific to your machine in the source code or configuration files</li>
 </ol>
+</div>
+</div>
+<div id="outline-container-passing-ros-2-linting-tests-1-P-1" class="outline-2">
+<h2 id="passing-ros-2-linting-tests-1-P-1">Passing ROS 2 Linting Tests</h2>
+<div class="outline-text-2" id="text-orgfdadf30">
+<p>
+The ROS 2 <code>flake8</code> and <code>pep257</code> tests can be annoying to pass.
+The below experimental solution is designed to help:
+</p>
+<ul class="org-ul">
+<li><a href="https://github.com/NU-MSR/numsr_ros2_style">https://github.com/NU-MSR/numsr_ros2_style</a></li>
+<li>Install ruff with <code>curl -LsSf https://astral.sh/ruff/install.sh | sh</code></li>
+<li>It is possible to integrate ruff with <code>vcscode</code> to have the fixes and errors displayed in the editor.</li>
+</ul>
 </div>
 </div>
 </div>

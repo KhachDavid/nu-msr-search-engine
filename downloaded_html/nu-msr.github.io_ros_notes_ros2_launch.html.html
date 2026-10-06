@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-10-01 Thu 09:09 -->
+<!-- 2026-10-06 Tue 09:10 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Launchfiles</title>
@@ -242,15 +242,11 @@ In <code>&lt;pkg&gt;/config</code>, create a <code>&lt;myconfig&gt;.yaml</code> 
        pram2: value
 </pre>
 </div></li>
-<li><p>
-<code>ros2 param load</code> can load these files
-</p>
+<li><code>ros2 param load</code> can load these files
 <ol class="org-ol">
 <li>You must install the data by editing <code>setup.py</code> and adding it to <code>data_files</code> in <code>setup.py</code></li>
-</ol>
-<p>
-3.In an xml launchfile use <code>&lt;param from="$(find-pkg-share pkgname)/installed/path/to/configfile&gt;</code>
-</p></li>
+<li>In an xml launchfile use <code>&lt;param from="$(find-pkg-share pkgname)/installed/path/to/configfile&gt;</code></li>
+</ol></li>
 </ol></li>
 <li>More information on how ROS handles <code>.yaml</code> files can be found in the <a href="https://github.com/ros2/rcl/tree/master/rcl_yaml_param_parser">rcl_yaml_param_parser</a> library</li>
 </ol>
