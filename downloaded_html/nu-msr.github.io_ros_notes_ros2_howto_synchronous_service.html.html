@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-10-06 Tue 09:10 -->
+<!-- 2026-10-06 Tue 13:26 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Synchronous Service Calls</title>
@@ -54,28 +54,28 @@ The node's <code>__init__</code> function is where
 <li>The services are created</li>
 <li>We wait for the services to become available
 <ul class="org-ul">
-<li>We assume that once available, the services will always be available, otherwise there is an error.</li>
+<li>We initially assume that once available, the services will always be available, otherwise there is an error.</li>
 </ul></li>
 </ol>
 
 <div class="org-src-container">
-<pre class="src src-python">  <span class="org-keyword">from</span> rclpy.callback_groups <span class="org-keyword">import</span> MutuallyExclusiveCallbackGroup
-wa
-  <span class="org-keyword">class</span> <span class="org-type">AwaitClient</span>(node):
-      <span class="org-keyword">def</span> <span class="org-function-name">__init__</span>(<span class="org-keyword">self</span>):
-          <span class="org-builtin">super</span>().__init__(<span class="org-string">'await_client'</span>)
-          <span class="org-comment-delimiter"># </span><span class="org-comment">Create the callback group
-</span>          <span class="org-keyword">self</span>.<span class="org-variable-name">_mux_client</span> <span class="org-operator">=</span> MutuallyExclusiveCallbackGroup()
+<pre class="src src-python"><span class="org-keyword">from</span> rclpy.callback_groups <span class="org-keyword">import</span> MutuallyExclusiveCallbackGroup
 
-          <span class="org-comment-delimiter"># </span><span class="org-comment">Create the services
-</span>          <span class="org-keyword">self</span>.<span class="org-variable-name">_client</span> <span class="org-operator">=</span> <span class="org-keyword">self</span>.create_client(ServiceType, <span class="org-string">'service_name'</span>, callback_group <span class="org-operator">=</span> <span class="org-keyword">self</span>._mux_client)
+<span class="org-keyword">class</span> <span class="org-type">AwaitClient</span>(node):
+    <span class="org-keyword">def</span> <span class="org-function-name">__init__</span>(<span class="org-keyword">self</span>):
+        <span class="org-builtin">super</span>().__init__(<span class="org-string">'await_client'</span>)
+        <span class="org-comment-delimiter"># </span><span class="org-comment">Create the callback group
+</span>        <span class="org-keyword">self</span>.<span class="org-variable-name">_mux_client</span> <span class="org-operator">=</span> MutuallyExclusiveCallbackGroup()
 
-          <span class="org-comment-delimiter"># </span><span class="org-comment">Other clients with callbacks get the default callback group, for example, a timer
-</span>          <span class="org-keyword">self</span>.<span class="org-variable-name">_tmr</span> <span class="org-operator">=</span> <span class="org-keyword">self</span>.create_timer(5.0, <span class="org-keyword">self</span>.timer_callback)
+        <span class="org-comment-delimiter"># </span><span class="org-comment">Create the services
+</span>        <span class="org-keyword">self</span>.<span class="org-variable-name">_client</span> <span class="org-operator">=</span> <span class="org-keyword">self</span>.create_client(ServiceType, <span class="org-string">'service_name'</span>, callback_group <span class="org-operator">=</span> <span class="org-keyword">self</span>._mux_client)
 
-          <span class="org-comment-delimiter"># </span><span class="org-comment">Wait for the servies to become available.
-</span>          <span class="org-keyword">if</span> <span class="org-keyword">not</span> <span class="org-keyword">self</span>._client.wait_for_service(timeout_sec <span class="org-operator">=</span> 1.0):
-              <span class="org-keyword">raise</span> <span class="org-type">RuntimeError</span>(f<span class="org-string">"Timeout waiting for service </span>{<span class="org-keyword">self</span>._client.service_name}<span class="org-string">"</span>)
+        <span class="org-comment-delimiter"># </span><span class="org-comment">Other clients with callbacks get the default callback group, for example, a timer
+</span>        <span class="org-keyword">self</span>.<span class="org-variable-name">_tmr</span> <span class="org-operator">=</span> <span class="org-keyword">self</span>.create_timer(5.0, <span class="org-keyword">self</span>.timer_callback)
+
+        <span class="org-comment-delimiter"># </span><span class="org-comment">Wait for the servies to become available.
+</span>        <span class="org-keyword">if</span> <span class="org-keyword">not</span> <span class="org-keyword">self</span>._client.wait_for_service(timeout_sec <span class="org-operator">=</span> 1.0):
+            <span class="org-keyword">raise</span> <span class="org-type">RuntimeError</span>(f<span class="org-string">"Timeout waiting for service </span>{<span class="org-keyword">self</span>._client.service_name}<span class="org-string">"</span>)
 </pre>
 </div>
 </div>
@@ -91,7 +91,7 @@ wa
 <pre class="src src-python"><span class="org-keyword">async def</span> <span class="org-function-name">timer_callback</span>(<span class="org-keyword">self</span>):
     <span class="org-comment-delimiter"># </span><span class="org-comment">Call the service, waiting indefinitely for the response
 </span>    <span class="org-comment-delimiter"># </span><span class="org-comment">If you are not using the response, omit the result =
-</span>    <span class="org-variable-name">result</span> <span class="org-operator">=</span> <span class="org-keyword">await</span> client.call_async(Request())
+</span>    <span class="org-variable-name">result</span> <span class="org-operator">=</span> <span class="org-keyword">await</span> <span class="org-keyword">self</span>._client.call_async(Request())
 </pre>
 </div>
 </div>
@@ -99,8 +99,12 @@ wa
 <h4 id="timeouts-3-P-1">Timeouts</h4>
 <div class="outline-text-4" id="text-org7cd909d">
 <ol class="org-ol">
+<li>Adding a timeout to the <code>await</code> is good practice, because it is possible that the node providing the service server can crash or become unreachable
+<ul class="org-ul">
+<li>Without a timeout, <code>await</code> will block the client node forever.</li>
+</ul></li>
 <li>The Python <a href="https://docs.python.org/3/library/asyncio.html">asyncio</a> library provides a few methods for adding <a href="https://docs.python.org/3/library/asyncio-task.html#timeouts">timeouts</a> to <code>await</code> calls</li>
-<li>For a single call, <code>result = asyncio.wait_for(client.call_async(Request()), timeout = 0.5)</code></li>
+<li>For a single call, <code>result = await asyncio.wait_for(client.call_async(Request()), timeout = 0.5)</code></li>
 <li><p>
 For several service calls that should all be governed by the same (cumulative) timeout:
 </p>
