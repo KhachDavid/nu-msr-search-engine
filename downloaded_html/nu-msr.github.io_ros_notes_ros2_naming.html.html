@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-09-29 Tue 09:23 -->
+<!-- 2026-10-08 Thu 23:48 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Naming in ROS</title>
@@ -27,7 +27,7 @@
 <ul>
 <li><a href="#overview-3-P-1">Overview</a></li>
 <li><a href="#names-as-paths-3-P-1">Names as Paths</a></li>
-<li><a href="#example-3-P-3">Example</a></li>
+<li><a href="#example-3-P-1">Example</a></li>
 </ul>
 </li>
 <li><a href="#comparison-with-ros-1-2-P-1">Comparison with ROS 1</a></li>
@@ -37,7 +37,7 @@
 <ul>
 <li><a href="#name-mapping-2-P-1">Name Mapping</a>
 <ul>
-<li><a href="#example-3-P-4">Example</a></li>
+<li><a href="#example-3-P-2">Example</a></li>
 </ul>
 </li>
 <li><a href="#a-node-s-ros-api-2-P-1">A Node's ROS API</a></li>
@@ -56,7 +56,7 @@
 </div>
 <div id="outline-container-overview-3-P-1" class="outline-4">
 <h4 id="overview-3-P-1">Overview</h4>
-<div class="outline-text-4" id="text-org8c1b08f">
+<div class="outline-text-4" id="text-org168e0bf">
 <ol class="org-ol">
 <li>Every item in the <a href="./ros_graph.html">ROS Computation Graph</a> has a <a href="https://wiki.ros.org/Names">Graph Resource Name (ROS 1)</a>
 <ul class="org-ul">
@@ -77,7 +77,7 @@
 </div>
 <div id="outline-container-names-as-paths-3-P-1" class="outline-4">
 <h4 id="names-as-paths-3-P-1">Names as Paths</h4>
-<div class="outline-text-4" id="text-org9580de2">
+<div class="outline-text-4" id="text-org9d39b3f">
 <p>
 Just like paths on Linux, ROS names can be relative or absolute
 </p>
@@ -104,9 +104,9 @@ Just like paths on Linux, ROS names can be relative or absolute
 </ol>
 </div>
 </div>
-<div id="outline-container-example-3-P-3" class="outline-4">
-<h4 id="example-3-P-3">Example</h4>
-<div class="outline-text-4" id="text-org1885e2f">
+<div id="outline-container-example-3-P-1" class="outline-4">
+<h4 id="example-3-P-1">Example</h4>
+<div class="outline-text-4" id="text-org7caa728">
 <p>
 Suppose we have a node called <code>/this/is/mynode</code>
 </p>
@@ -129,7 +129,7 @@ Suppose <code>/this/is/mynode</code> creates a publisher on the <code>hello</cod
 </div>
 <div id="outline-container-comparison-with-ros-1-2-P-1" class="outline-3">
 <h3 id="comparison-with-ros-1-2-P-1">Comparison with ROS 1</h3>
-<div class="outline-text-3" id="text-orge49a7e9">
+<div class="outline-text-3" id="text-org963dcac">
 <ol class="org-ol">
 <li>In ROS 1, parameters were global and followed the same naming conventions as other entities.</li>
 <li>In ROS 2, parameters are always associated with a specific node and within that node can optionally have their own <a href="https://docs.ros.org/en/lyrical/ROS-Framework/About-Parameters.html">parameter namespace</a>.</li>
@@ -143,7 +143,7 @@ Suppose <code>/this/is/mynode</code> creates a publisher on the <code>hello</cod
 </div>
 <div id="outline-container-name-mapping-2-P-1" class="outline-3">
 <h3 id="name-mapping-2-P-1">Name Mapping</h3>
-<div class="outline-text-3" id="text-org9ae2edf">
+<div class="outline-text-3" id="text-orgf46a3e9">
 <ol class="org-ol">
 <li>Resources can be <i>remapped</i> to any name that you want using <a href="https://docs.ros.org/en/lyrical/Developer-Tools/Introspection-and-analysis/Node-arguments.html">Node Arguments</a>
 <ul class="org-ul">
@@ -180,9 +180,9 @@ Suppose <code>/this/is/mynode</code> creates a publisher on the <code>hello</cod
 </ul></li>
 </ol>
 </div>
-<div id="outline-container-example-3-P-4" class="outline-4">
-<h4 id="example-3-P-4">Example</h4>
-<div class="outline-text-4" id="text-org4d3540c">
+<div id="outline-container-example-3-P-2" class="outline-4">
+<h4 id="example-3-P-2">Example</h4>
+<div class="outline-text-4" id="text-orgdda4028">
 <p>
 The <code>turtlesim_node</code> supports having multiple turtles. Each <code>turtle</code>'s topics are mapped to it's own namespace.
 For example there is <code>/turtle1/cmd_vel</code> and <code>/turtle2/cmd_vel</code> to control the velocity and <code>/turtle1/pose</code> and <code>/turtle2/pose</code> to get the turtle's pose.
@@ -191,7 +191,7 @@ Imagine we make a node called <code>control</code> that we use to control the tu
 </div>
 <ul class="org-ul">
 <li><a id="absolute-paths-generally-don-t-use-these--4-P-1"></a>Absolute Paths (Generally Don't Use These)<br>
-<div class="outline-text-5" id="text-org351e764">
+<div class="outline-text-5" id="text-orgf94caf6">
 <p>
 Assume <code>control</code> subscribes to <code>/pose</code> and publishes to <code>/cmd_vel</code>. To use two copies of this node we need to
 </p>
@@ -203,7 +203,7 @@ Assume <code>control</code> subscribes to <code>/pose</code> and publishes to <c
 </div>
 </li>
 <li><a id="relative-paths-and-namespaces-use-these--4-P-1"></a>Relative Paths and Namespaces (Use These)<br>
-<div class="outline-text-5" id="text-org75959c4">
+<div class="outline-text-5" id="text-orgc5ba4a6">
 <ol class="org-ol">
 <li>The node subcribes to <code>pose</code> and publishes to <code>cmd_vel</code> (both relative names)</li>
 <li>We launch one <code>control</code> node in the <code>/turtle1</code> namespace and one control node in the <code>/turtle2</code> namespace</li>
@@ -216,7 +216,7 @@ Assume <code>control</code> subscribes to <code>/pose</code> and publishes to <c
 </div>
 <div id="outline-container-a-node-s-ros-api-2-P-1" class="outline-3">
 <h3 id="a-node-s-ros-api-2-P-1">A Node's ROS API</h3>
-<div class="outline-text-3" id="text-orga70c7de">
+<div class="outline-text-3" id="text-orge893eb3">
 <ul class="org-ul">
 <li>The publishers, subscribers, services, parameters, and actions a node declares comprise it's ROS API
 <ul class="org-ul">

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-10-07 Wed 16:28 -->
+<!-- 2026-10-08 Thu 23:48 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>The ROS API and Python</title>
@@ -29,7 +29,7 @@
 </nav>
 <div id="outline-container-client-libraries-1-P-1" class="outline-2">
 <h2 id="client-libraries-1-P-1">Client Libraries</h2>
-<div class="outline-text-2" id="text-org0516c7c">
+<div class="outline-text-2" id="text-orgba72282">
 <p>
 <a href="https://docs.ros.org/en/lyrical/ROS-Framework/About-Client-Libraries.html">ROS client libraries</a> are how generic ROS concepts such as <i>Nodes</i>, <i>Topics</i>, <i>Services</i> etc. are actually
 implemented and used in a given programming language.
@@ -95,26 +95,26 @@ Volunteers also maintain client libraries for many other programming languages, 
 </div>
 <div id="outline-container-using-interfaces-1-P-1" class="outline-2">
 <h2 id="using-interfaces-1-P-1">Using Interfaces</h2>
-<div class="outline-text-2" id="text-org5324b04">
+<div class="outline-text-2" id="text-orgf848241">
 <p>
 To use interfaces from a ROS node you must import the corresponding package. This will expose an object that contains the elements in that interface.
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span class="org-comment-delimiter"># </span><span class="org-comment">import for a package/msg/MessageType
-</span><span class="org-keyword">from</span> package.msg <span class="org-keyword">import</span> MessageType
+<pre class="src src-python"><span class="org-comment-delimiter"># </span><span class="org-comment">import for a package/msg/MessageType</span>
+<span class="org-keyword">from</span> package.msg <span class="org-keyword">import</span> MessageType
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">import for a package/srv/ServiceType
-</span><span class="org-keyword">from</span> package.srv <span class="org-keyword">import</span>  ServiceType
+<span class="org-comment-delimiter"># </span><span class="org-comment">import for a package/srv/ServiceType</span>
+<span class="org-keyword">from</span> package.srv <span class="org-keyword">import</span>  ServiceType
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">The request type:
-</span>ServiceType.Request()
+<span class="org-comment-delimiter"># </span><span class="org-comment">The request type:</span>
+ServiceType.Request()
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">The response Type:
-</span>ServiceType.Response()
+<span class="org-comment-delimiter"># </span><span class="org-comment">The response Type:</span>
+ServiceType.Response()
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Each object has the same field names as set in the IDL file
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">These types can also be constructed by providing keyword arguments to the constructor
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">Which in turn contains the field names of the type</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Each object has the same field names as set in the IDL file</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">These types can also be constructed by providing keyword arguments to the constructor</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Which in turn contains the field names of the type</span>
 </pre>
 </div>
 

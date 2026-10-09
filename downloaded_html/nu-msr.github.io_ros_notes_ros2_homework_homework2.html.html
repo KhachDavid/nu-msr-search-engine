@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-09-29 Tue 09:23 -->
+<!-- 2026-10-08 Thu 23:48 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Homework 2</title>
@@ -21,70 +21,84 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#logistics-1-P-3">Logistics</a></li>
-<li><a href="#overview-1-P-12">Overview</a>
+<li><a href="#logistics-1-P-1">Logistics</a></li>
+<li><a href="#overview-1-P-2">Overview</a>
 <ul>
-<li><a href="#hints-2-P-2">Hints</a></li>
+<li><a href="#hints-2-P-1">Hints</a></li>
 <li><a href="#frames-2-P-1">Frames</a></li>
 </ul>
 </li>
 <li><a href="#the-robot-1-P-1">The Robot</a>
 <ul>
-<li><a href="#the-arena-2-P-1">The Arena</a></li>
+<li><a href="#overview-2-P-1">Overview</a></li>
 <li><a href="#configuration-2-P-1">Configuration</a></li>
 <li><a href="#visualizing-the-robot-2-P-1">Visualizing the Robot</a></li>
 </ul>
 </li>
-<li><a href="#turtle-node-1-P-1">Turtle Node</a></li>
-<li><a href="#physics-module-1-P-1">Physics Module</a></li>
-<li><a href="#arena-node-1-P-1">Arena Node</a></li>
-<li><a href="#control-node-1-P-1">Control Node</a></li>
+<li><a href="#physics-1-P-1">Physics</a></li>
+<li><a href="#simulation-node-1-P-1">Simulation Node</a>
+<ul>
+<li><a href="#overview-2-P-2">Overview</a></li>
+<li><a href="#simulation-loop-2-P-1">Simulation Loop</a></li>
+<li><a href="#the-arena-2-P-1">The Arena</a></li>
+<li><a href="#brick-dynamics-2-P-1">Brick Dynamics</a></li>
+<li><a href="#robot-dynamics-2-P-1">Robot Dynamics</a></li>
+</ul>
+</li>
+<li><a href="#control-node-1-P-1">Control Node</a>
+<ul>
+<li><a href="#overview-2-P-3">Overview</a></li>
+<li><a href="#launch-2-P-1">Launch</a></li>
+</ul>
+</li>
+<li><a href="#catcher-node-1-P-1">Catcher Node</a>
+<ul>
+<li><a href="#overview-2-P-4">Overview</a></li>
+<li><a href="#launchfile-2-P-1">Launchfile</a></li>
+</ul>
+</li>
 <li><a href="#testing-1-P-1">Testing</a></li>
 <li><a href="#readme-1-P-2">README</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-logistics-1-P-3" class="outline-2">
-<h2 id="logistics-1-P-3">Logistics</h2>
-<div class="outline-text-2" id="text-org3a2cf37">
-<ol class="org-ol">
-<li>Create a git repository using the link provided in Canvas.</li>
-<li>Your homework will be submitted via this git repository.</li>
-<li>I will grade whatever is on the <code>main</code> branch when I clone the repository.</li>
-<li><a href="./guidelines.html">Guidelines</a> provides important information about what
-you should turn-in, including information about your <code>README.md</code> file.
+<div id="outline-container-logistics-1-P-1" class="outline-2">
+<h2 id="logistics-1-P-1">Logistics</h2>
+<div class="outline-text-2" id="text-orga0b3fac">
 <ul class="org-ul">
-<li>As per the guidelines, your code must pass <code>colcon test</code> cleanly</li>
-</ul></li>
-<li>In general, you should refer to <code>ROS</code> entities using relative names from within your nodes (i.e., no leading "/")</li>
-<li>All python launchfiles written for this assignment should use a <a href="../launch.html#declarative">declarative style</a>:</li>
-<li>When a launch file is listed as <code>filename.launch.{py,xml}</code> you should implement both an XML and python version of that launchfile.</li>
+<li>The <a href="./guidelines.html">Guidelines</a> provide important information about coding standards, expectations, and logistical considerations for this assignment.</li>
+<li>I recommend reading the guidelines both before starting the assignment and prior to your final submission:</li>
+<li>When a launch file is listed as <code>filename.launch.{py,xml}</code> implement both an XML and python version.</li>
 <li>All data files that are installed should be installed to the appropriate sub-directory of the package's share directory
+(e.g., <code>config/myfile.yaml</code> should be installed to <code>$(find-pkg-share mypackage)/config/myfile.yaml</code>)</li>
+<li>For this assignment, do not read from <code>yaml</code> files directly in your nodes.
 <ul class="org-ul">
-<li>e.g., <code>config/myfile.yaml</code> should be installed to <code>$(find-pkg-share mypackage)/config/myfile.yaml</code></li>
+<li>Instead the appropriate values should be loaded into the node as parameters at launch time</li>
+<li>It is impermissible to <code>import yaml</code> in your python code, for example.</li>
 </ul></li>
-</ol>
+<li>All python launch files should be written in a <a href="../launch.html#declarative">declarative style</a>.</li>
+</ul>
 </div>
 </div>
-<div id="outline-container-overview-1-P-12" class="outline-2">
-<h2 id="overview-1-P-12">Overview</h2>
-<div class="outline-text-2" id="text-org73c4237">
+<div id="outline-container-overview-1-P-2" class="outline-2">
+<h2 id="overview-1-P-2">Overview</h2>
+<div class="outline-text-2" id="text-orgd5fa45f">
 <p>
-We will use <code>turtlesim</code> to simulate a robot in ROS.  The <code>turtle</code> robot will be integrated into various standard ROS systems (e.g., <code>tf</code>, <code>joint_states</code>, etc)
-and then we will control it to catch a brick that is dropped from the sky.
+We will simulate a robot in ROS and integrate it into various standard ROS systems (e.g., <code>tf</code>, <code>joint_states</code>, etc.).
+The robot will be used to catch a brick that is dropped from the sky.
 </p>
 
 <p>
 The repository is called <code>homework2</code> and there will be two packages within the repository
 </p>
 <ol class="org-ol">
-<li><code>turtle_brick</code> (an <code>ament_python</code> package)</li>
-<li><code>turtle_brick_interfaces</code> (for any custom interfaces that must be defined)</li>
+<li><code>brickbot_interfaces</code> - custom interfaces that are created for this project</li>
+<li><code>brickbot</code> an <code>ament_python</code> package containing everything else</li>
 </ol>
 </div>
-<div id="outline-container-hints-2-P-2" class="outline-3">
-<h3 id="hints-2-P-2">Hints</h3>
-<div class="outline-text-3" id="text-org6e49230">
+<div id="outline-container-hints-2-P-1" class="outline-3">
+<h3 id="hints-2-P-1">Hints</h3>
+<div class="outline-text-3" id="text-orgcdb36e7">
 <p>
 Here are some general hints for this assignment:
 </p>
@@ -102,7 +116,7 @@ the launchfile makes this process much simpler.</li>
 </div>
 <div id="outline-container-frames-2-P-1" class="outline-3">
 <h3 id="frames-2-P-1">Frames</h3>
-<div class="outline-text-3" id="text-org2f8713e">
+<div class="outline-text-3" id="text-org44cb4c0">
 <p>
 The following coordinate frames will be used:
 </p>
@@ -111,15 +125,14 @@ The following coordinate frames will be used:
 <ul class="org-ul">
 <li>All other frames are descendants of <code>world</code></li>
 </ul></li>
-<li><code>odom</code>. Items relative to this frame represent their location relative to the starting location of the turtle.
-<ul class="org-ul">
-<li>The turtle's location relative to <code>odom</code> is it's position according to its wheel odometry</li>
-<li>The <code>odom</code> frame is at a fixed offset from <code>world</code> and represents the initial location of the turtle.</li>
-</ul></li>
-<li><code>brick</code>. This frame is the location of the brick</li>
+<li><code>brick</code>. This frame is the location at the center of the brick's bottom surface</li>
 <li><code>base_link</code>. This frame is the base location of the robot
 <ul class="org-ul">
 <li>The <code>base_link</code> has other child frames, as defined by the robot's <code>urdf</code> file</li>
+</ul></li>
+<li><code>odom</code> frame: the robot's position based on its odometry is relative to the <code>odom</code> frame.
+<ul class="org-ul">
+<li>The position of the <code>odom</code> frame relative to the world represents where the robot started</li>
 </ul></li>
 </ol>
 </div>
@@ -127,202 +140,256 @@ The following coordinate frames will be used:
 </div>
 <div id="outline-container-the-robot-1-P-1" class="outline-2">
 <h2 id="the-robot-1-P-1">The Robot</h2>
-<div class="outline-text-2" id="text-org3b43850">
+<div class="outline-text-2" id="text-the-robot-1-P-1">
+</div>
+<div id="outline-container-overview-2-P-1" class="outline-3">
+<h3 id="overview-2-P-1">Overview</h3>
+<div class="outline-text-3" id="text-orgca1f5f7">
 <ol class="org-ol">
-<li>The turtle robot has the same kinematics as the <code>turtlesim</code></li>
 <li>The robot is modeled as a unicycle robot that "self balances" on a caster. It consists of
 <ul class="org-ul">
 <li>A <code>base_link</code> that is the main location of the robot and is represented by a cube.</li>
-<li>A <code>platform</code> which is a cylindrical link at the top of the robot
+<li>A <code>platform</code> is a flat square
 <ul class="org-ul">
 <li>The base of the <code>platform</code> should be parallel to the ground in the zero position, but should be able to rotate so that the brick can be dumped.</li>
 <li>The <code>platform</code> should be a fixed vertical distance above the <code>base_link</code>, so that it may rotate fully without colliding with the base link.</li>
-<li>A fixed cylindrical link should connect the <code>base_link</code> to the <code>platform</code></li>
+<li>A fixed cylindrical link called <code>hinge</code> should connect the <code>base_link</code> to the <code>platform</code></li>
+<li>The platform rotates about it's <code>+y</code> axis via a joint called <code>alpha</code></li>
 </ul></li>
-<li>A <code>stem</code> is a cylindrical link that turns about the vertical z-axis and is below the <code>base_link</code></li>
-<li>A <code>wheel</code> is connected to the stem and can roll as the robot moves</li>
+<li>A <code>stem</code> is a cylindrical link that turns about the vertical z-axis and is below the <code>base_link</code>, connected by a joint named <code>theta</code></li>
+<li>A <code>wheel</code> is connected to the <code>stem</code> by a joint named <code>phi</code> and can roll as the robot moves</li>
 <li>Each link should be a different color.</li>
 </ul></li>
 <li>The robot has a maximum translational speed but infinite rotational speed, making it effectively omni-directional
 <ul class="org-ul">
 <li>To move in a given direction, the <code>stem</code> points in that direction and then the robot translates (while the wheel rolls).</li>
 </ul></li>
-<li>The <code>.urdf.xacro</code> file for the robot should be in <code>urdf/turtle.urdf.xacro</code></li>
-<li>The visual and collision components can be the same.  The inertial components can be omitted because we are only using this model kinematically.</li>
-</ol>
-
-
-<figure id="org5329cd2">
-<img src="../../images/hw2_robot.png" alt="hw2_robot.png">
-
-<figcaption><span class="figure-number">Figure 1: </span>A picture of the robot. Your robot should use different colors and sizes</figcaption>
-</figure>
-</div>
-<div id="outline-container-the-arena-2-P-1" class="outline-3">
-<h3 id="the-arena-2-P-1">The Arena</h3>
-<div class="outline-text-3" id="text-orgaf6a8c5">
-<ol class="org-ol">
-<li>The arena should be depicted in <code>rviz2</code>, with rectangular walls (drawn as markers) denoting its boundary</li>
-<li>The arena should be the same size as the <code>turtlesim</code> simulator and have a matching coordinate system
+<li>The <code>.urdf.xacro</code> file for the robot should be in <code>urdf/robot.urdf.xacro</code></li>
+<li>The visual and collision components can be the same. Inertia can be omitted for this homework.
 <ul class="org-ul">
-<li>The <code>world</code> frame should be the fixed frame.</li>
-<li>The <code>odom</code> frame should be at the initial location of the turtle</li>
+<li>Use <code>xacro</code> features to avoid redundancy when defining the visual and collision components.</li>
+<li>Any <code>xacro</code> macros used should be defined in <code>urdf/macros.xacro</code> and included in the main <code>xacro</code> file.</li>
 </ul></li>
+<li>The <code>xacro</code> file should take in an argument for a <code>config</code> file, which defaults to <code>robot.yaml</code></li>
 </ol>
+
+<p>
+The image below is illustrative: however, the platform is a square rather than a cylinder.
+<img src="../../images/hw2_robot.png" alt="hw2_robot.png">
+</p>
 </div>
 </div>
 <div id="outline-container-configuration-2-P-1" class="outline-3">
 <h3 id="configuration-2-P-1">Configuration</h3>
-<div class="outline-text-3" id="text-orgd265f89">
+<div class="outline-text-3" id="text-org0322803">
 <ol class="org-ol">
-<li>A configuration file called <code>config/turtle.yaml</code> should include
+<li>A configuration file called <code>config/robot.yaml</code> should have the following parameters
 <ul class="org-ul">
 <li>The <code>platform_height</code> of the robot's <code>platform</code> above the ground</li>
+<li>The <code>platform_length</code> is the length of the platform's side</li>
 <li>The <code>wheel_radius</code> of the robot's wheel</li>
 <li>The <code>max_velocity</code>, maximum translational velocity of the robot</li>
-<li>The <code>gravity_accel</code>, the acceleration due to gravity</li>
 <li>The default values of these configuration items can be chosen by you.</li>
 </ul></li>
-<li>Anything that relies on these parameters should read the appropriate parameters
+<li>The <code>.urdf.xacro</code> files should use <code>config/robot.yaml</code> to set its dimensions appropriately
 <ul class="org-ul">
-<li>In other words, changing <code>config/turtle.yaml</code> should be the only change required to work with a different <code>platform_height</code> or <code>wheel_radius</code>
-and have the robot appear correctly</li>
-<li>Changes to <code>config/turtle.yaml</code> need only take affect after the code is re-built and re-run.</li>
+<li>Other dimensions that are not specified should be specified as constants within the <code>urdf.xacro</code> file.</li>
 </ul></li>
+<li>Changing <code>config/robot.yaml</code> should be the only change needed to change these dimensions of the robot.</li>
+<li>Also create a configuration file called <code>config/big_robot.yaml</code> with different parameter values.</li>
 </ol>
 </div>
 </div>
 <div id="outline-container-visualizing-the-robot-2-P-1" class="outline-3">
 <h3 id="visualizing-the-robot-2-P-1">Visualizing the Robot</h3>
-<div class="outline-text-3" id="text-org785fa3a">
+<div class="outline-text-3" id="text-orgd8ac153">
 <ol class="org-ol">
-<li>Write a launchfile called <code>show_turtle.launch.{py,xml}</code> that displays the turtle robot (as defined by <code>turtle.urdf.xacro</code>) in <code>rviz</code>
+<li>Write a launchfile called <code>launch/show_robot.launch.{py,xml}</code> that displays the robot (as defined by <code>robot.urdf.xacro</code>) in <code>rviz</code>
 <ul class="org-ul">
 <li>The launchfile argument <code>use_jsp</code> controls the behavior of the <code>joint_state_publisher</code>
 <ul class="org-ul">
 <li>If <code>use_jsp</code> is <code>gui</code> then the <code>joint_state_publisher_gui</code> is used to publish joint states (the default)</li>
 <li>If <code>use_jsp</code> is <code>jsp</code> then the <code>joint_state_publisher</code> is used to publish joint states</li>
 <li>If <code>use_jsp</code> is <code>none</code> then no nodes that publish <code>joint_states</code> are started by the launchfile</li>
-<li>Document the arguments that the documentation shows up when using <code>ros2 launch -s</code></li>
+<li>Document the arguments so that the documentation shows up when using <code>ros2 launch -s</code></li>
 </ul></li>
 <li>The launchfile argument <code>rviz_config</code> contains the name of the <code>rviz</code> configuration file relative to the project's share directory.</li>
+<li>The launchfile argument <code>robot_config</code> contains the name of the robot configuration file relative to the <code>config</code> directory. It defaults to <code>robot.yaml</code></li>
+<li>The launchfile argument <code>use_rviz</code> determines whether <code>rviz</code> is started</li>
+</ul></li>
 <li>The launchfile starts any other nodes that may be necessary to display the URDF in <code>rviz</code></li>
-</ul></li>
 </ol>
 </div>
 </div>
 </div>
-<div id="outline-container-turtle-node-1-P-1" class="outline-2">
-<h2 id="turtle-node-1-P-1">Turtle Node</h2>
-<div class="outline-text-2" id="text-org29580a4">
+<div id="outline-container-physics-1-P-1" class="outline-2">
+<h2 id="physics-1-P-1">Physics</h2>
+<div class="outline-text-2" id="text-orgf785b83">
 <ol class="org-ol">
-<li>A node called <code>turtle_robot</code> serves as a bridge between the <code>turtlesim</code> and actual <code>ros</code> interfaces and is responsible for
+<li>A python module called <code>physics.py</code> should contain ROS-independent code to keep track of the physics of the environment.
 <ul class="org-ul">
-<li>Publishing the <code>joint_states</code> of the turtle robot
-<ul class="org-ul">
-<li>The wheel joint state should be published so that the wheel is rolling without slipping (compute based on the wheel radius and the forward velocity).</li>
+<li>It must not <code>import</code> any ROS python modules</li>
 </ul></li>
-<li>Broadcasting the location of the <code>base_link</code> frame relative to the <code>odom</code> frame</li>
-<li>Publishing <code>nav_msgs/Odometry</code> message on the <code>odom</code> topic (covariance can be ignored, twist can be a direct copy of the latest <code>cmd_vel</code>)</li>
-<li>Publishing a <code>cmd_vel</code> message.
-<ul class="org-ul">
-<li>If the turtle is not moving, this node should publish a <code>cmd_vel</code> of 0 (a real robot would then detect the absence of such commands as a fault condition).</li>
-<li>The robot is <code>holonomic</code> (e.g., omni-directional), so <code>cmd_vel</code> commands may include a <code>y</code> component.</li>
-<li>The <code>turtlesim</code> can be made <code>holonomic</code> by setting the appropriate parameter.</li>
-</ul></li>
-<li>Subscribing to a <code>goal_pose</code> topic of the <code>geometry_msgs/msg/PoseStamped</code> message type.
-<ul class="org-ul">
-<li>When the node receives this message it starts driving the robot toward the goal pose using <code>cmd_vel</code> messages</li>
-</ul></li>
-<li>Subscribing to a <code>tilt</code> message (of custom type <code>turtle_brick_interfaces/msg/Tilt</code>).
-<ul class="org-ul">
-<li>The tilt angle of the platform is set to the last message received on this topic</li>
-</ul></li>
-<li>Subscribes to the <code>turtle1/pose</code> message
-<ul class="org-ul">
-<li>This message provides the location of the robot, and can be used to set the odometry messages and transforms</li>
-</ul></li>
-<li>All publishing and broadcasting shall be done at 100 Hz.</li>
-</ul></li>
-
-<li>Write a launchfile called <code>run_turtle.launch.{py,xml}</code> that
-<ul class="org-ul">
-<li>Starts the <code>turtlesim</code> node (with <code>holonomic</code> set to <code>True</code>)</li>
-<li>Starts the <code>turtle_robot</code> node</li>
-<li>Includes <code>show_turtle.launch.{py,xml}</code> as appropriate to draw the <code>turtle</code> robot in <code>rviz</code>
-<ul class="org-ul">
-<li>Python launchfiles can be included in xml launchfiles and vice versa, you can use any combination you would like here.</li>
-</ul></li>
-<li>You can now test the <code>goal_pose</code> command and should see the robot move to the goal location</li>
-<li>Use a declarative style for the launchfile.</li>
-</ul></li>
-</ol>
-</div>
-</div>
-<div id="outline-container-physics-module-1-P-1" class="outline-2">
-<h2 id="physics-module-1-P-1">Physics Module</h2>
-<div class="outline-text-2" id="text-orgd77ddf4">
-<ol class="org-ol">
-<li>A module called <code>physics.py</code> should contain ROS-independent code to keep track of the physics of the environment.</li>
 <li><p>
-It should provide a class with the following definition.
+It should provide classes with the following definition.
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span class="org-keyword">class</span> <span class="org-type">World</span>:
-    <span class="org-doc">"""Keep track of the physics of the world."""</span>
+<pre class="src src-python"><span class="org-keyword">class</span> <span class="org-type">Brick</span>:
+    <span class="org-doc">'''Keep track of the physics of the Brick.'''</span>
 
-    <span class="org-keyword">def</span> <span class="org-function-name">__init__</span>(<span class="org-keyword">self</span>, brick, gravity, radius, dt):
-        <span class="org-doc">"""
-        Initialize the world.
+    <span class="org-keyword">def</span> <span class="org-function-name">__init__</span>(<span class="org-keyword">self</span>, location, gravity, side_length, dt):
+        <span class="org-doc">'''</span>
+<span class="org-doc">        Initialize the brick.</span>
 
-        Args:
-        brick - The (x,y,z) location of the brick
-        gravity - the acceleration due to gravity in m/s^2
-        radius - the radius of the platform
-        dt - timestep in seconds of the physics simulation
-        """</span>
+<span class="org-doc">        Args:</span>
+<span class="org-doc">        location - The (x,y,z) location of the brick. It is axis aligned.</span>
+<span class="org-doc">        gravity - the acceleration due to gravity in m/s^2</span>
+<span class="org-doc">        side_length - the side_length of the platform</span>
+<span class="org-doc">        dt - timestep in seconds of the physics simulation</span>
+<span class="org-doc">        '''</span>
         <span class="org-keyword">pass</span>
 
     @<span class="org-builtin">property</span>
-    <span class="org-keyword">def</span> <span class="org-function-name">brick</span>(<span class="org-keyword">self</span>):
-        <span class="org-doc">"""
-        Get the brick's location.
+    <span class="org-keyword">def</span> <span class="org-function-name">position</span>(<span class="org-keyword">self</span>):
+        <span class="org-doc">'''</span>
+<span class="org-doc">        Get the brick's position.</span>
 
-        Return:
-            (x,y,z) location of the brick
-        """</span>
+<span class="org-doc">        Return:</span>
+<span class="org-doc">            (x,y,z) location of the brick</span>
+<span class="org-doc">        '''</span>
         <span class="org-keyword">pass</span>
 
-    <span class="org-type">@brick.setter</span>
-    <span class="org-keyword">def</span> <span class="org-function-name">brick</span>(<span class="org-keyword">self</span>, location):
-        <span class="org-doc">"""
-        Set the brick's location.
+    <span class="org-type">@position.setter</span>
+    <span class="org-keyword">def</span> <span class="org-function-name">position</span>(<span class="org-keyword">self</span>, pos):
+        <span class="org-doc">'''</span>
+<span class="org-doc">        Set the brick's position.</span>
 
-        Args:
-           location - the (x,y,z) location of the brick
-        """</span>
+<span class="org-doc">        Args:</span>
+<span class="org-doc">           pos - the (x,y,z) location of the brick</span>
+<span class="org-doc">        '''</span>
         <span class="org-keyword">pass</span>
 
-    <span class="org-keyword">def</span> <span class="org-function-name">drop</span>(<span class="org-keyword">self</span>):
-        <span class="org-doc">"""
-        Update the brick's location by having it fall in gravity for one timestep
-        """</span>
+    <span class="org-keyword">def</span> <span class="org-function-name">drop_gravity</span>(<span class="org-keyword">self</span>):
+        <span class="org-doc">'''</span>
+<span class="org-doc">        Update the brick's location by having it fall in gravity for one timestep.</span>
+<span class="org-doc">        '''</span>
+        <span class="org-keyword">pass</span>
+
+    <span class="org-keyword">def</span> <span class="org-function-name">slide_ramp</span>(<span class="org-keyword">self</span>, radians):
+        <span class="org-doc">'''</span>
+<span class="org-doc">        Update the brick's location as it slides on a frictionless ramp for one timestep.</span>
+
+<span class="org-doc">        Args:</span>
+<span class="org-doc">           radians - the angle of the ramp</span>
+<span class="org-doc">        '''</span>
+
+<span class="org-keyword">class</span> <span class="org-type">Robot</span>:
+    <span class="org-keyword">def</span> <span class="org-function-name">__init__</span>(<span class="org-keyword">self</span>, config, dt):
+        <span class="org-doc">'''</span>
+<span class="org-doc">        Initialize the Robot.</span>
+
+<span class="org-doc">        Args:</span>
+<span class="org-doc">        config - The (x,y,alpha) position of the robot + tilt of the platform.</span>
+<span class="org-doc">        dt - timestep in seconds of the physics simulation</span>
+
+<span class="org-doc">        '''</span>
+        <span class="org-keyword">pass</span>
+
+    @<span class="org-builtin">property</span>
+    <span class="org-keyword">def</span> <span class="org-function-name">configuration</span>(<span class="org-keyword">self</span>):
+        <span class="org-doc">'''</span>
+<span class="org-doc">        Get the robot's configuration.</span>
+
+<span class="org-doc">        Return:</span>
+<span class="org-doc">            (x,y,alpha) configuration of the robot</span>
+<span class="org-doc">        '''</span>
+        <span class="org-keyword">pass</span>
+
+
+    <span class="org-keyword">def</span> <span class="org-function-name">drive</span>(<span class="org-keyword">self</span>, velocity):
+        <span class="org-doc">'''</span>
+<span class="org-doc">        Update the robot's position after driving for one timestep.</span>
+
+<span class="org-doc">        Args:</span>
+<span class="org-doc">           velocity - (dx/dt, dy/dt) relative to the robot's body</span>
+<span class="org-doc">        '''</span>
+        <span class="org-keyword">pass</span>
+
+    <span class="org-keyword">def</span> <span class="org-function-name">tilt</span>(<span class="org-keyword">self</span>, alpha):
+        <span class="org-doc">'''</span>
+<span class="org-doc">        Tilt the platform to the specified angle</span>
+
+<span class="org-doc">        Args:</span>
+<span class="org-doc">           alpha - the angle of the platform relative to the horizontal.</span>
+<span class="org-doc">        '''</span>
         <span class="org-keyword">pass</span>
 </pre>
 </div></li>
 </ol>
 </div>
 </div>
-<div id="outline-container-arena-node-1-P-1" class="outline-2">
-<h2 id="arena-node-1-P-1">Arena Node</h2>
-<div class="outline-text-2" id="text-orge691565">
+<div id="outline-container-simulation-node-1-P-1" class="outline-2">
+<h2 id="simulation-node-1-P-1">Simulation Node</h2>
+<div class="outline-text-2" id="text-simulation-node-1-P-1">
+</div>
+<div id="outline-container-overview-2-P-2" class="outline-3">
+<h3 id="overview-2-P-2">Overview</h3>
+<div class="outline-text-3" id="text-org0b0d122">
+<p>
+The <code>simulation</code> node acts as fake hardware for this assignment. It manages and has full knowledge of the brick and the robot.
+</p>
 <ol class="org-ol">
-<li>A node called <code>arena</code> is responsible for simulating the environment by
+<li>Robot and brick state are updated by the <code>physics</code> module</li>
+<li>The <code>simulation</code> node is implemented in <code>simulation.py</code></li>
+<li>Parameters for the <code>simulation</code> node are:
 <ul class="org-ul">
-<li>Publishing markers that denote the boundaries of the environment</li>
-<li>Broadcasting the <code>brick</code> frame at the location of the brick, and a marker to show it's location in <code>rviz</code></li>
-<li>Offer a service called <code>place</code> (of custom type <code>turtle_brick_interfaces/srv/Place</code>) that moves the brick to a specified location</li>
-<li>Offering a service called <code>drop</code> that causes the brick to fall in gravity according to the specified rules:
+<li><code>width, length</code> The dimensions of the arena</li>
+<li><code>x0, y0</code> - The initial position of the robot</li>
+<li><code>gravity</code> - Gravitational acceleration</li>
+<li><code>timestep</code> - Simulation timestep</li>
+</ul></li>
+<li>Parameters should be stored in <code>config/simulation.yaml</code> and loaded via launchfile</li>
+<li>Many of the parameters in <code>config/robot.yaml</code> are also needed and should be loaded.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-simulation-loop-2-P-1" class="outline-3">
+<h3 id="simulation-loop-2-P-1">Simulation Loop</h3>
+<div class="outline-text-3" id="text-org3f6e651">
+<ul class="org-ul">
+<li>The simulation is driven by a single timer with a period of <code>timestep</code></li>
+<li>Each tick of the timer corresponds to a single simulation step</li>
+<li>All publishing and broadcasting should be done from the timer callback</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-the-arena-2-P-1" class="outline-3">
+<h3 id="the-arena-2-P-1">The Arena</h3>
+<div class="outline-text-3" id="text-org74d0659">
+<ol class="org-ol">
+<li>Drawing walls on the arena boundaries using markers:
+<ul class="org-ul">
+<li>These should be published as a <code>visualization_msgs/msg/MarkerArray</code> on the <code>visualization_marker_array</code> topic in the <code>arena</code> marker namespace</li>
+</ul></li>
+<li>Broadcasting the <code>brick</code> frame at the location of the brick, and a marker to show its location in <code>rviz</code>
+<ul class="org-ul">
+<li>The <code>brick</code> marker is published on the <code>visualization_marker</code> topic in the <code>arena</code> marker namespace</li>
+<li>The <code>brick</code> should of the <code>CUBE</code> type.</li>
+</ul></li>
+<li>Offer a <code>place</code> service (of custom type <code>brickbot_interfaces/srv/Place</code>) that moves the brick to a specified position
+<ul class="org-ul">
+<li>The service has a request type of <code>geometry_msgs/msg/Point</code> with a member called <code>position</code> and an empty response</li>
+<li>Only the <code>x,y,z</code> coordinates are moved, the brick maintains a fixed orientation relative to the <code>world</code></li>
+</ul></li>
+<li>Broadcast a static transform from <code>world</code> to <code>odom</code> based on the initial position of the robot.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-brick-dynamics-2-P-1" class="outline-3">
+<h3 id="brick-dynamics-2-P-1">Brick Dynamics</h3>
+<div class="outline-text-3" id="text-org177ce49">
+<ol class="org-ol">
+<li>Offer a service called <code>drop</code> (of type <code>std_srvs/srv/Empty</code>) that causes the brick to fall in gravity according to the specified rules:
 <ul class="org-ul">
 <li>After the service responds, the brick starts falling in gravity (using the specified <code>gravity</code> acceleration).</li>
 <li>If the brick hits the platform or the ground it stops falling.</li>
@@ -330,95 +397,182 @@ It should provide a class with the following definition.
 <ul class="org-ul">
 <li>Your code can assume that the platform is at 0 degrees when the brick is dropped and does not need to handle other cases.</li>
 </ul></li>
-<li>If the brick is on the platform and the platform tilts, it should slide off the platform (friction-less, but in gravity)</li>
-<li>When the trailing-edge brick clears the platform, it magically floats in place.</li>
-<li>The angle of the brick relative to the ground should be the same as the angle of the platform relative to the ground at all times.</li>
 </ul></li>
-<li>The node should simulate the physics at <code>250 Hz</code></li>
+<li>The brick slides on the platform based on <code>gravity</code> and the platform angle, with zero friction
+<ul class="org-ul">
+<li>When the brick is completely off the platform it freezes and floats in space</li>
+<li>By construction the sides of the platform and of the brick are always aligned.</li>
+<li>Angle of the brick's bottom relative to the ground should always match that of the platform</li>
 </ul></li>
-<li>The node should use the <code>physics</code> module to perform all calculations.</li>
 </ol>
+</div>
+</div>
+<div id="outline-container-robot-dynamics-2-P-1" class="outline-3">
+<h3 id="robot-dynamics-2-P-1">Robot Dynamics</h3>
+<div class="outline-text-3" id="text-org05c8fb9">
+<ol class="org-ol">
+<li>The simulation tracks the state of the robot according to a simple kinematic model.</li>
+<li>Velocity commands are received by subscribing to  <code>cmd_vel</code> (<code>geometry_msgs/msg/Twist</code>)
+<ul class="org-ul">
+<li>The robot state is updated in the simulation loop</li>
+<li>Only <code>x</code> and <code>y</code> linear velocities are executed, others are ignored</li>
+<li>Velocities above <code>max_velocity</code> are ignored</li>
+<li>The wheel immediately pivots to point in the direction of motion</li>
+<li>The wheel should rotate to simulate rolling without slipping</li>
+</ul></li>
+<li>The robot publishes a <code>sensor_msgs/msg/JointState</code> message on the <code>joint_states</code> topic</li>
+<li>The robot simulation subscribes to <code>tilt</code> of custom type <code>brickbot_interfaces/msg/Tilt</code>, which has a single member <code>angle</code>, of floating point type.
+<ul class="org-ul">
+<li>The platform's tilt angle should be updated on the next simulation step</li>
+</ul></li>
+</ol>
+</div>
 </div>
 </div>
 <div id="outline-container-control-node-1-P-1" class="outline-2">
 <h2 id="control-node-1-P-1">Control Node</h2>
-<div class="outline-text-2" id="text-org8d6b144">
+<div class="outline-text-2" id="text-control-node-1-P-1">
+</div>
+<div id="outline-container-overview-2-P-3" class="outline-3">
+<h3 id="overview-2-P-3">Overview</h3>
+<div class="outline-text-3" id="text-orgd9a93c2">
+<p>
+The <code>control</code> node is implemented in <code>control.py</code> and it is responsible for higher-level control and odometry
+</p>
 <ol class="org-ol">
-<li>Write a node called <code>catcher</code> that causes the turtle to catch a falling brick
+<li>The <code>control</code> node should have any parameters it requires, as defined in <code>config/robot.yaml</code></li>
+<li>The <code>control</code> node is driven by a timer that executes at 100Hz.
 <ul class="org-ul">
-<li>When the node detects that the brick is falling it first computes (based on <code>max_velocity</code> and <code>platform_height</code>) whether it can reach
-the brick on-time
-<ul class="org-ul">
-<li>If the brick cannot be caught on time, the node publishes a Text marker that lasts for 3 seconds that says "Unreachable"</li>
-<li>If the brick can be caught on time, the robot drives under the brick.
-<ul class="org-ul">
-<li>When the brick is caught, the robot drives back to the arena center and <code>tilts</code> the brick off.</li>
+<li>Everything published/broadcast from this node happens from the timer callback</li>
 </ul></li>
-</ul></li>
-</ul></li>
-
-<li>Write a launchfile called <code>turtle_arena.launch.{py,xml}</code> that runs all the nodes necessary for the turtle to catch a brick
+<li>The <code>control</code> node subscribes to a <code>goal_pose</code> topic of the <code>geometry_msgs/msg/PoseStamped</code> message type.
 <ul class="org-ul">
-<li>The launchfile should include <code>run_turtle.launch.{py,xml}</code> as needed</li>
-<li>The <code>rviz</code> configuration should show the turtle, the arena, and the brick</li>
+<li>Only <code>goal_poses</code> relative to the world frame are accepted</li>
+<li>When the node receives this message it starts driving the robot toward the goal pose by publishing <code>cmd_vel</code> messages</li>
+<li>When the robot is not moving, the node publishes a <code>cmd_vel</code> of 0</li>
+</ul></li>
+<li>The <code>control</code> node subscribes to the <code>joint_states</code> topic and computes wheel odometry
+<ul class="org-ul">
+<li>It should publish a <code>nav_msgs/msg/Odometry</code> message (covariance can be ignored) on the <code>odom</code> topic</li>
+<li>It broadcasts a transform from <code>odom</code> to <code>base_link</code> based on the odometry calculation</li>
 </ul></li>
 </ol>
 </div>
 </div>
+<div id="outline-container-launch-2-P-1" class="outline-3">
+<h3 id="launch-2-P-1">Launch</h3>
+<div class="outline-text-3" id="text-org4a3735a">
+<ol class="org-ol">
+<li>Write a launchfile called <code>control.launch.xml</code> that
+<ul class="org-ul">
+<li>Starts the <code>simulation</code> node</li>
+<li>Starts the <code>control</code> node</li>
+<li>Includes <code>show_robot.launch.{py,xml}</code> as appropriate to draw the robot in <code>rviz</code>
+<ul class="org-ul">
+<li>Python launchfiles can be included in xml launchfiles and vice versa, you can use any combination you would like here.</li>
+</ul></li>
+<li>You can now test the <code>goal_pose</code> command and should see the robot move to the goal location</li>
+</ul></li>
+<li>The <code>launchfile</code> has a <code>use_rviz</code> argument to decide whether to start <code>rviz</code></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-catcher-node-1-P-1" class="outline-2">
+<h2 id="catcher-node-1-P-1">Catcher Node</h2>
+<div class="outline-text-2" id="text-catcher-node-1-P-1">
+</div>
+<div id="outline-container-overview-2-P-4" class="outline-3">
+<h3 id="overview-2-P-4">Overview</h3>
+<div class="outline-text-3" id="text-org33d71be">
+<ol class="org-ol">
+<li>The <code>catcher</code> node is implemented in <code>catcher.py</code>
+<ul class="org-ul">
+<li>It can use any parameters it needs as specified in <code>config/robot.yaml</code></li>
+<li>It can read the <code>gravity</code> parameter from <code>config/simulation.yaml</code></li>
+</ul></li>
+<li>Write a node called <code>catcher</code> that causes the robot to catch a falling brick</li>
+<li>The node knows the brick's location based on the <code>brick</code> tf frame and monitors it.</li>
+<li>When the node detects that the brick is falling it:
+<ol class="org-ol">
+<li>Computes (based on <code>max_velocity</code>) whether it can reach the brick in time to catch it
+<ul class="org-ul">
+<li>If the brick cannot be caught, the node publishes a Text marker that lasts for 3 seconds that says "Unreachable"
+<ul class="org-ul">
+<li>The marker is published on the <code>visualization_marker</code> topic in the <code>catcher</code> marker namespace</li>
+</ul></li>
+<li>If the brick can be caught, the robot drives under the brick and catches it.</li>
+</ul></li>
+</ol></li>
+<li>When a brick is caught, the robot <code>tilts</code> the brick until it is off the platform (and just floating in space!).</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-launchfile-2-P-1" class="outline-3">
+<h3 id="launchfile-2-P-1">Launchfile</h3>
+<div class="outline-text-3" id="text-orgd51ffea">
+<ol class="org-ol">
+<li>Write a launchfile called <code>catcher.launch.xml</code> that runs all the nodes necessary for the robot to catch a brick
+<ul class="org-ul">
+<li>The launchfile should include <code>control.launch.xml</code> as needed</li>
+<li>The <code>rviz</code> configuration should show the robot, the arena, and the brick</li>
+<li>The launchfile has a <code>use_rviz</code> argument to decide whether to launch rviz</li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
 <div id="outline-container-testing-1-P-1" class="outline-2">
 <h2 id="testing-1-P-1">Testing</h2>
-<div class="outline-text-2" id="text-orgc3b6fb6">
+<div class="outline-text-2" id="text-orgc12fdb6">
 <ol class="org-ol">
 <li>Your code should pass all the standard tests that are run with <code>colcon test</code></li>
-<li>Write at least one <code>pytest</code> unit test for each of the (required) members of the <code>physics.World</code> class</li>
-<li>Write a test launchfile called <code>test_brick_launch.py</code> that verifies that the <code>turtle_robot</code> node publishes <code>cmd_vel</code> commands at 100 Hz</li>
+<li>Write at least one <code>pytest</code> unit test for:
+<ul class="org-ul">
+<li><code>physics.Robot.drive</code></li>
+<li><code>physics.Brick.drop_gravity</code></li>
+<li><code>physics.Brick.slide_ramp</code></li>
+</ul></li>
+<li>Write a test launchfile called <code>test_brick_launch.py</code> that verifies that the <code>control</code> node publishes <code>cmd_vel</code> commands at 100 Hz</li>
+<li>Write a test launchfile called <code>test_frames_launch.py</code> that
+<ul class="org-ul">
+<li>Places the brick directly above the platform</li>
+<li>Drops the brick</li>
+<li>Tilts</li>
+<li>Verifies that a brick, after sliding, stays in the correct location</li>
+</ul></li>
 <li>Your final result should not have any <code>rviz</code> errors or warnings once all nodes in a given launchfile have started running.</li>
 </ol>
 </div>
 </div>
 <div id="outline-container-readme-1-P-2" class="outline-2">
 <h2 id="readme-1-P-2">README</h2>
-<div class="outline-text-2" id="text-org53580a4">
+<div class="outline-text-2" id="text-org652bbb4">
 <p>
 In the base directory of your repository (e.g. <code>homework2</code>) create a <code>README.md</code> using the following template (be sure to update the <code>${}</code> with the answers.)
 </p>
 <div class="org-src-container">
-<pre class="src src-nil"># ME495 Embedded Systems Homework 2
+<pre class="src src-nil"># ME450 Embedded Systems Homework 2
 Author: ${Your Name}
 
 ${A brief overview of what the package does}
 
 ## Quickstart
-1. Use `ros2 launch ${pkg} ${launchfile} ${options}` to start the arena and turtle simulation
+1. Use `ros2 launch ${pkg} ${launchfile} ${options}` to start the arena and robot simulation
 2. Use ${ros2 service call here} to place a brick
 3. Use ${ros2 service call here} to drop a brick
-4. Here is a video of the turtle when the brick is within catching range
+4. Here is a video of the robot when the brick is within catching range
    ${embed video here, it must be playable on github. Upload the video as an issue and link to it}
 
-5. Here is a video of the turtle when the brick cannot be caught
+5. Here is a screenshot of the robot when the brick cannot be caught
 
-   ${embed video here, it must be playable on github. Upload the video as an issue and link to it}
+   ${embed image here, it must be viewable on github.}
+
+6. Here is a screenshot when =big_robot.yaml= is loaded by the show_robot.launch.xml launchfile
+
+   ${embed image here, it must be viewable on github.}
 </pre>
 </div>
-
-<ol class="org-ol">
-<li>You should capture of each of the following scenarios
-<ol class="org-ol">
-<li>The brick is dropped but cannot be caught</li>
-<li>The brick is dropped and is caught</li>
-</ol></li>
-
-<li>In all cases, the brick should be visible from the time it is placed in the air through the complete drop.</li>
-
-<li>The directory structure of your git repository should look like
-<ul class="org-ul">
-<li><code>homework2</code></li>
-<li><code>homework2/</code></li>
-<li><code>homework2/README.md</code></li>
-<li><code>homework2/turtle_brick</code></li>
-<li><code>homework2/turtle_brick_interfaces</code></li>
-</ul></li>
-</ol>
 </div>
 </div>
 </div>

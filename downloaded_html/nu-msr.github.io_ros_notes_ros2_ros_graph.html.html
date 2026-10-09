@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-10-07 Wed 16:28 -->
+<!-- 2026-10-08 Thu 23:48 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ROS Graph</title>
@@ -23,14 +23,14 @@
 <ul>
 <li><a href="#ros-graph-1-P-1">ROS Graph</a>
 <ul>
-<li><a href="#overview-2-P-1">Overview</a></li>
+<li><a href="#overview-2-P-5">Overview</a></li>
 <li><a href="#communication-layers-2-P-1">Communication Layers</a></li>
 <li><a href="#quality-of-service-2-P-1">Quality of Service</a></li>
 </ul>
 </li>
 <li><a href="#nodes-1-P-1">Nodes</a>
 <ul>
-<li><a href="#overview-2-P-2">Overview</a></li>
+<li><a href="#overview-2-P-6">Overview</a></li>
 <li><a href="#inspecting-nodes-2-P-1">Inspecting Nodes</a></li>
 <li><a href="#advanced-2-P-1">Advanced</a>
 <ul>
@@ -41,19 +41,19 @@
 </li>
 <li><a href="#topics-1-P-1">Topics</a>
 <ul>
-<li><a href="#overview-2-P-3">Overview</a></li>
+<li><a href="#overview-2-P-7">Overview</a></li>
 <li><a href="#inspecting-topics-2-P-1">Inspecting Topics</a></li>
 </ul>
 </li>
 <li><a href="#services-1-P-1">Services</a>
 <ul>
-<li><a href="#overview-2-P-4">Overview</a></li>
+<li><a href="#overview-2-P-8">Overview</a></li>
 <li><a href="#inspecting-services-2-P-1">Inspecting Services</a></li>
 </ul>
 </li>
 <li><a href="#actions">Actions</a>
 <ul>
-<li><a href="#overview-2-P-5">Overview</a></li>
+<li><a href="#overview-2-P-9">Overview</a></li>
 <li><a href="#inspecting-actions-2-P-1">Inspecting Actions</a></li>
 <li><a href="#interfaces-2-P-1">Interfaces</a>
 <ul>
@@ -64,25 +64,25 @@
 </li>
 <li><a href="#parameters">Parameters</a>
 <ul>
-<li><a href="#overview-2-P-6">Overview</a></li>
+<li><a href="#overview-2-P-10">Overview</a></li>
 <li><a href="#using-parameters-2-P-1">Using Parameters</a></li>
 <li><a href="#ros-1-2-P-1">ROS 1</a></li>
 </ul>
 </li>
 <li><a href="#launchfiles-1-P-1">Launchfiles</a>
 <ul>
-<li><a href="#overview-2-P-7">Overview</a></li>
+<li><a href="#overview-2-P-11">Overview</a></li>
 <li><a href="#using-launchfiles-2-P-1">Using Launchfiles</a></li>
 </ul>
 </li>
 <li><a href="#bags-1-P-1">Bags</a>
 <ul>
-<li><a href="#overview-2-P-8">Overview</a></li>
+<li><a href="#overview-2-P-12">Overview</a></li>
 </ul>
 </li>
 <li><a href="#logging-1-P-1">Logging</a>
 <ul>
-<li><a href="#overview-2-P-9">Overview</a></li>
+<li><a href="#overview-2-P-13">Overview</a></li>
 <li><a href="#inspecting-logs-2-P-1">Inspecting Logs</a></li>
 </ul>
 </li>
@@ -94,9 +94,9 @@
 <h2 id="ros-graph-1-P-1">ROS Graph</h2>
 <div class="outline-text-2" id="text-ros-graph-1-P-1">
 </div>
-<div id="outline-container-overview-2-P-1" class="outline-3">
-<h3 id="overview-2-P-1">Overview</h3>
-<div class="outline-text-3" id="text-org67ebda2">
+<div id="outline-container-overview-2-P-5" class="outline-3">
+<h3 id="overview-2-P-5">Overview</h3>
+<div class="outline-text-3" id="text-org6049011">
 <ul class="org-ul">
 <li>A ROS-based system consists of a collection of <i>nodes</i> that execute code and communicate with each other, either locally or over the network.</li>
 <li>The <i>nodes</i> and are connected to each other via <i>topics</i> which are directed communication channels
@@ -115,7 +115,7 @@
 </div>
 <div id="outline-container-communication-layers-2-P-1" class="outline-3">
 <h3 id="communication-layers-2-P-1">Communication Layers</h3>
-<div class="outline-text-3" id="text-org020abc4">
+<div class="outline-text-3" id="text-org6767b15">
 <p>
 The <a href="https://design.ros2.org/articles/ros_middleware_interface.html">design of ROS 2</a> involves several layers of abstraction, which can roughly be summarized as follows:
 </p>
@@ -142,7 +142,7 @@ The <a href="https://design.ros2.org/articles/ros_middleware_interface.html">des
 </div>
 <div id="outline-container-quality-of-service-2-P-1" class="outline-3">
 <h3 id="quality-of-service-2-P-1">Quality of Service</h3>
-<div class="outline-text-3" id="text-orge344b75">
+<div class="outline-text-3" id="text-org6002d76">
 <ul class="org-ul">
 <li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/interfaces/topics/About-Quality-of-Service-Settings.html">Quality of Service</a> settings determine polices for how data is handled when data is being exchanges between nodes</li>
 <li>QoS determines what to do various scenarios such as communication over an unreliable connection or when messages are coming in too fast to be processed.</li>
@@ -155,9 +155,9 @@ The <a href="https://design.ros2.org/articles/ros_middleware_interface.html">des
 <h2 id="nodes-1-P-1">Nodes</h2>
 <div class="outline-text-2" id="text-nodes-1-P-1">
 </div>
-<div id="outline-container-overview-2-P-2" class="outline-3">
-<h3 id="overview-2-P-2">Overview</h3>
-<div class="outline-text-3" id="text-orgf1c9dcd">
+<div id="outline-container-overview-2-P-6" class="outline-3">
+<h3 id="overview-2-P-6">Overview</h3>
+<div class="outline-text-3" id="text-org049be85">
 <ul class="org-ul">
 <li>A <a href="https://docs.ros.org/en/lyrical/ROS-Framework/About-Nodes.html">Node</a> in ROS executes code and communicates with other nodes</li>
 <li>Nodes use ROS <a href="https://docs.ros.org/en/lyrical/ROS-Framework/About-Client-Libraries.html">client libraries</a> to interact with other nodes and the ROS system.
@@ -173,7 +173,7 @@ The <a href="https://design.ros2.org/articles/ros_middleware_interface.html">des
 </div>
 <div id="outline-container-inspecting-nodes-2-P-1" class="outline-3">
 <h3 id="inspecting-nodes-2-P-1">Inspecting Nodes</h3>
-<div class="outline-text-3" id="text-org003b0af">
+<div class="outline-text-3" id="text-org3ad8099">
 <ul class="org-ul">
 <li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/nodes/Working-with-nodes/Understanding-ROS2-Nodes/Understanding-ROS2-Nodes.html">Node Tutorial</a></li>
 <li><code>ros2 node</code> is a command that is used to interact with running nodes from the command line.</li>
@@ -183,8 +183,8 @@ The <a href="https://design.ros2.org/articles/ros_middleware_interface.html">des
 </ul>
 </div>
 </div>
-<details id="orgd2b4be5"><summary class="header-3">Advanced</summary>
-<div class="outline-text-3" id="text-orgd2b4be5">
+<details id="org9f3f415"><summary class="header-3">Advanced</summary>
+<div class="outline-text-3" id="text-org9f3f415">
 <ul class="org-ul">
 <li>A Node is often its own process, but in ROS 2 multiple nodes may run under a single process (e.g., to reduce communication overhead).
 <ul class="org-ul">
@@ -202,7 +202,7 @@ a complete robotic system.</li>
 </div>
 <div id="outline-container-ros-1-comparison-3-P-1" class="outline-4">
 <h4 id="ros-1-comparison-3-P-1">ROS 1 Comparison</h4>
-<div class="outline-text-4" id="text-org9621e18">
+<div class="outline-text-4" id="text-org71d7988">
 <ul class="org-ul">
 <li>In ROS 1, a command <code>rosnode kill nodename</code> existed. There is no equivalent <a href="https://github.com/ros2/design/issues/287">currently in ROS 2</a>.
 <ul class="org-ul">
@@ -218,9 +218,9 @@ a complete robotic system.</li>
 <h2 id="topics-1-P-1">Topics</h2>
 <div class="outline-text-2" id="text-topics-1-P-1">
 </div>
-<div id="outline-container-overview-2-P-3" class="outline-3">
-<h3 id="overview-2-P-3">Overview</h3>
-<div class="outline-text-3" id="text-org0dae2e6">
+<div id="outline-container-overview-2-P-7" class="outline-3">
+<h3 id="overview-2-P-7">Overview</h3>
+<div class="outline-text-3" id="text-orgf8b0a93">
 <ul class="org-ul">
 <li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/interfaces/About-Topics.html">Topics</a> are labeled channels for communication between nodes</li>
 <li>A node sends information to nodes that <i>subscribe</i> by <i>publishing</i> a <i>message</i> to a <i>topic</i>.</li>
@@ -235,7 +235,7 @@ a complete robotic system.</li>
 </div>
 <div id="outline-container-inspecting-topics-2-P-1" class="outline-3">
 <h3 id="inspecting-topics-2-P-1">Inspecting Topics</h3>
-<div class="outline-text-3" id="text-org3299621">
+<div class="outline-text-3" id="text-org693faf6">
 <ul class="org-ul">
 <li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/interfaces/topics/Understanding-ROS2-Topics/Understanding-ROS2-Topics.html">Topics Tutorial</a></li>
 <li><code>ros2 topic</code> provides commands for investigating topics.</li>
@@ -252,9 +252,9 @@ a complete robotic system.</li>
 <h2 id="services-1-P-1">Services</h2>
 <div class="outline-text-2" id="text-services-1-P-1">
 </div>
-<div id="outline-container-overview-2-P-4" class="outline-3">
-<h3 id="overview-2-P-4">Overview</h3>
-<div class="outline-text-3" id="text-org8add9ea">
+<div id="outline-container-overview-2-P-8" class="outline-3">
+<h3 id="overview-2-P-8">Overview</h3>
+<div class="outline-text-3" id="text-org2f8d29b">
 <ul class="org-ul">
 <li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/interfaces/About-Services.html">Services</a> provide a request/response mechanism for inter-node communication.</li>
 <li>A node provides a <i>service</i> by creating a <i>service server</i> (sometimes referred to as just a <i>server</i>).</li>
@@ -269,7 +269,7 @@ a complete robotic system.</li>
 </div>
 <div id="outline-container-inspecting-services-2-P-1" class="outline-3">
 <h3 id="inspecting-services-2-P-1">Inspecting Services</h3>
-<div class="outline-text-3" id="text-orgbde7c57">
+<div class="outline-text-3" id="text-org90af16b">
 <ul class="org-ul">
 <li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/interfaces/services/Working-with-services/Understanding-ROS2-Services/Understanding-ROS2-Services.html">Services Tutorial</a></li>
 <li><code>ros2 service</code> provides commands for investigating services.</li>
@@ -282,9 +282,9 @@ a complete robotic system.</li>
 <h2 id="actions">Actions</h2>
 <div class="outline-text-2" id="text-actions">
 </div>
-<div id="outline-container-overview-2-P-5" class="outline-3">
-<h3 id="overview-2-P-5">Overview</h3>
-<div class="outline-text-3" id="text-org06f6117">
+<div id="outline-container-overview-2-P-9" class="outline-3">
+<h3 id="overview-2-P-9">Overview</h3>
+<div class="outline-text-3" id="text-org3caa3a8">
 <ul class="org-ul">
 <li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/interfaces/About-Actions.html">Actions</a> enable nodes to initiate a long-running task and receive periodic feedback.</li>
 <li>Actions consist of three parts: a <i>goal</i>, a <i>result</i>, and <i>feedback</i>.
@@ -301,7 +301,7 @@ a complete robotic system.</li>
 </div>
 <div id="outline-container-inspecting-actions-2-P-1" class="outline-3">
 <h3 id="inspecting-actions-2-P-1">Inspecting Actions</h3>
-<div class="outline-text-3" id="text-orge8709b9">
+<div class="outline-text-3" id="text-org331a94f">
 <ul class="org-ul">
 <li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/interfaces/actions/Working-with-actions/Understanding-ROS2-Actions/Understanding-ROS2-Actions.html">Action Tutorial</a></li>
 <li><code>ros2 action</code> provides commands for examining actions.</li>
@@ -315,7 +315,7 @@ a complete robotic system.</li>
 </div>
 <div id="outline-container-interfaces-2-P-1" class="outline-3">
 <h3 id="interfaces-2-P-1">Interfaces</h3>
-<div class="outline-text-3" id="text-orgfc3653d">
+<div class="outline-text-3" id="text-orgdf55366">
 <ul class="org-ul">
 <li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/interfaces/About-Interfaces.html">Interfaces</a> are a generic name for Topics, Services, and Actions (the interface to a node).
 <ul class="org-ul">
@@ -336,7 +336,7 @@ a complete robotic system.</li>
 </div>
 <div id="outline-container-ros-idl-3-P-1" class="outline-4">
 <h4 id="ros-idl-3-P-1">ROS IDL</h4>
-<div class="outline-text-4" id="text-orgea1386b">
+<div class="outline-text-4" id="text-orge605cbd">
 <ul class="org-ul">
 <li>Each line in an IDL file specifies a field in the data type.</li>
 <li>Each field contains a type-specifier and the name of the field.
@@ -362,9 +362,9 @@ a complete robotic system.</li>
 <h2 id="parameters">Parameters</h2>
 <div class="outline-text-2" id="text-parameters">
 </div>
-<div id="outline-container-overview-2-P-6" class="outline-3">
-<h3 id="overview-2-P-6">Overview</h3>
-<div class="outline-text-3" id="text-org9f1a399">
+<div id="outline-container-overview-2-P-10" class="outline-3">
+<h3 id="overview-2-P-10">Overview</h3>
+<div class="outline-text-3" id="text-org119d328">
 <ul class="org-ul">
 <li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/About-Parameters.html">Parameters</a> enable storing configuration values for a node.</li>
 <li>Parameters are used as settings that can be accessed by all ROS nodes and modified by the user to change node behavior.</li>
@@ -375,7 +375,7 @@ a complete robotic system.</li>
 </div>
 <div id="outline-container-using-parameters-2-P-1" class="outline-3">
 <h3 id="using-parameters-2-P-1">Using Parameters</h3>
-<div class="outline-text-3" id="text-orgba98634">
+<div class="outline-text-3" id="text-org0feec18">
 <ul class="org-ul">
 <li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/parameters/Working-with-parameters/Understanding-ROS2-Parameters/Understanding-ROS2-Parameters.html">Inspecting Parameter Tutorial</a>
 <ul class="org-ul">
@@ -390,7 +390,7 @@ a complete robotic system.</li>
 </div>
 <div id="outline-container-ros-1-2-P-1" class="outline-3">
 <h3 id="ros-1-2-P-1">ROS 1</h3>
-<div class="outline-text-3" id="text-orgc77ac78">
+<div class="outline-text-3" id="text-orgc7d8e1b">
 <ul class="org-ul">
 <li>In ROS 1 parameters are stored in a central server called the ROS parameter server.</li>
 <li>The behavior of a central parameter server can be emulated by creating a node that is only used to store parameters.</li>
@@ -402,9 +402,9 @@ a complete robotic system.</li>
 <h2 id="launchfiles-1-P-1">Launchfiles</h2>
 <div class="outline-text-2" id="text-launchfiles-1-P-1">
 </div>
-<div id="outline-container-overview-2-P-7" class="outline-3">
-<h3 id="overview-2-P-7">Overview</h3>
-<div class="outline-text-3" id="text-org1082de7">
+<div id="outline-container-overview-2-P-11" class="outline-3">
+<h3 id="overview-2-P-11">Overview</h3>
+<div class="outline-text-3" id="text-org81604b6">
 <ul class="org-ul">
 <li><a href="https://docs.ros.org/en/lyrical/Developer-Tools/Launch/Launch-Main.html">Launch files</a> enable multiple nodes to be started with a single command</li>
 <li>In ROS 2 there are 3 formats for launchfiles
@@ -422,7 +422,7 @@ a complete robotic system.</li>
 </div>
 <div id="outline-container-using-launchfiles-2-P-1" class="outline-3">
 <h3 id="using-launchfiles-2-P-1">Using Launchfiles</h3>
-<div class="outline-text-3" id="text-org2aa0037">
+<div class="outline-text-3" id="text-org6933c05">
 <ul class="org-ul">
 <li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/nodes/Working-with-nodes/Launching-Multiple-Nodes/Launching-Multiple-Nodes.html">Launchfile Tutorial</a></li>
 <li><code>ros2 launch</code> lets you run and interact with launchfiles.</li>
@@ -435,9 +435,9 @@ a complete robotic system.</li>
 <h2 id="bags-1-P-1">Bags</h2>
 <div class="outline-text-2" id="text-bags-1-P-1">
 </div>
-<div id="outline-container-overview-2-P-8" class="outline-3">
-<h3 id="overview-2-P-8">Overview</h3>
-<div class="outline-text-3" id="text-org3d06824">
+<div id="outline-container-overview-2-P-12" class="outline-3">
+<h3 id="overview-2-P-12">Overview</h3>
+<div class="outline-text-3" id="text-org6893f68">
 <p>
 <a href="https://docs.ros.org/en/lyrical/ROS-Framework/interfaces/Working-with-interfaces/Recording-And-Playing-Back-Data/Recording-And-Playing-Back-Data.html">Bags</a> enable you to record ROS communication data across the graph and play it back later.
 </p>
@@ -454,9 +454,9 @@ testing different algorithms and parameters on it is extremely useful.</li>
 <h2 id="logging-1-P-1">Logging</h2>
 <div class="outline-text-2" id="text-logging-1-P-1">
 </div>
-<div id="outline-container-overview-2-P-9" class="outline-3">
-<h3 id="overview-2-P-9">Overview</h3>
-<div class="outline-text-3" id="text-orged2ae17">
+<div id="outline-container-overview-2-P-13" class="outline-3">
+<h3 id="overview-2-P-13">Overview</h3>
+<div class="outline-text-3" id="text-org4892732">
 <ul class="org-ul">
 <li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/nodes/About-Logging/About-Logging.html">Logging</a> is used to record important diagnostic information from ROS nodes</li>
 <li>There are five severity levels: <code>DEBUG</code>, <code>INFO</code>, <code>WARN</code>, <code>ERROR</code>, <code>FATAL</code> that can be configured and messages can be filtered based on severity</li>
@@ -466,7 +466,7 @@ testing different algorithms and parameters on it is extremely useful.</li>
 </div>
 <div id="outline-container-inspecting-logs-2-P-1" class="outline-3">
 <h3 id="inspecting-logs-2-P-1">Inspecting Logs</h3>
-<div class="outline-text-3" id="text-orga51109a">
+<div class="outline-text-3" id="text-org767b538">
 <ul class="org-ul">
 <li><a href="https://docs.ros.org/en/lyrical/ROS-Framework/nodes/Working-with-nodes/Using-Rqt-Console/Using-Rqt-Console.html">rqt_console tutorial</a></li>
 <li><a href="https://docs.ros.org/en/lyrical/Developer-Tools/Introspection-and-analysis/Logging-and-logger-configuration.html">Configuring Logging</a></li>
@@ -480,7 +480,7 @@ testing different algorithms and parameters on it is extremely useful.</li>
 </div>
 <div id="outline-container-debugging-1-P-1" class="outline-2">
 <h2 id="debugging-1-P-1">Debugging</h2>
-<div class="outline-text-2" id="text-org71359b9">
+<div class="outline-text-2" id="text-org04c8351">
 <ul class="org-ul">
 <li><code>ros2 doctor</code> can help point out problems with your ROS setup</li>
 </ul>

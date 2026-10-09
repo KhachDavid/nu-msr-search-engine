@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-10-06 Tue 13:26 -->
+<!-- 2026-10-08 Thu 23:48 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Synchronous Service Calls</title>
@@ -21,7 +21,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#overview-1-P-1">Overview</a></li>
+<li><a href="#overview-1-P-3">Overview</a></li>
 <li><a href="#constructing-the-node-1-P-1">Constructing the Node</a>
 <ul>
 <li><a href="#calling-the-service-from-a-callback-2-P-1">Calling the Service From A Callback</a>
@@ -35,9 +35,9 @@
 </ul>
 </div>
 </nav>
-<div id="outline-container-overview-1-P-1" class="outline-2">
-<h2 id="overview-1-P-1">Overview</h2>
-<div class="outline-text-2" id="text-org8685103">
+<div id="outline-container-overview-1-P-3" class="outline-2">
+<h2 id="overview-1-P-3">Overview</h2>
+<div class="outline-text-2" id="text-org762f228">
 <p>
 This document explains the simplest way to call services synchronously from a ROS 2 python node.
 </p>
@@ -45,7 +45,7 @@ This document explains the simplest way to call services synchronously from a RO
 </div>
 <div id="outline-container-constructing-the-node-1-P-1" class="outline-2">
 <h2 id="constructing-the-node-1-P-1">Constructing the Node</h2>
-<div class="outline-text-2" id="text-org6693efe">
+<div class="outline-text-2" id="text-orgf3ee48f">
 <p>
 The node's <code>__init__</code> function is where
 </p>
@@ -64,24 +64,24 @@ The node's <code>__init__</code> function is where
 <span class="org-keyword">class</span> <span class="org-type">AwaitClient</span>(node):
     <span class="org-keyword">def</span> <span class="org-function-name">__init__</span>(<span class="org-keyword">self</span>):
         <span class="org-builtin">super</span>().__init__(<span class="org-string">'await_client'</span>)
-        <span class="org-comment-delimiter"># </span><span class="org-comment">Create the callback group
-</span>        <span class="org-keyword">self</span>.<span class="org-variable-name">_mux_client</span> <span class="org-operator">=</span> MutuallyExclusiveCallbackGroup()
+        <span class="org-comment-delimiter"># </span><span class="org-comment">Create the callback group</span>
+        <span class="org-keyword">self</span>.<span class="org-variable-name">_mux_client</span> <span class="org-operator">=</span> MutuallyExclusiveCallbackGroup()
 
-        <span class="org-comment-delimiter"># </span><span class="org-comment">Create the services
-</span>        <span class="org-keyword">self</span>.<span class="org-variable-name">_client</span> <span class="org-operator">=</span> <span class="org-keyword">self</span>.create_client(ServiceType, <span class="org-string">'service_name'</span>, callback_group <span class="org-operator">=</span> <span class="org-keyword">self</span>._mux_client)
+        <span class="org-comment-delimiter"># </span><span class="org-comment">Create the services</span>
+        <span class="org-keyword">self</span>.<span class="org-variable-name">_client</span> <span class="org-operator">=</span> <span class="org-keyword">self</span>.create_client(ServiceType, <span class="org-string">'service_name'</span>, callback_group <span class="org-operator">=</span> <span class="org-keyword">self</span>._mux_client)
 
-        <span class="org-comment-delimiter"># </span><span class="org-comment">Other clients with callbacks get the default callback group, for example, a timer
-</span>        <span class="org-keyword">self</span>.<span class="org-variable-name">_tmr</span> <span class="org-operator">=</span> <span class="org-keyword">self</span>.create_timer(5.0, <span class="org-keyword">self</span>.timer_callback)
+        <span class="org-comment-delimiter"># </span><span class="org-comment">Other clients with callbacks get the default callback group, for example, a timer</span>
+        <span class="org-keyword">self</span>.<span class="org-variable-name">_tmr</span> <span class="org-operator">=</span> <span class="org-keyword">self</span>.create_timer(5.0, <span class="org-keyword">self</span>.timer_callback)
 
-        <span class="org-comment-delimiter"># </span><span class="org-comment">Wait for the servies to become available.
-</span>        <span class="org-keyword">if</span> <span class="org-keyword">not</span> <span class="org-keyword">self</span>._client.wait_for_service(timeout_sec <span class="org-operator">=</span> 1.0):
+        <span class="org-comment-delimiter"># </span><span class="org-comment">Wait for the servies to become available.</span>
+        <span class="org-keyword">if</span> <span class="org-keyword">not</span> <span class="org-keyword">self</span>._client.wait_for_service(timeout_sec <span class="org-operator">=</span> 1.0):
             <span class="org-keyword">raise</span> <span class="org-type">RuntimeError</span>(f<span class="org-string">"Timeout waiting for service </span>{<span class="org-keyword">self</span>._client.service_name}<span class="org-string">"</span>)
 </pre>
 </div>
 </div>
 <div id="outline-container-calling-the-service-from-a-callback-2-P-1" class="outline-3">
 <h3 id="calling-the-service-from-a-callback-2-P-1">Calling the Service From A Callback</h3>
-<div class="outline-text-3" id="text-org77f9f6d">
+<div class="outline-text-3" id="text-orgb1b0e8a">
 <ol class="org-ol">
 <li>To call the service from a callback, the callback should be defined as an <code>async</code> function</li>
 <li>At the site of the call, use <code>await</code>, which will suspend the callback until the result is available.</li>
@@ -89,15 +89,15 @@ The node's <code>__init__</code> function is where
 </ol>
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-keyword">async def</span> <span class="org-function-name">timer_callback</span>(<span class="org-keyword">self</span>):
-    <span class="org-comment-delimiter"># </span><span class="org-comment">Call the service, waiting indefinitely for the response
-</span>    <span class="org-comment-delimiter"># </span><span class="org-comment">If you are not using the response, omit the result =
-</span>    <span class="org-variable-name">result</span> <span class="org-operator">=</span> <span class="org-keyword">await</span> <span class="org-keyword">self</span>._client.call_async(Request())
+    <span class="org-comment-delimiter"># </span><span class="org-comment">Call the service, waiting indefinitely for the response</span>
+    <span class="org-comment-delimiter"># </span><span class="org-comment">If you are not using the response, omit the result =</span>
+    <span class="org-variable-name">result</span> <span class="org-operator">=</span> <span class="org-keyword">await</span> <span class="org-keyword">self</span>._client.call_async(Request())
 </pre>
 </div>
 </div>
 <div id="outline-container-timeouts-3-P-1" class="outline-4">
 <h4 id="timeouts-3-P-1">Timeouts</h4>
-<div class="outline-text-4" id="text-org7cd909d">
+<div class="outline-text-4" id="text-org34ba25a">
 <ol class="org-ol">
 <li>Adding a timeout to the <code>await</code> is good practice, because it is possible that the node providing the service server can crash or become unreachable
 <ul class="org-ul">
@@ -121,7 +121,7 @@ For several service calls that should all be governed by the same (cumulative) t
 </div>
 <div id="outline-container-calling-a-service-during-setup-2-P-1" class="outline-3">
 <h3 id="calling-a-service-during-setup-2-P-1">Calling a Service during Setup</h3>
-<div class="outline-text-3" id="text-org5ce1a63">
+<div class="outline-text-3" id="text-org2ea4e3e">
 <ol class="org-ol">
 <li>If you need to call services during the setup of your node, you can use <code>spin_until_future_complete</code> to wait for services to return.</li>
 <li>Any use of <code>spin_until_future_complete</code> is restricted to the code prior to calling <code>rclpy.spin()</code></li>
