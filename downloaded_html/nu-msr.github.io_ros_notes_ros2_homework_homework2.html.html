@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-10-08 Thu 23:48 -->
+<!-- 2026-10-13 Tue 09:11 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Homework 2</title>
@@ -22,7 +22,7 @@
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
 <li><a href="#logistics-1-P-1">Logistics</a></li>
-<li><a href="#overview-1-P-2">Overview</a>
+<li><a href="#overview-1-P-1">Overview</a>
 <ul>
 <li><a href="#hints-2-P-1">Hints</a></li>
 <li><a href="#frames-2-P-1">Frames</a></li>
@@ -58,13 +58,13 @@
 </ul>
 </li>
 <li><a href="#testing-1-P-1">Testing</a></li>
-<li><a href="#readme-1-P-2">README</a></li>
+<li><a href="#readme-1-P-1">README</a></li>
 </ul>
 </div>
 </nav>
 <div id="outline-container-logistics-1-P-1" class="outline-2">
 <h2 id="logistics-1-P-1">Logistics</h2>
-<div class="outline-text-2" id="text-orga0b3fac">
+<div class="outline-text-2" id="text-org3a2cf37">
 <ul class="org-ul">
 <li>The <a href="./guidelines.html">Guidelines</a> provide important information about coding standards, expectations, and logistical considerations for this assignment.</li>
 <li>I recommend reading the guidelines both before starting the assignment and prior to your final submission:</li>
@@ -80,9 +80,9 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-overview-1-P-2" class="outline-2">
-<h2 id="overview-1-P-2">Overview</h2>
-<div class="outline-text-2" id="text-orgd5fa45f">
+<div id="outline-container-overview-1-P-1" class="outline-2">
+<h2 id="overview-1-P-1">Overview</h2>
+<div class="outline-text-2" id="text-org168678b">
 <p>
 We will simulate a robot in ROS and integrate it into various standard ROS systems (e.g., <code>tf</code>, <code>joint_states</code>, etc.).
 The robot will be used to catch a brick that is dropped from the sky.
@@ -98,7 +98,7 @@ The repository is called <code>homework2</code> and there will be two packages w
 </div>
 <div id="outline-container-hints-2-P-1" class="outline-3">
 <h3 id="hints-2-P-1">Hints</h3>
-<div class="outline-text-3" id="text-orgcdb36e7">
+<div class="outline-text-3" id="text-org6e49230">
 <p>
 Here are some general hints for this assignment:
 </p>
@@ -116,7 +116,7 @@ the launchfile makes this process much simpler.</li>
 </div>
 <div id="outline-container-frames-2-P-1" class="outline-3">
 <h3 id="frames-2-P-1">Frames</h3>
-<div class="outline-text-3" id="text-org44cb4c0">
+<div class="outline-text-3" id="text-org2f8713e">
 <p>
 The following coordinate frames will be used:
 </p>
@@ -144,7 +144,7 @@ The following coordinate frames will be used:
 </div>
 <div id="outline-container-overview-2-P-1" class="outline-3">
 <h3 id="overview-2-P-1">Overview</h3>
-<div class="outline-text-3" id="text-orgca1f5f7">
+<div class="outline-text-3" id="text-org970a132">
 <ol class="org-ol">
 <li>The robot is modeled as a unicycle robot that "self balances" on a caster. It consists of
 <ul class="org-ul">
@@ -181,7 +181,7 @@ The image below is illustrative: however, the platform is a square rather than a
 </div>
 <div id="outline-container-configuration-2-P-1" class="outline-3">
 <h3 id="configuration-2-P-1">Configuration</h3>
-<div class="outline-text-3" id="text-org0322803">
+<div class="outline-text-3" id="text-orgd265f89">
 <ol class="org-ol">
 <li>A configuration file called <code>config/robot.yaml</code> should have the following parameters
 <ul class="org-ul">
@@ -202,7 +202,7 @@ The image below is illustrative: however, the platform is a square rather than a
 </div>
 <div id="outline-container-visualizing-the-robot-2-P-1" class="outline-3">
 <h3 id="visualizing-the-robot-2-P-1">Visualizing the Robot</h3>
-<div class="outline-text-3" id="text-orgd8ac153">
+<div class="outline-text-3" id="text-org785fa3a">
 <ol class="org-ol">
 <li>Write a launchfile called <code>launch/show_robot.launch.{py,xml}</code> that displays the robot (as defined by <code>robot.urdf.xacro</code>) in <code>rviz</code>
 <ul class="org-ul">
@@ -224,7 +224,7 @@ The image below is illustrative: however, the platform is a square rather than a
 </div>
 <div id="outline-container-physics-1-P-1" class="outline-2">
 <h2 id="physics-1-P-1">Physics</h2>
-<div class="outline-text-2" id="text-orgf785b83">
+<div class="outline-text-2" id="text-org117a087">
 <ol class="org-ol">
 <li>A python module called <code>physics.py</code> should contain ROS-independent code to keep track of the physics of the environment.
 <ul class="org-ul">
@@ -238,90 +238,90 @@ It should provide classes with the following definition.
     <span class="org-doc">'''Keep track of the physics of the Brick.'''</span>
 
     <span class="org-keyword">def</span> <span class="org-function-name">__init__</span>(<span class="org-keyword">self</span>, location, gravity, side_length, dt):
-        <span class="org-doc">'''</span>
-<span class="org-doc">        Initialize the brick.</span>
+        <span class="org-doc">'''
+        Initialize the brick.
 
-<span class="org-doc">        Args:</span>
-<span class="org-doc">        location - The (x,y,z) location of the brick. It is axis aligned.</span>
-<span class="org-doc">        gravity - the acceleration due to gravity in m/s^2</span>
-<span class="org-doc">        side_length - the side_length of the platform</span>
-<span class="org-doc">        dt - timestep in seconds of the physics simulation</span>
-<span class="org-doc">        '''</span>
+        Args:
+        location - The (x,y,z) location of the brick. It is axis aligned.
+        gravity - the acceleration due to gravity in m/s^2
+        side_length - the side_length of the platform
+        dt - timestep in seconds of the physics simulation
+        '''</span>
         <span class="org-keyword">pass</span>
 
     @<span class="org-builtin">property</span>
     <span class="org-keyword">def</span> <span class="org-function-name">position</span>(<span class="org-keyword">self</span>):
-        <span class="org-doc">'''</span>
-<span class="org-doc">        Get the brick's position.</span>
+        <span class="org-doc">'''
+        Get the brick's position.
 
-<span class="org-doc">        Return:</span>
-<span class="org-doc">            (x,y,z) location of the brick</span>
-<span class="org-doc">        '''</span>
+        Return:
+            (x,y,z) location of the brick
+        '''</span>
         <span class="org-keyword">pass</span>
 
     <span class="org-type">@position.setter</span>
     <span class="org-keyword">def</span> <span class="org-function-name">position</span>(<span class="org-keyword">self</span>, pos):
-        <span class="org-doc">'''</span>
-<span class="org-doc">        Set the brick's position.</span>
+        <span class="org-doc">'''
+        Set the brick's position.
 
-<span class="org-doc">        Args:</span>
-<span class="org-doc">           pos - the (x,y,z) location of the brick</span>
-<span class="org-doc">        '''</span>
+        Args:
+           pos - the (x,y,z) location of the brick
+        '''</span>
         <span class="org-keyword">pass</span>
 
     <span class="org-keyword">def</span> <span class="org-function-name">drop_gravity</span>(<span class="org-keyword">self</span>):
-        <span class="org-doc">'''</span>
-<span class="org-doc">        Update the brick's location by having it fall in gravity for one timestep.</span>
-<span class="org-doc">        '''</span>
+        <span class="org-doc">'''
+        Update the brick's location by having it fall in gravity for one timestep.
+        '''</span>
         <span class="org-keyword">pass</span>
 
     <span class="org-keyword">def</span> <span class="org-function-name">slide_ramp</span>(<span class="org-keyword">self</span>, radians):
-        <span class="org-doc">'''</span>
-<span class="org-doc">        Update the brick's location as it slides on a frictionless ramp for one timestep.</span>
+        <span class="org-doc">'''
+        Update the brick's location as it slides on a frictionless ramp for one timestep.
 
-<span class="org-doc">        Args:</span>
-<span class="org-doc">           radians - the angle of the ramp</span>
-<span class="org-doc">        '''</span>
+        Args:
+           radians - the angle of the ramp
+        '''</span>
 
 <span class="org-keyword">class</span> <span class="org-type">Robot</span>:
     <span class="org-keyword">def</span> <span class="org-function-name">__init__</span>(<span class="org-keyword">self</span>, config, dt):
-        <span class="org-doc">'''</span>
-<span class="org-doc">        Initialize the Robot.</span>
+        <span class="org-doc">'''
+        Initialize the Robot.
 
-<span class="org-doc">        Args:</span>
-<span class="org-doc">        config - The (x,y,alpha) position of the robot + tilt of the platform.</span>
-<span class="org-doc">        dt - timestep in seconds of the physics simulation</span>
+        Args:
+        config - The (x,y,alpha) position of the robot + tilt of the platform.
+        dt - timestep in seconds of the physics simulation
 
-<span class="org-doc">        '''</span>
+        '''</span>
         <span class="org-keyword">pass</span>
 
     @<span class="org-builtin">property</span>
     <span class="org-keyword">def</span> <span class="org-function-name">configuration</span>(<span class="org-keyword">self</span>):
-        <span class="org-doc">'''</span>
-<span class="org-doc">        Get the robot's configuration.</span>
+        <span class="org-doc">'''
+        Get the robot's configuration.
 
-<span class="org-doc">        Return:</span>
-<span class="org-doc">            (x,y,alpha) configuration of the robot</span>
-<span class="org-doc">        '''</span>
+        Return:
+            (x,y,alpha) configuration of the robot
+        '''</span>
         <span class="org-keyword">pass</span>
 
 
     <span class="org-keyword">def</span> <span class="org-function-name">drive</span>(<span class="org-keyword">self</span>, velocity):
-        <span class="org-doc">'''</span>
-<span class="org-doc">        Update the robot's position after driving for one timestep.</span>
+        <span class="org-doc">'''
+        Update the robot's position after driving for one timestep.
 
-<span class="org-doc">        Args:</span>
-<span class="org-doc">           velocity - (dx/dt, dy/dt) relative to the robot's body</span>
-<span class="org-doc">        '''</span>
+        Args:
+           velocity - (dx/dt, dy/dt) relative to the robot's body
+        '''</span>
         <span class="org-keyword">pass</span>
 
     <span class="org-keyword">def</span> <span class="org-function-name">tilt</span>(<span class="org-keyword">self</span>, alpha):
-        <span class="org-doc">'''</span>
-<span class="org-doc">        Tilt the platform to the specified angle</span>
+        <span class="org-doc">'''
+        Tilt the platform to the specified angle
 
-<span class="org-doc">        Args:</span>
-<span class="org-doc">           alpha - the angle of the platform relative to the horizontal.</span>
-<span class="org-doc">        '''</span>
+        Args:
+           alpha - the angle of the platform relative to the horizontal.
+        '''</span>
         <span class="org-keyword">pass</span>
 </pre>
 </div></li>
@@ -334,7 +334,7 @@ It should provide classes with the following definition.
 </div>
 <div id="outline-container-overview-2-P-2" class="outline-3">
 <h3 id="overview-2-P-2">Overview</h3>
-<div class="outline-text-3" id="text-org0b0d122">
+<div class="outline-text-3" id="text-orgfc14a00">
 <p>
 The <code>simulation</code> node acts as fake hardware for this assignment. It manages and has full knowledge of the brick and the robot.
 </p>
@@ -355,7 +355,7 @@ The <code>simulation</code> node acts as fake hardware for this assignment. It m
 </div>
 <div id="outline-container-simulation-loop-2-P-1" class="outline-3">
 <h3 id="simulation-loop-2-P-1">Simulation Loop</h3>
-<div class="outline-text-3" id="text-org3f6e651">
+<div class="outline-text-3" id="text-org719be4a">
 <ul class="org-ul">
 <li>The simulation is driven by a single timer with a period of <code>timestep</code></li>
 <li>Each tick of the timer corresponds to a single simulation step</li>
@@ -365,7 +365,7 @@ The <code>simulation</code> node acts as fake hardware for this assignment. It m
 </div>
 <div id="outline-container-the-arena-2-P-1" class="outline-3">
 <h3 id="the-arena-2-P-1">The Arena</h3>
-<div class="outline-text-3" id="text-org74d0659">
+<div class="outline-text-3" id="text-org3e0a0ff">
 <ol class="org-ol">
 <li>Drawing walls on the arena boundaries using markers:
 <ul class="org-ul">
@@ -387,7 +387,7 @@ The <code>simulation</code> node acts as fake hardware for this assignment. It m
 </div>
 <div id="outline-container-brick-dynamics-2-P-1" class="outline-3">
 <h3 id="brick-dynamics-2-P-1">Brick Dynamics</h3>
-<div class="outline-text-3" id="text-org177ce49">
+<div class="outline-text-3" id="text-org419dc65">
 <ol class="org-ol">
 <li>Offer a service called <code>drop</code> (of type <code>std_srvs/srv/Empty</code>) that causes the brick to fall in gravity according to the specified rules:
 <ul class="org-ul">
@@ -409,7 +409,7 @@ The <code>simulation</code> node acts as fake hardware for this assignment. It m
 </div>
 <div id="outline-container-robot-dynamics-2-P-1" class="outline-3">
 <h3 id="robot-dynamics-2-P-1">Robot Dynamics</h3>
-<div class="outline-text-3" id="text-org05c8fb9">
+<div class="outline-text-3" id="text-org8301f49">
 <ol class="org-ol">
 <li>The simulation tracks the state of the robot according to a simple kinematic model.</li>
 <li>Velocity commands are received by subscribing to  <code>cmd_vel</code> (<code>geometry_msgs/msg/Twist</code>)
@@ -435,7 +435,7 @@ The <code>simulation</code> node acts as fake hardware for this assignment. It m
 </div>
 <div id="outline-container-overview-2-P-3" class="outline-3">
 <h3 id="overview-2-P-3">Overview</h3>
-<div class="outline-text-3" id="text-orgd9a93c2">
+<div class="outline-text-3" id="text-orgb957dcd">
 <p>
 The <code>control</code> node is implemented in <code>control.py</code> and it is responsible for higher-level control and odometry
 </p>
@@ -461,7 +461,7 @@ The <code>control</code> node is implemented in <code>control.py</code> and it i
 </div>
 <div id="outline-container-launch-2-P-1" class="outline-3">
 <h3 id="launch-2-P-1">Launch</h3>
-<div class="outline-text-3" id="text-org4a3735a">
+<div class="outline-text-3" id="text-org3f2b706">
 <ol class="org-ol">
 <li>Write a launchfile called <code>control.launch.xml</code> that
 <ul class="org-ul">
@@ -484,7 +484,7 @@ The <code>control</code> node is implemented in <code>control.py</code> and it i
 </div>
 <div id="outline-container-overview-2-P-4" class="outline-3">
 <h3 id="overview-2-P-4">Overview</h3>
-<div class="outline-text-3" id="text-org33d71be">
+<div class="outline-text-3" id="text-orgc95721d">
 <ol class="org-ol">
 <li>The <code>catcher</code> node is implemented in <code>catcher.py</code>
 <ul class="org-ul">
@@ -510,7 +510,7 @@ The <code>control</code> node is implemented in <code>control.py</code> and it i
 </div>
 <div id="outline-container-launchfile-2-P-1" class="outline-3">
 <h3 id="launchfile-2-P-1">Launchfile</h3>
-<div class="outline-text-3" id="text-orgd51ffea">
+<div class="outline-text-3" id="text-orgca667cf">
 <ol class="org-ol">
 <li>Write a launchfile called <code>catcher.launch.xml</code> that runs all the nodes necessary for the robot to catch a brick
 <ul class="org-ul">
@@ -524,7 +524,7 @@ The <code>control</code> node is implemented in <code>control.py</code> and it i
 </div>
 <div id="outline-container-testing-1-P-1" class="outline-2">
 <h2 id="testing-1-P-1">Testing</h2>
-<div class="outline-text-2" id="text-orgc12fdb6">
+<div class="outline-text-2" id="text-orgc3b6fb6">
 <ol class="org-ol">
 <li>Your code should pass all the standard tests that are run with <code>colcon test</code></li>
 <li>Write at least one <code>pytest</code> unit test for:
@@ -545,9 +545,9 @@ The <code>control</code> node is implemented in <code>control.py</code> and it i
 </ol>
 </div>
 </div>
-<div id="outline-container-readme-1-P-2" class="outline-2">
-<h2 id="readme-1-P-2">README</h2>
-<div class="outline-text-2" id="text-org652bbb4">
+<div id="outline-container-readme-1-P-1" class="outline-2">
+<h2 id="readme-1-P-1">README</h2>
+<div class="outline-text-2" id="text-org53580a4">
 <p>
 In the base directory of your repository (e.g. <code>homework2</code>) create a <code>README.md</code> using the following template (be sure to update the <code>${}</code> with the answers.)
 </p>
