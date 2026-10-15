@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-09-29 Tue 09:23 -->
+<!-- 2026-10-15 Thu 09:20 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Visualization in ROS</title>
@@ -21,7 +21,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#overview-1-P-9">Overview</a></li>
+<li><a href="#overview-1-P-1">Overview</a></li>
 <li><a href="#rviz2-1-P-1">Rviz2</a>
 <ul>
 <li><a href="#paths-2-P-1">Paths</a></li>
@@ -45,8 +45,8 @@
 </ul>
 </div>
 </nav>
-<div id="outline-container-overview-1-P-9" class="outline-2">
-<h2 id="overview-1-P-9">Overview</h2>
+<div id="outline-container-overview-1-P-1" class="outline-2">
+<h2 id="overview-1-P-1">Overview</h2>
 <div class="outline-text-2" id="text-org1c7a219">
 <ul class="org-ul">
 <li>ROS has several tools for interacting graphically with robotic systems.
@@ -97,7 +97,7 @@ messages for displaying visual primitives in <code>rviz2</code> using some Displ
 <ul class="org-ul">
 <li>For example, spheres, cubes, cylinders, lines</li>
 </ul></li>
-<li>Markers are drawn by publishing <a href="http://docs.ros.org/en/kilted/p/visualization_msgs/msg/Marker.html">Marker</a> messages and subscribing to the topic in rviz.
+<li>Markers are drawn by publishing <a href="https://docs.ros.org/en/lyrical/p/visualization_msgs/msg/Marker.html">Marker</a> messages and subscribing to the topic in rviz.
 <ul class="org-ul">
 <li>By default, the Marker display type listens on the <code>visualization_marker</code> topic, but this can be changed in the rviz2 gui or with remapping.</li>
 <li>Markers have a <code>header</code> field that requires the time.  Using <code>node.get_clock().now()</code> for this ensures the Marker will be drawn</li>
@@ -131,7 +131,7 @@ relative to its parent frame, even if that frame moves after the marker is drawn
 <h3 id="markerarray-2-P-1">MarkerArray</h3>
 <div class="outline-text-3" id="text-org190b05d">
 <ul class="org-ul">
-<li>The <a href="http://docs.ros.org/en/kilted/p/visualization_msgs/msg/MarkerArray.html">MarkerArray</a> message consists of an array of Marker messages</li>
+<li>The <a href="https://docs.ros.org/en/lyrical/p/visualization_msgs/msg/MarkerArray.html">MarkerArray</a> message consists of an array of Marker messages</li>
 <li>This message type lets you publish multiple markers with a single message</li>
 <li><code>rviz2</code> has a DisplayType that can subscribe to a <code>MarkerArray</code> message and visualize all markers in the array</li>
 <li>If you are sending many markers, it is more efficient to send them as an array</li>
@@ -155,7 +155,7 @@ relative to its parent frame, even if that frame moves after the marker is drawn
 <li>When a new subscriber connects, that message is sent to the new subscriber</li>
 <li>For example, if <code>rviz</code> launched after the message is published, it would still receive the message due to the latching</li>
 </ul></li>
-<li>In ROS 2 the <a href="https://docs.ros.org/en/kilted/Concepts/Intermediate/About-Quality-of-Service-Settings.html">Quality of Service</a> (QoS) settings enable emulating the behavior similar to ROS 1
+<li>In ROS 2 the <a href="https://docs.ros.org/en/lyrical/Concepts/Intermediate/About-Quality-of-Service-Settings.html">Quality of Service</a> (QoS) settings enable emulating the behavior similar to ROS 1
 <ul class="org-ul">
 <li>The publisher on the topic should have it's "Durability" set to <code>TRANSIENT_LOCAL</code></li>
 <li>The subscriber (e.g., the Marker Display in <code>rviz</code>) should also have it's "Durability" set to <code>TRANSIENT_LOCAL</code></li>

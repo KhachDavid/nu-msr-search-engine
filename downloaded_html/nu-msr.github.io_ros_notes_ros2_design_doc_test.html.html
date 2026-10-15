@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-09-29 Tue 09:23 -->
+<!-- 2026-10-15 Thu 09:20 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Testing, Documentation, and Design</title>
@@ -53,7 +53,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#testing-1-P-2">Testing</a>
+<li><a href="#testing-1-P-1">Testing</a>
 <ul>
 <li><a href="#why-testing--2-P-1">Why Testing?</a></li>
 <li><a href="#why-automate-testing--2-P-1">Why Automate Testing?</a></li>
@@ -83,23 +83,22 @@
 </li>
 <li><a href="#integration-testing-in-ros-and-python-2-P-1">Integration Testing in ROS and Python</a></li>
 <li><a href="#running-tests-2-P-1">Running Tests</a></li>
-<li><a href="#warnings-2-P-1">Warnings</a></li>
 </ul>
 </li>
 <li><a href="#quality-1-P-1">Quality</a></li>
-<li><a href="#documentation-1-P-3">Documentation</a>
+<li><a href="#documentation-1-P-1">Documentation</a>
 <ul>
 <li><a href="#ros-doc-2-2-P-1">Ros Doc 2</a></li>
 <li><a href="#sphinx-2-P-1">Sphinx</a></li>
-<li><a href="#git-2-P-2">Git</a></li>
+<li><a href="#git-2-P-1">Git</a></li>
 </ul>
 </li>
 <li><a href="#design-guidelines-1-P-1">Design Guidelines</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-testing-1-P-2" class="outline-2">
-<h2 id="testing-1-P-2">Testing</h2>
+<div id="outline-container-testing-1-P-1" class="outline-2">
+<h2 id="testing-1-P-1">Testing</h2>
 <div class="outline-text-2" id="text-org8b83e5b">
 <p>
 <i>Program testing can be used to show the presence of bugs, never to show their absence!</i> 
@@ -135,7 +134,7 @@ and can serve their purpose to catch errors</li>
 <h2 id="testing-in-ros-1-P-1">Testing in ROS</h2>
 <div class="outline-text-2" id="text-orgb8f583b">
 <ul class="org-ul">
-<li>The <a href="https://docs.ros.org/en/kilted/The-ROS2-Project/Contributing/Developer-Guide.html#testing">ROS 2 testing philosophy</a> discusses three types of tests: unit, integration, and systems</li>
+<li>The <a href="https://docs.ros.org/en/lyrical/The-ROS2-Project/Contributing/Developer-Guide.html#testing">ROS 2 testing philosophy</a> discusses three types of tests: unit, integration, and systems</li>
 <li>These terms are standard terms, but when applied to ROS packages they take on more concrete meaning</li>
 </ul>
 </div>
@@ -160,13 +159,13 @@ every push to a git repository using continuous integration</li>
 </ul></li>
 <li>Thus you can test code A, that uses B, by mocking B.  This now no-longer tests B but it
 still lets you test A, under the assumption that B is working</li>
-<li>ROS 2 recommends mocking everything and having no dependencies
+<li>ROS 2 recommends mocking to narrow parts of what is being tested
 <ul class="org-ul">
-<li>Although mocking creates arguably the purest unit tests there are some problems with this approach:
+<li>Although mocking creates arguably the purest unit tests there are some problems with mocking too much:
 <ol class="org-ol">
 <li>Mocking can be a lot of effort (when a mocked dependency changes, so must the mock itself)</li>
 <li>If something is mocked it is not benefiting from extra test coverage that testing another part of the system provides</li>
-<li>We already need the dependencies anyway so isolated the dependencies for testing is not overly helpful for our development use-case</li>
+<li>We already need the dependencies anyway so isolating the dependencies for testing is not overly helpful for our development use-case</li>
 <li>Mocking is a place to introduce new errors and bugs (e.g., did you correctly mock the object?)</li>
 </ol></li>
 <li>With that said mocking can be helpful in many cases, especially if some code depends on something that takes a long time or moves a robot</li>
@@ -192,7 +191,7 @@ and encompass a broader range of functionality</li>
 <h3 id="systems-testing-2-P-1">Systems Testing</h3>
 <div class="outline-text-3" id="text-orgad2a217">
 <ul class="org-ul">
-<li>A systems test is a type of integration test where a whole end-to-end system is testing</li>
+<li>A systems test is a type of integration test where a whole end-to-end system is tested</li>
 <li>ROS 2 suggests putting such tests in their own packages to maintain decoupling between packages</li>
 </ul>
 </div>
@@ -212,7 +211,7 @@ and encompass a broader range of functionality</li>
 <ul class="org-ul">
 <li>Testing everything often requires physical hardware to move or sense in the real world</li>
 <li>There are non-deterministic inputs and outputs</li>
-<li>The best testing strategy is to isolate as much of the "pure software" part of the robot from the hardware, enabling as much code as possible to be testing using standard software development practices.</li>
+<li>The best testing strategy is to isolate as much of the "pure software" part of the robot from the hardware, enabling as much code as possible to be tested using standard software development practices.</li>
 </ul></li>
 </ul>
 </div>
@@ -239,11 +238,11 @@ and encompass a broader range of functionality</li>
 <li>These tests are mostly used to test stylistic items:
 <code>test/test_copyright.py</code>: - by default this is skipped, enable when you release code to ensure that there is a copyright notice in every file
 <code>test/test_flake8.py</code>: - enforce python style
-<code>test/test_pep257</code>: compliance with <a href="https://peps.python.org/pep-0257/">PEP 257</a> docstring conventions</li>
+<code>test/test_pep257.py</code>: compliance with <a href="https://peps.python.org/pep-0257/">PEP 257</a> docstring conventions</li>
 </ul></li>
 <li>These notes do not endorse the use of any particular text-editor or IDE, nor do they offer support for the use of any editor.
 <ul class="org-ul">
-<li>However, the - <a href="https://github.com/athackst/vscode-ament-task-provider">VSCode Ament Flake8</a> extension enables you to see <code>flake8</code> and other standard ament test errors in VSCode and might make it more efficient for you to address such errors.</li>
+<li>However, the <a href="https://github.com/athackst/vscode-ament-task-provider">VSCode Ament Flake8</a> extension enables you to see <code>flake8</code> and other standard ament test errors in VSCode and might make it more efficient for you to address such errors.</li>
 </ul></li>
 </ul>
 </div>
@@ -267,7 +266,7 @@ and encompass a broader range of functionality</li>
 <h4 id="writing-unittests-3-P-1">Writing Unittests</h4>
 <div class="outline-text-4" id="text-org366ef69">
 <ul class="org-ul">
-<li>import <code>unitttest</code></li>
+<li>import <code>unittest</code></li>
 <li>Write a class that serves as a "Test Case"
 <ul class="org-ul">
 <li>the class inherits from <code>unittest.TestCase</code></li>
@@ -277,7 +276,7 @@ special <code>unittest</code> assertion functions (e.g., <code>self.assertTrue</
 </ul></li>
 <li>The <a href="https://docs.python.org/3/library/unittest.html">unittest</a> documentation has more information.
 <ul class="org-ul">
-<li>Tests are written like any other <code>python</code> <code>unitttest</code>: there is nothing ROS-specific.</li>
+<li>Tests are written like any other <code>python</code> <code>unittest</code>: there is nothing ROS-specific.</li>
 </ul></li>
 </ul>
 </div>
@@ -299,21 +298,15 @@ special <code>unittest</code> assertion functions (e.g., <code>self.assertTrue</
 <ul class="org-ul">
 <li><a href="https://index.ros.org/p/launch_testing/">launch_testing</a>: ROS agnostic testing, based on <code>unittest</code>
 <ul class="org-ul">
-<li>This package is now enshrined as an <a href="https://docs.ros.org/en/kilted/Tutorials/Intermediate/Testing/Integration.html">official ROS integration testing tutorial</a></li>
-<li>The tutorial focuses on adding tests via <code>CMakeLists.txt</code>. The notes here use <code>pytest</code>.
-<ul class="org-ul">
-<li>There are currently reasons (namely isolation of the nodes) to use the <code>CMakeLists.txt</code> method; however, doing this would require creating a separate package for integration tests</li>
-<li>An area for contribution would be to allow these tests to be detected with <code>pytest</code> and run in an isolated manner.</li>
-</ul></li>
+<li>This package is used in the <a href="https://docs.ros.org/en/lyrical/Developer-Tools/Debugging/Testing/Integration.html">official ROS integration testing tutorial</a></li>
 </ul></li>
 <li><a href="https://index.ros.org/p/launch_testing_ros/">launch_testing_ros</a> ROS-specific testing, based on <code>launch_testing</code>
 <ul class="org-ul">
-<li>Essentially, this package adds some additional features/functions to call</li>
-<li>As of 10/2025, you should clone the repository and build the documentation locally</li>
+<li>Adds functions that enable waiting for various ROS events to happen (e.g., waiting for messages to arrive)</li>
 </ul></li>
 <li><a href="https://index.ros.org/p/launch_pytest/">launch_pytest</a>: ROS agnostic testing, based on <code>pytest</code>
 <ul class="org-ul">
-<li>This package seems to be a work-in-progress, or maybe no longer worked on.</li>
+<li>This package seems to be a work-in-progress</li>
 </ul></li>
 </ul></li>
 <li>The integration testing is powerful, letting you:
@@ -329,7 +322,7 @@ special <code>unittest</code> assertion functions (e.g., <code>self.assertTrue</
 <li>Don't forget about the examples in these repositories</li>
 </ul></li>
 <li><code>test_depend</code> on <code>launch_testing_ros</code></li>
-<li>Write a <code>test_&lt;something&gt;_launch.py</code> file in the <code>test</code> directory</li>
+<li>Write a <code>test_&lt;something&gt;_launch.py</code> (or <code>&lt;something&gt;_launch_test.py</code>) file in the <code>test</code> directory</li>
 <li><p>
 Below is some code that highlights the differences between a launch file
 and a test launch file and explains how it works
@@ -337,23 +330,33 @@ and a test launch file and explains how it works
 <div class="org-src-container">
 <pre class="src src-python"><span class="org-keyword">import</span> unittest
 <span class="org-keyword">import</span> pytest
+<span class="org-keyword">import</span> rclpy
+<span class="org-keyword">from</span> rclpy.duration <span class="org-keyword">import</span> Duration
 <span class="org-keyword">from</span> launch <span class="org-keyword">import</span> LaunchDescription
+<span class="org-keyword">from</span> launch_ros.actions <span class="org-keyword">import</span> Node
+<span class="org-keyword">import</span> launch_testing
+
+<span class="org-keyword">import</span> launch_testing.asserts
+<span class="org-keyword">import</span> launch_testing.markers
 <span class="org-keyword">from</span> launch_testing.actions <span class="org-keyword">import</span> ReadyToTest
-<span class="org-comment-delimiter"># </span><span class="org-comment">Mark the launch description generation as a rostest
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">Also, it's called generate_test_description() for a test
-</span><span class="org-comment-delimiter"># </span><span class="org-comment">But it still returns a LaunchDescription
-</span><span class="org-type">@pytest.mark.rostest</span>
+<span class="org-keyword">from</span> launch_testing_ros.actions <span class="org-keyword">import</span> EnableRmwIsolation
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Mark the launch description generation as a launch test
+</span><span class="org-comment-delimiter"># </span><span class="org-comment">keep_alive keeps the launch running until the tests finish, even if every launched process exits
+</span><span class="org-type">@pytest.mark.launch_test</span>
+<span class="org-type">@launch_testing.markers.keep_alive</span>
 <span class="org-keyword">def</span> <span class="org-function-name">generate_test_description</span>():
     <span class="org-keyword">return</span> (
         LaunchDescription([
-            Node(...), <span class="org-comment-delimiter"># </span><span class="org-comment">here is where you put all launch actions you want to run during the test
-</span>                  <span class="org-comment-delimiter"># </span><span class="org-comment">To test a particular launch file, IncludeLaunchDescription()
-</span>            ReadyToTest() <span class="org-comment-delimiter"># </span><span class="org-comment">this is the last action. Can be used elsewhere somehow
+            EnableRmwIsolation(), <span class="org-comment-delimiter"># </span><span class="org-comment">Isolate tests from regular ROS nodes
+</span>            Node(...), <span class="org-comment-delimiter"># </span><span class="org-comment">Launch actions you want to run during the test
+</span>                       <span class="org-comment-delimiter"># </span><span class="org-comment">To test a particular launch file, IncludeLaunchDescription()
+</span>            ReadyToTest() <span class="org-comment-delimiter"># </span><span class="org-comment">Enable the tests to begin
 </span>            ]),
             <span class="org-comment-delimiter"># </span><span class="org-comment">Here is a dictionary of additional arguments to pass to test functions
 </span>            <span class="org-comment-delimiter"># </span><span class="org-comment">You could, for example, store the Node Action in a variable and pass it to the test
-</span>            <span class="org-comment-delimiter"># </span><span class="org-comment">functions. 
-</span>            {<span class="org-string">'my_argument'</span>:  additional_argument} 
+</span>            <span class="org-comment-delimiter"># </span><span class="org-comment">functions.
+</span>            {<span class="org-string">'my_argument'</span>:  additional_argument}
             )
 <span class="org-comment-delimiter"># </span><span class="org-comment">The above returns the launch description. Now it's time for the test
 </span><span class="org-comment-delimiter"># </span><span class="org-comment">The goal is essentially to create a node that can then be used in all tests to
@@ -369,7 +372,7 @@ and a test launch file and explains how it works
     @<span class="org-builtin">classmethod</span>
     <span class="org-keyword">def</span> <span class="org-function-name">tearDownClass</span>(cls):
         <span class="org-doc">""" Runs one time, when testcase is unloaded"""</span>
-       rclpy.shutdown()
+        rclpy.shutdown()
 
     <span class="org-keyword">def</span> <span class="org-function-name">setUp</span>(<span class="org-keyword">self</span>):
         <span class="org-doc">"""Runs before every test"""</span>
@@ -384,19 +387,31 @@ and a test launch file and explains how it works
 </span>        <span class="org-keyword">self</span>.node.destroy_node()
 
     <span class="org-keyword">def</span> <span class="org-function-name">test_my_test1</span>(<span class="org-keyword">self</span>, launch_service, proc_output, my_argument):
-       <span class="org-doc">"""In UnitTest, any function starting with "test" is run as a test
+        <span class="org-doc">"""In UnitTest, any function starting with "test" is run as a test
 
-          Args:
-             launch_service - information about the launch
-             proc_output - this object streams the output (if any) from the running process
-             my_argument - this was passed in when we created the description
-       """</span>
-       <span class="org-comment-delimiter"># </span><span class="org-comment">Here you can use self.node to publish and subscribe
-</span>       <span class="org-comment-delimiter"># </span><span class="org-comment">launch_testing_ros.WaitForTopics waits for something to be published on a topic
-</span>       <span class="org-comment-delimiter"># </span><span class="org-comment">spin with rclpy.spin_once()
-</span>       <span class="org-comment-delimiter"># </span><span class="org-comment">You can check and verify output with proc_output. launch/launch_testing has more information
-</span>       <span class="org-comment-delimiter"># </span><span class="org-comment">You should specify a timeout for rclpy.spin_once() because if no ROS events happen it will
-</span>       <span class="org-comment-delimiter"># </span><span class="org-comment">block forever (but if no events happen that is a bug and the test should fail</span>
+           Args:
+              launch_service - information about the launch
+              proc_output - this object streams the output (if any) from the running process
+              my_argument - this was passed in when we created the description
+        """</span>
+        <span class="org-comment-delimiter"># </span><span class="org-comment">Here you can use self.node to publish and subscribe
+</span>        <span class="org-comment-delimiter"># </span><span class="org-comment">launch_testing_ros.WaitForTopics waits for something to be published on a topic
+</span>        <span class="org-comment-delimiter"># </span><span class="org-comment">You can check and verify output with proc_output. launch/launch_testing has more information
+</span>        <span class="org-variable-name">start_time</span> <span class="org-operator">=</span> <span class="org-keyword">self</span>.node.get_clock().now()
+        <span class="org-keyword">while</span> <span class="org-keyword">not</span> condition_is_met():
+        <span class="org-comment-delimiter"># </span><span class="org-comment">Always specify a timeout for rclpy.spin_once(): if no ROS events happen it will
+</span>        <span class="org-comment-delimiter"># </span><span class="org-comment">block forever (but if no events happen that is a bug and the test should fail)
+</span>            rclpy.spin_once(<span class="org-keyword">self</span>.node, timeout_sec<span class="org-operator">=</span>0.1)
+            <span class="org-keyword">if</span> <span class="org-keyword">self</span>.node.get_clock().now() <span class="org-operator">-</span> start_time <span class="org-operator">&gt;</span> Duration(seconds<span class="org-operator">=</span>1.0):
+                <span class="org-keyword">break</span>
+        <span class="org-keyword">assert</span> condition_is_met()
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Check the exit codes of the nodes to ensure they exited cleanly
+</span><span class="org-type">@launch_testing.post_shutdown_test</span>()
+<span class="org-keyword">class</span> <span class="org-type">TestNodeShutdown</span>(unittest.TestCase):
+    <span class="org-keyword">def</span> <span class="org-function-name">test_exit_codes</span>(<span class="org-keyword">self</span>, proc_info):
+        <span class="org-doc">"""Check if the process exited cleanly"""</span>
+        launch_testing.asserts.assertExitCodes(proc_info)
 </pre>
 </div></li>
 </ul></li>
@@ -404,7 +419,8 @@ and a test launch file and explains how it works
 these can be hard to diagnose.  The order of nodes in a launchfile (including testing nodes) is not specified
 unless you work with events and explicitly do things to order them</li>
 
-<li>The <a href="https://github.com/m-elwin/me495_tf">me495_tf</a> on the <code>ros2</code> branch has code that demonstrates some features as do the launch_testing packages themselves</li>
+<li>The <a href="https://github.com/m-elwin/me495_tf">me495_tf</a> package on the <code>ros2</code> branch has a complete, working integration test (<a href="https://github.com/m-elwin/me495_tf/blob/ros2/test/in_out_launch_test.py">test/in_out_launch_test.py</a>) that can serve as a template.
+The launch_testing packages also contain many examples.</li>
 </ol>
 </div>
 </div>
@@ -413,49 +429,13 @@ unless you work with events and explicitly do things to order them</li>
 <div class="outline-text-3" id="text-org7e9adc8">
 <ol class="org-ol">
 <li>Before you can run tests, you must <code>colcon build</code> the workspace</li>
-<li>All tests (unit and integration) can then be run with <code>colcon test</code> (without sourcing the workspace, it seems)</li>
+<li>All tests (unit and integration) can then be run with <code>colcon test</code> (without sourcing the workspace)</li>
 <li>To see test results run <code>colcon test-result</code></li>
 <li>Often you may wish to see more details (especially when a test fails). Use <code>colcon test-result --verbose</code></li>
-<li>Sometimes you want to see the exact output of tests for a specific package. Use <code>cat log/latest_test/package/stdout_stderr.log</code></li>
+<li>Sometimes you want to see the exact output of tests for a specific package. Use <code>cat log/latest_test/&lt;package&gt;/stdout_stderr.log</code></li>
 <li>You can also run <code>colcon test --event-handlers console_direct+</code> to see all the information when you run the tests.</li>
 <li>Add <code>--pytest-args -s</code> to the <code>colcon test</code> command to be able to view full output from the tests (e.g., the result of print statements).</li>
 </ol>
-</div>
-</div>
-<div id="outline-container-warnings-2-P-1" class="outline-3">
-<h3 id="warnings-2-P-1">Warnings</h3>
-<div class="outline-text-3" id="text-orgdf75e1a">
-<p>
-As of Ubuntu 24.04 and ROS kilted, running some tests with pytests results in a warning:
-</p>
-<div class="org-src-container">
-<pre class="src src-nil">test/test_flake8.py: 22 warnings
-  Warning: This process (pid=&lt;PID&gt;) is multi-threaded, use of fork() may lead to deadlocks in the child.
-</pre>
-</div>
-
-<p>
-This warning is <a href="https://github.com/python/cpython/issues/100228?">from the python interpreter itself</a>, and is related to deadlocks when
-<code>os.fork()</code> is called from multi-threaded processes.
-</p>
-
-<p>
-As pytest is setup, it uses the python <code>multiprocessing</code> package, which default uses <code>os.fork()</code> to spawn new processes.
-</p>
-
-<p>
-The warning can be fixed by adding the following code into your tests directory as <code>conftest.py</code>
-</p>
-<div class="org-src-container">
-<pre class="src src-python"><span class="org-keyword">import</span> multiprocessing
-multiprocessing.set_start_method(<span class="org-string">'spawn'</span>, force<span class="org-operator">=</span><span class="org-constant">True</span>)
-</pre>
-</div>
-
-<p>
-This code runs before all tests are run and configures the <code>multiprocessing</code> module to use <code>spawn</code> rather than <code>fork</code> to start new <code>python</code> interpreters.
-This will be slower, but does not run into the issues. Hopefully this workaround will eventually no longer be needed in newer versions.
-</p>
 </div>
 </div>
 </div>
@@ -468,14 +448,14 @@ This will be slower, but does not run into the issues. Hopefully this workaround
 <li>Opinion: few packages seem to have adopted these, but those that have seem to uphold them pretty well.
 <ul class="org-ul">
 <li>Maybe more packages will adopt them as they mature</li>
-<li>The declaration also has lower levels so that if you depend on a package with a low level then you know you should not be.</li>
+<li>The declaration also has lower levels, so if you depend on a package with a low quality level you know to be cautious about relying on it.</li>
 </ul></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-documentation-1-P-3" class="outline-2">
-<h2 id="documentation-1-P-3">Documentation</h2>
-<div class="outline-text-2" id="text-documentation-1-P-3">
+<div id="outline-container-documentation-1-P-1" class="outline-2">
+<h2 id="documentation-1-P-1">Documentation</h2>
+<div class="outline-text-2" id="text-documentation-1-P-1">
 </div>
 <div id="outline-container-ros-doc-2-2-P-1" class="outline-3">
 <h3 id="ros-doc-2-2-P-1">Ros Doc 2</h3>
@@ -498,15 +478,15 @@ This will be slower, but does not run into the issues. Hopefully this workaround
 <li><a href="http://sphinx-doc.org/en/master">Sphinx</a> is a tool that converts docstrings in your python source code into well-formatted documentation
 <ul class="org-ul">
 <li>To install: <code>sudo apt install python3-sphinx</code></li>
-<li>The ROS 2 method of developing sphinx documents is still under development</li>
-<li>However, for now, put useful meaningful docstrings in your classes and functions</li>
+<li>In ROS 2, <code>rosdoc2</code> runs Sphinx for you, so you rarely need to configure Sphinx directly</li>
+<li>Put useful, meaningful docstrings in your classes and functions</li>
 </ul></li>
 <li><code>rosdoc2</code> by default supports <a href="https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html">Sphinx-style</a> docstrings.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-git-2-P-2" class="outline-3">
-<h3 id="git-2-P-2">Git</h3>
+<div id="outline-container-git-2-P-1" class="outline-3">
+<h3 id="git-2-P-1">Git</h3>
 <div class="outline-text-3" id="text-org142ceec">
 <ul class="org-ul">
 <li>Git is an important part of the documentation process</li>
@@ -532,12 +512,13 @@ some guidelines about the trade-offs experienced in these decisions.
 <ul class="org-ul">
 <li>Code in a single node is simpler and can take advantage of the abstractions provided by the programming language</li>
 <li>Code that is split across multiple nodes can be re-used and mixed-and-matched with other ROS nodes more easily</li>
-<li>Code that is split across multiple nodes is inherently parallel (since nodes run in parallel).</li>
+<li>Code that is split across multiple nodes runs in parallel when the nodes run in separate processes
+(nodes composed into the same container process share an executor and may not run in parallel)</li>
 <li><p>
 My (very loose) guideline is that if two nodes are
 </p>
 <ol class="org-ol">
-<li>Always are either both running or not running</li>
+<li>Are always either both running or not running</li>
 <li>Subscribed to each other's topics</li>
 <li>Do not need to be running in parallel</li>
 </ol>
