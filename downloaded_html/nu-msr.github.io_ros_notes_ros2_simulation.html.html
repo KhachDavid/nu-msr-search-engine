@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-09-29 Tue 09:23 -->
+<!-- 2026-10-22 Thu 09:26 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Simulation</title>
@@ -21,7 +21,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#overview-1-P-5">Overview</a></li>
+<li><a href="#overview-1-P-1">Overview</a></li>
 <li><a href="#advantages-of-simulation-1-P-1">Advantages of Simulation</a></li>
 <li><a href="#disadvantages-of-simulation-1-P-1">Disadvantages of Simulation</a></li>
 <li><a href="#choosing-a-simulator-1-P-1">Choosing a simulator</a>
@@ -42,17 +42,18 @@
 <li><a href="#open-source-simulators-2-P-1">Open Source Simulators</a>
 <ul>
 <li><a href="#current-simulators-3-P-1">Current Simulators</a></li>
-<li><a href="#less-maintained-3-P-1">Less Maintained</a></li>
+<li><a href="#legacy-3-P-1">Legacy</a></li>
+<li><a href="#other-3-P-1">Other</a></li>
 </ul>
 </li>
-<li><a href="#closed-source-simulators-2-P-1">Closed Source Simulators</a></li>
+<li><a href="#non-open-source-simulators-2-P-1">Non-Open Source Simulators</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-overview-1-P-5" class="outline-2">
-<h2 id="overview-1-P-5">Overview</h2>
+<div id="outline-container-overview-1-P-1" class="outline-2">
+<h2 id="overview-1-P-1">Overview</h2>
 <div class="outline-text-2" id="text-org92aebb6">
 <p>
 Computer simulations represent the physical world as a set of state variables
@@ -268,24 +269,20 @@ Here is a list of other robotics simulators. You may encounter them, and some ar
 <ul class="org-ul">
 <li>Purchased by DeepMind, which has made it open-source (formerly was very expensive and proprietary).</li>
 </ul></li>
+<li><a href="https://projectsuperdex.com/">SuperDex</a> - a simulator from Meta with a custom physics engine optimized for contact interactions and dexterous manipulation</li>
 <li><a href="https://drake.mit.edu">Drake</a> C++ Simulation tools for dynamic robots, using optimization techniques.
 <ul class="org-ul">
 <li>Started at MIT, now backed by Toyota Research.</li>
 <li>High-fidelity simulation (particularly for contacts), at the expense of simulation speed.</li>
 <li>User has visibility into all algorithms and principles used in computation of the simulation</li>
 </ul></li>
-<li><a href="https://projectchrono.org">Project Chrono</a> - A multi-physics simulation.
-<ul class="org-ul">
-<li>Does finite elements, granular material, real physics that takes a long time to compute.</li>
-<li>Only recommended if you have a specific need for high-fidelity physics</li>
-</ul></li>
-<li><a href="https://cyberbotics.com">Webbots</a> - Robot simulator with a long history. Just released a new version in 2023</li>
+<li><a href="https://cyberbotics.com">Webbots</a> - Robot simulator with a long history and recent efforts.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-less-maintained-3-P-1" class="outline-4">
-<h4 id="less-maintained-3-P-1">Less Maintained</h4>
-<div class="outline-text-4" id="text-org8a048ea">
+<div id="outline-container-legacy-3-P-1" class="outline-4">
+<h4 id="legacy-3-P-1">Legacy</h4>
+<div class="outline-text-4" id="text-org289efd3">
 <ul class="org-ul">
 <li><a href="https://pybullet.org">pybullet</a> - A pythons simulator based on Bullet.
 <ul class="org-ul">
@@ -309,10 +306,27 @@ a Gazebo simulation and a real robot.
 </ul>
 </div>
 </div>
+<div id="outline-container-other-3-P-1" class="outline-4">
+<h4 id="other-3-P-1">Other</h4>
+<div class="outline-text-4" id="text-orgf7d7b10">
+<ul class="org-ul">
+<li><a href="https://projectchrono.org">Project Chrono</a> - A multi-physics simulation.
+<ul class="org-ul">
+<li>Does finite elements, granular material, real physics that takes a long time to compute.</li>
+<li>Only recommended if you have a specific need for high-fidelity physics</li>
+</ul></li>
+</ul>
 </div>
-<div id="outline-container-closed-source-simulators-2-P-1" class="outline-3">
-<h3 id="closed-source-simulators-2-P-1">Closed Source Simulators</h3>
-<div class="outline-text-3" id="text-org43a978b">
+</div>
+</div>
+<div id="outline-container-non-open-source-simulators-2-P-1" class="outline-3">
+<h3 id="non-open-source-simulators-2-P-1">Non-Open Source Simulators</h3>
+<div class="outline-text-3" id="text-org8f15918">
+<p>
+These simulators do have some source code availability but are not fully open source in that
+they may have additional requirements for using the source code or require the installation of proprietary
+libraries in order to function.
+</p>
 <ul class="org-ul">
 <li><a href="https://www.coppeliarobotics.com">CoppeliaSim</a> (formerly V-Rep)
 <ul class="org-ul">

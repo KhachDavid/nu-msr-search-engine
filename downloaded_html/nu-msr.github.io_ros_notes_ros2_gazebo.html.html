@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-09-29 Tue 09:23 -->
+<!-- 2026-10-22 Thu 09:26 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Simulation</title>
@@ -22,7 +22,7 @@
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
 <li><a href="#gazebo-and-ros-1-P-1">Gazebo and ROS</a></li>
-<li><a href="#installation-1-P-2">Installation</a></li>
+<li><a href="#installation-1-P-1">Installation</a></li>
 <li><a href="#running-1-P-1">Running</a>
 <ul>
 <li><a href="#from-the-command-line-2-P-1">From the Command Line</a></li>
@@ -76,17 +76,16 @@ These notes discuss practical usage of <a href="https://gazebosim.org/home">(Mod
 </p>
 </div>
 </div>
-<div id="outline-container-installation-1-P-2" class="outline-2">
-<h2 id="installation-1-P-2">Installation</h2>
+<div id="outline-container-installation-1-P-1" class="outline-2">
+<h2 id="installation-1-P-1">Installation</h2>
 <div class="outline-text-2" id="text-orgdaad0dc">
 <ol class="org-ol">
-<li>Install gazebo and its ROS components with <code>sudo apt install ros-kilted-ros-gz-sim</code></li>
-<li><a href="https://gazebosim.org/docs/ionic">Tutorials for Gazebo Ionic</a> (Ionic is the version name)
+<li>Install gazebo and its ROS components with <code>sudo apt install ros-lyrical-ros-gz</code></li>
+<li><a href="https://gazebosim.org/docs/jetty">Tutorials for Gazebo Jetty</a> (Jetty is the version name)
 <ul class="org-ul">
-<li>Each version of ROS 2 has a corresponding <a href="https://gazebosim.org/docs/latest/ros_installation/">recommended Gazebo version</a>: ROS Kilted goes with Gazebo Ionic</li>
-<li>As of ROS 2 Jazzy, specific Gazebo <a href="https://gazebosim.org/docs/latest/ros2_gz_vendor_pkgs/">vendor packages</a> are provided with ROS and can be installed with <code>sudo apt install ros-&lt;my_ros_distro&gt;-ros-gz-sim</code></li>
+<li>Each version of ROS 2 has a corresponding <a href="https://gazebosim.org/docs/latest/ros_installation/">recommended Gazebo version</a>: ROS Lyrical goes with Gazebo Jetty</li>
 </ul></li>
-<li><a href="https://gazebosim.org/docs/ionic/ros2_overview/">Tutorial on Integrating Gazebo with ROS 2</a>
+<li><a href="https://gazebosim.org/docs/jetty/ros2_overview/">Tutorial on Integrating Gazebo with ROS 2</a>
 <ul class="org-ul">
 <li>The python launchfile examples in the tutorial above uses several poor practices that you should not adopt:
 <ol class="org-ol">
@@ -109,7 +108,7 @@ when the <code>install/setup.bash</code> is sourced.</li>
 </div>
 <div id="outline-container-from-the-command-line-2-P-1" class="outline-3">
 <h3 id="from-the-command-line-2-P-1">From the Command Line</h3>
-<div class="outline-text-3" id="text-orgceac941">
+<div class="outline-text-3" id="text-orge838ac6">
 <ol class="org-ol">
 <li>Run gazebo with <code>ros2 launch ros_gz_sim gz_sim.launch.py</code>
 <ul class="org-ul">
@@ -130,10 +129,10 @@ when the <code>install/setup.bash</code> is sourced.</li>
 </div>
 <div id="outline-container-from-a-launch-file-2-P-1" class="outline-3">
 <h3 id="from-a-launch-file-2-P-1">From a Launch File</h3>
-<div class="outline-text-3" id="text-org4ef7f51">
+<div class="outline-text-3" id="text-org7a0f110">
 <ol class="org-ol">
-<li>The server can be started with the <a href="https://gazebosim.org/docs/ionic/ros2_launch_gazebo/#using-a-custom-launch-file"><code>&lt;gz_server&gt;</code></a> action in an XML launchfile</li>
-<li>The <a href="https://github.com/gazebosim/ros_gz/blob/kilted/ros_gz_sim/ros_gz_sim/actions/gzserver.py">GzServer</a> action is used in a Python launchfile
+<li>The server can be started with the <a href="https://gazebosim.org/docs/jetty/ros2_launch_gazebo/#using-a-custom-launch-file"><code>&lt;gz_server&gt;</code></a> action in an XML launchfile</li>
+<li>The <a href="https://github.com/gazebosim/ros_gz/blob/lyrical/ros_gz_sim/ros_gz_sim/actions/gzserver.py">GzServer</a> action is used in a Python launchfile
 <ul class="org-ul">
 <li>The python <code>GzServer</code> class (the python Action) provides the code that parses the <code>&lt;gz_server&gt;</code> xml tag, so these two actions are equivalent</li>
 </ul></li>
@@ -173,10 +172,12 @@ Create a <code>.dsv</code> file in the <code>env-hooks</code> directory of your 
 <div class="org-src-container">
 <pre class="src src-nil">prepend-non-duplicate;GZ_SIM_RESOURCE_PATH;share/&lt;pkg_name&gt;/models
 prepend-non-duplicate;GZ_SIM_RESOURCE_PATH;share/&lt;pkg_name&gt;/worlds
-prepend-non-duplicate;GZ_SIM_PLUGIN_PATH;share/&lt;pkg_name&gt;/plugins
-prepend-non-duplicate;GZ_SYSTEM_PLUGIN_PATH;share/&lt;pkg_name&gt;/plugins
+prepend-non-duplicate;GZ_SIM_SYSTEM_PLUGIN_PATH;share/&lt;pkg_name&gt;/plugins
 </pre>
-</div></li>
+</div>
+<ul class="org-ul">
+<li>In some cases you may need to set other path variables here: see <code>gz sim --help</code> for a list of possibilities</li>
+</ul></li>
 </ul>
 <ul class="org-ul">
 <li>Follow the <a href="./colcon.html#colcon-pkg">colcon.pkg</a> instructions to install the hook and have it update the environment whenever you source <code>install/setup.bash</code>
@@ -272,7 +273,7 @@ we use installs those models and puts the install directory on the <code>GZ_SIM_
 <li>ROS can be used to load both URDF and SDF models into the simulator.
 <ul class="org-ul">
 <li>URDF files are automatically converted to SDF prior to being loaded.</li>
-<li>For a URDF model to be loaded successfully, all links must have visual, collision, and inertia specified.</li>
+<li>For a URDF model to be loaded successfully, all links must have inertia specified.</li>
 </ul></li>
 <li><p>
 Additional <code>sdf</code> tags can be added to a URDF by using the <code>&lt;gazebo&gt;</code> tag, which provide additional flexibility when converting a URDF to an SDF
@@ -356,17 +357,17 @@ or from a <code>model_string</code> by using command substitution: <code>$(xacro
 </ul></li>
 <li>From the command line, <code>ros2 launch ros_gz_sim gz_spawn_model.launch.py</code> can be used.
 <ul class="org-ul">
-<li>This launch file is recommended in the tutorial, but seems to do a bunch of unnecessary/legacy environmental setup</li>
+<li>This launch file is recommended in the tutorial, but seems to do be superfluous.</li>
 </ul></li>
 </ul>
 </div>
 </div>
 <div id="outline-container-from-a-launch-file-2-P-2" class="outline-3">
 <h3 id="from-a-launch-file-2-P-2">From a Launch File</h3>
-<div class="outline-text-3" id="text-orgbf69dc1">
+<div class="outline-text-3" id="text-org147742f">
 <ol class="org-ol">
 <li>The <a href="https://gazebosim.org/docs/latest/ros2_spawn_model/#spawn-a-model-from-a-custom-launch-file"><code>&lt;gz_spawn_model&gt;</code></a> tag is used to spawn a robot from an XML launch file</li>
-<li>There is also <a href="https://github.com/gazebosim/ros_gz/blob/kilted/ros_gz_sim/ros_gz_sim/actions/gz_spawn_model.py">GzSpawnModel</a> for python launchfiles
+<li>There is also <a href="https://github.com/gazebosim/ros_gz/blob/lyrical/ros_gz_sim/ros_gz_sim/actions/gz_spawn_model.py">GzSpawnModel</a> for python launchfiles
 <ul class="org-ul">
 <li>If you inspect the above file, you can see that the Launch Action (coded in Python) is responsible for parsing the <code>XML</code> action, so the options and capabilities should be the same.</li>
 </ul></li>
@@ -374,9 +375,11 @@ or from a <code>model_string</code> by using command substitution: <code>$(xacro
 <ul class="org-ul">
 <li>Going forward the <code>&lt;gz_spawn_model&gt;</code> tag is the preferred method.</li>
 </ul></li>
-<li>As of 10/2025, the <code>gz_spawn_model</code> has several optional arguments that (perhaps due to a bug) need to be present in the <code>xml</code> even if they are set to the empty string <code>""</code>
+<li>As of 10/2026, the <code>gz_spawn_model</code> has several optional arguments; however, due to a bug, all options need to be present in the <code>xml</code> even if they are set to the empty string <code>""</code>
 <ul class="org-ul">
 <li>The <code>x</code>, <code>y</code>, and <code>z</code> coordinates must be explicitly set to a floating-point value</li>
+<li>It is possible that <code>roll</code>, <code>pitch</code>, and <code>yaw</code> are silently ignored</li>
+<li>Fixing this bug is a prime opportunity to make a contribution!</li>
 </ul></li>
 </ol>
 </div>
@@ -389,12 +392,12 @@ or from a <code>model_string</code> by using command substitution: <code>$(xacro
 <li>The <a href="https://index.ros.org/p/ros_gz_bridge/">ROS GZ Bridge</a> is a node that is used to connect ROS topics and services to Gazebo topics and services.</li>
 <li>Once the bridge is running you can publish/subscribe to the topics like any other ROS topic</li>
 <li>You should generally run only one <code>ros_gz_bridge</code> and specify all topics/services that must be bridged</li>
-<li>The <a href="https://gazebosim.org/docs/ionic/ros2_integration/">Gazebo ROS 2 Bridge Documentation</a> provides more information.</li>
+<li>The <a href="https://gazebosim.org/docs/jetty/ros2_integration/">Gazebo ROS 2 Bridge Documentation</a> provides more information.</li>
 </ul>
 </div>
 <div id="outline-container-from-the-command-line-2-P-2" class="outline-3">
 <h3 id="from-the-command-line-2-P-2">From the Command Line</h3>
-<div class="outline-text-3" id="text-orge838ac6">
+<div class="outline-text-3" id="text-org54b8ced">
 <ul class="org-ul">
 <li><code>ros2 run ros_gz_bridge parameter_bridge topic@ros_type@gz_type</code>
 <ul class="org-ul">
@@ -407,21 +410,23 @@ or from a <code>model_string</code> by using command substitution: <code>$(xacro
 <li>In general, use a uni-directional bridge whenever you do not explicitly need bi-directional communication; to avoid subtle unforeseen problems</li>
 </ul></li>
 <li>Be careful about topic types: for example the ROS type of the <code>/tf</code> topic is <code>TFMessage</code> not <code>TransformStamped</code></li>
-<li>Mappings between ROS and gz topic types are found in the <a href="https://docs.ros.org/en/kilted/p/ros_gz_bridge/">API documentation</a></li>
-<li>The <code>parameter_bridge</code> node also accepts configuration in <a href="https://gazebosim.org/docs/ionic/ros2_integration/#launching-the-bridge-manually">YAML Format</a></li>
+<li>Mappings between ROS and gz topic types are found in the <a href="https://docs.ros.org/en/lyrical/p/ros_gz_bridge/">API documentation</a></li>
+<li>The <code>parameter_bridge</code> node also accepts configuration in <a href="https://gazebosim.org/docs/jetty/ros2_integration/#launching-the-bridge-manually">YAML Format</a></li>
 </ul></li>
 </ul>
 </div>
 </div>
 <div id="outline-container-from-a-launch-file-2-P-3" class="outline-3">
 <h3 id="from-a-launch-file-2-P-3">From a Launch File</h3>
-<div class="outline-text-3" id="text-org7a0f110">
+<div class="outline-text-3" id="text-orga57dac1">
 <ol class="org-ol">
-<li>The <a href="https://gazebosim.org/docs/latest/ros2_integration/#launching-the-bridge-using-the-launch-files-included-in-ros-gz-bridge-package"><code>&lt;ros_gz_bridge&gt;</code></a> tag is used to spawn a robot from an XML launch file
+<li>The <a href="https://gazebosim.org/docs/latest/ros2_integration/#launching-the-bridge-using-the-launch-files-included-in-ros-gz-bridge-package"><code>&lt;ros_gz_bridge&gt;</code></a> tag is used to start the bridge from an XML launch file
 <ul class="org-ul">
+<li>The <a href="https://docs.ros.org/en/lyrical/p/ros_gz_bridge/#example-6-configuring-the-bridge-via-xml-launch-file">README.md</a> provides more details</li>
 <li>Using this tag is the preferred method. It also provides options to <code>use_composition</code>, enabling it to be automatically run in the same container as <code>gazebo</code>, which reduces communication overhead.</li>
+<li>It is possible to load bridge parameters from a <code>yaml</code> file or directly specify the topics/services to be bridged using <code>&lt;topic&gt;</code>  and <code>&lt;service&gt;</code> tags (which is minimally documented but likely preferred).</li>
 </ul></li>
-<li>There is also <a href="https://github.com/gazebosim/ros_gz/blob/kilted/ros_gz_bridge/ros_gz_bridge/actions/ros_gz_bridge.py">RosGzBridge</a> for python launchfiles
+<li>There is also <a href="https://github.com/gazebosim/ros_gz/blob/lyrical/ros_gz_bridge/ros_gz_bridge/actions/ros_gz_bridge.py">RosGzBridge</a> for python launchfiles
 <ul class="org-ul">
 <li>If you inspect the above file, you can see that the Launch Action (coded in Python) is responsible for parsing the <code>XML</code> action, so the options and capabilities should be the same.</li>
 </ul></li>
@@ -454,7 +459,7 @@ ensuring that all nodes are using simulated time becomes important.</li>
 <ol class="org-ol">
 <li>Gazebo uses plugins to enhance/modify functionality</li>
 <li>Some plugins can be associated with specific models and used to control them</li>
-<li><a href="https://gazebosim.org/api/sim/8/">Useful Plugins</a> can be found in the API documentation, especially the Systems.
+<li><a href="https://gazebosim.org/api/sim/10/">Useful Plugins</a> can be found in the API documentation, especially the Systems.
 <ul class="org-ul">
 <li>The documentation includes what tags can be used in the <code>SDF</code> to include the plugin</li>
 <li>Assume the C++ namespace of the plugin is given as <code>xx::yy::zz::systems::PluginName</code> etc. Then in the SDF file the plugin is included as</li>
@@ -464,11 +469,11 @@ ensuring that all nodes are using simulated time becomes important.</li>
 <ul class="org-ul">
 <li>Set <code>name</code> to <code>gz::sim::systems::DiffDrive</code></li>
 <li>set <code>filename</code> to <code>gz-sim-diff-drive-system</code></li>
-<li>Options for this plugin go inside the <code>&lt;plugin&gt;&lt;/plugin&gt;</code> tag (see <a href="https://gazebosim.org/api/sim/8/classgz_1_1sim_1_1systems_1_1DiffDrive.html">API Documentation</a>)</li>
+<li>Options for this plugin go inside the <code>&lt;plugin&gt;&lt;/plugin&gt;</code> tag (see <a href="https://gazebosim.org/api/sim/10/classgz_1_1sim_1_1systems_1_1DiffDrive.html">API Documentation</a>)</li>
 </ul></li>
 </ul></li>
 </ul></li>
-<li>The <a href="https://gazebosim.org/api/sim/8/classgz_1_1sim_1_1systems_1_1JointStatePublisher.html">JointStatePublisher</a> plugin publishes joint states</li>
+<li>The <a href="https://gazebosim.org/api/sim/10/classgz_1_1sim_1_1systems_1_1JointStatePublisher.html">JointStatePublisher</a> plugin publishes joint states</li>
 </ol>
 </div>
 </div>
@@ -508,33 +513,30 @@ which can make navigating online sources difficult:
 <li>The renaming of Ignition Gazebo (former name of the modern Gazebo simulator) to Gazebo and the renaming of Gazebo (the original Gazebo simulator) to Gazebo Classic
 <ul class="org-ul">
 <li>There are still many references to <code>ignition</code> and commands to <code>ign</code></li>
-<li>Here is a guide in case you only see the old documentation: <a href="https://gazebosim.org/docs/harmonic/migration_from_ignition/">Ignition to Gazebo</a>.</li>
+<li>Here is a guide in case you only see the old documentation: <a href="https://gazebosim.org/docs/jetty/migration_from_ignition/">Ignition to Gazebo</a>.</li>
 </ul></li>
 <li>ROS 2 now distributes it's own "vendored" version of Gazebo with each ROS 2 release (before, gazebo was distributed with Ubuntu)
 <ul class="org-ul">
 <li>These packages appear to be installed under <code>/opt/ros/&lt;rosdistro&gt;/opt</code>: maybe it's to avoid name conflicts but it ends up polluting the path quite a bit.</li>
 </ul></li>
-<li>A new method of <a href="https://gazebosim.org/docs/harmonic/ros2_overview/">Gazebo ROS 2 Integration</a>, which looks promising but does not seem
+<li>A new method of <a href="https://gazebosim.org/docs/jetty/ros2_overview/">Gazebo ROS 2 Integration</a>, which looks promising but does not seem
 to be fully implemented or feature complete.
 <ul class="org-ul">
 <li>It allows starting the <code>gazebo_server</code> using a <code>&lt;gz_server&gt;</code> tag in a Launchfile (excellent!)</li>
 <li>The server can run in a container as a composable node (great!)</li>
 <li>The ROS 2 Gazebo Bridge can also run in the composable Node and has it's own <code>xml</code> launchfile tag (wonderful!)</li>
-<li>The <code>create_own_container</code> attribute does not seem to be implemented in the currently released Jazzy version of <code>ros_gz_sim</code> package (though it is in the code&#x2026;??)</li>
 <li>There does not seem to be a straightforward way (or at least I have not found one) to start the Gazebo Gui client for use with the <code>&lt;gz_server&gt;</code>
 <ul class="org-ul">
 <li><code>gz sim -g</code> sometimes connects to the server and sometimes does not: simply starting and restarting it a few times seems to work but it is unreliable on my system (might need to just do a bit more debugging here).
 <ul class="org-ul">
 <li>It would be, in my opinion, a useful contribution to add the capability to run the Gazebo Gui as a component node and launch it with a <code>&lt;gz_client&gt;</code> tag from a launchfile.</li>
+<li>Currently the method for doing this is to run <code>&lt;executable cmd="gz sim -g" /&gt;</code></li>
 </ul></li>
 </ul></li>
 <li>The migration to the ROS 1 way of handling Gazebo Paths (custom tags in <code>package.xml</code>) versus the ROS 2 way (using colcon <code>env-hooks</code>) may be better long-term,
 but it's implementation relies on using certain launchfiles which we cannot fully use currently.</li>
-<li>The demonstrations for <code>ros_gz_sim</code> do not seem updated for the new method.</li>
-<li>Overall, I would like to adopt the new methods, but their still seems to be a mix of documentation promoting the new methods, examples with the old methods. Hopefully by next year this
-will be a bit more mature.</li>
 </ul></li>
-<li>There is also <a href="https://gazebosim.org/docs/harmonic/ros2_interop/#maintaining-a-single-robot-description-format">talk of maintaining robots as SDF files rather than URDF files</a>. I have not yet seen this in practice,
+<li>There is also <a href="https://gazebosim.org/docs/jetty/ros2_interop/#maintaining-a-single-robot-description-format">talk of maintaining robots as SDF files rather than URDF files</a>. I have not yet seen this in practice,
 and am hesitant to adopt this practice given that SDF files are more general than URDF files (so URDF can always be converted to SDF but not vice-versa).</li>
 </ol>
 </div>
@@ -543,7 +545,7 @@ and am hesitant to adopt this practice given that SDF files are more general tha
 <h3 id="documentation-2-P-1">Documentation</h3>
 <div class="outline-text-3" id="text-orge615d9f">
 <ol class="org-ol">
-<li><a href="https://gazebosim.org/docs/fortress/tutorials">Gazebo Tutorials</a></li>
+<li><a href="https://gazebosim.org/docs/jetty/tutorials">Gazebo Tutorials</a></li>
 <li><a href="https://sdformat.org">SDF Format</a></li>
 <li><a href="https://github.com/gazebosim/ros_gz">ROS 2 Gazebo Interface</a> (See the <code>README.md</code> files in each package in the repository)</li>
 <li><a href="https://apps.gazebosim.org/fuel">Fuel Model Library</a></li>
