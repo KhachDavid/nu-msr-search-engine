@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-09-17 Thu 16:00 -->
+<!-- 2026-10-27 Tue 07:50 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Computer Setup</title>
@@ -76,7 +76,6 @@
 <li><a href="#northwestern-it-1-P-1">Northwestern IT</a>
 <ul>
 <li><a href="#vpn">Northwestern VPN</a></li>
-<li><a href="#printer-2-P-1">Printer</a></li>
 </ul>
 </li>
 <li><a href="#non-free-applications-1-P-1">Non-Free Applications</a>
@@ -293,7 +292,7 @@ Select either <i>No Encryption</i> or <i>Encrypt with a passphrase</i>
 </div>
 <div id="outline-container-terminal-2-P-1" class="outline-3">
 <h3 id="terminal-2-P-1">Terminal</h3>
-<div class="outline-text-3" id="text-orgb077658">
+<div class="outline-text-3" id="text-org3b711a3">
 <ol class="org-ol">
 <li>Type <code>Ctrl-Alt T</code> to open a terminal window.
 <ul class="org-ul">
@@ -533,7 +532,7 @@ So <a href="https://wiki.archlinux.org/index.php/List_of_applications/Documents#
 </p>
 
 
-<figure id="org06562e7">
+<figure id="orgf5c8dc0">
 <img src="https://imgs.xkcd.com/comics/real_programmers.png" alt="real_programmers.png">
 
 <figcaption><span class="figure-number">Figure 1: </span><a href="https://xkcd.com/378/">https://xkcd.com/378/</a>.</figcaption>
@@ -571,7 +570,7 @@ git config --global init.defaultBranch main
 </div>
 <div id="outline-container-python-2-P-1" class="outline-3">
 <h3 id="python-2-P-1">Python</h3>
-<div class="outline-text-3" id="text-org8f9d050">
+<div class="outline-text-3" id="text-org50711bc">
 <p>
 Install <a href="https://pypi.org/project/pip/">pip</a>, a package manager for python, <a href="https://ipython.org/">ipython</a>, an interactive python read-eval-print-loop (REPL),
 and support for virtual environments:
@@ -798,7 +797,7 @@ to open commonly-used applications.</li>
 </div>
 <div id="outline-container-terminal-3-P-1" class="outline-4">
 <h4 id="terminal-3-P-1">Terminal</h4>
-<div class="outline-text-4" id="text-org3b711a3">
+<div class="outline-text-4" id="text-org29b5fef">
 <ul class="org-ul">
 <li>The <code>gsettings</code> command provides access to all settings via the command line.</li>
 <li>Settings are grouped into <code>schemas</code>, and individual options are stored as keys under a schema</li>
@@ -1004,77 +1003,6 @@ Here is a brief summary of what I've learned about how GlobalProtect VPN works
 </ol>
 </div>
 </details>
-</div>
-<div id="outline-container-printer-2-P-1" class="outline-3">
-<h3 id="printer-2-P-1">Printer</h3>
-<div class="outline-text-3" id="text-printer-2-P-1">
-</div>
-<div id="outline-container-me-office-printer-3-P-1" class="outline-4">
-<h4 id="me-office-printer-3-P-1">ME Office Printer</h4>
-<div class="outline-text-4" id="text-org4762158">
-<p>
-These are instructions for using the printer in the Mechanical Engineering office and only work while on campus.
-You will need a printer code (referred to as <code>&lt;USERCODE&gt;</code>).
-</p>
-<ul class="org-ul">
-<li>Information on obtaining a printer code is available on canvas under "Resources/Printers".</li>
-
-<li><p>
-Disable printer discovery to avoid seeing extraneous printers
-</p>
-<div class="org-src-container">
-<pre class="src src-nil">sudo systemctl disable --now cups-browsed
-</pre>
-</div></li>
-
-<li><p>
-Setup the printer to use your <code>&lt;USERCODE&gt;</code>
-</p>
-<div class="org-src-container">
-<pre class="src src-nil">sudo lpadmin -p ME_Office -v "ipp://129.105.102.18/ipp" -m \
-"openprinting-ppds:0/ppd/openprinting/Ricoh/PDF/Ricoh-MP_C6004ex_PDF.ppd" \
--o UserCode=Custom.&lt;USERCODE&gt;
-</pre>
-</div>
-<p>
-Replace <code>&lt;USERCODE&gt;</code> with your user code. (i.e., if your code is 1234, use Custom.1234)
-</p></li>
-<li><p>
-Enable the printer
-</p>
-<div class="org-src-container">
-<pre class="src src-nil">sudo cupsenable ME_Office
-sudo cupsaccept ME_Office
-</pre>
-</div></li>
-<li>The printer to print to is called <code>ME_Office</code>.</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-crb-printer-3-P-1" class="outline-4">
-<h4 id="crb-printer-3-P-1">CRB Printer</h4>
-<div class="outline-text-4" id="text-orgc9a3323">
-<ol class="org-ol">
-<li><p>
-Setup the printer:
-</p>
-<div class="org-src-container">
-<pre class="src src-nil">sudo lpadmin -p CRB_Lab -v "hp:/net/HP_LaserJet_P4015?ip=129.105.69.122" -m \
-"hplip:0/ppd/hplip/HP/hp-laserjet_p4015x.ppd"
-</pre>
-</div></li>
-<li><p>
-Enable the printer
-</p>
-<div class="org-src-container">
-<pre class="src src-nil">sudo cupsenable CRB_Lab
-sudo cupsaccept CRB_Lab
-</pre>
-</div></li>
-<li>The printer to print to is called <code>CRB_Lab</code>.</li>
-</ol>
-</div>
-</div>
 </div>
 </div>
 <div id="outline-container-non-free-applications-1-P-1" class="outline-2">
@@ -1317,7 +1245,7 @@ These package managers often offer the same software that is available via <code
 </div>
 <div id="outline-container-python-3-P-1" class="outline-4">
 <h4 id="python-3-P-1">Python</h4>
-<div class="outline-text-4" id="text-org50711bc">
+<div class="outline-text-4" id="text-org857b38b">
 <p>
 Python package management will come up a lot in this course. Furthermore doing things like trying to uninstall python
 or install another python version can cause great damage to the your system.
