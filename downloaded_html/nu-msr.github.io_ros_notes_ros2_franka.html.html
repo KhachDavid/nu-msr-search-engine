@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-09-29 Tue 09:23 -->
+<!-- 2026-10-30 Fri 11:00 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Emika Franka Panda Robot</title>
@@ -24,7 +24,11 @@
 <li><a href="#introduction-1-P-1">Introduction</a></li>
 <li><a href="#layers-of-control-1-P-1">Layers of Control</a></li>
 <li><a href="#robot-versions-1-P-1">Robot Versions</a></li>
-<li><a href="#franka_setup">Software Setup</a></li>
+<li><a href="#franka_setup">Software Setup</a>
+<ul>
+<li><a href="#no-robot-no-problem-2-P-1">No Robot, No Problem</a></li>
+</ul>
+</li>
 <li><a href="#getting-started-1-P-1">Getting Started</a>
 <ul>
 <li><a href="#rules-2-P-1">Rules</a></li>
@@ -47,7 +51,7 @@
 </ul>
 </li>
 <li><a href="#mechanical-1-P-1">Mechanical</a></li>
-<li><a href="#resources-1-P-2">Resources</a></li>
+<li><a href="#resources-1-P-1">Resources</a></li>
 </ul>
 </div>
 </nav>
@@ -75,13 +79,13 @@ however, in more advanced configurations it is possible to run your code directl
 <div class="outline-text-2" id="text-orgf85054b">
 <ol class="org-ol">
 <li>MoveIt: At the highest layer, the robot can be controlled
-through MoveIt and ROS, provided by <a href="https://frankaemika.github.io/docs/franka_ros2.html">franka_ros2</a></li>
+through MoveIt and ROS, provided by <a href="https://frankarobotics.github.io/docs/doc/franka_ros2_jazzy/docs/index.html">franka_ros2</a></li>
 
 <li>ros_control: There are several ROS controllers that can be used,
-written with the <a href="https://control.ros.org">ros2_control</a> package. It is also possible to write your
+written with the <a href="https://control.ros.org/lyrical/index.html">ros2_control</a> package. It is also possible to write your
 own controllers in C++.</li>
 
-<li><a href="https://frankaemika.github.io/docs/libfranka.html">libfranka</a> this is a C++ library provided by Franka. ROS uses this library
+<li><a href="https://frankarobotics.github.io/docs/doc/libfranka/docs/index.html">libfranka</a> this is a C++ library provided by Franka. ROS uses this library
 to communicate with and control the robot, and you can use it also.</li>
 </ol>
 
@@ -101,7 +105,7 @@ interactively placing the robot and storing its position.</li>
 <ol class="org-ol">
 <li>MSR has four Franka Emika Panda robots. These robots are now referred to as FER robots.</li>
 <li>There is also a newer (but substantially similar) Franka robot called the FR3, which some research groups have in the lab.</li>
-<li>There is no official ROS 2 support for the FER, but I provide a library that ports the FR3 ROS 2 package to ros2 Jazzy</li>
+<li>There is no official ROS 2 support for the FER, but I provide a library that ports the FR3 ROS 2 package to the FER.</li>
 </ol>
 </div>
 </div>
@@ -117,17 +121,20 @@ Create a new ROS 2 workspace:
 <span class="org-builtin">cd</span> ws/franka
 vcs import --input https://nu-msr.github.io/images/franka.repos src
 rosdep install --from-paths src -y --ignore-src -r
-colcon build --merge-install --cmake-args -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF
+colcon build --merge-install --cmake-args -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF -DBUILD_TESTING=OFF
 </pre>
 </div></li>
 <li>To use the Franka you will need to have the <code>franka</code> workspace sourced.
 <ul class="org-ul">
 <li>This workspace underlays whatever workspace you are working on</li>
-<li>You can safely source the <code>franka</code> workspace instead of <code>/opt/ros/jazzy/setup.bash</code> in <code>~/.bashrc</code> if you would like.</li>
+<li>You can safely source the <code>franka</code> workspace instead of <code>/opt/ros/lyrical/setup.bash</code> in <code>~/.bashrc</code> if you would like.</li>
 </ul></li>
-<li>Install <a href="https://chrony-project.org/">chrony</a> an advanced NTP server and client. We will use <code>chrony</code> to synchronize the clocks between the <code>station</code> and your laptop=</li>
+<li>Install <a href="https://chrony-project.org/">chrony</a> an advanced NTP server and client. We will use <code>chrony</code> to synchronize the clocks between the <code>station</code> and your laptop=
+<ul class="org-ul">
+<li>In Ubuntu 26.04 chrony should already be installed</li>
+</ul></li>
 <li><p>
-Configure chrony by appending the following lines to <code>/etc/chrony/chrony.conf</code> (e.g., <code>sudoedit /etc/chrony/chrony.conf</code>)
+Configure chrony by creating the following file in <code>/etc/chrony/conf.d/00-franka.conf</code>
 </p>
 <div class="org-src-container">
 <pre class="src src-nil">allow 192.168.18/24
@@ -135,7 +142,7 @@ local stratum 5
 </pre>
 </div>
 <ul class="org-ul">
-<li>This configuration allows the robot to connect to the <code>chrony</code> NTP server and</li>
+<li>This configuration allows the robot to connect to a <code>chrony</code> NTP server on your laptop</li>
 </ul></li>
 <li>Restart chrony <code>sudo systemctl restart chrony</code></li>
 <li>When on the <code>station</code> you can view time synchronization status with <code>chronyc tracking</code>
@@ -143,6 +150,17 @@ local stratum 5
 <li>You can also view the state of the NTP time sources with <code>chronyc sources</code></li>
 </ul></li>
 </ol>
+</div>
+<div id="outline-container-no-robot-no-problem-2-P-1" class="outline-3">
+<h3 id="no-robot-no-problem-2-P-1">No Robot, No Problem</h3>
+<div class="outline-text-3" id="text-org9591124">
+<p>
+Run a MoveIt kinematic simulation of the robot locally, even when not connected.
+</p>
+<ul class="org-ul">
+<li><code>ros2 launch franka_fer_moveit_config demo.launch.py</code></li>
+</ul>
+</div>
 </div>
 </div>
 <div id="outline-container-getting-started-1-P-1" class="outline-2">
@@ -396,11 +414,11 @@ Before you step away from the robot:
 </ol>
 </div>
 </div>
-<div id="outline-container-resources-1-P-2" class="outline-2">
-<h2 id="resources-1-P-2">Resources</h2>
+<div id="outline-container-resources-1-P-1" class="outline-2">
+<h2 id="resources-1-P-1">Resources</h2>
 <div class="outline-text-2" id="text-org6beebbc">
 <ol class="org-ol">
-<li><a href="https://support.franka.de/docs/franka_ros2.html">Software Documentation</a>
+<li><a href="https://frankarobotics.github.io/docs/doc/franka_ros2_jazzy/docs/index.html">Software Documentation</a>
 <ul class="org-ul">
 <li>Particular attention to franka_ros</li>
 </ul></li>

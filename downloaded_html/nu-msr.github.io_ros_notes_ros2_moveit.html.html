@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-09-29 Tue 09:23 -->
+<!-- 2026-10-30 Fri 11:00 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MoveIt 2 Introduction</title>
@@ -21,7 +21,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#overview-1-P-8">Overview</a></li>
+<li><a href="#overview-1-P-1">Overview</a></li>
 <li><a href="#getting-started-1-P-2">Getting Started</a></li>
 <li><a href="#main-components-1-P-1">Main Components</a></li>
 <li><a href="#configuration-1-P-1">Configuration</a>
@@ -43,7 +43,7 @@
 <li><a href="#plan-requests-and-results-2-P-1">Plan Requests and Results</a></li>
 <li><a href="#pre-and-post-processing-2-P-1">Pre and Post Processing</a>
 <ul>
-<li><a href="#ros-2-3-P-2">ROS 2</a></li>
+<li><a href="#ros-2-3-P-1">ROS 2</a></li>
 <li><a href="#ros-1-3-P-1">ROS 1</a></li>
 </ul>
 </li>
@@ -60,8 +60,8 @@
 </ul>
 </div>
 </nav>
-<div id="outline-container-overview-1-P-8" class="outline-2">
-<h2 id="overview-1-P-8">Overview</h2>
+<div id="outline-container-overview-1-P-1" class="outline-2">
+<h2 id="overview-1-P-1">Overview</h2>
 <div class="outline-text-2" id="text-orgcc0a539">
 <p>
 <a href="https://moveit.picknik.ai/">MoveIt 2</a> is ROS's motion planning and manipulation library.
@@ -84,7 +84,7 @@ but it is also accessible from C++ and via ROS 2.
 <h2 id="getting-started-1-P-2">Getting Started</h2>
 <div class="outline-text-2" id="text-orgdb484ea">
 <p>
-Install moveit: <code>sudo apt install ros-jazzy-moveit</code>.
+Install moveit: <code>sudo apt install ros-lyrical-moveit</code>.
 </p>
 </div>
 </div>
@@ -150,7 +150,7 @@ where the end-effector is, which joints can ignore collision detection</li>
 <li>the <code>srdf</code> is in the <code>robot_description_semantic</code> parameter</li>
 </ul></li>
 <li>Both <code>urdf</code> and <code>srdf</code> files are usually written with <code>xacro</code></li>
-<li>The <a href="https://ros-planning.github.io/moveit_tutorials/doc/setup_assistant/setup_assistant_tutorial.html">MoveIt Setup Assistant</a>
+<li>The <a href="https://moveit.picknik.ai/main/doc/examples/setup_assistant/setup_assistant_tutorial.html">MoveIt Setup Assistant</a>
 can be used to create an SRDF</li>
 <li>The robot manufacturer typically provides the SRDF file</li>
 </ul>
@@ -167,9 +167,9 @@ MoveIt is highly configurable, but I describe the default expected interface her
 <li>Joint states should be published on the <code>/joint_states</code> topic.</li>
 <li>A <code>robot_state_publisher</code> should be publishing transforms for the robot and the <code>/robot_description</code> topic.</li>
 <li>The <code>/execute_trajectory</code> action (of type <code>moveit_msgs/action/ExecuteTrajectory</code>) tells moveit to execute the trajectory</li>
-<li>MoveIt executes a trajectory by interacting with low-level controllers (typically provided via the <a href="https://control.ros.org/master/index.html">ros2_control</a> package).
+<li>MoveIt executes a trajectory by interacting with low-level controllers (typically provided via the <a href="https://control.ros.org/lyrical/index.html">ros2_control</a> package).
 <ul class="org-ul">
-<li>A <a href="http://docs.ros.org/api/control_msgs/html/action/FollowJointTrajectory.html">control_msgs/FollowJointTrajectory</a> <a href="https://docs.ros.org/en/jazzy/Tutorials/Intermediate/Writing-an-Action-Server-Client/Py.html">action server</a> is used to enable the robot to follow the trajectory</li>
+<li>A <a href="https://docs.ros.org/en/lyrical/p/control_msgs/action/FollowJointTrajectory.html">control_msgs/FollowJointTrajectory</a> <a href="https://docs.ros.org/en/lyrical/ROS-Framework/interfaces/actions/Working-with-actions/Writing-an-Action-Server-Client/Py.html">action server</a> is used to enable the robot to follow the trajectory</li>
 <li>Low-level controllers are used to turn the trajectory into actual movements</li>
 <li>Most robots that support moveit provide the low-level controllers and the action server for you.</li>
 <li>Depending on the requirements, integrating an existing controller into the robot requires C++.</li>
@@ -184,7 +184,7 @@ MoveIt is highly configurable, but I describe the default expected interface her
 <li>MoveIt can perform forward and inverse kinematics, as well as computing Jacobians</li>
 <li>It actually relies on external libraries and plugins to perform these calculations,
 hence it is highly flexible</li>
-<li>The <code>move_group</code> node provides the <code>/compute_ik</code>  (of type <a href="http://docs.ros.org/en/kilted/p/moveit_msgs/srv/GetPositionIK.html">moveit_msgs/srv/GetPositionIK</a> and the <code>/compute_fk</code> (of type <a href="http://docs.ros.org/en/kilted/p/moveit_msgs/srv/GetPositionFK.html">moveit_msgs/srv/GetPositionFK</a>) services
+<li>The <code>move_group</code> node provides the <code>/compute_ik</code>  (of type <a href="https://docs.ros.org/en/rolling/p/moveit_msgs/srv/GetPositionIK.html">moveit_msgs/srv/GetPositionIK</a> and the <code>/compute_fk</code> (of type <a href="https://docs.ros.org/en/rolling/p/moveit_msgs/srv/GetPositionFK.html">moveit_msgs/srv/GetPositionFK</a>) services
 <ul class="org-ul">
 <li>Note that the current state of the robot is always known via the <code>/joint_states</code> topic
 and the <code>tf</code> location of the end-effector</li>
@@ -195,9 +195,9 @@ and the <code>tf</code> location of the end-effector</li>
 <h3 id="kinematics-and-dynamics-library-2-P-1">Kinematics and Dynamics Library</h3>
 <div class="outline-text-3" id="text-org6c5b32b">
 <ul class="org-ul">
-<li><a href="http://www.orocos.org/kdl">The Kinematics and Dynamics Library</a> (KDL) from the Orocos project
+<li><a href="https://www.orocos.org/kdl.html">The Kinematics and Dynamics Library</a> (KDL) from the Orocos project
 <ul class="org-ul">
-<li><a href="http://wiki.ros.org/kdl_parser">kdl_parser</a> converts <code>urdf</code> into KDL "chains" which
+<li><a href="https://docs.ros.org/en/rolling/p/kdl_parser/">kdl_parser</a> converts <code>urdf</code> into KDL "chains" which
 are used by KDL to perform kinematics calculations</li>
 <li>KDL is the default kinematics solver in MoveIT</li>
 <li>KDL is relatively easy to configure and widely applicable</li>
@@ -214,12 +214,12 @@ are used by KDL to perform kinematics calculations</li>
 <h3 id="ikfast-2-P-1">IKFast</h3>
 <div class="outline-text-3" id="text-org82bb5e6">
 <p>
-<a href="http://www.orocos.org/kdl">IKFast</a> (part of OpenRAVE) creates <code>C++</code> header files that contain functions
+<a href="http://openrave.org/docs/latest_stable/openravepy/ikfast/">IKFast</a> (part of OpenRAVE) creates <code>C++</code> header files that contain functions
  for solving the inverse kinematics analytically.
 </p>
 <ul class="org-ul">
 <li>MoveIT can wrap these generated header files and use them to solve IK.</li>
-<li><a href="https://ros-planning.github.io/moveit_tutorials/doc/ikfast/ikfast_tutorial.html">MoveIT tutorial for IKFast</a></li>
+<li><a href="https://moveit.picknik.ai/main/doc/examples/ikfast/ikfast_tutorial.html">MoveIT tutorial for IKFast</a></li>
 <li>Produces good solutions quickly</li>
 <li>Difficult to setup, not applicable to all robots</li>
 <li><a href="http://www.programmingvision.com/rosen_diankov_thesis.pdf">The Theory behind IKFast</a></li>
@@ -231,9 +231,9 @@ are used by KDL to perform kinematics calculations</li>
 <h3 id="trac-ik-2-P-1">Trac_IK</h3>
 <div class="outline-text-3" id="text-orgaccbaa9">
 <ul class="org-ul">
-<li><a href="http://wiki.ros.org/trac_ik">trac_ik</a> is a relatively new inverse kinematics solver
+<li><a href="https://docs.ros.org/en/rolling/p/trac_ik_lib/">trac_ik</a> is a relatively new inverse kinematics solver
 <ul class="org-ul">
-<li><a href="http://docs.ros.org/melodic/api/moveit_tutorials/html/doc/trac_ik/trac_ik_tutorial.html?highlight=trac_ik">MoveIt documentation for trac_ik</a></li>
+<li><a href="https://docs.ros.org/en/rolling/p/trac_ik_kinematics_plugin/">MoveIt documentation for trac_ik</a></li>
 <li>developed for DARPA Robotics Challenge</li>
 <li>Better performance than KDL and more reliable</li>
 <li>Designed as a drop-in replacement for KDL</li>
@@ -289,8 +289,8 @@ To plan a motion, send a "plan request" to the <code>move_group</code> node.
 <h3 id="pre-and-post-processing-2-P-1">Pre and Post Processing</h3>
 <div class="outline-text-3" id="text-pre-and-post-processing-2-P-1">
 </div>
-<div id="outline-container-ros-2-3-P-2" class="outline-4">
-<h4 id="ros-2-3-P-2">ROS 2</h4>
+<div id="outline-container-ros-2-3-P-1" class="outline-4">
+<h4 id="ros-2-3-P-1">ROS 2</h4>
 <div class="outline-text-4" id="text-org7b7cee8">
 <ol class="org-ol">
 <li><a href="https://moveit.picknik.ai/main/doc/concepts/trajectory_processing.html">Post-processing</a> enables you to adjust the timing to the path, according to jint_lmits.</li>
@@ -368,7 +368,7 @@ turns off collision detection, etc</li>
 <li><code>ompl_planning.yaml</code> Settings for OMPL. Often you have to search through
 the source code to determine what a parameter does.
 <ul class="org-ul">
-<li>Looking at the code for the MoveIt Setup Assistant helps: <a href="https://github.com/ros-planning/moveit/blob/master/moveit_setup_assistant/src/tools/moveit_config_data.cpp">moveit_config_data.cpp</a></li>
+<li>Looking at the code for the MoveIt Setup Assistant helps: <a href="https://github.com/moveit/moveit2/tree/main/moveit_setup_assistant">moveit_config_data.cpp</a></li>
 </ul></li>
 <li><code>joint_limits.yaml</code> Joint velocity and acceleration limits
 <ul class="org-ul">

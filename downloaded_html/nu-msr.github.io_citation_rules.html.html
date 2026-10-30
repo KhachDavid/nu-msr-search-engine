@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-10-05 Mon 15:16 -->
+<!-- 2026-10-05 Mon 15:20 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Citation Rules</title>
@@ -304,14 +304,18 @@ Some generative AI tools are built into editors (e.g., Copilot)
 <li>Place the transcript under the <code>transcripts/</code> directory or provide a persistent URL to the transcript.</li>
 <li>Refer to them on the second line of <code>citations.txt</code> as
 <ul class="org-ul">
-<li>"[ Full | Edited | Summary ] [with AI] Transcript: &lt;url | transcripts/filename&gt;"</li>
+<li>"[ Full | Redacted | Partial | Edited | Summary ] [with AI] Transcript: &lt;url | transcripts/filename&gt;"</li>
 </ul></li>
 <li>Full means the complete transcript, as exported from the AI tool (be careful, such transcripts can reveal personal information)</li>
-<li>Edited means that you redacted, modified or curated the transcript in some manner</li>
-<li>Summary means that you describe the overall purpose and content of the transcript, without directly providing content from the transcript.</li>
-<li>It is appropriate to describe in <code>citations.txt</code> what editing you did.</li>
+<li>Redacted means only personal information was replaced (such as your name with USER)</li>
+<li>Partial means part of the complete transcript, with some sections/prompts removed or redacted</li>
+<li>Edited means that you redacted, modified or curated the transcript in some manner.
+<ul class="org-ul">
+<li>You can explain what editing you did in <code>citations.txt</code></li>
 </ul></li>
-<li>AI may be used to help edit or summarize existing transcripts.
+<li>Summary means that you describe the overall purpose and content of the transcript, without directly providing content from the transcript.</li>
+</ul></li>
+<li>AI may be used to help prepare transcripts.
 <ul class="org-ul">
 <li>The usage must be disclosed by adding <code>with AI</code>, but no further citation is required.</li>
 </ul></li>
