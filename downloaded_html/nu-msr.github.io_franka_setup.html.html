@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-10-05 Mon 15:20 -->
+<!-- 2026-11-02 Mon 10:20 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Franka Setup</title>
@@ -24,7 +24,12 @@
 <li><a href="#overview-1-P-1">Overview</a></li>
 <li><a href="#workstation-computer-1-P-1">Workstation Computer</a>
 <ul>
-<li><a href="#operating-system-2-P-1">Operating System</a></li>
+<li><a href="#operating-system-2-P-1">Operating System</a>
+<ul>
+<li><a href="#realtime-linux-3-P-1">Realtime Linux</a></li>
+<li><a href="#franka-workspace-3-P-1">Franka Workspace</a></li>
+</ul>
+</li>
 <li><a href="#network-setup-2-P-1">Network Setup</a>
 <ul>
 <li><a href="#ethernet-connections-3-P-1">Ethernet Connections</a></li>
@@ -72,15 +77,22 @@ to the Franka Robot (likely not what you want).</li>
 <ul class="org-ul">
 <li>The default user should be for the administrator of the system.</li>
 </ul></li>
-<li>After installation create a student user:
+<li>Follow instructions in <a href="https://nu-msr.github.io/hackathon/computer_setup.html">Computer Setup</a> to renaming ethernet devices using systemd link files.
+<ul class="org-ul">
+<li>The 1G port is <code>lan0</code>, and the 10G ports are <code>lan10g0</code> and <code>lan10g1</code></li>
+</ul></li>
+<li>Create a student user:
 <ul class="org-ul">
 <li><code>sudo adduser student</code></li>
 </ul></li>
-<li>The realtime kernel is part of the <a href="https://launchpad.net/~numsr">NUMSR PPA</a>.
-<ul class="org-ul">
-<li>The package to install is <code>linux-image-6.6.43-rt38numsr</code></li>
-<li>Instructions on how the package was built can be found at <a href="../hackathon/ubuntu_minimal.html#rt_linux">Minimal Ubuntu Setup</a></li>
-</ul></li>
+</ol>
+</div>
+<div id="outline-container-realtime-linux-3-P-1" class="outline-4">
+<h4 id="realtime-linux-3-P-1">Realtime Linux</h4>
+<div class="outline-text-4" id="text-org0663585">
+<ol class="org-ol">
+<li>Install the realtime kernel:
+<code>sudo apt install ubuntu-realtime --no-install-recommends</code></li>
 <li><p>
 Permissions must be set for the user to start processes with realtime priority, as per <a href="https://frankaemika.github.io/docs/installation_linux.html#allow-a-user-to-set-real-time-permissions-for-its-processes">Franka Installation Instructions</a>:
 </p>
@@ -103,14 +115,12 @@ sudo usermod -a -G realtime student
 @realtime hard memlock 102400
 </pre>
 </div>
-
+</div>
+</div>
+<div id="outline-container-franka-workspace-3-P-1" class="outline-4">
+<h4 id="franka-workspace-3-P-1">Franka Workspace</h4>
+<div class="outline-text-4" id="text-orgf83df9e">
 <ol class="org-ol">
-<li>Edit <code>/etc/defaults/grub</code> and change the value of <code>GRUB_DEFAULT</code> to <code>"1&gt;2"</code>
-<ul class="org-ul">
-<li>This selects the 2nd grub menu option (Advanced Options for ubuntu) and then 3rd option, which should be the rt kernel )</li>
-<li>Run <code>sudo update-grub</code></li>
-<li>Reboot and verify that the RT kernel was loaded (you should see <code>PREEMPT_RT</code> in the output of <code>uname -a</code>)</li>
-</ul></li>
 <li><p>
 Create a new ROS 2 workspace:
 </p>
@@ -141,6 +151,7 @@ Add the following content to the <code>.bashrc</code> of user accounts
 <li>This is a workaround because MoveitConfigsUtils assumes that the <code>DISPLAY</code> variable is set.</li>
 </ul></li>
 </ol>
+</div>
 </div>
 </div>
 <div id="outline-container-network-setup-2-P-1" class="outline-3">
