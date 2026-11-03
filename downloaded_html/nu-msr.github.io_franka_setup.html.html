@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-11-02 Mon 10:20 -->
+<!-- 2026-11-03 Tue 08:54 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Franka Setup</title>
@@ -33,7 +33,9 @@
 <li><a href="#network-setup-2-P-1">Network Setup</a>
 <ul>
 <li><a href="#ethernet-connections-3-P-1">Ethernet Connections</a></li>
-<li><a href="#dns-3-P-1">DNS</a></li>
+<li><a href="#bridge-3-P-1">Bridge</a></li>
+<li><a href="#addresses-3-P-1">Addresses</a></li>
+<li><a href="#dns-and-dhcp-3-P-1">DNS and DHCP</a></li>
 <li><a href="#ssh-3-P-1">SSH</a></li>
 <li><a href="#ntp-3-P-1">NTP</a></li>
 <li><a href="#internet-3-P-1">Internet</a></li>
@@ -162,7 +164,7 @@ Add the following content to the <code>.bashrc</code> of user accounts
 <h4 id="ethernet-connections-3-P-1">Ethernet Connections</h4>
 <div class="outline-text-4" id="text-orgfdf018c">
 <ul class="org-ul">
-<li><code>enp109s0</code>: This is the 1Gb/s ethernet port built into the motherboard. It is used to connect to the laptop.
+<li><code>lan0 (enp109s0)</code>: This is the 1Gb/s ethernet port built into the motherboard. It is used to connect to the laptop.
 <ul class="org-ul">
 <li>In our computers it has the buggy r8169 driver.</li>
 <li>Upon reconnect, it will not bring the link up.</li>
@@ -175,19 +177,23 @@ Add the following content to the <code>.bashrc</code> of user accounts
 <li><code>echo "w /sys/bus/pci/devices/0000\:6d\:00.0/power/control - - - - auto" &gt; /etc/tmpfiles.d/r8169.conf</code></li>
 </ul></li>
 </ul></li>
-<li><code>ens24f0</code>: This is a 10Gb/S ethernet port that connects to a Franka Control box</li>
-<li><code>ens24f1</code>: This is a 10Gb/S ethernet port that connects to a Franka Control box (two Frankas can be connected to one station).</li>
+<li><code>lan10g0 (ens24f0)</code>: This is a 10Gb/S ethernet port that connects to a Franka Control box</li>
+<li><code>lan10g1 (ens24f1)</code>: This is a 10Gb/S ethernet port that connects to a Franka Control box
+<ul class="org-ul">
+<li>(Two Frankas can be connected to one station).</li>
+</ul></li>
 </ul>
 </div>
+</div>
+<div id="outline-container-bridge-3-P-1" class="outline-4">
+<h4 id="bridge-3-P-1">Bridge</h4>
+<div class="outline-text-4" id="text-org36766fb">
 <ul class="org-ul">
-<li><a id="bridge-4-P-1"></a>Bridge<br>
-<div class="outline-text-5" id="text-org36766fb">
-<ul class="org-ul">
-<li>All connections are bridged on <code>br0</code>, which is given ip address <code>192.168.18.1</code>.
+<li>All connections are bridged on <code>br0</code> on <code>station&lt;X&gt;</code>, which is given ip address <code>192.168.18.&lt;X&gt;</code>
 <ul class="org-ul">
 <li>Thus the robot and all connected computers are on the same subnet and can communicate</li>
 </ul></li>
-<li>The franka control boxes have static leases, based on their mac addresses.</li>
+<li>The Franka control boxes also have static ips. <code>panda&lt;X&gt;</code> has ip address <code>192.168.18.1&lt;X&gt;</code></li>
 <li><p>
 Create the bridge and slaves:
 </p>
@@ -195,77 +201,79 @@ Create the bridge and slaves:
 <pre class="src src-nil"># Create the bridge
 nmcli con add type bridge ifname br0
 # Add the slaves
-nmcli con add type ethernet con-name br-laptop ifname enp109s0 master br0
-nmcli con add type ethernet con-name br-pandaX ifname ens24f0 master br0
-nmcli con add type ethernet con-name br-pandaY ifname ens24f1 master br0
+nmcli con add type ethernet con-name br-laptop ifname lan0 master br0
+nmcli con add type ethernet con-name br-ext0 ifname lan10g0 master br0
+nmcli con add type ethernet con-name br-ext1 ifname lan10g1 master br0
 </pre>
 </div></li>
-<li>Disable Spanning-Tree Protocol: <code>nmcli con modify bridge-br0 bridge.stp no</code></li>
-<li>Static IP for station: <code>nmcli con modify bridge-br0 ipv4.method manual ipv4.address "192.168.18.1/24" ipv4.dns 127.0.0.1</code></li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div id="outline-container-dns-3-P-1" class="outline-4">
-<h4 id="dns-3-P-1">DNS</h4>
-<div class="outline-text-4" id="text-org3cf8905">
-<ol class="org-ol">
-<li>Install dnsmasq: <code>sudo apt install dnsmasq</code>
+<li>Disable Spanning-Tree Protocol: <code>nmcli con modify bridge-br0 bridge.stp no</code>
 <ul class="org-ul">
-<li><p>
-Setup dnsmasq by copying <a href="./images/franka_dnsmasq.conf">./images/franka_dnsmasq.conf</a> to <code>/etc/dnsmasq.conf</code> on <code>station</code>
-</p>
+<li>Because STP is off, never connect stations in a loop (e.g., station1-station2-station3-station1): chains only.</li>
+</ul></li>
+<li>Static IP for <code>station&lt;X&gt;</code>: <code>nmcli con modify bridge-br0 ipv4.method manual ipv4.address "192.168.18.&lt;X&gt;/24" ipv4.dns 127.0.0.1</code></li>
+<li>Set the hostname to <code>station&lt;X&gt;</code>: <code>sudo hostnamectl set-hostname station&lt;X&gt;</code>
+<ul class="org-ul">
+<li><code>franka_route.sh</code> gets the station number from the hostname.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-addresses-3-P-1" class="outline-4">
+<h4 id="addresses-3-P-1">Addresses</h4>
+<div class="outline-text-4" id="text-orge3352bc">
+<ul class="org-ul">
+<li>The Franka control boxes are given their static IP addresses in the Desk web interface (Settings → Network).</li>
+<li>The laptop plugged into the <code>1g</code> port is always accessible as <code>laptop</code> or <code>&lt;hostname&gt;</code></li>
+<li>A station can be connected to a second Franka control box via it's 10G port (two robots one control computer) or</li>
+<li>A station can be connected to a second station (for networked control of two separate Frankas).
+<ul class="org-ul">
+<li>When stations are linked, the laptop on <code>station&lt;X&gt;</code> is globally accessible as <code>laptop.s&lt;X&gt;.robot</code> or <code>&lt;hostname&gt;.s&lt;X&gt;.robot</code></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-dns-and-dhcp-3-P-1" class="outline-4">
+<h4 id="dns-and-dhcp-3-P-1">DNS and DHCP</h4>
+<div class="outline-text-4" id="text-orge838c9c">
+<ul class="org-ul">
+<li>Each station runs <code>dnsmasq</code> to provide DNS for all of the hosts and DHCP for the laptop plugged in to <code>lan0</code>.</li>
+<li>The laptop gets its network configuration from the DHCP server</li>
+
+<li>Install dnsmasq and nftables: <code>sudo apt install dnsmasq dnsmasq-utils nftables</code>
+<ul class="org-ul">
+<li><code>dnsmasq-utils</code> provides <code>dhcp_release</code>, used by <code>franka_route.sh</code></li>
+</ul></li>
+<li>Setup dnsmasq by copying <a href="./images/franka_dnsmasq.conf">./images/franka_dnsmasq.conf</a> to <code>/etc/dnsmasq.conf</code> on <code>station&lt;X&gt;</code>
 <ul class="org-ul">
 <li><code>wget https://nu-msr.github.io/images/franka_dnsmasq.conf</code></li>
 <li><code>sudo mv franka_dnsmasq.conf /etc/dnsmasq.conf</code></li>
-<li><code>mkdir /etc/systemd/system/dnsmasq.service.conf</code></li>
-</ul>
-<p>
-= Copy <a href="./images/dnsmasq_franka_service.conf">dnsmasq_service.conf</a> to <code>/etc/systemd/system/dnsmasq.service.conf/dnsmasq.conf</code> on station.
-</p>
+<li>Edit the <code>STATION-SPECIFIC SETTINGS</code> section at the top of <code>/etc/dnsmasq.conf</code> for <code>station&lt;X&gt;</code>:
 <ul class="org-ul">
-<li>This service file causes <code>dnsmasq</code> to flush all leases when it starts. It seems that this makes the system more reliable in terms of
-making clients refresh their dns settings. There is probably something to fix the problem in a better way, but this seems to work.</li>
-<li>It also ensures that dnsmasq starts after the network bridge br0 is created, enabling it to work when the station is restarted.</li>
+<li><code>dhcp-range=192.168.18.1X0,192.168.18.1X9,1h</code>: the address ranges for the laptop on <code>lan0</code></li>
+<li>Remove the <code>server=/s&lt;X&gt;.robot/192.168.18.&lt;X&gt;</code> for <code>station&lt;X&gt;</code></li>
 </ul></li>
-<li>Copy <a href="./images/franka_route.sh">./images/franka_route.sh</a> to <code>/usr/local/bin/franka_route.sh</code> on <code>station</code>
+</ul></li>
+<li>Copy <a href="./images/franka_route.sh">./images/franka_route.sh</a> to <code>/usr/local/bin/franka_route.sh</code> on <code>station&lt;X&gt;</code>
 <ul class="org-ul">
-<li>This script executes when new machines get ip addresses</li>
+<li>This script makes the laptop the station's default route (see <a href="#org86175f6">Internet</a>) and clears out previous dhcp leases when a new laptop connects</li>
 <li><code>wget https://nu-msr.github.io/images/franka_route.sh</code></li>
 <li><code>sudo mv franka_route.sh /usr/local/bin</code></li>
 <li><code>sudo chmod 755 /usr/local/bin/franka_route.sh</code></li>
+<li><code>sudo mkdir -p /etc/dnsmasq_hosts</code></li>
+</ul></li>
+<li>Restrict DHCP to <code>lan0</code> by copying <a href="./images/franka_nftables.conf">./images/franka_nftables.conf</a> to <code>/etc/nftables.conf</code> on <code>station&lt;X&gt;</code>
+<ul class="org-ul">
+<li>These rules drop DHCP traffic entering or leaving the <code>lan10g*</code> ports so that dhcp traffic is local to the <code>lan0</code> port</li>
+<li><code>wget https://nu-msr.github.io/images/franka_nftables.conf</code></li>
+<li><code>sudo mv franka_nftables.conf /etc/nftables.conf</code></li>
+<li><code>sudo systemctl enable --now nftables</code></li>
 </ul></li>
 <li>Disable <code>systemd-resolved</code>:
 <ul class="org-ul">
 <li><code>sudo systemctl disable --now systemd-resolved</code></li>
 </ul></li>
 <li>Restart <code>dnsmasq</code>: <code>sudo systemctl restart dnsmasq</code></li>
-<li><code>/etc/resolv.conf</code> can remain because dnsmasq is set to ignore it. This lets us easily get internet when needed.</li>
-</ul></li>
-<li>This is setup so that everything connected to <code>station</code> is on the <code>192.168.18.0/24</code> subnet
-<ul class="org-ul">
-<li>Some static addresses are created (see line 87 <code>address</code> in <a href="./etc/dnsmasq.conf)">./etc/dnsmasq.conf)</a>:
-<ul class="org-ul">
-<li><code>station</code>, <code>station.robot</code>: Resolves to 192.168.18.1, Workstation computer</li>
-<li><code>panda0</code>, <code>panda0.robot</code>: Resolves to 192.168.18.10, primary robot</li>
-<li><code>panda1</code>, <code>panda1.robot</code>: Resolves to 192.168.18.11, secondary robot</li>
-<li><code>robot.franka.de</code>: Resolves to 192.168.18.10, primary robot
-<ul class="org-ul">
-<li>Need to access web interface at <code>robot.franka.de</code> to avoid SSL certificate errors</li>
-</ul></li>
-</ul></li>
-<li>IP Addresses are assigned by mac address (see line 249 <code>dhcp-host</code>).
-<ul class="org-ul">
-<li>All mac addresses of all panda robots are assigned to both 192.168.18.10 and 192.168.18.11</li>
-<li>If there is a conflict of mac addresses with the first assignment, it falls through to the second. This
-is how both pandas can get an IP address</li>
-<li>The IP address of the <code>station</code> computer is statically assigned to <code>192.168.18.1</code></li>
-</ul></li>
-</ul></li>
-<li><code>dnsmasq</code> also uses northwestern and cloudflare dns servers upstream so when there is internet access it can resolve domains.</li>
-<li>Your laptop will be accessible via it's hostname, and via <code>laptop</code></li>
-</ol>
+</ul>
 </div>
 </div>
 <div id="outline-container-ssh-3-P-1" class="outline-4">
@@ -325,16 +333,21 @@ The <code>station</code> should have an <code>ssh</code> server:
 <ol class="org-ol">
 <li>The Franka Panda's SSH certificate has expired, making it difficult to access the web UI from Firefox (because Firefox will not let users add exceptions
 for expired certificates through the UI).</li>
-<li>Install <code>nginx</code> and setup a proxy: this allows users to navigate to <code>https://station.robot</code> in their browser to access the Franka Web Interface:
+<li>Install <code>nginx</code> and setup a proxy: this allows users to navigate to <code>https://station&lt;X&gt;.robot</code> in their browser to access the Franka Web Interface of <code>panda&lt;X&gt;</code>:
 <ul class="org-ul">
-<li>Copy <a href="./images/http-proxy">./images/http-proxy</a> to <code>/etc/nginx/sites-available/http-proxy</code></li>
+<li>Copy <a href="./images/http-proxy">./images/http-proxy</a> to <code>/etc/nginx/sites-available/http-proxy</code>
+<ul class="org-ul">
+<li>On <code>station&lt;X&gt;</code>, change <code>proxy_pass https://panda1.robot</code> to <code>panda&lt;X&gt;.robot</code></li>
+</ul></li>
 <li>Remove <code>/etc/nginx/sites-enabled/default</code></li>
 <li>Link <code>/etc/nginx/sites-enabled/http-proxy</code> in <code>/etc/nginx/sites-available/http-proxy</code></li>
 <li><p>
-Create the <code>ssl</code> certificate:
+Create the <code>ssl</code> certificate for <code>station&lt;X&gt;.robot</code> (set <code>X</code> to the station number):
 </p>
 <div class="org-src-container">
-<pre class="src src-bash">openssl req -x509 -nodes -newkey rsa:4096 -keyout station.key -out station.crt -days 36500 -subj <span class="org-string">"/CN=station.robot"</span>
+<pre class="src src-bash"><span class="org-variable-name">X</span>=1
+openssl req -x509 -nodes -newkey rsa:4096 -keyout station.key -out station.crt -days 36500 <span class="org-sh-escaped-newline">\</span>
+    -subj <span class="org-string">"/CN=station${X}.robot"</span> -addext <span class="org-string">"subjectAltName=DNS:station${X}.robot,DNS:station${X}"</span>
 sudo mkdir -p /etc/nginx/ssl
 sudo mv station.key /etc/nginx/ssl
 sudo mv station.crt /etc/nginx/ssl
