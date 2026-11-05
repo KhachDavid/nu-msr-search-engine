@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-11-03 Tue 08:54 -->
+<!-- 2026-11-04 Wed 16:37 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Franka Setup</title>
@@ -245,27 +245,28 @@ nmcli con add type ethernet con-name br-ext1 ifname lan10g1 master br0
 </ul></li>
 <li>Setup dnsmasq by copying <a href="./images/franka_dnsmasq.conf">./images/franka_dnsmasq.conf</a> to <code>/etc/dnsmasq.conf</code> on <code>station&lt;X&gt;</code>
 <ul class="org-ul">
-<li><code>wget https://nu-msr.github.io/images/franka_dnsmasq.conf</code></li>
-<li><code>sudo mv franka_dnsmasq.conf /etc/dnsmasq.conf</code></li>
+<li><code>sudo wget -O /etc/dnsmasq.conf https://nu-msr.github.io/images/franka_dnsmasq.conf</code></li>
 <li>Edit the <code>STATION-SPECIFIC SETTINGS</code> section at the top of <code>/etc/dnsmasq.conf</code> for <code>station&lt;X&gt;</code>:
 <ul class="org-ul">
-<li><code>dhcp-range=192.168.18.1X0,192.168.18.1X9,1h</code>: the address ranges for the laptop on <code>lan0</code></li>
+<li>Set the address ranges for the laptop on <code>lan0</code>: <code>dhcp-range=192.168.18.1X0,192.168.18.1X9,1h</code>.</li>
 <li>Remove the <code>server=/s&lt;X&gt;.robot/192.168.18.&lt;X&gt;</code> for <code>station&lt;X&gt;</code></li>
+<li>In the two <code>cname</code> lines, change <code>station1.robot</code> and <code>panda1.robot</code> to <code>station&lt;X&gt;.robot</code> and <code>panda&lt;X&gt;.robot</code>
+<ul class="org-ul">
+<li>Then <code>station</code>, <code>panda</code>, and <code>desk</code> always refer to the station the laptop is plugged into and its panda</li>
+</ul></li>
 </ul></li>
 </ul></li>
 <li>Copy <a href="./images/franka_route.sh">./images/franka_route.sh</a> to <code>/usr/local/bin/franka_route.sh</code> on <code>station&lt;X&gt;</code>
 <ul class="org-ul">
 <li>This script makes the laptop the station's default route (see <a href="#org86175f6">Internet</a>) and clears out previous dhcp leases when a new laptop connects</li>
-<li><code>wget https://nu-msr.github.io/images/franka_route.sh</code></li>
-<li><code>sudo mv franka_route.sh /usr/local/bin</code></li>
+<li><code>sudo wget -O /usr/local/bin/franka_route.sh https://nu-msr.github.io/images/franka_route.sh</code></li>
 <li><code>sudo chmod 755 /usr/local/bin/franka_route.sh</code></li>
 <li><code>sudo mkdir -p /etc/dnsmasq_hosts</code></li>
 </ul></li>
 <li>Restrict DHCP to <code>lan0</code> by copying <a href="./images/franka_nftables.conf">./images/franka_nftables.conf</a> to <code>/etc/nftables.conf</code> on <code>station&lt;X&gt;</code>
 <ul class="org-ul">
 <li>These rules drop DHCP traffic entering or leaving the <code>lan10g*</code> ports so that dhcp traffic is local to the <code>lan0</code> port</li>
-<li><code>wget https://nu-msr.github.io/images/franka_nftables.conf</code></li>
-<li><code>sudo mv franka_nftables.conf /etc/nftables.conf</code></li>
+<li><code>sudo wget -O /etc/nftables.conf https://nu-msr.github.io/images/franka_nftables.conf</code></li>
 <li><code>sudo systemctl enable --now nftables</code></li>
 </ul></li>
 <li>Disable <code>systemd-resolved</code>:
@@ -284,6 +285,7 @@ The <code>station</code> should have an <code>ssh</code> server:
 </p>
 <ul class="org-ul">
 <li><code>sudo apt install ssh</code></li>
+<li>Edit <code>/etc/ssh/sshd_config</code>, add <code>ROS_DOMAIN_ID</code> to the AcceptEnv line.</li>
 </ul>
 </div>
 </div>
@@ -298,7 +300,14 @@ The <code>station</code> should have an <code>ssh</code> server:
 <li>See <a href="../ros_notes/ros2/franka.html#franka_setup">Franka Notes</a> for details on how to setup the client.</li>
 </ul></li>
 <li>Install <code>chrony</code> on the <code>station</code> (<code>sudo apt install chrony</code>)</li>
-<li>Copy <a href="./images/franka_chrony.conf">./images/franka_chrony.conf</a> to  <code>/etc/chrony/chrony.conf</code> on <code>station</code>
+<li><p>
+Make the <code>station</code> synchronize its time to the laptop (<code>laptop</code> is the name <code>dnsmasq</code> gives the connected laptop):
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span class="org-builtin">echo</span> <span class="org-string">"server laptop iburst minpoll -1 maxpoll 3"</span> | sudo tee /etc/chrony/conf.d/franka.conf
+sudo systemctl restart chrony
+</pre>
+</div>
 <ul class="org-ul">
 <li>If your laptop is running <code>chrony</code> then the <code>station</code> will connect to laptop and synchronize it's time</li>
 </ul></li>
@@ -333,27 +342,44 @@ The <code>station</code> should have an <code>ssh</code> server:
 <ol class="org-ol">
 <li>The Franka Panda's SSH certificate has expired, making it difficult to access the web UI from Firefox (because Firefox will not let users add exceptions
 for expired certificates through the UI).</li>
-<li>Install <code>nginx</code> and setup a proxy: this allows users to navigate to <code>https://station&lt;X&gt;.robot</code> in their browser to access the Franka Web Interface of <code>panda&lt;X&gt;</code>:
+<li>Install <code>nginx</code> and setup a proxy: this allows users to navigate to <code>https://desk&lt;X&gt;.robot</code> (or <code>https://desk.robot</code> for this station's panda) in their browser to access the Franka Web Interface of <code>panda&lt;X&gt;</code>:
 <ul class="org-ul">
-<li>Copy <a href="./images/http-proxy">./images/http-proxy</a> to <code>/etc/nginx/sites-available/http-proxy</code>
-<ul class="org-ul">
-<li>On <code>station&lt;X&gt;</code>, change <code>proxy_pass https://panda1.robot</code> to <code>panda&lt;X&gt;.robot</code></li>
-</ul></li>
-<li>Remove <code>/etc/nginx/sites-enabled/default</code></li>
-<li>Link <code>/etc/nginx/sites-enabled/http-proxy</code> in <code>/etc/nginx/sites-available/http-proxy</code></li>
 <li><p>
-Create the <code>ssl</code> certificate for <code>station&lt;X&gt;.robot</code> (set <code>X</code> to the station number):
+Install <code>nginx</code> and download <a href="./images/http-proxy">./images/http-proxy</a>:
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span class="org-variable-name">X</span>=1
-openssl req -x509 -nodes -newkey rsa:4096 -keyout station.key -out station.crt -days 36500 <span class="org-sh-escaped-newline">\</span>
-    -subj <span class="org-string">"/CN=station${X}.robot"</span> -addext <span class="org-string">"subjectAltName=DNS:station${X}.robot,DNS:station${X}"</span>
-sudo mkdir -p /etc/nginx/ssl
-sudo mv station.key /etc/nginx/ssl
-sudo mv station.crt /etc/nginx/ssl
+<pre class="src src-bash">sudo apt install nginx
+sudo wget -O /etc/nginx/sites-available/http-proxy https://nu-msr.github.io/images/http-proxy
 </pre>
 </div></li>
-<li><code>systemctl reload nginx</code></li>
+<li><p>
+Enable the proxy and disable the default site:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">sudo ln -s /etc/nginx/sites-available/http-proxy /etc/nginx/sites-enabled/http-proxy
+sudo rm /etc/nginx/sites-enabled/default
+</pre>
+</div></li>
+<li><p>
+Create a self-signed <code>ssl</code> certificate (browsers will warn about it once since it isn't trusted)
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">sudo mkdir -p /etc/nginx/ssl
+sudo openssl req -x509 -noenc -newkey rsa:4096 -days 36500 -subj <span class="org-string">"/CN=station"</span> <span class="org-sh-escaped-newline">\</span>
+     -keyout /etc/nginx/ssl/station.key -out /etc/nginx/ssl/station.crt
+</pre>
+</div>
+<ul class="org-ul">
+<li>If we ever moved to trust the certficate (e.g., providing students with my own cert) then we would need to set the domain properly in the cert and customize it per host</li>
+</ul></li>
+<li><p>
+Check the configuration and load it:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">sudo nginx -t
+sudo systemctl reload nginx
+</pre>
+</div></li>
 </ul></li>
 </ol>
 </div>
