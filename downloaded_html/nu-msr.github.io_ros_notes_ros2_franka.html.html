@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-10-30 Fri 11:00 -->
+<!-- 2026-11-04 Wed 16:42 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Emika Franka Panda Robot</title>
@@ -51,6 +51,7 @@
 </ul>
 </li>
 <li><a href="#mechanical-1-P-1">Mechanical</a></li>
+<li><a href="#two-frankas-1-P-1">Two Frankas</a></li>
 <li><a href="#resources-1-P-1">Resources</a></li>
 </ul>
 </div>
@@ -222,7 +223,8 @@ If the robot is off, you will need to turn it on (obviously!).
 <li>Your computer should obtain an ip address automatically, but it may take a little while.</li>
 </ul></li>
 <li>Make sure the enabling device is within reach and pressed down (robot is disabled).</li>
-<li>Navigate in your web browser to <code>https://station.robot</code>
+<li>Each robot is numbered 1 to 4, I will refer to the number as <code>X</code> in these notes.</li>
+<li>Navigate in your web browser to <code>https://desk.robot</code>
 <ul class="org-ul">
 <li>This is the graphical, non-programmer interface to the robot</li>
 <li>You will get an SSL warning. It is okay, in this circumstance, to accept the risk and continue</li>
@@ -251,9 +253,9 @@ If the robot is off, you will need to turn it on (obviously!).
 <li>The Franka Panda Web Interface has an expired SSL certificate that cannot be updated</li>
 <li>Firefox blocks all pages with expired SSL certificates and does not provide a way in it's user interface for the user to overrid</li>
 <li>Chrome still allows the user to override the expired certificate</li>
-<li>I have setup a proxy on <code>https://station.robot</code> for the webserver at <code>https://panda0.robot</code>
+<li>I have setup a proxy on <code>https://desk.robot</code> for the webserver at <code>https://panda.robot</code>
 <ul class="org-ul">
-<li>The proxy connects to <code>https://panda0.robot</code> and ignores the expired certificate</li>
+<li>The proxy connects to <code>https://panda.robot</code> and ignores the expired certificate</li>
 <li>It passes traffic between that server and your laptop</li>
 <li>When your computer communicates with the proxy, it receives the SSL certificate of the proxy, not the webserver
 <ul class="org-ul">
@@ -307,14 +309,14 @@ openssl x509 -outform PEM &gt; franka.crt
 <li>You can also use <code>ssh-copy-id</code> to install your <code>ssh</code> certificate and avoid entering the password each time.</li>
 </ul></li>
 <li>Release the enabling device, so that the robot lights are blue</li>
-<li>On <code>station</code> run <code>ros2 launch franka_fer_moveit_config real.launch.py use_rviz:=false robot_ip:=panda0.robot</code> to start the controllers and moveit</li>
-<li>On laptop run <code>ros2 launch franka_fer_moveit_config moveit_rviz.launch.py robot_ip:=panda0.robot</code> to launch <code>rviz</code>
+<li>On <code>station</code> run <code>ros2 launch franka_fer_moveit_config real.launch.py use_rviz:=false robot_ip:=panda.robot</code> to start the controllers and moveit</li>
+<li>On laptop run <code>ros2 launch franka_fer_moveit_config moveit_rviz.launch.py robot_ip:=panda.robot</code> to launch <code>rviz</code>
 <ul class="org-ul">
 <li>You can also specify the <code>rviz_config</code> parameter to load an alternative <code>rviz</code> file, if you want to customize the visualization</li>
 </ul></li>
 <li>The <code>move_group</code> node is running on <code>station</code>, but you can communicate with it via its <code>actions</code>, <code>services</code>, and <code>topics</code> without worrying about that</li>
 <li>Pressing the <code>enabling</code> device will stop the robot and cause some nodes to crash</li>
-<li>The <code>ROS_DOMAIN_ID</code> of the Franka robot is 0 by default. You need your <code>ROS_DOMAIN_ID</code> to match that of the robot</li>
+<li>The <code>ROS_DOMAIN_ID</code> of the franka code running on station is 0 by default. You need your <code>ROS_DOMAIN_ID</code> to match that of the robot</li>
 </ol>
 </div>
 </div>
@@ -411,6 +413,29 @@ Before you step away from the robot:
 <div class="outline-text-2" id="text-org957ccf0">
 <ol class="org-ol">
 <li>Franka World provides a full SolidWorks Model of the robot and also CAD for mounting cameras to the arm</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-two-frankas-1-P-1" class="outline-2">
+<h2 id="two-frankas-1-P-1">Two Frankas</h2>
+<div class="outline-text-2" id="text-orgf9e5bc2">
+<ol class="org-ol">
+<li>One station computer can control two franka robots: simply plug in another franka into the other 10G ethernet port.</li>
+<li>Two stations can be plugged into each other so that each station controls one franka on the same network</li>
+<li>Every robot has it's own unique ip and name:
+<ul class="org-ul">
+<li>Robots: <code>pandaX.robot</code>,</li>
+<li>Realtime PCs: <code>stationX.robot</code></li>
+<li>Web Interfaces: <code>deskX.robot</code></li>
+<li>Your laptop is always available as <code>laptop.robot</code> and <code>&lt;laptop_hostname&gt;.robot</code></li>
+</ul></li>
+<li>When two stations are plugged in access the remote robot with <code>pandaX.sX.robot</code>
+<ul class="org-ul">
+<li>E.g., if station2 is connected to station3, and laptop is connected to station 2
+<ul class="org-ul">
+<li>On <code>laptop</code> panda3.s3.robot resolves to <code>panda3</code></li>
+</ul></li>
+</ul></li>
 </ol>
 </div>
 </div>
