@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-09-29 Tue 09:23 -->
+<!-- 2026-11-09 Mon 10:19 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Intel Realsense D435i</title>
+<title>RealSense D435i</title>
 <meta name="author" content="Matthew Elwin" />
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" href="./../pubme.css" type="text/css"/>
@@ -16,15 +16,15 @@
  <a accesskey="H" href="./../index.html"> HOME </a>
 </div><div id="content" class="content">
 <header>
-<h1 class="title">Intel Realsense D435i</h1>
+<h1 class="title">RealSense D435i</h1>
 </header><nav id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#description-1-P-2">Description</a></li>
+<li><a href="#description-1-P-1">Description</a></li>
 <li><a href="#setup-1-P-1">Setup</a>
 <ul>
-<li><a href="#installation-2-P-2">Installation</a></li>
+<li><a href="#installation-2-P-1">Installation</a></li>
 <li><a href="#testing-2-P-1">Testing</a></li>
 </ul>
 </li>
@@ -37,11 +37,11 @@
 </ul>
 </div>
 </nav>
-<div id="outline-container-description-1-P-2" class="outline-2">
-<h2 id="description-1-P-2">Description</h2>
+<div id="outline-container-description-1-P-1" class="outline-2">
+<h2 id="description-1-P-1">Description</h2>
 <div class="outline-text-2" id="text-orgf235f4f">
 <p>
-The <a href="https://www.intelrealsense.com/depth-camera-d435i">Intel RealSense D435i</a> is an RGB-D depth camera
+The <a href="https://www.realsenseai.com/products/430-series/">RealSense D435i</a> is an RGB-D depth camera
 with an integrated inertial measurement unit (IMU).
 These cameras provide robots with a 3 dimensional view of the world allowing you to create algorithms that
 reason about 3D structures.  The addition of an IMU helps the system orient itself when moving.
@@ -52,8 +52,8 @@ reason about 3D structures.  The addition of an IMU helps the system orient itse
 <h2 id="setup-1-P-1">Setup</h2>
 <div class="outline-text-2" id="text-setup-1-P-1">
 </div>
-<div id="outline-container-installation-2-P-2" class="outline-3">
-<h3 id="installation-2-P-2">Installation</h3>
+<div id="outline-container-installation-2-P-1" class="outline-3">
+<h3 id="installation-2-P-1">Installation</h3>
 <div class="outline-text-3" id="text-org69328d8">
 <p>
 There are two components required to use the RealSense from ROS: the library (<a href="https://index.ros.org/p/librealsense2/">https://index.ros.org/p/librealsense2/</a>)
@@ -100,9 +100,9 @@ and it will be treated as a regular camera.</li>
 <h3 id="ros-driver-2-P-1">ROS Driver</h3>
 <div class="outline-text-3" id="text-orgc04342e">
 <ul class="org-ul">
-<li>Instructions for use and an explanation of the topics that are published are posted <a href="https://github.com/IntelRealSense/realsense-ros#usage-instructions">on the realsense-ros github page.</a>
+<li>Instructions for use and an explanation of the topics that are published are posted <a href="https://github.com/realsenseai/realsense-ros#usage">on the realsense-ros github page.</a>
 <ul class="org-ul">
-<li>There is also <a href="https://dev.intelrealsense.com/docs/ros-wrapper">Developer Documentation</a></li>
+<li>There is also <a href="https://dev.realsenseai.com/docs/ros2-wrapper/">Developer Documentation</a></li>
 </ul></li>
 <li>The most common way to launch the realsense in ROS is with it's Launchfile:
 <ul class="org-ul">
@@ -116,7 +116,7 @@ and it will be treated as a regular camera.</li>
 <code>/camera/camera/extrinsics/depth_to_color</code>: This is the transform from the depth to RGB frames</li>
 </ul></li>
 </ul></li>
-<li>To interpret the depth image values see <a href="https://github.com/IntelRealSense/realsense-ros/blob/ros2-development/realsense2_camera/scripts/show_center_depth.py">This example</a>
+<li>To interpret the depth image values see <a href="https://github.com/realsenseai/realsense-ros/blob/ros2-development/realsense2_camera/scripts/show_center_depth.py">This example</a>
 <ul class="org-ul">
 <li>Basically each pixel is a 16 bit integer that is the distance in <code>mm</code></li>
 </ul></li>
@@ -127,7 +127,7 @@ and it will be treated as a regular camera.</li>
 <h3 id="sdk-2-P-1">SDK</h3>
 <div class="outline-text-3" id="text-org63b6acb">
 <ul class="org-ul">
-<li>Official documentation is here for using SDK 2.0: <a href="https://dev.intelrealsense.com/docs/docs-get-started">https://dev.intelrealsense.com/docs/docs-get-started</a></li>
+<li>Official documentation is here for using SDK 2.0: <a href="https://dev.realsenseai.com/docs/get-started-in-sdk-20/">https://dev.realsenseai.com/docs/get-started-in-sdk-20/</a></li>
 <li>Use <code>librealsense</code> python wrappers: wrappers around librealsense for more advanced usage in python</li>
 <li>Use <code>librealsense</code> from C++
 <ul class="org-ul">
