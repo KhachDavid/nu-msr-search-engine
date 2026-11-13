@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-09-29 Tue 09:23 -->
+<!-- 2026-11-12 Thu 16:10 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>April Tags Activity</title>
@@ -33,7 +33,7 @@
 <div class="org-src-container">
 <pre class="src src-bash">
 <span class="org-comment-delimiter"># </span><span class="org-comment">Start the camera node (exact command depends on your hardware)
-</span>ros2 run usb_cam usb_cam_node_exe --ros-args -p framerate:=30.0
+</span>ros2 run v4l2_camera v4l2_camera
 
 <span class="org-comment-delimiter"># </span><span class="org-comment">Run the camera calibration
 </span>ros2 run camera_calibration cameracalibrator --size 8x6 --square 0.108 --ros-args -r image:=/image_raw
@@ -46,9 +46,6 @@ mkdir calib
 mv /tmp/calibrationdata.tar.gz /tmp/calib
 <span class="org-builtin">cd</span> /tmp/calib
 tar xf calibrationdata.tar.gz
-
-<span class="org-comment-delimiter"># </span><span class="org-comment">Kill the usb_cam node and restart, this time loading the calibration
-</span>ros2 run usb_cam usb_cam_node_exe --ros-args -p framerate:=30.0 -p camera_info_url:=file:///tmp/calib/ost.yaml
 
 <span class="org-comment-delimiter"># </span><span class="org-comment">Start the image proc pipeline
 </span>ros2 launch image_proc image_proc.launch.py
@@ -67,9 +64,9 @@ tar xf calibrationdata.tar.gz
 <h2 id="april-tags-1-P-1">April Tags</h2>
 <div class="outline-text-2" id="text-org3dab831">
 <ol class="org-ol">
-<li>Install the <a href="https://index.ros.org/p/apriltag_ros/github-christianrauch-apriltag_ros/#iron">apriltag_ros</a> package 
+<li>Install the <a href="https://index.ros.org/p/apriltag_ros/">apriltag_ros</a> package 
 <ul class="org-ul">
-<li>This package will automatically install the <a href="https://index.ros.org/p/apriltag/github-AprilRobotics-apriltag/#iron">apriltag</a> package</li>
+<li>This package will automatically install the <a href="https://index.ros.org/p/apriltag/">apriltag</a> package</li>
 <li><code>apriltag</code> is a ROS-independent library and <code>apriltag_ros</code> provides a ROS API for it</li>
 </ul></li>
 
@@ -78,7 +75,7 @@ tar xf calibrationdata.tar.gz
 <li><a href="https://github.com/AprilRobotics/apriltag-imgs">https://github.com/AprilRobotics/apriltag-imgs</a></li>
 <li>Scale the image and print</li>
 </ul></li>
-<li>Create the <code>tags.yaml</code> file describing the april tags (see instructions in in the <a href="https://github.com/christianrauch/apriltag_ros">apriltag_ros git repository</a>.</li>
+<li>Create the <code>tags.yaml</code> file describing the april tags (<a href="https://docs.ros.org/en/lyrical/p/apriltag_ros/">see instructions</a>)</li>
 
 <li>Run <code>ros2 run apriltag_ros apriltag_node --ros-args --params-file ./file.yaml</code>
 <ul class="org-ul">
