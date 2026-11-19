@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-11-12 Thu 16:10 -->
+<!-- 2026-11-19 Thu 11:28 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Homework 4</title>
@@ -28,7 +28,7 @@
 <ul>
 <li><a href="#a-launch-file-2-P-1">A Launch File</a>
 <ul>
-<li><a href="#important-3-P-1">Important</a></li>
+<li><a href="#customizing-nav2-parameters-3-P-1">Customizing Nav2 Parameters</a></li>
 </ul>
 </li>
 <li><a href="#autonomous-exploration-2-P-1">Autonomous Exploration</a>
@@ -59,7 +59,7 @@ you should turn-in, including information about your <code>README.md</code> file
 <h2 id="navigation-1-P-1">Navigation</h2>
 <div class="outline-text-2" id="text-orgfe0a9fd">
 <ul class="org-ul">
-<li>The goal is to use the simulated robot to map an environment and then navigate within the map using the <a href="https://index.ros.org/p/slam_toolbox/github-SteveMacenski-slam_toolbox/#jazzy">slam_toolbox</a></li>
+<li>The goal is to use the simulated robot to map an environment and then navigate within the map using the <a href="https://docs.nav2.org/lyrical/tutorials/general_tutorials/navigation2_with_slam/navigation2_with_slam/">slam_toolbox</a></li>
 </ul>
 </div>
 </div>
@@ -79,10 +79,10 @@ you should turn-in, including information about your <code>README.md</code> file
 <h2 id="navigation-stack-setup-1-P-1">Navigation Stack Setup</h2>
 <div class="outline-text-2" id="text-orgf2240b0">
 <ul class="org-ul">
-<li>Going through the <a href="https://docs.nav2.org/setup_guides/index.html">First Time Setup Guide</a> (through setting up the robot's footprint) will help you understand how the
+<li>Going through the <a href="https://docs.nav2.org/lyrical/configuration_and_development/first_time_robot_setup_guide/">First-Time Robot Setup Guide</a> (through setting up the robot's footprint) will help you understand how the
 Nav2 stack works, and may be a helpful reference while completing this assignment.</li>
 <li>Much of the setup, however, is already done for you in <code>nubot</code>.</li>
-<li>By running the launch file in the <code>nubot</code> package you will be able to see what features required by the <code>nav_stack</code> are already implemented.</li>
+<li>By running the launch file in the <code>nubot</code> package you will be able to see what features required by <code>nav2</code> are already implemented.</li>
 </ul>
 </div>
 <div id="outline-container-a-launch-file-2-P-1" class="outline-3">
@@ -93,10 +93,13 @@ Nav2 stack works, and may be a helpful reference while completing this assignmen
 <li>In <code>nubot_nav</code>, write a launch file called <code>manual_explore.launch.xml</code> that:
 <ul class="org-ul">
 <li>Starts the <code>nubot</code> simulation.</li>
-<li>Starts <code>slam_toolbox</code> in <code>async</code> mode.</li>
-<li>Starts the <code>nav2</code> stack (to create cost-maps and also enable navigation).
+<li>Starts the <code>nav2</code> stack with SLAM enabled (to run <code>slam_toolbox</code>, create cost-maps, and enable navigation).
 <ul class="org-ul">
-<li>Make sure to set a parameter to increase the footprint of the robot so that it encompasses the whole robot</li>
+<li>Use <code>bringup_launch.py</code> from <code>nav2_bringup</code> with <code>slam:=True</code></li>
+<li>Make sure to set a parameter to increase the footprint of the robot so that it encompasses the whole robot
+<ul class="org-ul">
+<li>Note: the footprint may appear multiple times in the configuration file</li>
+</ul></li>
 <li>You may use a circular approximation of the robot</li>
 </ul></li>
 <li>Starts <code>rviz</code> and displays:
@@ -114,14 +117,16 @@ Nav2 stack works, and may be a helpful reference while completing this assignmen
 <li>HINT: You must enable simulation time when using the launchfiles to start navigation and SLAM</li>
 </ul>
 </div>
-<div id="outline-container-important-3-P-1" class="outline-4">
-<h4 id="important-3-P-1">Important</h4>
-<div class="outline-text-4" id="text-orga8fd1df">
+<div id="outline-container-customizing-nav2-parameters-3-P-1" class="outline-4">
+<h4 id="customizing-nav2-parameters-3-P-1">Customizing Nav2 Parameters</h4>
+<div class="outline-text-4" id="text-orgd58cf72">
 <ul class="org-ul">
-<li>In ROS 2 kilted as of v1.4.2, the <code>nav2_bringup</code> package's default <code>nav2_params.yaml</code> file has invalid parameters.</li>
-<li>Use <code>ros2 launch nav2_bringup navigation_launch.py --show-args</code> to find the location of this launchfile,
-copy it into your own package, and modify all values that end in <code>_ZONE_ENABLED</code> to be false.</li>
-<li>When using <code>nav2_bringup navigation_launch.py</code> in your own launchfiles, make sure to set the argument so it uses your custom configuration.</li>
+<li>Use <code>ros2 launch nav2_bringup bringup_launch.py --show-args</code> to determine
+<ul class="org-ul">
+<li>The argument used to specify the <code>nav2</code> parameters</li>
+<li>The location of the default <code>nav2</code> parameters file</li>
+</ul></li>
+<li>Copy the default parameters into your own package under <code>config</code>, modify it as needed, and be sure to load it with your own launch configuration</li>
 </ul>
 </div>
 </div>

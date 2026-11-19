@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-09-29 Tue 09:23 -->
+<!-- 2026-11-18 Wed 15:44 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Using Pip With ROS 2</title>
@@ -21,7 +21,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#overview-1-P-10">Overview</a></li>
+<li><a href="#overview-1-P-1">Overview</a></li>
 <li><a href="#direct-into-a-workspace-1-P-1">Direct Into A Workspace</a>
 <ul>
 <li><a href="#steps-2-P-1">Steps</a></li>
@@ -35,8 +35,8 @@
 </ul>
 </div>
 </nav>
-<div id="outline-container-overview-1-P-10" class="outline-2">
-<h2 id="overview-1-P-10">Overview</h2>
+<div id="outline-container-overview-1-P-1" class="outline-2">
+<h2 id="overview-1-P-1">Overview</h2>
 <div class="outline-text-2" id="text-org1714d92">
 <p>
 This guide explains two methods for installing pip packages directly into a ROS <code>colcon</code> workspace.
@@ -55,7 +55,7 @@ One method uses pip and the ROS 2 workspace method directly, while the other use
 </div>
 <div id="outline-container-steps-2-P-1" class="outline-3">
 <h3 id="steps-2-P-1">Steps</h3>
-<div class="outline-text-3" id="text-orgcb1672e">
+<div class="outline-text-3" id="text-orga02712c">
 <ol class="org-ol">
 <li><p>
 Create a new ROS workspace and <code>ament_python</code> package
@@ -76,7 +76,7 @@ Build and source the workspace:
 </pre>
 </div></li>
 <li>Rather than calling <code>pip</code> directly, use the following invocation:
-<code>PYTHONUSERBASE=$(ros2 pkg prefix py_venv) pip3 install --user --break-system-packages &lt;OTHER ARGS HERE&gt;</code></li>
+<code>PREFIX=$(ros2 pkg prefix py_venv) &amp;&amp; PYTHONUSERBASE=$PREFIX pip3 install --user --break-system-packages &lt;OTHER ARGS HERE&gt;</code></li>
 <li>The above command will override system packages, which could cause some ROS 2 packages to break. You may need to:
 <ol class="org-ol">
 <li>Use the <code>--no-deps</code> flags and add needed dependencies manually: this is a good way to go
@@ -85,7 +85,6 @@ are from <code>pip</code>.</li>
 <li>Specifically uninstall packages that conflict with <code>PYTHONUSERBASE=$(ros2 pkg prefix pyvenv) pip3 uninstall --break-system-packages &lt;UNINSTALL&gt;</code>
 <ul class="org-ul">
 <li>The goal is to find package versions that work with both ROS 2 and whatever package you are installing.</li>
-<li>For example, many pip packages use <code>numpy &gt; 2.0</code> by default, but ROS packages require <code>numpy &lt; 2</code></li>
 </ul></li>
 </ol></li>
 </ol>
@@ -103,7 +102,7 @@ are from <code>pip</code>.</li>
 </div>
 <div id="outline-container-steps-2-P-2" class="outline-3">
 <h3 id="steps-2-P-2">Steps</h3>
-<div class="outline-text-3" id="text-orga02712c">
+<div class="outline-text-3" id="text-orgf94003d">
 <ol class="org-ol">
 <li><p>
 Any python package that uses virtual environments must have the following adding to the <code>setup.cfg</code>
@@ -113,7 +112,7 @@ Any python package that uses virtual environments must have the following adding
 executable = /usr/bin/env python3
 </pre>
 </div></li>
-<li>Create the virtual environment: <code>python3 -m venv myvenv</code></li>
+<li>Create the virtual environment: <code>python3 -m venv --system-site-packages myvenv</code></li>
 <li>If the virtual environment is in a ROS 2 workspace: <code>touch myvenv/COLCON_IGNORE</code></li>
 <li>Activate the virtual environment: <code>source myvenv/bin/activate</code></li>
 <li>The packages that have had their <code>setup.cfg</code> modified will now use the virtual environment</li>
