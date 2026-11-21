@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2026-11-20 Fri 16:57 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>UR Robots</title>
+<meta name="author" content="Matthew Elwin" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="./../pubme.css" type="text/css"/>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./../index.html"> HOME </a>
+</div><div id="content" class="content">
+<header>
+<h1 class="title">UR Robots</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#introduction-1-P-1">Introduction</a></li>
+<li><a href="#ur_setup">Software Setup</a></li>
+<li><a href="#mock-robot-controller-1-P-1">Mock Robot Controller</a>
+<ul>
+<li><a href="#no-robot-no-problem-2-P-1">No Robot, No Problem</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-introduction-1-P-1" class="outline-2">
+<h2 id="introduction-1-P-1">Introduction</h2>
+<div class="outline-text-2" id="text-org5a612ed">
+<p>
+UR robots have a unified interface for controlling them.
+</p>
+
+<p>
+The robots we have in the lab are UR7e robots.
+</p>
+</div>
+</div>
+<div id="outline-container-ur_setup" class="outline-2">
+<h2 id="ur_setup">Software Setup</h2>
+<div class="outline-text-2" id="text-ur_setup">
+<ol class="org-ol">
+<li>Install the <code>ur</code> ROS package for your current ROS distribution via <code>apt</code>
+<ul class="org-ul">
+<li>(e.g., on lyrical <code>sudo apt install ros-lyrical-ur</code>)</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-mock-robot-controller-1-P-1" class="outline-2">
+<h2 id="mock-robot-controller-1-P-1">Mock Robot Controller</h2>
+<div class="outline-text-2" id="text-org9e2a71c">
+<ul class="org-ul">
+<li>The fake robot controller:
+<code>ros2 launch ur_robot_driver ur_control.launch.py ur_type:=ur7e robot_ip:=none use_mock_hardware:=true launch_rviz:=false</code></li>
+<li>Moveit:
+<code>ros2 launch ur_moveit_config ur_moveit.launch.py ur_type:=ur7e launch_rviz:=true</code></li>
+<li>We let the moveit launchfile start <code>rviz</code> so that we get the full <code>moveit rviz</code> setup.</li>
+</ul>
+</div>
+<div id="outline-container-no-robot-no-problem-2-P-1" class="outline-3">
+<h3 id="no-robot-no-problem-2-P-1">No Robot, No Problem</h3>
+<div class="outline-text-3" id="text-orgd5eb2aa">
+<p>
+Run a MoveIt kinematic simulation of the robot locally, even when not connected.
+</p>
+<ul class="org-ul">
+<li><code>ros2 launch franka_fer_moveit_config demo.launch.py</code></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p><p class="outline-2">Author: Matthew Elwin. </p></p>
+</div>
+</body>
+</html>
