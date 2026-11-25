@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2026-11-20 Fri 16:57 -->
+<!-- 2026-11-23 Mon 16:45 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>UR Robots</title>
@@ -28,6 +28,7 @@
 <li><a href="#no-robot-no-problem-2-P-1">No Robot, No Problem</a></li>
 </ul>
 </li>
+<li><a href="#the-robot-1-P-1">The Robot</a></li>
 </ul>
 </div>
 </nav>
@@ -50,6 +51,10 @@ The robots we have in the lab are UR7e robots.
 <li>Install the <code>ur</code> ROS package for your current ROS distribution via <code>apt</code>
 <ul class="org-ul">
 <li>(e.g., on lyrical <code>sudo apt install ros-lyrical-ur</code>)</li>
+</ul></li>
+<li>Add a static ip connection <code>nmcli con add type ethernet con-name UR ifname &lt;ETH0&gt; ip4 192.168.56.1/24</code>
+<ul class="org-ul">
+<li>Replace <code>&lt;ETH0&gt;</code> with the name of your ethernet device (run <code>nmcli</code> to list them)</li>
 </ul></li>
 </ol>
 </div>
@@ -75,6 +80,21 @@ Run a MoveIt kinematic simulation of the robot locally, even when not connected.
 <li><code>ros2 launch franka_fer_moveit_config demo.launch.py</code></li>
 </ul>
 </div>
+</div>
+</div>
+<div id="outline-container-the-robot-1-P-1" class="outline-2">
+<h2 id="the-robot-1-P-1">The Robot</h2>
+<div class="outline-text-2" id="text-org72b4d2f">
+<ol class="org-ol">
+<li>Power on the robot by pressing the button on the teach pendant</li>
+<li>In the lower left corner of the screen press the power button and unlock and activate the robot</li>
+<li>Press the Play button on the bottom middle of the screen
+<ul class="org-ul">
+<li>The program should be called <i>ros_control</i></li>
+</ul></li>
+<li>In one terminal <code>ros2 launch ur_robot_driver ur_control.launch.py ur_type:=ur7e robot_ip:=none use_mock_hardware:=true launch_rviz:=false</code></li>
+<li>In another terminal <code>ros2 launch ur_moveit_config ur_moveit.launch.py ur_type:=ur7e launch_rviz:=true</code></li>
+</ol>
 </div>
 </div>
 </div>
